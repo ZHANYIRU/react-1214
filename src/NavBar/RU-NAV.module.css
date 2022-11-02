@@ -26,10 +26,12 @@
     font-size: 24px;
     font-weight: bold;
     text-decoration: none;
-    padding-bottom: 5px;
+    border-bottom: 2px solid transparent;
+    transition: .3s;
 }
 .nav ul a:hover{
     border-bottom: 2px solid var(--yellow);
+    padding-bottom: 5px;
 }
 .navRight i{
     font-size: 30px;
