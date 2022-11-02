@@ -26,8 +26,12 @@ function Navbar() {
           </ul>
         </div>
         <div className={styled.navRight}>
-          <a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
-          <a href="#"><i class="fa-solid fa-user"></i></a>
+          <a href="#">
+            <i class="fa-solid fa-cart-shopping"></i>
+          </a>
+          <a href="#">
+            <i class="fa-solid fa-user"></i>
+          </a>
         </div>
       </nav>
     </>

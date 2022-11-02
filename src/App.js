@@ -1,11 +1,15 @@
 import './reset.css'
-import Navbar from './NavBar/Navbar';
+import Navbar from './NavBar/Navbar'
+import Background from './Background/Background'
+import Main from './Main/Main'
 function App() {
   return (
     <>
-      <Navbar/>
+      <Navbar />
+      <Background />
+      <Main />
     </>
-  );
+  )
 }
 
-export default App;
+export default App
