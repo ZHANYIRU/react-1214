@@ -1,7 +1,7 @@
 .bgc {
   width: 100%;
   height: 100vh;
-  background: url(../../public/img/image\ 26.png) no-repeat;
+  background: url(../../public/img/image_26.png) no-repeat;
   background-size: 100% 100%;
   position: fixed;
   z-index: -99;
@@ -17,13 +17,13 @@
 }
 
 .div1 {
-  background: url(../../public/img/1\ 201.png) no-repeat;
+  background: url(../../public/img/1_201.png) no-repeat;
   background-position: bottom;
   position: absolute;
 }
 
 .div2 {
-  background: url(../../public/img/2\ 995.png) no-repeat;
+  background: url(../../public/img/2_995.png) no-repeat;
   background-position: bottom;
   position: absolute;
 }
@@ -41,7 +41,7 @@
 }
 
 .div5 {
-  background: url(../../public/img/5\ 9400.png) no-repeat;
+  background: url(../../public/img/5_9400.png) no-repeat;
   background-position: center bottom -50px;
   position: fixed;
 }

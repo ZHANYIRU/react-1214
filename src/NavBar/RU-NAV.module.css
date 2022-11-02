@@ -15,6 +15,7 @@
     align-items: center;
     padding: 0 30px;
     position: fixed;
+    z-index: 88;
 }
 .nav ul{
     width: 80%;
