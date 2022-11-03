@@ -6,6 +6,8 @@ function Navbar() {
         <div className={styled.navLeft}>
           <div className={styled.logo}>
             <img src="../img/Logo1920x1293.png" alt="" />
+            {/* <img src="../img/Logo-black.png" alt="" /> */}
+            
           </div>
           <ul>
             <li>
