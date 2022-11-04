@@ -18,16 +18,17 @@
   border-radius: 50%;
   margin-right: 50px;
   position: relative;
+  .one::after , .two::after{
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 1px;
+    background-color: $darkGreen;
+    left: 60px;
+    top: 25px;
+  }
 }
-.one::after , .two::after{
-  content: "";
-  position: absolute;
-  width: 30px;
-  height: 1px;
-  background-color: $darkGreen;
-  left: 60px;
-  top: 25px;
-}
+
 .one::before{
   content: "購物清單";
   position: absolute;

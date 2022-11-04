@@ -1,5 +1,5 @@
-import Navbar from '../NavBar/Navbar'
-import styled from '../../styles/Cart.module.scss'
+import Navbar from '../compoent/NavBar/Navbar'
+import styled from '../styles/Cart.module.scss'
 function Cart() {
   return (
     <>
@@ -10,9 +10,7 @@ function Cart() {
           <div className={styled.two}>2</div>
           <div className={styled.three}>3</div>
         </div>
-        <div className={styled.buyCard}>
-          
-        </div>
+        <div className={styled.buyCard}></div>
       </div>
     </>
   )

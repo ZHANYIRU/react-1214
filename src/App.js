@@ -1,16 +1,25 @@
 import './reset.css'
-// import Navbar from './compoent/NavBar/Navbar'
-import Background from './compoent/Background/Background'
-import Main from './compoent/Main/Main'
-import Cart from './compoent/Cart/Cart'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Home from './pages/Home'
+import Product from './pages/Product'
+import Camp from './pages/Camp'
+import Room from './pages/Room'
+import Rental from './pages/Rental'
+import Cart from './pages/Cart'
+import Member from './pages/Member'
 function App() {
   return (
-    <>
-      {/* <Navbar /> */}
-      {/* <Background /> */}
-      {/* <Main /> */}
-      <Cart />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/product" element={<Product />} />
+        <Route path="/camp" element={<Camp />} />
+        <Route path="/room" element={<Room />} />
+        <Route path="/rental" element={<Rental />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/member" element={<Member />} />
+      </Routes>
+    </BrowserRouter>
   )
 }
 

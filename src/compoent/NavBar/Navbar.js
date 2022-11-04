@@ -1,4 +1,5 @@
 import styled from '../../styles/RU-NAV.module.scss'
+import { Link } from 'react-router-dom'
 function Navbar() {
   return (
     <>
@@ -10,29 +11,29 @@ function Navbar() {
           </div>
           <ul>
             <li>
-              <a href="#">首頁</a>
+              <Link to="/">首頁</Link>
             </li>
             <li>
-              <a href="#">登山用品</a>
+              <Link to="/product">登山用品</Link>
             </li>
             <li>
-              <a href="#">套裝行程</a>
+              <Link to="/camp">套裝行程</Link>
             </li>
             <li>
-              <a href="#">營位山莊</a>
+              <Link to="/room">營位山莊</Link>
             </li>
             <li>
-              <a href="#">裝備租借</a>
+              <Link to="/rental">裝備租借</Link>
             </li>
           </ul>
         </div>
         <div className={styled.navRight}>
-          <a href="#">
+          <Link to="/cart">
             <i class="fa-solid fa-cart-shopping"></i>
-          </a>
-          <a href="#">
+          </Link>
+          <Link to="/member">
             <i class="fa-solid fa-user"></i>
-          </a>
+          </Link>
         </div>
       </nav>
     </>
