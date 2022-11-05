@@ -1,16 +1,18 @@
 @import './global.scss';
-.body{
+.body {
   width: 100%;
   height: 500vh;
   background-color: $lightGreen;
 }
-.cartTitle{
+.cartTitle {
   display: flex;
   position: absolute;
   top: 100px;
   left: 45%;
 }
-.one,.two,.three{
+.one,
+.two,
+.three {
   text-align: center;
   line-height: 50px;
   width: 50px;
@@ -18,56 +20,57 @@
   border-radius: 50%;
   margin-right: 50px;
   position: relative;
-  .one::after , .two::after{
-    content: "";
-    position: absolute;
-    width: 30px;
-    height: 1px;
-    background-color: $darkGreen;
-    left: 60px;
-    top: 25px;
-  }
+}
+.one::after,
+.two::after {
+  content: '';
+  position: absolute;
+  width: 30px;
+  height: 1px;
+  background-color: $darkGreen;
+  left: 60px;
+  top: 25px;
 }
 
-.one::before{
-  content: "購物清單";
+.one::before {
+  content: '購物清單';
   position: absolute;
   width: 70px;
   top: 50px;
   left: -10px;
   color: $darkGreen;
 }
-.two::before{
-  content: "填寫資料";
+.two::before {
+  content: '填寫資料';
   position: absolute;
   width: 70px;
   top: 50px;
   left: -10px;
   color: $darkGreen;
 }
-.three::before{
-  content: "完成訂單";
+.three::before {
+  content: '完成訂單';
   position: absolute;
   width: 70px;
   top: 50px;
   left: -10px;
   color: $darkGreen;
 }
-.one{
+.one {
   background-color: $darkGreen;
   color: #ffffff;
 }
-.two,.three{
+.two,
+.three {
   border: 1px solid $darkGreen;
   color: $darkGreen;
 }
-.buyCard{
+.buyCard {
   width: 100px;
   height: 200px;
   border-radius: 10px;
-  background-color: #E3EEE7;
+  background-color: #e3eee7;
   position: fixed;
-  top :100px;
+  top: 100px;
   left: 50px;
 }
-
