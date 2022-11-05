@@ -31,6 +31,7 @@ function Navbar() {
           <Link to="/cart">
             <i class="fa-solid fa-cart-shopping"></i>
           </Link>
+          <span>9</span>
           <Link to="/member">
             <i class="fa-solid fa-user"></i>
           </Link>
