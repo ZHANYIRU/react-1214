@@ -1,0 +1,48 @@
+@import './Cart.module.scss';
+.ok{
+  width: 98%;
+  font-size: 20px;
+  font-weight: 900;
+  text-align: center;
+  margin-top: 100px;
+}
+.okCard{
+  width: 60%;
+  height: 400px;
+  background-color: #ffffff;
+  margin: 30px auto 0;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  .okText{
+    height: 30%;
+    h2{
+      font-size: 25px;
+      font-weight: 900;
+      margin-bottom: 30px;
+      position: relative;
+      &::after{
+        content: '';
+        width: 150%;
+        height: 2px;
+        background-color: $lightGreen;
+        position: absolute;
+        bottom: -10px;
+        left: -70px;
+      }
+    }
+    p{
+      font-weight: 600;
+      margin-bottom: 15px;
+    }
+    
+  }
+  .lookOrder{
+    border: 1px solid $darkGreen;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+  }
+}
