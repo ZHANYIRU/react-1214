@@ -1,14 +1,15 @@
 import './reset.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import ScrollToTop from './compoent/ScrollToTop/ScrollToTop'
+import ScrollToTop from './components/ScrollToTop'
+import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 import Home from './pages/Home'
 import Product from './pages/Product'
 import Camp from './pages/Camp'
 import Room from './pages/Room'
 import Rental from './pages/Rental'
-import Cart from './pages/Cart'
+import Cart from './pages/Cart/Cart'
 import Member from './pages/Member'
-import Navbar from './compoent/NavBar/Navbar'
 function App() {
   return (
     <BrowserRouter>
@@ -23,6 +24,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/member" element={<Member />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   )
 }

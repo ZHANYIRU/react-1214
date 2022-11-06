@@ -1,5 +1,5 @@
-import Background from '../compoent/Background/Background'
-import Main from '../compoent/Main/Main'
+import Background from '../components/Background/Background'
+import Main from '../components/Main/Main'
 function Home() {
   return (
     <>

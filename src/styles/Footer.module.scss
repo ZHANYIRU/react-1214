@@ -1,0 +1,102 @@
+@import './global.scss';
+.img{
+  width: 100%;
+  height: 550px;
+  background-color:$lightGreen ;
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    vertical-align:bottom;
+  }
+}
+.footer{
+  margin-top: -5px;
+  width: 100%;
+  background-color: $darkGreen;
+  padding: 80px 0 40px;
+}
+.ftrTop{
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 5px solid $lightGreen;
+  padding-bottom: 30px;
+  .ftrLeft{
+    display: flex;
+    color: #ffffff;
+    width: 50%;
+    justify-content: space-between;
+    .about{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      p{
+        margin-top: 15px;
+      }
+    }
+    .media{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+        i{
+          margin-right: 15px;
+          margin-top:10px ;
+          font-size: 20px;
+        }
+    }
+    .like{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-bottom: 25px;
+      input{
+        padding: 3px 3px 3px 10px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        margin-right: 10px;
+      }
+      button{
+        border: none;
+        padding: 3px 10px;
+        border-radius: 10px;
+      }
+    }
+  }
+  .ftrLogo{
+    width: 200px;
+    img{
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+}
+.ftrBottom{
+  display: flex;
+  justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
+  color: #ffffff;
+  padding-top:30px ;
+  .btmLeft{
+    display: flex;
+    width: 15%;
+    justify-content: space-between;
+  }
+  .btmLogo{
+    width: 50px;
+    img{
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+  p{
+    line-height: 2rem;
+  }
+  span{
+    color: $yellow;
+    margin: 0 5px;
+  }
+}
