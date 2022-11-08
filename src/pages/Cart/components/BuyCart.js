@@ -1,4 +1,4 @@
-import styled from '../../../styles/Cart.module.scss'
+import styled from '../../../styles/cart-scss/Cart.module.scss'
 function BuyCart(props) {
   return (
     <>

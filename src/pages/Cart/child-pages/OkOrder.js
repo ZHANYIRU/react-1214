@@ -1,4 +1,4 @@
-import styled from '../../../styles/OK.module.scss'
+import styled from '../../../styles/cart-scss/OK.module.scss'
 
 function OkOrder(props) {
   return (

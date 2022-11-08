@@ -1,4 +1,4 @@
-import styled from '../../styles/Cart.module.scss'
+import styled from '../../styles/cart-scss/Cart.module.scss'
 import CartTitle from './components/CartTitle'
 import BuyCart from './components/BuyCart'
 import CartDetail from './child-pages/CartDetail'

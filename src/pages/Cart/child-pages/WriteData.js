@@ -1,4 +1,4 @@
-import styled from '../../../styles/writeData.module.scss'
+import styled from '../../../styles/cart-scss/writeData.module.scss'
 function WriteData(props) {
   return <div className={styled.writeWrap}>填寫資料</div>
 }
