@@ -23,13 +23,6 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/member" element={<Member />} />
       </Routes>
-      {/* 22222 */}
-      {/* 4444 */}
-      {/* wei  testtestest*/}
-
-      {/* write by zx */}
-      {/* write by zx2 */}
-      {/* write by zx3 */}
       <Footer />
     </BrowserRouter>
   )
