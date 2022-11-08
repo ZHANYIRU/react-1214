@@ -26,6 +26,10 @@ function App() {
       {/* 22222 */}
       {/* 4444 */}
       {/* wei */}
+
+      {/* write by zx */}
+      {/* write by zx2 */}
+      {/* write by zx3 */}
       <Footer />
     </BrowserRouter>
   )
