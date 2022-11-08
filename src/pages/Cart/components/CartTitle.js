@@ -8,14 +8,9 @@ function CartTitle({ maxStep, step }) {
             .fill(1)
             .map((v, i) => {
               return (
-                <>
-                  <div
-                    className={step >= i + 1 ? styled.active : ''}
-                    key={i + 1}
-                  >
-                    {i + 1}
-                  </div>
-                </>
+                <div className={step >= i + 1 ? styled.active : ''} key={i + 1}>
+                  {i + 1}
+                </div>
               )
             })}
         </div>
