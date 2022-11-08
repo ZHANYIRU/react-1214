@@ -17,7 +17,8 @@
   justify-content: space-around;
   align-items: center;
   .okText{
-    height: 30%;
+    margin-top: 25px;
+    // height: 30%;
     h2{
       font-size: 25px;
       font-weight: 900;
@@ -37,7 +38,20 @@
       font-weight: 600;
       margin-bottom: 15px;
     }
-    
+  }
+  .okBottom{
+    display: flex;
+    width: 20%;
+    justify-content: space-between;
+  .forHome{
+    border: 1px solid $darkGreen;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 10px;
+      a{
+        color: black;
+      }
+    }
   }
   .lookOrder{
     border: 1px solid $darkGreen;

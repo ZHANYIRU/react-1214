@@ -1,5 +1,5 @@
 import styled from '../../../styles/cart-scss/OK.module.scss'
-
+import { Link } from 'react-router-dom'
 function OkOrder(props) {
   return (
     <>
@@ -12,7 +12,12 @@ function OkOrder(props) {
           <p>訂單日期：2022/12/14</p>
           <p>訂單總額：47,282</p>
         </div>
-        <div className={styled.lookOrder}>查看我的訂單</div>
+        <div className={styled.okBottom}>
+          <div className={styled.forHome}>
+            <Link to="/">回首頁</Link>
+          </div>
+          <div className={styled.lookOrder}>查看我的訂單</div>
+        </div>
       </div>
     </>
   )

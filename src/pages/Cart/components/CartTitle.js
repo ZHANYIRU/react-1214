@@ -10,7 +10,7 @@ function CartTitle({ maxStep, step }) {
               return (
                 <>
                   <div
-                    className={step === i + 1 ? styled.active : ''}
+                    className={step >= i + 1 ? styled.active : ''}
                     key={i + 1}
                   >
                     {i + 1}
