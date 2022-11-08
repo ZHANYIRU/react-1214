@@ -1,11 +1,29 @@
 import styled from '../../../styles/cart-scss/Cart.module.scss'
-function CartTitle() {
+function CartTitle({ maxStep, step }) {
   return (
     <>
-      <div className={styled.cartTitle}>
-        <div className={styled.one}>1</div>
-        <div className={styled.two}>2</div>
-        <div className={styled.three}>3</div>
+      <div className={styled.cardWrap}>
+        <div className={styled.cartTitle}>
+          {Array(maxStep)
+            .fill(1)
+            .map((v, i) => {
+              return (
+                <>
+                  <div
+                    className={step === i + 1 ? styled.active : ''}
+                    key={i + 1}
+                  >
+                    {i + 1}
+                  </div>
+                </>
+              )
+            })}
+        </div>
+        <div className={styled.text}>
+          <p>購物清單</p>
+          <p>填寫資料</p>
+          <p>完成訂單</p>
+        </div>
       </div>
     </>
   )

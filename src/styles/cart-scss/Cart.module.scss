@@ -10,64 +10,67 @@
     left: 100px;
   }
 }
-.cartTitle {
+.cardWrap{
   width: 300px;
+  height: 80px;
   display: flex;
   margin: 0 auto ;
-}
-.one,
-.two,
-.three {
-  text-align: center;
-  line-height: 50px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 50px;
-  position: relative;
-}
-.one::after,
-.two::after {
-  content: '';
-  position: absolute;
-  width: 30px;
-  height: 1px;
-  background-color: $darkGreen;
-  left: 60px;
-  top: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .cartTitle {
+    width: 300px;
+    display: flex;
+    margin: 0 auto ;
+    div{
+      text-align: center;
+    line-height: 50px;
+    width: 50px;
+    height: 50px;
+    border: 1px solid $darkGreen;
+    border-radius: 50%;
+    margin-right: 50px;
+    position: relative;
+    &:nth-child(1):after{
+      content: '';
+    position: absolute;
+    width: 30px;
+    height: 1px;
+    background-color: $darkGreen;
+    left: 60px;
+    top: 25px;
+    }
+    &:nth-child(2):after{
+      content: '';
+    position: absolute;
+    width: 30px;
+    height: 1px;
+    background-color: $darkGreen;
+    left: 60px;
+    top: 25px;
+    }
+    }
+  }
+  .text{
+    display: flex;
+    p{
+      margin-left: -5px;
+      width: 100%;
+    }
+  }
 }
 
+.active{
+  color: #ffffff;
+  background-color: $darkGreen;
+  
+}
 .one::before {
   content: '購物清單';
   position: absolute;
   width: 70px;
   top: 50px;
   left: -10px;
-  color: $darkGreen;
-}
-.two::before {
-  content: '填寫資料';
-  position: absolute;
-  width: 70px;
-  top: 50px;
-  left: -10px;
-  color: $darkGreen;
-}
-.three::before {
-  content: '完成訂單';
-  position: absolute;
-  width: 70px;
-  top: 50px;
-  left: -10px;
-  color: $darkGreen;
-}
-.one {
-  background-color: $darkGreen;
-  color: #ffffff;
-}
-.two,
-.three {
-  border: 1px solid $darkGreen;
   color: $darkGreen;
 }
 .buyCart {

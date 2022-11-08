@@ -1,4 +1,4 @@
-import  styled from '../../styles/home-scss/Background.module.scss'
+import styled from '../../styles/home-scss/Background.module.scss'
 function Background() {
   return (
     <>
