@@ -18,16 +18,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/product" element={<Product />} />
         <Route path="/camp" element={<Camp />} />
-
-       
         <Route path="/room" element={<Room />} />
         <Route path="/rental" element={<Rental />} />
         <Route path="/cart" element={<Cart />} />
-
-
-        {/* eeee */}
-        {/* eeee */}
-        {/* eeee */}
         <Route path="/member" element={<Member />} />
       </Routes>
       <Footer />
