@@ -23,6 +23,11 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/member" element={<Member />} />
       </Routes>
+      {/* 111 */}
+      {/* 111 */}
+      {/* 111 */}
+      {/* 111 */}
+      {/* 111 */}
       <Footer />
     </BrowserRouter>
   )
