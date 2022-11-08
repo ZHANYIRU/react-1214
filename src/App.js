@@ -19,11 +19,7 @@ function App() {
         <Route path="/product" element={<Product />} />
         <Route path="/camp" element={<Camp />} />
 
-        {/* eeee */}
-        {/* eeee */}
-        {/* eeee */}
-        {/* eeee */}
-        {/* eeee */}
+       
         <Route path="/room" element={<Room />} />
         <Route path="/rental" element={<Rental />} />
         <Route path="/cart" element={<Cart />} />
