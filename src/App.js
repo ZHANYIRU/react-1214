@@ -23,11 +23,7 @@ function App() {
         <Route path="/room" element={<Room />} />
         <Route path="/rental" element={<Rental />} />
         <Route path="/cart" element={<Cart />} />
-
-
-        {/* eeee */}
-        {/* eeee */}
-        {/* eeee */}
+        {/* 3333 */}
         <Route path="/member" element={<Member />} />
       </Routes>
       <Footer />
