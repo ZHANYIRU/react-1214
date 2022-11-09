@@ -13,10 +13,10 @@ function OkOrder(props) {
           <p>訂單總額：47,282</p>
         </div>
         <div className={styled.okBottom}>
-          <div className={styled.forHome}>
-            <Link to="/">回首頁</Link>
-          </div>
-          <div className={styled.lookOrder}>查看我的訂單</div>
+          {/* <div className={styled.forHome}> */}
+            <Link to="/" className={styled.forHome}>回首頁</Link>
+          {/* </div> */}
+          <Link to="/" className={styled.lookOrder}>查看我的訂單</Link>
         </div>
       </div>
     </>
