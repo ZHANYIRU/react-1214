@@ -19,12 +19,12 @@ function Footer(props) {
               <div className={styled.media}>
                 <h3>社群媒體</h3>
                 <div className={styled.icon}>
-                  <i class="fa-brands fa-instagram"></i>
-                  <i class="fa-brands fa-square-facebook"></i>
-                  <i class="fa-brands fa-youtube"></i>
+                  <i className="fa-brands fa-instagram"></i>
+                  <i className="fa-brands fa-square-facebook"></i>
+                  <i className="fa-brands fa-youtube"></i>
                   <br />
-                  <i class="fa-brands fa-twitter"></i>
-                  <i class="fa-brands fa-pinterest-p"></i>
+                  <i className="fa-brands fa-twitter"></i>
+                  <i className="fa-brands fa-pinterest-p"></i>
                 </div>
               </div>
               <div className={styled.like}>
