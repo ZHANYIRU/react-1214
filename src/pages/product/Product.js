@@ -1,10 +1,30 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import Slider from './slider'
 // import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
-import styled from '../../styles/product-scss/product.module.scss'
+import styled from '../../styles/product.scss/product.module.scss'
+import img1 from './img/img1.jpg'
+import img2 from './img/img2.jpg'
+import img3 from './img/img3.jpg'
 
 function Product() {
+  //圖片
+  const data = [
+    {
+      key: 1,
+      src: img1,
+    },
+    {
+      key: 2,
+      src: img2,
+    },
+    {
+      key: 3,
+      src: img3,
+    },
+  ]
+
   //抓取fetch狀態
   const [datas, setDatas] = useState([
     {
@@ -39,12 +59,7 @@ function Product() {
       <div className={styled.container}>
         <div className={styled.empty}></div>
         {/* Slider */}
-        <div className={styled.slider}>
-          <img
-            src="https://shoplineimg.com/59f04b129a76f01821000235/5f4732017094a800393a6193/1800x.webp?source_format=jpg"
-            alt=""
-          />
-        </div>
+        <Slider data={data} />
         {/* 搜尋專區 */}
         <div className={styled.form}>
           <form action="">
