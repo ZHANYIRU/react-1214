@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 // import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
-import styled from '../../styles/product.module.scss'
+import styled from '../../styles/product.scss/product.module.scss'
 
 function Product() {
   //抓取fetch狀態
