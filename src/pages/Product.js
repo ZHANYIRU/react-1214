@@ -38,7 +38,13 @@ function Product() {
     <>
       <div className={styled.container}>
         <div className={styled.empty}></div>
-
+        {/* Slider */}
+        <div className={styled.slider}>
+          <img
+            src="https://shoplineimg.com/59f04b129a76f01821000235/5f4732017094a800393a6193/1800x.webp?source_format=jpg"
+            alt=""
+          />
+        </div>
         {/* 搜尋專區 */}
         <div className={styled.form}>
           <form action="">
