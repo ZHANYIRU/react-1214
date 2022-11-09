@@ -5,7 +5,6 @@ function BuyCart({ step, setStep }) {
       <>
         <div className={styled.buyCart}>
           <div className={styled.wrap}>
-            <button>繼續選購</button>
             <button
               onClick={() => {
                 setStep(step + 1)
