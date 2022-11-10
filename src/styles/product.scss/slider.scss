@@ -1,0 +1,79 @@
+@import '../global.scss';
+.slider {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    margin: 32px auto;
+    box-shadow: 0 0 6px #666666;
+  }
+  
+  .slider-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.5s ease-out;
+  }
+  
+  .slider-slide-active {
+    opacity: 1;
+  }
+  
+  .slider-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .slider-prev,
+  .slider-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #ffffff;
+    border-radius: 50%;
+    border: none;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+  }
+
+  
+  .slider-dots {
+    display: flex;
+    position: absolute;
+    bottom: 32px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .slider-dot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: #ffffff;
+    margin: 0 4px;
+    cursor: pointer;
+  }
+  
+  .slider-dot::before {
+    content: "";
+    display: block;
+    width: 70%;
+    height: 70%;
+    background-color: #000000;
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+  }
+  
+  .slider-dot-active::before {
+    opacity: 1;
+  }
+
