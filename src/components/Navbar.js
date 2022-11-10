@@ -1,6 +1,18 @@
 import styled from '../styles/NAV.module.scss'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 function Navbar() {
+  const [loginBox, setLoginBox] = useState({
+    top: '-20px',
+  })
+  const loginBtn = (e) => {
+    e.preventDefault()
+    if (loginBox.top === '-20px') {
+      setLoginBox({ ...loginBox, top: '70px' })
+    } else {
+      setLoginBox({ ...loginBox, top: '-20px' })
+    }
+  }
   return (
     <>
       <nav className={styled.nav}>
@@ -32,11 +44,19 @@ function Navbar() {
             <i className="fa-solid fa-cart-shopping"></i>
           </Link>
           <span>9</span>
-          <Link to="/member">
+          <Link to="/member" onClick={loginBtn}>
             <i className="fa-solid fa-user"></i>
           </Link>
         </div>
       </nav>
+      <div className={styled.loginBefore} style={loginBox}>
+        <Link>
+          <span>會員登入</span>
+        </Link>
+        <Link>
+          <span>會員註冊</span>
+        </Link>
+      </div>
     </>
   )
 }
