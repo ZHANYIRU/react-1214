@@ -5,7 +5,7 @@ body{
    
 }
 @mixin text{
-    font-size: 1.2rem;
+    font-size: 1rem;
         font-weight: 700;
         font-family: 'Courier New', Courier, monospace;
 }
@@ -21,6 +21,7 @@ body{
 .container{
     width: 60%;
     margin: 0 auto;
+    // min-width: 770px;
 }
 
 .form{
@@ -29,8 +30,9 @@ body{
     // display: flex;
     // justify-content:flex-start;
     .search{
-        text-align: center;
+        // text-align: center;
         border-radius: 40px;
+        padding-left: 10px;
         border: 3px black solid;
         background-color:white;
         margin:  0 auto;
@@ -52,36 +54,26 @@ p{
 }
 .empty{
     width: 100%;
-    height: 100px;
+    height: 30px;
     
 }
 
-// slider
-.slider{
-    width: 300%;
-   
-
-    margin-bottom: 50px;
-    img{
-     width: 100%;
-     height: 500px;
-    object-fit:cover;
-    }
-}
 
 
 //--------------------------------
 .product_nav{
+    
     margin: 0 auto;
     display: flex;
+    flex-wrap: nowrap;
     justify-content:center;
     align-items: center;
-    width: 100%;
     height: 45px;
     margin-bottom: 50px;
     .product_nav_box1{
                 @include nav_box;
-                padding-left: 50px;
+                // padding-left: 50px;
+                flex-grow: 0.4;
         div{
             @include text;
         }
@@ -91,7 +83,8 @@ p{
     }
     .product_nav_box3{
                 @include nav_box;
-                padding-right: 50px;
+                // padding-right: 50px;
+                flex-grow: 0.4;
         div{
             @include text;
         }
@@ -100,16 +93,16 @@ p{
         }
     }
     .product_nav_box2{
-        width:10%;
+        flex-grow: 0.2;
         height: 100%;
        position: relative;
        border-bottom: 3px black solid;
+       flex-shrink: 1;
         
         p{
             @include text;
-            top: -6px;
-            left:18px;
-            position:absolute;
+            text-align: center;
+            transform: translateY(-5px);
         }
     }
   }

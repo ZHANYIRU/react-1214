@@ -134,3 +134,14 @@ table {
 a{
   text-decoration:none ;
 }
+
+::-webkit-scrollbar{
+  width: 10px;
+}
+::-webkit-scrollbar-track{
+  background: rgba(128, 128, 128, 0.494);
+}
+::-webkit-scrollbar-thumb{
+  background: #FFDA16;
+  border-radius: 10px;
+}

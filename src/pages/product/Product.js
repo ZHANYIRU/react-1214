@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import Slider from './slider'
 // import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
-import styled from '../../styles/product.scss/product.module.scss'
+import styled from '../../styles/product-scss/product.module.scss'
 import img1 from './img/img1.jpg'
 import img2 from './img/img2.jpg'
 import img3 from './img/img3.jpg'
@@ -57,6 +57,7 @@ function Product() {
   return (
     <>
       <div className={styled.container}>
+      <div className={styled.filter}></div>
         <div className={styled.empty}></div>
         {/* Slider */}
         <Slider data={data} />
