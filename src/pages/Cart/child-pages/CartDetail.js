@@ -1,6 +1,16 @@
-import styled from '../../../styles/cart-scss/cartDetail.module.scss'
+import CartDetailRoom from '../components/CartDetailRoom'
+import CartDetailCam from '../components/CartDetailCam'
+import CartDetailPro from '../components/CartDetailPro'
+import CartDetailRen from '../components/CartDetailRen'
 function CartDetail(props) {
-  return <div className={styled.dtWrap}>購物車詳細</div>
+  return (
+    <>
+      <CartDetailRoom />
+      <CartDetailCam />
+      <CartDetailPro />
+      <CartDetailRen />
+    </>
+  )
 }
 
 export default CartDetail
