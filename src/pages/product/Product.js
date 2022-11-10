@@ -57,6 +57,7 @@ function Product() {
   return (
     <>
       <div className={styled.container}>
+      <div className={styled.filter}></div>
         <div className={styled.empty}></div>
         {/* Slider */}
         <Slider data={data} />

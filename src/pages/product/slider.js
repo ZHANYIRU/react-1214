@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import '../../styles/product.scss/slider.scss'
+import '../../styles/product-scss/slider.scss'
 function Slider({ data }) {
   const [currentId, setCurrentId] = useState(0)
 
