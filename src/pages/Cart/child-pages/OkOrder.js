@@ -1,6 +1,10 @@
 import styled from '../../../styles/cart-scss/OK.module.scss'
 import { Link } from 'react-router-dom'
+import { useEffect } from 'react'
 function OkOrder(props) {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
       <p className={styled.ok}>成功下訂，感謝您的訂購！</p>
@@ -14,9 +18,13 @@ function OkOrder(props) {
         </div>
         <div className={styled.okBottom}>
           {/* <div className={styled.forHome}> */}
-            <Link to="/" className={styled.forHome}>回首頁</Link>
+          <Link to="/" className={styled.forHome}>
+            回首頁
+          </Link>
           {/* </div> */}
-          <Link to="/" className={styled.lookOrder}>查看我的訂單</Link>
+          <Link to="/" className={styled.lookOrder}>
+            查看我的訂單
+          </Link>
         </div>
       </div>
     </>
