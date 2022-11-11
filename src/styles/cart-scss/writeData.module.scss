@@ -1,7 +1,102 @@
 @import '../global.scss';
-.writeWrap{
+
+.checkCart {
+  width: 50%;
+  height: 90vh;
+  background-color: white;
   margin: 50px auto 0;
-  width: 60%;
+  padding: 20px 0 15px;
+  border-radius: 10px;
+  overflow: auto;
+
+  &::-webkit-scrollbar-track {
+    -webkit-border-radius: 10px;
+    background: #4B5022;
+  }
+
+  >h2 {
+    font-size: 25px;
+    text-align: center;
+  }
+}
+
+.checkRoom,
+.checkCam,
+.checkPro,
+.checkRen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  >h2 {
+    border-bottom: 3px solid #E0E5CF;
+    padding: 10px 0;
+    width: 90%;
+    margin-bottom: 10px;
+  }
+}
+
+.checkWrap {
+  width: 90%;
+  height: 200px;
+  background-color: #ECECEC;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px;
+  position: relative;
+}
+
+.checkText {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+  }
+
+  p:last-child {
+    color: #C25C5C;
+  }
+}
+
+.checkImg {
+  width: 150px;
+  height: 100px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.icon {
+  position: absolute;
+  top: 15px;
+  left: 35%;
+  display: flex;
+  font-size: 14px;
+
+  div {
+    margin-right: 15px;
+  }
+
+  i {
+    color: #48742C;
+    margin-right: 5px;
+  }
+}
+
+.writeWrap {
+  margin: 50px auto 0;
+  width: 50%;
   height: 100vh;
   background-color: #E3EEE7;
+  border-radius: 10px;
 }

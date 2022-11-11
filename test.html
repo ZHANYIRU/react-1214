@@ -1,20 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    *{
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
+    .check {
+      display: inline-block;
+      position: relative;
+      width: 20px;
+      height: 20px;
+      border: 1px solid black;
+      border-radius: 5px;
     }
-    
+
+    .check::after {
+      content: '';
+      position: absolute;
+      border-right: 2px solid white;
+      border-bottom: 2px solid white;
+      transform: rotate(45deg);
+      width: 5px;
+      height: 10px;
+      top: 2px;
+      left: 7px;
+      opacity: 0;
+    }
+
+    #test{
+      display: none;
+    }
+    #test:checked+.check {
+      background-color: #034628;
+    }
+    #test:checked +.check::after{
+      opacity: 1;
+    }
   </style>
 </head>
+
 <body>
-  
+  <input type="checkbox" id='test' />
+  <label for="test" class='check'></label>
 </body>
+
 </html>
