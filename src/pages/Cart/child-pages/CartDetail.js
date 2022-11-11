@@ -1,8 +1,12 @@
-import CartDetailRoom from '../components/CartDetailRoom'
-import CartDetailCam from '../components/CartDetailCam'
-import CartDetailPro from '../components/CartDetailPro'
-import CartDetailRen from '../components/CartDetailRen'
+import { useEffect } from 'react'
+import CartDetailRoom from '../components/cart-detail/CartDetailRoom'
+import CartDetailCam from '../components/cart-detail/CartDetailCam'
+import CartDetailPro from '../components/cart-detail/CartDetailPro'
+import CartDetailRen from '../components/cart-detail/CartDetailRen'
 function CartDetail(props) {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <>
       <CartDetailRoom />

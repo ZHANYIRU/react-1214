@@ -6,11 +6,6 @@ function BuyCart({ step, setStep, buyBar }) {
   const [fixed, setFixed] = useState({
     position: 'fixed',
   })
-  // if (buyBar) {
-  //   setFixed({ ...fixed, position: 'relative' })
-  // } else {
-  //   setFixed({ ...fixed, position: 'fixed' })
-  // }
   useEffect(() => {
     if (buyBar) {
       setFixed({ ...fixed, position: 'absolute' })

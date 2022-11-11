@@ -2,7 +2,7 @@ import styled from '../../styles/cart-scss/Cart.module.scss'
 import CartTitle from './components/CartTitle'
 import BuyCart from './components/BuyCart'
 import CartDetail from './child-pages/CartDetail'
-import WriteData from './child-pages/WriteData'
+import CheckData from './child-pages/CheckData'
 import OkOrder from './child-pages/OkOrder'
 import { useState, useRef, useEffect } from 'react'
 function Cart() {
@@ -32,7 +32,7 @@ function Cart() {
   //for步驟
   const [step, setStep] = useState(1)
   //動態元件
-  const components = [CartDetail, WriteData, OkOrder]
+  const components = [CartDetail, CheckData, OkOrder]
   const NowComponents = components[step - 1]
   return (
     <>
