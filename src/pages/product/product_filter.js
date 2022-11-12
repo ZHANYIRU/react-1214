@@ -26,9 +26,22 @@ export default function Product_filter() {
   let price = 'http://localhost:3001/product/price'
   let brands = 'http://localhost:3001/product/brand'
   const getData = async (rotues) => {
-    const response = await axios.post()
-    const data = response.data
-    console.log(data)
+    if (lowPrice && highPrice && brand) {
+      const response = await axios.post(rotues, {
+        lowPrice: [lowPrice],
+        highPrice: [highPrice],
+        brand: brand,
+      })
+      const data = response.data
+      console.log(data)
+    } else if (lowPrice && highPrice) {
+      const response = await axios.post(rotues, {
+        lowPrice: [lowPrice],
+        highPrice: [highPrice],
+      })
+      const data = response.data
+      console.log(data)
+    }
   }
 
   const filterData = () => {
@@ -38,9 +51,7 @@ export default function Product_filter() {
       getData(price)
     }
   }
-  useEffect(() => {
-    filterData()
-  }, [])
+  useEffect(() => {}, [])
   return (
     <div>
       <form action="">

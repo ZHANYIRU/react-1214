@@ -44,7 +44,7 @@ function Product() {
   ])
 
   const getProductData = async () => {
-    const response = await axios.get('http://localhost:3001/product')
+    const response = await axios.get('http://localhost:3001/product/all')
     const r = response.data
     // console.log(r)
     setDatas(r)
