@@ -2,12 +2,12 @@ import styled from '../../styles/cart-scss/Cart.module.scss'
 import CartTitle from './components/CartTitle'
 import BuyCart from './components/BuyCart'
 import CartDetail from './child-pages/CartDetail'
-import CheckData from './child-pages/CheckData'
+import WritePage from './child-pages/WritePage'
 import OkOrder from './child-pages/OkOrder'
 import { useState, useRef, useEffect } from 'react'
 function Cart() {
   //查看body高度
-  const bodyHeight = useRef()
+  const bodyHeight = useRef(null)
   //給buyBar的判斷
   const [buyBar, setBuyBar] = useState(false)
 
@@ -29,10 +29,10 @@ function Cart() {
   }, [])
   //最大流程數
   const maxStep = 3
-  //for步驟
+  //流程的狀態
   const [step, setStep] = useState(1)
   //動態元件
-  const components = [CartDetail, CheckData, OkOrder]
+  const components = [CartDetail, WritePage, OkOrder]
   const NowComponents = components[step - 1]
   return (
     <>

@@ -1,0 +1,26 @@
+@import '../global.scss';
+.btnGroup{
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  margin: 50px auto 30px;
+  button{
+    border: none;
+    background-color: $darkGreen;
+    color:$yellow;
+    border-radius: 5px;
+    padding: 10px 20px;
+  }
+}
+.camera{
+  width: 50%;
+  margin: 0 auto ;
+  height: 125vh;
+}
+.threeD{
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  // transform: rotateY(180deg);
+  transition: .8s;
+}
