@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import styled from '../../../styles/cart-scss/WriteData.module.scss'
+import styled from '../../../styles/cart-scss/writeData.module.scss'
 function WriteData() {
   const [familySelect, setFamilySelect] = useState('')
   const [paySelect, setPaySelect] = useState('')
