@@ -10,6 +10,26 @@
     vertical-align:bottom;
   }
 }
+.box {
+  width: 100%;
+  height: 100%;
+}
+.divWrap {
+  width: 100%;
+  height: 330px;
+  position: relative;
+}
+.div4 {
+  background: url(../../public/img/4.png) no-repeat;
+  background-position: center bottom ;
+  position: absolute;
+}
+
+.div5 {
+  background: url(../../public/img/5.png) no-repeat;
+  background-position: center bottom ;
+  position: absolute;
+}
 .footer{
   margin-top: -5px;
   width: 100%;

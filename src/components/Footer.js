@@ -1,11 +1,21 @@
 import styled from '../styles/Footer.module.scss'
+import { useLocation } from 'react-router-dom'
 function Footer(props) {
+  const { pathname } = useLocation()
   return (
     <>
       <footer>
-        <div className={styled.img}>
-          <img src="../img/footermoun.png" alt="" />
-        </div>
+        {pathname !== '/' ? (
+          <div className={styled.img}>
+            <img src="../img/footermoun.png" alt="" />
+          </div>
+        ) : (
+          <div className={styled.divWrap}>
+            <div className={`${styled.box} ${styled.div4}`}></div>
+            <div className={`${styled.box} ${styled.div5}`}></div>
+          </div>
+        )}
+
         <div className={styled.footer}>
           <div className={styled.ftrTop}>
             <div className={styled.ftrLeft}>
