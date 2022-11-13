@@ -26,6 +26,7 @@ function Slider({ data }) {
             className={`slider-dot ${
               currentId === id ? 'slider-dot-active' : ''
             } `}
+            key={id}
           />
         ))}
       </div>

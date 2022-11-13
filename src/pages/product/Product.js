@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import Slider from './slider'
+import Product_filter from './product_filter'
 // import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import styled from '../../styles/product-scss/product.module.scss'
@@ -43,7 +44,7 @@ function Product() {
   ])
 
   const getProductData = async () => {
-    const response = await axios.get('http://localhost:8377/product')
+    const response = await axios.get('http://localhost:3001/product/all')
     const r = response.data
     // console.log(r)
     setDatas(r)
@@ -51,22 +52,22 @@ function Product() {
 
   useEffect(() => {
     getProductData()
-    console.log(datas)
   }, [])
 
   return (
     <>
       <div className={styled.container}>
-      <div className={styled.filter}></div>
+        <div className={styled.filter}></div>
         <div className={styled.empty}></div>
         {/* Slider */}
         <Slider data={data} />
+        <Product_filter />
         {/* 搜尋專區 */}
         <div className={styled.form}>
           <form action="">
             <input className={styled.search} type="text" />
 
-            <i class="fa-solid fa-magnifying-glass"></i>
+            <i className="fa-solid fa-magnifying-glass"></i>
           </form>
           {/* 種類專區 */}
         </div>
