@@ -7,7 +7,7 @@ function Main({ setFtr }) {
     const windowH = window.innerHeight
     const mainH = mainHeight.current.clientHeight
     const windowScrollY = window.scrollY
-    if (windowScrollY + windowH > mainH) {
+    if (windowScrollY + windowH * 0.8 > mainH) {
       setFtr(true)
     } else {
       setFtr(false)

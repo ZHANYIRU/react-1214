@@ -43,6 +43,7 @@ function WritePage({ step, setStep }) {
         >
           {check}
         </button>
+
         {buy && (
           <button
             onClick={() => {

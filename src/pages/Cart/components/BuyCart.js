@@ -1,22 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import styled from '../../../styles/cart-scss/BuyCart.module.scss'
 function BuyCart({ step, setStep, buyBar }) {
   const [check, setCheck] = useState(false)
-  //for滾動到footer時buyBar不再fixed
-  const [fixed, setFixed] = useState({
-    position: 'fixed',
-  })
-  useEffect(() => {
-    if (buyBar) {
-      setFixed({ ...fixed, position: 'absolute' })
-    } else {
-      setFixed({ ...fixed, position: 'fixed' })
-    }
-  }, [buyBar])
   if (step === 1) {
     return (
       <>
-        <div className={styled.buyCart} style={fixed}>
+        <div
+          className={styled.buyCart}
+          style={{ position: buyBar && 'absolute' }}
+        >
           <div className={styled.wrap}>
             <div>
               <input
