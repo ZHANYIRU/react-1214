@@ -8,7 +8,7 @@ import Camp from './pages/camp/Camp'
 import Room from './pages/room/Room'
 import Rental from './pages/rental/Rental'
 import Cart from './pages/Cart/Cart'
-import Order from './pages/Cart/components/Order'
+import Order from './pages/Order/Order'
 import Member from './pages/member/Member'
 function App() {
   return (
