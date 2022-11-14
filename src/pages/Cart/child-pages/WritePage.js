@@ -1,4 +1,4 @@
-import styled from '../../../styles/cart-scss/WritePaga.module.scss'
+import styled from '../../../styles/cart-scss/WritePage.module.scss'
 import CheckData from '../components/CheckData'
 import WriteData from '../components/WriteData'
 import { useEffect, useState } from 'react'
@@ -50,7 +50,7 @@ function WritePage({ step, setStep }) {
               setStep(step + 1)
             }}
           >
-            結帳去
+            付款去
           </button>
         )}
       </div>

@@ -17,6 +17,7 @@ function CartTitle({ maxStep, step }) {
         <div className={styled.text}>
           <p>購物清單</p>
           <p>填寫資料</p>
+          <p>付款頁面</p>
           <p>完成訂單</p>
         </div>
       </div>

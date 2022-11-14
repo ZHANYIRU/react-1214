@@ -8,6 +8,7 @@ import Camp from './pages/camp/Camp'
 import Room from './pages/room/Room'
 import Rental from './pages/rental/Rental'
 import Cart from './pages/Cart/Cart'
+import Order from './pages/Cart/components/Order'
 import Member from './pages/member/Member'
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/room" element={<Room />} />
         <Route path="/rental" element={<Rental />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/order" element={<Order />} />
         <Route path="/member" element={<Member />} />
       </Routes>
       <Footer />

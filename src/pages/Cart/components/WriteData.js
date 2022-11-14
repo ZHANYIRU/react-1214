@@ -111,6 +111,29 @@ function WriteData() {
             </div>
           </div>
         </div>
+        <div className={styled.catchBox}>
+          <h3>收貨方式</h3>
+          <div className={styled.home}>
+            <input type="radio" id="home" />
+            <label htmlFor="home">宅配地址</label>
+          </div>
+          <div className={styled.family}>
+            <input type="radio" id="family" />
+            <label htmlFor="family">全家店到店</label>
+          </div>
+        </div>
+        <div className={styled.area}>
+          <div className={styled.address}>
+            <h3>地址</h3>
+            <select name="" id="">
+              <option value="">新北市</option>
+            </select>
+            <select name="" id="">
+              <option value="">木柵區</option>
+            </select>
+          </div>
+          <input type="text" />
+        </div>
       </div>
     </>
   )

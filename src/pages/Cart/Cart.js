@@ -3,6 +3,7 @@ import CartTitle from './components/CartTitle'
 import BuyCart from './components/BuyCart'
 import CartDetail from './child-pages/CartDetail'
 import WritePage from './child-pages/WritePage'
+import Pay from './child-pages/Pay'
 import OkOrder from './child-pages/OkOrder'
 import { useState, useRef, useEffect } from 'react'
 function Cart() {
@@ -32,7 +33,7 @@ function Cart() {
   //流程的狀態
   const [step, setStep] = useState(1)
   //動態元件
-  const components = [CartDetail, WritePage, OkOrder]
+  const components = [CartDetail, WritePage, Pay, OkOrder]
   const NowComponents = components[step - 1]
   return (
     <>
