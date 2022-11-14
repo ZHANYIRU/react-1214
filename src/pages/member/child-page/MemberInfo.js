@@ -1,6 +1,10 @@
+import { useState } from 'react'
 import styled from '../../../styles/member-scss/MemberInfo.module.scss'
 
 export default function MemberInfo() {
+  const [isNew, SetIsNew] = useState(false)
+  const [isEdit, SetIsEdit] = useState(false)
+
   return (
     <>
       <div className={styled.row}>
@@ -27,32 +31,91 @@ export default function MemberInfo() {
               .fill(1)
               .map((v, i) => {
                 return (
-                  <>
-                    <div className={styled.post} key={i}>
-                      <img
-                        src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
-                        alt="post"
-                      ></img>
-                      <div className={styled.postInfo}>
-                        <p>
-                          <span>
-                            <i className="fa-solid fa-heart"></i>32
-                          </span>
-                          <span>
-                            <i className="fa-solid fa-comment-dots"></i>9
-                          </span>
-                        </p>
-                        <p>苗栗 加里山</p>
-                        <p>海拔高度 1211m</p>
-                        <span className={styled.postEdit}><i className="fa-solid fa-pen-to-square"></i></span>
-                      </div>
+                  <div className={styled.post} key={i}>
+                    <img
+                      src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
+                      alt="post"
+                    ></img>
+                    <div className={styled.postInfo}>
+                      <p>
+                        <span>
+                          <i className="fa-solid fa-heart"></i>32
+                        </span>
+                        <span>
+                          <i className="fa-solid fa-comment-dots"></i>9
+                        </span>
+                      </p>
+                      <p>苗栗 加里山</p>
+                      <p>海拔高度 1211m</p>
+                      <span
+                        className={styled.postEdit}
+                        onClick={() => {
+                          // console.log(1);
+                          SetIsEdit(true)
+                        }}
+                      >
+                        <i className="fa-solid fa-pen-to-square"></i>
+                      </span>
+                      {/* 輸入用 react-textarea-autosize 套件 */}
                     </div>
-                  </>
+                  </div>
                 )
               })}
           </div>
         </div>
       </div>
+      {isEdit && (
+        <div
+          className={styled.modalBg}
+          onClick={() => {
+            SetIsEdit(false)
+            // z-index over nav bar?
+          }}
+        >
+          <div
+            className={styled.modal}
+            onClick={(e) => {
+              e.stopPropagation()
+            }}
+          >
+            <div className={styled.editImg}>
+              <img
+                src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
+                alt="postImg"
+              ></img>
+            </div>
+            <div className={styled.editContent}>
+              <div className={styled.contentTop}>
+                <h3>編輯貼文</h3>
+                <textarea maxLength="120">要編輯的內文</textarea>
+              </div>
+              <div className={styled.contentBtm}>
+                <div>
+                  <p>海拔高度: 1211m</p>
+                  <h3>
+                    <span>苗栗</span>
+                    <span>加里山</span>
+                  </h3>
+                </div>
+                <div className={styled.delete}>
+                  <h3>
+                    <span>刪除</span>
+                    <i class="fa-solid fa-trash-can"></i>
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className={styled.btnGrp}>
+            <button className={styled.btnDone}>
+              <p>確認修改</p>
+            </button>
+            <button className={styled.btnCancel}>
+              <p>取消修改</p>
+            </button>
+          </div>
+        </div>
+      )}
     </>
   )
 }
