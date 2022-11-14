@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from '../../../styles/cart-scss/OrderTime.module.scss'
+import styled from '../../../styles/order-scss/OrderTime.module.scss'
 function OrderTime() {
   return (
     <>

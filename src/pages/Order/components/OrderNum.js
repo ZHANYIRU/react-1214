@@ -1,32 +1,37 @@
 import React from 'react'
-import Accordion from 'react-bootstrap/Accordion'
-import '../../../styles/cart-scss/OrderNum.scss'
+import { useState } from 'react'
+import styled from '../../../styles/order-scss/OrderNum.module.scss'
 function OrderNum() {
+  const [open, setOpen] = useState(false)
+  const openOrder = () => {
+    setOpen(!open)
+  }
   return (
-    <Accordion alwaysOpen>
-      <Accordion.Item eventKey="0">
-        <Accordion.Header>Accordion Item #1</Accordion.Header>
-        <Accordion.Body>
-          <div className="div1"></div>
-          <div className="div1"></div>
-          <div className="div1"></div>
-          <div className="div1"></div>
-          <div className="div1"></div>
-        </Accordion.Body>
-      </Accordion.Item>
-      <Accordion.Item eventKey="1">
-        <Accordion.Header>Accordion Item #2</Accordion.Header>
-        <Accordion.Body>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </Accordion.Body>
-      </Accordion.Item>
-    </Accordion>
+    <>
+      <div className={styled.numWrap}>
+        <div className={styled.orederNum} onClick={openOrder}>
+          <p> 訂單編號：0000000000</p>
+        </div>
+        <div className={open ? `${styled.contentOpen}` : `${styled.content}`}>
+          <div className={styled.div1}>12121</div>
+          <div className={styled.div1}>121212</div>
+          <div className={styled.div1}>21212</div>
+          <div className={styled.div1}>21212</div>
+        </div>
+      </div>
+      {/* <div className="tabs">
+        <div className="tab">
+          <input type="checkbox" id="chck1" />
+          <label className="tab-label" for="chck1">
+            Item 1
+          </label>
+          <div className="tab-content">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum,
+            reiciendis!
+          </div>
+        </div>
+      </div> */}
+    </>
   )
 }
 
