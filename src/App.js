@@ -7,6 +7,7 @@ import Product from './pages/product/Product'
 import Camp from './pages/camp/Camp'
 import Room from './pages/room/Room'
 import Rental from './pages/rental/Rental'
+import Rental_detail from './pages/rental/Rental_detail'
 import Cart from './pages/Cart/Cart'
 import Member from './pages/member/Member'
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/camp" element={<Camp />} />
         <Route path="/room" element={<Room />} />
         <Route path="/rental" element={<Rental />} />
+        <Route path="/rental/:rental_product_sid" element={<Rental_detail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/member" element={<Member />} />
       </Routes>
