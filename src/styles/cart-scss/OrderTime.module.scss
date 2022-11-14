@@ -24,4 +24,7 @@
   width: 1px;
   height: 50px;
   background-color: black;
+  &:last-child {
+    display: none;
+  }
 }
