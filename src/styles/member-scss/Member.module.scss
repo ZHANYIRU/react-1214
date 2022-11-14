@@ -1,0 +1,32 @@
+@import '../global.scss';
+
+.row {
+    width: 100%;
+    padding-top: 160px;
+    padding-bottom: 80px;
+    width: 100%;
+    .col {
+        width: 1320px;
+        margin: auto;
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+
+        aside {
+            width: 25%;
+            height: 75vh;
+            position: sticky;
+            background-color: #fff;
+            box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
+            border-radius: 12px;
+            top: 160px;
+        }
+        article {
+            width: 70%;
+            height: 300vh;
+            background-color: pink;
+        }
+
+    }
+
+}

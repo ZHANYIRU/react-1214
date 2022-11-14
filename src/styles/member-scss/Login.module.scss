@@ -7,7 +7,7 @@
     padding-bottom: 80px;
     width: 100%;
     .col {
-        width: 33.33333%;
+        width: 640px;
         margin: auto;
     }
 }
@@ -42,7 +42,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 30px;
+        margin-bottom: 40px;
         position: relative;
 
         label {
@@ -79,7 +79,7 @@
     }
 
     button {
-        width: 48%;
+        width: 240px;
         height: 50px;
         border: none;
         border-radius: 10px;
@@ -91,5 +91,11 @@
         text-align: center;
         color: #01170D;
         margin-top: 36px;
+        transition: 0.2s;
+
+        &:hover {
+            background: #ffc116;
+        }
+
     }
 }

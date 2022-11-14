@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import styled from '../../styles/member-scss/Login.module.scss'
 
 function Login(props) {
   const [showPass, setShowPass] = useState(false)
+  const navigate = useNavigate();
 
   return (
     <>
@@ -13,15 +15,17 @@ function Login(props) {
             <div className={styled.divider}></div>
             <form>
               <div className={styled.formRow}>
-                <label>電子郵件</label>
-                <input type="email"></input>
+                <label htmlFor='email'>電子信箱</label>
+                <input type="email" name='email'></input>
               </div>
               <div className={styled.formRow}>
-                <label>密碼</label>
-                <input type={showPass ? 'text ' : 'password'}></input>
+                <label htmlFor='password'>密碼</label>
+                <input type={showPass ? 'text ' : 'password'} name='password'></input>
                 <div
                   className={styled.showPass}
-                  onClick={()=>{setShowPass(!showPass)}}
+                  onClick={() => {
+                    setShowPass(!showPass)
+                  }}
                 >
                   {showPass ? (
                     <i class="fa-solid fa-eye-slash"></i>
@@ -32,7 +36,9 @@ function Login(props) {
               </div>
               <div className={styled.btnGroup}>
                 <button>登入</button>
-                <button>註冊新會員</button>
+                <button onClick={()=>{
+                  navigate('/join');
+                }}>註冊新會員</button>
               </div>
             </form>
           </div>

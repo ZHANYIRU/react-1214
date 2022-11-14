@@ -10,6 +10,7 @@ import Rental from './pages/rental/Rental'
 import Cart from './pages/Cart/Cart'
 import Member from './pages/member/Member'
 import Login from './pages/member/Login'
+import Join from './pages/member/Join'
 function App() {
   return (
     <BrowserRouter>
@@ -24,6 +25,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/member" element={<Member />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/join" element={<Join />} />
       </Routes>
       <Footer />
     </BrowserRouter>
