@@ -5,6 +5,7 @@
     padding-top: 160px;
     padding-bottom: 80px;
     width: 100%;
+
     .col {
         width: 1320px;
         margin: auto;
@@ -13,18 +14,111 @@
         justify-content: space-between;
 
         aside {
-            width: 25%;
+            width: 320px;
             height: 75vh;
             position: sticky;
             background-color: #fff;
             box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
             border-radius: 12px;
             top: 160px;
+            box-sizing: border-box;
+            padding: 50px 32px;
+            box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
+            text-align: center;
+
+            .social {
+                cursor: pointer;
+            }
+
+            .avatar {
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+                // background-image: linear-gradient(0deg,#ddd, #444);
+                background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
+                box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.5);
+                overflow: hidden;
+                margin: auto;
+                margin-bottom: 25px;
+
+                img {
+                    border-radius: 50%;
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    border: 10px solid transparent;
+                    box-sizing: border-box;
+                }
+            }
+
+            h3 {
+                // font-family: 'Montserrat';
+                font-weight: bold;
+                font-size: 32px;
+                line-height: 32px;
+                text-align: center;
+                margin-bottom: 16px;
+            }
+
+            .socials {
+                width: 80%;
+                display: flex;
+                justify-content: space-between;
+                margin: auto;
+                border-top: 1px solid #ccc;
+                padding-top: 16px;
+                margin-bottom: 12px;
+            }
+
+            .highlight {
+                // font-family: 'Montserrat';
+                font-weight: 700;
+                font-size: 18px;
+                text-align: center;
+                color: #333;
+                margin-bottom: 16px;
+            }
+
+            p {
+                line-height: 18px;
+                font-weight: 500;
+
+                &.intro {
+                    height: 140px;
+                    text-align: left;
+                }
+            }
+
+            button {
+                width: 240px;
+                height: 50px;
+                border: none;
+                border-radius: 10px;
+                background: #FFDA16;
+                box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+                font-family: 'Montserrat';
+                font-weight: 800;
+                font-size: 22px;
+                text-align: center;
+                color: #01170D;
+                margin-top: 36px;
+                transition: 0.2s;
+            
+                &:hover {
+                    background: #ffc116;
+                }
+
+                a {
+                    
+                }
+            }
         }
+
         article {
-            width: 70%;
-            height: 300vh;
-            background-color: pink;
+            width: 960px;
+            // min-height: 75vh;
+            // height: 300vh;
+            // background-color: pink;
         }
 
     }

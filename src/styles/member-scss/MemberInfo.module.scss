@@ -1,0 +1,148 @@
+@import '../global.scss';
+
+.row {
+    width: 100%;
+
+    .col {
+        margin: auto;
+    }
+
+    h3 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: bold;
+        font-size: 32px;
+        line-height: 29px;
+        letter-spacing: 0.065em;
+        color: #01170D;
+        margin-top: 5px;
+        margin-bottom: 16px;
+    }
+}
+
+.overview {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+
+    h4 {
+        font-size: 20px;
+    }
+
+    .postMap {
+        width: 35%;
+        aspect-ratio: 1/1.5;
+        background-color: #ccc;
+    }
+
+    .totalHeight {
+        width: 60%;
+        aspect-ratio: 2/1;
+        background-color: pink;
+    }
+}
+
+.postTitle {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+        width: 120px;
+        height: 32px;
+        border: none;
+        background: #FFDA16;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(1.5px);
+        border-radius: 5px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        span {
+            font-size: 16px;
+            font-weight: 600;
+            margin-right: 10px;
+        }
+
+        i {
+            margin-top: 2px;
+        }
+    }
+}
+
+.divider {
+    width: 100%;
+    height: 2px;
+    background-color: $darkGreen;
+}
+
+.postList {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 2%;
+
+    .post {
+        width: 32%;
+        aspect-ratio: 4/3;
+        background-color: #ccc;
+        margin-top: 24px;
+        position: relative;
+        // border-radius: 5px;
+        overflow: hidden;
+
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .postInfo {
+            width: 100%;
+            height: 100%;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .postEdit {
+                color: #fff;
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                font-size: 20px;
+            }
+        }
+
+        p {
+            font-size: 20px;
+            color: #fff;
+            margin-bottom: 16px;
+
+            span {
+                margin: 20px;
+                i {
+                    margin-right: 6px;
+                }
+    
+            }
+        }
+
+
+
+        &:hover .postInfo {
+            opacity: 1;
+        }
+
+    }
+
+
+}

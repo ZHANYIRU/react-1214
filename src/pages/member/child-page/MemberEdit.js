@@ -1,15 +1,14 @@
 import { useState } from 'react'
-import styled from '../../styles/member-scss/Join.module.scss'
+import styled from '../../../styles/member-scss/MemberEdit.module.scss'
 
-export default function Join(props) {
-  const [showPass, setShowPass] = useState(false)
+export default function MemberEdit() {
 
   return (
     <>
-      <div className={styled.row}>
+            <div className={styled.row}>
         <div className={styled.col}>
           <div className={styled.card}>
-            <h3>會員註冊</h3>
+            <h3>編輯會員資料</h3>
             <div className={styled.divider}></div>
             <form>
               <div className={styled.avatar}>
@@ -32,43 +31,6 @@ export default function Join(props) {
               <div className={styled.formRow}>
                 <label className={styled.required}>顯示名稱</label>
                 <input type="text"></input>
-              </div>
-              <div className={styled.formRow}>
-                <label htmlFor="password" className={styled.required}>
-                  密碼
-                </label>
-                <input
-                  type={showPass ? 'text ' : 'password'}
-                  name="password"
-                ></input>
-                <div
-                  className={styled.showPass}
-                  onClick={() => {
-                    setShowPass(!showPass)
-                  }}
-                >
-                  {showPass ? (
-                    <i className="fa-solid fa-eye-slash"></i>
-                  ) : (
-                    <i className="fa-solid fa-eye"></i>
-                  )}
-                </div>
-              </div>
-              <div className={styled.formRow}>
-                <label className={styled.required}>確認密碼 </label>
-                <input type={showPass ? 'text ' : 'password'}></input>
-                <div
-                  className={styled.showPass}
-                  onClick={() => {
-                    setShowPass(!showPass)
-                  }}
-                >
-                  {showPass ? (
-                    <i className="fa-solid fa-eye-slash"></i>
-                  ) : (
-                    <i className="fa-solid fa-eye"></i>
-                  )}
-                </div>
               </div>
               <div className={styled.formRow}>
                 <label htmlFor="mobile">手機號碼</label>
@@ -102,7 +64,7 @@ export default function Join(props) {
                 ></textarea>
               </div>
               {/* bonus: 驗證碼API */}
-              <button>註冊會員</button>
+              <button>更新資料</button>
             </form>
           </div>
         </div>
