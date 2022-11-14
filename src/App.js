@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Home from './pages/home/Home'
 import Product from './pages/product/Product'
+import ProductPage from './pages/product/ProductPage'
 import Camp from './pages/camp/Camp'
 import Room from './pages/room/Room'
 import Rental from './pages/rental/Rental'
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/product" element={<Product />} />
+        <Route path="/product/:product_sid" element={<ProductPage />} />
         <Route path="/camp" element={<Camp />} />
         <Route path="/room" element={<Room />} />
         <Route path="/rental" element={<Rental />} />
