@@ -72,22 +72,30 @@ export default function MemberInfo() {
             // z-index over nav bar?
           }}
         >
-          <div
-            className={styled.modal}
-            onClick={(e) => {
-              e.stopPropagation()
-            }}
-          >
-            <div className={styled.editImg}>
+          <div className={styled.modal}>
+            <div
+              className={styled.editImg}
+              onClick={(e) => {
+                e.stopPropagation()
+              }}
+            >
               <img
                 src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
                 alt="postImg"
               ></img>
             </div>
-            <div className={styled.editContent}>
+            <div
+              className={styled.editContent}
+              onClick={(e) => {
+                e.stopPropagation()
+              }}
+            >
               <div className={styled.contentTop}>
                 <h3>編輯貼文</h3>
-                <textarea maxLength="120">要編輯的內文</textarea>
+                <textarea
+                  maxLength="120"
+                  defaultValue={'要編輯的內文'}
+                ></textarea>
               </div>
               <div className={styled.contentBtm}>
                 <div>
@@ -100,19 +108,29 @@ export default function MemberInfo() {
                 <div className={styled.delete}>
                   <h3>
                     <span>刪除</span>
-                    <i class="fa-solid fa-trash-can"></i>
+                    <i className="fa-solid fa-trash-can"></i>
                   </h3>
                 </div>
               </div>
             </div>
-          </div>
-          <div className={styled.btnGrp}>
-            <button className={styled.btnDone}>
-              <p>確認修改</p>
-            </button>
-            <button className={styled.btnCancel}>
-              <p>取消修改</p>
-            </button>
+            <div className={styled.btnGrp}>
+              <button
+                className={styled.btnDone}
+                onClick={(e) => {
+                  e.stopPropagation()
+                }}
+              >
+                <p>確認修改</p>
+              </button>
+              <button
+                className={styled.btnCancel}
+                onClick={(e) => {
+                  e.stopPropagation()
+                }}
+              >
+                <p>取消修改</p>
+              </button>
+            </div>
           </div>
         </div>
       )}

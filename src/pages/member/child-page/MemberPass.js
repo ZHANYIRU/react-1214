@@ -22,9 +22,9 @@ export default function MemberPass() {
                   }}
                 >
                   {showPass ? (
-                    <i class="fa-solid fa-eye-slash"></i>
+                    <i className="fa-solid fa-eye-slash"></i>
                   ) : (
-                    <i class="fa-solid fa-eye"></i>
+                    <i className="fa-solid fa-eye"></i>
                   )}
                 </div>
               </div>
