@@ -1,0 +1,60 @@
+@import '../global.scss';
+.roomCardGroup{
+    // position: absolute;
+    width:80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+.roomCard{
+    margin-bottom: 50px;
+    padding: 18px;
+    width:19%;
+    background-color: white;
+    border-radius: 10px;
+    box-sizing: content-box;
+}
+.cardImg{
+    background-image: url('./../../../public/img/room.jpg');
+    background-size: cover;
+    height: 200px;
+    border-radius: 10px;
+}
+.icon{
+    display: flex;
+    justify-content: space-between
+}
+.icon span{
+    display: inline-block;
+    margin-top: 10px;
+    padding-right: 10px;
+    font-weight: 700;
+}
+.icon span i {
+    color:#48742C
+}
+.roomName{
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.star{
+    margin-top: 8px;
+}
+.star i {
+    color: #ffda16;
+    font-size: 0.8rem;
+    margin-right: 4px;
+}
+.commentQTY{
+    font-size: 0.9rem;
+
+}
+.price{
+font-weight: 700;
+text-align: end;
+font-size: 1.2rem;
+}
+.price span{
+font-size: 1rem;
+}

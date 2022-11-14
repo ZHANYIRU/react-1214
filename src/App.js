@@ -9,6 +9,7 @@ import Room from './pages/room/Room'
 import Rental from './pages/rental/Rental'
 import Cart from './pages/Cart/Cart'
 import Member from './pages/member/Member'
+import RoomFilterPage from './pages/room/RoomFilterPage'
 function App() {
   return (
     <BrowserRouter>
@@ -19,6 +20,7 @@ function App() {
         <Route path="/product" element={<Product />} />
         <Route path="/camp" element={<Camp />} />
         <Route path="/room" element={<Room />} />
+        <Route path="/room/filter" element={<RoomFilterPage />} />
         <Route path="/rental" element={<Rental />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/member" element={<Member />} />
