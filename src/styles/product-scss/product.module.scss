@@ -425,6 +425,7 @@ input{
       }
 
 // --------------------------------------------------------
+     
 
       .mbfilter{
         margin: 0 auto;
@@ -448,25 +449,12 @@ input{
          }
     }
     
-    .filter2{
-        display: flex;
-        // position:fixed;
-        justify-content:center;
-        // min-width: 246px;
-        // width:16%;
-        // top: 0px;
-        top: 65px;
-        // right: 105%;
-        left: 30px;
-        flex-shrink: .2;
-        background-color: #F5F5F5;
-        padding:10px;
-        border-radius: 10px;
-        box-shadow: 3px 3px 6px rgb(127, 126, 126);
-        h2{
-            font-size: 1.3rem;
-         }
-    }
+    .mbfilter2{
+        height: 500px;
+      }
+
+
+    
 
 
 

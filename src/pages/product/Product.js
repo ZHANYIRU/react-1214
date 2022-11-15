@@ -26,7 +26,6 @@ function Product() {
     },
   ]
   // fixed_filter
-  const mainHeight = useRef('')
   //附style給filter
   const [fixedd, setFixedd] = useState(false)
   //偵測是否為手機版面

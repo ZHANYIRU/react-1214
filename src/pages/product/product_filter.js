@@ -62,9 +62,11 @@ export default function Product_filter({ fixedd, mob, setMob, gW }) {
   const filterToggle = () => {
     if (!filterOpen) {
       mbfilterRef.current.style.height = '500px'
+
       setFilterOpen(true)
     } else {
-      mbfilterRef.current.style.height = '50px'
+      mbfilterRef.current.style.height = ''
+
       setFilterOpen(false)
     }
   }
@@ -112,15 +114,6 @@ export default function Product_filter({ fixedd, mob, setMob, gW }) {
           />
         </div>
         <h2> 品牌</h2>
-        {/* <input
-      type="text"
-      placeholder="請輸入品牌"
-      name="brands"
-      value={brand}
-      onChange={(e) => {
-        setBrand(e.target.value)
-      }}
-    /> */}
         <select
           name="brand"
           id=""
@@ -334,8 +327,6 @@ export default function Product_filter({ fixedd, mob, setMob, gW }) {
       </form>
     </div>
   )
-  useEffect(() => {
-    window.addEventListener('resize', gW)
-  }, [mob])
+  useEffect(() => {}, [])
   return <>{mob ? mobFilter : webFilter}</>
 }
