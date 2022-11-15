@@ -28,7 +28,7 @@ function Cart() {
     }
   }, [])
   //最大流程數
-  const maxStep = 3
+  const maxStep = 4
   //流程的狀態
   const [step, setStep] = useState(1)
   //動態元件
