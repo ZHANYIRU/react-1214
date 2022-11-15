@@ -1,8 +1,10 @@
 @import '../global.scss';
+
 .body {
   width: 100%;
   background-color: $lightGreen;
 }
+
 .order {
   width: 70%;
   height: 150vh;
@@ -11,16 +13,19 @@
   display: flex;
   justify-content: space-between;
 }
+
 .member {
   width: 150px;
   height: 300px;
   background-color: white;
 }
+
 .orderRight {
   width: 80%;
   height: 100%;
   // border: 1px solid black;
 }
+
 .search {
   width: 85%;
   height: 40px;
@@ -30,6 +35,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
+
   input {
     width: 100%;
     padding-left: 5px;
@@ -37,6 +43,7 @@
     outline: none;
   }
 }
+
 .orderBottom {
   display: flex;
   justify-content: space-between;

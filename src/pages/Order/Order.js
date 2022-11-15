@@ -6,7 +6,7 @@ function Order() {
   return (
     <div className={styled.body}>
       <div className={styled.order}>
-        <div className={styled.member}>會員</div>
+        <div className={styled.member}></div>
         <div className={styled.orderRight}>
           <div className={styled.search}>
             <i className="fa-solid fa-magnifying-glass"></i>

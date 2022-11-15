@@ -3,12 +3,22 @@ import { useState } from 'react'
 import styled from '../../../styles/order-scss/OrderNum.module.scss'
 function OrderNum() {
   const [open, setOpen] = useState(false)
-  const openOrder = () => {
+  const openOrder = (e) => {
+    console.log(e.currentTarget)
     setOpen(!open)
   }
   return (
     <>
       <div className={styled.numWrap}>
+        <div className={styled.orederNum} onClick={openOrder} key={1}>
+          <p> 訂單編號：0000000000</p>
+        </div>
+        <div className={open ? `${styled.contentOpen}` : `${styled.content}`} sid={1}>
+          <div className={styled.div1}>12121</div>
+          <div className={styled.div1}>121212</div>
+          <div className={styled.div1}>21212</div>
+          <div className={styled.div1}>21212</div>
+        </div>
         <div className={styled.orederNum} onClick={openOrder}>
           <p> 訂單編號：0000000000</p>
         </div>
