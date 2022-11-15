@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Slider from './slider'
 import Product_filter from './product_filter'
 // import { Link, useLocation } from 'react-router-dom'
@@ -42,6 +42,9 @@ function Product() {
       size: 'S',
     },
   ])
+  const { product_sid } = useParams()
+
+  const [sid, getSid] = useState('')
 
   const getProductData = async () => {
     const response = await axios.get('http://localhost:3001/product/all')
@@ -61,7 +64,7 @@ function Product() {
         <div className={styled.empty}></div>
         {/* Slider */}
         <Slider data={data} />
-        <Product_filter />
+
         {/* 搜尋專區 */}
         <div className={styled.form}>
           <form action="">
@@ -69,18 +72,19 @@ function Product() {
 
             <i className="fa-solid fa-magnifying-glass"></i>
           </form>
+
           {/* 種類專區 */}
         </div>
         <div className={styled.product_nav}>
           <div className={styled.product_nav_box1}>
             <Link>
-              <div>最新上架</div>
+              <h2>最新上架</h2>
             </Link>
             <Link>
-              <div>熱門商品</div>
+              <h2>熱門商品</h2>
             </Link>
             <Link>
-              <div>男女服飾</div>
+              <h2>男女服飾</h2>
             </Link>
           </div>
           <div className={styled.product_nav_box2}>
@@ -88,33 +92,42 @@ function Product() {
           </div>
           <div className={styled.product_nav_box3}>
             <Link>
-              <div>專業用品</div>
+              <h2>專業用品</h2>
             </Link>
             <Link>
-              <div>飲水用品</div>
+              <h2>飲水用品</h2>
             </Link>
             <Link>
-              <div>其他配件</div>
+              <h2>其他配件</h2>
             </Link>
           </div>
         </div>
 
         {/* 卡片專區 */}
+
+        {/* <div className={styled.cardBigBox}> */}
+
         <div className={styled.cardbox}>
+          <Product_filter />
           {datas.map((v, i) => {
             return (
-              <div key={v.product_sid} className={styled.card}>
-                <img
-                  src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
-                  alt=""
-                />
-                <p className={styled.p}>{v.product_name}</p>
-                <h2>金額：{v.product_price}</h2>
-              </div>
+              <Link key={v.product_sid} to={'/product/'+ v.product_sid}>
+                <div className={styled.card}>
+                  <img
+                    src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
+                    alt=""
+                  />
+                  <p className={styled.p}>{v.product_name}</p>
+                  <h2>
+                    金額：<span>${v.product_price}</span>
+                  </h2>
+                </div>
+              </Link>
             )
           })}
         </div>
       </div>
+      {/* </div> */}
     </>
   )
 }

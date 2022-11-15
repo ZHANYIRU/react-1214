@@ -1,0 +1,163 @@
+@import '../global.scss';
+
+.row {
+    width: 100%;
+    .col {
+        margin: auto;
+    }
+}
+
+.card {
+    background: #E3EEE7;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 13px;
+    box-sizing: border-box;
+    padding: 100px 120px 100px 120px;
+
+    h3 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 29px;
+        letter-spacing: 0.065em;
+        color: #01170D;
+        margin-bottom: 16px;
+    }
+
+    .divider {
+        width: 100%;
+        height: 5px;
+        background-color: #fff;
+        margin-bottom: 36px;
+    }
+
+    form {
+
+        text-align: center;
+
+        p {
+            font-size: 18px;
+            margin-bottom: 25px;
+            color: red;
+            text-align: left;
+        }
+
+        .avatar {
+            width: 100px;
+            height: 100px;
+            background-color: #eee;
+            margin: auto;
+            margin-bottom: 25px;
+            border-radius: 50%;
+            outline: 1px solid #ccc;
+        }
+
+        .avatarLabel {
+            width: 240px;
+            height: 50px;
+            border: none;
+            border-radius: 10px;
+            background: #FFDA16;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            font-family: 'Montserrat';
+            font-weight: 800;
+            font-size: 22px;
+            line-height: 50px;
+            color: #01170D;
+            margin-bottom: 25px;
+            transition: 0.2s;
+
+            &:hover {
+                background: #ffc116;
+            }
+
+            cursor: pointer;
+            input {
+               display: none;
+            }
+        }
+
+        .formRow {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 45px;
+            position: relative;
+
+            label {
+                width: 15%;
+                text-align-last: justify;
+                font-size: 20px;
+                flex-shrink: 0;
+                position: relative;
+
+                &.required {
+                  &::after {
+                    content: "*";
+                    position: absolute;
+                    color: red;
+                  }
+                }
+            }
+
+            input {
+                height: 30px;
+                width: 70%;
+                border-radius: 5px;
+                border: none;
+                outline: none;
+                transition: 0.2s;
+
+                &:focus {
+                    outline: 2px solid #ccc;
+                }
+            }
+
+            textarea {
+                width: 70%;
+                border-radius: 5px;
+                border: none;
+                outline: none;
+                transition: 0.2s;
+                line-height: 22px;
+
+                &:focus {
+                    outline: 2px solid #ccc;
+                }
+            }
+
+            .showPass {
+                position: absolute;
+                right: 10px;
+
+            }
+
+            .forTxtArea {
+                transform: translateY(-150%);
+            }
+
+        }
+
+        button {
+            width: 240px;
+            height: 50px;
+            border: none;
+            border-radius: 10px;
+            background: #FFDA16;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            font-family: 'Montserrat';
+            font-weight: 800;
+            font-size: 22px;
+            text-align: center;
+            color: #01170D;
+            margin-top: 36px;
+            transition: 0.2s;
+
+            &:hover {
+                background: #ffc116;
+            }
+        }
+    }
+}

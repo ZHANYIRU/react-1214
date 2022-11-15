@@ -1,0 +1,90 @@
+@import '../global.scss';
+
+.row {
+    width: 100%;
+    .col {
+        margin: auto;
+    }
+}
+
+.card {
+    background: #fff;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 13px;
+    box-sizing: border-box;
+    padding: 100px 120px 100px 120px;
+    min-height: 75vh;
+
+    .flexbox {
+        display: flex;
+    }
+
+    h3 {
+        // font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 29px;
+        letter-spacing: 0.065em;
+        color: #01170D;
+        margin-bottom: 16px;
+        margin-right: 12px;
+    }
+
+    .divider {
+        width: 100%;
+        height: 5px;
+        background-color: #ccc;
+        margin-bottom: 48px;
+    }
+
+    .userList {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+
+        .user {
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 48px;
+
+            .portrait {
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                overflow: hidden;
+                margin-bottom: 8px;
+        
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        
+            h4 {
+                font-size: 24px;
+                margin-bottom: 8px;
+            }
+            button {
+                width: 96px;
+                height: 40px;
+                border: none;
+                border-radius: 10px;
+                font-weight: 500;
+                &.follow {
+                    background-color: #BADDA9;
+                }
+                &.following {
+                    background-color: #E3EEE7;
+                }
+            }
+        }
+    }
+
+
+    
+
+}
