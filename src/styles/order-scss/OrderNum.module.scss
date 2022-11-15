@@ -1,56 +1,56 @@
 @import '../global.scss';
 
-.tabs {
-  border-radius: 8px;
-}
+// .tabs {
+//   border-radius: 8px;
+// }
 
-.tab {
-  width: 100%;
-  color: white;
-  overflow: hidden;
+// .tab {
+//   width: 100%;
+//   color: white;
+//   overflow: hidden;
 
-  &-label {
-    display: flex;
-    justify-content: space-between;
-    padding: 1em;
-    background: lightblue;
-    font-weight: bold;
-    cursor: pointer;
+//   &-label {
+//     display: flex;
+//     justify-content: space-between;
+//     padding: 1em;
+//     background: lightblue;
+//     font-weight: bold;
+//     cursor: pointer;
 
-    /* Icon */
-    &::after {
-      content: "\276F";
-      width: 1em;
-      height: 1em;
-      text-align: center;
-      transition: all .35s;
-    }
-  }
+//     /* Icon */
+//     &::after {
+//       content: "\276F";
+//       width: 1em;
+//       height: 1em;
+//       text-align: center;
+//       transition: all .35s;
+//     }
+//   }
 
-  &-content {
-    max-height: 0;
-    padding: 0 1em;
-    color: lightblue;
-    background: white;
-    transition: all .35s;
-  }
-}
+//   &-content {
+//     max-height: 0;
+//     padding: 0 1em;
+//     color: lightblue;
+//     background: white;
+//     transition: all .35s;
+//   }
+// }
 
-// :checked
-input:checked {
-  +.tab-label {
-    background: lightblue;
+// // :checked
+// input:checked {
+//   +.tab-label {
+//     background: lightblue;
 
-    &::after {
-      transform: rotate(90deg);
-    }
-  }
+//     &::after {
+//       transform: rotate(90deg);
+//     }
+//   }
 
-  ~.tab-content {
-    max-height: 100vh;
-    padding: 1em;
-  }
-}
+//   ~.tab-content {
+//     max-height: 100vh;
+//     padding: 1em;
+//   }
+// }
 
 .numWrap {
   width: 85%;
@@ -71,7 +71,7 @@ input:checked {
   max-height: 0;
   padding: 0px 10px 0px;
   overflow: hidden;
-  transition: all .8s;
+  transition: all 0.8s;
   margin-bottom: 50px;
 }
 
@@ -79,7 +79,7 @@ input:checked {
   background-color: palegreen;
   max-height: 100vh;
   padding: 20px 10px 10px;
-  transition: all .5s;
+  transition: all 0.5s;
   margin-bottom: 50px;
 }
 
