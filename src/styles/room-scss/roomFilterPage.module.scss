@@ -1,0 +1,102 @@
+@import '../global.scss';
+.wrap{
+    width: 100%;
+}
+.filter{
+    width: 80%;
+    padding-top: 100px;
+    display: flex;   
+    justify-content: center;
+    align-items: center;
+
+    .location{
+    border: none;
+    background-color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 12px 20px 8px 20px ;
+    border-radius: 5px;
+    margin-right: 20px;
+    position: relative;
+
+    &::before {
+        content: "山區";
+        position: absolute;
+        top: 10px;
+        left: 50px;
+        font-size: 0.5rem;
+        width: 100px;
+        height: 50px;
+     }
+ }
+
+
+ button{
+    border: none;
+    background-color: white;
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 15px 20px ;
+    border-radius: 5px;
+ }
+}
+
+.roomCardGroup{
+    // position: absolute;
+    width:80%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
+}
+.roomCard{
+    margin-bottom: 50px;
+    padding: 18px;
+    width:19%;
+    background-color: white;
+    border-radius: 10px;
+    box-sizing: content-box;
+}
+.cardImg{
+    background-image: url('./../../../public/img/room.jpg');
+    background-size: cover;
+    height: 200px;
+    border-radius: 10px;
+}
+.icon{
+    display: flex;
+    justify-content: space-between
+}
+.icon span{
+    display: inline-block;
+    margin-top: 10px;
+    padding-right: 10px;
+    font-weight: 700;
+}
+.icon span i {
+    color:#48742C
+}
+.roomName{
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.star{
+    margin-top: 8px;
+}
+.star i {
+    color: #ffda16;
+    font-size: 0.8rem;
+    margin-right: 4px;
+}
+.commentQTY{
+    font-size: 0.9rem;
+
+}
+.price{
+font-weight: 700;
+text-align: end;
+font-size: 1.2rem;
+}
+.price span{
+font-size: 1rem;
+}
