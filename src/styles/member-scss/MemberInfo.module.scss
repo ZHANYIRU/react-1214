@@ -129,10 +129,11 @@
 
             span {
                 margin: 20px;
+
                 i {
                     margin-right: 6px;
                 }
-    
+
             }
         }
 
@@ -149,8 +150,8 @@
 
 .modalBg {
     position: fixed;
-    top:0;
-    left:0;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
@@ -174,6 +175,7 @@
             border-bottom-left-radius: 10px;
             background-color: #000;
             overflow: hidden;
+
             img {
                 width: 100%;
                 height: 100%;
@@ -195,7 +197,7 @@
                     color: #666;
                     margin-bottom: 20px;
                 }
-                
+
                 label {
                     width: 200px;
                     height: 40px;
@@ -211,14 +213,15 @@
                     margin-bottom: 25px;
                     transition: 0.3s;
                     text-align: center;
-        
+
                     &:hover {
                         background: #3b3b3b;
                     }
-        
+
                     cursor: pointer;
+
                     input {
-                       display: none;
+                        display: none;
                     }
                 }
 
@@ -230,7 +233,7 @@
         .editContent {
             width: 50%;
             box-sizing: border-box;
-            padding: 48px;
+            padding: 36px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -238,15 +241,15 @@
             h3 {
                 font-size: 24px;
                 font-weight: bold;
-                
+
             }
 
             .contentTop {
-                
+
                 h3 {
                     margin-bottom: 20px;
                 }
-                
+
                 textarea {
                     width: 360px;
                     resize: none;
@@ -254,6 +257,75 @@
                     outline: none;
                     line-height: 24px;
                     border-bottom: 1px solid #000;
+                }
+
+                .contentFlex {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+
+                    h4 {
+                        font-size: 20px;
+                        margin-right: auto;
+                    }
+
+                    p {
+                        font-size: 14px;
+                        font-weight: 500;
+                        color: #999;
+                    }
+
+                    .avatar {
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                        // background-image: linear-gradient(0deg,#ddd, #444);
+                        background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
+                        overflow: hidden;
+                        margin-right: 12px;
+
+                        img {
+                            border-radius: 50%;
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            border: 5px solid transparent;
+                            box-sizing: border-box;
+                        }
+                    }
+                }
+
+                .contentTxt {
+                    width: 336px;
+                    margin-left: 72px;
+                    margin-bottom: 20px;
+                    border: none;
+                }
+
+                .reply {
+                        
+                    .replyAvatar {
+                        width: 45px;
+                        height: 45px;
+                        border-radius: 50%;
+                        // background-image: linear-gradient(0deg,#ddd, #444);
+                        background-image: conic-gradient(from 180deg at 50% 50%, #8A663B -46.87deg, #ecdac2 67.5deg, #B39471 183.75deg, #8A663B 313.12deg, #fff9f3 427.5deg);
+                        overflow: hidden;
+                        margin-right: 27px;
+                        flex-shrink: 0;
+
+                        img {
+                            border-radius: 50%;
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                            border: 4px solid transparent;
+                            box-sizing: border-box;
+                        }
+                    }
+
+                    
                 }
             }
 
@@ -264,13 +336,18 @@
 
                 p {
                     color: #999;
+                    flex-grow: 1;
                 }
+
                 h3 {
                     font-size: 18px;
                     margin-top: 12px;
-                    span, select {
+
+                    span,
+                    select {
                         margin-right: 16px;
                     }
+
                     select {
                         height: 40px;
                         width: 170px;
@@ -279,6 +356,7 @@
                     }
 
                 }
+
                 .delete {
                     color: red;
                 }
@@ -296,7 +374,7 @@
         justify-content: center;
         gap: 120px;
     }
-    
+
     button {
         width: 180px;
         height: 50px;
@@ -314,7 +392,7 @@
         &.btnDone {
             background-color: $yellow;
         }
-    
+
         &.btnCancel {
             background-color: red;
             color: #fff;

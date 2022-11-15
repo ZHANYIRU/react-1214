@@ -38,9 +38,13 @@ export default function MemberInfo() {
               .fill(1)
               .map((v, i) => {
                 return (
-                  <div className={styled.post} key={i} onClick={()=>{
-                    setIsView(true)
-                  }}>
+                  <div
+                    className={styled.post}
+                    key={i}
+                    onClick={() => {
+                      setIsView(true)
+                    }}
+                  >
                     <img
                       src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
                       alt="post"
@@ -198,7 +202,7 @@ export default function MemberInfo() {
         <div
           className={styled.modalBg}
           // z-index over nav bar?
-          onClick={()=>{
+          onClick={() => {
             setIsView(false)
           }}
         >
@@ -211,9 +215,46 @@ export default function MemberInfo() {
             </div>
             <div className={styled.editContent}>
               <div className={styled.contentTop}>
+                <div className={styled.contentFlex}>
+                  <div className={styled.avatar}>
+                    <img
+                      src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
+                      alt="postImg"
+                    ></img>
+                  </div>
+                  <h4>Kekeke123</h4>
+                  <i class="fa-regular fa-heart"></i>
+                </div>
+                <TextareaAutosize
+                  className={styled.contentTxt}
+                  readOnly
+                  value="喜愛登山與旅遊結合規劃，發掘台灣的歷史與美，熱愛攝影，探索台灣百岳，中級山，郊山的山野旅行者。GoHiking ! ! !"
+                />
+                <div className={styled.contentFlex}>
+                  <p style={{ marginLeft: '72px' }}>2022-08-12</p>
+                  <p>苗栗 南庄區</p>
+                  <p>加里山 1211m</p>
+                </div>
+                <hr />
+                <div className={styled.reply}>
+                  <div className={styled.contentFlex}>
+                    <div className={styled.replyAvatar}>
+                      <img
+                        src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
+                        alt="postImg"
+                      ></img>
+                    </div>
+                    <div>
+                      <h4>勞淑</h4>
+                      <TextareaAutosize
+                        readOnly
+                        value="喜愛登山與旅遊結合規劃，發掘台灣的歷史與美，熱愛攝影，探索台灣百岳，中級山，郊山的山野旅行者。GoHiking ! ! !"
+                      />
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div className={styled.contentBtm}>
-              </div>
+              <div className={styled.contentBtm}></div>
             </div>
           </div>
         </div>
