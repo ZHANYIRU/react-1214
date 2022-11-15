@@ -10,18 +10,20 @@ function OrderNum() {
   return (
     <>
       <div className={styled.numWrap}>
-        <div className={styled.orederNum} onClick={openOrder} key={1}>
+        <input type="checkbox" id='order' />
+        <label className={styled.orederNum} onClick={openOrder} htmlFor='order'>
           <p> 訂單編號：0000000000</p>
-        </div>
-        <div className={open ? `${styled.contentOpen}` : `${styled.content}`} sid={1}>
+        </label>
+        <div className={open ? `${styled.contentOpen}` : `${styled.content}`}>
           <div className={styled.div1}>12121</div>
           <div className={styled.div1}>121212</div>
           <div className={styled.div1}>21212</div>
           <div className={styled.div1}>21212</div>
         </div>
-        <div className={styled.orederNum} onClick={openOrder}>
-          <p> 訂單編號：0000000000</p>
-        </div>
+        <input type="checkbox" id='order1' />
+        <label className={styled.orederNum} onClick={openOrder} htmlFor='order1'>
+          <p> 訂單編號：11111111</p>
+        </label>
         <div className={open ? `${styled.contentOpen}` : `${styled.content}`}>
           <div className={styled.div1}>12121</div>
           <div className={styled.div1}>121212</div>
