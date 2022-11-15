@@ -141,7 +141,7 @@ export default function MemberInfo() {
           <div className={styled.modal}>
             <div className={styled.editImg}>
               <div className={styled.newImg}>
-                <i class="fa-regular fa-image"></i>
+                <i className="fa-regular fa-image"></i>
                 <label htmlFor="avatar" className={styled.avatarLabel}>
                   {' '}
                   上傳大頭貼
@@ -206,7 +206,12 @@ export default function MemberInfo() {
             setIsView(false)
           }}
         >
-          <div className={styled.modal}>
+          <div
+            className={styled.modal}
+            onClick={(e) => {
+              e.stopPropagation()
+            }}
+          >
             <div className={styled.editImg}>
               <img
                 src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
@@ -223,7 +228,7 @@ export default function MemberInfo() {
                     ></img>
                   </div>
                   <h4>Kekeke123</h4>
-                  <i class="fa-regular fa-heart"></i>
+                  <i className="fa-regular fa-heart"></i>
                 </div>
                 <TextareaAutosize
                   className={styled.contentTxt}
@@ -237,7 +242,7 @@ export default function MemberInfo() {
                 </div>
                 <hr />
                 <div className={styled.reply}>
-                  <div className={styled.contentFlex}>
+                  {/* <div className={styled.contentFlex}>
                     <div className={styled.replyAvatar}>
                       <img
                         src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
@@ -251,10 +256,52 @@ export default function MemberInfo() {
                         value="喜愛登山與旅遊結合規劃，發掘台灣的歷史與美，熱愛攝影，探索台灣百岳，中級山，郊山的山野旅行者。GoHiking ! ! !"
                       />
                     </div>
-                  </div>
+                    <i className="fa-regular fa-heart"></i>
+                  </div> */}
+                  {Array(10)
+                    .fill(1)
+                    .map((v, i) => {
+                      return (
+                        <div key={i} className={styled.replyPost}>
+                          <div className={styled.contentFlex}>
+                            <div className={styled.replyAvatar}>
+                              <img
+                                src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
+                                alt="postImg"
+                              ></img>
+                            </div>
+                            <div>
+                              <h4>勞淑</h4>
+                              <TextareaAutosize
+                                readOnly
+                                value="喜愛登山與旅遊結合規劃，發掘台灣的歷史與美!"
+                              />
+                            </div>
+                            <i className="fa-regular fa-heart"></i>
+                          </div>
+                        </div>
+                      )
+                    })}
                 </div>
               </div>
-              <div className={styled.contentBtm}></div>
+              <hr />
+              <div className={styled.contentFlex}>
+                <span>
+                  <TextareaAutosize
+                    className={styled.replyInput}
+                    maxRows="1"
+                    maxLength="120"
+                    placeholder="留言...(30字以內)"
+                  />
+                </span>
+                <button className={styled.replySend}>送出</button>
+              </div>
+            </div>
+            <div className={`${styled.goTo} ${styled.prev}`}>
+              <i className="fa-solid fa-chevron-left"></i>
+            </div>
+            <div className={`${styled.goTo} ${styled.next}`}>
+              <i className="fa-solid fa-chevron-right"></i>
             </div>
           </div>
         </div>
