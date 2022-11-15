@@ -8,7 +8,7 @@
   z-index: 1;
 }
 .cardWrap{
-  width: 350px;
+  width: 400px;
   height: 80px;
   display: flex;
   margin: 0 auto ;
@@ -47,12 +47,21 @@
     left: 60px;
     top: 25px;
     }
+    &:nth-child(3):after{
+      content: '';
+    position: absolute;
+    width: 30px;
+    height: 1px;
+    background-color: $darkGreen;
+    left: 60px;
+    top: 25px;
+    }
     }
   }
   .text{
+    width: 100%;
     display: flex;
-    justify-content: center;
-    margin-right: 5px;
+    margin-left: -5px;
     p{
       margin-right: 36px;
     }

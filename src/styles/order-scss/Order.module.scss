@@ -1,0 +1,45 @@
+@import '../global.scss';
+.body {
+  width: 100%;
+  background-color: $lightGreen;
+}
+.order {
+  width: 70%;
+  height: 150vh;
+  margin: 0 auto;
+  padding-top: 80px;
+  display: flex;
+  justify-content: space-between;
+}
+.member {
+  width: 150px;
+  height: 300px;
+  background-color: white;
+}
+.orderRight {
+  width: 80%;
+  height: 100%;
+  // border: 1px solid black;
+}
+.search {
+  width: 85%;
+  height: 40px;
+  background-color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+  input {
+    width: 100%;
+    padding-left: 5px;
+    border: none;
+    outline: none;
+  }
+}
+.orderBottom {
+  display: flex;
+  justify-content: space-between;
+  width: 85%;
+  padding: 15px 0;
+}

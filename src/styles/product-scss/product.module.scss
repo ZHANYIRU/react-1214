@@ -4,6 +4,7 @@ body{
     background-color: $lightGreen;
    
 }
+
 @mixin text{
     font-size: 1rem;
         font-weight: 700;
@@ -21,7 +22,7 @@ body{
 .container{
     width: 60%;
     margin: 0 auto;
-    // min-width: 770px;
+    min-width: 912px;
 }
 
 .form{
@@ -62,7 +63,6 @@ p{
 
 //--------------------------------
 .product_nav{
-    
     margin: 0 auto;
     display: flex;
     flex-wrap: nowrap;
@@ -70,6 +70,11 @@ p{
     align-items: center;
     height: 45px;
     margin-bottom: 50px;
+    h2{
+        font-size: 1.2rem;
+        color: #000;
+        font-weight: 700;
+    }
     .product_nav_box1{
                 @include nav_box;
                 // padding-left: 50px;
@@ -102,27 +107,152 @@ p{
         p{
             @include text;
             text-align: center;
+            font-size: 1.1rem;
             transform: translateY(-5px);
+            font-weight: 700;
         }
     }
   }
 
 
-.cardbox{
-    margin: 0 auto;
-    width:100%;
+
+
+
+
+
+    .cardbox{
+        position: relative;
+        // min-width: 912px;
+        width:100%;
+        display: flex;
+        gap: 20px;
+        justify-content:space-around;
+        align-items:flex-start;
+        border: 1px red solid;
+        cursor: pointer;
+
+        .card{
+            width: 100%;
+            border: 1px black solid;
+            border-radius: 10px;
+            padding: 15px;
+            background-color: #fff;
+        }
+        img{
+            width: 100%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+        p{
+            margin-bottom: 10px;
+            line-height: 1.2rem;
+        }
+        h2{
+            font-size: 1.2rem;
+            span{
+                color:#FF0F00;
+            }
+        }    
+
+       
+        // .cardEmpty{
+        //     width: 20%;
+        // }
+        // .cardEmpty2{
+        //     width: 2%;
+        // }
+        .filter{
+            display: flex;
+            position:absolute;
+            justify-content:center;
+            // min-width: 246px;
+            // width:16%;
+            top: 0px;
+            right: 105%;
+            flex-shrink: .2;
+            background-color: #F5F5F5;
+            padding:10px;
+            border-radius: 10px;
+            box-shadow: 3px 3px 6px rgb(127, 126, 126);
+            h2{
+                font-size: 1.3rem;
+             }
+        }
+    }
+    
+
+
+
+.pricebox{
     display: flex;
-    gap: 30px;
     justify-content: center;
     align-items: center;
-    border: 1px red solid;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
-.card{
-    width: 25%;
-    border: 1px black solid;
-    img{
+.dash{
+    width: 10px;
+    height: 2px;
+    background-color: #000;
+    margin: 0 5px 0 5px;
+}
+input{
+    border-radius: 5px;
+    background-color: #fff;
+}
+.filterSelect{
+    width: 225px;
+    height: 35px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+.genderRadio{
+    margin-bottom: 10px;
+    // text-align: center;
+    display: flex;
+    justify-content: center;
+    justify-content: start;
+    .genderBox{
         width: 100%;
-        object-fit: cover;
-       
+        text-align: center;
+    }
+    input{
+            margin: 0 10px 0 10px;
+        }
+    label{
+        font-size: 1.2rem;
+    }
+}
+.filterButton{
+    border-radius: 5px;
+    background-color: #FF0F00;
+    font-size: 1.2rem;
+    color: #fff;
+    border: none;
+    width: 225px;
+    height: 30px;
+}
+.checkBoxWrap{
+    // display: flex;
+    margin:  10px 0 10px 0;
+    .checkBox{
+        width: 100%;
+        margin:  10px 0 10px 0;
+        input{
+            margin-right: 5px;
+        }
+    }
+}
+
+.star{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    i{
+        color:rgb(252, 224, 5) ;
+    }
+    link{
+        margin: 5px 0 5px 0;
     }
 }

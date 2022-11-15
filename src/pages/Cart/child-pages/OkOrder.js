@@ -22,7 +22,7 @@ function OkOrder(props) {
             回首頁
           </Link>
           {/* </div> */}
-          <Link to="/" className={styled.lookOrder}>
+          <Link to="/order" className={styled.lookOrder}>
             查看我的訂單
           </Link>
         </div>
