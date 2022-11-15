@@ -19,8 +19,10 @@ import MemberPass from './pages/member/child-page/MemberPass'
 import Followers from './pages/member/child-page/Followers'
 import Following from './pages/member/child-page/Following'
 import MemberInfo from './pages/member/child-page/MemberInfo'
-
+import Profile from './pages/member/Profile'
+import ProfileInfo from './pages/member/child-page/ProfileInfo'
 import RoomFilterPage from './pages/room/RoomFilterPage'
+
 function App() {
   return (
     <BrowserRouter>
@@ -44,6 +46,11 @@ function App() {
           <Route path="/member/password" element={<MemberPass />} />
           <Route path="/member/followers" element={<Followers />} />
           <Route path="/member/following" element={<Following />} />
+        </Route>
+        <Route path="/profile/" element={<Profile />}>
+            <Route index element={<ProfileInfo />} />
+            <Route path="/profile/followers/" element={<Followers />} />
+            <Route path="/profile/following/" element={<Following />} />
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/join" element={<Join />} />
