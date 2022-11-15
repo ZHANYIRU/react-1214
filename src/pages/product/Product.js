@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import Slider from './slider'
 import Product_filter from './product_filter'
@@ -25,7 +25,21 @@ function Product() {
       src: img3,
     },
   ]
-
+  // fixed_filter
+  const mainHeight = useRef('')
+  //附style給filter
+  const [fixedd, setFixedd] = useState(false)
+  const scrollFilter = () => {
+    const windowH = window.innerHeight
+    const mainH = mainHeight.current.clientHeight
+    const windowScrollY = window.scrollY
+    if (windowScrollY > 770) {
+      setFixedd(true)
+    } else {
+      setFixedd(false)
+    }
+    console.log(windowScrollY)
+  }
   //抓取fetch狀態
   const [datas, setDatas] = useState([
     {
@@ -55,6 +69,7 @@ function Product() {
 
   useEffect(() => {
     getProductData()
+    window.addEventListener('scroll', scrollFilter)
   }, [])
 
   return (
@@ -108,10 +123,10 @@ function Product() {
         {/* <div className={styled.cardBigBox}> */}
 
         <div className={styled.cardbox}>
-          <Product_filter />
+          <Product_filter fixedd={fixedd} />
           {datas.map((v, i) => {
             return (
-              <Link key={v.product_sid} to={'/product/'+ v.product_sid}>
+              <Link key={v.product_sid} to={'/product/' + v.product_sid}>
                 <div className={styled.card}>
                   <img
                     src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"

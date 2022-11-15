@@ -5,18 +5,15 @@ function Slider({ data }) {
   const jumpTo = (id) => {
     setCurrentId(id)
   }
-  const carousel = () => {
-    setInterval(() => {
+  useEffect(() => {
+    const a = setInterval(() => {
       if (currentId >= 0 && currentId <= 1) setCurrentId(currentId + 1)
       if (currentId == 2) {
         setCurrentId(0)
       }
-    }, 1000)
-  }
-  useEffect(() => {
-    carousel()
+    }, 2500)
     return () => {
-      clearInterval(carousel)
+      clearInterval(a)
     }
   }, [currentId])
   return (

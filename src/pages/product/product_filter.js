@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import React, { useState, useRef, useEffect } from 'react'
 import styled from '../../styles/product-scss/product.module.scss'
 
-export default function Product_filter() {
+export default function Product_filter({ fixedd }) {
   const [lowPrice, setLowPrice] = useState('')
   const [highPrice, setHighPrice] = useState('')
   const brandOptions = ['Arcteryx 始祖鳥', 'mmm']
@@ -24,6 +24,11 @@ export default function Product_filter() {
       size: 'S',
     },
   ])
+  const filterStyle = {
+    position: 'fixed',
+    top: '65px',
+    left: '105px',
+  }
 
   let allProduct = 'http://localhost:3001/product/all'
   let price = 'http://localhost:3001/product/price'
@@ -65,7 +70,7 @@ export default function Product_filter() {
   }
   useEffect(() => {}, [])
   return (
-    <div className={styled.filter}>
+    <div className={fixedd ? `${styled.filter2}` : `${styled.filter}`}>
       <form action="">
         <h2>價格</h2>
         <div className={styled.pricebox}>
