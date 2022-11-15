@@ -10,8 +10,8 @@ function OrderNum() {
   return (
     <>
       <div className={styled.numWrap}>
-        <input type="checkbox" id='order' />
-        <label className={styled.orederNum} onClick={openOrder} htmlFor='order'>
+        <input type="checkbox" id="order" />
+        <label className={styled.orederNum} onClick={openOrder} htmlFor="order">
           <p> 訂單編號：0000000000</p>
         </label>
         <div className={open ? `${styled.contentOpen}` : `${styled.content}`}>
@@ -20,8 +20,12 @@ function OrderNum() {
           <div className={styled.div1}>21212</div>
           <div className={styled.div1}>21212</div>
         </div>
-        <input type="checkbox" id='order1' />
-        <label className={styled.orederNum} onClick={openOrder} htmlFor='order1'>
+        <input type="checkbox" id="order1" />
+        <label
+          className={styled.orederNum}
+          onClick={openOrder}
+          htmlFor="order1"
+        >
           <p> 訂單編號：11111111</p>
         </label>
         <div className={open ? `${styled.contentOpen}` : `${styled.content}`}>
