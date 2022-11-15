@@ -50,10 +50,12 @@ function Navbar() {
         </div>
       </nav>
       <div className={styled.loginBefore} style={loginBox}>
-        <Link>
+        <Link to="/login">
+          {/* 切換會員中心 */}
           <span>會員登入</span>
         </Link>
-        <Link>
+        <Link to="/join">
+        {/* 切換會員登出 */}
           <span>會員註冊</span>
         </Link>
       </div>

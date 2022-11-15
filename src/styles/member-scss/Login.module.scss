@@ -1,0 +1,100 @@
+@import '../global.scss';
+
+
+.row {
+    padding-top: 160px;
+    padding-bottom: 80px;
+    width: 100%;
+    .col {
+        width: 640px;
+        margin: auto;
+    }
+}
+
+.card {
+    background: #E3EEE7;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
+    border-radius: 13px;
+    box-sizing: border-box;
+    padding: 75px 55px 100px 55px;
+
+    h3 {
+        font-family: 'Montserrat';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 29px;
+        letter-spacing: 0.065em;
+        color: #01170D;
+        margin-bottom: 16px;
+    }
+
+    .divider {
+        width: 100%;
+        height: 5px;
+        background-color: #fff;
+        margin-bottom: 36px;
+    }
+
+    .formRow {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+        position: relative;
+
+        label {
+            width: 20%;
+            text-align-last: justify;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        input {
+            height: 30px;
+            width: 65%;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            transition: 0.2s;
+
+            &:focus {
+                outline: 2px solid #ccc;
+            }
+        }
+        .showPass {
+            position: absolute;
+            right: 10px;
+
+        }
+    }
+
+    .btnGroup {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    button {
+        width: 240px;
+        height: 50px;
+        border: none;
+        border-radius: 10px;
+        background: #FFDA16;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        font-family: 'Montserrat';
+        font-weight: 800;
+        font-size: 22px;
+        text-align: center;
+        color: #01170D;
+        margin-top: 36px;
+        transition: 0.2s;
+
+        &:hover {
+            background: #ffc116;
+        }
+
+    }
+}
