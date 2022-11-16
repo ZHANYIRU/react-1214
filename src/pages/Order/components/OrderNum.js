@@ -3,14 +3,57 @@ import { useState } from 'react'
 import Evaluation from './Evaluation'
 import styled from '../../../styles/order-scss/OrderNum.module.scss'
 function OrderNum() {
-  const [open, setOpen] = useState(false)
+  //給lightBox
+  const [lightOpen, setLightOpen] = useState(false)
+  const [orderopen, setOrderOpen] = useState(false)
   const openOrder = (e) => {
-    console.log(e.currentTarget)
-    setOpen(!open)
+    setOrderOpen(!orderopen)
   }
   return (
     <>
-      <div className={styled.lightBox}></div>
+      {lightOpen && (
+        <div
+          className={styled.lightBgc}
+          onClick={(e) => {
+            setLightOpen(!lightOpen)
+          }}
+        >
+          <div
+            className={styled.lightbox}
+            onClick={(e) => {
+              e.stopPropagation()
+            }}
+          >
+            <div className={styled.lightName}>
+              <div className={styled.lightImg}>
+                <img
+                  src="https://assets.juksy.com/files/articles/112793/800x_100_w-61af971ed4cc6.jpg"
+                  alt=""
+                />
+              </div>
+              <p>
+                韓國超級巨星IUUUU韓國超級巨星IUUUU韓國超級巨星IUUUU韓國超級巨星IUUUU韓國超級巨星IUUUU韓國超級巨星IUUUU
+              </p>
+            </div>
+            <div className={styled.star}>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i>
+            </div>
+            <textarea rows="6" placeholder="寫點甚麼...." />
+            <button
+              onClick={(e) => {
+                setLightOpen(!lightOpen)
+              }}
+            >
+              確認
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className={styled.numWrap}>
         <input type="checkbox" id="order" />
         <label className={styled.orderNum} onClick={openOrder} htmlFor="order">
@@ -20,7 +63,7 @@ function OrderNum() {
         </label>
         <div
           className={
-            open ? `${styled.contentWrapOpen}` : `${styled.contentWrap}`
+            orderopen ? `${styled.contentWrapOpen}` : `${styled.contentWrap}`
           }
         >
           <div className={styled.pro}>
@@ -46,7 +89,13 @@ function OrderNum() {
                 <p>2</p>
                 <p>1200</p>
               </div>
-              <button>給予評價</button>
+              <button
+                onClick={() => {
+                  setLightOpen(!lightOpen)
+                }}
+              >
+                給予評價
+              </button>
             </div>
           </div>
           <div className={styled.room}>
@@ -78,7 +127,13 @@ function OrderNum() {
                 <p>2</p>
                 <p>1200</p>
               </div>
-              <button>給予評價</button>
+              <button
+                onClick={() => {
+                  setLightOpen(!lightOpen)
+                }}
+              >
+                給予評價
+              </button>
             </div>
           </div>
           <div className={styled.camp}>
@@ -110,7 +165,13 @@ function OrderNum() {
                 <p>2</p>
                 <p>1200</p>
               </div>
-              <button>給予評價</button>
+              <button
+                onClick={() => {
+                  setLightOpen(!lightOpen)
+                }}
+              >
+                給予評價
+              </button>
             </div>
           </div>
           <div className={styled.ren}>
@@ -148,7 +209,13 @@ function OrderNum() {
                 <p>2</p>
                 <p>2400</p>
               </div>
-              <button>給予評價</button>
+              <button
+                onClick={() => {
+                  setLightOpen(!lightOpen)
+                }}
+              >
+                給予評價
+              </button>
             </div>
           </div>
         </div>

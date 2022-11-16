@@ -206,11 +206,69 @@
   }
 }
 
-.lightBox {
+.lightBgc {
   width: 100%;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.272);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+.lightbox{
+  width: 600px;
+  height: 350px;
+  border-radius: 15px;
+  background-color: white;
+  padding: 25px 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  textarea{
+    resize: none;
+    border-radius: 10px;
+    padding-left: 10px;
+    outline: none;
+  }
+  button {
+    border: none;
+    background-color: $darkGreen;
+    color: $yellow;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 12px;
+    font-weight: 300;
+    margin: 0 0 0 auto;
+  }
+}
+.lightName{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  p{
+    line-height: 1rem;
+    font-weight: 500;
+    width: 55%;
+    font-size: 12px;
+    margin-left: 20px;
+  }
+  .lightImg{
+    width: 100px;
+    height: 100px;
+    img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+.star{
+  i{
+    font-size: 18px;
+    margin-right:15px ;
+    color: #426349;
+  }
+}
+
