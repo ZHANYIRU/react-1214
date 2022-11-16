@@ -1,4 +1,8 @@
 
+@import '../global.scss';
+*{
+    line-height: 1.2rem;
+}
 .empty{
     width: 100%;
     height: 70px;
@@ -12,8 +16,8 @@
 
 .card{
     background-color: #fff;
-    border-radius: 20px;
-    overflow: hidden;
+    border-radius: 10px  ;
+     overflow:hidden;
 }
 .productDtail{
     display: flex;
@@ -42,22 +46,41 @@
         
     }
 }
+
+
+
+
 .productText{
     width:55%;
     display: flex;
     flex-direction: column;
     .productTitle{
-        i{
-            color:rgb(252, 224, 5) ;
+        i{  
+            margin: 10px 5px;
+            color:$yellow ;
+            font-size: 1.2rem;
         }
+        h1{
+            font-size: 1.6rem;
+        }
+       
     }
-    
+    // 金額 h2
+    h2{
+        font-size: 1.5rem; 
+        margin-bottom: 20px;
+        font-weight: 700;
+    }
     .standard{
         display: flex;
         align-items: center;
         width: 100%;
+        margin: 30px 0;
+        //商品規格h2
         h2{
-            font-size: 1.8rem;
+            
+            font-size: 1.2rem;
+            margin-bottom: 0px;
         }
         .standardBox{
             margin-left: 20px;
@@ -74,6 +97,91 @@
             border-radius: 10px;
             &:hover{
                 background-color: #FFDA16;
+            }
+            
+        }
+        
+    }
+
+    .howNum{
+        width: 100%;
+        display: flex;
+        // justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+        p{
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-right: 30px;
+        }
+        .numBox{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.3rem;
+            border: 1px solid #ccc;
+            
+            .numBox1{
+                border-right: 1px solid #ccc;
+                padding: 5px;
+            }
+            .numBox2{
+                padding: 5px;
+            }
+            .numBox3{
+                border-left: 1px solid #ccc;
+                padding: 5px;
+            }
+        }
+        
+    }
+
+    .deliver{
+        display: flex;
+        align-items: center;
+        p{
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-right: 30px;
+        }
+        label{
+            margin-right: 5px;
+        }
+        input{
+            margin-right: 30px;
+        }
+        margin-bottom: 50px;
+    }
+    .buttonGroup{
+        display: flex;
+        width: 100%;
+        justify-content:center;
+        .cart{
+            border-radius: 5px;
+            background-color: #000;
+            border: none;
+            color: white;
+            margin-right: 80px;
+            padding: 10px;
+            width: 150px;
+            &:hover{
+                background-color: $yellow;
+                color: black;
+                border: none;
+            }
+        }
+        .buy{
+            border-radius: 5px;
+            border: none;
+            background-color: #000;
+            color: white;
+            padding: 10px;
+            width: 150px;
+            
+            &:hover{
+                background-color: $yellow;
+                color: black;
+                border: none;
             }
         }
     }

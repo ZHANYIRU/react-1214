@@ -23,6 +23,14 @@ export default function ProductPage() {
     },
   ]
   const { product_sid } = useParams()
+  //format currency
+  const moneyFormat = (price) => {
+    let a = Number(price)
+    let b = a.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD' })
+    let c = b.split('.')
+    return c[0]
+  }
+
   return (
     <>
       <div className={styled.empty}></div>
@@ -77,19 +85,23 @@ export default function ProductPage() {
                     <div className={styled.standardBox}>M</div>
                     <div className={styled.standardBox}>L</div>
                   </div>
-                  <h2>金額：{v.product_price}</h2>
+                  <h2>金額：{moneyFormat(v.product_price)}</h2>
                   <div className={styled.howNum}>
                     <p>商品數量</p>
                     <div className={styled.numBox}>
-                      <div className={styled.numBox1}>-</div>
+                      <div className={styled.numBox1}>
+                        <i class="fa-solid fa-minus"></i>
+                      </div>
                       <div className={styled.numBox2}>
                         {v.product_inventory}
                       </div>
-                      <div className={styled.numBox3}>+</div>
+                      <div className={styled.numBox3}>
+                        <i class="fa-solid fa-plus"></i>
+                      </div>
                     </div>
                   </div>
                   <div className={styled.deliver}>
-                    <p>配送方式：</p>
+                    <p>配送方式</p>
                     <label htmlFor="home">宅配</label>
                     <input type="radio" id="home" name="deliver" />
                     <label htmlFor="711">超商取貨</label>
@@ -107,8 +119,6 @@ export default function ProductPage() {
           })}
         </div>
       </div>
-      <div>555</div>
-      <div>{product_sid}</div>
     </>
   )
 }
