@@ -21,6 +21,7 @@ import Following from './pages/member/child-page/Following'
 import MemberInfo from './pages/member/child-page/MemberInfo'
 
 import RoomFilterPage from './pages/room/RoomFilterPage'
+import RoomDetailPage from './pages/room/RoomDetailPage'
 function App() {
   return (
     <BrowserRouter>
@@ -32,7 +33,8 @@ function App() {
         <Route path="/product/:product_sid" element={<ProductPage />} />
         <Route path="/camp" element={<Camp />} />
         <Route path="/room" element={<Room />} />
-        <Route path="/room/filter" element={<RoomFilterPage />} />
+        <Route path="/room/search" element={<RoomFilterPage />} />
+        <Route path="/room/:room_sid" element={<RoomDetailPage />} />
         <Route path="/rental" element={<Rental />} />
         <Route path="/rental/:rental_product_sid" element={<Rental_detail />} />
         <Route path="/cart" element={<Cart />} />

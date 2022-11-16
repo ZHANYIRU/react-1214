@@ -1,0 +1,101 @@
+@import '../global.scss';
+.cardWrap{
+    display: flex;
+    margin-bottom: 50px;
+    padding: 25px;
+    width: 60%;
+    background-color: white;
+    border-radius: 10px;
+    box-sizing: content-box;
+
+    .cardImg{
+        background-image: url('./../../../public/img/room.jpg');
+        background-size: cover;
+        width:50% ;
+        border-radius: 10px;
+    }
+}
+.detail{
+    margin-left: 35px;
+    font-weight: 700;
+}
+
+.facility{
+    display: flex;
+    width: 400px;
+    flex-wrap: wrap;
+
+    div{
+        margin: 10px 10px 5px 0;
+        flex-direction: column;
+        img{
+            display: inline-block;
+            width: 20px;
+            vertical-align: top;
+            margin-right: 5px;
+        }
+        span{
+            vertical-align: center;
+            display: inline-block;
+            font-size: 1rem;
+        }
+    }
+}
+
+.roomName{
+    margin-top: 10px;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.star{
+    margin-top: 8px;
+    i {
+        color: #ffda16;
+        font-size: 0.8rem;
+        margin-right: 4px;}
+    .commentQTY{
+        font-size: 0.8rem;
+    }   
+}
+
+
+.icon{
+    display: flex;
+    span{
+        display: inline-block;
+        margin-top: 10px;
+        padding-right: 10px;
+        margin-right: 5px;
+        font-weight: 700;
+        i {
+            color:#48742C;
+        }
+        }
+    }
+
+.text{
+    display: flex;
+    flex-direction: column;
+    span{
+        margin-top: 10px;
+        display: inline-block;
+    }
+}
+
+.bottom{
+    display: flex;
+    justify-content: space-between;
+    .price{
+        display: inline-block;
+        font-weight: 700;
+        font-size: 1.2rem;
+        padding-top: 10px;
+        }
+
+    button{
+    border: none;
+    padding: 10px 15px;
+    background-color: #ffda16;
+    border-radius: 5px;
+}    
+}

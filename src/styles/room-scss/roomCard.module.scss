@@ -22,17 +22,17 @@
 }
 .icon{
     display: flex;
-    justify-content: space-between
-}
-.icon span{
-    display: inline-block;
-    margin-top: 10px;
-    padding-right: 10px;
-    font-weight: 700;
-}
-.icon span i {
-    color:#48742C
-}
+    justify-content: space-between;
+    span{
+        display: inline-block;
+        margin-top: 10px;
+        padding-right: 10px;
+        font-weight: 700;
+        i {
+            color:#48742C;
+        }
+    }
+    }
 .roomName{
     margin-top: 10px;
     font-size: 1.2rem;
