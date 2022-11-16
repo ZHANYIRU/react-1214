@@ -54,6 +54,7 @@
 
 .numWrap {
   width: 90%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   input {
@@ -64,15 +65,15 @@
 .orderNum {
   display: flex;
   width: 100%;
-  background-color: #E9D9A2;
+  background-color: #e9d9a2;
   cursor: pointer;
   padding: 15px;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-  p:first-child{
+  p:first-child {
     width: 70%;
   }
-  p:nth-child(2){
+  p:nth-child(2) {
     text-align: center;
     width: 26%;
   }
@@ -87,78 +88,129 @@
 
 .contentWrapOpen {
   padding: 10px 0;
-  max-height: 100vh;
+  max-height: 50vh;
   transition: all 0.5s;
   margin-bottom: 50px;
+  overflow: auto;
 }
-.proContentTitle{
-  width: 96%;
+.proContentTitle,
+.roomContentTitle,
+.campContentTitle,
+.renContentTitle {
+  width: 97%;
   height: 30px;
   margin: 0 auto 10px;
   background-color: #426349;
   color: white;
   border-radius: 15px;
   display: flex;
-  p{
+  p {
     font-size: 14px;
     line-height: 30px;
     height: 100%;
     border-right: 1px solid white;
-  }
-  p:first-child{
-    width: 64%;
     text-align: center;
   }
-  p:not(:first-child){
-    text-align: center;
-    width: 12%;
-  }
-  p:last-child{
+  p:last-child {
     border: none;
   }
+  p:first-child {
+    width: 64%;
+  }
+  p:not(:first-child) {
+    width: 12%;
+  }
 }
-.content{
-  width: 95%;
+
+.proContent,
+.roomContent,
+.campContent,
+.renContent {
+  width: 97%;
   margin: 0 auto 15px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid #a09f9e;
   padding-bottom: 20px;
-  button{
+  button {
     border: none;
     background-color: $darkGreen;
-    color:$yellow;
+    color: $yellow;
     border-radius: 5px;
     padding: 10px 15px;
     font-size: 12px;
     font-weight: 300;
-    margin: 0  0 0 auto;
+    margin: 0 0 0 auto;
+  }
+  .contentDe {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    p {
+      font-size: 12px;
+    }
+    p:nth-child(2) {
+      padding-left: 15px;
+      width: 53%;
+    }
+    p:not(:nth-child(2)) {
+      flex: 1;
+      text-align: center;
+    }
+    .imgWrap {
+      width: 92px;
+      height: 92px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
   }
 }
-.contentDe{
-  width: 100%;
-  display: flex;
-  align-items: center;
-  p{
-    font-size: 14px;
-  }
-  p:nth-child(2){
-    padding-left: 15px;
-    width: 53.6%;
-  }
-  p:not(:nth-child(2)){
-    text-align: center;
-    width: 99.53px;
+.proContent {
+  .contentDe {
+    p:nth-child(2) {
+      width: 53%;
+    }
   }
 }
 
-.imgWrap{
-  width: 92px;
-  height: 92px;
-  img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.roomContent {
+  .contentDe {
+    p:nth-child(2) {
+      width: 40.3%;
+    }
   }
+}
+.campContent {
+  .contentDe {
+    p:nth-child(2) {
+      width: 40.3%;
+    }
+  }
+}
+.renContent {
+  .contentDe {
+    p:nth-child(2) {
+      width: 36%;
+      padding-right: 5px;
+    }
+    p:nth-child(4) {
+      height: 42px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+  }
+}
+
+.lightBox {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.272);
 }
