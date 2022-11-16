@@ -38,7 +38,7 @@ export default function SocialWall() {
             </div>
             <div className={styles.content}>
               <div className={styled.postList}>
-                {Array(18)
+                {Array(14)
                   .fill(1)
                   .map((v, i) => {
                     return <ThumbnailView setIsView={setIsView} key={i} />
@@ -46,8 +46,13 @@ export default function SocialWall() {
               </div>
             </div>
             <div className={styles.tags}>
-              <div className={styles.tag}>我的分享</div>
-              <div className={styles.tag}>英雄榜</div>
+              <div className={`${styles.tag} ${styles.sel}`}>
+                我的分享
+                <div className={styles.shade}></div>
+              </div>
+              <div className={styles.tag}>
+                英雄榜<div className={styles.shade}></div>
+              </div>
             </div>
           </div>
         </div>

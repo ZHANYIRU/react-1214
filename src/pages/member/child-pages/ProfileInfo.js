@@ -1,8 +1,10 @@
 import { useState } from 'react'
 import styled from '../../../styles/member-scss/MemberInfo.module.scss'
-import TextareaAutosize from 'react-textarea-autosize'
+// import TextareaAutosize from 'react-textarea-autosize'
 import ModalView from '../components/ModalView'
 import ThumbnailView from '../components/ThumbnailView'
+import TotalHeight from '../components/TotalHeight'
+import PostMap from '../components/PostMap'
 
 export default function ProfileInfo() {
   const [isView, setIsView] = useState(false)
@@ -15,12 +17,8 @@ export default function ProfileInfo() {
             <h3>分享地圖</h3>
             <div className={styled.divider}></div>
             <div className={styled.overview}>
-              <div className={styled.postMap}>
-                <h4>總計地點: 8</h4>
-              </div>
-              <div className={styled.totalHeight}>
-                <h4>累積海拔: 3786 公尺</h4>
-              </div>
+              <PostMap />
+              <TotalHeight />
             </div>
           </div>
         </div>

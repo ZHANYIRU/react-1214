@@ -24,7 +24,7 @@
 
 .card {
     background-color: #fff;
-    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.25);
     border-radius: 12px;
     min-height: 760px;
     position: relative;
@@ -59,16 +59,36 @@
         writing-mode: vertical-rl;
         display: flex;
         gap: 20px;
-        z-index: -99;
+        // z-index: -3;
+        
 
         .tag {
             width: 40px;
-            height: 150px;
+            height: 120px;
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: $yellow;
-            
+            background: $yellow;
+            font-weight: 600;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            transition: 0.2s;
+            position: relative;
+            cursor: pointer;
+
+            &:hover {
+                background: #ffc116;
+            }
+
+            .shade {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                width: 8px;
+                background: linear-gradient(90deg, rgba(0, 0, 0, 0.15), transparent 90%);
+            }
+
         }
     }
 

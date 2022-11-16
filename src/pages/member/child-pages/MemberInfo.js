@@ -3,11 +3,14 @@ import styled from '../../../styles/member-scss/MemberInfo.module.scss'
 import TextareaAutosize from 'react-textarea-autosize'
 import ModalView from '../components/ModalView'
 import Thumbnail from '../components/Thumbnail'
+import TotalHeight from '../components/TotalHeight'
+import PostMap from '../components/PostMap'
 
 export default function MemberInfo() {
   const [isNew, setIsNew] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
   const [isView, setIsView] = useState(false)
+  const [isDel, setIsDel] = useState(false)
   const [editTxt, setEditTxt] = useState('')
 
   return (
@@ -18,12 +21,8 @@ export default function MemberInfo() {
             <h3>分享地圖</h3>
             <div className={styled.divider}></div>
             <div className={styled.overview}>
-              <div className={styled.postMap}>
-                <h4>總計地點: 8</h4>
-              </div>
-              <div className={styled.totalHeight}>
-                <h4>累積海拔: 3786 公尺</h4>
-              </div>
+              <PostMap />
+              <TotalHeight />
             </div>
           </div>
         </div>
@@ -92,9 +91,23 @@ export default function MemberInfo() {
                   </h3>
                 </div>
                 <div className={styled.delete}>
-                  <h3>
-                    <span>刪除</span>
-                    <i className="fa-solid fa-trash-can"></i>
+                  <h3
+                    onClick={() => {
+                      setIsDel(true)
+                    }}
+                  >
+                    {' '}
+                    {isDel ? (
+                      <>
+                        <span>確認刪除?</span>
+                        <i className="fa-solid fa-trash-can"></i>
+                      </>
+                    ) : (
+                      <>
+                        <span>刪除</span>
+                        <i className="fa-solid fa-trash-can"></i>
+                      </>
+                    )}
                   </h3>
                 </div>
               </div>
@@ -107,6 +120,7 @@ export default function MemberInfo() {
                 className={styled.btnCancel}
                 onClick={() => {
                   setIsEdit(false)
+                  setIsDel(false)
                 }}
               >
                 <p>取消修改</p>
