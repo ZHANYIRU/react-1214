@@ -30,7 +30,7 @@ function Product() {
   const [fixedd, setFixedd] = useState(false)
   //偵測是否為手機版面
   const [mob, setMob] = useState(false)
-
+  const filterRef = useRef('')
   //偵測滾動時，filter要吸附的位置
   const scrollFilter = () => {
     const windowScrollY = window.scrollY
@@ -42,20 +42,23 @@ function Product() {
     }
   }
   // 切換回product的方法 (讓Bar不要跑掉)
-  const filterLocation = () => {
-    let Window_W = window.innerWidth
-    if (location.pathname === '/product' && Window_W < 500) {
-      setMob(true)
-    } else {
-      setMob(false)
-    }
-  }
+  // const filterLocation = () => {
+  //   let Window_W = window.innerWidth
+  //   if (location.pathname === '/product' && Window_W < 500) {
+  //     setMob(true)
+  //   } else {
+  //     setMob(false)
+  //   }
+  // }
 
   // 視窗寬度方法
-  const gW = () => {
+  const reSize = () => {
     let Window_W = window.innerWidth
-    if (Window_W < 500 && location.pathname === '/product') {
-      setMob(true)
+    if (
+      Window_W < 500 &&
+      (location.pathname === '/product' || location.pathname === '/product/')
+    ) {
+      return setMob(true)
     } else if (Window_W > 500) {
       setMob(false)
     }
@@ -89,11 +92,12 @@ function Product() {
     setDatas(r)
   }
 
-  //----------------------------
+  //-------------------------------------------------------------------
   useEffect(() => {
     getProductData()
-    filterLocation()
-    window.addEventListener('resize', gW)
+    // filterLocation()
+    // reSize()
+    window.addEventListener('resize', reSize)
     window.addEventListener('scroll', scrollFilter)
   }, [fixedd, mob])
 
@@ -150,7 +154,13 @@ function Product() {
         {/* 卡片專區 */}
 
         {/* <div className={styled.cardBigBox}> */}
-        <Product_filter fixedd={fixedd} mob={mob} setMob={setMob} gW={gW} />
+        <Product_filter
+          fixedd={fixedd}
+          mob={mob}
+          setMob={setMob}
+          reSize={reSize}
+          filterRef={filterRef}
+        />
         <div className={styled.cardbox}>
           {datas.map((v, i) => {
             return (

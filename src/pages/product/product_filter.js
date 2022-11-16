@@ -3,7 +3,13 @@ import { Link } from 'react-router-dom'
 import React, { useState, useRef, useEffect } from 'react'
 import styled from '../../styles/product-scss/product.module.scss'
 
-export default function Product_filter({ fixedd, mob, setMob, gW }) {
+export default function Product_filter({
+  fixedd,
+  mob,
+  setMob,
+  reSize,
+  filterRef,
+}) {
   const [lowPrice, setLowPrice] = useState('')
   const [highPrice, setHighPrice] = useState('')
   const brandOptions = ['Arcteryx 始祖鳥', 'mmm']
@@ -27,7 +33,6 @@ export default function Product_filter({ fixedd, mob, setMob, gW }) {
   ])
 
   const mbfilterRef = useRef('')
-  const filterRef = useRef('')
 
   let allProduct = 'http://localhost:3001/product/all'
   let price = 'http://localhost:3001/product/price'
@@ -61,11 +66,18 @@ export default function Product_filter({ fixedd, mob, setMob, gW }) {
   // const filterToggle
   const filterToggle = () => {
     if (!filterOpen) {
-      mbfilterRef.current.style.height = '500px'
-
+      // mbfilterRef.current.style = 'borderRadius: 10px'
+      mbfilterRef.current.style.height = '380px'
+      mbfilterRef.current.style.backgroundColor = '#F5F5F5'
+      // mbfilterRef.current.style = 'background-Color : #F5F5F5'
+      // borderRadius: '10px',
+      // backgroundColor: '#F5F5F5',
+      // boxShadow: '3px 3px 6px rgb(127, 126, 126)',
+      // height: '380px',
       setFilterOpen(true)
     } else {
       mbfilterRef.current.style.height = ''
+      mbfilterRef.current.style.backgroundColor = ''
 
       setFilterOpen(false)
     }
@@ -87,6 +99,7 @@ export default function Product_filter({ fixedd, mob, setMob, gW }) {
       className={fixedd ? `${styled.filter2}` : `${styled.filter}`}
       ref={filterRef}
     >
+      {mob ? '' : ''}
       <form action="">
         <h2>價格</h2>
         <div className={styled.pricebox}>
@@ -206,6 +219,16 @@ export default function Product_filter({ fixedd, mob, setMob, gW }) {
   const mobFilter = (
     <div className={styled.mbfilter} ref={mbfilterRef}>
       <form action="">
+        <div className={styled.icon}>
+          <i class="fa-solid fa-sort"></i>
+          <i
+            class="fa-solid fa-filter"
+            onClick={() => {
+              filterToggle()
+            }}
+          ></i>
+        </div>
+        <h2>價格</h2>
         <div className={styled.pricebox}>
           <input
             size="5"
@@ -229,13 +252,6 @@ export default function Product_filter({ fixedd, mob, setMob, gW }) {
               setHighPrice(e.target.value)
             }}
           />
-          <i class="fa-solid fa-sort"></i>
-          <i
-            class="fa-solid fa-filter"
-            onClick={() => {
-              filterToggle()
-            }}
-          ></i>
         </div>
         <h2> 品牌</h2>
         <select
@@ -292,41 +308,11 @@ export default function Product_filter({ fixedd, mob, setMob, gW }) {
         >
           送出
         </button>
-        <hr />
-        <div className={styled.star}>
-          <Link>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </Link>
-
-          <Link>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </Link>
-
-          <Link>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </Link>
-
-          <Link>
-            <i class="fa-solid fa-star"></i>
-            <i class="fa-solid fa-star"></i>
-          </Link>
-
-          <Link>
-            <i class="fa-solid fa-star"></i>
-          </Link>
-        </div>
       </form>
     </div>
   )
-  useEffect(() => {}, [])
+  useEffect(() => {
+    window.addEventListener('resize', reSize)
+  }, [mob])
   return <>{mob ? mobFilter : webFilter}</>
 }
