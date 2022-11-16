@@ -11,6 +11,7 @@ import Rental from './pages/rental/Rental'
 import Rental_detail from './pages/rental/Rental_detail'
 import Cart from './pages/Cart/Cart'
 import Order from './pages/Order/Order'
+import TestProducts from './pages/Cart/TestProducts/TestProducts'
 import Member from './pages/member/Member'
 import Login from './pages/member/Login'
 import Join from './pages/member/Join'
@@ -35,7 +36,7 @@ function App() {
         <Route path="/rental" element={<Rental />} />
         <Route path="/rental/:rental_product_sid" element={<Rental_detail />} />
         <Route path="/cart" element={<Cart />} />
-        {/* <Route path="/order" element={<Order />} /> */}
+        <Route path="/test" element={<TestProducts />} />
         <Route path="/member" element={<Member />}>
           <Route index element={<MemberInfo />} />
           <Route path="/member/orders" element={<Order />} />

@@ -27,6 +27,7 @@ function CartDetailPro() {
                 />
               </div>
             </div>
+            <i class="fa-regular fa-trash-can"></i>
           </div>
           <div className={styled.wrap}>
             <input type="checkbox" />
@@ -49,6 +50,7 @@ function CartDetailPro() {
                 />
               </div>
             </div>
+            <i class="fa-regular fa-trash-can"></i>
           </div>
           <div className={styled.wrap}>
             <input type="checkbox" />
@@ -71,6 +73,7 @@ function CartDetailPro() {
                 />
               </div>
             </div>
+            <i class="fa-regular fa-trash-can"></i>
           </div>
         </div>
       </div>
