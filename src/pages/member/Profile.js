@@ -1,4 +1,4 @@
-import styles from '../../styles/member-scss/Member.module.scss'
+import styled from '../../styles/member-scss/Member.module.scss'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { useEffect } from 'react'
 
@@ -16,11 +16,11 @@ function Profile(props) {
 
   return (
     <>
-      <div className={styles.row}>
-        <div className={styles.col}>
-          <aside className={styles.profile}>
+      <div className={styled.row}>
+        <div className={styled.col}>
+          <aside className={styled.profile}>
             <div
-              className={`${styles.avatar} ${styles.social}`}
+              className={`${styled.avatar} ${styled.social}`}
               onClick={() => {
                 navigate(`/profile/?mid=${1}`)
               }}
@@ -31,38 +31,38 @@ function Profile(props) {
               ></img>
             </div>
             <h3
-              className={styles.social}
+              className={styled.social}
               onClick={() => {
                 navigate(`/profile/?mid=${1}`)
               }}
             >
               和真
             </h3>
-            <p className={styles.highlight}>銀級玩家</p>
-            <div className={styles.socials}>
+            <p className={styled.highlight}>銀級玩家</p>
+            <div className={styled.socials}>
               <div
-                className={styles.social}
+                className={styled.social}
                 onClick={() => {
                   navigate(`/profile/following/?mid=${1}`)
                 }}
               >
-                <p className={styles.highlight}>關注</p>
+                <p className={styled.highlight}>關注</p>
                 <h3>7</h3>
               </div>
               <div
-                className={styles.social}
+                className={styled.social}
                 onClick={() => {
                   navigate('/profile/followers/?mid=1')
                 }}
               >
-                <p className={styles.highlight}>粉絲</p>
+                <p className={styled.highlight}>粉絲</p>
                 <h3>43</h3>
               </div>
             </div>
-            <button className={styles.follow}>
+            <button className={styled.follow}>
               <i className="fa-solid fa-user-plus"></i> 關注他
             </button>
-            <p className={styles.intro}>
+            <p className={styled.intro}>
               喜愛登山與旅遊結合規劃，發掘台灣的歷史與美，熱愛攝影，探索台灣百岳，中級山，郊山的山野旅行者。GoHiking
               ! ! !
               {/* 一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十 */}

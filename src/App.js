@@ -14,13 +14,14 @@ import Order from './pages/Order/Order'
 import Member from './pages/member/Member'
 import Login from './pages/member/Login'
 import Join from './pages/member/Join'
-import MemberEdit from './pages/member/child-page/MemberEdit'
-import MemberPass from './pages/member/child-page/MemberPass'
-import Followers from './pages/member/child-page/Followers'
-import Following from './pages/member/child-page/Following'
-import MemberInfo from './pages/member/child-page/MemberInfo'
+import MemberEdit from './pages/member/child-pages/MemberEdit'
+import MemberPass from './pages/member/child-pages/MemberPass'
+import Followers from './pages/member/child-pages/Followers'
+import Following from './pages/member/child-pages/Following'
+import MemberInfo from './pages/member/child-pages/MemberInfo'
 import Profile from './pages/member/Profile'
-import ProfileInfo from './pages/member/child-page/ProfileInfo'
+import ProfileInfo from './pages/member/child-pages/ProfileInfo'
+import SocialWall from './pages/member/SocialWall'
 import RoomFilterPage from './pages/room/RoomFilterPage'
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <Route path="/rental/:rental_product_sid" element={<Rental_detail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/order" element={<Order />} />
+        <Route path="/social" element={<SocialWall />} />
         <Route path="/member" element={<Member />}>
           <Route index element={<MemberInfo />} />
           <Route path="/member/orders" />

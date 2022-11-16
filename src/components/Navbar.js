@@ -37,6 +37,9 @@ function Navbar() {
             <li>
               <Link to="/rental">裝備租借</Link>
             </li>
+            <li>
+              <Link to="/social">山友分享</Link>
+            </li>
           </ul>
         </div>
         <div className={styled.navRight}>

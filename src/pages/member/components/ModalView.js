@@ -1,73 +1,9 @@
-import { useState } from 'react'
 import styled from '../../../styles/member-scss/MemberInfo.module.scss'
 import TextareaAutosize from 'react-textarea-autosize'
 
-export default function ProfileInfo() {
-  const [isView, setIsView] = useState(false)
-
-  return (
-    <>
-      <div className={styled.row}>
-        <div className={styled.col}>
-          <div className={styled.card}>
-            <h3>分享地圖</h3>
-            <div className={styled.divider}></div>
-            <div className={styled.overview}>
-              <div className={styled.postMap}>
-                <h4>總計地點: 8</h4>
-              </div>
-              <div className={styled.totalHeight}>
-                <h4>累積海拔: 3786 公尺</h4>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className={styled.row}>
-        <div className={styled.col}>
-          <div className={styled.card}>
-            <div className={styled.postTitle}>
-              <h3>分享貼文: 17</h3>
-            </div>
-            <div className={styled.divider}></div>
-            <div className={styled.postList}>
-              {Array(17)
-                .fill(1)
-                .map((v, i) => {
-                  return (
-                    <div
-                      className={styled.post}
-                      key={i}
-                      onClick={() => {
-                        setIsView(true)
-                      }}
-                    >
-                      <img
-                        src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
-                        alt="post"
-                      ></img>
-                      <div className={styled.postInfo}>
-                        <p>
-                          <span>
-                            <i className="fa-solid fa-heart"></i>32
-                          </span>
-                          <span>
-                            <i className="fa-solid fa-comment-dots"></i>9
-                          </span>
-                        </p>
-                        <p>苗栗 加里山</p>
-                        <p>海拔高度 1211m</p>
-                        {/* 輸入用 react-textarea-autosize 套件 */}
-                      </div>
-                    </div>
-                  )
-                })}
-            </div>
-          </div>
-        </div>
-      </div>
-      {isView && (
-        <div
+export default function ModalView ({setIsView}) {
+    return <>
+                <div
           className={styled.modalBg}
           // z-index over nav bar?
           onClick={() => {
@@ -96,7 +32,7 @@ export default function ProfileInfo() {
                     ></img>
                   </div>
                   <h4>Kekeke123</h4>
-                  <i className="fa-regular fa-heart"></i>
+                  <span>123 <i className="fa-regular fa-heart"></i></span>
                 </div>
                 <TextareaAutosize
                   className={styled.contentTxt}
@@ -131,7 +67,7 @@ export default function ProfileInfo() {
                     .map((v, i) => {
                       return (
                         <div key={i} className={styled.replyPost}>
-                          <div className={styled.contentFlex}>
+                          <div className={`${styled.contentFlex} ${styled.left}`}>
                             <div className={styled.replyAvatar}>
                               <img
                                 src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
@@ -145,7 +81,7 @@ export default function ProfileInfo() {
                                 value="喜愛登山與旅遊結合規劃，發掘台灣的歷史與美!"
                               />
                             </div>
-                            <i className="fa-regular fa-heart"></i>
+                            {/* <i className="fa-regular fa-heart"></i> */}
                           </div>
                         </div>
                       )
@@ -173,7 +109,6 @@ export default function ProfileInfo() {
             </div>
           </div>
         </div>
-      )}
     </>
-  )
+
 }
