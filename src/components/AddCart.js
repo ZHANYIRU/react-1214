@@ -10,20 +10,20 @@ export const addProCart = (proSid, name, size, price, qty, img) => {
   if (!localStorage.getItem('proCart')) {
     return localStorage.setItem('proCart', JSON.stringify([newProCart]))
   }
-  const cart = JSON.parse(localStorage.getItem('proCart'))
-  //找localStorage有沒有這個商品
-  const p = cart.find((el) => el.proSid === proSid)
+  let cart = JSON.parse(localStorage.getItem('proCart'))
+  //找localStorage有沒有這個商品 & size
+  const proIndex = cart.findIndex(
+    (el) => el.proSid === proSid && el.size === size
+  )
   //沒有的話就加入
-  if (!p) {
+  if (proIndex === -1) {
     localStorage.setItem('proCart', JSON.stringify([...cart, newProCart]))
     //有的話就累加數量
   } else {
-    // const newP = { ...p, qty: p.qty + qty }
-    // console.log(newP)
-    // localStorage.setItem('proCart', JSON.stringify([...cart, newP]))
+    const newQty = cart[proIndex].qty + qty
+    cart[proIndex].qty = newQty
+    localStorage.setItem('proCart', JSON.stringify(cart))
   }
-  console.log(cart)
-  console.log(p)
 }
 export const addCampCart = () => {}
 export const addRoomCart = () => {}

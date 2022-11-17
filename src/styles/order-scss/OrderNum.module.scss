@@ -212,12 +212,12 @@
   position: fixed;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.272);
+  background-color: rgba(0, 0, 0, 0.377);
   display: flex;
   justify-content: center;
   align-items: center;
 }
-.lightbox{
+.lightbox {
   width: 600px;
   height: 350px;
   border-radius: 15px;
@@ -226,7 +226,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  textarea{
+  textarea {
     resize: none;
     border-radius: 10px;
     padding-left: 10px;
@@ -243,32 +243,31 @@
     margin: 0 0 0 auto;
   }
 }
-.lightName{
+.lightName {
   display: flex;
   align-items: center;
   width: 100%;
-  p{
+  p {
     line-height: 1rem;
     font-weight: 500;
     width: 55%;
     font-size: 12px;
     margin-left: 20px;
   }
-  .lightImg{
+  .lightImg {
     width: 100px;
     height: 100px;
-    img{
+    img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
   }
 }
-.star{
-  i{
+.star {
+  i {
     font-size: 18px;
-    margin-right:15px ;
+    margin-right: 15px;
     color: #426349;
   }
 }
-
