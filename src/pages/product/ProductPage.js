@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useEffect } from 'react'
 
 export default function ProductPage() {
-  const [introCom, setintroCom] = useState(false)
+  const [introCom, setintroCom] = useState(true)
   //隨機產生3筆資料
   const [randomData, setRandomData] = useState([
     {
@@ -252,7 +252,11 @@ export default function ProductPage() {
                   : `${styled.productIntro}`
               }
               onClick={(e) => {
-                changeBtn(e)
+                if (!introCom) {
+                  changeBtn()
+                } else {
+                  return
+                }
               }}
             >
               商品介紹
@@ -264,7 +268,11 @@ export default function ProductPage() {
                   : `${styled.productIntro}`
               }
               onClick={() => {
-                changeBtn()
+                if (introCom) {
+                  changeBtn()
+                } else {
+                  return
+                }
               }}
             >
               商品評論
