@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import React, { useState, useRef, useEffect } from 'react'
+import { useMediaQuery } from 'react-responsive'
 import styled from '../../styles/product-scss/product.module.scss'
 
 export default function Product_filter({
@@ -10,6 +11,7 @@ export default function Product_filter({
   reSize,
   filterRef,
 }) {
+  const mobile = useMediaQuery({ query: '(max-width:390px)' })
   const [lowPrice, setLowPrice] = useState('')
   const [highPrice, setHighPrice] = useState('')
   const brandOptions = ['Arcteryx 始祖鳥', 'mmm']
@@ -314,5 +316,10 @@ export default function Product_filter({
   useEffect(() => {
     window.addEventListener('resize', reSize)
   }, [mob])
-  return <>{mob ? mobFilter : webFilter}</>
+  return (
+    <>
+      {mobile && mobFilter}
+      {mobile || webFilter}
+    </>
+  )
 }

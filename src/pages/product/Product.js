@@ -97,9 +97,9 @@ function Product() {
     getProductData()
     // filterLocation()
     // reSize()
-    window.addEventListener('resize', reSize)
+    // window.addEventListener('resize', reSize)
     window.addEventListener('scroll', scrollFilter)
-  }, [fixedd, mob])
+  }, [fixedd])
 
   return (
     <>
