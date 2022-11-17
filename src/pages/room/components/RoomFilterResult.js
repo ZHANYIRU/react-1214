@@ -1,4 +1,4 @@
-import style from '../../styles/room-scss/roomFilterResult.module.scss'
+import style from '../../../styles/room-scss/roomFilterResult.module.scss'
 
 function RoomFilterResult() {
   return (

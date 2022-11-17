@@ -1,5 +1,5 @@
 import style from '../../styles/room-scss/roomFilterPage.module.scss'
-import RoomFilterResult from './RoomFilterResult'
+import RoomFilterResult from './components/RoomFilterResult'
 
 function RoomFilterPage() {
   return (

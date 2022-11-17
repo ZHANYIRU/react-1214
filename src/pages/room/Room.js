@@ -1,6 +1,6 @@
 import style from '../../styles/room-scss/room.module.scss'
-import RoomCard from './RoomCard'
-import RoomSearch from './RoomSearch'
+import RoomCard from './components/RoomCard'
+import RoomSearch from './components/RoomSearch'
 function Room(props) {
   return (
     <>

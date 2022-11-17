@@ -1,6 +1,6 @@
 import React from 'react'
 import RoomMainTitle from './RoomMainTitle'
-import style from '../../styles/room-scss/roomCard.module.scss'
+import style from '../../../styles/room-scss/roomCard.module.scss'
 
 function RoomCard() {
   return (

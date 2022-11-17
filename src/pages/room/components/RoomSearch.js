@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import style from '../../styles/room-scss/roomSearch.module.scss'
+import style from '../../../styles/room-scss/roomSearch.module.scss'
 
 function RoomSearch() {
   return (
