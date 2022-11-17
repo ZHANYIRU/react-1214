@@ -1,8 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import styled from '../../styles/product-scss/productPage.module.scss'
-
+import axios from 'axios'
+import { useEffect } from 'react'
 export default function ProductPage() {
+  const [randomData, setRandomData] = useState([
+    {
+      product_sid: '1',
+      product_name: 'a',
+      product_category_sid: '10',
+      brand_sid: '7',
+      product_price: '3699',
+      product_inventory: '20',
+      product_img: '1',
+      product_imgs: '1',
+      product_spec: '1',
+      product_feature: '1',
+      size: 'S',
+    },
+  ])
   const productData = [
     {
       product_sid: 1,
@@ -30,12 +46,21 @@ export default function ProductPage() {
     let c = b.split('.')
     return c[0]
   }
+  const getProductData = async () => {
+    const response = await axios.get('http://localhost:3001/product/random')
+    const r = response.data
+    console.log(r)
+    setRandomData(r)
+  }
+  useEffect(() => {
+    getProductData()
+  }, [])
 
   return (
     <>
       <div className={styled.empty}></div>
-      <div className={styled.container}>
-        <div className={styled.card}>
+      <div className={styled.card}>
+        <div className={styled.container}>
           {/* //bordshell */}
           {productData.map((v, i) => {
             return (
@@ -117,6 +142,49 @@ export default function ProductPage() {
               </div>
             )
           })}
+          <div className={styled.changeTitle}>
+            <div className={styled.productIntro}>商品介紹</div>
+            <div className={styled.productCommon}>商品評論</div>
+          </div>
+          <div className={styled.introTitle}>產品規格</div>
+          <p className={styled.intro}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
+            temporibus corrupti repellendus soluta eum et labore autem, in
+            exercitationem harum voluptate fugiat assumenda molestias maxime
+            veniam. Voluptate possimus itaque ea!
+          </p>
+          <div className={styled.introTitle}>特色說明</div>
+          <p className={styled.intro}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
+            temporibus corrupti repellendus soluta eum et labore autem, in
+            exercitationem harum voluptate fugiat assumenda molestias maxime
+            veniam. Voluptate possimus itaque ea!
+          </p>
+          <div className={styled.introTitle}>猜你喜歡</div>
+          <div className={styled.guessYouLike}>卡片排列</div>
+          <div className={styled.cardbox}>
+            {randomData.map((v, i) => {
+              return (
+                <Link
+                  className={styled.card}
+                  key={v.product_sid}
+                  to={'/product/' + v.product_sid}
+                >
+                  <div>
+                    <img
+                      src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
+                      alt=""
+                    />
+                    <p className={styled.p}>{v.product_name}</p>
+                    <h2>
+                      金額：<span>${v.product_price}</span>
+                    </h2>
+                  </div>
+                </Link>
+              )
+            })}
+          </div>
+          <div className={styled.empty}></div>
         </div>
       </div>
     </>
