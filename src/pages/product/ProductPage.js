@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import styled from '../../styles/product-scss/productPage.module.scss'
 import axios from 'axios'
 import { useEffect } from 'react'
+
 export default function ProductPage() {
+  const [introCom, setintroCom] = useState(false)
+  //隨機產生3筆資料
   const [randomData, setRandomData] = useState([
     {
       product_sid: '1',
@@ -19,6 +22,7 @@ export default function ProductPage() {
       size: 'S',
     },
   ])
+  //商品細節主商品
   const productData = [
     {
       product_sid: 1,
@@ -39,6 +43,7 @@ export default function ProductPage() {
     },
   ]
   const { product_sid } = useParams()
+
   //format currency
   const moneyFormat = (price) => {
     let a = Number(price)
@@ -46,14 +51,111 @@ export default function ProductPage() {
     let c = b.split('.')
     return c[0]
   }
-  const getProductData = async () => {
-    const response = await axios.get('http://localhost:3001/product/random')
+  //取得亂數資料的方法
+  const getRondomProductData = async () => {
+    const response = await axios.get('http://localhost:3001/product/all')
     const r = response.data
     console.log(r)
     setRandomData(r)
   }
+  // 切換開關方法
+  const changeBtn = (e) => {
+    setintroCom(!introCom)
+  }
+
+  // 商品介紹 or 商品評論
+  const intro = (
+    <div className={styled.introWrap}>
+      <div className={styled.introTitle}>產品規格</div>
+      <p className={styled.intro}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
+        temporibus corrupti repellendus soluta eum et labore autem, in
+        exercitationem harum voluptate fugiat assumenda molestias maxime veniam.
+        Voluptate possimus itaque ea!
+      </p>
+      <div className={styled.introTitle}>特色說明</div>
+      <p className={styled.intro}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
+        temporibus corrupti repellendus soluta eum et labore autem, in
+        exercitationem harum voluptate fugiat assumenda molestias maxime veniam.
+        Voluptate possimus itaque ea!
+      </p>
+      <div className={styled.introTitle}>猜你喜歡</div>
+      <div className={styled.guessYouLike}>卡片排列</div>
+      <div className={styled.cardbox}>
+        {randomData.map((v, i) => {
+          return (
+            <Link
+              className={styled.card}
+              key={v.product_sid}
+              to={'/product/' + v.product_sid}
+            >
+              <div>
+                <img
+                  src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
+                  alt=""
+                />
+                <p className={styled.p}>{v.product_name}</p>
+                <h2>
+                  金額：<span>${v.product_price}</span>
+                </h2>
+              </div>
+            </Link>
+          )
+        })}
+      </div>
+    </div>
+  )
+
+  const com = (
+    <div className={styled.comWrap}>
+      <div className={styled.starBox}>
+        <Link>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+          <i class="fa-solid fa-star"></i>
+        </Link>
+        <button>撰寫評論</button>
+      </div>
+      <div className={styled.commonArea}>
+        {Array(6)
+          .fill(1)
+          .map((v, i) => {
+            return (
+              <div className={styled.commonBox}>
+                <div className={styled.commonTitle}>
+                  <div className={styled.commonTitle_img_border}>
+                    <div className={styled.commonTitle_img}>
+                      <img
+                        src="https://cdn2.ettoday.net/images/2253/2253152.jpg"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+
+                  <div className={styled.memberName}>我愛一條柴</div>
+                </div>
+                <div className={styled.commonText}>
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil
+                  dolor voluptas velit facere nam, cupiditate iure ratione
+                </div>
+                <div className={styled.howStar}>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+              </div>
+            )
+          })}
+      </div>
+    </div>
+  )
   useEffect(() => {
-    getProductData()
+    getRondomProductData()
   }, [])
 
   return (
@@ -143,47 +245,32 @@ export default function ProductPage() {
             )
           })}
           <div className={styled.changeTitle}>
-            <div className={styled.productIntro}>商品介紹</div>
-            <div className={styled.productCommon}>商品評論</div>
+            <div
+              className={
+                introCom
+                  ? `${styled.productIntro} ${styled.underLine}`
+                  : `${styled.productIntro}`
+              }
+              onClick={(e) => {
+                changeBtn(e)
+              }}
+            >
+              商品介紹
+            </div>
+            <div
+              className={
+                !introCom
+                  ? `${styled.productIntro} ${styled.underLine}`
+                  : `${styled.productIntro}`
+              }
+              onClick={() => {
+                changeBtn()
+              }}
+            >
+              商品評論
+            </div>
           </div>
-          <div className={styled.introTitle}>產品規格</div>
-          <p className={styled.intro}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
-            temporibus corrupti repellendus soluta eum et labore autem, in
-            exercitationem harum voluptate fugiat assumenda molestias maxime
-            veniam. Voluptate possimus itaque ea!
-          </p>
-          <div className={styled.introTitle}>特色說明</div>
-          <p className={styled.intro}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
-            temporibus corrupti repellendus soluta eum et labore autem, in
-            exercitationem harum voluptate fugiat assumenda molestias maxime
-            veniam. Voluptate possimus itaque ea!
-          </p>
-          <div className={styled.introTitle}>猜你喜歡</div>
-          <div className={styled.guessYouLike}>卡片排列</div>
-          <div className={styled.cardbox}>
-            {randomData.map((v, i) => {
-              return (
-                <Link
-                  className={styled.card}
-                  key={v.product_sid}
-                  to={'/product/' + v.product_sid}
-                >
-                  <div>
-                    <img
-                      src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
-                      alt=""
-                    />
-                    <p className={styled.p}>{v.product_name}</p>
-                    <h2>
-                      金額：<span>${v.product_price}</span>
-                    </h2>
-                  </div>
-                </Link>
-              )
-            })}
-          </div>
+          {introCom ? intro : com}
           <div className={styled.empty}></div>
         </div>
       </div>

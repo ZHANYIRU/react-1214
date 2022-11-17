@@ -50,7 +50,7 @@ function Product() {
   //     setMob(false)
   //   }
   // }
-
+  const location = useLocation()
   // 視窗寬度方法
   const reSize = () => {
     let Window_W = window.innerWidth
@@ -80,7 +80,6 @@ function Product() {
     },
   ])
   const { product_sid } = useParams()
-  const location = useLocation()
 
   const [sid, getSid] = useState('')
 
@@ -97,7 +96,10 @@ function Product() {
     getProductData()
     // filterLocation()
     // reSize()
-    // window.addEventListener('resize', reSize)
+    if (location.pathname === '/product' || location.pathname === '/product/') {
+      setMob(true)
+    }
+    window.addEventListener('resize', reSize)
     window.addEventListener('scroll', scrollFilter)
   }, [fixedd])
 
