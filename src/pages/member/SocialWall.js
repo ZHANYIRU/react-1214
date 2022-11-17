@@ -3,10 +3,13 @@ import styles from '../../styles/member-scss/SocialWall.module.scss'
 import ThumbnailView from './components/ThumbnailView'
 import { useState } from 'react'
 import ModalView from './components/ModalView'
+import { useNavigate } from 'react-router-dom'
 
 export default function SocialWall() {
   const [isView, setIsView] = useState(false)
   const [tabFollow, setTabFollow] = useState(false)
+
+  const navigate = useNavigate()
 
   return (
     <>
@@ -46,7 +49,12 @@ export default function SocialWall() {
               </div>
             </div>
             <div className={styles.tags}>
-              <div className={`${styles.tag} ${styles.sel}`}>
+              <div
+                className={`${styles.tag} ${styles.sel}`}
+                onClick={() => {
+                  navigate('/member')
+                }}
+              >
                 我的分享
                 <div className={styles.shade}></div>
               </div>
