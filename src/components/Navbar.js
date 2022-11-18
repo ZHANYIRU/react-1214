@@ -48,7 +48,7 @@ function Navbar() {
           <Link to="/cart">
             <i className="fa-solid fa-cart-shopping"></i>
           </Link>
-          <span>{cartItem ? cartItem : 0}</span>
+          <span>{cartItem}</span>
           <Link to="/member" onClick={loginBtn}>
             <i className="fa-solid fa-user"></i>
           </Link>

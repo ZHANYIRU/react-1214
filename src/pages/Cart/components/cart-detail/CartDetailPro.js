@@ -13,10 +13,10 @@ function CartDetailPro() {
   }, [])
   return (
     <>
-      {proCart.items && (
+      {proCart && (
         <div className={`${styled.dtWrap} ${styled.pro}`}>
           <div className={styled.outWrap}>
-            {proCart.items.map((el, i) => {
+            {proCart.map((el, i) => {
               return (
                 <div className={styled.wrap}>
                   <input type="checkbox" />

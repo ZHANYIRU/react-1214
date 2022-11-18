@@ -2,20 +2,21 @@ import { useReducer, createContext } from 'react'
 
 const proCartReducer = (state, action) => {
   const { sid, name, size, price, qty } = action.payload
-  const items = state.items.length
+  const itemsLength = state.items.length
   const index = state.items.findIndex(
     (el) => el.sid === sid && el.size === size
   )
+  let newState = JSON.parse(localStorage.getItem('proCart'))
   switch (action.type) {
     case 'ADD_CART':
-      let newState = localStorage.getItem('proCart')
       if (state.totalItem === 0) {
         console.log(123)
         newState = {
           items: [{ sid: sid, name: name, size: size, price: price, qty: qty }],
           totalItem: 1,
         }
-        localStorage.setItem('proCart', JSON.stringify(newState))
+        localStorage.setItem('proCart', JSON.stringify(newState.items))
+        localStorage.setItem('totalItem', newState.totalItem)
         return newState
       }
       if (index === -1) {
@@ -32,19 +33,20 @@ const proCartReducer = (state, action) => {
               qty: qty,
             },
           ],
-          totalItem: items + 1,
+          totalItem: itemsLength + 1,
         }
-        localStorage.setItem('proCart', JSON.stringify(newState))
+        localStorage.setItem('proCart', JSON.stringify(newState.items))
+        localStorage.setItem('totalItem', newState.totalItem)
         return newState
       } else {
         console.log(789)
         console.log(qty)
         state.items[index].qty = state.items[index].qty + qty
-        localStorage.setItem('proCart', JSON.stringify(state))
+        localStorage.setItem('proCart', JSON.stringify(state.items))
         return state
       }
     default:
-      return state
+      return newState
   }
 }
 
@@ -66,10 +68,9 @@ export const ProCartContextProvider = ({ children }) => {
     totalItem: 0,
   }
   const [state, dispatch] = useReducer(proCartReducer, initState)
-  let cartItem = {}
-  if (localStorage.getItem('proCart')) {
-    cartItem = JSON.parse(localStorage.getItem('proCart')).totalItem
-  }
+  const cartItem = localStorage.getItem('totalItem')
+    ? JSON.parse(localStorage.getItem('totalItem'))
+    : 0
 
   console.log('加完', state)
   const addProCart = (proSid, name, size, price, qty, img) => {
