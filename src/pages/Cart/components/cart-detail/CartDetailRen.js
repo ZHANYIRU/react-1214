@@ -26,7 +26,7 @@ function CartDetailRen() {
                 <img src="https://vencedor888.com/upload/1000_86.jpg" alt="" />
               </div>
             </div>
-            <i class="fa-regular fa-trash-can"></i>
+            <i className="fa-regular fa-trash-can"></i>
           </div>
           <div className={styled.wrap}>
             <input type="checkbox" />
@@ -48,7 +48,7 @@ function CartDetailRen() {
                 <img src="https://vencedor888.com/upload/1000_86.jpg" alt="" />
               </div>
             </div>
-            <i class="fa-regular fa-trash-can"></i>
+            <i className="fa-regular fa-trash-can"></i>
           </div>
           <div className={styled.wrap}>
             <input type="checkbox" />
@@ -70,7 +70,7 @@ function CartDetailRen() {
                 <img src="https://vencedor888.com/upload/1000_86.jpg" alt="" />
               </div>
             </div>
-            <i class="fa-regular fa-trash-can"></i>
+            <i className="fa-regular fa-trash-can"></i>
           </div>
         </div>
       </div>

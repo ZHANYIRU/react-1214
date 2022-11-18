@@ -67,14 +67,15 @@ export const ProCartContextProvider = ({ children }) => {
     ],
     totalItem: 0,
   }
+  //呼叫reducer
   const [state, dispatch] = useReducer(proCartReducer, initState)
+  console.log('我是context')
+  //NavBar購物車數量顯示
   const cartItem = localStorage.getItem('totalItem')
     ? JSON.parse(localStorage.getItem('totalItem'))
     : 0
-
-  console.log('加完', state)
+  //加入購物車
   const addProCart = (proSid, name, size, price, qty, img) => {
-    console.log('一開始', state)
     dispatch({
       type: 'ADD_CART',
       payload: {
@@ -85,7 +86,6 @@ export const ProCartContextProvider = ({ children }) => {
         qty: qty,
       },
     })
-    console.log('送', state)
   }
   return (
     <ProCartContext.Provider value={{ addProCart, cartItem }}>

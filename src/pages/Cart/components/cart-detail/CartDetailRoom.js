@@ -34,7 +34,7 @@ function CartDetailRoom() {
                 </div>
               </div>
             </div>
-            <i class="fa-regular fa-trash-can"></i>
+            <i className="fa-regular fa-trash-can"></i>
           </div>
           <div className={styled.wrap}>
             <input type="checkbox" />
@@ -64,7 +64,7 @@ function CartDetailRoom() {
                 </div>
               </div>
             </div>
-            <i class="fa-regular fa-trash-can"></i>
+            <i className="fa-regular fa-trash-can"></i>
           </div>
         </div>
       </div>
