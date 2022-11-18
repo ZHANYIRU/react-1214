@@ -1,10 +1,12 @@
 import styled from '../styles/NAV.module.scss'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import ProCartContext from '../contexts/ProCartContext'
 import { useMediaQuery } from 'react-responsive'
 function Navbar() {
   //定義Navbar 手機板
   const mobile = useMediaQuery({ query: '(max-width:390px)' })
+  const { cartItem } = useContext(ProCartContext)
   const [loginBox, setLoginBox] = useState({
     top: '-20px',
   })
@@ -81,13 +83,16 @@ function Navbar() {
             <li>
               <Link to="/rental">裝備租借</Link>
             </li>
+            <li>
+              <Link to="/social">山友分享</Link>
+            </li>
           </ul>
         </div>
         <div className={styled.navRight}>
           <Link to="/cart">
             <i className="fa-solid fa-cart-shopping"></i>
           </Link>
-          <span>9</span>
+          <span>{cartItem}</span>
           <Link to="/member" onClick={loginBtn}>
             <i className="fa-solid fa-user"></i>
           </Link>
@@ -99,7 +104,7 @@ function Navbar() {
           <span>會員登入</span>
         </Link>
         <Link to="/join">
-          {/* 切換會員登出 */}
+            {/* 切換會員登出 */}
           <span>會員註冊</span>
         </Link>
       </div>

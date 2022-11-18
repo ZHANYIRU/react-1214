@@ -21,9 +21,8 @@
   }
 }
 .border {
-  width: 1px;
   height: 50px;
-  background-color: black;
+  border-right: 1px solid black;
   &:last-child {
     display: none;
   }
