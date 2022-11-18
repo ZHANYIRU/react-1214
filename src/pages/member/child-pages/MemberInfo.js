@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import styled from '../../../styles/member-scss/MemberInfo.module.scss'
 import TextareaAutosize from 'react-textarea-autosize'
 import ModalView from '../components/ModalView'
 import Thumbnail from '../components/Thumbnail'
 import TotalHeight from '../components/TotalHeight'
 import PostMap from '../components/PostMap'
+import MemberContext from '../../../contexts/MemberContext'
 
 export default function MemberInfo() {
   const [isNew, setIsNew] = useState(false)
@@ -12,6 +13,10 @@ export default function MemberInfo() {
   const [isView, setIsView] = useState(false)
   const [isDel, setIsDel] = useState(false)
   const [editTxt, setEditTxt] = useState('')
+
+  const {data} = useContext(MemberContext)
+
+  console.log(data.member_sid)
 
   return (
     <>

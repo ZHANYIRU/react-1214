@@ -1,29 +1,32 @@
 import styled from '../../styles/member-scss/Member.module.scss'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { useEffect } from 'react'
-import axios from 'axios'
-import { useState } from 'react'
+import { useEffect, useContext } from 'react'
+// import axios from 'axios'
+// import { useState } from 'react'
+import MemberContext from '../../contexts/MemberContext'
 
 function Member(props) {
   const navigate = useNavigate()
 
-  const [profile, setProfile] = useState({
-    name: '',
-    intro: '',
-    avatar: '',
-  })
+  const { data, getUpdateInfo } = useContext(MemberContext)
 
-  async function getInfo() {
-    const result = await axios.get('http://localhost:3001/member/api?id=668')
-    // console.log(result.data.rows[0].name)
-    if (result.data.rows[0]) {
-      setProfile(result.data.rows[0])
-    }
-  }
+  // const [profile, setProfile] = useState({
+  //   name: '',
+  //   intro: '',
+  //   avatar: '',
+  // })
 
-  useEffect(() => {
-    getInfo()
-  }, [])
+  // async function getInfo() {
+  //   const result = await axios.get('http://localhost:3001/member/api?id=668')
+  //   // console.log(result.data.rows[0].name)
+  //   if (result.data.rows[0]) {
+  //     setProfile(result.data.rows[0])
+  //   }
+  // }
+
+  // useEffect(() => {
+  //   getInfo()
+  // }, [])
 
   return (
     <>
@@ -36,9 +39,9 @@ function Member(props) {
                 navigate('/member')
               }}
             >
-              {profile.avatar ? (
+              {data.avatar ? (
                 <img
-                  src={`http://localhost:3001/uploads/${profile.avatar}`}
+                  src={`http://localhost:3001/uploads/${data.avatar}`}
                   alt="avatar"
                 ></img>
               ) : (
@@ -54,7 +57,7 @@ function Member(props) {
                 navigate('/member')
               }}
             >
-              {profile.nickname}
+              {data.nickname}
             </h3>
             <p className={styled.highlight}>銀級玩家</p>
             <div className={styled.socials}>
@@ -78,7 +81,7 @@ function Member(props) {
               </div>
             </div>
             <pre className={styled.intro} readOnly>
-              {profile.intro}
+              {data.intro}
               {/* 喜愛登山與旅遊結合規劃，發掘台灣的歷史與美，熱愛攝影，探索台灣百岳，中級山，郊山的山野旅行者。GoHiking! ! ! */}
             </pre>
             {/* bonus: 處理換行問題 */}
@@ -105,7 +108,7 @@ function Member(props) {
             </button>
           </aside>
           <article>
-            <Outlet profile={profile} setProfile={setProfile} />
+            <Outlet />
           </article>
         </div>
       </div>

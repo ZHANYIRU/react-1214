@@ -1,9 +1,18 @@
 import axios from 'axios'
-import { useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import styled from '../../../styles/member-scss/MemberPass.module.scss'
+import MemberContext from '../../../contexts/MemberContext'
 
 export default function MemberPass() {
-  const [showPass, setShowPass] = useState(false)
+  const [showPass, setShowPass] = useState({
+    showNow: false,
+    showNew: false,
+    showVer: false,
+  })
+
+  const {data} = useContext(MemberContext)
+
+  console.log(data.member_sid)
 
   const passForm = useRef(null)
 
@@ -31,16 +40,16 @@ export default function MemberPass() {
               <div className={styled.formRow}>
                 <label htmlFor="password">目前的密碼</label>
                 <input
-                  type={showPass ? 'text ' : 'password'}
+                  type={showPass.showNow ? 'text ' : 'password'}
                   name="password"
                 ></input>
                 <div
                   className={styled.showPass}
                   onClick={() => {
-                    setShowPass(!showPass)
+                    setShowPass({ ...showPass, showNow: !showPass.showNow })
                   }}
                 >
-                  {showPass ? (
+                  {showPass.showNow ? (
                     <i className="fa-solid fa-eye-slash"></i>
                   ) : (
                     <i className="fa-solid fa-eye"></i>
@@ -50,16 +59,16 @@ export default function MemberPass() {
               <div className={styled.formRow}>
                 <label htmlFor="newPass">輸入新密碼</label>
                 <input
-                  type={showPass ? 'text ' : 'password'}
+                  type={showPass.showNew ? 'text ' : 'password'}
                   name="newPass"
                 ></input>
                 <div
                   className={styled.showPass}
                   onClick={() => {
-                    setShowPass(!showPass)
+                    setShowPass({ ...showPass, showNew: !showPass.showNew })
                   }}
                 >
-                  {showPass ? (
+                  {showPass.showNew ? (
                     <i className="fa-solid fa-eye-slash"></i>
                   ) : (
                     <i className="fa-solid fa-eye"></i>
@@ -68,14 +77,14 @@ export default function MemberPass() {
               </div>
               <div className={styled.formRow}>
                 <label htmlFor="verPass">確認新密碼</label>
-                <input type={showPass ? 'text ' : 'password'}></input>
+                <input type={showPass.showVer ? 'text ' : 'password'}></input>
                 <div
                   className={styled.showPass}
                   onClick={() => {
-                    setShowPass(!showPass)
+                    setShowPass({ ...showPass, showVer: !showPass.showVer })
                   }}
                 >
-                  {showPass ? (
+                  {showPass.showVer ? (
                     <i className="fa-solid fa-eye-slash"></i>
                   ) : (
                     <i className="fa-solid fa-eye"></i>

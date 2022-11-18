@@ -2,8 +2,13 @@ import styled from '../styles/NAV.module.scss'
 import { Link } from 'react-router-dom'
 import { useState, useContext } from 'react'
 import ProCartContext from '../contexts/ProCartContext'
+import MemberContext from '../contexts/MemberContext'
+
 function Navbar() {
   const { cartItem } = useContext(ProCartContext)
+  
+  const {data} = useContext(MemberContext)
+
   const [loginBox, setLoginBox] = useState({
     top: '-20px',
   })
@@ -50,7 +55,7 @@ function Navbar() {
           </Link>
           <span>{cartItem}</span>
           <Link to="/member" onClick={loginBtn}>
-            <i className="fa-solid fa-user"></i>
+            <i className="fa-solid fa-user">{data.nickname}</i>
           </Link>
         </div>
       </nav>
