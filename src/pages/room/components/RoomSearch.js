@@ -11,7 +11,7 @@ function RoomSearch() {
       </select>
       <select className={style.block}>
         <option>
-          <i class="fa-solid fa-chevron-down">地區</i>
+          <i class="fa-solid fa-chevron-down">山區</i>
         </option>
       </select>
       <input className={style.block} placeholder="請輸入關鍵字" />

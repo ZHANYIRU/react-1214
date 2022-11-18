@@ -33,12 +33,33 @@ function RoomDetail() {
             </div>
             <div className={style.price}>金額：{'650'}/人</div>
           </div>
+        </div>
+        <div className={style.slideWrap}>
           <div className={style.slide}>
-            <div className={style.imgs}></div>
-            <div className={style.arrow}>
-              <i class="fa-solid fa-chevron-left"></i>
-              <i class="fa-solid fa-angle-right"></i>
-            </div>
+            <dic className={style.imgs}>
+              <div className={style.img}>
+                <img
+                  src="https://z1.muscache.cn/pictures/2caace88-ab77-498a-9d4e-23777b70b1bc.jpg"
+                  alt=""
+                />
+              </div>
+              <div className={style.img}>
+                <img
+                  src="https://z1.muscache.cn/pictures/2caace88-ab77-498a-9d4e-23777b70b1bc.jpg"
+                  alt=""
+                />
+              </div>
+              <div className={style.img}>
+                <img
+                  src="https://z1.muscache.cn/pictures/2caace88-ab77-498a-9d4e-23777b70b1bc.jpg"
+                  alt=""
+                />
+              </div>
+            </dic>
+          </div>
+          <div className={style.arrow}>
+            <i class="fa-solid fa-chevron-left"></i>
+            <i class="fa-solid fa-angle-right"></i>
           </div>
         </div>
         <div className={style.bottom}>
@@ -62,12 +83,70 @@ function RoomDetail() {
           </div>
           <div className={style.sec3}>
             <h4>提供設備</h4>
-            <div className={style.facility}>
-              <img
-                src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
-                alt=""
-              />
-              <span>淋浴</span>
+            <div className={style.facilityList}>
+              <div className={style.facility}>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
+                  alt=""
+                />
+                <div>淋浴</div>
+              </div>
+              <div className={style.facility}>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
+                  alt=""
+                />
+                <div>淋浴</div>
+              </div>
+              <div className={style.facility}>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
+                  alt=""
+                />
+                <div>淋浴</div>
+              </div>
+              <div className={style.facility}>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
+                  alt=""
+                />
+                <div>淋浴</div>
+              </div>
+              <div className={style.facility}>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
+                  alt=""
+                />
+                <div>淋浴</div>
+              </div>
+              <div className={style.facility}>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
+                  alt=""
+                />
+                <div>淋浴</div>
+              </div>
+              <div className={style.facility}>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
+                  alt=""
+                />
+                <div>淋浴</div>
+              </div>
+              <div className={style.facility}>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
+                  alt=""
+                />
+                <div>淋浴</div>
+              </div>
+              <div className={style.facility}>
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
+                  alt=""
+                />
+                <div>淋浴</div>
+              </div>
             </div>
           </div>
           <div className={style.sec4}>
