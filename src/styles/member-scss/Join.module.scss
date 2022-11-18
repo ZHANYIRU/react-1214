@@ -18,6 +18,25 @@
     box-sizing: border-box;
     padding: 100px 120px 100px 120px;
 
+    button {
+        width: 200px;
+        height: 40px;
+        border: none;
+        border-radius: 10px;
+        background: #FFDA16;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        font-weight: 700;
+        font-size: 18px;
+        text-align: center;
+        color: #01170D;
+        margin-top: 36px;
+        transition: 0.2s;
+    
+        &:hover {
+            background: #ffc116;
+        }
+    }
+
     h3 {
         font-style: normal;
         font-weight: 600;
@@ -122,6 +141,7 @@
                 border-radius: 5px;
                 border: none;
                 outline: none;
+                overflow: hidden;
                 transition: 0.2s;
                 line-height: 22px;
 
@@ -142,25 +162,6 @@
 
         }
 
-    }
-}
-
-button {
-    width: 200px;
-    height: 40px;
-    border: none;
-    border-radius: 10px;
-    background: #FFDA16;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    font-weight: 700;
-    font-size: 18px;
-    text-align: center;
-    color: #01170D;
-    margin-top: 36px;
-    transition: 0.2s;
-
-    &:hover {
-        background: #ffc116;
     }
 }
 
@@ -188,6 +189,25 @@ button {
         h3 {
             font-size: 32px;
             padding: 40px 0px;
+        }
+    }
+
+    button {
+        width: 200px;
+        height: 40px;
+        border: none;
+        border-radius: 10px;
+        background: #FFDA16;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        font-weight: 700;
+        font-size: 18px;
+        text-align: center;
+        color: #01170D;
+        margin-top: 36px;
+        transition: 0.2s;
+    
+        &:hover {
+            background: #ffc116;
         }
     }
 }

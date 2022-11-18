@@ -3,6 +3,7 @@ import { useState } from 'react'
 import styled from '../../styles/member-scss/Join.module.scss'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import TextareaAutosize from 'react-textarea-autosize'
 
 export default function Join(props) {
   const [showPass, setShowPass] = useState({
@@ -122,13 +123,14 @@ export default function Join(props) {
                 <label htmlFor="intro" className={styled.forTxtArea}>
                   個人簡介
                 </label>
-                <textarea
+                <TextareaAutosize
                   name="intro"
                   placeholder="(最多120字)"
                   style={{ resize: 'none' }}
-                  rows="4"
+                  maxRows="8"
+                  minRows="4"
                   maxLength="120"
-                ></textarea>
+                 />
               </div>
               {/* bonus: 驗證碼API */}
               <button onClick={handleSumbit}>註冊會員</button>

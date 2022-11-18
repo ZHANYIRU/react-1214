@@ -25,7 +25,7 @@ export default function MemberEdit() {
   const [myBirth, setMyBirth] = useState('')
 
   async function getInfo() {
-    const result = await axios.get('http://localhost:3001/member/api?id=666')
+    const result = await axios.get('http://localhost:3001/member/api?id=668')
     // console.log(result.data.rows[0].name)
     if (result.data.rows[0]) {
       setProfile(result.data.rows[0])
@@ -40,7 +40,7 @@ export default function MemberEdit() {
     const formData = new FormData(updateForm.current)
 
     const result = await axios.put(
-      'http://localhost:3001/member/api?id=666',
+      'http://localhost:3001/member/api?id=668',
       formData
     )
 
@@ -66,7 +66,7 @@ export default function MemberEdit() {
             <div className={styled.divider}></div>
             <form ref={updateForm} encType="multipart/form-data">
               <div className={styled.avatar}>
-                {profile.avatar ? (
+                {profile.avatar || preview ? (
                   <img
                     src={
                       preview
@@ -160,6 +160,7 @@ export default function MemberEdit() {
                   style={{ resize: 'none' }}
                   rows="4"
                   maxRows="8"
+                  minRows="4"
                   maxLength="120"
                   defaultValue={profile.intro}
                   name="intro"
