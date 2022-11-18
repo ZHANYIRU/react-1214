@@ -24,6 +24,12 @@ export default function MemberEdit() {
   // console.log(data)
 
   const [preview, setPreview] = useState('')
+  const [myBirth, setMyBirth] = useState('')
+
+  useEffect(() => {
+    let dateBirth = dayjs(data.birthday).format('YYYY-MM-DD')
+    setMyBirth(dateBirth)
+  }, [])
 
   const updateForm = useRef(null)
 
@@ -137,7 +143,10 @@ export default function MemberEdit() {
                 <input
                   type="date"
                   name="birthday"
-                  value={dayjs(data.birthday).format('YYYY-MM-DD')}
+                  value={myBirth}
+                  onChange={(e) => {
+                    setMyBirth(e.target.value)
+                  }}
                 ></input>
               </div>
               <div className={styled.formRow}>
