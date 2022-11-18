@@ -8,14 +8,14 @@ const proCartReducer = (state, action) => {
   )
   switch (action.type) {
     case 'ADD_CART':
-      let newState = {}
+      let newState = localStorage.getItem('proCart')
       if (state.totalItem === 0) {
         console.log(123)
         newState = {
           items: [{ sid: sid, name: name, size: size, price: price, qty: qty }],
           totalItem: 1,
         }
-        localStorage.setItem('proCart', JSON.stringify(newState.items))
+        localStorage.setItem('proCart', JSON.stringify(newState))
         return newState
       }
       if (index === -1) {
@@ -34,13 +34,13 @@ const proCartReducer = (state, action) => {
           ],
           totalItem: items + 1,
         }
-        localStorage.setItem('proCart', JSON.stringify(newState.items))
+        localStorage.setItem('proCart', JSON.stringify(newState))
         return newState
       } else {
         console.log(789)
         console.log(qty)
         state.items[index].qty = state.items[index].qty + qty
-        localStorage.setItem('proCart', JSON.stringify(state.items))
+        localStorage.setItem('proCart', JSON.stringify(state))
         return state
       }
     default:
@@ -66,6 +66,11 @@ export const ProCartContextProvider = ({ children }) => {
     totalItem: 0,
   }
   const [state, dispatch] = useReducer(proCartReducer, initState)
+  let cartItem = {}
+  if (localStorage.getItem('proCart')) {
+    cartItem = JSON.parse(localStorage.getItem('proCart')).totalItem
+  }
+
   console.log('加完', state)
   const addProCart = (proSid, name, size, price, qty, img) => {
     console.log('一開始', state)
@@ -82,7 +87,7 @@ export const ProCartContextProvider = ({ children }) => {
     console.log('送', state)
   }
   return (
-    <ProCartContext.Provider value={{ addProCart }}>
+    <ProCartContext.Provider value={{ addProCart, cartItem }}>
       {children}
     </ProCartContext.Provider>
   )

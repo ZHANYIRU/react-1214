@@ -5,7 +5,7 @@ function CartDetailPro() {
   const [proCart, setProCart] = useState([{}])
   const getPro = () => {
     const pro = JSON.parse(localStorage.getItem('proCart'))
-    console.log(pro)
+    console.log('11111', pro)
     setProCart(pro)
   }
   useEffect(() => {
@@ -13,10 +13,10 @@ function CartDetailPro() {
   }, [])
   return (
     <>
-      {proCart && (
+      {proCart.items && (
         <div className={`${styled.dtWrap} ${styled.pro}`}>
           <div className={styled.outWrap}>
-            {proCart.map((el, i) => {
+            {proCart.items.map((el, i) => {
               return (
                 <div className={styled.wrap}>
                   <input type="checkbox" />
