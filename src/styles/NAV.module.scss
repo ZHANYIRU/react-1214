@@ -103,3 +103,102 @@
     border-color: transparent transparent #5F5F5F transparent;
   }
 }
+
+
+
+@media screen and (max-width:390px){
+  .navBarBigWrap{
+    background-color: black;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .mobTopWrap{
+      position:relative;
+      display: flex;
+      width: 100%;
+      justify-content: center;
+      .logoWrap{
+        flex-shrink: 1;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+        .logo{
+          width: 65px;
+          height: 60px;
+          img{
+            width: 100%;
+            // height: 20px;
+            object-fit: cover;
+          }
+        }
+      }
+//-------------------------------------------
+      .loginBefore{
+        width: 70px;
+        height: 80px;
+        background-color: #5F5F5F;
+        position: fixed;
+        // top: -20px;
+        right: 10px;
+        
+        // z-index:
+        border-radius: 10px;
+        text-align: center;
+        padding-top: 10px;
+        transition: .5s linear inherit ;
+        a{
+          line-height: 30px;
+          display: inline-block;
+          font-size: 12px;
+          color: white;
+          span{
+            border-bottom: 2px solid transparent;
+            transition: .3s;
+          }
+          &:hover span{
+            border-bottom: 2px solid $yellow;
+            padding-bottom: 2px;
+          }
+        }
+        &::before{
+          content: '';
+          display: inline-block;
+          position: absolute;
+          top: -8px;
+          right: 10px;
+          border-style: solid;
+          border-width: 1px 15px 8.8px 15px;
+          border-color: transparent transparent #5F5F5F transparent;
+        }
+      }
+
+//-------------------------------------------
+     .navRight{
+      position:absolute;
+      top: 5px;
+      right: 15px;
+      // z-index: 2;
+      // overflow: hidden;
+      a{
+        margin-left: 10px;
+      }
+     }
+    }
+
+    .mobNavWrap{
+      ul{
+        display: flex;
+        justify-content:space-around;
+      }
+      li{
+        
+      }
+      a{
+        text-decoration: none;
+        color: white;
+        
+      }
+    }
+  }
+}

@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { Link, useParams, useLocation } from 'react-router-dom'
-import Slider from './slider'
-import Product_filter from './product_filter'
-// import { Link, useLocation } from 'react-router-dom'
+import Slider from './components/slider'
+import Product_filter from './components/product_filter'
+import { useMediaQuery } from 'react-responsive'
+
 import axios from 'axios'
 import styled from '../../styles/product-scss/product.module.scss'
 import img1 from './img/img1.jpg'
@@ -25,7 +26,20 @@ function Product() {
       src: img3,
     },
   ]
-  // fixed_filter
+  // search style
+  const [search, setSearch] = useState({
+    width: '20%',
+  })
+
+  const searchStyle = (e) => {
+    e.preventDefault()
+    if (search.width === '20%') {
+      setSearch({ ...search, width: '100%' })
+    }
+  }
+
+  // 手機板判定
+  const mobile = useMediaQuery({ query: '(max-width:390px)' })
   //附style給filter
   const [fixedd, setFixedd] = useState(false)
   //偵測是否為手機版面
@@ -111,29 +125,39 @@ function Product() {
         <Slider data={data} />
 
         {/* 搜尋專區 */}
-        <div className={styled.form}>
-          <form action="">
-            <input className={styled.search} type="text" />
+        {mobile ? (
+          ''
+        ) : (
+          <div
+            className={styled.forms}
+            style={search}
+            onClick={(e) => {
+              searchStyle(e)
+            }}
+          >
+            <form action="">
+              <input className={styled.search} type="text" />
 
-            <i className="fa-solid fa-magnifying-glass"></i>
-          </form>
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </form>
+          </div>
+        )}
 
-          {/* 種類專區 */}
-        </div>
-        <div className={styled.product_nav} Draggable onDrag={() => {}}>
+        {/* 種類專區 */}
+        <div className={styled.product_nav} onDrag={() => {}}>
           <div className={styled.product_nav_box1}>
             <Link>
               <h2>最新上架</h2>
             </Link>
-            {mob ? <p>|</p> : ''}
+            {mobile ? <p>|</p> : ''}
             <Link>
               <h2>熱門商品</h2>
             </Link>
-            {mob ? <p>|</p> : ''}
+            {mobile ? <p>|</p> : ''}
             <Link>
               <h2>男女服飾</h2>
             </Link>
-            {mob ? <p>|</p> : ''}
+            {mobile ? <p>|</p> : ''}
           </div>
           <div className={styled.product_nav_box2}>
             <p>商品類別</p>
@@ -142,11 +166,11 @@ function Product() {
             <Link>
               <h2>專業用品</h2>
             </Link>
-            {mob ? <p>|</p> : ''}
+            {mobile ? <p>|</p> : ''}
             <Link>
               <h2>飲水用品</h2>
             </Link>
-            {mob ? <p>|</p> : ''}
+            {mobile ? <p>|</p> : ''}
             <Link>
               <h2>其他配件</h2>
             </Link>
@@ -160,7 +184,7 @@ function Product() {
           fixedd={fixedd}
           mob={mob}
           setMob={setMob}
-          reSize={reSize}
+          
           filterRef={filterRef}
         />
         <div className={styled.cardbox}>
@@ -171,16 +195,16 @@ function Product() {
                 key={v.product_sid}
                 to={'/product/' + v.product_sid}
               >
-                <div>
+                <div className={styled.imgWrap}>
                   <img
-                    src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
+                    src="https://www.arcteryx.com.tw/media/catalog/product/cache/9f23c48e1ba32633494dfb89a2676b50/3/0/30698_l08370200_gamma-lt-jacket_m_habitat_1.jpg"
                     alt=""
                   />
-                  <p className={styled.p}>{v.product_name}</p>
-                  <h2>
-                    金額：<span>${v.product_price}</span>
-                  </h2>
                 </div>
+                <p className={styled.p}>{v.product_name}</p>
+                <h2>
+                  金額：<span>${v.product_price}</span>
+                </h2>
               </Link>
             )
           })}

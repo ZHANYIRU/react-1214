@@ -53,7 +53,7 @@ export default function ProductPage() {
   }
   //取得亂數資料的方法
   const getRondomProductData = async () => {
-    const response = await axios.get('http://localhost:3001/product/all')
+    const response = await axios.get('http://localhost:3001/product/random')
     const r = response.data
     console.log(r)
     setRandomData(r)
@@ -81,8 +81,7 @@ export default function ProductPage() {
         Voluptate possimus itaque ea!
       </p>
       <div className={styled.introTitle}>猜你喜歡</div>
-      <div className={styled.guessYouLike}>卡片排列</div>
-      <div className={styled.cardbox}>
+      <div className={styled.guessYouLike}>
         {randomData.map((v, i) => {
           return (
             <Link
