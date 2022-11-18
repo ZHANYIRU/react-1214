@@ -86,13 +86,16 @@ function Navbar() {
             <li>
               <Link to="/social">山友分享</Link>
             </li>
+            <li>
+              <Link to="/test">Test</Link>
+            </li>
           </ul>
         </div>
         <div className={styled.navRight}>
           <Link to="/cart">
             <i className="fa-solid fa-cart-shopping"></i>
           </Link>
-          <span>{cartItem}</span>
+          <span>{cartItem ? cartItem : 0}</span>
           <Link to="/member" onClick={loginBtn}>
             <i className="fa-solid fa-user"></i>
           </Link>
@@ -104,7 +107,7 @@ function Navbar() {
           <span>會員登入</span>
         </Link>
         <Link to="/join">
-            {/* 切換會員登出 */}
+          {/* 切換會員登出 */}
           <span>會員註冊</span>
         </Link>
       </div>
@@ -125,7 +128,7 @@ function Navbar() {
           <Link to="/cart">
             <i className="fa-solid fa-cart-shopping"></i>
           </Link>
-          <span>9</span>
+          <span>{cartItem}</span>
           <Link to="/member" onClick={loginBtnMMob}>
             <i className="fa-solid fa-user"></i>
           </Link>

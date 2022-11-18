@@ -1,22 +1,15 @@
 import React from 'react'
-import { useState, useEffect } from 'react'
+import { useContext } from 'react'
+import ProCartContext from '../../../../contexts/ProCartContext'
 import styled from '../../../../styles/cart-scss/cartDetail.module.scss'
 function CartDetailPro() {
-  const [proCart, setProCart] = useState([{}])
-  const getPro = () => {
-    const pro = JSON.parse(localStorage.getItem('proCart'))
-    console.log('11111', pro)
-    setProCart(pro)
-  }
-  useEffect(() => {
-    getPro()
-  }, [])
+  const { pro } = useContext(ProCartContext)
   return (
     <>
-      {proCart && (
+      {pro && (
         <div className={`${styled.dtWrap} ${styled.pro}`}>
           <div className={styled.outWrap}>
-            {proCart.map((el, i) => {
+            {pro.map((el, i) => {
               return (
                 <div className={styled.wrap}>
                   <input type="checkbox" />

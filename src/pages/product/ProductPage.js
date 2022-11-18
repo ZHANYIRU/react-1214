@@ -1,10 +1,12 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useContext } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import styled from '../../styles/product-scss/productPage.module.scss'
 import axios from 'axios'
 import { useEffect } from 'react'
+import ProCartContext from '../../contexts/ProCartContext'
 
 export default function ProductPage() {
+  const { addProCart } = useContext(ProCartContext)
   const [introCom, setintroCom] = useState(true)
   //隨機產生3筆資料
   const [randomData, setRandomData] = useState([
@@ -236,7 +238,14 @@ export default function ProductPage() {
                     <input type="radio" id="shop" name="deliver" />
                   </div>
                   <div className={styled.buttonGroup}>
-                    <button className={styled.cart}>加入購物車</button>
+                    <button
+                      className={styled.cart}
+                      onClick={() => {
+                        addProCart('50', '我是衣服', 'S', 2500, 1)
+                      }}
+                    >
+                      加入購物車
+                    </button>
                     <button className={styled.buy}>直接購買</button>
                   </div>
                 </div>
