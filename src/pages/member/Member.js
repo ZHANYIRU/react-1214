@@ -14,7 +14,7 @@ function Member(props) {
   })
 
   async function getInfo() {
-    const result = await axios.get('http://localhost:3001/member/api?id=666')
+    const result = await axios.get('http://localhost:3001/member/api?id=668')
     // console.log(result.data.rows[0].name)
     if (result.data.rows[0]) {
       setProfile(result.data.rows[0])
@@ -42,7 +42,10 @@ function Member(props) {
                   alt="avatar"
                 ></img>
               ) : (
-                ''
+                <img
+                  src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
+                  alt="postImg"
+                ></img>
               )}
             </div>
             <h3
