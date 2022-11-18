@@ -60,9 +60,9 @@
             }
 
             .socials {
-                width: 80%;
+                width: 100%;
                 display: flex;
-                justify-content: space-between;
+                justify-content: space-around;
                 margin: auto;
                 border-top: 1px solid #ccc;
                 padding-top: 16px;
@@ -77,9 +77,11 @@
                 margin-bottom: 16px;
             }
 
-            p {
-                line-height: 18px;
-                font-weight: 500;
+            pre {
+                line-height: 17px;
+                font-weight: 600;
+                white-space: pre-wrap;
+                overflow: hidden;
 
                 &.intro {
                     height: 140px;
