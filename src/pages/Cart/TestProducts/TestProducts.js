@@ -1,8 +1,10 @@
-import React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import ProCartContext from '../../../contexts/ProCartContext'
 import './test.scss'
-import { addProCart } from '../../../components/AddCart'
+// import { addProCart } from '../../../components/AddCart'
+
 function TestProducts() {
+  const { addProCart } = useContext(ProCartContext)
   const [qty, setQty] = useState(1)
   const [userSize, setUserSize] = useState('S')
   const size = ['S', 'M', 'L']
