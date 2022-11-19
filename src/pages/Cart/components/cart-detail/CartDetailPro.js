@@ -3,7 +3,14 @@ import { useContext } from 'react'
 import ProCartContext from '../../../../contexts/ProCartContext'
 import styled from '../../../../styles/cart-scss/cartDetail.module.scss'
 function CartDetailPro() {
-  const { pro } = useContext(ProCartContext)
+  const { pro, plusOne, minusOne } = useContext(ProCartContext)
+  // pro:[{
+  //  sid: 50,
+  //  name: "+9拐杖",
+  //  size: "S",
+  //  price: 2000,
+  //  qty: 1
+  // }]
   return (
     <>
       {pro && (
@@ -11,7 +18,7 @@ function CartDetailPro() {
           <div className={styled.outWrap}>
             {pro.map((el, i) => {
               return (
-                <div className={styled.wrap}>
+                <div className={styled.wrap} key={`${el.sid}+${el.size}`}>
                   <input type="checkbox" />
                   <div className={styled.wrapRight}>
                     <div className={styled.roomText}>
@@ -19,9 +26,32 @@ function CartDetailPro() {
                       <p>尺寸：{el.size}</p>
                       <p>單價：{el.price}</p>
                       <div className={styled.qty}>
-                        <button>－</button>
-                        <input type="text" value={el.qty} />
-                        <button>＋</button>
+                        {el.qty <= 1 ? (
+                          <button
+                            onClick={() => {
+                              minusOne(el.sid, el.size)
+                            }}
+                            disabled
+                          >
+                            －
+                          </button>
+                        ) : (
+                          <button
+                            onClick={() => {
+                              minusOne(el.sid, el.size)
+                            }}
+                          >
+                            －
+                          </button>
+                        )}
+                        <button>{el.qty}</button>
+                        <button
+                          onClick={() => {
+                            plusOne(el.sid, el.size)
+                          }}
+                        >
+                          ＋
+                        </button>
                       </div>
                       <p>總金額：{el.price * el.qty}</p>
                     </div>

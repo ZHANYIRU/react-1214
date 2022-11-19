@@ -16,9 +16,19 @@ const initState = {
 const proCartReducer = (state, action) => {
   const { proSid, name, size, price, qty } = action.payload
   const itemsLength = state.items.length
-  const index = state.items.findIndex(
+  //for 商品的index
+  const proIndex = state.items.findIndex(
     (el) => el.sid === proSid && el.size === size
   )
+  //更新購物車
+  const updateCart = (a, payload) => {
+    if (proIndex > -1) {
+      a[proIndex] = { ...a[proIndex], qty: payload }
+      const newState = { items: a, totalItem: state.totalItem }
+      localStorage.setItem('proCart', JSON.stringify(newState.items))
+      return newState
+    }
+  }
   switch (action.type) {
     //加入購物車
     case 'ADD_CART':
@@ -34,7 +44,7 @@ const proCartReducer = (state, action) => {
         localStorage.setItem('totalItem', state.totalItem)
         return state
       }
-      if (index === -1) {
+      if (proIndex === -1) {
         console.log(456)
         state = {
           ...state,
@@ -55,10 +65,27 @@ const proCartReducer = (state, action) => {
         return state
       } else {
         console.log(789)
-        state.items[index].qty = state.items[index].qty + qty
-        localStorage.setItem('proCart', JSON.stringify(state.items))
+        if (proIndex > -1) {
+          const a = [...state.items]
+          const newQty = a[proIndex].qty + qty
+          return updateCart(a, newQty)
+        }
         return state
       }
+    case 'PLUS':
+      if (proIndex > -1) {
+        const a = [...state.items]
+        const newQty = a[proIndex].qty + 1
+        return updateCart(a, newQty)
+      }
+      return state
+    case 'MINUS':
+      if (proIndex > -1) {
+        const a = [...state.items]
+        const newQty = a[proIndex].qty > 1 ? a[proIndex].qty - 1 : 1
+        return updateCart(a, newQty)
+      }
+      return state
     //清空購物車
     case 'RESET_CART':
       localStorage.removeItem('proCart')
@@ -66,7 +93,7 @@ const proCartReducer = (state, action) => {
       return initState
     //沒有符合的case 回傳初始state
     default:
-      return initState
+      return state
   }
 }
 //建立Context
@@ -74,9 +101,19 @@ const ProCartContext = createContext({})
 export default ProCartContext
 
 export const ProCartContextProvider = ({ children }) => {
+  let localState = JSON.parse(JSON.stringify(initState))
+  const str = localStorage.getItem('proCart')
+  const str2 = localStorage.getItem('totalItem')
+  //從localStorage抓資料來當state初始值
+  //如果有抓到localStorage 初始值改為他
+  if (str && str2) {
+    const local = JSON.parse(str)
+    const local2 = JSON.parse(str2)
+    localState = { items: local, totalItem: local2 }
+  }
   //呼叫reducer
-  const [state, dispatch] = useReducer(proCartReducer, initState)
-  console.log(state)
+  const [state, dispatch] = useReducer(proCartReducer, localState)
+  console.log('Context', state)
   console.log('我是context')
   //購物車數量顯示
   const cartItem = localStorage.getItem('totalItem')
@@ -99,6 +136,20 @@ export const ProCartContextProvider = ({ children }) => {
       },
     })
   }
+  //商品數量+1
+  const plusOne = (proSid, size) => {
+    dispatch({
+      type: 'PLUS',
+      payload: { proSid, size },
+    })
+  }
+  //商品數量-1
+  const minusOne = (proSid, size) => {
+    dispatch({
+      type: 'MINUS',
+      payload: { proSid, size },
+    })
+  }
   //清空購物車
   const resetCart = () => {
     dispatch({
@@ -107,7 +158,9 @@ export const ProCartContextProvider = ({ children }) => {
     })
   }
   return (
-    <ProCartContext.Provider value={{ addProCart, cartItem, resetCart, pro }}>
+    <ProCartContext.Provider
+      value={{ addProCart, plusOne, minusOne, cartItem, resetCart, pro }}
+    >
       {children}
     </ProCartContext.Provider>
   )

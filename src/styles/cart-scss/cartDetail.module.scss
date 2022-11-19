@@ -99,8 +99,10 @@
   width: 100px;
   height: 25px;
   border: 1px solid #4b5022;
+  border-radius: 5px;
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
   input {
     outline: none;
     border: none;
