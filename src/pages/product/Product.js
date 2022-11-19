@@ -37,7 +37,12 @@ function Product() {
       setSearch({ ...search, width: '100%' })
     }
   }
+  const [afterGenderData, setAfterGenderData] = useState('')
 
+  //拿到filter回傳值
+  const [fromFilterDataCard, setFromFilterDataCard] = useState('')
+  //拿到filter回傳值
+  const [fromFilterDataGender, setFromFilterDataGender] = useState('')
   // 手機板判定
   const mobile = useMediaQuery({ query: '(max-width:390px)' })
   //附style給filter
@@ -105,6 +110,16 @@ function Product() {
     setDatas(r)
   }
 
+  //顯示卡片
+  // if (fromFilterDataGender === '男') {
+  //   return v.product_category_sid === 9
+  // } else {
+  //   return v
+  // }
+  // let afterFilter = fromFilterDataCard.map((v, i) => {
+  //   return v.product_category_sid === 9
+  // })
+
   //-------------------------------------------------------------------
   useEffect(() => {
     getProductData()
@@ -116,7 +131,21 @@ function Product() {
     window.addEventListener('resize', reSize)
     window.addEventListener('scroll', scrollFilter)
   }, [fixedd])
-
+  useEffect(() => {
+    if (fromFilterDataGender === '男') {
+      setAfterGenderData(
+        datas.filter((v, i) => {
+          return v.product_category_sid == 9
+        })
+      )
+    } else if (fromFilterDataGender === '女') {
+      setAfterGenderData(
+        datas.filter((v, i) => {
+          return v.product_category_sid == 10
+        })
+      )
+    }
+  }, [])
   return (
     <>
       <div className={styled.container}>
@@ -184,8 +213,11 @@ function Product() {
           fixedd={fixedd}
           mob={mob}
           setMob={setMob}
-          
           filterRef={filterRef}
+          setFromFilterDataCard={setFromFilterDataCard}
+          setFromFilterDataGender={setFromFilterDataGender}
+          datas={datas}
+          setDatas={setDatas}
         />
         <div className={styled.cardbox}>
           {datas.map((v, i) => {

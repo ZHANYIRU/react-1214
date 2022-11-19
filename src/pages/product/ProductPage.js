@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import styled from '../../styles/product-scss/productPage.module.scss'
 import axios from 'axios'
-import { useEffect } from 'react'
+import { useEffect,} from 'react'
 
 export default function ProductPage() {
   const [introCom, setintroCom] = useState(true)
