@@ -1,57 +1,4 @@
 @import '../global.scss';
-
-// .tabs {
-//   border-radius: 8px;
-// }
-
-// .tab {
-//   width: 100%;
-//   color: white;
-//   overflow: hidden;
-
-//   &-label {
-//     display: flex;
-//     justify-content: space-between;
-//     padding: 1em;
-//     background: lightblue;
-//     font-weight: bold;
-//     cursor: pointer;
-
-//     /* Icon */
-//     &::after {
-//       content: "\276F";
-//       width: 1em;
-//       height: 1em;
-//       text-align: center;
-//       transition: all .35s;
-//     }
-//   }
-
-//   &-content {
-//     max-height: 0;
-//     padding: 0 1em;
-//     color: lightblue;
-//     background: white;
-//     transition: all .35s;
-//   }
-// }
-
-// // :checked
-// input:checked {
-//   +.tab-label {
-//     background: lightblue;
-
-//     &::after {
-//       transform: rotate(90deg);
-//     }
-//   }
-
-//   ~.tab-content {
-//     max-height: 100vh;
-//     padding: 1em;
-//   }
-// }
-
 .numWrap {
   width: 90%;
   display: flex;
@@ -81,14 +28,14 @@
 .contentWrap {
   max-height: 0;
   overflow: hidden;
-  transition: all 0.8s;
+  transition: ease-in-out 0.5s;
   margin-bottom: 50px;
 }
 
 .contentWrapOpen {
   padding: 10px 0;
   max-height: 50vh;
-  transition: all 0.5s;
+  transition: ease-in-out 0.5s;
   margin-bottom: 50px;
   overflow: auto;
 }

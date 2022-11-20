@@ -1,12 +1,24 @@
 import { useReducer, createContext } from 'react'
 //初始架構
+//items-商品 items2-房間
 const initState = {
   items: [
     {
       sid: 0,
       name: '',
       size: '',
+      img: '',
       price: 0,
+      qty: 0,
+    },
+  ],
+  items2: [
+    {
+      sid: 0,
+      name: '',
+      starDate: '',
+      endDate: '',
+      price: '',
       qty: 0,
     },
   ],
@@ -54,7 +66,7 @@ const proCartReducer = (state, action) => {
               qty: qty,
             },
           ],
-          totalItem: 1,
+          totalItem: state.totalItem + 1,
         }
         const newTotalItem = state.totalItem
         return updateCart(state, newTotalItem)

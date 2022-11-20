@@ -1,9 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
-import Evaluation from './Evaluation'
 import styled from '../../../styles/order-scss/OrderNum.module.scss'
 import dayjs from 'dayjs'
-function OrderNum({ momOrder }) {
+function OrderNum({ momOrder, open, setOpen }) {
   // order範本
   // "sid": 59,
   // "order_num": "20220923025717",
@@ -13,16 +12,26 @@ function OrderNum({ momOrder }) {
   const { rows, proRows, roomRows, renRows, camRows } = momOrder
   //給lightBox
   const [lightOpen, setLightOpen] = useState(false)
-  const [agree, setAgree] = useState(false)
-  const openOrder = (e) => {
-    setAgree(!agree)
-  }
+  //格式化金額
   const moneyFormat = (price) => {
     let a = Number(price)
     let b = a.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD' })
     let c = b.split('.')
     return c[0]
   }
+  //打開子訂單
+  const openWrap = (e) => {
+    const value = Number(e.target.value)
+    console.log(value)
+    if (open.includes(value)) {
+      const newOpen = open.filter((el2) => el2 !== value)
+      setOpen(newOpen)
+    } else {
+      const newOpen = [...open, value]
+      setOpen(newOpen)
+    }
+  }
+
   return (
     <>
       {lightOpen && (
@@ -73,15 +82,22 @@ function OrderNum({ momOrder }) {
           rows.map((el, i) => {
             return (
               <div key={el.sid}>
-                <input type="checkbox" id="order1" onClick={openOrder} />
-                <label className={styled.orderNum} htmlFor="order1">
+                <input
+                  type="checkbox"
+                  value={`${el.sid}`}
+                  id={`${el.sid}`}
+                  onClick={(e) => {
+                    openWrap(e)
+                  }}
+                />
+                <label className={styled.orderNum} htmlFor={`${el.sid}`}>
                   <p> 訂單編號：{el.order_num}</p>
                   <p>金額：{moneyFormat(el.total)}</p>
                   <i className="fa-solid fa-chevron-down"></i>
                 </label>
                 <div
                   className={
-                    agree
+                    open.includes(el.sid)
                       ? `${styled.contentWrapOpen}`
                       : `${styled.contentWrap}`
                   }

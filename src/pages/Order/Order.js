@@ -6,6 +6,8 @@ import axios from 'axios'
 import { useState } from 'react'
 import { useEffect } from 'react'
 function Order() {
+  //打開子訂單+時間線增長的狀態
+  const [open, setOpen] = useState([])
   const [momOrder, setMomOrder] = useState([
     {
       rows: [],
@@ -17,6 +19,10 @@ function Order() {
   ])
   const getList = async () => {
     const { data } = await axios.get(MY_HOST + '/order/api')
+    // const newOpen = data.rows.map((el, i) => {
+    //   return { [`${el.sid}`]: false }
+    // })
+    // setOpen(newOpen)
     setMomOrder(data)
   }
   useEffect(() => {
@@ -29,8 +35,8 @@ function Order() {
         <input type="text" placeholder="可以透過訂單編號、商品名稱搜尋" />
       </div>
       <div className={styled.orderBottom}>
-        <OrderTime rows={momOrder.rows} />
-        <OrderNum momOrder={momOrder} />
+        <OrderTime rows={momOrder.rows} open={open} />
+        <OrderNum momOrder={momOrder} open={open} setOpen={setOpen} />
       </div>
     </div>
   )

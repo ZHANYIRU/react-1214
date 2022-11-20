@@ -5,8 +5,8 @@ import './test.scss'
 
 function TestProducts() {
   const { addProCart } = useContext(ProCartContext)
-  const [qty, setQty] = useState(1)
-  const [userSize, setUserSize] = useState('S')
+  const [qty, setQty] = useState([1, 1])
+  const [userSize, setUserSize] = useState(['S', 'S'])
   const size = ['S', 'M', 'L']
   const testPro = [
     {
@@ -23,8 +23,8 @@ function TestProducts() {
   return (
     <>
       <div className="test">
-        <h1>測試頁面</h1>
         <div>
+          <h1>商品Test</h1>
           {testPro.map((el, i) => {
             return (
               <>
@@ -32,9 +32,11 @@ function TestProducts() {
                   <p>{el.proname}</p>
                   <p>{el.price}</p>
                   <select
-                    value={userSize}
+                    value={userSize[i]}
                     onChange={(e) => {
-                      setUserSize(e.target.value)
+                      const newSize = [...userSize]
+                      newSize[i] = e.target.value
+                      setUserSize(newSize)
                     }}
                   >
                     {size.map((el1, i1) => {
@@ -46,9 +48,11 @@ function TestProducts() {
                     })}
                   </select>
                   <select
-                    value={qty}
+                    value={qty[i]}
                     onChange={(e) => {
-                      setQty(Number(e.target.value))
+                      const newQty = [...qty]
+                      newQty[i] = +e.target.value
+                      setQty(newQty)
                     }}
                   >
                     {Array(10)
@@ -67,9 +71,9 @@ function TestProducts() {
                     addProCart(
                       el.productsid,
                       el.proname,
-                      userSize,
+                      userSize[i],
                       el.price,
-                      qty
+                      qty[i]
                     )
                   }}
                 >
@@ -78,6 +82,13 @@ function TestProducts() {
               </>
             )
           })}
+        </div>
+        <div>
+          <h2>房間Test</h2>
+          <p></p>
+          <p></p>
+          <p></p>
+          <p></p>
         </div>
       </div>
     </>

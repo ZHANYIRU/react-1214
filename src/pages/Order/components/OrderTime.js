@@ -1,6 +1,6 @@
 import dayjs from 'dayjs'
 import styled from '../../../styles/order-scss/OrderTime.module.scss'
-function OrderTime({ rows }) {
+function OrderTime({ rows, open }) {
   return (
     <>
       <div>
@@ -13,7 +13,13 @@ function OrderTime({ rows }) {
                   <p>{d.isValid() && d.format('MMM')}</p>
                   <p>{d.format('DD')}</p>
                 </div>
-                <div className={styled.border} />
+                <div
+                  className={
+                    open.includes(el.sid)
+                      ? `${styled.long}`
+                      : `${styled.border}`
+                  }
+                />
               </div>
             )
           })}
