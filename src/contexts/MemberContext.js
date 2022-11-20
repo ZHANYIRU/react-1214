@@ -6,7 +6,6 @@ const MemberContext = createContext({})
 export default MemberContext
 
 export const MemberContextProvider = function ({ children }) {
-
   let initInfo = {
     member_sid: '',
     name: '',
@@ -24,11 +23,19 @@ export const MemberContextProvider = function ({ children }) {
     token: '',
   }
 
+  const resetInfo = initInfo
+
   const [data, setData] = useState(initInfo)
+  const [isLogin, setIsLogin] = useState(false)
 
   async function getInfo() {
-    const result = await axios.get('http://localhost:3001/member/api?id=668')
-    // console.log(result.data.rows[0].name)
+    const token = localStorage.getItem('token')
+
+    const result = await axios.get(`http://localhost:3001/member/api`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
     if (result.data.rows[0]) {
       setData(result.data.rows[0])
     }
@@ -36,18 +43,18 @@ export const MemberContextProvider = function ({ children }) {
     // console.log(result.data.rows[0])
   }
 
- useEffect(()=>{
+  useEffect(() => {
     getInfo()
- },[])
+  }, [isLogin])
 
-//  const getUpdateInfo = function () {
-//     getInfo()
-//  }
 
- return (
-    <MemberContext.Provider value={{data, setData}} >
-        {children}
+  //  const getUpdateInfo = function () {
+  //     getInfo()
+  //  }
+
+  return (
+    <MemberContext.Provider value={{ data, setData, isLogin, setIsLogin, resetInfo }}>
+      {children}
     </MemberContext.Provider>
- )
-
+  )
 }

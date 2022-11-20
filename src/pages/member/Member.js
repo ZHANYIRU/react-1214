@@ -8,25 +8,14 @@ import MemberContext from '../../contexts/MemberContext'
 function Member(props) {
   const navigate = useNavigate()
 
-  const { data, getUpdateInfo } = useContext(MemberContext)
+  const { data, setData, isLogin, resetInfo } = useContext(MemberContext)
 
-  // const [profile, setProfile] = useState({
-  //   name: '',
-  //   intro: '',
-  //   avatar: '',
-  // })
-
-  // async function getInfo() {
-  //   const result = await axios.get('http://localhost:3001/member/api?id=668')
-  //   // console.log(result.data.rows[0].name)
-  //   if (result.data.rows[0]) {
-  //     setProfile(result.data.rows[0])
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getInfo()
-  // }, [])
+  useEffect(() => {
+    if (!isLogin) {
+      setData(resetInfo)
+      navigate('/login')
+    }
+  }, [])
 
   return (
     <>

@@ -16,7 +16,7 @@ export default function MemberInfo() {
 
   const {data} = useContext(MemberContext)
 
-  console.log(data.member_sid)
+  // console.log(data.member_sid)
 
   return (
     <>

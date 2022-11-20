@@ -6,6 +6,7 @@ import TextareaAutosize from 'react-textarea-autosize'
 import dayjs from 'dayjs'
 import { useRef } from 'react'
 import MemberContext from '../../../contexts/MemberContext'
+import { useNavigate } from 'react-router-dom'
 
 export default function MemberEdit() {
   // const [profile, setProfile] = useState({
@@ -19,7 +20,9 @@ export default function MemberEdit() {
   //   intro: '',
   // })
 
-  const { data, getUpdateInfo } = useContext(MemberContext)
+  const navigate = useNavigate()
+
+  const { data, setData, isLogin, resetInfo } = useContext(MemberContext)
 
   // console.log(data)
 
@@ -29,6 +32,12 @@ export default function MemberEdit() {
   useEffect(() => {
     let dateBirth = dayjs(data.birthday).format('YYYY-MM-DD')
     setMyBirth(dateBirth)
+
+    if(!isLogin) {
+      setData(resetInfo)
+      navigate('/login')
+    }
+
   }, [])
 
   const updateForm = useRef(null)

@@ -12,7 +12,7 @@ export default function MemberPass() {
 
   const {data} = useContext(MemberContext)
 
-  console.log(data.member_sid)
+  // console.log(data.member_sid)
 
   const passForm = useRef(null)
 
