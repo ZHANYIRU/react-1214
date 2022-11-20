@@ -26,11 +26,14 @@ const initState = {
 }
 //Reducer
 const proCartReducer = (state, action) => {
-  const { proSid, name, size, price, qty, img } = action.payload
+  const { proSid, name, size, price, qty, img, roomSid, start, end } =
+    action.payload
   //for 商品的index
   const proIndex = state.items.findIndex(
     (el) => el.sid === proSid && el.size === size
   )
+  //for 房間的index
+  const roomIndex = state.items2.findIndex((el) => el.sid === roomSid)
   //更新localStorage購物車
   const updateCart = (upState, payload) => {
     if (state.totalItem === 0) {
@@ -51,7 +54,7 @@ const proCartReducer = (state, action) => {
     }
   }
   switch (action.type) {
-    //加入購物車
+    //加入購物車-商品
     case 'ADD_CART':
       if (state.totalItem === 0) {
         console.log(123)
@@ -99,6 +102,8 @@ const proCartReducer = (state, action) => {
         }
         return state
       }
+    case 'ADD_CART2':
+      return {}
     //數量+1
     case 'PLUS':
       if (proIndex > -1) {
@@ -168,7 +173,7 @@ export const ProCartContextProvider = ({ children }) => {
   const pro = localStorage.getItem('proCart')
     ? JSON.parse(localStorage.getItem('proCart'))
     : ''
-  //加入購物車
+  //加入購物車-商品
   const addProCart = (proSid, name, size, price, qty, img) => {
     dispatch({
       type: 'ADD_CART',
@@ -176,6 +181,21 @@ export const ProCartContextProvider = ({ children }) => {
         proSid,
         name,
         size,
+        price,
+        qty,
+        img,
+      },
+    })
+  }
+  //加入購物車-商品
+  const addRoomCart = (roomSid, name, start, end, price, qty, img) => {
+    dispatch({
+      type: 'ADD_CART2',
+      payload: {
+        roomSid,
+        name,
+        start,
+        end,
         price,
         qty,
         img,
@@ -214,6 +234,7 @@ export const ProCartContextProvider = ({ children }) => {
     <ProCartContext.Provider
       value={{
         addProCart,
+        addRoomCart,
         plusOne,
         minusOne,
         delOne,

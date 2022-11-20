@@ -4,8 +4,13 @@ import './test.scss'
 // import { addProCart } from '../../../components/AddCart'
 
 function TestProducts() {
-  const { addProCart } = useContext(ProCartContext)
+  const { addProCart, addRoomCart } = useContext(ProCartContext)
   const [qty, setQty] = useState([1, 1])
+  const [qty2, setQty2] = useState([1, 1])
+  const [date2, setdate2] = useState({
+    start: '',
+    end: '',
+  })
   const [userSize, setUserSize] = useState(['S', 'S'])
   const size = ['S', 'M', 'L']
   const testPro = [
@@ -18,6 +23,18 @@ function TestProducts() {
       productsid: 30,
       proname: 'IU簽名照',
       price: 2000000,
+    },
+  ]
+  const testRoom = [
+    {
+      room_sid: 20,
+      name: '超豪華報紙',
+      price: 3000,
+    },
+    {
+      room_sid: 40,
+      name: '你家',
+      price: 6000,
     },
   ]
   return (
@@ -85,10 +102,73 @@ function TestProducts() {
         </div>
         <div>
           <h2>房間Test</h2>
-          <p></p>
-          <p></p>
-          <p></p>
-          <p></p>
+          {testRoom.map((el, i) => {
+            return (
+              <>
+                <div key={el.room_sid}>
+                  <p>{el.name}</p>
+                  <p>{el.price}</p>
+                  <input
+                    type="date"
+                    value={date2.start}
+                    name="start"
+                    onChange={(e) => {
+                      const newStart = {
+                        ...date2,
+                        [e.target.name]: e.target.value,
+                      }
+                      setdate2(newStart)
+                    }}
+                  />
+                  <input
+                    type="date"
+                    value={date2.end}
+                    name="end"
+                    onChange={(e) => {
+                      const newStart = {
+                        ...date2,
+                        [e.target.name]: e.target.value,
+                      }
+                      setdate2(newStart)
+                    }}
+                  />
+                  <select
+                    value={qty2[i]}
+                    onChange={(e) => {
+                      const newQty = [...qty2]
+                      newQty[i] = +e.target.value
+                      setQty2(newQty)
+                    }}
+                  >
+                    {Array(10)
+                      .fill(1)
+                      .map((v, i2) => {
+                        return (
+                          <option value={i2 + 1} key={i2}>
+                            {i2 + 1}
+                          </option>
+                        )
+                      })}
+                  </select>
+                </div>
+                <button
+                  onClick={() => {
+                    addRoomCart()
+                    console.log(
+                      el.room_sid,
+                      el.name,
+                      date2.start,
+                      date2.end,
+                      el.price,
+                      qty2[i]
+                    )
+                  }}
+                >
+                  加入購物車
+                </button>
+              </>
+            )
+          })}
         </div>
       </div>
     </>
