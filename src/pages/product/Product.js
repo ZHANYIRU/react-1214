@@ -131,21 +131,21 @@ function Product() {
     window.addEventListener('resize', reSize)
     window.addEventListener('scroll', scrollFilter)
   }, [fixedd])
-  useEffect(() => {
-    if (fromFilterDataGender === '男') {
-      setAfterGenderData(
-        datas.filter((v, i) => {
-          return v.product_category_sid == 9
-        })
-      )
-    } else if (fromFilterDataGender === '女') {
-      setAfterGenderData(
-        datas.filter((v, i) => {
-          return v.product_category_sid == 10
-        })
-      )
-    }
-  }, [])
+  // useEffect(() => {
+  //   if (fromFilterDataGender === '男') {
+  //     setAfterGenderData(
+  //       datas.filter((v, i) => {
+  //         return v.product_category_sid == 9
+  //       })
+  //     )
+  //   } else if (fromFilterDataGender === '女') {
+  //     setAfterGenderData(
+  //       datas.filter((v, i) => {
+  //         return v.product_category_sid == 10
+  //       })
+  //     )
+  //   }
+  // }, [])
   return (
     <>
       <div className={styled.container}>

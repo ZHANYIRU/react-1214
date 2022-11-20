@@ -17,12 +17,19 @@ export default function ProductFilter({
   const mobile = useMediaQuery({ query: '(max-width:390px)' })
   // const [genderFilter, setGenderFilter] = useState([{}])
   const genderOptions = ['男', '女']
+  const [proofList, setProofList] = useState([])
+  const wProofOptions = [
+    '抗水（Water Resistant）',
+    '防潑水（Water Repellent）',
+    '防水（Waterproof）',
+  ]
   const [genders, setGenders] = useState('')
   const [filters, setFilter] = useState({
     lowPrice: '',
     highPrice: '',
     brand: '',
-    gender: '',
+    gender: '1',
+    wProof: '1',
   })
   // 輸入時抓到value
   const handleFieldChange = (e) => {
@@ -60,34 +67,68 @@ export default function ProductFilter({
       ...filters,
     })
     const data = response.data
-    setDatas(data)
-    setFromFilterDataCard(datas)
-    setFromFilterDataGender(genders)
-    console.log(data)
+    if (genders === '男') {
+      const a = data.filter((v, i) => {
+        return v.product_category_sid == 9
+      })
+      console.log(a)
+      setDatas(a)
+    } else if (genders === '女') {
+      const a = data.filter((v, i) => {
+        return v.product_category_sid == 10
+      })
+      console.log(a)
+      setDatas(a)
+    } else if (!genders) {
+      setDatas(data)
+      setFromFilterDataCard(datas)
+      setFromFilterDataGender(genders)
+    }
+
+    // console.log(data)
   }
 
   let filter = 'http://localhost:3001/product/filter'
+  // const getData = async () => {
+  //   if (Number(filters.lowPrice) > Number(filters.highPrice)) {
+  //     alert('請檢查價格是否輸入錯誤')
+  //     console.log('請檢查價格是否輸入錯誤')
+  //   } else if (genders) {
+  //     filterRender(filter)
+  //   } else if (filters.lowPrice && filters.highPrice && filters.brand) {
+  //     filterRender(filter)
+  //   } else if (
+  //     (filters.lowPrice && filters.highPrice) ||
+  //     (filters.lowPrice && filters.highPrice && filters.brand === -1)
+  //   ) {
+  //     filterRender(filter)
+  //   } else if (filters.brand) {
+  //     filterRender(filter)
+  //   } else if (!filters.brand || !filters.lowPrice || !filters.highPrice) {
+  //     // alert('請填資料')
+  //     console.log('請填資料')
+  //   }
+  // }
+
   const getData = async () => {
     if (Number(filters.lowPrice) > Number(filters.highPrice)) {
       alert('請檢查價格是否輸入錯誤')
       console.log('請檢查價格是否輸入錯誤')
-    } else if (genders) {
-      filterRender(filter)
-    } else if (filters.lowPrice && filters.highPrice && filters.brand) {
-      filterRender(filter)
     } else if (
-      (filters.lowPrice && filters.highPrice) ||
-      (filters.lowPrice && filters.highPrice && filters.brand === -1)
+      filters.lowPrice ||
+      filters.highPrice ||
+      filters.brand ||
+      genders
     ) {
-      filterRender(filter)
-    } else if (filters.brand) {
       filterRender(filter)
     } else if (!filters.brand || !filters.lowPrice || !filters.highPrice) {
       // alert('請填資料')
       console.log('請填資料')
+      alert('請填資料')
     }
   }
 
+  //-----------------
   // const filterToggle
   const filterToggle = () => {
     if (!filterOpen) {
@@ -154,6 +195,7 @@ export default function ProductFilter({
                 <input
                   type="radio"
                   checked={genders === v}
+                  name="gender"
                   value={v}
                   onChange={(e) => {
                     setGenders(e.target.value)
@@ -165,7 +207,7 @@ export default function ProductFilter({
           })}
         </div>
         <h2> 防水等級</h2>
-        <div className={styled.checkBoxWrap}>
+        {/* <div className={styled.checkBoxWrap}>
           <div className={styled.checkBox}>
             <input type="checkbox" id="wRes" value="wRes" name="wRes" />
             <label htmlFor="wRes">抗水（Water Resistant）</label>
@@ -178,8 +220,37 @@ export default function ProductFilter({
             <input type="checkbox" id="wProof" value="wProof" name="proof" />
             <label htmlFor="wProof">防水（Waterproof）</label>
           </div>
-        </div>
+        </div> */}
+        <div className={styled.checkBoxWrap}>
+          {wProofOptions.map((v, i) => {
+            return (
+              <div className={styled.checkBox} key={i}>
+                <input
+                  type="checkbox"
+                  checked={proofList.includes(v)}
+                  value={v}
+                  id={i}
+                  onChange={(e) => {
+                    const value = e.target.value
 
+                    if (proofList.includes(value)) {
+                      // 如果此項目值在state陣列中 -> 移出state陣列
+                      const newProofList = proofList.filter(
+                        (v2, i2) => v2 !== value
+                      )
+                      setProofList(newProofList)
+                    } else {
+                      // 如果不在此state陣列中 -> 加到state陣列中
+                      const newProofList = [...proofList, value]
+                      setProofList(newProofList)
+                    }
+                  }}
+                />
+                <label htmlFor={i}>{v}</label>
+              </div>
+            )
+          })}
+        </div>
         <button type="submit" className={styled.filterButton}>
           送出
         </button>
@@ -287,6 +358,7 @@ export default function ProductFilter({
                   type="radio"
                   checked={genders === v}
                   value={v}
+                  name="gender"
                   onChange={(e) => {
                     setGenders(e.target.value)
                   }}
@@ -295,31 +367,9 @@ export default function ProductFilter({
               </div>
             )
           })}
-          {/* <div className={styled.genderBox}>
-            <label htmlFor="male">男性</label>
-            <input
-              type="radio"
-              id="male"
-              name="gender"
-              checked={sex === 'male'}
-              value={filter.gender}
-              onChange={handleFieldChange}
-            />
-          </div>
-          <div className={styled.genderBox}>
-            <label htmlFor="female">女性</label>
-            <input
-              type="radio"
-              id="female"
-              name="gender"
-              checked={sex === 'female'}
-              value="female"
-              onChange={handleFieldChange}
-            />
-          </div> */}
         </div>
         <h2> 防水等級</h2>
-        <div className={styled.checkBoxWrap}>
+        {/* <div className={styled.checkBoxWrap}>
           <div className={styled.checkBox}>
             <input type="checkbox" id="wRes" value="wRes" />
             <label htmlFor="wRes">抗水（Water Resistant）</label>
@@ -332,6 +382,36 @@ export default function ProductFilter({
             <input type="checkbox" id="wProof" value="wProof" />
             <label htmlFor="wProof">防水（Waterproof）</label>
           </div>
+        </div> */}
+        <div className={styled.checkBoxWrap}>
+          {wProofOptions.map((v, i) => {
+            return (
+              <div className={styled.checkBox} key={i}>
+                <input
+                  type="checkbox"
+                  checked={proofList.includes(v)}
+                  value={v}
+                  id={i}
+                  onChange={(e) => {
+                    const value = e.target.value
+
+                    if (proofList.includes(value)) {
+                      // 如果此項目值在state陣列中 -> 移出state陣列
+                      const newProofList = proofList.filter(
+                        (v2, i2) => v2 !== value
+                      )
+                      setProofList(newProofList)
+                    } else {
+                      // 如果不在此state陣列中 -> 加到state陣列中
+                      const newProofList = [...proofList, value]
+                      setProofList(newProofList)
+                    }
+                  }}
+                />
+                <label htmlFor={i}>{v}</label>
+              </div>
+            )
+          })}
         </div>
 
         <button
