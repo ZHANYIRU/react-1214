@@ -17,6 +17,12 @@ function OrderNum({ momOrder }) {
   const openOrder = (e) => {
     setAgree(!agree)
   }
+  const moneyFormat = (price) => {
+    let a = Number(price)
+    let b = a.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD' })
+    let c = b.split('.')
+    return c[0]
+  }
   return (
     <>
       {lightOpen && (
@@ -70,7 +76,7 @@ function OrderNum({ momOrder }) {
                 <input type="checkbox" id="order1" onClick={openOrder} />
                 <label className={styled.orderNum} htmlFor="order1">
                   <p> 訂單編號：{el.order_num}</p>
-                  <p>金額：{el.total}</p>
+                  <p>金額：{moneyFormat(el.total)}</p>
                   <i className="fa-solid fa-chevron-down"></i>
                 </label>
                 <div
@@ -107,9 +113,9 @@ function OrderNum({ momOrder }) {
                                 />
                               </div>
                               <p>{el2.product_name}</p>
-                              <p>{el2.product_price}</p>
+                              <p>{moneyFormat(el2.product_price)}</p>
                               <p>{el2.qty}</p>
-                              <p>{el2.total}</p>
+                              <p>{moneyFormat(el2.total)}</p>
                             </div>
                             <button
                               onClick={() => {
@@ -162,9 +168,9 @@ function OrderNum({ momOrder }) {
                               </p>
                               <p>{ds.isValid() && ds.format('YYYY-MM-DD')}</p>
                               <p>{de.isValid() && de.format('YYYY-MM-DD')}</p>
-                              <p>{el3.room_price}</p>
+                              <p>{moneyFormat(el3.room_price)}</p>
                               <p>{el3.qty}</p>
-                              <p>{el3.total}</p>
+                              <p>{moneyFormat(el3.total)}</p>
                             </div>
                             <button
                               onClick={() => {
@@ -218,9 +224,9 @@ function OrderNum({ momOrder }) {
                                 </p>
                                 <p>{ds.isValid() && ds.format('YYYY-MM-DD')}</p>
                                 <p>{de.isValid() && de.format('YYYY-MM-DD')}</p>
-                                <p>{el4.price}</p>
+                                <p>{moneyFormat(el4.price)}</p>
                                 <p>{el4.people}</p>
-                                <p>{el4.total}</p>
+                                <p>{moneyFormat(el4.total)}</p>
                               </div>
                               <button
                                 onClick={() => {

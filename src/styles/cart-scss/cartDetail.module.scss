@@ -117,3 +117,10 @@
     font-weight: 700;
   }
 }
+.people{
+  display: flex;
+  align-items: center;
+  p:last-child{
+    margin-left: 5px;
+  }
+}

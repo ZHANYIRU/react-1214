@@ -14,7 +14,7 @@ const initState = {
 }
 //Reducer
 const proCartReducer = (state, action) => {
-  const { proSid, name, size, price, qty } = action.payload
+  const { proSid, name, size, price, qty, img } = action.payload
   //for 商品的index
   const proIndex = state.items.findIndex(
     (el) => el.sid === proSid && el.size === size
@@ -45,7 +45,14 @@ const proCartReducer = (state, action) => {
         console.log(123)
         state = {
           items: [
-            { sid: proSid, name: name, size: size, price: price, qty: qty },
+            {
+              sid: proSid,
+              name: name,
+              size: size,
+              img: img,
+              price: price,
+              qty: qty,
+            },
           ],
           totalItem: 1,
         }
@@ -62,6 +69,7 @@ const proCartReducer = (state, action) => {
               sid: proSid,
               name: name,
               size: size,
+              img: img,
               price: price,
               qty: qty,
             },
@@ -158,6 +166,7 @@ export const ProCartContextProvider = ({ children }) => {
         size,
         price,
         qty,
+        img,
       },
     })
   }

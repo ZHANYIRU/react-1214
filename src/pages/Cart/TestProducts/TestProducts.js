@@ -20,7 +20,6 @@ function TestProducts() {
       price: 2000000,
     },
   ]
-  const dateId = Number(new Date())
   return (
     <>
       <div className="test">
