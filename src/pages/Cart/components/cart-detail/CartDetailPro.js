@@ -3,7 +3,7 @@ import { useContext } from 'react'
 import ProCartContext from '../../../../contexts/ProCartContext'
 import styled from '../../../../styles/cart-scss/cartDetail.module.scss'
 function CartDetailPro() {
-  const { pro, plusOne, minusOne } = useContext(ProCartContext)
+  const { pro, plusOne, minusOne, delOne } = useContext(ProCartContext)
   // pro:[{
   //  sid: 50,
   //  name: "+9拐杖",
@@ -62,7 +62,12 @@ function CartDetailPro() {
                       />
                     </div>
                   </div>
-                  <i className="fa-regular fa-trash-can"></i>
+                  <i
+                    className="fa-regular fa-trash-can"
+                    onClick={() => {
+                      delOne(el.sid, el.size)
+                    }}
+                  ></i>
                 </div>
               )
             })}

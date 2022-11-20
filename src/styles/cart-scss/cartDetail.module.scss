@@ -50,6 +50,9 @@
   padding: 20px 0;
   justify-content: space-between;
   align-items: center;
+  i {
+    cursor: pointer;
+  }
 }
 .wrapRight {
   width: 92%;

@@ -1,29 +1,22 @@
-import React from 'react'
+import dayjs from 'dayjs'
 import styled from '../../../styles/order-scss/OrderTime.module.scss'
-function OrderTime() {
+function OrderTime({ rows }) {
   return (
     <>
-      <div className={styled.container}>
-        <div className={styled.time}>
-          <p>Oct</p>
-          <p>18</p>
-        </div>
-        <div className={styled.border} />
-        <div className={styled.time}>
-          <p>Oct</p>
-          <p>18</p>
-        </div>
-        <div className={styled.border} />
-        <div className={styled.time}>
-          <p>Oct</p>
-          <p>18</p>
-        </div>
-        <div className={styled.border} />
-        <div className={styled.time}>
-          <p>Oct</p>
-          <p>18</p>
-        </div>
-        <div className={styled.border} />
+      <div>
+        {rows &&
+          rows.map((el, i) => {
+            const d = dayjs(el.created_time)
+            return (
+              <div className={styled.timeWrap} key={el.order_num}>
+                <div className={styled.time}>
+                  <p>{d.isValid() && d.format('MMM')}</p>
+                  <p>{d.format('DD')}</p>
+                </div>
+                <div className={styled.border} />
+              </div>
+            )
+          })}
       </div>
     </>
   )
