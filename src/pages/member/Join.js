@@ -22,7 +22,7 @@ export default function Join(props) {
 
     const formData = new FormData(joinForm.current)
 
-    let result = await axios.post('http://localhost:3001/member/api', formData)
+    let result = await axios.post('http://localhost:3001/member/join/api', formData)
 
     // console.log(result.data)
     setShowSuccess(true)
