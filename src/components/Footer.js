@@ -5,7 +5,7 @@ function Footer(props) {
   return (
     <>
       <footer>
-        {pathname !== '/' ? (
+        {pathname !== '/' && pathname !== '/room' ? (
           <div className={styled.img}>
             <img src="../img/footermoun.png" alt="" />
           </div>

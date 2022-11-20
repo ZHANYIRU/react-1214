@@ -1,4 +1,7 @@
 import style from '../../../styles/room-scss/roomDetail.module.scss'
+import { Carousel } from 'react-responsive-carousel'
+import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
+import RoomSelectBar from './RoomSelectBar'
 
 function RoomDetail() {
   return (
@@ -36,31 +39,43 @@ function RoomDetail() {
         </div>
         <div className={style.slideWrap}>
           <div className={style.slide}>
-            <dic className={style.imgs}>
-              <div className={style.img}>
-                <img
-                  src="https://z1.muscache.cn/pictures/2caace88-ab77-498a-9d4e-23777b70b1bc.jpg"
-                  alt=""
-                />
-              </div>
-              <div className={style.img}>
-                <img
-                  src="https://z1.muscache.cn/pictures/2caace88-ab77-498a-9d4e-23777b70b1bc.jpg"
-                  alt=""
-                />
-              </div>
-              <div className={style.img}>
-                <img
-                  src="https://z1.muscache.cn/pictures/2caace88-ab77-498a-9d4e-23777b70b1bc.jpg"
-                  alt=""
-                />
-              </div>
-            </dic>
+            <div className={style.imgs}>
+              <Carousel
+                showArrows={false}
+                showIndicators={false}
+                showStatus={false}
+              >
+                <div className={style.img}>
+                  <img
+                    src="https://www.hotelscombined.com.tw/himg/02/a1/b6/expediav2-3633483-2c7545-091043.jpg"
+                    alt=""
+                  />
+                </div>
+                <div className={style.img}>
+                  <img
+                    src="https://z1.muscache.cn/pictures/2caace88-ab77-498a-9d4e-23777b70b1bc.jpg"
+                    alt=""
+                  />
+                </div>
+                <div className={style.img}>
+                  <img
+                    src="https://chyfun.com/wp-content/uploads/20190923235607_35.webp"
+                    alt=""
+                  />
+                </div>
+                <div className={style.img}>
+                  <img
+                    src="https://chyfun.com/wp-content/uploads/20190923235607_35.webp"
+                    alt=""
+                  />
+                </div>
+              </Carousel>
+            </div>
           </div>
-          <div className={style.arrow}>
+          {/* <div className={style.arrow}>
             <i class="fa-solid fa-chevron-left"></i>
             <i class="fa-solid fa-angle-right"></i>
-          </div>
+          </div> */}
         </div>
         <div className={style.bottom}>
           <div className={style.switch}>
@@ -188,6 +203,7 @@ function RoomDetail() {
           </div>
         </div>
       </div>
+      <RoomSelectBar />
     </>
   )
 }
