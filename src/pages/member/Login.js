@@ -11,7 +11,6 @@ function Login(props) {
   const [showPass, setShowPass] = useState(false)
   const navigate = useNavigate()
   const loginForm = useRef(null)
-  const { isLogin, setIsLogin } = useContext(MemberContext)
 
   const login = async function () {
     const formData = new FormData(loginForm.current)
@@ -25,10 +24,7 @@ function Login(props) {
     localStorage.setItem('token', `${result.data.token}`)
 
     if (result.data.success) {
-      setIsLogin(true)
       navigate('/')
-    } else {
-      setIsLogin(false)
     }
   }
 

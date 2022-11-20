@@ -26,7 +26,6 @@ export const MemberContextProvider = function ({ children }) {
   const resetInfo = initInfo
 
   const [data, setData] = useState(initInfo)
-  const [isLogin, setIsLogin] = useState(false)
 
   async function getInfo() {
     const token = localStorage.getItem('token')
@@ -36,24 +35,25 @@ export const MemberContextProvider = function ({ children }) {
         Authorization: `Bearer ${token}`,
       },
     })
-    if (result.data.rows[0]) {
+    if (result.data.rows) {
       setData(result.data.rows[0])
+      console.log(result.data.rows[0])
+    } else {
+      setData(resetInfo)
+      console.log(result.data)
     }
-
-    // console.log(result.data.rows[0])
   }
 
   useEffect(() => {
     getInfo()
-  }, [isLogin])
-
+  }, [])
 
   //  const getUpdateInfo = function () {
   //     getInfo()
   //  }
 
   return (
-    <MemberContext.Provider value={{ data, setData, isLogin, setIsLogin, resetInfo }}>
+    <MemberContext.Provider value={{ data, setData }}>
       {children}
     </MemberContext.Provider>
   )

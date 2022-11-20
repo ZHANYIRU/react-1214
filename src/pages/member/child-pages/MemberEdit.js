@@ -22,7 +22,7 @@ export default function MemberEdit() {
 
   const navigate = useNavigate()
 
-  const { data, setData, isLogin, resetInfo } = useContext(MemberContext)
+  const { data, setData } = useContext(MemberContext)
 
   // console.log(data)
 
@@ -32,11 +32,6 @@ export default function MemberEdit() {
   useEffect(() => {
     let dateBirth = dayjs(data.birthday).format('YYYY-MM-DD')
     setMyBirth(dateBirth)
-
-    if(!isLogin) {
-      setData(resetInfo)
-      navigate('/login')
-    }
 
   }, [])
 

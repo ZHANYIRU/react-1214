@@ -8,14 +8,8 @@ import MemberContext from '../../contexts/MemberContext'
 function Member(props) {
   const navigate = useNavigate()
 
-  const { data, setData, isLogin, resetInfo } = useContext(MemberContext)
+  const { data, setData } = useContext(MemberContext)
 
-  useEffect(() => {
-    if (!isLogin) {
-      setData(resetInfo)
-      navigate('/login')
-    }
-  }, [])
 
   return (
     <>
