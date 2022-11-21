@@ -21,7 +21,7 @@
       font-weight: 500;
       text-decoration: none;
       border-bottom: 2px solid transparent;
-      transition: .3s;
+      transition: 0.3s;
       &:hover {
         border-bottom: 2px solid $yellow;
         padding-bottom: 5px;
@@ -32,7 +32,7 @@
 .navRight {
   a {
     margin-left: 30px;
-    transition: .3s;
+    transition: 0.3s;
     border-bottom: 2px solid transparent;
     &:hover {
       border-bottom: 2px solid $yellow;
@@ -66,10 +66,10 @@
   justify-content: space-between;
 }
 
-.loginBefore{
+.loginBefore {
   width: 70px;
   height: 80px;
-  background-color: #5F5F5F;
+  background-color: #5f5f5f;
   position: fixed;
   // top: -20px;
   right: 10px;
@@ -77,22 +77,22 @@
   border-radius: 10px;
   text-align: center;
   padding-top: 10px;
-  transition: .3s;
-  a{
+  transition: 0.3s;
+  a {
     line-height: 30px;
     display: inline-block;
     font-size: 12px;
     color: white;
-    span{
+    span {
       border-bottom: 2px solid transparent;
-      transition: .3s;
+      transition: 0.3s;
     }
-    &:hover span{
+    &:hover span {
       border-bottom: 2px solid $yellow;
       padding-bottom: 2px;
     }
   }
-  &::before{
+  &::before {
     content: '';
     display: inline-block;
     position: absolute;
@@ -100,68 +100,66 @@
     left: 30px;
     border-style: solid;
     border-width: 0 5px 8.7px 5px;
-    border-color: transparent transparent #5F5F5F transparent;
+    border-color: transparent transparent #5f5f5f transparent;
   }
 }
 
-
-
-@media screen and (max-width:390px){
-  .navBarBigWrap{
+@media screen and (max-width: 390px) {
+  .navBarBigWrap {
     background-color: black;
     width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    .mobTopWrap{
-      position:relative;
+    .mobTopWrap {
+      position: relative;
       display: flex;
       width: 100%;
       justify-content: center;
-      .logoWrap{
+      .logoWrap {
         flex-shrink: 1;
         display: flex;
         justify-content: center;
         width: 100%;
-        .logo{
+        .logo {
           width: 65px;
           height: 60px;
-          img{
+          img {
             width: 100%;
             // height: 20px;
             object-fit: cover;
           }
         }
       }
-//-------------------------------------------
-      .loginBefore{
+      //-------------------------------------------
+      .loginBefore {
         width: 70px;
         height: 80px;
-        background-color: #5F5F5F;
+        background-color: #5f5f5f;
         position: fixed;
         // top: -20px;
         right: 10px;
-        
+
         // z-index:
         border-radius: 10px;
         text-align: center;
         padding-top: 10px;
-        transition: .5s linear inherit ;
-        a{
+        transition: 0.5s linear inherit;
+        a {
           line-height: 30px;
           display: inline-block;
           font-size: 12px;
           color: white;
-          span{
+          span {
             border-bottom: 2px solid transparent;
-            transition: .3s;
+            transition: 0.3s;
           }
-          &:hover span{
+          &:hover span {
             border-bottom: 2px solid $yellow;
             padding-bottom: 2px;
           }
         }
-        &::before{
+        &::before {
           content: '';
           display: inline-block;
           position: absolute;
@@ -169,35 +167,33 @@
           right: 10px;
           border-style: solid;
           border-width: 1px 15px 8.8px 15px;
-          border-color: transparent transparent #5F5F5F transparent;
+          border-color: transparent transparent #5f5f5f transparent;
         }
       }
 
-//-------------------------------------------
-     .navRight{
-      position:absolute;
-      top: 5px;
-      right: 15px;
-      // z-index: 2;
-      // overflow: hidden;
-      a{
-        margin-left: 10px;
+      //-------------------------------------------
+      .navRight {
+        position: absolute;
+        top: 5px;
+        right: 15px;
+        // z-index: 2;
+        // overflow: hidden;
+        a {
+          margin-left: 10px;
+        }
       }
-     }
     }
 
-    .mobNavWrap{
-      ul{
+    .mobNavWrap {
+      ul {
         display: flex;
-        justify-content:space-around;
+        justify-content: space-around;
       }
-      li{
-        
+      li {
       }
-      a{
+      a {
         text-decoration: none;
         color: white;
-        
       }
     }
   }
