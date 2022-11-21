@@ -8,6 +8,28 @@ import ProCartContext from '../../contexts/ProCartContext'
 export default function ProductPage() {
   const { product_sid } = useParams()
   const { addProCart } = useContext(ProCartContext)
+  // 尺寸選取
+  const [size, setSize] = useState({
+    S: false,
+    M: false,
+    L: false,
+  })
+  //尺寸方法
+  const choseSize = (choseOption) => {
+    if (choseOption === 'S') {
+      const choseSizeTarget = { ...size, S: true, M: false, L: false }
+      setSize(choseSizeTarget)
+    } else if (choseOption === 'M') {
+      const choseSizeTarget = { ...size, S: false, M: true, L: false }
+      setSize(choseSizeTarget)
+    } else {
+      const choseSizeTarget = { ...size, S: false, M: false, L: true }
+      setSize(choseSizeTarget)
+    }
+  }
+  //選擇數量
+  const [num, setNum] = useState(1)
+  //商品介紹、評論
   const [introCom, setintroCom] = useState(true)
   //隨機產生3筆資料
   const [randomData, setRandomData] = useState([
@@ -229,33 +251,97 @@ export default function ProductPage() {
 
                   <div className={styled.standard}>
                     <h2>商品規格</h2>
-                    <div className={styled.standardBox}>S</div>
-                    <div className={styled.standardBox}>M</div>
-                    <div className={styled.standardBox}>L</div>
+                    <div
+                      className={
+                        size.S
+                          ? `${styled.standardBoxChose}`
+                          : `${styled.standardBox}`
+                      }
+                      onClick={() => {
+                        if (size.S) {
+                          return setSize({
+                            S: false,
+                            M: false,
+                            L: false,
+                          })
+                        }
+                        choseSize('S')
+                      }}
+                    >
+                      S
+                    </div>
+                    <div
+                      className={
+                        size.M
+                          ? `${styled.standardBoxChose}`
+                          : `${styled.standardBox}`
+                      }
+                      onClick={() => {
+                        if (size.M) {
+                          return setSize({
+                            S: false,
+                            M: false,
+                            L: false,
+                          })
+                        }
+                        choseSize('M')
+                      }}
+                    >
+                      M
+                    </div>
+                    <div
+                      className={
+                        size.L
+                          ? `${styled.standardBoxChose}`
+                          : `${styled.standardBox}`
+                      }
+                      onClick={() => {
+                        if (size.L) {
+                          return setSize({
+                            S: false,
+                            M: false,
+                            L: false,
+                          })
+                        }
+                        choseSize('L')
+                      }}
+                    >
+                      L
+                    </div>
                   </div>
                   <h2>金額：{moneyFormat(v.product_price)}</h2>
                   <div className={styled.howNum}>
                     <p>商品數量</p>
                     <div className={styled.numBox}>
                       <div className={styled.numBox1}>
-                        <i className="fa-solid fa-minus"></i>
+                        <i
+                          className="fa-solid fa-minus"
+                          onClick={() => {
+                            if (num < 2) return
+                            setNum(num - 1)
+                          }}
+                        ></i>
                       </div>
-                      <div className={styled.numBox2}>
-                        {v.product_inventory}
-                      </div>
+                      <div className={styled.numBox2}>{num}</div>
                       <div className={styled.numBox3}>
-                        <i className="fa-solid fa-plus"></i>
+                        <i
+                          className="fa-solid fa-plus"
+                          onClick={() => {
+                            if (num > v.product_inventory) return
+                            setNum(num + 1)
+                          }}
+                        ></i>
                       </div>
                     </div>
                   </div>
                   <div className={styled.deliver}>
                     <p>配送方式</p>
                     <label htmlFor="home">宅配</label>
-                    <input type="radio" id="home" name="deliver" />
+                    <input type="radio" id="home" name="deliver" value="home" />
                     <label htmlFor="711">超商取貨</label>
-                    <input type="radio" id="711" name="deliver" />
+                    <input type="radio" id="711" name="deliver" value="711" />
                     <label htmlFor="shop">實體店取貨</label>
-                    <input type="radio" id="shop" name="deliver" />
+                    <input type="radio" id="shop" name="deliver" value="shop" />
                   </div>
                   <div className={styled.buttonGroup}>
                     <button
