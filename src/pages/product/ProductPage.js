@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import ProCartContext from '../../contexts/ProCartContext'
 
 export default function ProductPage() {
+  const { product_sid } = useParams()
   const { addProCart } = useContext(ProCartContext)
   const [introCom, setintroCom] = useState(true)
   //隨機產生3筆資料
@@ -44,7 +45,31 @@ export default function ProductPage() {
       size: 'S',
     },
   ]
-  const { product_sid } = useParams()
+
+  const [datas, setDatas] = useState([
+    {
+      product_sid: '1',
+      product_name: 'a',
+      product_category_sid: '10',
+      brand_sid: '7',
+      product_price: '3699',
+      product_inventory: '20',
+      product_img: '1',
+      product_imgs: '1',
+      product_spec: '1',
+      product_feature: '1',
+      size: 'S',
+    },
+  ])
+  //我是fetch
+  const getProductData = async (url) => {
+    const response = await axios.get(
+      `http://localhost:3001/product/${product_sid}`
+    )
+    const r = response.data
+    console.log(r)
+    setDatas(r)
+  }
 
   //format currency
   const moneyFormat = (price) => {
@@ -66,57 +91,49 @@ export default function ProductPage() {
   }
 
   // 商品介紹 or 商品評論
-  const intro = (
-    <div className={styled.introWrap}>
-      <div className={styled.introTitle}>產品規格</div>
-      <p className={styled.intro}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
-        temporibus corrupti repellendus soluta eum et labore autem, in
-        exercitationem harum voluptate fugiat assumenda molestias maxime veniam.
-        Voluptate possimus itaque ea!
-      </p>
-      <div className={styled.introTitle}>特色說明</div>
-      <p className={styled.intro}>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
-        temporibus corrupti repellendus soluta eum et labore autem, in
-        exercitationem harum voluptate fugiat assumenda molestias maxime veniam.
-        Voluptate possimus itaque ea!
-      </p>
-      <div className={styled.introTitle}>猜你喜歡</div>
-      <div className={styled.guessYouLike}>
-        {randomData.map((v, i) => {
-          return (
-            <Link
-              className={styled.card}
-              key={v.product_sid}
-              to={'/product/' + v.product_sid}
-            >
-              <div>
-                <img
-                  src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
-                  alt=""
-                />
-                <p className={styled.p}>{v.product_name}</p>
-                <h2>
-                  金額：<span>${v.product_price}</span>
-                </h2>
-              </div>
-            </Link>
-          )
-        })}
+  const intro = datas.map((v, i) => {
+    return (
+      <div className={styled.introWrap}>
+        <div className={styled.introTitle}>產品規格</div>
+        <p className={styled.intro}>{v.product_spec}</p>
+        <div className={styled.introTitle}>特色說明</div>
+        <p className={styled.intro}>{v.product_feature}</p>
+        <div className={styled.introTitle}>猜你喜歡</div>
+        <div className={styled.guessYouLike}>
+          {randomData.map((v, i) => {
+            return (
+              <Link
+                className={styled.card}
+                key={v.product_sid}
+                to={'/product/' + v.product_sid}
+              >
+                <div>
+                  <img
+                    src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
+                    alt=""
+                  />
+                  <p className={styled.p}>{v.product_name}</p>
+                  <h2>
+                    金額：<span>${v.product_price}</span>
+                  </h2>
+                </div>
+              </Link>
+            )
+          })}
+        </div>
       </div>
-    </div>
-  )
+    )
+  })
 
   const com = (
     <div className={styled.comWrap}>
       <div className={styled.starBox}>
         <Link>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
-          <i class="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
         </Link>
         <button>撰寫評論</button>
       </div>
@@ -143,11 +160,11 @@ export default function ProductPage() {
                   dolor voluptas velit facere nam, cupiditate iure ratione
                 </div>
                 <div className={styled.howStar}>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
-                  <i class="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
                 </div>
               </div>
             )
@@ -158,6 +175,9 @@ export default function ProductPage() {
   useEffect(() => {
     getRondomProductData()
   }, [])
+  useEffect(() => {
+    getProductData()
+  }, [])
 
   return (
     <>
@@ -165,7 +185,7 @@ export default function ProductPage() {
       <div className={styled.card}>
         <div className={styled.container}>
           {/* //bordshell */}
-          {productData.map((v, i) => {
+          {datas.map((v, i) => {
             return (
               <div className={styled.productDtail} key={v.product_sid}>
                 <div className={styled.imgBox}>
@@ -199,11 +219,11 @@ export default function ProductPage() {
                   <div className={styled.productTitle}>
                     <h1>{v.product_name}</h1>
                     <Link>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
-                      <i class="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
+                      <i className="fa-solid fa-star"></i>
                     </Link>
                   </div>
 
@@ -218,13 +238,13 @@ export default function ProductPage() {
                     <p>商品數量</p>
                     <div className={styled.numBox}>
                       <div className={styled.numBox1}>
-                        <i class="fa-solid fa-minus"></i>
+                        <i className="fa-solid fa-minus"></i>
                       </div>
                       <div className={styled.numBox2}>
                         {v.product_inventory}
                       </div>
                       <div className={styled.numBox3}>
-                        <i class="fa-solid fa-plus"></i>
+                        <i className="fa-solid fa-plus"></i>
                       </div>
                     </div>
                   </div>

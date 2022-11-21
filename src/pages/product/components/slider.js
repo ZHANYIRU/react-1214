@@ -16,6 +16,7 @@ function Slider({ data }) {
       clearInterval(a)
     }
   }, [currentId])
+
   return (
     <div className="slider">
       {data.map((el, id) => (

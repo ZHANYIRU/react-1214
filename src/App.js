@@ -10,6 +10,8 @@ import Camp from './pages/camp/Camp'
 import Room from './pages/room/Room'
 import Rental from './pages/rental/Rental'
 import Rental_detail from './pages/rental/Rental_detail'
+import ProductSee from './pages/rental/components/ProductSee'
+
 import Cart from './pages/Cart/Cart'
 import Order from './pages/Order/Order'
 import TestProducts from './pages/Cart/TestProducts/TestProducts'
@@ -44,6 +46,8 @@ function App() {
             path="/rental/:rental_product_sid"
             element={<Rental_detail />}
           />
+          <Route path="/rentaltest" element={<ProductSee />} />
+
           <Route path="/cart" element={<Cart />} />
           <Route path="/test" element={<TestProducts />} />
           <Route path="/social" element={<SocialWall />} />
