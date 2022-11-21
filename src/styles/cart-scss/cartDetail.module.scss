@@ -44,6 +44,7 @@
   }
 }
 .wrap {
+  // animation: change 1.5s linear infinite;
   width: 90%;
   margin: 0 auto;
   display: flex;
@@ -53,6 +54,33 @@
   i {
     cursor: pointer;
   }
+}
+.wrapChange {
+  animation: change .6s linear;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  padding: 20px 0;
+  justify-content: space-between;
+  align-items: center;
+  i {
+    cursor: pointer;
+  }
+}
+@keyframes change {
+  0%{
+    transform: translateX(0px);
+    opacity: 1;
+  }
+  50%{
+    transform: translateX(400px);
+    opacity: 0.6;
+  }
+  100%{
+    transform: translateX(700px);
+    opacity: 0;
+  }
+  
 }
 .wrapRight {
   width: 92%;
@@ -86,8 +114,8 @@
 }
 .icon {
   position: absolute;
-  top: 15px;
-  left: 35%;
+  top: 10px;
+  left: 55%;
   display: flex;
   font-size: 14px;
   div {

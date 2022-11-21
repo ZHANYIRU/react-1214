@@ -1,127 +1,103 @@
-import React from 'react'
+import { useState, useContext } from 'react'
+import ProCartContext from '../../../../contexts/ProCartContext'
 import styled from '../../../../styles/cart-scss/cartDetail.module.scss'
 function CartDetailCam() {
+  const { camp, plusOne3, minusOne3, delOne3 } = useContext(ProCartContext)
+  const [del, setDel] = useState([])
+  const change = (el, i) => {
+    if (!del.includes(el.sid)) {
+      const newDel = [...del, el.sid]
+      setDel(newDel)
+    }
+  }
   return (
     <>
-      <div className={`${styled.dtWrap} ${styled.cam}`}>
-        <div className={styled.outWrap}>
-          {/* 之後map的 */}
-          <div className={styled.wrap}>
-            <input type="checkbox" />
-            <div className={styled.wrapRight}>
-              <div className={styled.roomText}>
-                <h2>眠月線-失落的森林</h2>
-                <p>集合地址：353苗栗縣南庄鄉蓬萊村42份7-6號</p>
-                <p>預定日期：2022/10/31</p>
-                <p>3天2夜</p>
-                <div className={styled.people}>
-                  <p>人數：</p>
-                  <div className={styled.qty}>
-                    <button>－</button>
-                    <button>2</button>
-                    <button>＋</button>
+      {camp && (
+        <div className={`${styled.dtWrap} ${styled.cam}`}>
+          <div className={styled.outWrap}>
+            {camp.map((el, i) => {
+              return (
+                <div
+                  className={
+                    del.includes(el.sid)
+                      ? `${styled.wrapChange}`
+                      : `${styled.wrap}`
+                  }
+                  key={el.sid}
+                >
+                  <input type="checkbox" />
+                  <div className={styled.wrapRight}>
+                    <div className={styled.roomText}>
+                      <h2>{el.name}</h2>
+                      <p>集合地址：{el.address}</p>
+                      <p>預定日期：{el.startDate}</p>
+                      <p>單價：{el.price}</p>
+                      <div className={styled.people}>
+                        <p>人數：</p>
+                        <div className={styled.qty}>
+                          {el.qty <= 1 ? (
+                            <button
+                              onClick={() => {
+                                minusOne3(el.sid)
+                              }}
+                              disabled
+                            >
+                              －
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => {
+                                minusOne3(el.sid)
+                              }}
+                            >
+                              －
+                            </button>
+                          )}
+                          <button>{el.qty}</button>
+                          <button
+                            onClick={() => {
+                              plusOne3(el.sid)
+                            }}
+                          >
+                            ＋
+                          </button>
+                        </div>
+                        <p>人</p>
+                      </div>
+                      <p>總金額：{el.qty * el.price}</p>
+                    </div>
+                    <div className={styled.roomImg}>
+                      <img
+                        src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
+                        alt=""
+                      />
+                    </div>
+                    <div className={styled.icon}>
+                      <div>
+                        <i className="fa-solid fa-map-location-dot"></i>
+                        <span>{el.area}</span>
+                      </div>
+                      <div>
+                        <i className="fa-solid fa-mountain"></i>
+                        <span>{el.moun}</span>
+                      </div>
+                    </div>
                   </div>
-                  <p>人</p>
+                  <i
+                    className="fa-regular fa-trash-can"
+                    onClick={() => {
+                      change(el, i)
+                      setTimeout(() => {
+                        delOne3(el.sid)
+                      }, 500)
+                    }}
+                  ></i>
                 </div>
-                <p>總金額：3450</p>
-              </div>
-              <div className={styled.roomImg}>
-                <img
-                  src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
-                  alt=""
-                />
-              </div>
-              <div className={styled.icon}>
-                <div>
-                  <i className="fa-solid fa-map-location-dot"></i>
-                  <span>苗栗 南庄區</span>
-                </div>
-                <div>
-                  <i className="fa-solid fa-mountain"></i>
-                  <span>加里山</span>
-                </div>
-              </div>
-            </div>
-            <i className="fa-regular fa-trash-can"></i>
-          </div>
-          <div className={styled.wrap}>
-            <input type="checkbox" />
-            <div className={styled.wrapRight}>
-              <div className={styled.roomText}>
-                <h2>眠月線-失落的森林</h2>
-                <p>集合地址：353苗栗縣南庄鄉蓬萊村42份7-6號</p>
-                <p>預定日期：2022/10/31</p>
-                <p>3天2夜</p>
-                <div className={styled.people}>
-                  <p>人數：</p>
-                  <div className={styled.qty}>
-                    <button>－</button>
-                    <button>2</button>
-                    <button>＋</button>
-                  </div>
-                  <p>人</p>
-                </div>
-                <p>總金額：3450</p>
-              </div>
-              <div className={styled.roomImg}>
-                <img
-                  src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
-                  alt=""
-                />
-              </div>
-              <div className={styled.icon}>
-                <div>
-                  <i className="fa-solid fa-map-location-dot"></i>
-                  <span>苗栗 南庄區</span>
-                </div>
-                <div>
-                  <i className="fa-solid fa-mountain"></i>
-                  <span>加里山</span>
-                </div>
-              </div>
-            </div>
-            <i className="fa-regular fa-trash-can"></i>
-          </div>
-          <div className={styled.wrap}>
-            <input type="checkbox" />
-            <div className={styled.wrapRight}>
-              <div className={styled.roomText}>
-                <h2>眠月線-失落的森林</h2>
-                <p>集合地址：353苗栗縣南庄鄉蓬萊村42份7-6號</p>
-                <p>預定日期：2022/10/31</p>
-                <p>3天2夜</p>
-                <div className={styled.people}>
-                  <p>人數：</p>
-                  <div className={styled.qty}>
-                    <button>－</button>
-                    <button>2</button>
-                    <button>＋</button>
-                  </div>
-                  <p>人</p>
-                </div>
-                <p>總金額：3450</p>
-              </div>
-              <div className={styled.roomImg}>
-                <img
-                  src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
-                  alt=""
-                />
-              </div>
-              <div className={styled.icon}>
-                <div>
-                  <i className="fa-solid fa-map-location-dot"></i>
-                  <span>苗栗 南庄區</span>
-                </div>
-                <div>
-                  <i className="fa-solid fa-mountain"></i>
-                  <span>加里山</span>
-                </div>
-              </div>
-            </div>
-            <i className="fa-regular fa-trash-can"></i>
+              )
+            })}
           </div>
         </div>
-      </div>
+      )}
     </>
   )
 }

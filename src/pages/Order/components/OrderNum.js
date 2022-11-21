@@ -1,8 +1,7 @@
-import React from 'react'
-import { useState } from 'react'
 import styled from '../../../styles/order-scss/OrderNum.module.scss'
 import dayjs from 'dayjs'
-function OrderNum({ momOrder, open, setOpen, contentH }) {
+import { useState } from 'react'
+function OrderNum({ momOrder, open, setOpen }) {
   // order範本
   // "sid": 59,
   // "order_num": "20220923025717",
@@ -21,8 +20,7 @@ function OrderNum({ momOrder, open, setOpen, contentH }) {
   }
   //打開子訂單
   const openWrap = (e) => {
-    const value = Number(e.target.value)
-    console.log(value)
+    const value = +e.target.value
     if (open.includes(value)) {
       const newOpen = open.filter((el2) => el2 !== value)
       setOpen(newOpen)
@@ -31,7 +29,6 @@ function OrderNum({ momOrder, open, setOpen, contentH }) {
       setOpen(newOpen)
     }
   }
-
   return (
     <>
       {lightOpen && (
@@ -101,7 +98,6 @@ function OrderNum({ momOrder, open, setOpen, contentH }) {
                       ? `${styled.contentWrapOpen}`
                       : `${styled.contentWrap}`
                   }
-                  ref={contentH}
                 >
                   <div className={styled.pro}>
                     {proRows &&

@@ -3,11 +3,10 @@ import { MY_HOST } from './myConfig'
 import OrderTime from './components/OrderTime'
 import OrderNum from './components/OrderNum'
 import axios from 'axios'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 function Order() {
   //打開子訂單+時間線增長的狀態
   const [open, setOpen] = useState([])
-  const contentH = useRef(null)
   const [momOrder, setMomOrder] = useState([
     {
       rows: [],
@@ -19,11 +18,6 @@ function Order() {
   ])
   const getList = async () => {
     const { data } = await axios.get(MY_HOST + '/order/api')
-    // const newOpen = data.rows.map((el, i) => {
-    //   return { [`${el.sid}`]: false }
-    // })
-    // setOpen(newOpen)
-    console.log(data)
     setMomOrder(data)
   }
   useEffect(() => {
@@ -37,12 +31,7 @@ function Order() {
       </div>
       <div className={styled.orderBottom}>
         <OrderTime rows={momOrder.rows} open={open} />
-        <OrderNum
-          momOrder={momOrder}
-          open={open}
-          setOpen={setOpen}
-          contentH={contentH}
-        />
+        <OrderNum momOrder={momOrder} open={open} setOpen={setOpen} />
       </div>
     </div>
   )

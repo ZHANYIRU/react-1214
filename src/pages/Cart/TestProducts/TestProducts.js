@@ -4,13 +4,15 @@ import './test.scss'
 // import { addProCart } from '../../../components/AddCart'
 
 function TestProducts() {
-  const { addProCart, addRoomCart } = useContext(ProCartContext)
+  const { addProCart, addRoomCart, addCampCart } = useContext(ProCartContext)
   const [qty, setQty] = useState([1, 1])
   const [qty2, setQty2] = useState([1, 1])
+  const [qty3, setQty3] = useState([1, 1])
   const [date2, setdate2] = useState({
     start: '',
     end: '',
   })
+  const [date3, setDate3] = useState('')
   const [userSize, setUserSize] = useState(['S', 'S'])
   const size = ['S', 'M', 'L']
   const testPro = [
@@ -35,6 +37,18 @@ function TestProducts() {
       room_sid: 40,
       name: '你家',
       price: 6000,
+    },
+  ]
+  const testCamp = [
+    {
+      camp_sid: 10,
+      name: '霞喀羅古道 - 賞楓路線新手難度兩天一夜',
+      price: 1900,
+    },
+    {
+      camp_sid: 60,
+      name: '高島縱走2022開團 - 含交通新手難度一日遊',
+      price: 4000,
     },
   ]
   return (
@@ -163,6 +177,61 @@ function TestProducts() {
                       '阿拉斯加山',
                       el.price,
                       qty2[i]
+                    )
+                  }}
+                >
+                  加入購物車
+                </button>
+              </>
+            )
+          })}
+        </div>
+        <div>
+          <h2>活動Test</h2>
+          {testCamp.map((el, i) => {
+            return (
+              <>
+                <div key={el.camp_sid}>
+                  <p>{el.name}</p>
+                  <p>{el.price}</p>
+                  <input
+                    type="date"
+                    value={date3}
+                    name="start"
+                    onChange={(e) => {
+                      setDate3(e.target.value)
+                    }}
+                  />
+                  <select
+                    value={qty3[i]}
+                    onChange={(e) => {
+                      const newQty = [...qty3]
+                      newQty[i] = +e.target.value
+                      setQty3(newQty)
+                    }}
+                  >
+                    {Array(10)
+                      .fill(1)
+                      .map((v, i2) => {
+                        return (
+                          <option value={i2 + 1} key={i2}>
+                            {i2 + 1}
+                          </option>
+                        )
+                      })}
+                  </select>
+                </div>
+                <button
+                  onClick={() => {
+                    addCampCart(
+                      el.camp_sid,
+                      el.name,
+                      '集合在中央分隔島',
+                      date2.start,
+                      '木柵',
+                      '拉拉山',
+                      el.price,
+                      qty3[i]
                     )
                   }}
                 >

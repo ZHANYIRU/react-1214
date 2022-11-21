@@ -27,6 +27,7 @@ import { useReducer, createContext } from 'react'
 const initState = {
   items: [],
   items2: [],
+  items3: [],
   totalItem: 0,
 }
 //Reducer
@@ -44,6 +45,7 @@ const proCartReducer = (state, action) => {
     end,
     area,
     moun,
+    campSid,
   } = action.payload
   //for 商品的index
   const proIndex = state.items.findIndex(
@@ -51,6 +53,8 @@ const proCartReducer = (state, action) => {
   )
   //for 房間的index
   const roomIndex = state.items2.findIndex((el) => el.sid === roomSid)
+  //for 活動的index
+  const campIndex = state.items3.findIndex((el) => el.sid === campSid)
   //更新localStorage購物車-商品
   const updateCart = (upState, payload) => {
     if (proIndex === -1) {
@@ -79,11 +83,25 @@ const proCartReducer = (state, action) => {
       return newState
     }
   }
+  //更新localStorage購物車-活動
+  const updateCampCart = (upState, payload) => {
+    if (campIndex === -1) {
+      localStorage.setItem('campCart', JSON.stringify(upState.items3))
+      localStorage.setItem('totalItem', payload)
+      return upState
+    }
+    if (campIndex > -1) {
+      upState[campIndex] = { ...upState[campIndex], qty: payload }
+      const newState = { ...state, items3: upState, totalItem: state.totalItem }
+      localStorage.setItem('campCart', JSON.stringify(newState.items3))
+      return newState
+    }
+  }
   switch (action.type) {
     //加入購物車-商品
     case 'ADD_CART':
       if (proIndex === -1) {
-        console.log(456)
+        console.log('商品123')
         state = {
           ...state,
           items: [
@@ -102,7 +120,7 @@ const proCartReducer = (state, action) => {
         const newTotalItem = state.totalItem
         return updateCart(state, newTotalItem)
       } else {
-        console.log(789)
+        console.log('商品456')
         if (proIndex > -1) {
           const a = [...state.items]
           const newQty = a[proIndex].qty + qty
@@ -113,7 +131,7 @@ const proCartReducer = (state, action) => {
     //加入購物車-房間
     case 'ADD_CART2':
       if (roomIndex === -1) {
-        console.log(123)
+        console.log('房間123')
         state = {
           ...state,
           items2: [
@@ -122,7 +140,7 @@ const proCartReducer = (state, action) => {
               sid: roomSid,
               name: name,
               address: address,
-              starDate: start,
+              startDate: start,
               endDate: end,
               area: area,
               moun: moun,
@@ -136,11 +154,44 @@ const proCartReducer = (state, action) => {
         const newTotalItem = state.totalItem
         return updateRoomCart(state, newTotalItem)
       } else {
-        console.log(789)
+        console.log('房間456')
         if (roomIndex > -1) {
           const a = [...state.items2]
           const newQty = a[roomIndex].qty + qty
           return updateRoomCart(a, newQty)
+        }
+        return state
+      }
+    //加入購物車-活動
+    case 'ADD_CART3':
+      if (campIndex === -1) {
+        console.log('活動123')
+        state = {
+          ...state,
+          items3: [
+            ...state.items3,
+            {
+              sid: campSid,
+              name: name,
+              address: address,
+              startDate: start,
+              area: area,
+              moun: moun,
+              img: img,
+              price: price,
+              qty: qty,
+            },
+          ],
+          totalItem: state.totalItem + 1,
+        }
+        const newTotalItem = state.totalItem
+        return updateCampCart(state, newTotalItem)
+      } else {
+        console.log('活動789')
+        if (campIndex > -1) {
+          const a = [...state.items3]
+          const newQty = a[campIndex].qty + qty
+          return updateCampCart(a, newQty)
         }
         return state
       }
@@ -156,6 +207,11 @@ const proCartReducer = (state, action) => {
         const newQty = a[roomIndex].qty + 1
         return updateRoomCart(a, newQty)
       }
+      if (campIndex > -1) {
+        const a = [...state.items3]
+        const newQty = a[campIndex].qty + 1
+        return updateCampCart(a, newQty)
+      }
       return state
     //數量-1
     case 'MINUS':
@@ -168,6 +224,11 @@ const proCartReducer = (state, action) => {
         const a = [...state.items2]
         const newQty = a[roomIndex].qty > 1 ? a[roomIndex].qty - 1 : 1
         return updateRoomCart(a, newQty)
+      }
+      if (campIndex > -1) {
+        const a = [...state.items3]
+        const newQty = a[campIndex].qty > 1 ? a[campIndex].qty - 1 : 1
+        return updateCampCart(a, newQty)
       }
       return state
     //刪除單筆
@@ -200,11 +261,28 @@ const proCartReducer = (state, action) => {
         }
         return state
       }
+      if (campIndex > -1) {
+        const item1 = state.items3.slice(0, campIndex)
+        const item2 = state.items3.slice(campIndex + 1)
+        const newCartItem = item1.concat(item2)
+        state = {
+          ...state,
+          items3: newCartItem,
+          totalItem: state.totalItem - 1,
+        }
+        localStorage.setItem('campCart', JSON.stringify(state.items3))
+        localStorage.setItem('totalItem', state.totalItem)
+        if (newCartItem.length === 0) {
+          localStorage.removeItem('campCart')
+        }
+        return state
+      }
       return state
     //清空購物車
     case 'RESET_CART':
       localStorage.removeItem('proCart')
       localStorage.removeItem('roomCart')
+      localStorage.removeItem('campCart')
       localStorage.removeItem('totalItem')
       return initState
     //沒有符合的case 回傳初始state
@@ -244,6 +322,10 @@ export const ProCartContextProvider = ({ children }) => {
   //購物車房間顯示
   const room = localStorage.getItem('roomCart')
     ? JSON.parse(localStorage.getItem('roomCart'))
+    : ''
+  //購物車房間顯示
+  const camp = localStorage.getItem('campCart')
+    ? JSON.parse(localStorage.getItem('campCart'))
     : ''
   //加入購物車-商品
   const addProCart = (proSid, name, size, price, qty, img) => {
@@ -288,6 +370,33 @@ export const ProCartContextProvider = ({ children }) => {
       },
     })
   }
+  //加入購物車-活動
+  const addCampCart = (
+    campSid,
+    name,
+    address,
+    start,
+    area,
+    moun,
+    price,
+    qty,
+    img
+  ) => {
+    dispatch({
+      type: 'ADD_CART3',
+      payload: {
+        campSid,
+        name,
+        address,
+        start,
+        area,
+        moun,
+        price,
+        qty,
+        img,
+      },
+    })
+  }
   //商品數量+1(商品)
   const plusOne = (proSid, size) => {
     dispatch({
@@ -316,6 +425,20 @@ export const ProCartContextProvider = ({ children }) => {
       payload: { roomSid },
     })
   }
+  //商品數量+1(活動)
+  const plusOne3 = (campSid) => {
+    dispatch({
+      type: 'PLUS',
+      payload: { campSid },
+    })
+  }
+  //商品數量-1(活動)
+  const minusOne3 = (campSid) => {
+    dispatch({
+      type: 'MINUS',
+      payload: { campSid },
+    })
+  }
   //刪除單筆商品
   const delOne = (proSid, size) => {
     dispatch({
@@ -330,6 +453,13 @@ export const ProCartContextProvider = ({ children }) => {
       payload: { roomSid },
     })
   }
+  //刪除單筆房間
+  const delOne3 = (campSid) => {
+    dispatch({
+      type: 'DEL',
+      payload: { campSid },
+    })
+  }
   //清空購物車
   const resetCart = () => {
     dispatch({
@@ -342,16 +472,21 @@ export const ProCartContextProvider = ({ children }) => {
       value={{
         addProCart,
         addRoomCart,
+        addCampCart,
         plusOne,
         plusOne2,
+        plusOne3,
         minusOne,
         minusOne2,
+        minusOne3,
         delOne,
         delOne2,
+        delOne3,
         resetCart,
         cartItem,
         pro,
         room,
+        camp,
       }}
     >
       {children}

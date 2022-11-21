@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useState, useContext } from 'react'
 import ProCartContext from '../../../../contexts/ProCartContext'
 import styled from '../../../../styles/cart-scss/cartDetail.module.scss'
 function CartDetailPro() {
@@ -10,11 +10,18 @@ function CartDetailPro() {
   //  qty: 1
   // }]
   const { pro, plusOne, minusOne, delOne } = useContext(ProCartContext)
+  const [del, setDel] = useState([])
   const moneyFormat = (price) => {
     let a = Number(price)
     let b = a.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD' })
     let c = b.split('.')
     return c[0]
+  }
+  const change = (el, i) => {
+    if (!del.includes(el.sid)) {
+      const newDel = [...del, el.sid]
+      setDel(newDel)
+    }
   }
   return (
     <>
@@ -23,7 +30,14 @@ function CartDetailPro() {
           <div className={styled.outWrap}>
             {pro.map((el, i) => {
               return (
-                <div className={styled.wrap} key={`${el.sid}+${el.size}`}>
+                <div
+                  className={
+                    del.includes(el.sid)
+                      ? `${styled.wrapChange}`
+                      : `${styled.wrap}`
+                  }
+                  key={`${el.sid}+${el.size}`}
+                >
                   <input type="checkbox" />
                   <div className={styled.wrapRight}>
                     <div className={styled.roomText}>
@@ -73,7 +87,10 @@ function CartDetailPro() {
                   <i
                     className="fa-regular fa-trash-can"
                     onClick={() => {
-                      delOne(el.sid, el.size)
+                      change(el, i)
+                      setTimeout(() => {
+                        delOne(el.sid, el.size)
+                      }, 500)
                     }}
                   ></i>
                 </div>
