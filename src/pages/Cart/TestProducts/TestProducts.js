@@ -153,12 +153,14 @@ function TestProducts() {
                 </div>
                 <button
                   onClick={() => {
-                    addRoomCart()
-                    console.log(
+                    addRoomCart(
                       el.room_sid,
                       el.name,
+                      '苗栗縣獅潭鄉',
                       date2.start,
                       date2.end,
+                      '苗栗',
+                      '阿拉斯加山',
                       el.price,
                       qty2[i]
                     )

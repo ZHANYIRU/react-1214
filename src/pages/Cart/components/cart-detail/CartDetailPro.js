@@ -1,4 +1,3 @@
-import React from 'react'
 import { useContext } from 'react'
 import ProCartContext from '../../../../contexts/ProCartContext'
 import styled from '../../../../styles/cart-scss/cartDetail.module.scss'

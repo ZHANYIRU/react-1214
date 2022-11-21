@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import styled from '../../../styles/order-scss/OrderNum.module.scss'
 import dayjs from 'dayjs'
-function OrderNum({ momOrder, open, setOpen }) {
+function OrderNum({ momOrder, open, setOpen, contentH }) {
   // order範本
   // "sid": 59,
   // "order_num": "20220923025717",
@@ -101,6 +101,7 @@ function OrderNum({ momOrder, open, setOpen }) {
                       ? `${styled.contentWrapOpen}`
                       : `${styled.contentWrap}`
                   }
+                  ref={contentH}
                 >
                   <div className={styled.pro}>
                     {proRows &&
