@@ -6,7 +6,7 @@ const Rental_detail = () => {
   const { rental_product_sid } = useParams()
   let [Detail, setDetail] = useState({})
 
-  const rental_url = `http://localhost:3001/rental//getDetailData/${rental_product_sid}`
+  const rental_url = `http://localhost:3001/rental/getDetailData/${rental_product_sid}`
 
   async function get_rental_detail() {
     const response = await axios.get(rental_url)
