@@ -62,12 +62,344 @@ export default function ProductFilter({
   // let brands = 'http://localhost:3001/product/brand'
   // let price_brand = 'http://localhost:3001/product/filter'
 
+  // '抗水（Water Resistant）',
+  //'防潑水（Water Repellent）',
+  //'防水（Waterproof）',
+
   const filterRender = async (rotues) => {
     const response = await axios.post(rotues, {
       ...filters,
     })
     const data = response.data
-    if (genders === '男') {
+    // 三種屬性 + 男
+    if (
+      proofList.includes('抗水（Water Resistant）') &&
+      proofList.includes('防潑水（Water Repellent）') &&
+      proofList.includes('防水（Waterproof）') &&
+      genders === '男'
+    ) {
+      const a = data.filter((v, i) => {
+        return v.proof === '抗水' || v.proof === '防潑水' || v.proof === '防水'
+      })
+      const b = a.filter((v, i) => {
+        return (
+          v.product_category_sid == 9 ||
+          v.product_category_sid == 7 ||
+          v.product_category_sid == 11
+        )
+      })
+      console.log(b)
+      setDatas(b)
+    }
+    // 三種屬性 + 女
+    else if (
+      proofList.includes('抗水（Water Resistant）') &&
+      proofList.includes('防潑水（Water Repellent）') &&
+      proofList.includes('防水（Waterproof）') &&
+      genders === '女'
+    ) {
+      const a = data.filter((v, i) => {
+        return v.proof === '抗水' || v.proof === '防潑水' || v.proof === '防水'
+      })
+      const b = a.filter((v, i) => {
+        return (
+          v.product_category_sid == 8 ||
+          v.product_category_sid == 10 ||
+          v.product_category_sid == 12
+        )
+      })
+      console.log(a)
+      console.log(b)
+      setDatas(b)
+    }
+    // 三種屬性
+    else if (
+      proofList.includes('抗水（Water Resistant）') &&
+      proofList.includes('防潑水（Water Repellent）') &&
+      proofList.includes('防水（Waterproof）')
+    ) {
+      const a = data.filter((v, i) => {
+        return v.proof === '抗水' || v.proof === '防潑水' || v.proof === '防水'
+      })
+      console.log(a)
+      console.log(a)
+      setDatas(a)
+    }
+    // 抗水+防潑水+男
+    else if (
+      proofList.includes('抗水（Water Resistant）') &&
+      proofList.includes('防潑水（Water Repellent）') &&
+      genders === '男'
+    ) {
+      const a = data.filter((v, i) => {
+        return v.proof === '抗水' || v.proof === '防潑水'
+      })
+      const b = a.filter((v, i) => {
+        return (
+          v.product_category_sid == 9 ||
+          v.product_category_sid == 7 ||
+          v.product_category_sid == 11
+        )
+      })
+      console.log(b)
+      setDatas(b)
+    }
+    // 防水+防潑水+男
+    else if (
+      proofList.includes('防潑水（Water Repellent）') &&
+      proofList.includes('防水（Waterproof）') &&
+      genders === '男'
+    ) {
+      const a = data.filter((v, i) => {
+        return v.proof === '防潑水' || v.proof === '防水'
+      })
+      const b = a.filter((v, i) => {
+        return (
+          v.product_category_sid == 9 ||
+          v.product_category_sid == 7 ||
+          v.product_category_sid == 11
+        )
+      })
+      console.log(b)
+      setDatas(b)
+    }
+    // 抗水+防水+男
+    else if (
+      proofList.includes('抗水（Water Resistant）') &&
+      proofList.includes('防水（Waterproof）') &&
+      genders === '男'
+    ) {
+      const a = data.filter((v, i) => {
+        return v.proof === '抗水' || v.proof === '防水'
+      })
+      const b = a.filter((v, i) => {
+        return (
+          v.product_category_sid == 9 ||
+          v.product_category_sid == 7 ||
+          v.product_category_sid == 11
+        )
+      })
+      console.log(b)
+      setDatas(b)
+    }
+    //抗水+防潑水 +女
+    else if (
+      proofList.includes('抗水（Water Resistant）') &&
+      proofList.includes('防潑水（Water Repellent）') &&
+      genders === '女'
+    ) {
+      const a = data.filter((v, i) => {
+        return v.proof === '抗水' || v.proof === '防潑水'
+      })
+      const b = a.filter((v, i) => {
+        return (
+          v.product_category_sid == 8 ||
+          v.product_category_sid == 10 ||
+          v.product_category_sid == 12
+        )
+      })
+      console.log(b)
+      setDatas(b)
+    }
+    //防潑水+防水 +女
+    else if (
+      proofList.includes('防潑水（Water Repellent）') &&
+      proofList.includes('防水（Waterproof）') &&
+      genders === '女'
+    ) {
+      const a = data.filter((v, i) => {
+        return v.proof === '防潑水' || v.proof === '防水'
+      })
+      const b = a.filter((v, i) => {
+        return (
+          v.product_category_sid == 8 ||
+          v.product_category_sid == 10 ||
+          v.product_category_sid == 12
+        )
+      })
+      console.log(b)
+      setDatas(b)
+    }
+    //抗水+防水 +女
+    else if (
+      proofList.includes('抗水（Water Resistant）') &&
+      proofList.includes('防水（Waterproof）') &&
+      genders === '女'
+    ) {
+      const a = data.filter((v, i) => {
+        return v.proof === '抗水' || v.proof === '防水'
+      })
+      const b = a.filter((v, i) => {
+        return (
+          v.product_category_sid == 8 ||
+          v.product_category_sid == 10 ||
+          v.product_category_sid == 12
+        )
+      })
+      console.log(b)
+      setDatas(b)
+    } //抗水+防潑水
+    else if (
+      proofList.includes('抗水（Water Resistant）') &&
+      proofList.includes('防潑水（Water Repellent）')
+    ) {
+      const a = data.filter((v, i) => {
+        return v.proof === '抗水' || v.proof === '防潑水'
+      })
+      console.log(a)
+      setDatas(a)
+    }
+    //防水+防潑水
+    else if (
+      proofList.includes('防水（Waterproof）') &&
+      proofList.includes('防潑水（Water Repellent）')
+    ) {
+      const a = data.filter((v, i) => {
+        return v.proof === '防水' || v.proof === '防潑水'
+      })
+      console.log(a)
+      setDatas(a)
+    }
+    //防水+抗水
+    else if (
+      proofList.includes('防水（Waterproof）') &&
+      proofList.includes('抗水（Water Resistant）')
+    ) {
+      const a = data.filter((v, i) => {
+        return v.proof === '抗水' || v.proof === '防水'
+      })
+      console.log(a)
+      setDatas(a)
+    }
+    //抗水 + 男
+    else if (
+      proofList.includes('抗水（Water Resistant）') &&
+      genders === '男'
+    ) {
+      const a = data.filter((v, i) => {
+        return v.proof === '抗水'
+      })
+      const b = a.filter((v, i) => {
+        return (
+          v.product_category_sid == 9 ||
+          v.product_category_sid == 7 ||
+          v.product_category_sid == 11
+        )
+      })
+      console.log(b)
+      setDatas(b)
+    }
+    //防潑水 +男
+    else if (
+      proofList.includes('防潑水（Water Repellent）') &&
+      genders === '男'
+    ) {
+      const a = data.filter((v, i) => {
+        return v.proof === '防潑水'
+      })
+      const b = a.filter((v, i) => {
+        return (
+          v.product_category_sid == 9 ||
+          v.product_category_sid == 7 ||
+          v.product_category_sid == 11
+        )
+      })
+      console.log(b)
+      setDatas(b)
+    }
+    //防水+男
+    else if (proofList.includes('防水（Waterproof）') && genders === '男') {
+      const a = data.filter((v, i) => {
+        return v.proof === '防水'
+      })
+      const b = a.filter((v, i) => {
+        return (
+          v.product_category_sid == 9 ||
+          v.product_category_sid == 7 ||
+          v.product_category_sid == 11
+        )
+      })
+      console.log(b)
+      setDatas(b)
+    }
+    //-------------------
+    //抗水 + 女
+    else if (
+      proofList.includes('抗水（Water Resistant）') &&
+      genders === '女'
+    ) {
+      const a = data.filter((v, i) => {
+        return v.proof === '抗水'
+      })
+      const b = a.filter((v, i) => {
+        return (
+          v.product_category_sid == 8 ||
+          v.product_category_sid == 10 ||
+          v.product_category_sid == 12
+        )
+      })
+      console.log(b)
+      setDatas(b)
+    }
+    //防潑水 +女
+    else if (
+      proofList.includes('防潑水（Water Repellent）') &&
+      genders === '女'
+    ) {
+      const a = data.filter((v, i) => {
+        return v.proof === '防潑水'
+      })
+      const b = a.filter((v, i) => {
+        return (
+          v.product_category_sid == 8 ||
+          v.product_category_sid == 10 ||
+          v.product_category_sid == 12
+        )
+      })
+      console.log(b)
+      setDatas(b)
+    }
+    //防水+女
+    else if (proofList.includes('防水（Waterproof）') && genders === '女') {
+      const a = data.filter((v, i) => {
+        return v.proof === '防水'
+      })
+      const b = a.filter((v, i) => {
+        return (
+          v.product_category_sid == 8 ||
+          v.product_category_sid == 10 ||
+          v.product_category_sid == 12
+        )
+      })
+      console.log(b)
+      setDatas(b)
+    }
+    //--------------
+
+    //抗水
+    else if (proofList.includes('抗水（Water Resistant）')) {
+      const a = data.filter((v, i) => {
+        return v.proof === '抗水'
+      })
+      console.log(a)
+      setDatas(a)
+    }
+    //防潑水
+    else if (proofList.includes('防潑水（Water Repellent）')) {
+      const a = data.filter((v, i) => {
+        return v.proof === '防潑水'
+      })
+      console.log(a)
+      setDatas(a)
+    }
+    //防水
+    else if (proofList.includes('防水（Waterproof）')) {
+      const a = data.filter((v, i) => {
+        return v.proof === '防水'
+      })
+      console.log(a)
+      setDatas(a)
+    } else if (genders === '男') {
       const a = data.filter((v, i) => {
         return v.product_category_sid == 9
       })
@@ -118,10 +450,17 @@ export default function ProductFilter({
       filters.lowPrice ||
       filters.highPrice ||
       filters.brand ||
-      genders
+      genders ||
+      proofList
     ) {
       filterRender(filter)
-    } else if (!filters.brand || !filters.lowPrice || !filters.highPrice) {
+    } else if (
+      !filters.brand ||
+      !filters.lowPrice ||
+      !filters.highPrice ||
+      !genders ||
+      !wProofOptions
+    ) {
       // alert('請填資料')
       console.log('請填資料')
       alert('請填資料')
@@ -144,10 +483,7 @@ export default function ProductFilter({
 
   // filter樣式 (電腦版)
   const webFilter = (
-    <div
-      className={fixedd ? `${styled.filter2}` : `${styled.filter}`}
-      ref={filterRef}
-    >
+    <div className={fixedd ? `${styled.filter2}` : `${styled.filter}`}>
       {mob ? '' : ''}
       <form onSubmit={handleFormSubmit}>
         <h2>價格</h2>

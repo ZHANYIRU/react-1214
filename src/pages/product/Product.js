@@ -129,6 +129,8 @@ function Product() {
       setMob(true)
     }
     window.addEventListener('resize', reSize)
+  }, [])
+  useEffect(() => {
     window.addEventListener('scroll', scrollFilter)
   }, [fixedd])
   // useEffect(() => {
