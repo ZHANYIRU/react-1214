@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import Slider from '../../product/slider'
+import Slider from '../../product/components/slider'
 // import Product_filter from './product_filter'
 // import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
