@@ -19,7 +19,9 @@ const Search = ({ search, setData }) => {
   return (
     <div className={styled.search}>
       <input type="text" onChange={InputHandler} />
-      <button onClick={search}>查詢</button>
+      <button onClick={search}>
+        <i className="fa-solid fa-magnifying-glass"></i>
+      </button>
     </div>
   )
 }
