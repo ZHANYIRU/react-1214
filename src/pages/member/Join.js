@@ -36,13 +36,12 @@ export default function Join(props) {
       formData
     )
 
-    if(result.data.success){
+    if (result.data.success) {
       localStorage.setItem('token', `${result.data.token}`)
       setShowSuccess(true)
     }
 
     // console.log(result.data)
-    
   }
 
   return (

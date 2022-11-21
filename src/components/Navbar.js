@@ -55,7 +55,10 @@ function Navbar() {
           </Link>
           <span>{cartItem}</span>
           <Link to="/member" onClick={loginBtn}>
-            <i className="fa-solid fa-user">{data.nickname}</i>
+            <i className="fa-solid fa-user"></i>
+            <i className="fa-solid" style={{ paddingLeft: '10px' }}>
+              {data.nickname}
+            </i>
           </Link>
         </div>
       </nav>
