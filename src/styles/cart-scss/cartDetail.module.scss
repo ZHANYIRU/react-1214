@@ -49,9 +49,13 @@
   display: flex;
   padding: 20px 0;
   justify-content: space-between;
+  align-items: center;
+  i {
+    cursor: pointer;
+  }
 }
 .wrapRight {
-  width: 95%;
+  width: 92%;
   height: 200px;
   background-color: #ececec;
   border-radius: 10px;
@@ -98,8 +102,10 @@
   width: 100px;
   height: 25px;
   border: 1px solid #4b5022;
+  border-radius: 5px;
   display: flex;
   justify-content: space-between;
+  overflow: hidden;
   input {
     outline: none;
     border: none;
@@ -109,5 +115,12 @@
   button {
     border: none;
     font-weight: 700;
+  }
+}
+.people{
+  display: flex;
+  align-items: center;
+  p:last-child{
+    margin-left: 5px;
   }
 }

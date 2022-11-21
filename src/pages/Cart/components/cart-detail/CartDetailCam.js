@@ -14,6 +14,15 @@ function CartDetailCam() {
                 <p>集合地址：353苗栗縣南庄鄉蓬萊村42份7-6號</p>
                 <p>預定日期：2022/10/31</p>
                 <p>3天2夜</p>
+                <div className={styled.people}>
+                  <p>人數：</p>
+                  <div className={styled.qty}>
+                    <button>－</button>
+                    <button>2</button>
+                    <button>＋</button>
+                  </div>
+                  <p>人</p>
+                </div>
                 <p>總金額：3450</p>
               </div>
               <div className={styled.roomImg}>
@@ -33,6 +42,7 @@ function CartDetailCam() {
                 </div>
               </div>
             </div>
+            <i className="fa-regular fa-trash-can"></i>
           </div>
           <div className={styled.wrap}>
             <input type="checkbox" />
@@ -42,6 +52,15 @@ function CartDetailCam() {
                 <p>集合地址：353苗栗縣南庄鄉蓬萊村42份7-6號</p>
                 <p>預定日期：2022/10/31</p>
                 <p>3天2夜</p>
+                <div className={styled.people}>
+                  <p>人數：</p>
+                  <div className={styled.qty}>
+                    <button>－</button>
+                    <button>2</button>
+                    <button>＋</button>
+                  </div>
+                  <p>人</p>
+                </div>
                 <p>總金額：3450</p>
               </div>
               <div className={styled.roomImg}>
@@ -61,6 +80,7 @@ function CartDetailCam() {
                 </div>
               </div>
             </div>
+            <i className="fa-regular fa-trash-can"></i>
           </div>
           <div className={styled.wrap}>
             <input type="checkbox" />
@@ -70,6 +90,15 @@ function CartDetailCam() {
                 <p>集合地址：353苗栗縣南庄鄉蓬萊村42份7-6號</p>
                 <p>預定日期：2022/10/31</p>
                 <p>3天2夜</p>
+                <div className={styled.people}>
+                  <p>人數：</p>
+                  <div className={styled.qty}>
+                    <button>－</button>
+                    <button>2</button>
+                    <button>＋</button>
+                  </div>
+                  <p>人</p>
+                </div>
                 <p>總金額：3450</p>
               </div>
               <div className={styled.roomImg}>
@@ -89,6 +118,7 @@ function CartDetailCam() {
                 </div>
               </div>
             </div>
+            <i className="fa-regular fa-trash-can"></i>
           </div>
         </div>
       </div>

@@ -5,7 +5,11 @@ import CartDetailPro from '../components/cart-detail/CartDetailPro'
 import CartDetailRen from '../components/cart-detail/CartDetailRen'
 function CartDetail(props) {
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant',
+    })
   }, [])
   return (
     <>
