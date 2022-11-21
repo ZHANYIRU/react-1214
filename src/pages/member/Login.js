@@ -36,8 +36,9 @@ function Login(props) {
               </div>
               <div className={styled.btnGroup}>
                 <button>登入</button>
-                <button onClick={()=>{
-                  navigate('/join');
+                <button onClick={(e)=>{
+                  e.preventDefault()
+                  navigate('/join')
                 }}>註冊新會員</button>
               </div>
             </form>

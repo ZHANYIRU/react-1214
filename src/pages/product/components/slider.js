@@ -1,19 +1,17 @@
 import { useState, useEffect } from 'react'
-import '../../styles/product-scss/slider.scss'
+import '../../../styles/product-scss/slider.scss'
 function Slider({ data }) {
   const [currentId, setCurrentId] = useState(0)
   const jumpTo = (id) => {
     setCurrentId(id)
   }
-  
   useEffect(() => {
     const a = setInterval(() => {
       if (currentId >= 0 && currentId <= 1) setCurrentId(currentId + 1)
       if (currentId == 2) {
         setCurrentId(0)
       }
-    }, 1000)
-    
+    }, 2500)
     return () => {
       clearInterval(a)
     }
