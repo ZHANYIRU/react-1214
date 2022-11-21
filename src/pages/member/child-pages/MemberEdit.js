@@ -22,7 +22,7 @@ export default function MemberEdit() {
 
   const navigate = useNavigate()
 
-  const { data, setData } = useContext(MemberContext)
+  const { data, setData, getInfo, auth } = useContext(MemberContext)
 
   // console.log(data)
 
@@ -32,8 +32,13 @@ export default function MemberEdit() {
   useEffect(() => {
     let dateBirth = dayjs(data.birthday).format('YYYY-MM-DD')
     setMyBirth(dateBirth)
-
   }, [])
+
+  useEffect(() => {
+    if (auth === false) {
+      navigate('/login')
+    }
+  }, [auth])
 
   const updateForm = useRef(null)
 
@@ -52,11 +57,20 @@ export default function MemberEdit() {
   async function updateInfo() {
     const formData = new FormData(updateForm.current)
 
+    const token = localStorage.getItem('token') || ''
+
     const result = await axios.put(
-      'http://localhost:3001/member/api?id=668',
-      formData
+      'http://localhost:3001/member/api',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+      }
     )
 
+    getInfo()
     console.log(result.data)
   }
 

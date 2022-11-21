@@ -39,6 +39,7 @@ export const MemberContextProvider = function ({ children }) {
     if (result.data.rows) {
       setData(result.data.rows[0])
       console.log(result.data.rows[0])
+      setAuth(true)
     } else {
       setData(resetInfo)
       console.log(result.data)
@@ -66,7 +67,7 @@ export const MemberContextProvider = function ({ children }) {
   //  }
 
   return (
-    <MemberContext.Provider value={{ data, setData, auth, setAuth, resetData }}>
+    <MemberContext.Provider value={{ data, setData, auth, setAuth, resetData, getInfo }}>
       {children}
     </MemberContext.Provider>
   )

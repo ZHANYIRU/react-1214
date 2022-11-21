@@ -11,7 +11,13 @@ function Login(props) {
   const [showPass, setShowPass] = useState(false)
   const navigate = useNavigate()
   const loginForm = useRef(null)
-  const { setAuth, resetData } = useContext(MemberContext)
+  const { setAuth, resetData, auth } = useContext(MemberContext)
+
+  useEffect(() => {
+    if (auth) {
+      navigate('/')
+    }
+  }, [auth])
 
   const login = async function () {
     const formData = new FormData(loginForm.current)
@@ -27,7 +33,7 @@ function Login(props) {
       localStorage.setItem('token', `${result.data.token}`)
       setAuth(true)
       navigate('/')
-    } 
+    }
 
     if (!result.data.success) {
       localStorage.removeItem('token')

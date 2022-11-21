@@ -1,7 +1,8 @@
 import axios from 'axios'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useRef, useState, useEffect } from 'react'
 import styled from '../../../styles/member-scss/MemberPass.module.scss'
 import MemberContext from '../../../contexts/MemberContext'
+import { useNavigate } from 'react-router-dom'
 
 export default function MemberPass() {
   const [showPass, setShowPass] = useState({
@@ -10,7 +11,15 @@ export default function MemberPass() {
     showVer: false,
   })
 
-  const { data } = useContext(MemberContext)
+  const navigate = useNavigate()
+
+  const { data, auth } = useContext(MemberContext)
+
+  useEffect(() => {
+    if (auth === false) {
+      navigate('/login')
+    }
+  }, [auth])
 
   // console.log(data.member_sid)
 
@@ -19,15 +28,17 @@ export default function MemberPass() {
   async function updatePass() {
     const formData = new FormData(passForm.current)
 
-    console.log(formData)
-
     const token = localStorage.getItem('token') || ''
-
-    console.log(token)
 
     const result = await axios.put(
       'http://localhost:3001/member/api/pass',
-      formData
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+      }
     )
 
     console.log(result.data)

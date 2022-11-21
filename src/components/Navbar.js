@@ -6,8 +6,8 @@ import MemberContext from '../contexts/MemberContext'
 
 function Navbar() {
   const { cartItem } = useContext(ProCartContext)
-  
-  const {data} = useContext(MemberContext)
+
+  const { data, auth, setAuth, resetData } = useContext(MemberContext)
 
   const [loginBox, setLoginBox] = useState({
     top: '-20px',
@@ -60,14 +60,34 @@ function Navbar() {
         </div>
       </nav>
       <div className={styled.loginBefore} style={loginBox}>
-        <Link to="/login">
-          {/* 切換會員中心 */}
-          <span>會員登入</span>
-        </Link>
-        <Link to="/join">
-          {/* 切換會員登出 */}
-          <span>會員註冊</span>
-        </Link>
+        {auth ? (
+          <Link to="/member">
+            <span>會員中心</span>
+          </Link>
+        ) : (
+          <Link to="/login">
+            {/* 切換會員中心 */}
+            <span>會員登入</span>
+          </Link>
+        )}
+        {auth ? (
+          <Link>
+            <span
+              onClick={() => {
+                resetData()
+                localStorage.removeItem('token')
+                setAuth(false)
+              }}
+            >
+              會員登出
+            </span>
+          </Link>
+        ) : (
+          <Link to="/join">
+            {/* 切換會員登出 */}
+            <span>會員註冊</span>
+          </Link>
+        )}
       </div>
     </>
   )

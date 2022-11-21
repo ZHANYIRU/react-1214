@@ -8,8 +8,13 @@ import MemberContext from '../../contexts/MemberContext'
 function Member(props) {
   const navigate = useNavigate()
 
-  const { data, setData } = useContext(MemberContext)
+  const { data, setData, auth } = useContext(MemberContext)
 
+  useEffect(() => {
+    if (auth === false) {
+      navigate('/login')
+    }
+  }, [auth])
 
   return (
     <>

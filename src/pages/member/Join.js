@@ -1,15 +1,24 @@
 import { useRef } from 'react'
-import { useState } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import styled from '../../styles/member-scss/Join.module.scss'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import TextareaAutosize from 'react-textarea-autosize'
+import MemberContext from '../../contexts/MemberContext'
 
 export default function Join(props) {
   const [showPass, setShowPass] = useState({
     myPass: false,
     verPass: false,
   })
+
+  const { auth } = useContext(MemberContext)
+
+  useEffect(() => {
+    if (auth) {
+      navigate('/')
+    }
+  }, [auth])
 
   const navigate = useNavigate()
 
@@ -22,7 +31,10 @@ export default function Join(props) {
 
     const formData = new FormData(joinForm.current)
 
-    let result = await axios.post('http://localhost:3001/member/join/api', formData)
+    let result = await axios.post(
+      'http://localhost:3001/member/join/api',
+      formData
+    )
 
     // console.log(result.data)
     setShowSuccess(true)
@@ -130,7 +142,7 @@ export default function Join(props) {
                   maxRows="8"
                   minRows="4"
                   maxLength="120"
-                 />
+                />
               </div>
               {/* bonus: 驗證碼API */}
               <button onClick={handleSumbit}>註冊會員</button>
