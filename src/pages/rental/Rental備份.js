@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import Carousel from './components/Carousel'
 import Search from './components/Search'
 import RentalCard from './components/RentalCard'
 import rentalcss from '../../styles/rental-scss/rentalProducts.module.scss'
@@ -22,10 +21,7 @@ function Rental(props) {
 
   return (
     <>
-    <div className={rentalcss.empty}></div>
       <div className={rentalcss.container}>
-        {/* 製作輪播牆 */}
-        {/* <Carousel /> */}
         {/* 搜尋元件 */}
         <Search setData={setData} />
 
@@ -34,13 +30,13 @@ function Rental(props) {
           <div className={rentalcss.box}>
             <h2>最新上架</h2>
             <h2>熱門商品</h2>
-            <h2>露營帳篷</h2>
+            <h2>男女服飾</h2>
           </div>
           <div className={rentalcss.middle}>
             <h2>商品類別</h2>
           </div>
           <div className={rentalcss.box}>
-            <h2>登山用具</h2>
+            <h2>專業用品</h2>
             <h2>飲水用品</h2>
             <h2>其他配件</h2>
           </div>
