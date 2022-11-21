@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import React, { useState, useRef, useEffect } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import styled from '../../../styles/product-scss/product.module.scss'
+import { filter_if } from '../if.js'
+import log from 'eslint-plugin-react/lib/util/log'
 
 export default function ProductFilter({
   fixedd,
@@ -71,376 +73,10 @@ export default function ProductFilter({
       ...filters,
     })
     const data = response.data
-    // 三種屬性 + 男
-    if (
-      proofList.includes('抗水（Water Resistant）') &&
-      proofList.includes('防潑水（Water Repellent）') &&
-      proofList.includes('防水（Waterproof）') &&
-      genders === '男'
-    ) {
-      const a = data.filter((v, i) => {
-        return v.proof === '抗水' || v.proof === '防潑水' || v.proof === '防水'
-      })
-      const b = a.filter((v, i) => {
-        return (
-          v.product_category_sid == 9 ||
-          v.product_category_sid == 7 ||
-          v.product_category_sid == 11
-        )
-      })
-      console.log(b)
-      setDatas(b)
-    }
-    // 三種屬性 + 女
-    else if (
-      proofList.includes('抗水（Water Resistant）') &&
-      proofList.includes('防潑水（Water Repellent）') &&
-      proofList.includes('防水（Waterproof）') &&
-      genders === '女'
-    ) {
-      const a = data.filter((v, i) => {
-        return v.proof === '抗水' || v.proof === '防潑水' || v.proof === '防水'
-      })
-      const b = a.filter((v, i) => {
-        return (
-          v.product_category_sid == 8 ||
-          v.product_category_sid == 10 ||
-          v.product_category_sid == 12
-        )
-      })
-      console.log(a)
-      console.log(b)
-      setDatas(b)
-    }
-    // 三種屬性
-    else if (
-      proofList.includes('抗水（Water Resistant）') &&
-      proofList.includes('防潑水（Water Repellent）') &&
-      proofList.includes('防水（Waterproof）')
-    ) {
-      const a = data.filter((v, i) => {
-        return v.proof === '抗水' || v.proof === '防潑水' || v.proof === '防水'
-      })
-      console.log(a)
-      console.log(a)
-      setDatas(a)
-    }
-    // 抗水+防潑水+男
-    else if (
-      proofList.includes('抗水（Water Resistant）') &&
-      proofList.includes('防潑水（Water Repellent）') &&
-      genders === '男'
-    ) {
-      const a = data.filter((v, i) => {
-        return v.proof === '抗水' || v.proof === '防潑水'
-      })
-      const b = a.filter((v, i) => {
-        return (
-          v.product_category_sid == 9 ||
-          v.product_category_sid == 7 ||
-          v.product_category_sid == 11
-        )
-      })
-      console.log(b)
-      setDatas(b)
-    }
-    // 防水+防潑水+男
-    else if (
-      proofList.includes('防潑水（Water Repellent）') &&
-      proofList.includes('防水（Waterproof）') &&
-      genders === '男'
-    ) {
-      const a = data.filter((v, i) => {
-        return v.proof === '防潑水' || v.proof === '防水'
-      })
-      const b = a.filter((v, i) => {
-        return (
-          v.product_category_sid == 9 ||
-          v.product_category_sid == 7 ||
-          v.product_category_sid == 11
-        )
-      })
-      console.log(b)
-      setDatas(b)
-    }
-    // 抗水+防水+男
-    else if (
-      proofList.includes('抗水（Water Resistant）') &&
-      proofList.includes('防水（Waterproof）') &&
-      genders === '男'
-    ) {
-      const a = data.filter((v, i) => {
-        return v.proof === '抗水' || v.proof === '防水'
-      })
-      const b = a.filter((v, i) => {
-        return (
-          v.product_category_sid == 9 ||
-          v.product_category_sid == 7 ||
-          v.product_category_sid == 11
-        )
-      })
-      console.log(b)
-      setDatas(b)
-    }
-    //抗水+防潑水 +女
-    else if (
-      proofList.includes('抗水（Water Resistant）') &&
-      proofList.includes('防潑水（Water Repellent）') &&
-      genders === '女'
-    ) {
-      const a = data.filter((v, i) => {
-        return v.proof === '抗水' || v.proof === '防潑水'
-      })
-      const b = a.filter((v, i) => {
-        return (
-          v.product_category_sid == 8 ||
-          v.product_category_sid == 10 ||
-          v.product_category_sid == 12
-        )
-      })
-      console.log(b)
-      setDatas(b)
-    }
-    //防潑水+防水 +女
-    else if (
-      proofList.includes('防潑水（Water Repellent）') &&
-      proofList.includes('防水（Waterproof）') &&
-      genders === '女'
-    ) {
-      const a = data.filter((v, i) => {
-        return v.proof === '防潑水' || v.proof === '防水'
-      })
-      const b = a.filter((v, i) => {
-        return (
-          v.product_category_sid == 8 ||
-          v.product_category_sid == 10 ||
-          v.product_category_sid == 12
-        )
-      })
-      console.log(b)
-      setDatas(b)
-    }
-    //抗水+防水 +女
-    else if (
-      proofList.includes('抗水（Water Resistant）') &&
-      proofList.includes('防水（Waterproof）') &&
-      genders === '女'
-    ) {
-      const a = data.filter((v, i) => {
-        return v.proof === '抗水' || v.proof === '防水'
-      })
-      const b = a.filter((v, i) => {
-        return (
-          v.product_category_sid == 8 ||
-          v.product_category_sid == 10 ||
-          v.product_category_sid == 12
-        )
-      })
-      console.log(b)
-      setDatas(b)
-    } //抗水+防潑水
-    else if (
-      proofList.includes('抗水（Water Resistant）') &&
-      proofList.includes('防潑水（Water Repellent）')
-    ) {
-      const a = data.filter((v, i) => {
-        return v.proof === '抗水' || v.proof === '防潑水'
-      })
-      console.log(a)
-      setDatas(a)
-    }
-    //防水+防潑水
-    else if (
-      proofList.includes('防水（Waterproof）') &&
-      proofList.includes('防潑水（Water Repellent）')
-    ) {
-      const a = data.filter((v, i) => {
-        return v.proof === '防水' || v.proof === '防潑水'
-      })
-      console.log(a)
-      setDatas(a)
-    }
-    //防水+抗水
-    else if (
-      proofList.includes('防水（Waterproof）') &&
-      proofList.includes('抗水（Water Resistant）')
-    ) {
-      const a = data.filter((v, i) => {
-        return v.proof === '抗水' || v.proof === '防水'
-      })
-      console.log(a)
-      setDatas(a)
-    }
-    //抗水 + 男
-    else if (
-      proofList.includes('抗水（Water Resistant）') &&
-      genders === '男'
-    ) {
-      const a = data.filter((v, i) => {
-        return v.proof === '抗水'
-      })
-      const b = a.filter((v, i) => {
-        return (
-          v.product_category_sid == 9 ||
-          v.product_category_sid == 7 ||
-          v.product_category_sid == 11
-        )
-      })
-      console.log(b)
-      setDatas(b)
-    }
-    //防潑水 +男
-    else if (
-      proofList.includes('防潑水（Water Repellent）') &&
-      genders === '男'
-    ) {
-      const a = data.filter((v, i) => {
-        return v.proof === '防潑水'
-      })
-      const b = a.filter((v, i) => {
-        return (
-          v.product_category_sid == 9 ||
-          v.product_category_sid == 7 ||
-          v.product_category_sid == 11
-        )
-      })
-      console.log(b)
-      setDatas(b)
-    }
-    //防水+男
-    else if (proofList.includes('防水（Waterproof）') && genders === '男') {
-      const a = data.filter((v, i) => {
-        return v.proof === '防水'
-      })
-      const b = a.filter((v, i) => {
-        return (
-          v.product_category_sid == 9 ||
-          v.product_category_sid == 7 ||
-          v.product_category_sid == 11
-        )
-      })
-      console.log(b)
-      setDatas(b)
-    }
-    //-------------------
-    //抗水 + 女
-    else if (
-      proofList.includes('抗水（Water Resistant）') &&
-      genders === '女'
-    ) {
-      const a = data.filter((v, i) => {
-        return v.proof === '抗水'
-      })
-      const b = a.filter((v, i) => {
-        return (
-          v.product_category_sid == 8 ||
-          v.product_category_sid == 10 ||
-          v.product_category_sid == 12
-        )
-      })
-      console.log(b)
-      setDatas(b)
-    }
-    //防潑水 +女
-    else if (
-      proofList.includes('防潑水（Water Repellent）') &&
-      genders === '女'
-    ) {
-      const a = data.filter((v, i) => {
-        return v.proof === '防潑水'
-      })
-      const b = a.filter((v, i) => {
-        return (
-          v.product_category_sid == 8 ||
-          v.product_category_sid == 10 ||
-          v.product_category_sid == 12
-        )
-      })
-      console.log(b)
-      setDatas(b)
-    }
-    //防水+女
-    else if (proofList.includes('防水（Waterproof）') && genders === '女') {
-      const a = data.filter((v, i) => {
-        return v.proof === '防水'
-      })
-      const b = a.filter((v, i) => {
-        return (
-          v.product_category_sid == 8 ||
-          v.product_category_sid == 10 ||
-          v.product_category_sid == 12
-        )
-      })
-      console.log(b)
-      setDatas(b)
-    }
-    //--------------
-
-    //抗水
-    else if (proofList.includes('抗水（Water Resistant）')) {
-      const a = data.filter((v, i) => {
-        return v.proof === '抗水'
-      })
-      console.log(a)
-      setDatas(a)
-    }
-    //防潑水
-    else if (proofList.includes('防潑水（Water Repellent）')) {
-      const a = data.filter((v, i) => {
-        return v.proof === '防潑水'
-      })
-      console.log(a)
-      setDatas(a)
-    }
-    //防水
-    else if (proofList.includes('防水（Waterproof）')) {
-      const a = data.filter((v, i) => {
-        return v.proof === '防水'
-      })
-      console.log(a)
-      setDatas(a)
-    } else if (genders === '男') {
-      const a = data.filter((v, i) => {
-        return v.product_category_sid == 9
-      })
-      console.log(a)
-      setDatas(a)
-    } else if (genders === '女') {
-      const a = data.filter((v, i) => {
-        return v.product_category_sid == 10
-      })
-      console.log(a)
-      setDatas(a)
-    } else if (!genders) {
-      setDatas(data)
-      setFromFilterDataCard(datas)
-      setFromFilterDataGender(genders)
-    }
-
-    // console.log(data)
+    filter_if(proofList, genders, data, setDatas)
   }
 
   let filter = 'http://localhost:3001/product/filter'
-  // const getData = async () => {
-  //   if (Number(filters.lowPrice) > Number(filters.highPrice)) {
-  //     alert('請檢查價格是否輸入錯誤')
-  //     console.log('請檢查價格是否輸入錯誤')
-  //   } else if (genders) {
-  //     filterRender(filter)
-  //   } else if (filters.lowPrice && filters.highPrice && filters.brand) {
-  //     filterRender(filter)
-  //   } else if (
-  //     (filters.lowPrice && filters.highPrice) ||
-  //     (filters.lowPrice && filters.highPrice && filters.brand === -1)
-  //   ) {
-  //     filterRender(filter)
-  //   } else if (filters.brand) {
-  //     filterRender(filter)
-  //   } else if (!filters.brand || !filters.lowPrice || !filters.highPrice) {
-  //     // alert('請填資料')
-  //     console.log('請填資料')
-  //   }
-  // }
 
   const getData = async () => {
     if (Number(filters.lowPrice) > Number(filters.highPrice)) {
@@ -590,38 +226,6 @@ export default function ProductFilter({
         <button type="submit" className={styled.filterButton}>
           送出
         </button>
-        <hr />
-        <div className={styled.star}>
-          <Link>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-          </Link>
-
-          <Link>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-          </Link>
-
-          <Link>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-          </Link>
-
-          <Link>
-            <i className="fa-solid fa-star"></i>
-            <i className="fa-solid fa-star"></i>
-          </Link>
-
-          <Link>
-            <i className="fa-solid fa-star"></i>
-          </Link>
-        </div>
       </form>
     </div>
   )
@@ -639,7 +243,20 @@ export default function ProductFilter({
             </form>
           </div>
           <div className={styled.icon}>
-            <i className="fa-solid fa-sort"></i>
+            <i
+              className="fa-solid fa-sort"
+              onClick={() => {
+                const d = [...datas]
+                //sort無淺拷貝
+                d.sort((a, b) => {
+                  return a.product_price - b.product_price
+                })
+                // const newDatas = [...datas, a]
+                console.log(d)
+                // console.log(newDatas)
+                setDatas(d)
+              }}
+            ></i>
             <i
               className="fa-solid fa-filter"
               onClick={() => {

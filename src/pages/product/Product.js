@@ -38,7 +38,13 @@ function Product() {
     }
   }
   const [afterGenderData, setAfterGenderData] = useState('')
-
+  //format currency
+  const moneyFormat = (price) => {
+    let a = Number(price)
+    let b = a.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD' })
+    let c = b.split('.')
+    return c[0]
+  }
   //拿到filter回傳值
   const [fromFilterDataCard, setFromFilterDataCard] = useState('')
   //拿到filter回傳值
@@ -60,15 +66,7 @@ function Product() {
       setFixedd(false)
     }
   }
-  // 切換回product的方法 (讓Bar不要跑掉)
-  // const filterLocation = () => {
-  //   let Window_W = window.innerWidth
-  //   if (location.pathname === '/product' && Window_W < 500) {
-  //     setMob(true)
-  //   } else {
-  //     setMob(false)
-  //   }
-  // }
+
   const location = useLocation()
   // 視窗寬度方法
   const reSize = () => {
@@ -102,52 +100,24 @@ function Product() {
 
   const [sid, getSid] = useState('')
 
-  //Fetch所有產品
-  const getProductData = async () => {
-    const response = await axios.get('http://localhost:3001/product/all')
+  //Fetch產品
+  const getProductData = async (url) => {
+    const response = await axios.get(`http://localhost:3001/product/${url}`)
     const r = response.data
     // console.log(r)
     setDatas(r)
   }
 
-  //顯示卡片
-  // if (fromFilterDataGender === '男') {
-  //   return v.product_category_sid === 9
-  // } else {
-  //   return v
-  // }
-  // let afterFilter = fromFilterDataCard.map((v, i) => {
-  //   return v.product_category_sid === 9
-  // })
-
   //-------------------------------------------------------------------
   useEffect(() => {
-    getProductData()
-    // filterLocation()
-    // reSize()
-    if (location.pathname === '/product' || location.pathname === '/product/') {
-      setMob(true)
-    }
+    getProductData('all')
+
     window.addEventListener('resize', reSize)
   }, [])
   useEffect(() => {
     window.addEventListener('scroll', scrollFilter)
   }, [fixedd])
-  // useEffect(() => {
-  //   if (fromFilterDataGender === '男') {
-  //     setAfterGenderData(
-  //       datas.filter((v, i) => {
-  //         return v.product_category_sid == 9
-  //       })
-  //     )
-  //   } else if (fromFilterDataGender === '女') {
-  //     setAfterGenderData(
-  //       datas.filter((v, i) => {
-  //         return v.product_category_sid == 10
-  //       })
-  //     )
-  //   }
-  // }, [])
+
   return (
     <>
       <div className={styled.container}>
@@ -177,15 +147,27 @@ function Product() {
         {/* 種類專區 */}
         <div className={styled.product_nav} onDrag={() => {}}>
           <div className={styled.product_nav_box1}>
-            <Link>
+            <Link
+              onClick={() => {
+                getProductData('new')
+              }}
+            >
               <h2>最新上架</h2>
             </Link>
             {mobile ? <p>|</p> : ''}
-            <Link>
+            <Link
+              onClick={() => {
+                getProductData('hot')
+              }}
+            >
               <h2>熱門商品</h2>
             </Link>
             {mobile ? <p>|</p> : ''}
-            <Link>
+            <Link
+              onClick={() => {
+                getProductData('clothe')
+              }}
+            >
               <h2>男女服飾</h2>
             </Link>
             {mobile ? <p>|</p> : ''}
@@ -194,16 +176,28 @@ function Product() {
             <p>商品類別</p>
           </div>
           <div className={styled.product_nav_box3}>
-            <Link>
-              <h2>專業用品</h2>
+            <Link
+              onClick={() => {
+                getProductData('bag')
+              }}
+            >
+              <h2>登山背包</h2>
             </Link>
             {mobile ? <p>|</p> : ''}
-            <Link>
-              <h2>飲水用品</h2>
+            <Link
+              onClick={() => {
+                getProductData('shose')
+              }}
+            >
+              <h2>登山鞋</h2>
             </Link>
             {mobile ? <p>|</p> : ''}
-            <Link>
-              <h2>其他配件</h2>
+            <Link
+              onClick={() => {
+                getProductData('accessories')
+              }}
+            >
+              <h2>專業配件</h2>
             </Link>
           </div>
         </div>
@@ -237,7 +231,7 @@ function Product() {
                 </div>
                 <p className={styled.p}>{v.product_name}</p>
                 <h2>
-                  金額：<span>${v.product_price}</span>
+                  金額：<span>{moneyFormat(v.product_price)}</span>
                 </h2>
               </Link>
             )
