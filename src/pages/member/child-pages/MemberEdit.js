@@ -65,11 +65,10 @@ export default function MemberEdit() {
       {
         headers: {
           'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${token}`,
+          Authorization: token ? `Bearer ${token}` : '',
         },
       }
     )
-
     getInfo()
     console.log(result.data)
   }

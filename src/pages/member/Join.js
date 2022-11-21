@@ -12,7 +12,7 @@ export default function Join(props) {
     verPass: false,
   })
 
-  const { auth } = useContext(MemberContext)
+  const { auth, setAuth } = useContext(MemberContext)
 
   useEffect(() => {
     if (auth) {
@@ -36,8 +36,14 @@ export default function Join(props) {
       formData
     )
 
+    if(result.data.success){
+      localStorage.setItem('token', `${result.data.token}`)
+      setAuth(true)
+      setShowSuccess(true)
+    }
+
     // console.log(result.data)
-    setShowSuccess(true)
+    
   }
 
   return (
