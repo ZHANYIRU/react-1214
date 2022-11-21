@@ -38,7 +38,6 @@ export default function Join(props) {
 
     if(result.data.success){
       localStorage.setItem('token', `${result.data.token}`)
-      setAuth(true)
       setShowSuccess(true)
     }
 
@@ -162,11 +161,12 @@ export default function Join(props) {
             <h3>註冊成功！</h3>
             <button
               onClick={() => {
-                navigate('/login')
+                navigate('/')
+                setAuth(true)
                 setShowSuccess(false)
               }}
             >
-              前往登入
+              前往首頁
             </button>
           </div>
         </div>
