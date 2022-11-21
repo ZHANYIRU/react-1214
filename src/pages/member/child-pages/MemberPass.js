@@ -10,19 +10,23 @@ export default function MemberPass() {
     showVer: false,
   })
 
-  const {data} = useContext(MemberContext)
+  const { data } = useContext(MemberContext)
 
   // console.log(data.member_sid)
 
   const passForm = useRef(null)
 
-  async function updatePass(e) {
-    e.preventDefault()
-
+  async function updatePass() {
     const formData = new FormData(passForm.current)
 
+    console.log(formData)
+
+    const token = localStorage.getItem('token') || ''
+
+    console.log(token)
+
     const result = await axios.put(
-      'http://localhost:3001/member/api/pass?id=668',
+      'http://localhost:3001/member/api/pass',
       formData
     )
 
@@ -95,7 +99,8 @@ export default function MemberPass() {
               <div className={styled.btnGroup}>
                 <button
                   onClick={(e) => {
-                    updatePass(e)
+                    e.preventDefault()
+                    updatePass()
                   }}
                 >
                   設定新密碼

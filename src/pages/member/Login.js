@@ -11,6 +11,7 @@ function Login(props) {
   const [showPass, setShowPass] = useState(false)
   const navigate = useNavigate()
   const loginForm = useRef(null)
+  const { setAuth, resetData } = useContext(MemberContext)
 
   const login = async function () {
     const formData = new FormData(loginForm.current)
@@ -21,10 +22,17 @@ function Login(props) {
     )
     console.log(result.data)
     // setData({...data, member_sid: result.data.member_sid})
-    localStorage.setItem('token', `${result.data.token}`)
 
     if (result.data.success) {
+      localStorage.setItem('token', `${result.data.token}`)
+      setAuth(true)
       navigate('/')
+    } 
+
+    if (!result.data.success) {
+      localStorage.removeItem('token')
+      setAuth(false)
+      resetData()
     }
   }
 
