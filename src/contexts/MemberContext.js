@@ -62,12 +62,20 @@ export const MemberContextProvider = function ({ children }) {
     resetData()
   }, [auth])
 
+  useEffect(() => {
+    if (data.member_sid === '') {
+      setAuth(false)
+    }
+  }, [data])
+
   //  const getUpdateInfo = function () {
   //     getInfo()
   //  }
 
   return (
-    <MemberContext.Provider value={{ data, setData, auth, setAuth, resetData, getInfo }}>
+    <MemberContext.Provider
+      value={{ data, setData, auth, setAuth, resetData, getInfo }}
+    >
       {children}
     </MemberContext.Provider>
   )

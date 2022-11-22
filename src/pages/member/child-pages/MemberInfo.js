@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState, useEffect, useRef } from 'react'
 import styled from '../../../styles/member-scss/MemberInfo.module.scss'
 import TextareaAutosize from 'react-textarea-autosize'
 import ModalView from '../components/ModalView'
@@ -7,6 +7,7 @@ import TotalHeight from '../components/TotalHeight'
 import PostMap from '../components/PostMap'
 import MemberContext from '../../../contexts/MemberContext'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 export default function MemberInfo() {
   const [isNew, setIsNew] = useState(false)
@@ -19,11 +20,89 @@ export default function MemberInfo() {
 
   const { data, auth } = useContext(MemberContext)
 
+  const [locations, setLocations] = useState([])
+  const [selLocation, setSelLocation] = useState(1)
+  const [mountains, setMountains] = useState([])
+  const [selMountain, setSelMountain] = useState(1)
+  const [selHeight, setSelHeight] = useState(0)
+  const [postList, setPostList] = useState([])
+  const [currentPost, setCurrentPost] = useState(0)
+
+  const newForm = useRef(null)
+
+  //get post list
+  async function getPostList() {
+    const postList = await axios.get(
+      `http://localhost:3001/member/post/api?mid=${data.member_sid}`
+    )
+
+    console.log(postList.data)
+    setPostList(postList.data)
+  }
+
+  //for new post options
+  async function getLocation() {
+    const result = await axios.get(
+      'http://localhost:3001/member/locations/api?mid = '
+    )
+
+    // console.log(result.data.rows)
+    setLocations(result.data.rows)
+  }
+
+  //for new post options
+  async function getMountains() {
+    const result = await axios.get(
+      `http://localhost:3001/member/mountains/api?id=${selLocation}`
+    )
+    setMountains(result.data.rows)
+  }
+
+  //send new post
+  async function newPost() {
+    const formData = new FormData(newForm.current)
+
+    const token = localStorage.getItem('token') || ''
+
+    const result = await axios.post(
+      'http://localhost:3001/member/post/api',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: token ? `Bearer ${token}` : '',
+        },
+      }
+    )
+    console.log(result.data)
+    setIsNew(false)
+  }
+
   useEffect(() => {
     if (auth === false) {
       navigate('/login')
     }
   }, [auth])
+
+  useEffect(() => {
+    getLocation()
+  }, [selLocation])
+
+  useEffect(() => {
+    getMountains()
+    // console.log(mountains)
+  }, [locations])
+
+  useEffect(() => {
+    if (mountains[0]) {
+      setSelMountain(mountains[0].mountain_sid)
+      setSelHeight(mountains[0].height)
+    }
+  }, [mountains])
+
+  useEffect(() => {
+    getPostList()
+  }, [isNew])
 
   // console.log(data.member_sid)
 
@@ -45,7 +124,7 @@ export default function MemberInfo() {
         <div className={styled.col}>
           <div className={styled.card}>
             <div className={styled.postTitle}>
-              <h3>分享貼文: 17</h3>
+              <h3>分享貼文: {postList.length}</h3>
               <button
                 onClick={() => {
                   setIsNew(true)
@@ -57,17 +136,18 @@ export default function MemberInfo() {
             </div>
             <div className={styled.divider}></div>
             <div className={styled.postList}>
-              {Array(17)
-                .fill(1)
-                .map((v, i) => {
-                  return (
-                    <Thumbnail
-                      setIsEdit={setIsEdit}
-                      setIsView={setIsView}
-                      key={i}
-                    />
-                  )
-                })}
+              {postList.map((v, i) => {
+                return (
+                  <Thumbnail
+                    postIndex={i}
+                    postData={v}
+                    setIsEdit={setIsEdit}
+                    setIsView={setIsView}
+                    setCurrentPost={setCurrentPost}
+                    key={i}
+                  />
+                )
+              })}
             </div>
           </div>
         </div>
@@ -148,67 +228,123 @@ export default function MemberInfo() {
           className={styled.modalBg}
           // z-index over nav bar?
         >
-          <div className={styled.modal}>
-            <div className={styled.editImg}>
-              <div className={styled.newImg}>
-                <i className="fa-regular fa-image"></i>
-                <label htmlFor="avatar" className={styled.avatarLabel}>
-                  {' '}
-                  上傳大頭貼
-                  <input
-                    type="file"
-                    accept="image/png, image/jpeg"
-                    name="avatar"
-                    id="avatar"
-                  />
-                </label>
-              </div>
-            </div>
-            <div className={styled.editContent}>
-              <div className={styled.contentTop}>
-                <h3>新貼文</h3>
-                <TextareaAutosize
-                  maxLength="120"
-                  maxRows="8"
-                  placeholder="輸入敘述文字(最多120字)"
-                  onChange={(e) => {
-                    setEditTxt(e.target.value)
-                  }}
-                />
-              </div>
-              <div className={styled.contentBtm}>
-                <div>
-                  <p>海拔高度: 1211m</p>
-                  <h3>
-                    <select>
-                      <option>地區</option>
-                      <option>苗栗</option>
-                    </select>
-                    <select>
-                      <option>山區</option>
-                      <option>志佳陽大山基點峰</option>
-                    </select>
-                  </h3>
+          <form ref={newForm}>
+            <div className={styled.modal}>
+              <div className={styled.editImg}>
+                <div className={styled.newImg}>
+                  <i className="fa-regular fa-image"></i>
+                  <label htmlFor="avatar" className={styled.avatarLabel}>
+                    上傳照片
+                    <input
+                      type="file"
+                      accept="image/png, image/jpeg"
+                      name="image_url"
+                      id="avatar"
+                    />
+                  </label>
                 </div>
               </div>
+              <div className={styled.editContent}>
+                <div className={styled.contentTop}>
+                  <h3>新貼文</h3>
+                  <TextareaAutosize
+                    name="context"
+                    maxLength="120"
+                    maxRows="8"
+                    placeholder="輸入敘述文字(最多120字)"
+                    onChange={(e) => {
+                      setEditTxt(e.target.value)
+                    }}
+                  />
+                </div>
+                <input
+                  type="hidden"
+                  value={data.member_sid}
+                  name="member_sid"
+                />
+                <div className={styled.contentBtm}>
+                  <div>
+                    <p>海拔高度: {selHeight}m</p>
+                    <h3>
+                      <select
+                        value={selLocation}
+                        onChange={(e) => {
+                          setSelLocation(e.target.value)
+                        }}
+                      >
+                        {/* <option>地區</option> */}
+                        {locations.map((v, i) => {
+                          return (
+                            <option key={10 + i} value={v.sid}>
+                              {v.name}
+                            </option>
+                          )
+                        })}
+                      </select>
+                      <select
+                        name="mountain_sid"
+                        value={selMountain}
+                        onChange={(e) => {
+                          setSelMountain(e.target.value)
+                          setSelHeight(
+                            e.target[e.target.selectedIndex].getAttribute(
+                              'data-mh'
+                            )
+                          )
+                          // console.log("height:" + e.target[e.target.selectedIndex].getAttribute('data-mh'))
+                        }}
+                      >
+                        {/* <option>山區</option> */}
+                        {mountains.map((v, i) => {
+                          return (
+                            <option
+                              key={i}
+                              value={v.mountain_sid}
+                              data-mh={v.height}
+                            >
+                              {v.mountain_name}
+                            </option>
+                          )
+                        })}
+                        {/* <option>志佳陽大山基點峰</option> */}
+                      </select>
+                    </h3>
+                  </div>
+                </div>
+              </div>
+              <div className={styled.btnGrp}>
+                <button
+                  className={styled.btnDone}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    newPost()
+                  }}
+                >
+                  <p>發表貼文</p>
+                </button>
+                <button
+                  className={styled.btnCancel}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    setIsNew(false)
+                  }}
+                >
+                  <p>取消貼文</p>
+                </button>
+              </div>
             </div>
-            <div className={styled.btnGrp}>
-              <button className={styled.btnDone}>
-                <p>發表貼文</p>
-              </button>
-              <button
-                className={styled.btnCancel}
-                onClick={() => {
-                  setIsNew(false)
-                }}
-              >
-                <p>取消貼文</p>
-              </button>
-            </div>
-          </div>
+          </form>
         </div>
       )}
-      {isView && <ModalView setIsView={setIsView} />}
+      {isView && (
+        <ModalView
+          setIsView={setIsView}
+          showData={postList[currentPost]}
+          setCurrentPost={setCurrentPost}
+          currentPost={currentPost}
+          listLength={postList.length}
+        />
+      )}
     </>
   )
 }
