@@ -39,7 +39,7 @@ function CartDetailRoom() {
                           {el.qty <= 1 ? (
                             <button
                               onClick={() => {
-                                minusOne2(el.sid)
+                                minusOne2(el.sid, el.price)
                               }}
                               disabled
                             >
@@ -48,7 +48,7 @@ function CartDetailRoom() {
                           ) : (
                             <button
                               onClick={() => {
-                                minusOne2(el.sid)
+                                minusOne2(el.sid, el.price)
                               }}
                             >
                               －
@@ -57,7 +57,7 @@ function CartDetailRoom() {
                           <button>{el.qty}</button>
                           <button
                             onClick={() => {
-                              plusOne2(el.sid)
+                              plusOne2(el.sid, el.price)
                             }}
                           >
                             ＋

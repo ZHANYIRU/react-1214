@@ -44,7 +44,6 @@
   }
 }
 .wrap {
-  // animation: change 1.5s linear infinite;
   width: 90%;
   margin: 0 auto;
   display: flex;
@@ -56,7 +55,7 @@
   }
 }
 .wrapChange {
-  animation: change .6s linear;
+  animation: change 0.6s linear;
   width: 90%;
   margin: 0 auto;
   display: flex;
@@ -68,19 +67,18 @@
   }
 }
 @keyframes change {
-  0%{
+  0% {
     transform: translateX(0px);
     opacity: 1;
   }
-  50%{
+  50% {
     transform: translateX(400px);
-    opacity: 0.6;
+    opacity: 0.3;
   }
-  100%{
-    transform: translateX(700px);
+  100% {
+    transform: translateX(800px);
     opacity: 0;
   }
-  
 }
 .wrapRight {
   width: 92%;
@@ -145,10 +143,10 @@
     font-weight: 700;
   }
 }
-.people{
+.people {
   display: flex;
   align-items: center;
-  p:last-child{
+  p:last-child {
     margin-left: 5px;
   }
 }

@@ -50,7 +50,7 @@ function CartDetailPro() {
                           {el.qty <= 1 ? (
                             <button
                               onClick={() => {
-                                minusOne(el.sid, el.size)
+                                minusOne(el.sid, el.size, el.price)
                               }}
                               disabled
                             >
@@ -59,7 +59,7 @@ function CartDetailPro() {
                           ) : (
                             <button
                               onClick={() => {
-                                minusOne(el.sid, el.size)
+                                minusOne(el.sid, el.size, el.price)
                               }}
                             >
                               －
@@ -68,7 +68,7 @@ function CartDetailPro() {
                           <button>{el.qty}</button>
                           <button
                             onClick={() => {
-                              plusOne(el.sid, el.size)
+                              plusOne(el.sid, el.size, el.price)
                             }}
                           >
                             ＋

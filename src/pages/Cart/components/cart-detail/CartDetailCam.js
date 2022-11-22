@@ -38,7 +38,7 @@ function CartDetailCam() {
                           {el.qty <= 1 ? (
                             <button
                               onClick={() => {
-                                minusOne3(el.sid)
+                                minusOne3(el.sid, el.price)
                               }}
                               disabled
                             >
@@ -47,7 +47,7 @@ function CartDetailCam() {
                           ) : (
                             <button
                               onClick={() => {
-                                minusOne3(el.sid)
+                                minusOne3(el.sid, el.price)
                               }}
                             >
                               －
@@ -56,7 +56,7 @@ function CartDetailCam() {
                           <button>{el.qty}</button>
                           <button
                             onClick={() => {
-                              plusOne3(el.sid)
+                              plusOne3(el.sid, el.price)
                             }}
                           >
                             ＋
