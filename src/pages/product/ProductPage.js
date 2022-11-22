@@ -4,28 +4,18 @@ import styled from '../../styles/product-scss/productPage.module.scss'
 import axios from 'axios'
 import { useEffect } from 'react'
 import ProCartContext from '../../contexts/ProCartContext'
+import StarRating from './components/starRating'
+import CommentLightBox from './components/CommentLightBox'
+import comFakeData from './comFakeData'
 
 export default function ProductPage() {
   const { product_sid } = useParams()
   const { addProCart } = useContext(ProCartContext)
-  //星星數
-  const [star, setStar] = useState(0)
-  //星星做動方法
-  const renderStar = () => {
-    let array = []
-    for (let i = 0; i < 5; i++) {
-      let cls = i >= star ? 'star-item' : 'star-item-light'
-      array.push(
-        <div
-          onClick={() => {
-            setStar(star + 1)
-          }}
-          className={cls}
-        ></div>
-      )
-    }
-    return array
-  }
+  //哪一筆評論的Index
+  const [whichCom, setWhichCom] = useState(-1)
+
+  //燈箱切換
+  const [comLightBox, setComLightBox] = useState(false)
   //換圖
   const changePic = useRef()
   // 尺寸選取
@@ -170,43 +160,47 @@ export default function ProductPage() {
   const com = (
     <div className={styled.comWrap}>
       <div className={styled.starBox}>
-        {/* <div className="content">
-          <div className="star-area">{renderStar()}</div>
-        </div> */}
-        <button>撰寫評論</button>
+        <StarRating />
+        <p className={styled.write} onClick={() => {}}>
+          (19)
+        </p>
       </div>
       <div className={styled.commonArea}>
-        {Array(6)
-          .fill(1)
-          .map((v, i) => {
-            return (
-              <div className={styled.commonBox}>
-                <div className={styled.commonTitle}>
-                  <div className={styled.commonTitle_img_border}>
-                    <div className={styled.commonTitle_img}>
-                      <img
-                        src="https://cdn2.ettoday.net/images/2253/2253152.jpg"
-                        alt=""
-                      />
-                    </div>
+        {comFakeData.map((v, i) => {
+          return (
+            <div className={styled.commonBox}>
+              <div className={styled.commonTitle}>
+                <div className={styled.commonTitle_img_border}>
+                  <div className={styled.commonTitle_img}>
+                    <img
+                      src="https://cdn2.ettoday.net/images/2253/2253152.jpg"
+                      alt=""
+                    />
                   </div>
+                </div>
 
-                  <div className={styled.memberName}>我愛一條柴</div>
-                </div>
-                <div className={styled.commonText}>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil
-                  dolor voluptas velit facere nam, cupiditate iure ratione
-                </div>
-                <div className={styled.howStar}>
-                  <i className="fa-solid fa-star"></i>
-                  <i className="fa-solid fa-star"></i>
-                  <i className="fa-solid fa-star"></i>
-                  <i className="fa-solid fa-star"></i>
-                  <i className="fa-solid fa-star"></i>
-                </div>
+                <div className={styled.memberName}>{v.name}</div>
               </div>
-            )
-          })}
+              <div className={styled.commonText}>{v.text}</div>
+              <div className={styled.howStar}>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+              </div>
+              <div
+                className={styled.readMore}
+                onClick={() => {
+                  setWhichCom(i)
+                  setComLightBox(true)
+                }}
+              >
+                閱讀更多
+              </div>
+            </div>
+          )
+        })}
       </div>
     </div>
   )
@@ -220,6 +214,13 @@ export default function ProductPage() {
   return (
     <>
       <div className={styled.empty}></div>
+      {comLightBox && (
+        <CommentLightBox
+          comFakeData={comFakeData}
+          whichCom={whichCom}
+          setComLightBox={setComLightBox}
+        />
+      )}
       <div className={styled.card}>
         <div className={styled.container}>
           {/* //bordshell */}
