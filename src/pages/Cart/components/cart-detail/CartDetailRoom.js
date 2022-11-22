@@ -2,7 +2,8 @@ import { useState, useContext } from 'react'
 import ProCartContext from '../../../../contexts/ProCartContext'
 import styled from '../../../../styles/cart-scss/cartDetail.module.scss'
 function CartDetailRoom() {
-  const { room, plusOne2, minusOne2, delOne2 } = useContext(ProCartContext)
+  const { room, plusOne2, minusOne2, delOne2, moneyFormat } =
+    useContext(ProCartContext)
   const [del, setDel] = useState([])
   const change = (el, i) => {
     if (!del.includes(el.sid)) {
@@ -32,7 +33,7 @@ function CartDetailRoom() {
                       <p>地址：{el.address}</p>
                       <p>預定日期：{el.startDate}</p>
                       <p>離開日期：{el.endDate}</p>
-                      <p>單價：{el.price}</p>
+                      <p>單價：{moneyFormat(el.price)}</p>
                       <div className={styled.people}>
                         <p>人數：</p>
                         <div className={styled.qty}>
@@ -65,7 +66,7 @@ function CartDetailRoom() {
                         </div>
                         <p>人</p>
                       </div>
-                      <p>總金額：{el.qty * el.price}</p>
+                      <p>總金額：{moneyFormat(el.qty * el.price)}</p>
                     </div>
                     <div className={styled.roomImg}>
                       <img

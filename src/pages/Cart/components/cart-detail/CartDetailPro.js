@@ -9,14 +9,9 @@ function CartDetailPro() {
   //  price: 2000,
   //  qty: 1
   // }]
-  const { pro, plusOne, minusOne, delOne } = useContext(ProCartContext)
+  const { pro, plusOne, minusOne, delOne, moneyFormat } =
+    useContext(ProCartContext)
   const [del, setDel] = useState([])
-  const moneyFormat = (price) => {
-    let a = Number(price)
-    let b = a.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD' })
-    let c = b.split('.')
-    return c[0]
-  }
   const change = (el, i) => {
     if (!del.includes(el.sid)) {
       const newDel = [...del, el.sid]
