@@ -15,10 +15,13 @@ function CartDetailRen() {
                 <p>租還日期：2022/12/31~2023/1/2</p>
                 <p>租借－歸還：大安店-木柵店</p>
                 <p>單價：3299</p>
-                <div className={styled.qty}>
-                  <button>－</button>
-                  <input type="text" />
-                  <button>＋</button>
+                <div className={styled.people}>
+                  <p>數量：</p>
+                  <div className={styled.qty}>
+                    <button>－</button>
+                    <button>2</button>
+                    <button>＋</button>
+                  </div>
                 </div>
                 <p>總金額：3450</p>
               </div>
@@ -26,6 +29,7 @@ function CartDetailRen() {
                 <img src="https://vencedor888.com/upload/1000_86.jpg" alt="" />
               </div>
             </div>
+            <i className="fa-regular fa-trash-can"></i>
           </div>
           <div className={styled.wrap}>
             <input type="checkbox" />
@@ -36,10 +40,13 @@ function CartDetailRen() {
                 <p>租還日期：2022/12/31~2023/1/2</p>
                 <p>租借－歸還：大安店-木柵店</p>
                 <p>單價：3299</p>
-                <div className={styled.qty}>
-                  <button>－</button>
-                  <input type="text" />
-                  <button>＋</button>
+                <div className={styled.people}>
+                  <p>數量：</p>
+                  <div className={styled.qty}>
+                    <button>－</button>
+                    <button>2</button>
+                    <button>＋</button>
+                  </div>
                 </div>
                 <p>總金額：3450</p>
               </div>
@@ -47,6 +54,7 @@ function CartDetailRen() {
                 <img src="https://vencedor888.com/upload/1000_86.jpg" alt="" />
               </div>
             </div>
+            <i className="fa-regular fa-trash-can"></i>
           </div>
           <div className={styled.wrap}>
             <input type="checkbox" />
@@ -57,10 +65,13 @@ function CartDetailRen() {
                 <p>租還日期：2022/12/31~2023/1/2</p>
                 <p>租借－歸還：大安店-木柵店</p>
                 <p>單價：3299</p>
-                <div className={styled.qty}>
-                  <button>－</button>
-                  <input type="text" />
-                  <button>＋</button>
+                <div className={styled.people}>
+                  <p>數量：</p>
+                  <div className={styled.qty}>
+                    <button>－</button>
+                    <button>2</button>
+                    <button>＋</button>
+                  </div>
                 </div>
                 <p>總金額：3450</p>
               </div>
@@ -68,6 +79,7 @@ function CartDetailRen() {
                 <img src="https://vencedor888.com/upload/1000_86.jpg" alt="" />
               </div>
             </div>
+            <i className="fa-regular fa-trash-can"></i>
           </div>
         </div>
       </div>

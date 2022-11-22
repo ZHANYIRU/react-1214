@@ -2,7 +2,7 @@
 
 .row {
     width: 100%;
-    padding-top: 160px;
+    padding-top: 120px;
     padding-bottom: 80px;
     width: 100%;
 
@@ -15,14 +15,14 @@
 
         aside {
             width: 320px;
-            height: 75vh;
+            height: 760px;
             position: sticky;
             background-color: #fff;
             box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
             border-radius: 12px;
-            top: 160px;
+            top: 120px;
             box-sizing: border-box;
-            padding: 50px 32px;
+            padding: 40px 32px;
             box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
             text-align: center;
 
@@ -52,7 +52,6 @@
             }
 
             h3 {
-                // font-family: 'Montserrat';
                 font-weight: bold;
                 font-size: 32px;
                 line-height: 32px;
@@ -61,9 +60,9 @@
             }
 
             .socials {
-                width: 80%;
+                width: 100%;
                 display: flex;
-                justify-content: space-between;
+                justify-content: space-around;
                 margin: auto;
                 border-top: 1px solid #ccc;
                 padding-top: 16px;
@@ -71,7 +70,6 @@
             }
 
             .highlight {
-                // font-family: 'Montserrat';
                 font-weight: 700;
                 font-size: 18px;
                 text-align: center;
@@ -79,9 +77,11 @@
                 margin-bottom: 16px;
             }
 
-            p {
-                line-height: 18px;
-                font-weight: 500;
+            pre {
+                line-height: 17px;
+                font-weight: 600;
+                white-space: pre-wrap;
+                overflow: hidden;
 
                 &.intro {
                     height: 140px;
@@ -90,26 +90,27 @@
             }
 
             button {
-                width: 240px;
-                height: 50px;
+                width: 200px;
+                height: 40px;
                 border: none;
                 border-radius: 10px;
                 background: #FFDA16;
                 box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-                font-family: 'Montserrat';
-                font-weight: 800;
-                font-size: 22px;
+                font-weight: 700;
+                font-size: 18px;
                 text-align: center;
                 color: #01170D;
-                margin-top: 36px;
+                margin-top: 28px;
                 transition: 0.2s;
             
                 &:hover {
                     background: #ffc116;
                 }
 
-                a {
-                    
+
+                &.follow {
+                    margin-top: 0;
+                    margin-bottom: 36px;
                 }
             }
         }
