@@ -8,6 +8,24 @@ import ProCartContext from '../../contexts/ProCartContext'
 export default function ProductPage() {
   const { product_sid } = useParams()
   const { addProCart } = useContext(ProCartContext)
+  //星星數
+  const [star, setStar] = useState(0)
+  //星星做動方法
+  const renderStar = () => {
+    let array = []
+    for (let i = 0; i < 5; i++) {
+      let cls = i >= star ? 'star-item' : 'star-item-light'
+      array.push(
+        <div
+          onClick={() => {
+            setStar(star + 1)
+          }}
+          className={cls}
+        ></div>
+      )
+    }
+    return array
+  }
   //換圖
   const changePic = useRef()
   // 尺寸選取
@@ -152,13 +170,9 @@ export default function ProductPage() {
   const com = (
     <div className={styled.comWrap}>
       <div className={styled.starBox}>
-        <Link>
-          <i className="fa-solid fa-star"></i>
-          <i className="fa-solid fa-star"></i>
-          <i className="fa-solid fa-star"></i>
-          <i className="fa-solid fa-star"></i>
-          <i className="fa-solid fa-star"></i>
-        </Link>
+        {/* <div className="content">
+          <div className="star-area">{renderStar()}</div>
+        </div> */}
         <button>撰寫評論</button>
       </div>
       <div className={styled.commonArea}>

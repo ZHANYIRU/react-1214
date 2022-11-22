@@ -338,7 +338,32 @@ a{
         i{
             color: #FFDA16;
         }
-
+        .content {
+            height: 100%;
+            .eva-content {
+              background-color: #fff;
+              overflow: hidden;
+              margin: px2rem(10px);
+              margin-top: px2rem(74px);
+            }
+            .star-area {
+              text-align: center;
+              margin-top: px2rem(30px);
+            }
+            .star-item {
+              width: px2rem(32px);
+              height: px2rem(32px);
+              background-image: url('./img/gray-star.png');
+              background-size: cover;
+              display: inline-block;
+              margin-right: px2rem(10px);
+          
+              &.light {
+                background-image: url('./img/light-star.png');
+              }
+            }
+          }
+          
     }
     button{
         border-radius: 5px;
