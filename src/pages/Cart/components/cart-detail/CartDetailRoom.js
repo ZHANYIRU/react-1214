@@ -87,9 +87,10 @@ function CartDetailRoom() {
                   <i
                     className="fa-regular fa-trash-can"
                     onClick={() => {
+                      const t = el.qty * el.price
                       change(el, i)
                       setTimeout(() => {
-                        delOne2(el.sid)
+                        delOne2(el.sid, t)
                       }, 500)
                     }}
                   ></i>

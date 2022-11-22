@@ -86,9 +86,10 @@ function CartDetailCam() {
                   <i
                     className="fa-regular fa-trash-can"
                     onClick={() => {
+                      const t = el.qty * el.price
                       change(el, i)
                       setTimeout(() => {
-                        delOne3(el.sid)
+                        delOne3(el.sid, t)
                       }, 500)
                     }}
                   ></i>

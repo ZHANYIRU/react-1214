@@ -386,9 +386,15 @@ const proCartReducer = (state, action) => {
         const item1 = state.items.slice(0, proIndex)
         const item2 = state.items.slice(proIndex + 1)
         const newCartItem = item1.concat(item2)
-        state = { ...state, items: newCartItem, totalItem: state.totalItem - 1 }
+        state = {
+          ...state,
+          items: newCartItem,
+          totalItem: state.totalItem - 1,
+          totalPrice: state.totalPrice - price,
+        }
         localStorage.setItem('proCart', JSON.stringify(state.items))
         localStorage.setItem('totalItem', state.totalItem)
+        localStorage.setItem('totalPrice', state.totalPrice)
         if (newCartItem.length === 0) {
           localStorage.removeItem('proCart')
         }
@@ -402,9 +408,11 @@ const proCartReducer = (state, action) => {
           ...state,
           items2: newCartItem,
           totalItem: state.totalItem - 1,
+          totalPrice: state.totalPrice - price,
         }
         localStorage.setItem('roomCart', JSON.stringify(state.items2))
         localStorage.setItem('totalItem', state.totalItem)
+        localStorage.setItem('totalPrice', state.totalPrice)
         if (newCartItem.length === 0) {
           localStorage.removeItem('roomCart')
         }
@@ -418,9 +426,11 @@ const proCartReducer = (state, action) => {
           ...state,
           items3: newCartItem,
           totalItem: state.totalItem - 1,
+          totalPrice: state.totalPrice - price,
         }
         localStorage.setItem('campCart', JSON.stringify(state.items3))
         localStorage.setItem('totalItem', state.totalItem)
+        localStorage.setItem('totalPrice', state.totalPrice)
         if (newCartItem.length === 0) {
           localStorage.removeItem('campCart')
         }
@@ -434,9 +444,11 @@ const proCartReducer = (state, action) => {
           ...state,
           items4: newCartItem,
           totalItem: state.totalItem - 1,
+          totalPrice: state.totalPrice - price,
         }
         localStorage.setItem('renCart', JSON.stringify(state.items4))
         localStorage.setItem('totalItem', state.totalItem)
+        localStorage.setItem('totalPrice', state.totalPrice)
         if (newCartItem.length === 0) {
           localStorage.removeItem('renCart')
         }
@@ -671,31 +683,31 @@ export const ProCartContextProvider = ({ children }) => {
     })
   }
   //刪除單筆商品
-  const delOne = (proSid, size) => {
+  const delOne = (proSid, size, price) => {
     dispatch({
       type: 'DEL',
-      payload: { proSid, size },
+      payload: { proSid, size, price },
     })
   }
   //刪除單筆房間
-  const delOne2 = (roomSid) => {
+  const delOne2 = (roomSid, price) => {
     dispatch({
       type: 'DEL',
-      payload: { roomSid },
+      payload: { roomSid, price },
     })
   }
   //刪除單筆活動
-  const delOne3 = (campSid) => {
+  const delOne3 = (campSid, price) => {
     dispatch({
       type: 'DEL',
-      payload: { campSid },
+      payload: { campSid, price },
     })
   }
   //刪除單筆租借
-  const delOne4 = (renSid, size) => {
+  const delOne4 = (renSid, size, price) => {
     dispatch({
       type: 'DEL',
-      payload: { renSid, size },
+      payload: { renSid, size, price },
     })
   }
   //清空購物車
