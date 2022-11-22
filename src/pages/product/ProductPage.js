@@ -8,6 +8,8 @@ import ProCartContext from '../../contexts/ProCartContext'
 export default function ProductPage() {
   const { product_sid } = useParams()
   const { addProCart } = useContext(ProCartContext)
+  //換圖
+  const changePic = useRef()
   // 尺寸選取
   const [size, setSize] = useState({
     S: false,
@@ -213,26 +215,75 @@ export default function ProductPage() {
                 <div className={styled.imgBox}>
                   <div className={styled.bigImg}>
                     <img
-                      src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
+                      src="https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg"
                       alt=""
+                      ref={changePic}
                     />
                   </div>
                   <div className={styled.imgGroup}>
                     <img
-                      src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
+                      src="https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg"
                       alt=""
+                      onMouseMove={() => {
+                        changePic.current.setAttribute(
+                          'src',
+                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg'
+                        )
+                      }}
+                      onMouseLeave={() => {
+                        changePic.current.setAttribute(
+                          'src',
+                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg'
+                        )
+                      }}
                     />
                     <img
-                      src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
+                      src="https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384f6822100480585f0/800x.webp?source_format=jpg"
                       alt=""
+                      onMouseMove={() => {
+                        changePic.current.setAttribute(
+                          'src',
+                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384f6822100480585f0/800x.webp?source_format=jpg'
+                        )
+                      }}
+                      onMouseLeave={() => {
+                        changePic.current.setAttribute(
+                          'src',
+                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg'
+                        )
+                      }}
                     />
                     <img
-                      src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
+                      src="https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a038499ed9f002a97789b/800x.webp?source_format=jpg"
                       alt=""
+                      onMouseMove={() => {
+                        changePic.current.setAttribute(
+                          'src',
+                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a038499ed9f002a97789b/800x.webp?source_format=jpg'
+                        )
+                      }}
+                      onMouseLeave={() => {
+                        changePic.current.setAttribute(
+                          'src',
+                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg'
+                        )
+                      }}
                     />
                     <img
-                      src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
+                      src="https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384741e520042b11aff/800x.webp?source_format=jpg"
                       alt=""
+                      onMouseMove={() => {
+                        changePic.current.setAttribute(
+                          'src',
+                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384741e520042b11aff/800x.webp?source_format=jpg'
+                        )
+                      }}
+                      onMouseLeave={() => {
+                        changePic.current.setAttribute(
+                          'src',
+                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg'
+                        )
+                      }}
                     />
                   </div>
                 </div>

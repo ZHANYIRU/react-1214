@@ -11,6 +11,10 @@ import img2 from './img/img2.jpg'
 import img3 from './img/img3.jpg'
 
 function Product() {
+  // 輸入用(可控表單元件用)
+  const [inputKeyword, setInputKeyword] = useState('')
+  // 按下搜尋按鈕用，真正搜尋用
+  const [searchKeyword, setSearchKeyWord] = useState('')
   //圖片
   const data = [
     {
@@ -137,9 +141,21 @@ function Product() {
             }}
           >
             <form action="">
-              <input className={styled.search} type="text" />
+              <input
+                className={styled.search}
+                type="text"
+                value={inputKeyword}
+                onChange={(e) => {
+                  setInputKeyword(e.target.value)
+                }}
+              />
 
-              <i className="fa-solid fa-magnifying-glass"></i>
+              <i
+                className="fa-solid fa-magnifying-glass"
+                onClick={() => {
+                  setSearchKeyWord(inputKeyword)
+                }}
+              ></i>
             </form>
           </div>
         )}
@@ -216,26 +232,30 @@ function Product() {
           setDatas={setDatas}
         />
         <div className={styled.cardbox}>
-          {datas.map((v, i) => {
-            return (
-              <Link
-                className={styled.card}
-                key={v.product_sid}
-                to={'/product/' + v.product_sid}
-              >
-                <div className={styled.imgWrap}>
-                  <img
-                    src="https://www.arcteryx.com.tw/media/catalog/product/cache/9f23c48e1ba32633494dfb89a2676b50/3/0/30698_l08370200_gamma-lt-jacket_m_habitat_1.jpg"
-                    alt=""
-                  />
-                </div>
-                <p className={styled.p}>{v.product_name}</p>
-                <h2>
-                  金額：<span>{moneyFormat(v.product_price)}</span>
-                </h2>
-              </Link>
-            )
-          })}
+          {datas
+            .filter((v, i) => {
+              return v.product_name.includes(searchKeyword)
+            })
+            .map((v, i) => {
+              return (
+                <Link
+                  className={styled.card}
+                  key={v.product_sid}
+                  to={'/product/' + v.product_sid}
+                >
+                  <div className={styled.imgWrap}>
+                    <img
+                      src="https://www.arcteryx.com.tw/media/catalog/product/cache/9f23c48e1ba32633494dfb89a2676b50/3/0/30698_l08370200_gamma-lt-jacket_m_habitat_1.jpg"
+                      alt=""
+                    />
+                  </div>
+                  <p className={styled.p}>{v.product_name}</p>
+                  <h2>
+                    金額：<span>{moneyFormat(v.product_price)}</span>
+                  </h2>
+                </Link>
+              )
+            })}
         </div>
       </div>
       {/* </div> */}
