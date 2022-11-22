@@ -3,7 +3,7 @@ import style from '../../../styles/room-scss/roomCard.module.scss'
 
 function RoomCard({ roomlist }) {
   const { M2rows } = roomlist
-  console.log(M2rows)
+  // console.log(M2rows)
 
   return (
     <>

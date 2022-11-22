@@ -25,9 +25,14 @@ function Main({ setFtr }) {
       <div className={styled.main} ref={mainHeight}>
         {/* <Weather /> */}
         <div className={styled.section1}>
-          <div className={styled.text}>有了837，登山很容易！</div>
-          <div className={styled.text}>輕鬆簡單，就能入門爬山</div>
-          <div className={styled.text}>快加入熱門揪團活動！</div>
+          <div className={styled.cube}>
+            <div className={styled.front}>有了837，登山很容易！</div>
+            <div className={styled.bottom}>輕鬆簡單，就能入門爬山</div>
+            <div className={styled.back}>快加入熱門揪團活動！</div>
+            <div className={styled.left}></div>
+            <div className={styled.right}></div>
+            <div className={styled.top}></div>
+          </div>
         </div>
         <div className={styled.section2}>
           <div className={styled.pic}>

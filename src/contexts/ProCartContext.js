@@ -1,4 +1,4 @@
-import { useReducer, createContext } from 'react'
+import { useState, useReducer, createContext } from 'react'
 //初始架構
 // const initState = {
 //   items: [
@@ -337,9 +337,12 @@ export const ProCartContextProvider = ({ children }) => {
       payload: {},
     })
   }
+  const [data, setData] = useState([])
   return (
     <ProCartContext.Provider
       value={{
+        data,
+        setData,
         addProCart,
         addRoomCart,
         plusOne,

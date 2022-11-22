@@ -1,7 +1,10 @@
 import style from '../../styles/room-scss/roomFilterPage.module.scss'
 import RoomFilterResult from './components/RoomFilterResult'
-
+import ProCartContext from '../../contexts/ProCartContext'
+import { useContext } from 'react'
 function RoomFilterPage() {
+  const { data } = useContext(ProCartContext)
+  console.log('test', data)
   return (
     <>
       <div className={style.warp}>

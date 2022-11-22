@@ -3,18 +3,58 @@
 }
 .section1{
   width: 100%;  
-  height: 210vh;
-  .text {
+  height: 100vh;
+  .cube{
+    transform-style: preserve-3d;
+    transform-origin: 0px 0px;
+    animation: rotateY 2s infinite;
+  }
+  .cube>div{
+    width: 100%;
+    height: 300px;
+    // position: absolute;
+  }
+
+  .front, .bottom, .back, .left, .right, .top {
     padding-top: 300px;
     font-size: 4rem;
     font-weight: 700;
     width: 100%;
-    height: 70vh;
+    height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: .5s;
   }
+  .front{
+    transform:translatez(200px)
+  }
+  .bottom{
+    transform:rotateX(-90deg)
+  }
+  .back{
+    transform:translatez(200px)
+  }
+
+  //沒東西
+  .left{
+    transform: rotateY(-90deg) translateZ(200px)
+  }
+  .right{
+    transform:
+    rotateY(90deg) translateZ(200px);
+  }
+  .top{
+    transform:rotateX(90deg) translatez(200px)
+
+  }
+  @keyframes rotateY {
+    from{
+        transform: rotateX(0deg);
+    }
+    to{
+        transform: rotateX(90deg);
+    }
+}
 }
 .section2{
   display: flex;
