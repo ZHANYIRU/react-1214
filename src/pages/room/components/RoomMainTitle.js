@@ -1,4 +1,4 @@
-import style from '../../styles/room-scss/roomMainTitle.module.scss'
+import style from '../../../styles/room-scss/roomMainTitle.module.scss'
 import React from 'react'
 
 function RoomMainTitle() {

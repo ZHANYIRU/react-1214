@@ -1,7 +1,8 @@
 import styled from '../../../styles/cart-scss/OK.module.scss'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 function OkOrder(props) {
+  const navigate = useNavigate()
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -22,9 +23,14 @@ function OkOrder(props) {
             回首頁
           </Link>
           {/* </div> */}
-          <Link to="/order" className={styled.lookOrder}>
+          <div
+            className={styled.lookOrder}
+            onClick={() => {
+              navigate('/member/orders')
+            }}
+          >
             查看我的訂單
-          </Link>
+          </div>
         </div>
       </div>
     </>

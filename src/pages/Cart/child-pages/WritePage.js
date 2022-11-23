@@ -13,7 +13,11 @@ function WritePage({ step, setStep }) {
   const [buy, setBuy] = useState(false)
   //進這元件的時候，滾動到視窗最上面
   useEffect(() => {
-    window.scrollTo(0, 0)
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant',
+    })
   }, [])
   return (
     <>
