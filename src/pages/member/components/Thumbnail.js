@@ -6,6 +6,7 @@ export default function Thumbnail({
   postData,
   setCurrentPost,
   postIndex,
+  setEditTxt,
 }) {
   return (
     <div
@@ -40,7 +41,9 @@ export default function Thumbnail({
           onClick={(e) => {
             // console.log(1);
             e.stopPropagation()
+            setCurrentPost(postIndex)
             setIsEdit(true)
+            setEditTxt(postData.context)
           }}
         >
           <i className="fa-solid fa-pen-to-square"></i>

@@ -1,79 +1,99 @@
-import React from 'react'
+import { useState, useContext } from 'react'
 import styled from '../../../../styles/cart-scss/cartDetail.module.scss'
+import ProCartContext from '../../../../contexts/ProCartContext'
 function CartDetailRen() {
+  const { ren, plusOne4, minusOne4, delOne4, moneyFormat } =
+    useContext(ProCartContext)
+  const [del, setDel] = useState([])
+  const change = (el, i) => {
+    if (!del.includes(el.sid)) {
+      const newDel = [...del, el.sid]
+      setDel(newDel)
+    }
+  }
   return (
     <>
-      <div className={`${styled.dtWrap} ${styled.ren}`}>
-        <div className={styled.outWrap}>
-          {/* 之後map的 */}
-          <div className={styled.wrap}>
-            <input type="checkbox" />
-            <div className={styled.wrapRight} style={{ height: '250px' }}>
-              <div className={styled.roomText}>
-                <h2>NorthFace睡袋</h2>
-                <p>尺寸：Ｍ</p>
-                <p>租還日期：2022/12/31~2023/1/2</p>
-                <p>租借－歸還：大安店-木柵店</p>
-                <p>單價：3299</p>
-                <div className={styled.qty}>
-                  <button>－</button>
-                  <input type="text" />
-                  <button>＋</button>
+      {ren && (
+        <div className={`${styled.dtWrap} ${styled.ren}`}>
+          <div className={styled.outWrap}>
+            {ren.map((el, i) => {
+              return (
+                <div
+                  className={
+                    del.includes(el.sid)
+                      ? `${styled.wrapChange}`
+                      : `${styled.wrap}`
+                  }
+                  key={`${el.sid}+${el.size}`}
+                >
+                  <input type="checkbox" />
+                  <div className={styled.wrapRight} style={{ height: '250px' }}>
+                    <div className={styled.roomText}>
+                      <h2>{el.name}</h2>
+                      <p>尺寸：Ｍ</p>
+                      <p>
+                        租還日期：{el.start}~{el.end}
+                      </p>
+                      <p>
+                        租借－歸還：{el.out}-{el.back}
+                      </p>
+                      <p>單價：{moneyFormat(el.price)}</p>
+                      <div className={styled.people}>
+                        <p>數量：</p>
+                        <div className={styled.qty}>
+                          {el.qty <= 1 ? (
+                            <button
+                              onClick={() => {
+                                minusOne4(el.sid, el.size, el.price)
+                              }}
+                              disabled
+                            >
+                              －
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => {
+                                minusOne4(el.sid, el.size, el.price)
+                              }}
+                            >
+                              －
+                            </button>
+                          )}
+                          <button>{el.qty}</button>
+                          <button
+                            onClick={() => {
+                              plusOne4(el.sid, el.size, el.price)
+                            }}
+                          >
+                            ＋
+                          </button>
+                        </div>
+                      </div>
+                      <p>總金額：{moneyFormat(el.price * el.qty)}</p>
+                    </div>
+                    <div className={styled.roomImg}>
+                      <img
+                        src="https://vencedor888.com/upload/1000_86.jpg"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                  <i
+                    className="fa-regular fa-trash-can"
+                    onClick={() => {
+                      const t = el.qty * el.price
+                      change(el, i)
+                      setTimeout(() => {
+                        delOne4(el.sid, el.size, t)
+                      }, 500)
+                    }}
+                  ></i>
                 </div>
-                <p>總金額：3450</p>
-              </div>
-              <div className={styled.roomImg}>
-                <img src="https://vencedor888.com/upload/1000_86.jpg" alt="" />
-              </div>
-            </div>
-            <i class="fa-regular fa-trash-can"></i>
-          </div>
-          <div className={styled.wrap}>
-            <input type="checkbox" />
-            <div className={styled.wrapRight} style={{ height: '250px' }}>
-              <div className={styled.roomText}>
-                <h2>NorthFace睡袋</h2>
-                <p>尺寸：Ｍ</p>
-                <p>租還日期：2022/12/31~2023/1/2</p>
-                <p>租借－歸還：大安店-木柵店</p>
-                <p>單價：3299</p>
-                <div className={styled.qty}>
-                  <button>－</button>
-                  <input type="text" />
-                  <button>＋</button>
-                </div>
-                <p>總金額：3450</p>
-              </div>
-              <div className={styled.roomImg}>
-                <img src="https://vencedor888.com/upload/1000_86.jpg" alt="" />
-              </div>
-            </div>
-            <i class="fa-regular fa-trash-can"></i>
-          </div>
-          <div className={styled.wrap}>
-            <input type="checkbox" />
-            <div className={styled.wrapRight} style={{ height: '250px' }}>
-              <div className={styled.roomText}>
-                <h2>NorthFace睡袋</h2>
-                <p>尺寸：Ｍ</p>
-                <p>租還日期：2022/12/31~2023/1/2</p>
-                <p>租借－歸還：大安店-木柵店</p>
-                <p>單價：3299</p>
-                <div className={styled.qty}>
-                  <button>－</button>
-                  <input type="text" />
-                  <button>＋</button>
-                </div>
-                <p>總金額：3450</p>
-              </div>
-              <div className={styled.roomImg}>
-                <img src="https://vencedor888.com/upload/1000_86.jpg" alt="" />
-              </div>
-            </div>
-            <i class="fa-regular fa-trash-can"></i>
+              )
+            })}
           </div>
         </div>
-      </div>
+      )}
     </>
   )
 }

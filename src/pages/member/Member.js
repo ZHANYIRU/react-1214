@@ -11,7 +11,7 @@ function Member(props) {
   const { data, setData, auth } = useContext(MemberContext)
 
   useEffect(() => {
-    if (auth === false) {
+    if (!localStorage.getItem('token')) {
       navigate('/login')
     }
   }, [auth])
