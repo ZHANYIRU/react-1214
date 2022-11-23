@@ -1,4 +1,4 @@
-import { useReducer, createContext } from 'react'
+import { useState, useReducer, createContext } from 'react'
 //初始架構
 // const initState = {
 //   items: [
@@ -717,6 +717,7 @@ export const ProCartContextProvider = ({ children }) => {
       payload: {},
     })
   }
+  const [data, setData] = useState([])
   //金錢格式化
   const moneyFormat = (price) => {
     let a = Number(price)
@@ -727,6 +728,8 @@ export const ProCartContextProvider = ({ children }) => {
   return (
     <ProCartContext.Provider
       value={{
+        data,
+        setData,
         moneyFormat,
         addProCart,
         addRoomCart,

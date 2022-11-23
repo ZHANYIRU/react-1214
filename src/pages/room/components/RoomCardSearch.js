@@ -1,18 +1,20 @@
 import React from 'react'
 import style from '../../../styles/room-scss/roomCard.module.scss'
 
-function RoomCard({ roomlist }) {
-  const { M1rows } = roomlist
-  // console.log(M1rows)
+function RoomCardSearch({ selectRoom, setSelectRoom }) {
+  const { roomRows } = selectRoom
 
   return (
     <>
       <div className={style.titleWrap}>
-        <h4 className={style.roomMainTitle}>雪山熱門住宿</h4>
+        <h4 className={style.roomMainTitle}>
+          {roomRows.length !== 0 && roomRows[0].mountain_name}
+          {roomRows.length !== 0 && '熱門住宿'}
+        </h4>
       </div>
       <div className={style.roomCardGroup}>
-        {M1rows &&
-          M1rows.map((v, i) => {
+        {roomRows &&
+          roomRows.map((v, i) => {
             return (
               <div className={style.roomCard} key={v.room_sid}>
                 <div className={style.cardImg}></div>
@@ -51,4 +53,4 @@ function RoomCard({ roomlist }) {
   )
 }
 
-export default RoomCard
+export default RoomCardSearch

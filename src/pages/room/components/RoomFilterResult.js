@@ -95,8 +95,8 @@ function RoomFilterResult() {
             <span>電話：0919 822 379</span>
           </div>
           <div className={style.bottom}>
-          <div className={style.price}>金額：{'650'}/人</div>
-          <button>查看詳情</button>
+            <div className={style.price}>金額：{'650'}/人</div>
+            <button>查看詳情</button>
           </div>
         </div>
       </div>

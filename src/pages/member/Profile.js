@@ -1,18 +1,55 @@
 import styled from '../../styles/member-scss/Member.module.scss'
-import { Outlet, useNavigate, useLocation } from 'react-router-dom'
-import { useEffect } from 'react'
+import { Outlet, useNavigate, useLocation, useFetcher } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useContext } from 'react'
+import MemberContext from '../../contexts/MemberContext'
 
 function Profile(props) {
   const navigate = useNavigate()
   const location = useLocation()
 
-  console.log(location.search)
+  const usp = new URLSearchParams(location.search)
+  const mid = usp.get('id')
+
+  let initInfo = {
+    member_sid: mid,
+    nickname: '',
+    avatar: '',
+    intro: '',
+  }
+
+  const { data } = useContext(MemberContext)
+
+  const [info, setInfo] = useState(initInfo)
+
+  async function getInfo() {
+    const result = await axios.get(
+      `http://localhost:3001/member/profile/api?mid=${mid}`
+    )
+
+    // console.log(result.data)
+
+    if (result.data.rows) {
+      setInfo(result.data.rows[0])
+    } else {
+      navigate('/')
+    }
+  }
+
+  console.log()
 
   useEffect(() => {
     if (!location.search) {
       navigate('/')
     }
-  }, [])
+
+    if (`${info.member_sid}` === `${data.member_sid}`) {
+      navigate('/member')
+    }
+
+    getInfo()
+  }, [info.member_sid])
 
   return (
     <>
@@ -22,21 +59,28 @@ function Profile(props) {
             <div
               className={`${styled.avatar} ${styled.social}`}
               onClick={() => {
-                navigate(`/profile/?mid=${1}`)
+                navigate(`/profile/?mid=${mid}`)
               }}
             >
-              <img
-                src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
-                alt="avatar"
-              ></img>
+              {info.avatar ? (
+                <img
+                  src={`http://localhost:3001/uploads/thumb_${info.avatar}`}
+                  alt="avatar"
+                ></img>
+              ) : (
+                <img
+                  src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
+                  alt="postImg"
+                ></img>
+              )}
             </div>
             <h3
               className={styled.social}
               onClick={() => {
-                navigate(`/profile/?mid=${1}`)
+                navigate(`/profile/?mid=${mid}`)
               }}
             >
-              和真
+              {info.nickname}
             </h3>
             <p className={styled.highlight}>銀級玩家</p>
             <div className={styled.socials}>
@@ -62,12 +106,7 @@ function Profile(props) {
             <button className={styled.follow}>
               <i className="fa-solid fa-user-plus"></i> 關注他
             </button>
-            <p className={styled.intro}>
-              喜愛登山與旅遊結合規劃，發掘台灣的歷史與美，熱愛攝影，探索台灣百岳，中級山，郊山的山野旅行者。GoHiking
-              ! ! !
-              {/* 一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十一二三四五六七八九十 */}
-            </p>
-            {/* bonus: 處理換行問題 */}
+            <pre className={styled.intro}>{info.intro}</pre>
           </aside>
           <article>
             <Outlet />

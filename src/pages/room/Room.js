@@ -1,8 +1,38 @@
+import axios from 'axios'
 import { useRef, useState, useEffect } from 'react'
 import style from '../../styles/room-scss/room.module.scss'
 import RoomCard from './components/RoomCard'
+import RoomCard2 from './components/RoomCard2'
+import RoomCard3 from './components/RoomCard3'
+import RoomCardSearch from './components/RoomCardSearch'
 import RoomSearch from './components/RoomSearch'
-function Room(props) {
+function Room({ data, setData }) {
+  // fetch db檔案
+  const [roomlist, setRoomList] = useState([])
+  async function getList() {
+    const { data } = await axios.get('http://localhost:3001/room/list')
+    setRoomList(data)
+  }
+  useEffect(() => {
+    getSearchList()
+    getList()
+  }, [])
+
+  //fetch searchbar內容
+  const [searchbar, setSearchBar] = useState([])
+  async function getSearchList() {
+    const { data } = await axios.get('http://localhost:3001/room/searchbar')
+    // console.log('searchlist', data)
+    setSearchBar(data)
+  }
+
+  // 保存SearchBar選擇狀態
+  const [selectRoom, setSelectRoom] = useState([])
+
+  // 紀錄使用者輸入的關鍵字
+  const [keyWord, setKeyWord] = useState('')
+
+  //監控內容高度
   const [ftr, setFtr] = useState(false)
   const mainHeight = useRef()
   const scroll = () => {
@@ -34,14 +64,36 @@ function Room(props) {
       </div>
 
       <div className={style.container} ref={mainHeight}>
-        <h2 className={style.title}>
+        <h2
+          className={style.title}
+          onClick={(e) => {
+            setData(e.target.value)
+          }}
+        >
           還在為尋找登山口住宿而煩惱嗎？ <br />
           別擔心！ <br />
           837都為大家整理好了！
         </h2>
-        <RoomSearch />
-        <RoomCard />
-        <RoomCard />
+        <RoomSearch
+          searchbar={searchbar}
+          setSearchBar={setSearchBar}
+          selectRoom={selectRoom}
+          setSelectRoom={setSelectRoom}
+          keyWord={keyWord}
+          setKeyWord={setKeyWord}
+          data={data}
+          setData={setData}
+        />
+        {selectRoom.length !== 0 && (
+          <RoomCardSearch
+            selectRoom={selectRoom}
+            setSelectRoom={setSelectRoom}
+          />
+        )}
+
+        <RoomCard roomlist={roomlist} />
+        <RoomCard2 roomlist={roomlist} />
+        <RoomCard3 roomlist={roomlist} />
       </div>
     </>
   )

@@ -14,6 +14,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.31.10",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "lodash": "^4.17.21",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-classlist": "^1.1.2",

@@ -2,17 +2,17 @@ import React from 'react'
 import style from '../../../styles/room-scss/roomCard.module.scss'
 
 function RoomCard({ roomlist }) {
-  const { M1rows } = roomlist
-  // console.log(M1rows)
+  const { M3rows } = roomlist
+  // console.log(M3rows)
 
   return (
     <>
       <div className={style.titleWrap}>
-        <h4 className={style.roomMainTitle}>雪山熱門住宿</h4>
+        <h4 className={style.roomMainTitle}>西合歡山熱門住宿</h4>
       </div>
       <div className={style.roomCardGroup}>
-        {M1rows &&
-          M1rows.map((v, i) => {
+        {M3rows &&
+          M3rows.map((v, i) => {
             return (
               <div className={style.roomCard} key={v.room_sid}>
                 <div className={style.cardImg}></div>
@@ -21,7 +21,7 @@ function RoomCard({ roomlist }) {
                     <span>
                       <i className="fa-solid fa-map-location-dot"></i>
                     </span>
-                    <span>{v.name}</span>
+                    <span>苗栗</span>
                   </div>
                   <div className={style.mountain}>
                     <span>
@@ -40,8 +40,8 @@ function RoomCard({ roomlist }) {
                   <span className={style.commentQTY}>(2)</span>
                 </div>
                 <div className={style.price}>
-                  ＄{v.room_price}
-                  <span>人 / 床位</span>
+                  {v.room_price}
+                  <span>床位</span>
                 </div>
               </div>
             )
