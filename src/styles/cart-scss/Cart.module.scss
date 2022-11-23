@@ -81,7 +81,7 @@
   background-color: $lightGreen;
 }
 .noCart {
-  width: 70%;
+  width: 40%;
   height: 100%;
   margin: 0 auto;
   display: flex;
@@ -90,7 +90,7 @@
   position: relative;
   i:first-child {
     color: $darkGreen;
-    font-size: 200px;
+    font-size: 100px;
   }
   i:nth-child(2) {
     color: $darkGreen;
@@ -103,7 +103,7 @@
   }
   p {
     color: $darkGreen;
-    font-size: 50px;
+    font-size: 30px;
   }
 }
 @keyframes hands {

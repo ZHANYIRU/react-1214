@@ -49,7 +49,6 @@ function Cart() {
         </div>
       ) : (
         <div className={styled.container}>
-          <CartTitle step={step} maxStep={maxStep} />
           <div className={styled.noCart}>
             <i className="fa-solid fa-cart-arrow-down"></i>
             <i className="fa-regular fa-hand-point-down"></i>
