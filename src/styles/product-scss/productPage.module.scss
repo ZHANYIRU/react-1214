@@ -26,6 +26,9 @@
     border-radius: 10px  ;
      overflow:hidden;
 }
+a{
+    color: #000;
+}
 .productDtail{
     display: flex;
     margin-bottom: 80px;
@@ -98,6 +101,7 @@
             margin-bottom: 0px;
         }
         .standardBox{
+            cursor: pointer;
             margin-left: 20px;
             display: flex;
             justify-content: center;
@@ -110,6 +114,25 @@
             font-size: 1.5rem;
             font-weight: 700;
             border-radius: 10px;
+            &:hover{
+                background-color: #FFDA16;
+            }
+            
+        }
+        .standardBoxChose{
+            margin-left: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 35px;
+            height: 35px;
+            // border: 1px black solid;
+            box-shadow:  3px  3px 3px #ccc,-3px 0px 3px #ccc;
+            // filter: drop-shadow(3px 3px 10px #ccc);
+            font-size: 1.5rem;
+            font-weight: 700;
+            border-radius: 10px;
+            background-color: #FFDA16;
             &:hover{
                 background-color: #FFDA16;
             }
@@ -265,7 +288,7 @@
    
     .card{
         width: 30%;
-        height: 330px;
+        height: 350px;
         // border: 1px black solid;
         border-radius: 10px;
         padding: 15px;
@@ -309,23 +332,24 @@
 }
 
 .starBox{
+    // width: 80%;
+    display: flex;
+    align-items: center;
     margin: 10px 0 20px 0;
-    a{
-        margin-right: 20px;
-        i{
-            color: #FFDA16;
-        }
-
-    }
-    button{
+    
+    .write{
+        font-size: 1.2rem;
+        // width: 100px;
         border-radius: 5px;
         border: none;
         padding: 10px 15px;
-        background-color: black;
-            color: white;
+        // background-color: black;
+            color: black;
+            font-weight: 700;
+            cursor: pointer;
         &:hover{
-            background-color: red;
-            color: white;
+            // background-color: red;
+            color: red;
         }
     }
 }
@@ -372,10 +396,21 @@
         }
     }
     .commonText{
+        line-height: 1.5rem;
         margin-bottom: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
     }
     .howStar{
         color: #FFDA16;
+        margin-bottom: 20px;
+    }
+    .readMore{
+        font-weight: 700;
+        cursor: pointer;
     }
     
 }

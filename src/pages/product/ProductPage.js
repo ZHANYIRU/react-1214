@@ -4,10 +4,42 @@ import styled from '../../styles/product-scss/productPage.module.scss'
 import axios from 'axios'
 import { useEffect } from 'react'
 import ProCartContext from '../../contexts/ProCartContext'
+import StarRating from './components/starRating'
+import CommentLightBox from './components/CommentLightBox'
+import comFakeData from './comFakeData'
 
 export default function ProductPage() {
   const { product_sid } = useParams()
   const { addProCart } = useContext(ProCartContext)
+  //哪一筆評論的Index
+  const [whichCom, setWhichCom] = useState(-1)
+
+  //燈箱切換
+  const [comLightBox, setComLightBox] = useState(false)
+  //換圖
+  const changePic = useRef()
+  // 尺寸選取
+  const [size, setSize] = useState({
+    S: false,
+    M: false,
+    L: false,
+  })
+  //尺寸方法
+  const choseSize = (choseOption) => {
+    if (choseOption === 'S') {
+      const choseSizeTarget = { ...size, S: true, M: false, L: false }
+      setSize(choseSizeTarget)
+    } else if (choseOption === 'M') {
+      const choseSizeTarget = { ...size, S: false, M: true, L: false }
+      setSize(choseSizeTarget)
+    } else {
+      const choseSizeTarget = { ...size, S: false, M: false, L: true }
+      setSize(choseSizeTarget)
+    }
+  }
+  //選擇數量
+  const [num, setNum] = useState(1)
+  //商品介紹、評論
   const [introCom, setintroCom] = useState(true)
   //隨機產生3筆資料
   const [randomData, setRandomData] = useState([
@@ -128,47 +160,47 @@ export default function ProductPage() {
   const com = (
     <div className={styled.comWrap}>
       <div className={styled.starBox}>
-        <Link>
-          <i className="fa-solid fa-star"></i>
-          <i className="fa-solid fa-star"></i>
-          <i className="fa-solid fa-star"></i>
-          <i className="fa-solid fa-star"></i>
-          <i className="fa-solid fa-star"></i>
-        </Link>
-        <button>撰寫評論</button>
+        <StarRating />
+        <p className={styled.write} onClick={() => {}}>
+          (19)
+        </p>
       </div>
       <div className={styled.commonArea}>
-        {Array(6)
-          .fill(1)
-          .map((v, i) => {
-            return (
-              <div className={styled.commonBox}>
-                <div className={styled.commonTitle}>
-                  <div className={styled.commonTitle_img_border}>
-                    <div className={styled.commonTitle_img}>
-                      <img
-                        src="https://cdn2.ettoday.net/images/2253/2253152.jpg"
-                        alt=""
-                      />
-                    </div>
+        {comFakeData.map((v, i) => {
+          return (
+            <div className={styled.commonBox}>
+              <div className={styled.commonTitle}>
+                <div className={styled.commonTitle_img_border}>
+                  <div className={styled.commonTitle_img}>
+                    <img
+                      src="https://cdn2.ettoday.net/images/2253/2253152.jpg"
+                      alt=""
+                    />
                   </div>
+                </div>
 
-                  <div className={styled.memberName}>我愛一條柴</div>
-                </div>
-                <div className={styled.commonText}>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil
-                  dolor voluptas velit facere nam, cupiditate iure ratione
-                </div>
-                <div className={styled.howStar}>
-                  <i className="fa-solid fa-star"></i>
-                  <i className="fa-solid fa-star"></i>
-                  <i className="fa-solid fa-star"></i>
-                  <i className="fa-solid fa-star"></i>
-                  <i className="fa-solid fa-star"></i>
-                </div>
+                <div className={styled.memberName}>{v.name}</div>
               </div>
-            )
-          })}
+              <div className={styled.commonText}>{v.text}</div>
+              <div className={styled.howStar}>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+                <i className="fa-solid fa-star"></i>
+              </div>
+              <div
+                className={styled.readMore}
+                onClick={() => {
+                  setWhichCom(i)
+                  setComLightBox(true)
+                }}
+              >
+                閱讀更多
+              </div>
+            </div>
+          )
+        })}
       </div>
     </div>
   )
@@ -182,6 +214,13 @@ export default function ProductPage() {
   return (
     <>
       <div className={styled.empty}></div>
+      {comLightBox && (
+        <CommentLightBox
+          comFakeData={comFakeData}
+          whichCom={whichCom}
+          setComLightBox={setComLightBox}
+        />
+      )}
       <div className={styled.card}>
         <div className={styled.container}>
           {/* //bordshell */}
@@ -191,26 +230,75 @@ export default function ProductPage() {
                 <div className={styled.imgBox}>
                   <div className={styled.bigImg}>
                     <img
-                      src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
+                      src="https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg"
                       alt=""
+                      ref={changePic}
                     />
                   </div>
                   <div className={styled.imgGroup}>
                     <img
-                      src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
+                      src="https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg"
                       alt=""
+                      onMouseMove={() => {
+                        changePic.current.setAttribute(
+                          'src',
+                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg'
+                        )
+                      }}
+                      onMouseLeave={() => {
+                        changePic.current.setAttribute(
+                          'src',
+                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg'
+                        )
+                      }}
                     />
                     <img
-                      src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
+                      src="https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384f6822100480585f0/800x.webp?source_format=jpg"
                       alt=""
+                      onMouseMove={() => {
+                        changePic.current.setAttribute(
+                          'src',
+                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384f6822100480585f0/800x.webp?source_format=jpg'
+                        )
+                      }}
+                      onMouseLeave={() => {
+                        changePic.current.setAttribute(
+                          'src',
+                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg'
+                        )
+                      }}
                     />
                     <img
-                      src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
+                      src="https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a038499ed9f002a97789b/800x.webp?source_format=jpg"
                       alt=""
+                      onMouseMove={() => {
+                        changePic.current.setAttribute(
+                          'src',
+                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a038499ed9f002a97789b/800x.webp?source_format=jpg'
+                        )
+                      }}
+                      onMouseLeave={() => {
+                        changePic.current.setAttribute(
+                          'src',
+                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg'
+                        )
+                      }}
                     />
                     <img
-                      src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
+                      src="https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384741e520042b11aff/800x.webp?source_format=jpg"
                       alt=""
+                      onMouseMove={() => {
+                        changePic.current.setAttribute(
+                          'src',
+                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384741e520042b11aff/800x.webp?source_format=jpg'
+                        )
+                      }}
+                      onMouseLeave={() => {
+                        changePic.current.setAttribute(
+                          'src',
+                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg'
+                        )
+                      }}
                     />
                   </div>
                 </div>
@@ -229,33 +317,97 @@ export default function ProductPage() {
 
                   <div className={styled.standard}>
                     <h2>商品規格</h2>
-                    <div className={styled.standardBox}>S</div>
-                    <div className={styled.standardBox}>M</div>
-                    <div className={styled.standardBox}>L</div>
+                    <div
+                      className={
+                        size.S
+                          ? `${styled.standardBoxChose}`
+                          : `${styled.standardBox}`
+                      }
+                      onClick={() => {
+                        if (size.S) {
+                          return setSize({
+                            S: false,
+                            M: false,
+                            L: false,
+                          })
+                        }
+                        choseSize('S')
+                      }}
+                    >
+                      S
+                    </div>
+                    <div
+                      className={
+                        size.M
+                          ? `${styled.standardBoxChose}`
+                          : `${styled.standardBox}`
+                      }
+                      onClick={() => {
+                        if (size.M) {
+                          return setSize({
+                            S: false,
+                            M: false,
+                            L: false,
+                          })
+                        }
+                        choseSize('M')
+                      }}
+                    >
+                      M
+                    </div>
+                    <div
+                      className={
+                        size.L
+                          ? `${styled.standardBoxChose}`
+                          : `${styled.standardBox}`
+                      }
+                      onClick={() => {
+                        if (size.L) {
+                          return setSize({
+                            S: false,
+                            M: false,
+                            L: false,
+                          })
+                        }
+                        choseSize('L')
+                      }}
+                    >
+                      L
+                    </div>
                   </div>
                   <h2>金額：{moneyFormat(v.product_price)}</h2>
                   <div className={styled.howNum}>
                     <p>商品數量</p>
                     <div className={styled.numBox}>
                       <div className={styled.numBox1}>
-                        <i className="fa-solid fa-minus"></i>
+                        <i
+                          className="fa-solid fa-minus"
+                          onClick={() => {
+                            if (num < 2) return
+                            setNum(num - 1)
+                          }}
+                        ></i>
                       </div>
-                      <div className={styled.numBox2}>
-                        {v.product_inventory}
-                      </div>
+                      <div className={styled.numBox2}>{num}</div>
                       <div className={styled.numBox3}>
-                        <i className="fa-solid fa-plus"></i>
+                        <i
+                          className="fa-solid fa-plus"
+                          onClick={() => {
+                            if (num > v.product_inventory) return
+                            setNum(num + 1)
+                          }}
+                        ></i>
                       </div>
                     </div>
                   </div>
                   <div className={styled.deliver}>
                     <p>配送方式</p>
                     <label htmlFor="home">宅配</label>
-                    <input type="radio" id="home" name="deliver" />
+                    <input type="radio" id="home" name="deliver" value="home" />
                     <label htmlFor="711">超商取貨</label>
-                    <input type="radio" id="711" name="deliver" />
+                    <input type="radio" id="711" name="deliver" value="711" />
                     <label htmlFor="shop">實體店取貨</label>
-                    <input type="radio" id="shop" name="deliver" />
+                    <input type="radio" id="shop" name="deliver" value="shop" />
                   </div>
                   <div className={styled.buttonGroup}>
                     <button
