@@ -1,0 +1,52 @@
+@import './global.scss';
+// html{
+//     position: relative;
+// }
+
+// img{
+//     width: 20%;
+//     position:fixed;
+//     z-index: 800;
+//     left: 30px;
+//     top: 350px;
+// }
+.cloud1 {
+  position: absolute;
+  top: 35vh;
+  animation: flow1 30s linear infinite;
+}
+.cloud2 {
+  position: absolute;
+  right: 0;
+  top: 55vh;
+  animation: flow2 30s linear infinite;
+  width: 600px;
+}
+.cloud3 {
+  position: absolute;
+  top: 145vh;
+  animation: flow1 30s linear infinite;
+}
+.cloud4 {
+  position: absolute;
+  right: 0;
+  top: 175vh;
+  animation: flow2 30s linear infinite;
+}
+
+@keyframes flow1 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(110vw);
+  }
+}
+@keyframes flow2 {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-110vw);
+  }
+}

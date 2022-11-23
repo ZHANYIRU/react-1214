@@ -1,36 +1,76 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import { useState, useContext } from 'react'
+import ProCartContext from '../../../../contexts/ProCartContext'
 import styled from '../../../../styles/cart-scss/cartDetail.module.scss'
 function CartDetailPro() {
-  const [proCart, setProCart] = useState([{}])
-  const getPro = () => {
-    const pro = JSON.parse(localStorage.getItem('proCart'))
-    console.log('11111', pro)
-    setProCart(pro)
+  // pro:[{
+  //  sid: 50,
+  //  name: "+9拐杖",
+  //  size: "S",
+  //  price: 2000,
+  //  qty: 1
+  // }]
+  const { pro, plusOne, minusOne, delOne, moneyFormat } =
+    useContext(ProCartContext)
+  const [del, setDel] = useState([])
+  const change = (el, i) => {
+    if (!del.includes(el.sid)) {
+      const newDel = [...del, el.sid]
+      setDel(newDel)
+    }
   }
-  useEffect(() => {
-    getPro()
-  }, [])
   return (
     <>
-      {proCart && (
+      {pro && (
         <div className={`${styled.dtWrap} ${styled.pro}`}>
           <div className={styled.outWrap}>
-            {proCart.map((el, i) => {
+            {pro.map((el, i) => {
               return (
-                <div className={styled.wrap}>
+                <div
+                  className={
+                    del.includes(el.sid)
+                      ? `${styled.wrapChange}`
+                      : `${styled.wrap}`
+                  }
+                  key={`${el.sid}+${el.size}`}
+                >
                   <input type="checkbox" />
                   <div className={styled.wrapRight}>
                     <div className={styled.roomText}>
                       <h2>{el.name}</h2>
                       <p>尺寸：{el.size}</p>
-                      <p>單價：{el.price}</p>
-                      <div className={styled.qty}>
-                        <button>－</button>
-                        <input type="text" value={el.qty} />
-                        <button>＋</button>
+                      <p>單價：{moneyFormat(el.price)}</p>
+                      <div className={styled.people}>
+                        <p>數量：</p>
+                        <div className={styled.qty}>
+                          {el.qty <= 1 ? (
+                            <button
+                              onClick={() => {
+                                minusOne(el.sid, el.size, el.price)
+                              }}
+                              disabled
+                            >
+                              －
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => {
+                                minusOne(el.sid, el.size, el.price)
+                              }}
+                            >
+                              －
+                            </button>
+                          )}
+                          <button>{el.qty}</button>
+                          <button
+                            onClick={() => {
+                              plusOne(el.sid, el.size, el.price)
+                            }}
+                          >
+                            ＋
+                          </button>
+                        </div>
                       </div>
-                      <p>總金額：{el.price * el.qty}</p>
+                      <p>總金額：{moneyFormat(el.price * el.qty)}</p>
                     </div>
                     <div className={styled.roomImg}>
                       <img
@@ -39,7 +79,16 @@ function CartDetailPro() {
                       />
                     </div>
                   </div>
-                  <i className="fa-regular fa-trash-can"></i>
+                  <i
+                    className="fa-regular fa-trash-can"
+                    onClick={() => {
+                      const t = el.qty * el.price
+                      change(el, i)
+                      setTimeout(() => {
+                        delOne(el.sid, el.size, t)
+                      }, 500)
+                    }}
+                  ></i>
                 </div>
               )
             })}
