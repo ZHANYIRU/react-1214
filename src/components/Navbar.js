@@ -3,10 +3,15 @@ import { Link } from 'react-router-dom'
 import { useState, useContext } from 'react'
 import ProCartContext from '../contexts/ProCartContext'
 import { useMediaQuery } from 'react-responsive'
+import MemberContext from '../contexts/MemberContext'
+
 function Navbar() {
   //定義Navbar 手機板
   const mobile = useMediaQuery({ query: '(max-width:390px)' })
   const { cartItem } = useContext(ProCartContext)
+
+  const { data, auth, setAuth, resetData } = useContext(MemberContext)
+
   const [loginBox, setLoginBox] = useState({
     top: '-20px',
   })
@@ -98,18 +103,41 @@ function Navbar() {
           <span>{cartItem ? cartItem : 0}</span>
           <Link to="/member" onClick={loginBtn}>
             <i className="fa-solid fa-user"></i>
+            <i className="fa-solid" style={{ paddingLeft: '10px' }}>
+              {data.nickname}
+            </i>
           </Link>
         </div>
       </nav>
       <div className={styled.loginBefore} style={loginBox}>
-        <Link to="/login">
-          {/* 切換會員中心 */}
-          <span>會員登入</span>
-        </Link>
-        <Link to="/join">
-          {/* 切換會員登出 */}
-          <span>會員註冊</span>
-        </Link>
+        {auth ? (
+          <Link to="/member">
+            <span>會員中心</span>
+          </Link>
+        ) : (
+          <Link to="/login">
+            {/* 切換會員中心 */}
+            <span>會員登入</span>
+          </Link>
+        )}
+        {auth ? (
+          <Link>
+            <span
+              onClick={() => {
+                resetData()
+                localStorage.removeItem('token')
+                setAuth(false)
+              }}
+            >
+              會員登出
+            </span>
+          </Link>
+        ) : (
+          <Link to="/join">
+            {/* 切換會員登出 */}
+            <span>會員註冊</span>
+          </Link>
+        )}
       </div>
     </>
   )
