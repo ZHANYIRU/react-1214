@@ -4,7 +4,7 @@ import styled from '../../styles/home-scss/Leaderboard.module.scss'
 export default function Leaderboard() {
   // 切換按鈕
   const [switchBtn, setSwitchBtn] = useState(false)
-  const fakeDataAll = [
+  const [fakeDataAll, setFakeDataAll] = useState([
     {
       sid: 1,
       rank: 1,
@@ -40,8 +40,8 @@ export default function Leaderboard() {
       name: 'aka爬山DD手',
       height: 2300,
     },
-  ]
-  const fakeDataFd = [
+  ])
+  const [fakeDataFd, setFakeDataFd] = useState([
     {
       sid: 1,
       rank: 1,
@@ -77,7 +77,9 @@ export default function Leaderboard() {
       name: 'aka爬山DD手',
       height: 2300,
     },
-  ]
+  ])
+  const display = switchBtn ? fakeDataAll : fakeDataFd
+
   const howHeight = (h) => {
     const heightest = 10000
     let present = Math.floor((h / heightest) * 100)
@@ -102,24 +104,22 @@ export default function Leaderboard() {
           <div className={styled.name}>名稱</div>
           <div className={styled.height}>累積高度</div>
         </div>
-        {switchBtn
-          ? fakeDataFd
-          : fakeDataAll.map((v, i) => {
-              return (
-                <li key={v.sid}>
-                  <div className={styled.ranking}>{v.rank}</div>
-                  <div className={styled.nameWrap}>
-                    <div className={styled.imgBorder}>
-                      <div className={styled.imgWrap}>
-                        <img src={v.img} alt="" />
-                      </div>
-                    </div>
-                    <p>{v.name}</p>
+        {display.map((v, i) => {
+          return (
+            <li key={v.sid}>
+              <div className={styled.ranking}>{v.rank}</div>
+              <div className={styled.nameWrap}>
+                <div className={styled.imgBorder}>
+                  <div className={styled.imgWrap}>
+                    <img src={v.img} alt="" />
                   </div>
-                  <div className={styled.height}>{howHeight(v.height)}</div>
-                </li>
-              )
-            })}
+                </div>
+                <p>{v.name}</p>
+              </div>
+              <div className={styled.height}>{howHeight(v.height)}</div>
+            </li>
+          )
+        })}
         <div className={styled.switchBtn}>
           <div
             className={styled.btnLeft}

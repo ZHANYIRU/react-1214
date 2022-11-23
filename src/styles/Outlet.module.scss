@@ -11,35 +11,35 @@
 //     top: 350px;
 // }
 .cloud1 {
-  position: absolute;
-  top: 35vh;
+  position: fixed;
+  top: 0px;
   animation: flow1 30s linear infinite;
 }
 .cloud2 {
-  position: absolute;
+  position: fixed;
   right: 0;
-  top: 55vh;
+  top: 450px;
   animation: flow2 30s linear infinite;
   width: 600px;
 }
-.cloud3 {
-  position: absolute;
-  top: 145vh;
-  animation: flow1 30s linear infinite;
-}
-.cloud4 {
-  position: absolute;
-  right: 0;
-  top: 175vh;
-  animation: flow2 30s linear infinite;
-}
+// .cloud3 {
+//   position: fixed;
+//   top: 900px;
+//   animation: flow1 30s linear infinite;
+// }
+// .cloud4 {
+//   position: absolute;
+//   right: 0;
+//   top: 175vh;
+//   animation: flow2 30s linear infinite;
+// }
 
 @keyframes flow1 {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(110vw);
+    transform: translateX(78vw) ;
   }
 }
 @keyframes flow2 {
@@ -47,6 +47,50 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-110vw);
+    transform:  translateX(-78vw);
+  }
+}
+
+
+@media screen and (max-width: 390px){
+  @keyframes flow1 {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(10vw) ;
+    }
+  }
+  @keyframes flow2 {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform:  translateX(-10vw);
+    }
+  }
+
+  .cloud1 {
+    position: absolute;
+    top: 10vh;
+    animation: flow1 1s linear infinite;
+  }
+  .cloud2 {
+    position: absolute;
+    right: 0;
+    top: 60vh;
+    animation: flow2 1s linear infinite;
+    width: 600px;
+  }
+  .cloud3 {
+    position: absolute;
+    top: 145vh;
+    animation: flow1 1s linear infinite;
+  }
+  .cloud4 {
+    position: absolute;
+    right: 0;
+    top: 175vh;
+    animation: flow2 1s linear infinite;
   }
 }
