@@ -1,9 +1,11 @@
 import { useState, useContext } from 'react'
 import ProCartContext from '../../../contexts/ProCartContext'
+import MemberContext from '../../../contexts/MemberContext'
 import styled from '../../../styles/cart-scss/BuyCart.module.scss'
 function BuyCart({ step, setStep, buyBar }) {
   const { cartItem, resetCart, cartPrice, moneyFormat } =
     useContext(ProCartContext)
+  const { auth } = useContext(MemberContext)
   const [check, setCheck] = useState(false)
   if (step === 1) {
     return (
@@ -30,13 +32,15 @@ function BuyCart({ step, setStep, buyBar }) {
               <p>{cartPrice ? moneyFormat(cartPrice) : 0}</p>
             </div>
             <button onClick={resetCart}>清空購物車</button>
-            <button
-              onClick={() => {
-                setStep(step + 1)
-              }}
-            >
-              買單去
-            </button>
+            {auth && (
+              <button
+                onClick={() => {
+                  setStep(step + 1)
+                }}
+              >
+                買單去
+              </button>
+            )}
           </div>
         </div>
       </>

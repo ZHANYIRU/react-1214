@@ -1,10 +1,19 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
+import MemberContext from '../../../contexts/MemberContext'
 import styled from '../../../styles/cart-scss/writeData.module.scss'
 function WriteData() {
+  const { data } = useContext(MemberContext)
   const [familySelect, setFamilySelect] = useState('')
   const [paySelect, setPaySelect] = useState('')
   const [writeUser, setWriteUser] = useState({
+    name: '',
+    mobile: 0,
+    address: '',
+    email: '',
+    text: '',
+  })
+  const [memberUser, setMemberUser] = useState({
     name: '',
     mobile: 0,
     address: '',
@@ -16,6 +25,18 @@ function WriteData() {
   const handle = (e) => {
     setWriteUser({ ...writeUser, [e.target.name]: e.target.value })
   }
+  const getUserInfo = () => {
+    setMemberUser({
+      ...memberUser,
+      name: data.name,
+      mobile: data.mobile,
+      address: data.address,
+      email: data.email,
+    })
+  }
+  useEffect(() => {
+    getUserInfo()
+  }, [])
   return (
     <>
       <div className={styled.writeWrap}>
@@ -63,19 +84,39 @@ function WriteData() {
           <div className={styled.buyInput}>
             <div>
               <label htmlFor="">姓名</label>
-              <input type="text" name="name" />
+              <input
+                type="text"
+                name="name"
+                value={memberUser.name}
+                onChange={() => {}}
+              />
             </div>
             <div>
               <label htmlFor="">手機號碼</label>
-              <input type="text" name="mobile" />
+              <input
+                type="text"
+                name="mobile"
+                value={memberUser.mobile}
+                onChange={() => {}}
+              />
             </div>
             <div>
               <label htmlFor="">地址</label>
-              <input type="text" name="address" />
+              <input
+                type="text"
+                name="address"
+                value={memberUser.address}
+                onChange={() => {}}
+              />
             </div>
             <div>
               <label htmlFor="">電子郵件</label>
-              <input type="text" name="email" />
+              <input
+                type="text"
+                name="email"
+                value={memberUser.email}
+                onChange={() => {}}
+              />
             </div>
             <div>
               <label htmlFor="">備註</label>
