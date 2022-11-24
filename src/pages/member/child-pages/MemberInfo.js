@@ -62,7 +62,14 @@ export default function MemberInfo() {
   async function newPost() {
     const formData = new FormData(newForm.current)
 
+    const fileName = formData.get('image_url').name
+
+    if(!fileName) {
+      return alert ('請先上傳圖片')
+    }
+
     const token = localStorage.getItem('token') || ''
+
 
     const result = await axios.post(
       'http://localhost:3001/member/post/api',
@@ -99,6 +106,7 @@ export default function MemberInfo() {
     console.log(result.data)
     alert(result.data.success ? '修改成功' : '修改失敗')
     setIsEdit(false)
+    setIsDel(false)
     getPostList()
   }
 
@@ -109,7 +117,9 @@ export default function MemberInfo() {
       'http://localhost:3001/member/post/api?sid=' +
         postList[currentPost].post_sid +
         '&height=' +
-        postList[currentPost].height,
+        postList[currentPost].height +
+        '&image_url=' +
+        postList[currentPost].image_url,
       {
         headers: {
           Authorization: token ? `Bearer ${token}` : '',
@@ -122,6 +132,7 @@ export default function MemberInfo() {
     if (result.data.success) {
       setIsEdit(false)
       getPostList()
+      setIsDel(false)
     }
   }
 

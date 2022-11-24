@@ -47,9 +47,11 @@ export default function ModalView({
                 </span>
               </div>
               <TextareaAutosize
+                maxRows="3"
                 className={styled.contentTxt}
                 readOnly
                 value={showData.context}
+                style={{ overflow: 'auto' }}
               />
               <div className={styled.contentFlex}>
                 <p style={{ marginLeft: '72px' }}>
