@@ -32,13 +32,13 @@ function Product() {
   ]
   // search style
   const [search, setSearch] = useState({
-    width: '20%',
+    width: '10%',
   })
 
   const searchStyle = (e) => {
     e.preventDefault()
-    if (search.width === '20%') {
-      setSearch({ ...search, width: '100%' })
+    if (search.width === '10%') {
+      setSearch({ ...search, width: '40%' })
     }
   }
   const [afterGenderData, setAfterGenderData] = useState('')
@@ -230,6 +230,9 @@ function Product() {
           setFromFilterDataGender={setFromFilterDataGender}
           datas={datas}
           setDatas={setDatas}
+          inputKeyword={inputKeyword}
+          setInputKeyword={setInputKeyword}
+          setSearchKeyWord={setSearchKeyWord}
         />
         <div className={styled.cardbox}>
           {datas

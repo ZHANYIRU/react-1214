@@ -1,7 +1,9 @@
 import styled from '../../../styles/order-scss/OrderNum.module.scss'
 import dayjs from 'dayjs'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 function OrderNum({ momOrder, open, setOpen }) {
+  const refH = useRef(null)
+  // console.log(refH.current.clientHeight)
   // order範本
   // "sid": 59,
   // "order_num": "20220923025717",
@@ -98,6 +100,7 @@ function OrderNum({ momOrder, open, setOpen }) {
                       ? `${styled.contentWrapOpen}`
                       : `${styled.contentWrap}`
                   }
+                  ref={refH}
                 >
                   <div className={styled.pro}>
                     {proRows &&

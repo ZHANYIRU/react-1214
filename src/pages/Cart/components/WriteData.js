@@ -1,9 +1,20 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
+import MemberContext from '../../../contexts/MemberContext'
 import styled from '../../../styles/cart-scss/writeData.module.scss'
 function WriteData() {
+  const { data } = useContext(MemberContext)
   const [familySelect, setFamilySelect] = useState('')
   const [paySelect, setPaySelect] = useState('')
+  //(訂購人)
+  const [memberUser, setMemberUser] = useState({
+    name: '',
+    mobile: 0,
+    address: '',
+    email: '',
+    text: '',
+  })
+  //填寫(收件人)
   const [writeUser, setWriteUser] = useState({
     name: '',
     mobile: 0,
@@ -11,11 +22,28 @@ function WriteData() {
     email: '',
     text: '',
   })
+  const [same, setSame] = useState(false)
   const family = ['宅配', '郵寄']
   const pay = ['ATM匯款', 'LINE PAY', '信用卡']
-  const handle = (e) => {
+  const handleM = (e) => {
+    setMemberUser({ ...memberUser, [e.target.name]: e.target.value })
+  }
+  const handleW = (e) => {
     setWriteUser({ ...writeUser, [e.target.name]: e.target.value })
   }
+  //自動帶入會員資料(訂購人)
+  const getUserInfo = () => {
+    setMemberUser({
+      ...memberUser,
+      name: data.name,
+      mobile: data.mobile,
+      address: data.address,
+      email: data.email,
+    })
+  }
+  useEffect(() => {
+    getUserInfo()
+  }, [])
   return (
     <>
       <div className={styled.writeWrap}>
@@ -63,30 +91,85 @@ function WriteData() {
           <div className={styled.buyInput}>
             <div>
               <label htmlFor="">姓名</label>
-              <input type="text" name="name" />
+              <input
+                type="text"
+                name="name"
+                value={memberUser.name}
+                onChange={(e) => {
+                  handleM(e)
+                }}
+              />
             </div>
             <div>
               <label htmlFor="">手機號碼</label>
-              <input type="text" name="mobile" />
+              <input
+                type="text"
+                name="mobile"
+                value={memberUser.mobile}
+                onChange={(e) => {
+                  handleM(e)
+                }}
+              />
             </div>
             <div>
               <label htmlFor="">地址</label>
-              <input type="text" name="address" />
+              <input
+                type="text"
+                name="address"
+                value={memberUser.address}
+                onChange={(e) => {
+                  handleM(e)
+                }}
+              />
             </div>
             <div>
               <label htmlFor="">電子郵件</label>
-              <input type="text" name="email" />
+              <input
+                type="text"
+                name="email"
+                value={memberUser.email}
+                onChange={(e) => {
+                  handleM(e)
+                }}
+              />
             </div>
             <div>
               <label htmlFor="">備註</label>
-              <textarea id="" rows="5" name="text" />
+              <textarea
+                rows="5"
+                name="text"
+                value={memberUser.text}
+                onChange={(e) => {
+                  handleM(e)
+                }}
+              />
             </div>
           </div>
         </div>
         <div className={styled.receive}>
           <div className={styled.text}>
             <h2>收件人資料</h2>
-            <input type="checkbox" id="receive" />
+            <input
+              type="checkbox"
+              id="receive"
+              checked={same}
+              onChange={() => {
+                if (!same) {
+                  setWriteUser(memberUser)
+                  setSame(!same)
+                } else {
+                  setWriteUser({
+                    ...writeUser,
+                    name: '',
+                    mobile: 0,
+                    address: '',
+                    email: '',
+                    text: '',
+                  })
+                  setSame(!same)
+                }
+              }}
+            />
             <label htmlFor="receive">同訂購人</label>
           </div>
           <div className={styled.receiveInput}>
@@ -97,7 +180,7 @@ function WriteData() {
                 type="text"
                 name="name"
                 onChange={(e) => {
-                  handle(e)
+                  handleW(e)
                 }}
               />
             </div>
@@ -108,7 +191,7 @@ function WriteData() {
                 type="text"
                 name="mobile"
                 onChange={(e) => {
-                  handle(e)
+                  handleW(e)
                 }}
               />
             </div>
@@ -119,7 +202,7 @@ function WriteData() {
                 type="text"
                 name="address"
                 onChange={(e) => {
-                  handle(e)
+                  handleW(e)
                 }}
               />
             </div>
@@ -130,7 +213,7 @@ function WriteData() {
                 type="text"
                 name="email"
                 onChange={(e) => {
-                  handle(e)
+                  handleW(e)
                 }}
               />
             </div>
@@ -142,21 +225,12 @@ function WriteData() {
                 rows="5"
                 name="text"
                 onChange={(e) => {
-                  handle(e)
+                  handleW(e)
                 }}
               />
             </div>
           </div>
         </div>
-        {/* <div className={styled.catchBox}>
-          <h3>收貨方式</h3>
-          <div className={styled.home}>
-            <input type="radio" id="home" />
-            <label htmlFor="home">宅配地址</label>
-            <input type="radio" id="family" />
-            <label htmlFor="family">全家店到店</label>
-          </div>
-        </div> */}
         <div className={styled.area}>
           <div className={styled.address}>
             <h3>地址</h3>

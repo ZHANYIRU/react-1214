@@ -500,7 +500,7 @@ export const ProCartContextProvider = ({ children }) => {
     }
   }
   //呼叫reducer
-  const [state, dispatch] = useReducer(proCartReducer, initState)
+  const [state, dispatch] = useReducer(proCartReducer, localState)
   console.log('Context', state)
   console.log('我是context')
   //購物車數量顯示
@@ -730,6 +730,9 @@ export const ProCartContextProvider = ({ children }) => {
     let c = b.split('.')
     return c[0]
   }
+  const d = new Date()
+  const order_num = Date.parse(d)
+  console.log(order_num)
   return (
     <ProCartContext.Provider
       value={{

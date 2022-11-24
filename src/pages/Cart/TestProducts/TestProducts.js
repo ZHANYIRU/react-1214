@@ -124,7 +124,8 @@ function TestProducts() {
                       el.proname,
                       userSize[i],
                       el.price,
-                      qty[i]
+                      qty[i],
+                      'img'
                     )
                   }}
                 >
@@ -196,7 +197,8 @@ function TestProducts() {
                       '苗栗',
                       '阿拉斯加山',
                       el.price,
-                      qty2[i]
+                      qty2[i],
+                      'img'
                     )
                   }}
                 >
@@ -251,7 +253,8 @@ function TestProducts() {
                       '木柵',
                       '拉拉山',
                       el.price,
-                      qty3[i]
+                      qty3[i],
+                      'img'
                     )
                   }}
                 >
@@ -339,7 +342,8 @@ function TestProducts() {
                       '宜蘭',
                       userSize2[i],
                       el.price,
-                      qty4[i]
+                      qty4[i],
+                      'img'
                     )
                   }}
                 >
