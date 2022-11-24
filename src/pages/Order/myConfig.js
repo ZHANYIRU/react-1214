@@ -1,1 +1,1 @@
-export const MY_HOST = 'http://localhost:3002'
+export const MY_HOST = 'http://localhost:3001'

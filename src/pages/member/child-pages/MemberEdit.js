@@ -1,49 +1,77 @@
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import styled from '../../../styles/member-scss/MemberEdit.module.scss'
 import axios from 'axios'
 import TextareaAutosize from 'react-textarea-autosize'
 import dayjs from 'dayjs'
 import { useRef } from 'react'
+import MemberContext from '../../../contexts/MemberContext'
+import { useNavigate } from 'react-router-dom'
 
 export default function MemberEdit() {
-  const [profile, setProfile] = useState({
-    avatar: '',
-    name: '',
-    nickname: '',
-    mobile: '',
-    email: '',
-    birthday: '',
-    address: '',
-    intro: '',
-  })
+  // const [profile, setProfile] = useState({
+  //   avatar: '',
+  //   name: '',
+  //   nickname: '',
+  //   mobile: '',
+  //   email: '',
+  //   birthday: '',
+  //   address: '',
+  //   intro: '',
+  // })
+
+  const navigate = useNavigate()
+
+  const { data, setData, getInfo, auth } = useContext(MemberContext)
+
+  // console.log(data)
 
   const [preview, setPreview] = useState('')
+  const [myBirth, setMyBirth] = useState('')
+
+  useEffect(() => {
+    let dateBirth = data.birthday
+      ? dayjs(data.birthday).format('YYYY-MM-DD')
+      : ''
+    setMyBirth(dateBirth)
+  }, [])
+
+  useEffect(() => {
+    if (!localStorage.getItem('token')) {
+      navigate('/login')
+    }
+  }, [auth])
 
   const updateForm = useRef(null)
 
-  const [myBirth, setMyBirth] = useState('')
+  // async function getInfo() {
+  //   const result = await axios.get('http://localhost:3001/member/api?id=668')
+  //   // console.log(result.data.rows[0].name)
+  //   if (result.data.rows[0]) {
+  //     setProfile(result.data.rows[0])
+  //     let dateBirth = dayjs(data.birthday).format('YYYY-MM-DD')
+  //     setMyBirth(dateBirth)
+  //   }
 
-  async function getInfo() {
-    const result = await axios.get('http://localhost:3001/member/api?id=668')
-    // console.log(result.data.rows[0].name)
-    if (result.data.rows[0]) {
-      setProfile(result.data.rows[0])
-      let dateBirth = dayjs(result.data.rows[0].birthday).format('YYYY-MM-DD')
-      setMyBirth(dateBirth)
-    }
-
-    // console.log(result.data.rows[0])
-  }
+  // console.log(result.data.rows[0])
+  // }
 
   async function updateInfo() {
     const formData = new FormData(updateForm.current)
 
-    const result = await axios.put(
-      'http://localhost:3001/member/api?id=668',
-      formData
-    )
+    const token = localStorage.getItem('token') || ''
 
+    const result = await axios.put(
+      'http://localhost:3001/member/api',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: token ? `Bearer ${token}` : '',
+        },
+      }
+    )
+    getInfo()
     console.log(result.data)
   }
 
@@ -53,9 +81,9 @@ export default function MemberEdit() {
     }
   }
 
-  useEffect(() => {
-    getInfo()
-  }, [])
+  // useEffect(() => {
+  //   getInfo()
+  // }, [])
 
   return (
     <>
@@ -66,12 +94,12 @@ export default function MemberEdit() {
             <div className={styled.divider}></div>
             <form ref={updateForm} encType="multipart/form-data">
               <div className={styled.avatar}>
-                {profile.avatar || preview ? (
+                {data.avatar || preview ? (
                   <img
                     src={
                       preview
                         ? preview
-                        : `http://localhost:3001/uploads/${profile.avatar}`
+                        : `http://localhost:3001/uploads/${data.avatar}`
                     }
                     alt="avatar"
                   ></img>
@@ -95,23 +123,19 @@ export default function MemberEdit() {
               <input
                 type="hidden"
                 name="prevAvatar"
-                defaultValue={profile.avatar}
+                defaultValue={data.avatar}
               />
 
               <p>(打*號為必填欄位)</p>
               <div className={styled.formRow}>
                 <label className={styled.required}>姓名</label>
-                <input
-                  type="text"
-                  defaultValue={profile.name}
-                  name="name"
-                ></input>
+                <input type="text" defaultValue={data.name} name="name"></input>
               </div>
               <div className={styled.formRow}>
                 <label className={styled.required}>顯示名稱</label>
                 <input
                   type="text"
-                  defaultValue={profile.nickname}
+                  defaultValue={data.nickname}
                   name="nickname"
                 ></input>
               </div>
@@ -120,7 +144,7 @@ export default function MemberEdit() {
                 <input
                   type="text"
                   name="mobile"
-                  defaultValue={profile.mobile}
+                  defaultValue={data.mobile}
                 ></input>
               </div>
               <div className={styled.formRow}>
@@ -130,14 +154,19 @@ export default function MemberEdit() {
                 <input
                   type="email"
                   name="email"
-                  defaultValue={profile.email}
+                  defaultValue={data.email}
                 ></input>
               </div>
               <div className={styled.formRow}>
                 <label htmlFor="birthday">生日</label>
-                <input type="date" name="birthday" value={myBirth} onChange={(e)=>{
-                  setMyBirth(e.target.value)
-                }}></input>
+                <input
+                  type="date"
+                  name="birthday"
+                  value={myBirth}
+                  onChange={(e) => {
+                    setMyBirth(e.target.value)
+                  }}
+                ></input>
               </div>
               <div className={styled.formRow}>
                 <label htmlFor="address" className={styled.forTxtArea}>
@@ -147,7 +176,7 @@ export default function MemberEdit() {
                   rows="4"
                   style={{ resize: 'none' }}
                   maxLength="120"
-                  defaultValue={profile.address}
+                  defaultValue={data.address}
                   name="address"
                 ></textarea>
               </div>
@@ -162,7 +191,7 @@ export default function MemberEdit() {
                   maxRows="8"
                   minRows="4"
                   maxLength="120"
-                  defaultValue={profile.intro}
+                  defaultValue={data.intro}
                   name="intro"
                 />
               </div>

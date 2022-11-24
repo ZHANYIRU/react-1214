@@ -1,15 +1,32 @@
 @import '../global.scss';
+.titleWrap{
+    margin: 50px auto 25px auto;
+    width: 75%;
+}
+.roomMainTitle{
+    padding: 10px 30px;
+    font-size: 1.4rem;
+}
 .roomCardGroup{
     // position: absolute;
     width:80%;
     margin: 0 auto;
     display: flex;
-    justify-content: space-evenly;
+    padding-left: 50px;
+    justify-content: flex-start;
+    // justify-content: flex-start;
+    // padding: 0 50px;
+    a{
+        width: 20%;
+        display: block;
+        margin-right: 75px;
+    }
 }
 .roomCard{
-    margin-bottom: 50px;
+    flex-shrink: 0;
+    margin: 0 20px 50px 20px;
     padding: 18px;
-    width:19%;
+    width: 100%;
     background-color: white;
     border-radius: 10px;
     box-sizing: content-box;
@@ -22,17 +39,17 @@
 }
 .icon{
     display: flex;
-    justify-content: space-between
-}
-.icon span{
-    display: inline-block;
-    margin-top: 10px;
-    padding-right: 10px;
-    font-weight: 700;
-}
-.icon span i {
-    color:#48742C
-}
+    justify-content: space-between;
+    span{
+        display: inline-block;
+        margin-top: 10px;
+        padding-right: 10px;
+        font-weight: 700;
+        i {
+            color:#48742C;
+        }
+    }
+    }
 .roomName{
     margin-top: 10px;
     font-size: 1.2rem;
@@ -40,11 +57,11 @@
 }
 .star{
     margin-top: 8px;
-}
-.star i {
-    color: #ffda16;
-    font-size: 0.8rem;
-    margin-right: 4px;
+    i {
+        color: #ffda16;
+        font-size: 0.8rem;
+        margin-right: 4px;
+    }
 }
 .commentQTY{
     font-size: 0.9rem;
