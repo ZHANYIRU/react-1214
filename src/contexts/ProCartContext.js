@@ -725,6 +725,9 @@ export const ProCartContextProvider = ({ children }) => {
     let c = b.split('.')
     return c[0]
   }
+  const d = new Date()
+  const order_num = Date.parse(d)
+  console.log(order_num)
   return (
     <ProCartContext.Provider
       value={{
