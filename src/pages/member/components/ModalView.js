@@ -207,29 +207,25 @@ export default function ModalView({
               </div>
               <hr />
               <div className={styled.reply}>
-                {replies
-                  .map((v, i) => {
-                    return (
-                      <div key={i} className={styled.replyPost}>
-                        <div className={`${styled.contentFlex} ${styled.left}`}>
-                          <div className={styled.replyAvatar}>
-                            <img
-                              src={`http://localhost:3001/uploads/avatar_${v.avatar}`}
-                              alt="postImg"
-                            ></img>
-                          </div>
-                          <div>
-                            <h4>{v.nickname}</h4>
-                            <TextareaAutosize
-                              readOnly
-                              value={v.context}
-                            />
-                          </div>
-                          {/* <i className="fa-regular fa-heart"></i> */}
+                {replies.map((v, i) => {
+                  return (
+                    <div key={i} className={styled.replyPost}>
+                      <div className={`${styled.contentFlex} ${styled.left}`}>
+                        <div className={styled.replyAvatar}>
+                          <img
+                            src={`http://localhost:3001/uploads/avatar_${v.avatar}`}
+                            alt="postImg"
+                          ></img>
                         </div>
+                        <div>
+                          <h4>{v.nickname}</h4>
+                          <TextareaAutosize readOnly value={v.context} />
+                        </div>
+                        {/* <i className="fa-regular fa-heart"></i> */}
                       </div>
-                    )
-                  })}
+                    </div>
+                  )
+                })}
               </div>
             </div>
             <hr />
