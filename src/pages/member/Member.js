@@ -29,7 +29,7 @@ function Member(props) {
             >
               {data.avatar ? (
                 <img
-                  src={`http://localhost:3001/uploads/thumb_${data.avatar}`}
+                  src={`http://localhost:3001/uploads/avatar_${data.avatar}`}
                   alt="avatar"
                 ></img>
               ) : (

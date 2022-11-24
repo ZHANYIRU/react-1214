@@ -1,10 +1,13 @@
 import styled from '../../styles/order-scss/Order.module.scss'
 import { MY_HOST } from './myConfig'
+import MemberContext from '../../contexts/MemberContext'
 import OrderTime from './components/OrderTime'
 import OrderNum from './components/OrderNum'
 import axios from 'axios'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 function Order() {
+  const { data } = useContext(MemberContext)
+  const sid = data.member_sid
   //打開子訂單+時間線增長的狀態
   const [open, setOpen] = useState([])
   const [momOrder, setMomOrder] = useState([
@@ -17,7 +20,7 @@ function Order() {
     },
   ])
   const getList = async () => {
-    const { data } = await axios.get(MY_HOST + '/order/api')
+    const { data } = await axios.get(MY_HOST + `/order/api?sid=${sid}`)
     setMomOrder(data)
   }
   useEffect(() => {
@@ -30,7 +33,7 @@ function Order() {
         <input type="text" placeholder="可以透過訂單編號、商品名稱搜尋" />
       </div>
       <div className={styled.orderBottom}>
-        <OrderTime rows={momOrder.rows} open={open} />
+        <OrderTime momOrder={momOrder} open={open} />
         <OrderNum momOrder={momOrder} open={open} setOpen={setOpen} />
       </div>
     </div>

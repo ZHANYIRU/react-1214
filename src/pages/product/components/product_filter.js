@@ -15,6 +15,9 @@ export default function ProductFilter({
   setFromFilterDataGender,
   datas,
   setDatas,
+  setSearchKeyWord,
+  inputKeyword,
+  setInputKeyword,
 }) {
   const mobile = useMediaQuery({ query: '(max-width:390px)' })
   // const [genderFilter, setGenderFilter] = useState([{}])
@@ -237,9 +240,21 @@ export default function ProductFilter({
         <div className={styled.filterTop}>
           <div className={styled.forms}>
             <form action="">
-              <input className={styled.search} type="text" />
+              <input
+                className={styled.search}
+                type="text"
+                value={inputKeyword}
+                onChange={(e) => {
+                  setInputKeyword(e.target.value)
+                }}
+              />
 
-              <i className="fa-solid fa-magnifying-glass"></i>
+              <i
+                className="fa-solid fa-magnifying-glass"
+                onClick={() => {
+                  setSearchKeyWord(inputKeyword)
+                }}
+              ></i>
             </form>
           </div>
           <div className={styled.icon}>
