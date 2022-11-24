@@ -1,15 +1,7 @@
 import styled from '../../../styles/order-scss/OrderNum.module.scss'
 import dayjs from 'dayjs'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 function OrderNum({ momOrder, open, setOpen }) {
-  const refH = useRef(null)
-  // console.log(refH.current.clientHeight)
-  // order範本
-  // "sid": 59,
-  // "order_num": "20220923025717",
-  // "member_sid": 644,
-  // "total": "2200",
-  // "created_time": "2022-09-23T06:57:17.000Z"
   const { rows, proRows, roomRows, renRows, camRows } = momOrder
   //給lightBox
   const [lightOpen, setLightOpen] = useState(false)
@@ -96,11 +88,12 @@ function OrderNum({ momOrder, open, setOpen }) {
                 </label>
                 <div
                   className={
-                    open.includes(el.sid)
-                      ? `${styled.contentWrapOpen}`
-                      : `${styled.contentWrap}`
+                    styled.contentWrap
+                    // open.includes(el.sid)
+                    //   ? `${styled.contentWrapOpen}`
+                    //   : `${styled.contentWrap}`
                   }
-                  ref={refH}
+                  style={{ maxHeight: open.includes(el.sid) && '50vh' }}
                 >
                   <div className={styled.pro}>
                     {proRows &&
@@ -119,7 +112,7 @@ function OrderNum({ momOrder, open, setOpen }) {
                         return el.order_num === el2.order_num ? (
                           <div
                             className={styled.proContent}
-                            key={el2.product_sid}
+                            key={`pro${el2.sid}`}
                           >
                             <div className={styled.contentDe}>
                               <div className={styled.imgWrap}>
@@ -161,13 +154,13 @@ function OrderNum({ momOrder, open, setOpen }) {
                         </div>
                       )}
                     {roomRows &&
-                      roomRows.map((el3, i) => {
+                      roomRows.map((el3, i3) => {
                         const ds = dayjs(el3.start)
                         const de = dayjs(el3.end)
                         return el.order_num === el3.order_num ? (
                           <div
                             className={styled.roomContent}
-                            key={el3.room_sid}
+                            key={`room${el3.sid}`}
                           >
                             <div className={styled.contentDe}>
                               <div className={styled.imgWrap}>
@@ -216,14 +209,14 @@ function OrderNum({ momOrder, open, setOpen }) {
                         </div>
                       )}
                     {camRows &&
-                      camRows.map((el4, i) => {
+                      camRows.map((el4, i4) => {
                         const ds = dayjs(el4.date_start)
                         const de = dayjs(el4.date_end)
                         return (
                           el.order_num === el4.order_num && (
                             <div
                               className={styled.campContent}
-                              key={el4.campaign_sid}
+                              key={`cam${el4.sid}`}
                             >
                               <div className={styled.contentDe}>
                                 <div className={styled.imgWrap}>
@@ -257,49 +250,64 @@ function OrderNum({ momOrder, open, setOpen }) {
                       })}
                   </div>
                   <div className={styled.ren}>
-                    <div className={styled.renContentTitle}>
-                      <p>租借商品</p>
-                      <p>
-                        租<i className="fa-solid fa-arrow-right"></i>還
-                      </p>
-                      <p>日期</p>
-                      <p>單價</p>
-                      <p>運費</p>
-                      <p>數量</p>
-                      <p>金額</p>
-                    </div>
-                    <div className={styled.renContent}>
-                      <div className={styled.contentDe}>
-                        <div className={styled.imgWrap}>
-                          <img
-                            src="https://cdn2.ettoday.net/images/4778/d4778980.jpg"
-                            alt=""
-                          />
+                    {renRows &&
+                      renRows.findIndex(
+                        (ren) => ren.order_num === el.order_num
+                      ) !== -1 && (
+                        <div className={styled.renContentTitle}>
+                          <p>租借商品</p>
+                          <p>
+                            租<i className="fa-solid fa-arrow-right"></i>還
+                          </p>
+                          <p>日期</p>
+                          <p>單價</p>
+                          <p>運費</p>
+                          <p>數量</p>
+                          <p>金額</p>
                         </div>
-                        <p>
-                          Arcteryx 始祖鳥 Beta LT 女款 Gore Tex登山雨衣/風雨衣
-                          29458 鐵克諾紅 Techno
-                        </p>
-                        <p>
-                          台北<i className="fa-solid fa-arrow-right"></i>高雄
-                        </p>
-                        <p>
-                          2022/10/11<i className="fa-solid fa-arrow-down"></i>
-                          2022/10/12
-                        </p>
-                        <p>600</p>
-                        <p>600</p>
-                        <p>2</p>
-                        <p>2400</p>
-                      </div>
-                      <button
-                        onClick={() => {
-                          setLightOpen(!lightOpen)
-                        }}
-                      >
-                        給予評價
-                      </button>
-                    </div>
+                      )}
+                    {renRows &&
+                      renRows.map((el5, i5) => {
+                        return (
+                          el.order_num === el5.order_num && (
+                            <div
+                              className={styled.renContent}
+                              key={`ren${el5.sid}`}
+                            >
+                              <div className={styled.contentDe}>
+                                <div className={styled.imgWrap}>
+                                  <img
+                                    src="https://cdn2.ettoday.net/images/4778/d4778980.jpg"
+                                    alt=""
+                                  />
+                                </div>
+                                <p>{el5.rental_product_name}</p>
+                                <p>
+                                  {el5.store_out}
+                                  <i className="fa-solid fa-arrow-right"></i>
+                                  {el5.store_back}
+                                </p>
+                                <p>
+                                  {el5.out_date}
+                                  <i className="fa-solid fa-arrow-down"></i>
+                                  {el5.back_date}
+                                </p>
+                                <p>{moneyFormat(el5.rental_price)}</p>
+                                <p>運費</p>
+                                <p>{el5.qty}</p>
+                                <p>{moneyFormat(el5.total)}</p>
+                              </div>
+                              <button
+                                onClick={() => {
+                                  setLightOpen(!lightOpen)
+                                }}
+                              >
+                                給予評價
+                              </button>
+                            </div>
+                          )
+                        )
+                      })}
                   </div>
                 </div>
               </div>

@@ -1,40 +1,32 @@
 import dayjs from 'dayjs'
+import MemberContext from '../../../contexts/MemberContext'
+import { useState, useEffect, useContext } from 'react'
 import styled from '../../../styles/order-scss/OrderTime.module.scss'
 function OrderTime({ open, momOrder }) {
+  const { auth } = useContext(MemberContext)
   const { rows, proRows, roomRows, renRows, camRows } = momOrder
+  const [total, setTotal] = useState([])
   const test = () => {
-    let pro
-    let room
-    let ren
-    let cam
-    if (proRows) {
-      pro = rows.map((v, i) => {
-        return (
-          proRows.filter((v2, i2) => v.order_num === v2.order_num).length +
-          roomRows.filter((v2, i2) => v.order_num === v2.order_num).length +
-          renRows.filter((v2, i2) => v.order_num === v2.order_num).length +
-          camRows.filter((v2, i2) => v.order_num === v2.order_num).length
+    if (rows) {
+      if (rows.length !== 0) {
+        setTotal(
+          rows.map((v, i) => {
+            return (
+              proRows.filter((v2, i2) => v.order_num === v2.order_num).length +
+              roomRows.filter((v2, i2) => v.order_num === v2.order_num).length +
+              renRows.filter((v2, i2) => v.order_num === v2.order_num).length +
+              camRows.filter((v2, i2) => v.order_num === v2.order_num).length
+            )
+          })
         )
-      })
+      }
     }
-    // if (roomRows) {
-    //   room = rows.map((v, i) => {
-    //     return roomRows.filter((v2, i2) => v.order_num === v2.order_num).length
-    //   })
-    // }
-    // if (renRows) {
-    //   ren = rows.map((v, i) => {
-    //     return renRows.filter((v2, i2) => v.order_num === v2.order_num).length
-    //   })
-    // }
-    // if (camRows) {
-    //   cam = rows.map((v, i) => {
-    //     return camRows.filter((v2, i2) => v.order_num === v2.order_num).length
-    //   })
-    // }
-    console.log(pro)
-    console.log(momOrder)
+    console.log(rows)
   }
+  useEffect(() => {
+    console.log(789)
+    test()
+  }, [rows])
 
   return (
     <>
@@ -54,10 +46,18 @@ function OrderTime({ open, momOrder }) {
                 </div>
                 <div
                   className={
-                    open.includes(el.sid)
-                      ? `${styled.long}`
-                      : `${styled.border}`
+                    styled.border
+                    // open.includes(el.sid)
+                    //   ? `${styled.long}`
+                    //   : `${styled.border}`
                   }
+                  style={{
+                    height:
+                      open.includes(el.sid) &&
+                      (50 + total[i] * 225 > 518.5
+                        ? `${518.5}px`
+                        : `${50 + total[i] * 225}px`),
+                  }}
                 />
               </div>
             )

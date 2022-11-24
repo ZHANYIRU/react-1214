@@ -1,4 +1,5 @@
 import { useState, useReducer, createContext } from 'react'
+import Swal from 'sweetalert2'
 //初始架構
 // const initState = {
 //   items: [
@@ -712,9 +713,26 @@ export const ProCartContextProvider = ({ children }) => {
   }
   //清空購物車
   const resetCart = () => {
-    dispatch({
-      type: 'RESET_CART',
-      payload: {},
+    Swal.fire({
+      title: '確定要清空嗎?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '確定!',
+      cancelButtonText: '取消',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          icon: 'success',
+          title: '已清空!',
+          showCancelButton: false,
+        })
+        dispatch({
+          type: 'RESET_CART',
+          payload: {},
+        })
+      }
     })
   }
   //room search結果
