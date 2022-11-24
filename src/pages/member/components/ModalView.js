@@ -2,7 +2,7 @@ import styled from '../../../styles/member-scss/MemberInfo.module.scss'
 import TextareaAutosize from 'react-textarea-autosize'
 import dayjs from 'dayjs'
 import axios from 'axios'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState, useRef } from 'react'
 import MemberContext from '../../../contexts/MemberContext'
 
 export default function ModalView({
@@ -22,8 +22,10 @@ export default function ModalView({
     nickname: '',
     total_height: 0,
   })
-
   const [liked, setLiked] = useState(false)
+  const [replies, setReplies] = useState([])
+
+  const replyForm = useRef(null)
 
   async function getInfo() {
     const rows = await axios.get(
@@ -70,12 +72,67 @@ export default function ModalView({
     console.log(result.data)
   }
 
-  useEffect(() => {
-    getInfo()
-  }, [currentPost])
+  async function removeLike() {
+    const token = localStorage.getItem('token') || ''
+
+    if (!token) {
+      return alert('請先登入會員')
+    }
+
+    const result = await axios.delete(
+      `http://localhost:3001/member/like/api?mid=${data.member_sid}&pid=${showData.post_sid}`,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: token ? `Bearer ${token}` : '',
+        },
+      }
+    )
+    console.log(result.data)
+    getPostList()
+    setLiked(false)
+  }
+
+  async function addReply() {
+    const token = localStorage.getItem('token') || ''
+
+    const formData = new FormData(replyForm.current)
+
+    if (!token) {
+      return alert('請先登入會員')
+    }
+
+    const result = await axios.post(
+      'http://localhost:3001/member/reply/api',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: token ? `Bearer ${token}` : '',
+        },
+      }
+    )
+    if (result.data.success) {
+      alert('成功回覆')
+      getReply()
+    }
+
+    console.log(result.data)
+  }
+
+  async function getReply() {
+    const rows = await axios.get(
+      `http://localhost:3001/member/reply/api?pid=${showData.post_sid}`
+    )
+
+    setReplies(rows.data)
+    console.log(rows.data)
+  }
 
   useEffect(() => {
+    getInfo()
     getLike()
+    getReply()
   }, [currentPost])
 
   return (
@@ -114,7 +171,11 @@ export default function ModalView({
                 </div>
                 <h4>{user.nickname}</h4>
                 {liked ? (
-                  <span>
+                  <span
+                    onClick={() => {
+                      removeLike()
+                    }}
+                  >
                     {showData.likes} <i className="fa-solid fa-heart"></i>
                   </span>
                 ) : (
@@ -145,39 +206,22 @@ export default function ModalView({
               </div>
               <hr />
               <div className={styled.reply}>
-                {/* <div className={styled.contentFlex}>
-                    <div className={styled.replyAvatar}>
-                      <img
-                        src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
-                        alt="postImg"
-                      ></img>
-                    </div>
-                    <div>
-                      <h4>勞淑</h4>
-                      <TextareaAutosize
-                        readOnly
-                        value="喜愛登山與旅遊結合規劃，發掘台灣的歷史與美，熱愛攝影，探索台灣百岳，中級山，郊山的山野旅行者。GoHiking ! ! !"
-                      />
-                    </div>
-                    <i className="fa-regular fa-heart"></i>
-                  </div> */}
-                {Array(10)
-                  .fill(1)
+                {replies
                   .map((v, i) => {
                     return (
                       <div key={i} className={styled.replyPost}>
                         <div className={`${styled.contentFlex} ${styled.left}`}>
                           <div className={styled.replyAvatar}>
                             <img
-                              src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
+                              src={`http://localhost:3001/uploads/avatar_${v.avatar}`}
                               alt="postImg"
                             ></img>
                           </div>
                           <div>
-                            <h4>勞淑</h4>
+                            <h4>{v.nickname}</h4>
                             <TextareaAutosize
                               readOnly
-                              value="喜愛登山與旅遊結合規劃，發掘台灣的歷史與美!"
+                              value={v.context}
                             />
                           </div>
                           {/* <i className="fa-regular fa-heart"></i> */}
@@ -189,15 +233,36 @@ export default function ModalView({
             </div>
             <hr />
             <div className={styled.contentFlex}>
-              <span>
-                <TextareaAutosize
-                  className={styled.replyInput}
-                  maxRows="1"
-                  maxLength="120"
-                  placeholder="留言...(30字以內)"
+              <form ref={replyForm}>
+                <input
+                  type="hidden"
+                  value={data.member_sid}
+                  name="member_sid"
                 />
-              </span>
-              <button className={styled.replySend}>送出</button>
+                <input
+                  type="hidden"
+                  value={showData.post_sid}
+                  name="post_sid"
+                />
+                <span>
+                  <TextareaAutosize
+                    className={styled.replyInput}
+                    maxRows="1"
+                    maxLength="120"
+                    placeholder="留言...(30字以內)"
+                    name="context"
+                  />
+                </span>
+                <button
+                  className={styled.replySend}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    addReply()
+                  }}
+                >
+                  送出
+                </button>
+              </form>
             </div>
           </div>
           <div

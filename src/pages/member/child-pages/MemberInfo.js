@@ -64,12 +64,11 @@ export default function MemberInfo() {
 
     const fileName = formData.get('image_url').name
 
-    if(!fileName) {
-      return alert ('請先上傳圖片')
+    if (!fileName) {
+      return alert('請先上傳圖片')
     }
 
     const token = localStorage.getItem('token') || ''
-
 
     const result = await axios.post(
       'http://localhost:3001/member/post/api',
