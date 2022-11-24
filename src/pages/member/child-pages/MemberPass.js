@@ -16,7 +16,7 @@ export default function MemberPass() {
   const { data, auth } = useContext(MemberContext)
 
   useEffect(() => {
-    if (auth === false) {
+    if (!localStorage.getItem('token')) {
       navigate('/login')
     }
   }, [auth])

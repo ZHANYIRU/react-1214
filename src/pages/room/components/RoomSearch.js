@@ -13,14 +13,15 @@ function RoomSearch({
 }) {
   const Navigate = useNavigate()
   const { locationRows, mountainRows } = searchbar
-  const { setData } = useContext(ProCartContext)
+  const { setData, setUserSelect } = useContext(ProCartContext)
+
   // 取得選擇到地區的山
   const getLocation = async (location_sid) => {
     const response = await axios.get(
       `http://localhost:3001/room/searchbar/getlocation?location_sid=${location_sid}`
     )
     setSearchBar(response.data)
-    // console.log('aaa', response.data)
+    setUserSelect(response.data)
   }
 
   //取得選擇相對應山的房型
@@ -47,7 +48,7 @@ function RoomSearch({
     setKeyWord(response.data)
     setData(response.data)
     Navigate('/room/search')
-    console.log('input', response)
+    // console.log('input', response)
   }
 
   return (
@@ -56,7 +57,6 @@ function RoomSearch({
         className={style.location}
         onChange={(e) => {
           const location_sid = e.target.value
-          // console.log('111', )
           getLocation(location_sid)
         }}
       >
@@ -74,7 +74,6 @@ function RoomSearch({
         className={style.mountain}
         onChange={(e) => {
           const mountain_sid = e.target.value
-          // console.log(mountain_sid)
           getRoom(mountain_sid)
           setRoomSid(mountain_sid)
         }}
