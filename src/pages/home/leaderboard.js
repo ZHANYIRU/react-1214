@@ -90,52 +90,54 @@ export default function Leaderboard() {
     )
   }
   return (
-    <div className={styled.Leaderboard}>
-      <div className={styled.topWrap}>
-        <h2>登山英雄排行榜</h2>
-        <form action="">
-          <i className="fa-solid fa-magnifying-glass"></i>
-          <input type="text" placeholder="搜尋山友" />
-        </form>
-      </div>
-      <div className={styled.board}>
-        <div className={styled.head}>
-          <div className={styled.ranking}>名次</div>
-          <div className={styled.name}>名稱</div>
-          <div className={styled.height}>累積高度</div>
+    <div className={styled.LeaderboardWrap}>
+      <div className={styled.Leaderboard}>
+        <div className={styled.topWrap}>
+          <h2>登山英雄排行榜</h2>
+          <form action="">
+            <i className="fa-solid fa-magnifying-glass"></i>
+            <input type="text" placeholder="搜尋山友" />
+          </form>
         </div>
-        {display.map((v, i) => {
-          return (
-            <li key={v.sid}>
-              <div className={styled.ranking}>{v.rank}</div>
-              <div className={styled.nameWrap}>
-                <div className={styled.imgBorder}>
-                  <div className={styled.imgWrap}>
-                    <img src={v.img} alt="" />
-                  </div>
-                </div>
-                <p>{v.name}</p>
-              </div>
-              <div className={styled.height}>{howHeight(v.height)}</div>
-            </li>
-          )
-        })}
-        <div className={styled.switchBtn}>
-          <div
-            className={styled.btnLeft}
-            onClick={() => {
-              setSwitchBtn(true)
-            }}
-          >
-            全部排名
+        <div className={styled.board}>
+          <div className={styled.head}>
+            <div className={styled.ranking}>名次</div>
+            <div className={styled.name}>名稱</div>
+            <div className={styled.height}>累積高度</div>
           </div>
-          <div
-            className={styled.btnRight}
-            onClick={() => {
-              setSwitchBtn(false)
-            }}
-          >
-            好友排名
+          {display.map((v, i) => {
+            return (
+              <li key={v.sid}>
+                <div className={styled.ranking}>{v.rank}</div>
+                <div className={styled.nameWrap}>
+                  <div className={styled.imgBorder}>
+                    <div className={styled.imgWrap}>
+                      <img src={v.img} alt="" />
+                    </div>
+                  </div>
+                  <p>{v.name}</p>
+                </div>
+                <div className={styled.height}>{howHeight(v.height)}</div>
+              </li>
+            )
+          })}
+          <div className={styled.switchBtn}>
+            <div
+              className={styled.btnLeft}
+              onClick={() => {
+                setSwitchBtn(true)
+              }}
+            >
+              全部排名
+            </div>
+            <div
+              className={styled.btnRight}
+              onClick={() => {
+                setSwitchBtn(false)
+              }}
+            >
+              好友排名
+            </div>
           </div>
         </div>
       </div>
