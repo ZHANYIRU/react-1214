@@ -115,6 +115,7 @@ export default function ModalView({
     if (result.data.success) {
       alert('成功回覆')
       getReply()
+      getPostList()
     }
 
     console.log(result.data)
