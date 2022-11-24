@@ -9,6 +9,8 @@ import Home from './pages/home/Home'
 import Product from './pages/product/Product'
 import ProductPage from './pages/product/ProductPage'
 import Camp from './pages/camp/Camp'
+import CampOneday from './pages/camp/CampOneday'
+import CampProduct from './pages/camp/CampProduct'
 import Room from './pages/room/Room'
 import Rental from './pages/rental/Rental'
 import Rental_detail from './pages/rental/Rental_detail'
@@ -45,6 +47,11 @@ function App() {
               <Route path="/product" element={<Product />} />
               <Route path="/product/:product_sid" element={<ProductPage />} />
               <Route path="/camp" element={<Camp />} />
+              <Route path="/camp/oneday" element={<CampOneday />} />
+              <Route
+                path="/camp/:filter/:camp_product_sid"
+                element={<CampProduct />}
+              />
               <Route path="/room" element={<Room />} />
               <Route path="/room/search" element={<RoomFilterPage />} />
               <Route path="/room/:room_sid" element={<RoomDetailPage />} />
