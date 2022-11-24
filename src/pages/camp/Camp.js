@@ -1,7 +1,22 @@
-function Camp(props) {
+import stylePropObject from 'eslint-plugin-react/lib/rules/style-prop-object'
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import style from '../../styles/camp-scss/camphome.module.scss'
+import CampSlider from './CampSlider'
+import CampHomeList from './CampHomeList'
+
+function Camp() {
   return (
     <>
-      <div>Camp</div>
+      <h2 className={style.title}>
+        <Link to="/camp/oneday">一日單攻報名行程</Link>
+      </h2>
+      <CampSlider />
+      <CampHomeList />
+      <CampHomeList />
+      <CampHomeList />
+
+      
     </>
   )
 }

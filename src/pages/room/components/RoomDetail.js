@@ -3,13 +3,13 @@ import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import RoomSelectBar from './RoomSelectBar'
 
-function RoomDetail() {
+function RoomDetail({ detail }) {
   return (
     <>
       <div className={style.cardWrap}>
         <div className={style.top}>
           <div className={style.title}>
-            <div className={style.roomName}>南庄小美家民宿</div>
+            <div className={style.roomName}>{detail.room_name}</div>
             <div className={style.star}>
               <i className="fa-solid fa-star"></i>
               <i className="fa-solid fa-star"></i>
@@ -24,17 +24,17 @@ function RoomDetail() {
                 <span>
                   <i className="fa-solid fa-map-location-dot"></i>
                 </span>
-                <span>苗栗</span>
-                <span>南庄區</span>
+                <span>{detail.name}</span>
               </div>
               <div className={style.mountain}>
                 <span>
                   <i className="fa-solid fa-mountain"></i>
                 </span>
-                <span>加里山</span>
+                <span>{detail.mountain_name}</span>
+                <span>{detail.height}m</span>
               </div>
             </div>
-            <div className={style.price}>金額：{'650'}/人</div>
+            <div className={style.price}>金額：${detail.room_price}/人</div>
           </div>
         </div>
         <div className={style.slideWrap}>
@@ -203,7 +203,7 @@ function RoomDetail() {
           </div>
         </div>
       </div>
-      <RoomSelectBar />
+      <RoomSelectBar detail={detail} />
     </>
   )
 }
