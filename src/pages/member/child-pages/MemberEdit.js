@@ -30,12 +30,14 @@ export default function MemberEdit() {
   const [myBirth, setMyBirth] = useState('')
 
   useEffect(() => {
-    let dateBirth = dayjs(data.birthday).format('YYYY-MM-DD')
+    let dateBirth = data.birthday
+      ? dayjs(data.birthday).format('YYYY-MM-DD')
+      : ''
     setMyBirth(dateBirth)
   }, [])
 
   useEffect(() => {
-    if (auth === false) {
+    if (!localStorage.getItem('token')) {
       navigate('/login')
     }
   }, [auth])

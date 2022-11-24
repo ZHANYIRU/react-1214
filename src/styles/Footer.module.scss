@@ -1,5 +1,7 @@
 @import './global.scss';
 .img{
+  z-index: -2;
+  position: relative;
   width: 100%;
   height: 550px;
   background-color:$lightGreen ;
