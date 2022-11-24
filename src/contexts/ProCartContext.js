@@ -500,7 +500,7 @@ export const ProCartContextProvider = ({ children }) => {
     }
   }
   //呼叫reducer
-  const [state, dispatch] = useReducer(proCartReducer, initState)
+  const [state, dispatch] = useReducer(proCartReducer, localState)
   console.log('Context', state)
   console.log('我是context')
   //購物車數量顯示
@@ -717,7 +717,12 @@ export const ProCartContextProvider = ({ children }) => {
       payload: {},
     })
   }
+  //room search結果
   const [data, setData] = useState([])
+  //room地區 篩選結果
+  const [userSelect, setUserSelect] = useState([])
+  //在篩選頁面獲得相對應山的房型
+  const [getMountain, setGetMountain] = useState([])
   //金錢格式化
   const moneyFormat = (price) => {
     let a = Number(price)
@@ -725,9 +730,16 @@ export const ProCartContextProvider = ({ children }) => {
     let c = b.split('.')
     return c[0]
   }
+  const d = new Date()
+  const order_num = Date.parse(d)
+  console.log(order_num)
   return (
     <ProCartContext.Provider
       value={{
+        getMountain,
+        setGetMountain,
+        userSelect,
+        setUserSelect,
         data,
         setData,
         moneyFormat,

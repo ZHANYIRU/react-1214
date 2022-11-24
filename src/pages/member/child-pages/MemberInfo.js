@@ -15,6 +15,7 @@ export default function MemberInfo() {
   const [isView, setIsView] = useState(false)
   const [isDel, setIsDel] = useState(false)
   const [editTxt, setEditTxt] = useState('')
+  const [preview, setPreview] = useState('')
 
   const navigate = useNavigate()
 
@@ -29,6 +30,7 @@ export default function MemberInfo() {
   const [currentPost, setCurrentPost] = useState(0)
 
   const newForm = useRef(null)
+  const editForm = useRef(null)
 
   //get post list
   async function getPostList() {
@@ -42,9 +44,7 @@ export default function MemberInfo() {
 
   //for new post options
   async function getLocation() {
-    const result = await axios.get(
-      'http://localhost:3001/member/locations/api?mid = '
-    )
+    const result = await axios.get('http://localhost:3001/member/locations/api')
 
     // console.log(result.data.rows)
     setLocations(result.data.rows)
@@ -62,7 +62,14 @@ export default function MemberInfo() {
   async function newPost() {
     const formData = new FormData(newForm.current)
 
+    const fileName = formData.get('image_url').name
+
+    if(!fileName) {
+      return alert ('請先上傳圖片')
+    }
+
     const token = localStorage.getItem('token') || ''
+
 
     const result = await axios.post(
       'http://localhost:3001/member/post/api',
@@ -75,11 +82,62 @@ export default function MemberInfo() {
       }
     )
     console.log(result.data)
+    alert(result.data.success ? '新增成功' : '新增失敗')
     setIsNew(false)
+    setPreview('')
+  }
+
+  //edit current post
+  async function editPost() {
+    const formData = new FormData(editForm.current)
+
+    const token = localStorage.getItem('token') || ''
+
+    const result = await axios.put(
+      'http://localhost:3001/member/post/api',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: token ? `Bearer ${token}` : '',
+        },
+      }
+    )
+    console.log(result.data)
+    alert(result.data.success ? '修改成功' : '修改失敗')
+    setIsEdit(false)
+    setIsDel(false)
+    getPostList()
+  }
+
+  async function delPost() {
+    const token = localStorage.getItem('token') || ''
+
+    const result = await axios.delete(
+      'http://localhost:3001/member/post/api?sid=' +
+        postList[currentPost].post_sid +
+        '&height=' +
+        postList[currentPost].height +
+        '&image_url=' +
+        postList[currentPost].image_url,
+      {
+        headers: {
+          Authorization: token ? `Bearer ${token}` : '',
+        },
+      }
+    )
+
+    console.log(result.data)
+    alert(result.data.success ? '刪除成功' : '刪除失敗')
+    if (result.data.success) {
+      setIsEdit(false)
+      getPostList()
+      setIsDel(false)
+    }
   }
 
   useEffect(() => {
-    if (auth === false) {
+    if (!localStorage.getItem('token')) {
       navigate('/login')
     }
   }, [auth])
@@ -102,7 +160,14 @@ export default function MemberInfo() {
 
   useEffect(() => {
     getPostList()
-  }, [isNew])
+  }, [isNew, auth])
+
+  //show preview
+  function showPreview(e) {
+    if (e.target.files.length > 0) {
+      setPreview(URL.createObjectURL(e.target.files[0]))
+    }
+  }
 
   // console.log(data.member_sid)
 
@@ -145,6 +210,7 @@ export default function MemberInfo() {
                     setIsView={setIsView}
                     setCurrentPost={setCurrentPost}
                     key={i}
+                    setEditTxt={setEditTxt}
                   />
                 )
               })}
@@ -157,70 +223,95 @@ export default function MemberInfo() {
           className={styled.modalBg}
           // z-index over nav bar?
         >
-          <div className={styled.modal}>
-            <div className={styled.editImg}>
-              <img
-                src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
-                alt="postImg"
-              ></img>
-            </div>
-            <div className={styled.editContent}>
-              <div className={styled.contentTop}>
-                <h3>編輯貼文</h3>
-                <TextareaAutosize
-                  maxLength="120"
-                  maxRows="8"
-                  placeholder="輸入敘述文字(最多120字)"
-                  onChange={(e) => {
-                    setEditTxt(e.target.value)
-                  }}
+          <form ref={editForm}>
+            <div className={styled.modal}>
+              <div className={styled.editImg}>
+                <img
+                  // src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
+                  src={
+                    'http://localhost:3001/uploads/' +
+                    postList[currentPost].image_url
+                  }
+                  alt="postImg"
+                ></img>
+              </div>
+              <div className={styled.editContent}>
+                <input
+                  type="hidden"
+                  value={postList[currentPost].post_sid}
+                  name="post_sid"
                 />
-              </div>
-              <div className={styled.contentBtm}>
-                <div>
-                  <p>海拔高度: 1211m</p>
-                  <h3>
-                    <span>苗栗</span>
-                    <span>加里山</span>
-                  </h3>
-                </div>
-                <div className={styled.delete}>
-                  <h3
-                    onClick={() => {
-                      setIsDel(true)
+                <div className={styled.contentTop}>
+                  <h3>編輯貼文</h3>
+                  <TextareaAutosize
+                    maxLength="120"
+                    maxRows="8"
+                    placeholder="輸入敘述文字(最多120字)"
+                    value={editTxt}
+                    name="context"
+                    onChange={(e) => {
+                      setEditTxt(e.target.value)
                     }}
-                  >
-                    {' '}
-                    {isDel ? (
-                      <>
-                        <span>確認刪除?</span>
-                        <i className="fa-solid fa-trash-can"></i>
-                      </>
-                    ) : (
-                      <>
-                        <span>刪除</span>
-                        <i className="fa-solid fa-trash-can"></i>
-                      </>
-                    )}
-                  </h3>
+                  />
+                </div>
+                <div className={styled.contentBtm}>
+                  <div>
+                    <p>海拔高度: {postList[currentPost].height}m</p>
+                    <h3>
+                      <span>{postList[currentPost].name}</span>
+                      <span>{postList[currentPost].mountain_name}</span>
+                    </h3>
+                  </div>
+                  <div className={styled.delete}>
+                    <h3
+                      onClick={() => {
+                        setIsDel(true)
+                      }}
+                    >
+                      {' '}
+                      {isDel ? (
+                        <div
+                          onClick={(e) => {
+                            e.preventDefault()
+                            delPost()
+                          }}
+                        >
+                          <span>確認刪除?</span>
+                          <i className="fa-solid fa-trash-can"></i>
+                        </div>
+                      ) : (
+                        <div>
+                          <span>刪除</span>
+                          <i className="fa-solid fa-trash-can"></i>
+                        </div>
+                      )}
+                    </h3>
+                  </div>
                 </div>
               </div>
+              <div className={styled.btnGrp}>
+                <button
+                  className={styled.btnDone}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    editPost()
+                  }}
+                >
+                  <p>確認修改</p>
+                </button>
+                <button
+                  className={styled.btnCancel}
+                  onClick={(e) => {
+                    setIsEdit(false)
+                    setIsDel(false)
+                    e.preventDefault()
+                  }}
+                >
+                  <p>取消修改</p>
+                </button>
+              </div>
             </div>
-            <div className={styled.btnGrp}>
-              <button className={styled.btnDone}>
-                <p>確認修改</p>
-              </button>
-              <button
-                className={styled.btnCancel}
-                onClick={() => {
-                  setIsEdit(false)
-                  setIsDel(false)
-                }}
-              >
-                <p>取消修改</p>
-              </button>
-            </div>
-          </div>
+          </form>
         </div>
       )}
       {isNew && (
@@ -231,8 +322,17 @@ export default function MemberInfo() {
           <form ref={newForm}>
             <div className={styled.modal}>
               <div className={styled.editImg}>
-                <div className={styled.newImg}>
-                  <i className="fa-regular fa-image"></i>
+                <div
+                  className={styled.newImg}
+                  style={{
+                    backgroundImage: `url(${preview})`,
+                    backgroundColor: preview ? '#000' : '#ddd',
+                  }}
+                >
+                  <i
+                    className="fa-regular fa-image"
+                    style={{ color: preview ? '#fff' : '#666' }}
+                  ></i>
                   <label htmlFor="avatar" className={styled.avatarLabel}>
                     上傳照片
                     <input
@@ -240,6 +340,9 @@ export default function MemberInfo() {
                       accept="image/png, image/jpeg"
                       name="image_url"
                       id="avatar"
+                      onChange={(e) => {
+                        showPreview(e)
+                      }}
                     />
                   </label>
                 </div>
@@ -265,6 +368,7 @@ export default function MemberInfo() {
                 <div className={styled.contentBtm}>
                   <div>
                     <p>海拔高度: {selHeight}m</p>
+                    <input type="hidden" value={selHeight} name="height" />
                     <h3>
                       <select
                         value={selLocation}
@@ -327,6 +431,7 @@ export default function MemberInfo() {
                   onClick={(e) => {
                     e.preventDefault()
                     setIsNew(false)
+                    setPreview('')
                   }}
                 >
                   <p>取消貼文</p>
