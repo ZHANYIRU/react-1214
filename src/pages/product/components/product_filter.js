@@ -179,20 +179,7 @@ export default function ProductFilter({
           })}
         </div>
         <h2> 防水等級</h2>
-        {/* <div className={styled.checkBoxWrap}>
-          <div className={styled.checkBox}>
-            <input type="checkbox" id="wRes" value="wRes" name="wRes" />
-            <label htmlFor="wRes">抗水（Water Resistant）</label>
-          </div>
-          <div className={styled.checkBox}>
-            <input type="checkbox" id="wRep" value="wRep" name="wRep" />
-            <label htmlFor="wRep">防潑水（Water Repellent）</label>
-          </div>
-          <div className={styled.checkBox}>
-            <input type="checkbox" id="wProof" value="wProof" name="proof" />
-            <label htmlFor="wProof">防水（Waterproof）</label>
-          </div>
-        </div> */}
+        
         <div className={styled.checkBoxWrap}>
           {wProofOptions.map((v, i) => {
             return (

@@ -1,29 +1,27 @@
 import { useState, useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import Slider from '../../product/slider'
+import Slider from '../../product/components/slider'
 // import Product_filter from './product_filter'
 // import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import styled from '../../../styles/rental-scss/productSee.module.scss'
-import img1 from './img1.jpg'
-import img2 from './img2.jpg'
-import img3 from './img3.jpg'
+
 
 function Product() {
   //圖片
   const data = [
-    {
-      key: 1,
-      src: img1,
-    },
-    {
-      key: 2,
-      src: img2,
-    },
-    {
-      key: 3,
-      src: img3,
-    },
+    // {
+    //   key: 1,
+    //   src: img1,
+    // },
+    // {
+    //   key: 2,
+    //   src: img2,
+    // },
+    // {
+    //   key: 3,
+    //   src: img3,
+    // },
   ]
 
   //抓取fetch狀態

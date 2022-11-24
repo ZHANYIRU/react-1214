@@ -10,6 +10,8 @@ import Camp from './pages/camp/Camp'
 import Room from './pages/room/Room'
 import Rental from './pages/rental/Rental'
 import Rental_detail from './pages/rental/Rental_detail'
+import Commnent from './pages/rental/components/Commnent'
+
 import ProductSee from './pages/rental/components/ProductSee'
 
 import Cart from './pages/Cart/Cart'
@@ -36,8 +38,8 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/product" element={<Product />} />
-          <Route path="/product/:product_sid" element={<ProductPage />} />
+          {/* <Route path="/product" element={<Product />} />
+          <Route path="/product/:product_sid" element={<ProductPage />} /> */}
           <Route path="/camp" element={<Camp />} />
           <Route path="/room" element={<Room />} />
           <Route path="/room/filter" element={<RoomFilterPage />} />
@@ -46,7 +48,7 @@ function App() {
             path="/rental/:rental_product_sid"
             element={<Rental_detail />}
           />
-          <Route path="/rentaltest" element={<ProductSee />} />
+          <Route path="/commnent" element={<Commnent />} />
 
           <Route path="/cart" element={<Cart />} />
           <Route path="/test" element={<TestProducts />} />
