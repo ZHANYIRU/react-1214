@@ -59,8 +59,12 @@ function Room({ data, setData }) {
         <div className={`${style.box} ${style.div3}`}></div>
       </div>
       <div className={style.divWrap} style={{ visibility: ftr && 'hidden' }}>
-        <div className={`${style.box} ${style.div4}`}></div>
-        <div className={`${style.box} ${style.div5}`}></div>
+        <div className={`${style.box2} ${style.div4}`}>
+          <img src="/img/4.png" alt="" />
+        </div>
+        <div className={`${style.box2} ${style.div5}`}>
+          <img src="/img/5.png" alt="" />
+        </div>
       </div>
 
       <div className={style.container} ref={mainHeight}>
