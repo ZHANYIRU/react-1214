@@ -1,84 +1,48 @@
+import log from 'eslint-plugin-react/lib/util/log'
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext, useEffect } from 'react'
+import MemberContext from '../../contexts/MemberContext'
 import styled from '../../styles/home-scss/Leaderboard.module.scss'
+import axios from 'axios'
+import { forEach } from 'lodash'
 export default function Leaderboard() {
+  //從context來的該會員登入資料
+  const memberData = useContext(MemberContext)
+
+  // 拿到該會員相關的好友們的PO文高度
+  const [yourFdData, setYourFdData] = useState([{}])
+  //全部資料
+  const [allData, setAllData] = useState([{ d: 1 }])
+
+  const fetchYourFd = async () => {
+    const response = await axios.get(
+      `http://localhost:3001/product/borad/api?mid=${memberData.data.member_sid}`
+    )
+    const data = response.data
+    // console.log(r)
+    setYourFdData(data)
+  }
+
+  const fetchAll = async () => {
+    const response = await axios.get(`http://localhost:3001/product/borad/api2`)
+    const data = response.data
+    // console.log(r)
+    console.log('我是全部')
+    setAllData(data)
+  }
+
   // 切換按鈕
-  const [switchBtn, setSwitchBtn] = useState(false)
-  const [fakeDataAll, setFakeDataAll] = useState([
-    {
-      sid: 1,
-      rank: 1,
-      img: 'https://pbs.twimg.com/media/FM12Yd3XEAIqM8S.jpg',
-      name: 'aka爬山高手',
-      height: 8377,
-    },
-    {
-      sid: 2,
-      rank: 2,
-      img: 'https://pbs.twimg.com/media/FM12Yd3XEAIqM8S.jpg',
-      name: 'aka爬山好手',
-      height: 8000,
-    },
-    {
-      sid: 3,
-      rank: 3,
-      img: 'https://pbs.twimg.com/media/FM12Yd3XEAIqM8S.jpg',
-      name: 'aka爬山低手',
-      height: 7000,
-    },
-    {
-      sid: 4,
-      rank: 4,
-      img: 'https://pbs.twimg.com/media/FM12Yd3XEAIqM8S.jpg',
-      name: 'aka爬山DD手',
-      height: 5000,
-    },
-    {
-      sid: 5,
-      rank: 5,
-      img: 'https://pbs.twimg.com/media/FM12Yd3XEAIqM8S.jpg',
-      name: 'aka爬山DD手',
-      height: 2300,
-    },
-  ])
-  const [fakeDataFd, setFakeDataFd] = useState([
-    {
-      sid: 1,
-      rank: 1,
-      img: 'https://i.natgeofe.com/n/9135ca87-0115-4a22-8caf-d1bdef97a814/75552.jpg',
-      name: 'aka爬山高手',
-      height: 8377,
-    },
-    {
-      sid: 2,
-      rank: 2,
-      img: 'https://i.natgeofe.com/n/9135ca87-0115-4a22-8caf-d1bdef97a814/75552.jpg',
-      name: 'aka爬山好手',
-      height: 8000,
-    },
-    {
-      sid: 3,
-      rank: 3,
-      img: 'https://i.natgeofe.com/n/9135ca87-0115-4a22-8caf-d1bdef97a814/75552.jpg',
-      name: 'aka爬山低手',
-      height: 7000,
-    },
-    {
-      sid: 4,
-      rank: 4,
-      img: 'https://i.natgeofe.com/n/9135ca87-0115-4a22-8caf-d1bdef97a814/75552.jpg',
-      name: 'aka爬山DD手',
-      height: 5000,
-    },
-    {
-      sid: 5,
-      rank: 5,
-      img: 'https://i.natgeofe.com/n/9135ca87-0115-4a22-8caf-d1bdef97a814/75552.jpg',
-      name: 'aka爬山DD手',
-      height: 2300,
-    },
-  ])
-  const display = switchBtn ? fakeDataAll : fakeDataFd
+  const [switchBtn, setSwitchBtn] = useState(true)
+  // const [fakeDataAll, setFakeDataAll] = useState([
+  //   {
+  //     member_sid: 1,
+  //     rank: 1,
+  //     avatar: 'https://pbs.twimg.com/media/FM12Yd3XEAIqM8S.jpg',
+  //     name: 'aka爬山高手',
+  //     total_height: 8377,
+  //   },
+  // ])
+  const display = switchBtn ? allData : yourFdData
 
   const howHeight = (h) => {
     const heightest = 10000
@@ -89,6 +53,11 @@ export default function Leaderboard() {
       </div>
     )
   }
+  useEffect(() => {
+    fetchAll()
+    fetchYourFd()
+  }, [])
+
   return (
     <div className={styled.LeaderboardWrap}>
       <div className={styled.Leaderboard}>
@@ -107,17 +76,17 @@ export default function Leaderboard() {
           </div>
           {display.map((v, i) => {
             return (
-              <li key={v.sid}>
+              <li key={v.member_sid}>
                 <div className={styled.ranking}>{v.rank}</div>
                 <div className={styled.nameWrap}>
                   <div className={styled.imgBorder}>
                     <div className={styled.imgWrap}>
-                      <img src={v.img} alt="" />
+                      <img src={v.avatar} alt="" />
                     </div>
                   </div>
                   <p>{v.name}</p>
                 </div>
-                <div className={styled.height}>{howHeight(v.height)}</div>
+                <div className={styled.height}>{howHeight(v.total_height)}</div>
               </li>
             )
           })}
@@ -126,6 +95,7 @@ export default function Leaderboard() {
               className={styled.btnLeft}
               onClick={() => {
                 setSwitchBtn(true)
+                fetchAll()
               }}
             >
               全部排名
@@ -134,6 +104,7 @@ export default function Leaderboard() {
               className={styled.btnRight}
               onClick={() => {
                 setSwitchBtn(false)
+                fetchYourFd()
               }}
             >
               好友排名
