@@ -2,10 +2,11 @@ import styled from '../../../styles/member-scss/MemberInfo.module.scss'
 import TextareaAutosize from 'react-textarea-autosize'
 import dayjs from 'dayjs'
 import axios from 'axios'
-import { useEffect, useState } from 'react'
-import userEvent from '@testing-library/user-event'
+import { useContext, useEffect, useState } from 'react'
+import MemberContext from '../../../contexts/MemberContext'
 
 export default function ModalView({
+  getPostList,
   setIsView,
   showData,
   setCurrentPost,
@@ -14,11 +15,15 @@ export default function ModalView({
 }) {
   // console.log(showData.member_sid)
 
+  const { data } = useContext(MemberContext)
+
   const [user, setUser] = useState({
     avatar: '',
     nickname: '',
     total_height: 0,
   })
+
+  const [liked, setLiked] = useState(false)
 
   async function getInfo() {
     const rows = await axios.get(
@@ -28,9 +33,50 @@ export default function ModalView({
     setUser(rows.data[0])
   }
 
+  async function getLike() {
+    const mid = data.member_sid || ''
+
+    const rows = await axios.get(
+      `http://localhost:3001/member/like/api?mid=${mid}&pid=${showData.post_sid}`
+    )
+    console.log(rows.data[0])
+    if (rows.data[0]) {
+      setLiked(true)
+    } else {
+      setLiked(false)
+    }
+  }
+
+  async function addLike() {
+    const token = localStorage.getItem('token') || ''
+
+    if (!token) {
+      return alert('請先登入會員')
+    }
+
+    const result = await axios.post(
+      `http://localhost:3001/member/like/api`,
+      { mid: data.member_sid, pid: showData.post_sid },
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: token ? `Bearer ${token}` : '',
+        },
+      }
+    )
+    getPostList()
+    setLiked(true)
+
+    console.log(result.data)
+  }
+
   useEffect(() => {
     getInfo()
-  }, [])
+  }, [currentPost])
+
+  useEffect(() => {
+    getLike()
+  }, [currentPost])
 
   return (
     <>
@@ -58,14 +104,28 @@ export default function ModalView({
               <div className={styled.contentFlex}>
                 <div className={styled.avatar}>
                   <img
-                    src={`http://localhost:3001/uploads/avatar_${user.avatar}`}
+                    src={
+                      user.avatar
+                        ? `http://localhost:3001/uploads/avatar_${user.avatar}`
+                        : ''
+                    }
                     alt="postImg"
                   ></img>
                 </div>
                 <h4>{user.nickname}</h4>
-                <span>
-                  {showData.likes} <i className="fa-regular fa-heart"></i>
-                </span>
+                {liked ? (
+                  <span>
+                    {showData.likes} <i className="fa-solid fa-heart"></i>
+                  </span>
+                ) : (
+                  <span
+                    onClick={() => {
+                      addLike()
+                    }}
+                  >
+                    {showData.likes} <i className="fa-regular fa-heart"></i>
+                  </span>
+                )}
               </div>
               <TextareaAutosize
                 maxRows="3"
