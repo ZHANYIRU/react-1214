@@ -12,12 +12,12 @@ function RentalCard({ data }) {
         <div className={rentalcss.cardBody}>
           <div className={rentalcss.imageContainer}>
             <img
-              src={`http://localhost:3001/imgs/rental/${data.rental_img}`}
+              src={`http://localhost:3001/rental_img/${data.rental_img[0]}`}
               alt=""
             />
           </div>
           <div className={rentalcss.rental_product_name}>
-            <p>{data.rental_product_name}</p>
+            <p>{data.rental_name}</p>
           </div>
           <div className={rentalcss.price}>
             <p>

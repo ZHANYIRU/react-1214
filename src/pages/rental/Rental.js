@@ -13,8 +13,8 @@ function Rental(props) {
 
   async function getList() {
     const response = await axios.get(rental_url)
-    console.log(response.data.rows)
-    setData(response.data.rows)
+    console.log(response.data)
+    setData(response.data)
   }
 
   const priceOrder = function (text) {
