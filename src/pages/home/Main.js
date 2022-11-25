@@ -1,6 +1,7 @@
 import styled from '../../styles/home-scss/Main.module.scss'
 import { useRef, useEffect } from 'react'
 // import Weather from './Weather'
+import Leaderboard from './leaderboard'
 function Main({ setFtr }) {
   const mainHeight = useRef(null)
 
@@ -54,7 +55,9 @@ function Main({ setFtr }) {
             <div className={styled.click}>全台店點</div>
           </div>
         </div>
-        <div className={styled.section3}></div>
+        <div className={styled.section3}>
+          <Leaderboard />
+        </div>
       </div>
     </>
   )
