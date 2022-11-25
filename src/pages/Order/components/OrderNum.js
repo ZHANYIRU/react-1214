@@ -15,13 +15,18 @@ function OrderNum({ momOrder, open, setOpen }) {
   //打開子訂單
   const openWrap = (e) => {
     const value = +e.target.value
-    if (open.includes(value)) {
-      const newOpen = open.filter((el2) => el2 !== value)
-      setOpen(newOpen)
-    } else {
+    if (!open.includes(value)) {
       const newOpen = [...open, value]
       setOpen(newOpen)
     }
+    // else {
+    //   const newOpen = [...open, value]
+    //   setOpen(newOpen)
+    // }
+  }
+  const closeWrap = (sid) => {
+    const newClose = open.filter((el2) => el2 !== sid)
+    setOpen(newClose)
   }
   return (
     <>
@@ -73,27 +78,46 @@ function OrderNum({ momOrder, open, setOpen }) {
           rows.map((el, i) => {
             return (
               <div key={el.sid}>
-                <input
-                  type="checkbox"
-                  value={`${el.sid}`}
-                  id={`${el.sid}`}
-                  onClick={(e) => {
-                    openWrap(e)
-                  }}
-                />
-                <label className={styled.orderNum} htmlFor={`${el.sid}`}>
-                  <p> 訂單編號：{el.order_num}</p>
-                  <p>金額：{moneyFormat(el.total)}</p>
-                  <i className="fa-solid fa-chevron-down"></i>
-                </label>
+                <div className={styled.camera}>
+                  <div
+                    className={styled.recipientWrap}
+                    style={{
+                      transform: open.includes(el.sid) && 'rotateX(180deg)',
+                    }}
+                  >
+                    <input
+                      type="checkbox"
+                      value={`${el.sid}`}
+                      id={`${el.sid}`}
+                      onClick={(e) => {
+                        openWrap(e)
+                      }}
+                    />
+                    <label className={styled.orderNum} htmlFor={`${el.sid}`}>
+                      <p> 訂單編號：{el.order_num}</p>
+                      <p>金額：{moneyFormat(el.total)}</p>
+                      <i className="fa-solid fa-chevron-down"></i>
+                    </label>
+                    <div
+                      className={styled.recipient}
+                      onClick={() => {
+                        closeWrap(el.sid)
+                      }}
+                    >
+                      <p>收件人：阿儒</p>
+                      <p>地址：新北市新莊區民安西路229巷6號5樓</p>
+                      <p>電話：0987654321</p>
+                      <p>付款方式：LINE PAY</p>
+                      <p>備註：安安</p>
+                    </div>
+                  </div>
+                </div>
                 <div
-                  className={
-                    styled.contentWrap
-                    // open.includes(el.sid)
-                    //   ? `${styled.contentWrapOpen}`
-                    //   : `${styled.contentWrap}`
-                  }
-                  style={{ maxHeight: open.includes(el.sid) && '50vh' }}
+                  className={styled.contentWrap}
+                  style={{
+                    maxHeight: open.includes(el.sid) && '50vh',
+                    overflow: open.includes(el.sid) && 'auto',
+                  }}
                 >
                   <div className={styled.pro}>
                     {proRows &&

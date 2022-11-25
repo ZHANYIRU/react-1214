@@ -7,8 +7,15 @@
     display: none;
   }
 }
+.recipientWrap {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: 0.5s;
+  // transform: rotateX(180deg);
+}
 
 .orderNum {
+  transform: translateZ(10px);
   display: flex;
   width: 100%;
   background-color: #e9d9a2;
@@ -23,6 +30,20 @@
     text-align: center;
     width: 26%;
   }
+}
+.recipient {
+  transform: rotateX(180deg);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  font-size: 14px;
+  background-color: #e9d9a2;
+  justify-content: space-around;
+  border-radius: 10px;
+  position: absolute;
+  top: 0;
+  cursor: pointer;
 }
 
 .contentWrap {

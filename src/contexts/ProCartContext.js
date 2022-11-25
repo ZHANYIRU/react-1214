@@ -735,6 +735,14 @@ export const ProCartContextProvider = ({ children }) => {
       }
     })
   }
+  //填寫(收件人)
+  const [writeUser, setWriteUser] = useState({
+    name: '',
+    mobile: 0,
+    address: '',
+    email: '',
+    text: '',
+  })
   //room search結果
   const [data, setData] = useState([])
   //room地區 篩選結果
@@ -784,6 +792,8 @@ export const ProCartContextProvider = ({ children }) => {
         room,
         camp,
         ren,
+        writeUser,
+        setWriteUser,
       }}
     >
       {children}
