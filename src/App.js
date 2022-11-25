@@ -47,7 +47,7 @@ function App() {
               <Route path="/product" element={<Product />} />
               <Route path="/product/:product_sid" element={<ProductPage />} />
               <Route path="/camp" element={<Camp />} />
-              <Route path="/camp/oneday" element={<CampOneday />} />
+              <Route path="/camp/filter" element={<CampOneday />} />
               <Route
                 path="/camp/:filter/:camp_product_sid"
                 element={<CampProduct />}
