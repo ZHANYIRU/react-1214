@@ -11,7 +11,7 @@ function RoomDetailPage() {
     const response = await axios.get(
       `http://localhost:3001/room/getRoomDetail/${room_sid}`
     )
-    console.log(response.data.rows[0])
+    // console.log(response.data.rows[0])
     setDetail(response.data.rows[0])
   }
 

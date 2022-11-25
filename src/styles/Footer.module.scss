@@ -25,15 +25,19 @@
   background: url(../../public/img/4.png) no-repeat;
   background-position: center bottom ;
   position: absolute;
+  z-index: -2;
 }
 
 .div5 {
   background: url(../../public/img/5.png) no-repeat;
   background-position: center bottom ;
   position: absolute;
+  z-index: -2;
 }
 .footer{
   margin-top: -5px;
+  z-index: -10;
+  position: relative;
   width: 100%;
   background-color: $darkGreen;
   padding: 80px 0 40px;
@@ -51,6 +55,8 @@
     width: 50%;
     justify-content: space-between;
     .about{
+      z-index: 1;
+      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -59,6 +65,8 @@
       }
     }
     .media{
+      z-index: 1;
+      position: relative;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
