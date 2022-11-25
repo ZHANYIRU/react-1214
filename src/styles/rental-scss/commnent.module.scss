@@ -1,0 +1,56 @@
+@import '../global.scss';
+.empty{
+    width: 100%;
+    height: 100px;
+}
+
+.commentCard{
+    border:1px solid #ccc;
+    width:30%;
+    margin-bottom:10px;
+    padding:10px;
+    
+
+    .memberInfo{
+        display:flex;
+        // justify-content: space-between;
+        align-items: center;
+        .avatar{
+            width:50px;
+            height:50px;
+            border-radius: 50%;
+            border:2px solid yellow;
+            overflow: hidden;
+            img{
+                width:100%;
+            }
+        }
+        
+        p{
+            color:#18472A;
+            text-align:center;
+            margin:0 10px;
+            // line-height: 100%;
+
+        }
+
+    
+        
+    }
+
+    .commnentWord{
+        font-size:12px;
+    }
+    
+    .readMore{
+        font-size:10px;
+        font-weight:600;
+    }
+
+}
+
+
+
+.star{
+    color:yellow;
+}

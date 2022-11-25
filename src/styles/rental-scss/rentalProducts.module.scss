@@ -4,39 +4,90 @@
     height: 60px;
 }
 .container{
-    margin:0 auto;
+    margin:0px 300px;
     width:80%;
 
-    .categoryBox{
-        width: 95%;
-        margin: 0 auto;
-        display: flex;
+
+    // 種類商品條 可能會棄案
+    // .categoryBox{
+    //     width: 95%;
+    //     margin: 0 auto;
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: center;
+    
+    //     .box{
+    //         width: 45%;
+    //         height: 50px;
+    //         display: flex;
+    //         justify-content:space-around;
+    //         align-items: center;
+    //         border-bottom: 1px solid black;
+    //         border-top: 1px solid black;
+    
+    //     }
+    //     .middle{
+    //         height: 50px;
+    //         width: 10%;
+    //         display: flex;
+    //         justify-content: center;
+    //         border-bottom: 1px solid black;
+    //         h2{
+    //             transform: translateY(-10px);
+    //         }
+    //     }
+    
+    // }
+    .orderShow{
+        background-color: #ccc;
+        width:98%;
+        margin:0 auto;
+        height:50px;
+        display:flex;
         align-items: center;
-        justify-content: center;
-    
-        .box{
-            width: 45%;
-            height: 50px;
-            display: flex;
-            justify-content:space-around;
-            align-items: center;
-            border-bottom: 1px solid black;
-            border-top: 1px solid black;
-    
-        }
-        .middle{
-            height: 50px;
-            width: 10%;
-            display: flex;
-            justify-content: center;
-            border-bottom: 1px solid black;
-            h2{
-                transform: translateY(-10px);
+        justify-content: space-between;
+        border-radius: 5px;
+        
+
+        .filtermore{
+            display:flex;
+            align-items:center;
+            padding-left:20px;
+
+            h2,i{
+                cursor:pointer;
             }
         }
-    
-    }
 
+        .order{
+            margin-right:20px;
+            width:400px;
+            display:flex;
+            justify-content: space-around;
+
+            p{
+                cursor:pointer;
+            }
+            // :nth-chiild(2){
+            //     border-left:1px solid black;
+            // }
+
+        }
+    }
+    .order p:nth-child(2){
+        border-left :2px solid black;
+        padding-left:20px;
+    }
+    
+    .order p:nth-child(3){
+        border-left :2px solid black;
+        padding-left:20px;
+    }
+    
+    .order p:nth-child(4){
+        border-left :2px solid black;
+        padding-left:20px;
+    }
 
     .rentalProductBox{
         width: 100%;
@@ -91,9 +142,14 @@
                     color:black;
                     font-size:22px;
                     font-weight: 700;
+                    margin:20px 0;
                     span{
                         color:red;
                     }
+                }
+                .star{
+                    margin:20px 0;
+                    color:yellow;
                 }
             }
             
@@ -101,4 +157,5 @@
     }
 
 }
+
 

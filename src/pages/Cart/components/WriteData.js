@@ -1,9 +1,11 @@
 import React from 'react'
 import { useState, useContext, useEffect } from 'react'
 import MemberContext from '../../../contexts/MemberContext'
+import ProCartContext from '../../../contexts/ProCartContext'
 import styled from '../../../styles/cart-scss/writeData.module.scss'
 function WriteData() {
   const { data } = useContext(MemberContext)
+  const { writeUser, setWriteUser } = useContext(ProCartContext)
   const [familySelect, setFamilySelect] = useState('')
   const [paySelect, setPaySelect] = useState('')
   //(訂購人)
@@ -14,14 +16,8 @@ function WriteData() {
     email: '',
     text: '',
   })
-  //填寫(收件人)
-  const [writeUser, setWriteUser] = useState({
-    name: '',
-    mobile: 0,
-    address: '',
-    email: '',
-    text: '',
-  })
+
+  //勾選自動帶入會員資料
   const [same, setSame] = useState(false)
   const family = ['宅配', '郵寄']
   const pay = ['ATM匯款', 'LINE PAY', '信用卡']

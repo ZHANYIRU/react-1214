@@ -17,6 +17,7 @@
     // justify-content: flex-start;
     // padding: 0 50px;
     a{
+        color: black;
         width: 20%;
         display: block;
         margin-right: 75px;
@@ -30,6 +31,10 @@
     background-color: white;
     border-radius: 10px;
     box-sizing: content-box;
+    &:hover{
+        transform: scale(1.02);
+        transition:0.5s;
+        }
 }
 .cardImg{
     // background-image: url('./../../../public/img/room.jpg');

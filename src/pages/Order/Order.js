@@ -6,8 +6,7 @@ import OrderNum from './components/OrderNum'
 import axios from 'axios'
 import { useState, useEffect, useContext } from 'react'
 function Order() {
-  const { data } = useContext(MemberContext)
-  const sid = data.member_sid
+  const { data, auth } = useContext(MemberContext)
   //打開子訂單+時間線增長的狀態
   const [open, setOpen] = useState([])
   const [momOrder, setMomOrder] = useState([
@@ -20,12 +19,14 @@ function Order() {
     },
   ])
   const getList = async () => {
-    const { data } = await axios.get(MY_HOST + `/order/api?sid=${sid}`)
-    setMomOrder(data)
+    const sid = data.member_sid
+    const res = await axios.get(MY_HOST + `/order/api?sid=${sid}`)
+    setMomOrder(res.data)
   }
   useEffect(() => {
+    console.log(456)
     getList()
-  }, [])
+  }, [auth])
   return (
     <div className={styled.orderRight}>
       <div className={styled.search}>
