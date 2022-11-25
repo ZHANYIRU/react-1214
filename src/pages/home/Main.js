@@ -17,10 +17,10 @@ function Main({ setFtr }) {
     } else {
       setFtr(false)
     }
-    const cubeHeight = window.innerHeight
+    const cubeHeight = window.innerHeight * 3
     const UserScrollY = window.scrollY
     if (UserScrollY < cubeHeight) {
-      lastScroll = window.scrollY / 2
+      lastScroll = window.scrollY / 4
       setDeg(lastScroll)
     }
 
@@ -62,18 +62,18 @@ function Main({ setFtr }) {
             <Parallax speed={-5} translateX={[250, -50]}>
               <img src="/img/cloud1.png" alt="" />
             </Parallax>
-            <Parallax
+            {/* <Parallax
               speed={-15}
-              translateX={[-80, 150]}
-              translateY={[120, 50]}
+              translateX={[300, -80]}
+              translateY={[-150, 80]}
             >
               <img src="/img/cloud1.png" alt="" />
-            </Parallax>
+            </Parallax> */}
 
             <Parallax translateX={[300, -80]}>
               <img src="/img/cloud1.png" alt="" />
             </Parallax>
-            <Parallax translateX={[-150, 50]}>
+            <Parallax translateX={[-150, 100]}>
               <img src="/img/cloud1.png" alt="" />
             </Parallax>
           </ParallaxProvider>
