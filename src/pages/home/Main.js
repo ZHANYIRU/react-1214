@@ -1,6 +1,7 @@
 import styled from '../../styles/home-scss/Main.module.scss'
 import { useRef, useEffect, useState } from 'react'
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax'
+import Leaderboard from './leaderboard'
 function Main({ setFtr }) {
   const mainHeight = useRef(null)
   const [rotateCube, setRotateCube] = useState(true)
@@ -98,7 +99,9 @@ function Main({ setFtr }) {
             <button className={styled.click}>全台店點</button>
           </div>
         </div>
-        <div className={styled.section3}></div>
+        <div className={styled.section3}>
+          <Leaderboard />
+        </div>
       </div>
     </>
   )
