@@ -4,6 +4,7 @@ import dayjs from 'dayjs'
 import axios from 'axios'
 import { useContext, useEffect, useState, useRef } from 'react'
 import MemberContext from '../../../contexts/MemberContext'
+import { Link, Navigate, useNavigate } from 'react-router-dom'
 
 export default function ModalView({
   getPostList,
@@ -14,10 +15,12 @@ export default function ModalView({
   listLength,
 }) {
   // console.log(showData.member_sid)
+  const navgigate = useNavigate()
 
   const { data } = useContext(MemberContext)
 
   const [user, setUser] = useState({
+    member_sid: 0,
     avatar: '',
     nickname: '',
     total_height: 0,
@@ -160,12 +163,19 @@ export default function ModalView({
           <div className={styled.editContent}>
             <div className={styled.contentTop}>
               <div className={styled.contentFlex}>
-                <div className={styled.avatar}>
+                <div
+                  className={styled.avatar}
+                  onClick={() => {
+                    setIsView(false)
+                    setCurrentPost(0)
+                    navgigate(`/profile?id=${showData.member_sid}`)
+                  }}
+                >
                   <img
                     src={
                       user.avatar
                         ? `http://localhost:3001/uploads/avatar_${user.avatar}`
-                        : ''
+                        : 'https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg'
                     }
                     alt="postImg"
                   ></img>
@@ -211,12 +221,24 @@ export default function ModalView({
                   return (
                     <div key={i} className={styled.replyPost}>
                       <div className={`${styled.contentFlex} ${styled.left}`}>
-                        <div className={styled.replyAvatar}>
+                        <div
+                          className={styled.replyAvatar}
+                          onClick={() => {
+                            setIsView(false)
+                            setCurrentPost(0)
+                            navgigate(`/profile?id=${v.member_sid}`)
+                          }}
+                        >
                           <img
-                            src={`http://localhost:3001/uploads/avatar_${v.avatar}`}
+                            src={
+                              v.avatar
+                                ? `http://localhost:3001/uploads/avatar_${v.avatar}`
+                                : 'https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg'
+                            }
                             alt="postImg"
                           ></img>
                         </div>
+
                         <div>
                           <h4>{v.nickname}</h4>
                           <TextareaAutosize readOnly value={v.context} />

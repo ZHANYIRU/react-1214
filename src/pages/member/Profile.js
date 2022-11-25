@@ -1,8 +1,7 @@
 import styled from '../../styles/member-scss/Member.module.scss'
-import { Outlet, useNavigate, useLocation, useFetcher } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'
+import { useEffect, useState, useContext, useCallback } from 'react'
 import axios from 'axios'
-import { useContext } from 'react'
 import MemberContext from '../../contexts/MemberContext'
 
 function Profile(props) {
@@ -19,9 +18,14 @@ function Profile(props) {
     intro: '',
   }
 
-  const { data } = useContext(MemberContext)
+  const { data, auth } = useContext(MemberContext)
+
+  console.log('目前登入會員為:' + data.member_sid)
 
   const [info, setInfo] = useState(initInfo)
+  const [follow, setFollow] = useState([])
+  const [following, setFollowing] = useState([])
+  const [isFollowing, setIsFollowing] = useState(false)
 
   async function getInfo() {
     const result = await axios.get(
@@ -37,19 +41,96 @@ function Profile(props) {
     }
   }
 
-  console.log()
+  async function getFollow() {
+    const rows = await axios.get(
+      `http://localhost:3001/member/follow/api?mid=${mid}`
+    )
+
+    rows.data.map((v, i) => {
+      if (v.follow_sid === data.member_sid) {
+        setIsFollowing(true)
+      }
+    })
+
+    setFollow(rows.data)
+    // console.log('followed by:' + rows.data.length)
+  }
+
+  async function getFollowing() {
+    const rows = await axios.get(
+      `http://localhost:3001/member/following/api?fid=${mid}`
+    )
+
+    setFollowing(rows.data)
+    // console.log('following:' + rows.data.length)
+  }
+
+  async function addFollow() {
+    const token = localStorage.getItem('token') || ''
+
+    if (!token) {
+      return alert('請先登入會員')
+    }
+    const result = await axios.post(
+      `http://localhost:3001/member/follow/api?mid=${mid}`,
+      {
+        mid: mid,
+      },
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: token ? `Bearer ${token}` : '',
+        },
+      }
+    )
+
+    console.log(result.data.success)
+    if (result.data.success) {
+      alert('關注成功')
+    }
+    if (!result.data.success) {
+      alert('關注失敗')
+    }
+  }
+
+  async function unfollow() {
+    const token = localStorage.getItem('token') || ''
+
+    if (!token) {
+      return alert('請先登入會員')
+    }
+
+    const result = await axios.delete(
+      `http://localhost:3001/member/follow/api?mid=${mid}`,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: token ? `Bearer ${token}` : '',
+        },
+      }
+    )
+    console.log(result.data.success)
+    if (result.data.success) {
+      alert('取消關注成功')
+    }
+    if (!result.data.success) {
+      alert('取消關注失敗')
+    }
+  }
 
   useEffect(() => {
     if (!location.search) {
       navigate('/')
     }
 
-    if (`${info.member_sid}` === `${data.member_sid}`) {
+    if (`${mid}` === `${data.member_sid}`) {
       navigate('/member')
     }
 
+    getFollow()
+    getFollowing()
     getInfo()
-  }, [info.member_sid])
+  }, [mid, data.member_sid])
 
   return (
     <>
@@ -59,12 +140,12 @@ function Profile(props) {
             <div
               className={`${styled.avatar} ${styled.social}`}
               onClick={() => {
-                navigate(`/profile/?mid=${mid}`)
+                navigate(`/profile?id=${mid}`)
               }}
             >
               {info.avatar ? (
                 <img
-                  src={`http://localhost:3001/uploads/thumb_${info.avatar}`}
+                  src={`http://localhost:3001/uploads/avatar_${info.avatar}`}
                   alt="avatar"
                 ></img>
               ) : (
@@ -77,7 +158,7 @@ function Profile(props) {
             <h3
               className={styled.social}
               onClick={() => {
-                navigate(`/profile/?mid=${mid}`)
+                navigate(`/profile?id=${mid}`)
               }}
             >
               {info.nickname}
@@ -87,25 +168,50 @@ function Profile(props) {
               <div
                 className={styled.social}
                 onClick={() => {
-                  navigate(`/profile/following/?mid=${1}`)
+                  navigate(`/profile/following?id=${mid}`)
                 }}
               >
                 <p className={styled.highlight}>關注</p>
-                <h3>7</h3>
+                <h3>{following.length}</h3>
               </div>
               <div
                 className={styled.social}
                 onClick={() => {
-                  navigate('/profile/followers/?mid=1')
+                  navigate(`/profile/followers?id=${mid}`)
                 }}
               >
                 <p className={styled.highlight}>粉絲</p>
-                <h3>43</h3>
+                <h3>{follow.length}</h3>
               </div>
             </div>
-            <button className={styled.follow}>
-              <i className="fa-solid fa-user-plus"></i> 關注他
-            </button>
+            {isFollowing ? (
+              <button
+                className={styled.follow}
+                onClick={() => {
+                  if (!auth) {
+                    alert('請先登入會員')
+                  } else {
+                    unfollow()
+                  }
+                }}
+              >
+                已關注
+              </button>
+            ) : (
+              <button
+                className={styled.follow}
+                onClick={() => {
+                  if (!auth) {
+                    alert('請先登入會員')
+                  } else {
+                    addFollow()
+                  }
+                }}
+              >
+                <i className="fa-solid fa-user-plus"></i> 關注他
+              </button>
+            )}
+
             <pre className={styled.intro}>{info.intro}</pre>
           </aside>
           <article>

@@ -34,12 +34,12 @@ export default function MemberInfo() {
 
   //get post list
   async function getPostList() {
-    const postList = await axios.get(
+    const rows = await axios.get(
       `http://localhost:3001/member/post/api?mid=${data.member_sid}`
     )
 
-    console.log(postList.data)
-    setPostList(postList.data)
+    console.log(rows.data)
+    setPostList(rows.data)
   }
 
   //for new post options
