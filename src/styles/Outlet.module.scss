@@ -14,14 +14,16 @@
   z-index: -1;
   position: fixed;
   top: 0px;
-  animation: flow1 30s linear infinite;
+  animation: flow1 25s linear infinite;
+  animation-direction: alternate;
 }
 .cloud2 {
   z-index: -1;
   position: fixed;
   right: 0;
-  top: 450px;
-  animation: flow2 30s linear infinite;
+  top: 400px;
+  animation: flow2 25s linear infinite;
+  animation-direction: alternate;
   width: 600px;
 }
 // .cloud3 {
@@ -60,7 +62,7 @@
       transform: translateX(0);
     }
     100% {
-      transform: translateX(10vw) ;
+      transform: translateX(30vw) ;
     }
   }
   @keyframes flow2 {
@@ -68,31 +70,34 @@
       transform: translateX(0);
     }
     100% {
-      transform:  translateX(-10vw);
+      transform:  translateX(-30vw);
     }
   }
 
   .cloud1 {
     position: absolute;
     top: 10vh;
-    animation: flow1 1s linear infinite;
+    width: 100px;
+    animation: flow1 3s linear infinite;
+    animation-direction: alternate;
   }
   .cloud2 {
     position: absolute;
     right: 0;
-    top: 60vh;
-    animation: flow2 1s linear infinite;
-    width: 600px;
+    top: 55vh;
+    animation: flow2 3s linear infinite;
+    animation-direction: alternate;
+    width: 100px;
   }
-  .cloud3 {
-    position: absolute;
-    top: 145vh;
-    animation: flow1 1s linear infinite;
-  }
-  .cloud4 {
-    position: absolute;
-    right: 0;
-    top: 175vh;
-    animation: flow2 1s linear infinite;
-  }
+  // .cloud3 {
+  //   position: absolute;
+  //   top: 145vh;
+  //   animation: flow1 1s linear infinite;
+  // }
+  // .cloud4 {
+  //   position: absolute;
+  //   right: 0;
+  //   top: 175vh;
+  //   animation: flow2 1s linear infinite;
+  // }
 }

@@ -15,16 +15,23 @@
     font-size: 1.3rem;
 }
 .select{
+   input{
+    margin:0 10px;
+    border: none;
+    padding: 8px 15px;
+    font-weight: 700;
+    background-color: rgba(255, 255, 255, 0.822);
+   }
     select{
         border-radius: 5px;
         padding: 5px 15px;
         border: none;
-        margin-right: 25px;
+        margin:0 10px;
         font-weight: 700;
         background-color: rgba(255, 255, 255, 0.822);
     }
-
 }
+
 .add{
     cursor: pointer;
     border-radius: 5px;
