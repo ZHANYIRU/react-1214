@@ -1,10 +1,10 @@
 import React from 'react'
 import rentalcss from '../../../styles/rental-scss/rentalProducts.module.scss'
 import { Link } from 'react-router-dom'
-import Rental_detail from '../Rental_detail'
+// import Rental_detail from '../Rental_detail'
 
 function RentalCard({ data }) {
-  console.log(data)
+  // console.log(data)
   return (
     <Link to={`/rental/${data.rental_product_sid}`}>
       {/* 外層 */}
@@ -23,6 +23,13 @@ function RentalCard({ data }) {
             <p>
               金額：<span>{data.rental_price}</span>
             </p>
+            <div className={rentalcss.star}>
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+              <i className="fa-solid fa-star"></i>
+            </div>
           </div>
         </div>
       </div>

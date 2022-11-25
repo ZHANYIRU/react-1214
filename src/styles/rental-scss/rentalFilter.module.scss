@@ -1,0 +1,50 @@
+@import '../global.scss';
+
+.h2{
+    font-size:20px;
+}
+.filterbox{
+    
+    width:250px;
+    padding:10px;
+    // border: 1px solid black;
+    border-radius:10px;
+    box-shadow:5px 5px 5px #ccc;
+    display:flex;
+    justify-content: center;
+    background-color:rgb(236, 236, 236);
+}
+.priceinput{
+    width:100px;
+    margin:10px 0;
+
+}
+
+
+.select{
+    width:100%;
+    margin:10px 0;
+}
+
+.choice{
+    display: flex;
+    justify-content: space-around;
+    margin:10px 0;
+    width:100%;
+}
+
+.checkbox{
+    display: flex;
+    justify-content: space-around;
+    margin:10px 0;
+    width:100%; 
+}
+
+.button{
+    background-color: #FF0F00;
+    border:none;
+    color:white;
+    width:90%;
+    padding:10px 5px;
+    border-radius:5px;
+}
