@@ -1,6 +1,9 @@
 import styled from '../../../styles/member-scss/MemberInfo.module.scss'
 import TextareaAutosize from 'react-textarea-autosize'
 import dayjs from 'dayjs'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
+import userEvent from '@testing-library/user-event'
 
 export default function ModalView({
   setIsView,
@@ -9,7 +12,25 @@ export default function ModalView({
   currentPost,
   listLength,
 }) {
-  console.log(listLength)
+  // console.log(showData.member_sid)
+
+  const [user, setUser] = useState({
+    avatar: '',
+    nickname: '',
+    total_height: 0,
+  })
+
+  async function getInfo() {
+    const rows = await axios.get(
+      `http://localhost:3001/member/modal/api?mid=${showData.member_sid}`
+    )
+    console.log(rows.data)
+    setUser(rows.data[0])
+  }
+
+  useEffect(() => {
+    getInfo()
+  }, [])
 
   return (
     <>
@@ -37,19 +58,21 @@ export default function ModalView({
               <div className={styled.contentFlex}>
                 <div className={styled.avatar}>
                   <img
-                    src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
+                    src={`http://localhost:3001/uploads/avatar_${user.avatar}`}
                     alt="postImg"
                   ></img>
                 </div>
-                <h4>Kekeke123</h4>
+                <h4>{user.nickname}</h4>
                 <span>
                   {showData.likes} <i className="fa-regular fa-heart"></i>
                 </span>
               </div>
               <TextareaAutosize
+                maxRows="3"
                 className={styled.contentTxt}
                 readOnly
                 value={showData.context}
+                style={{ overflow: 'auto' }}
               />
               <div className={styled.contentFlex}>
                 <p style={{ marginLeft: '72px' }}>
