@@ -12,7 +12,7 @@ const Rental_detail = () => {
   const [Detail, setDetail] = useState()
   console.log(Detail)
   //介紹或評論狀態
-  const [productIntroduce, setProductIntroduce] = useState(1)
+  const [productIntroduce, setProductIntroduce] = useState(true)
 
   //評論資料
   const [commnentData, setDommnentData] = useState([])
@@ -68,8 +68,7 @@ const Rental_detail = () => {
               </div>
               <div className={styled.right}>
                 <h2>商品名稱：{Detail.rental_product_name}</h2>
-                <p>每日租金：{Detail.rental_price
-}</p>
+                <p>每日租金：{Detail.rental_price}</p>
                 <div className={styled.flex}>
                   <div>
                     <span>租借起始日：</span>
@@ -120,39 +119,49 @@ const Rental_detail = () => {
             </div>
 
             <div className={styled.section2}>
-              <h2>商品介紹</h2>
-              <h2>商品評論</h2>
+              <h2
+                onClick={() => setProductIntroduce(true)}
+                className={styled.title}
+                // className={productIntroduce? {styled.title}:{styled.title1}
+              >
+                商品介紹
+              </h2>
+              <h2 onClick={() => setProductIntroduce(false)}>商品評論</h2>
             </div>
 
-            {/* <div className={styled.section3}>
-          <div>
-            <h3>商品規格</h3>
-            <p>
-              規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格
-            </p>
-          </div>
-          <div>
-            <h3>特色說明</h3>
-            <p>
-              規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格
-            </p>
-          </div>
-        </div> */}
+            {productIntroduce && (
+              <div className={styled.section3}>
+                <div>
+                  <h3>商品規格</h3>
+                  <p>
+                    規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格
+                  </p>
+                </div>
+                <div>
+                  <h3>特色說明</h3>
+                  <p>
+                    規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格
+                  </p>
+                </div>
+              </div>
+            )}
 
-            <div className={styled.sectionCommnent}>
-              <div className={styled.star}>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
+            {!productIntroduce && (
+              <div className={styled.sectionCommnent}>
+                <div className={styled.star}>
+                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
+                  <i className="fa-solid fa-star"></i>
+                </div>
+                <div className={styled.commnentCardBox}>
+                  {testData.map((v, i) => {
+                    return <Commnent key={i} />
+                  })}
+                </div>
               </div>
-              <div className={styled.commnentCardBox}>
-                {testData.map((v, i) => {
-                  return <Commnent key={i} />
-                })}
-              </div>
-            </div>
+            )}
 
             <div className={styled.section4}>
               <h3>猜你喜歡</h3>

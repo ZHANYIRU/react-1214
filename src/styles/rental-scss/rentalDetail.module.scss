@@ -101,15 +101,22 @@
     border-bottom:2px solid #B5B2B2;
 
 
-    h2{
+    .title{
         font-size:18px;
         font-weight: 500;
         width:50%;
         text-align:center;
         padding:10px 0 ;
+        cursor: pointer;
+        border-bottom:4px solid #26740A;
     }
-    h2:first-child{
-         border-bottom:4px solid #26740A;
+    .title1{
+        font-size:18px;
+        font-weight: 500;
+        width:50%;
+        text-align:center;
+        padding:10px 0 ;
+        cursor: pointer;
     }
 
 }

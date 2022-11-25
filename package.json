@@ -23,10 +23,7 @@
     "react-responsive-carousel": "^3.2.23",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
-<<<<<<< HEAD
     "react-slick": "^0.29.0",
-=======
->>>>>>> 1127e1f8a70637728bbf1cd4f5be906f9038e301
     "react-textarea-autosize": "^8.4.0",
     "responsive": "^2.0.0",
     "sass": "^1.56.0",
