@@ -1,9 +1,13 @@
 import styled from '../../styles/home-scss/Main.module.scss'
-import { useRef, useEffect } from 'react'
-// import Weather from './Weather'
+import { useRef, useEffect, useState } from 'react'
+import { Parallax, ParallaxProvider } from 'react-scroll-parallax'
 function Main({ setFtr }) {
   const mainHeight = useRef(null)
+  const [rotateCube, setRotateCube] = useState(true)
+  const [deg, setDeg] = useState(0)
 
+  //記錄上個scroll
+  let lastScroll
   const scroll = () => {
     const windowH = window.innerHeight
     const mainH = mainHeight.current.clientHeight
@@ -12,6 +16,20 @@ function Main({ setFtr }) {
       setFtr(true)
     } else {
       setFtr(false)
+    }
+    const cubeHeight = window.innerHeight
+    const UserScrollY = window.scrollY
+    if (UserScrollY < cubeHeight) {
+      lastScroll = window.scrollY / 2
+      setDeg(lastScroll)
+    }
+
+    if (lastScroll > 180) {
+      setRotateCube(!rotateCube)
+      console.log('消失', deg)
+    } else if (lastScroll < 180) {
+      console.log('出現', deg)
+      setRotateCube(true)
     }
   }
   useEffect(() => {
@@ -25,14 +43,40 @@ function Main({ setFtr }) {
       <div className={styled.main} ref={mainHeight}>
         {/* <Weather /> */}
         <div className={styled.section1}>
-          {/* <div className={styled.cube}>
-            <div className={styled.front}>有了837，登山很容易！</div>
-            <div className={styled.bottom}>輕鬆簡單，就能入門爬山</div>
-            <div className={styled.back}>快加入熱門揪團活動！</div>
-            <div className={styled.left}></div>
-            <div className={styled.right}></div>
-            <div className={styled.top}></div>
-          </div> */}
+          <ParallaxProvider speed={-10}>
+            <div className={styled.visible}>
+              <div className={styled.camera}>
+                <div
+                  className={`${styled.cube}`}
+                  style={{
+                    transform: deg <= 180 && `rotateX(${deg}deg) `,
+                    visibility: rotateCube ? 'visible' : 'hidden',
+                  }}
+                >
+                  <div className={styled.bottom}>輕鬆簡單，就能入門爬山</div>
+                  <div className={styled.front}>有了837，登山很容易！</div>
+                  <div className={styled.back}>快加入熱門揪團活動！</div>
+                </div>
+              </div>
+            </div>
+            <Parallax speed={-5} translateX={[250, -50]}>
+              <img src="/img/cloud1.png" alt="" />
+            </Parallax>
+            <Parallax
+              speed={-15}
+              translateX={[-80, 150]}
+              translateY={[120, 50]}
+            >
+              <img src="/img/cloud1.png" alt="" />
+            </Parallax>
+
+            <Parallax translateX={[300, -80]}>
+              <img src="/img/cloud1.png" alt="" />
+            </Parallax>
+            <Parallax translateX={[-150, 50]}>
+              <img src="/img/cloud1.png" alt="" />
+            </Parallax>
+          </ParallaxProvider>
         </div>
         <div className={styled.section2}>
           <div className={styled.pic}>
@@ -51,7 +95,7 @@ function Main({ setFtr }) {
             台灣837 推薦限定熱門行程
             <br />
             讓新手也能輕鬆擁有安全的登山、野營初體驗！
-            <div className={styled.click}>全台店點</div>
+            <button className={styled.click}>全台店點</button>
           </div>
         </div>
         <div className={styled.section3}></div>

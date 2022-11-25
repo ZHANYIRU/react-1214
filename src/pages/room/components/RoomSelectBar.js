@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import style from '../../../styles/room-scss/roomSelectBar.module.scss'
-// import { DayPicker } from 'react-day-picker'
-// import 'react-day-picker/dist/style.css'
+// import dayjs from 'dayjs'
 
 function RoomSelectBar({ detail }) {
   //房型資料定義
@@ -9,12 +8,18 @@ function RoomSelectBar({ detail }) {
   const roomPrice = detail.room_price
   const roomStart = detail.room_start_date
   const defaultDate = roomStart && roomStart.split('T', 10)[0]
-  console.log('123',defaultDate);
+
+  //預設入住日期加一天
+  const datePlus = Date.parse(defaultDate) + 86400000
+  // console.log('time', datePlus)
+  // const defaultCheckout = datePlus.getDate()
+  // console.log('date', defaultCheckout)
+
   //記錄使用者選擇到的房間數
   const [qty, setQty] = useState(0)
 
   //記錄使用者選擇的入住日期
-  const [checkIn, setCheckIn] = useState('')
+  const [checkIn, setCheckIn] = useState(defaultDate)
 
   //切換是否顯示selectBar
   const [showBar, setShowBar] = useState(false)
@@ -36,8 +41,6 @@ function RoomSelectBar({ detail }) {
     lastScroll = nowscroll
   }
   useEffect(() => {
-    console.log(456)
-    setCheckIn(defaultDate)
     window.addEventListener('scroll', show)
     return () => {
       window.removeEventListener('scroll', show)
