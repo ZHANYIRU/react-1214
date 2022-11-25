@@ -78,7 +78,6 @@ function Profile(props) {
       },
       {
         headers: {
-          'Content-Type': 'multipart/form-data',
           Authorization: token ? `Bearer ${token}` : '',
         },
       }
@@ -86,7 +85,8 @@ function Profile(props) {
 
     console.log(result.data.success)
     if (result.data.success) {
-      alert('關注成功')
+      // alert('關注成功')
+      setIsFollowing(true)
     }
     if (!result.data.success) {
       alert('關注失敗')
@@ -104,14 +104,14 @@ function Profile(props) {
       `http://localhost:3001/member/follow/api?mid=${mid}`,
       {
         headers: {
-          'Content-Type': 'multipart/form-data',
           Authorization: token ? `Bearer ${token}` : '',
         },
       }
     )
-    console.log(result.data.success)
+    console.log(result.data)
     if (result.data.success) {
-      alert('取消關注成功')
+      // alert('取消關注成功')
+      setIsFollowing(false)
     }
     if (!result.data.success) {
       alert('取消關注失敗')
@@ -130,7 +130,7 @@ function Profile(props) {
     getFollow()
     getFollowing()
     getInfo()
-  }, [mid, data.member_sid])
+  }, [mid, data.member_sid, isFollowing])
 
   return (
     <>

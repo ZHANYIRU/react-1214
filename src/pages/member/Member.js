@@ -1,12 +1,15 @@
 import styled from '../../styles/member-scss/Member.module.scss'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 // import axios from 'axios'
 // import { useState } from 'react'
 import MemberContext from '../../contexts/MemberContext'
+import axios from 'axios'
 
 function Member(props) {
   const navigate = useNavigate()
+  const [follow, setFollow] = useState([])
+  const [following, setFollowing] = useState([])
 
   const { data, setData, auth } = useContext(MemberContext)
 
@@ -14,7 +17,25 @@ function Member(props) {
     if (!localStorage.getItem('token')) {
       navigate('/login')
     }
-  }, [auth])
+    getFollow()
+    getFollowing()
+  }, [auth, data])
+
+  async function getFollow() {
+    const rows = await axios.get(
+      `http://localhost:3001/member/follow/api?mid=${data.member_sid}`
+    )
+    setFollow(rows.data)
+    console.log('followed by:' + rows.data.length)
+  }
+
+  async function getFollowing() {
+    const rows = await axios.get(
+      `http://localhost:3001/member/following/api?fid=${data.member_sid}`
+    )
+    setFollowing(rows.data)
+    console.log('following:' + rows.data.length)
+  }
 
   return (
     <>
@@ -56,7 +77,7 @@ function Member(props) {
                 }}
               >
                 <p className={styled.highlight}>關注</p>
-                <h3>7</h3>
+                <h3>{following.length}</h3>
               </div>
               <div
                 className={styled.social}
@@ -65,7 +86,7 @@ function Member(props) {
                 }}
               >
                 <p className={styled.highlight}>粉絲</p>
-                <h3>43</h3>
+                <h3>{follow.length}</h3>
               </div>
             </div>
             <pre className={styled.intro} readOnly>

@@ -1,6 +1,18 @@
 import styled from '../../../styles/member-scss/Follow.module.scss'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import MemberContext from '../../../contexts/MemberContext'
 
 export default function Followers() {
+  // const location = useLocation()
+  // const usp = new URLSearchParams(location.search)
+  
+  // const { data, auth } = useContext(MemberContext)
+
+  // const mid = usp.get('id') || data.member_sid || ''
+
+  // console.log('關注列表ID:'+ mid)
+
   return (
     <>
       <div className={styled.row}>
