@@ -1,34 +1,32 @@
 @import '../global.scss';
-.buyCart{
+.buyCart {
   width: 50%;
   height: 100px;
-  margin: 0 auto ;
-  // background-color: rgba(227, 238, 231, 0.73);
+  margin: 0 auto;
   background-color: #e9d8a2be;
   position: fixed;
-  // position: absolute;
   bottom: 0;
   left: 25%;
 }
-.wrap{
+.wrap {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  button{
+  button {
     border: none;
     background-color: $darkGreen;
-    color:$yellow;
+    color: $yellow;
     border-radius: 5px;
     padding: 10px 20px;
   }
-  p{
+  p {
     font-size: 20px;
   }
 }
-.price{
-  p{
+.price {
+  p {
     font-size: 30px;
   }
 }

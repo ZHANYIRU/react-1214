@@ -8,10 +8,14 @@ function Background({ ftr }) {
         <div className={`${styled.box} ${styled.div2}`}></div>
         <div className={`${styled.box} ${styled.div3}`}></div>
       </div>
-      {/* <div className={styled.divWrap} style={{ visibility: ftr && 'hidden' }}>
-        <div className={`${styled.box} ${styled.div4}`}></div>
-        <div className={`${styled.box} ${styled.div5}`}></div>
-      </div> */}
+      <div className={styled.divWrap} style={{ visibility: ftr && 'hidden' }}>
+        <div className={`${styled.box2} ${styled.div4}`}>
+          <img src="/img/4.png" alt="" />
+        </div>
+        <div className={`${styled.box2} ${styled.div5}`}>
+          <img src="/img/5.png" alt="" />
+        </div>
+      </div>
     </>
   )
 }

@@ -18,7 +18,7 @@ function Cart() {
     const windowH = window.innerHeight
     const bodyH = bodyHeight.current.clientHeight
     const windowScrollY = window.scrollY
-    if (windowScrollY + windowH > bodyH) {
+    if (windowScrollY + windowH * 0.8 > bodyH) {
       setBuyBar(true)
     } else {
       setBuyBar(false)
@@ -42,19 +42,23 @@ function Cart() {
   return (
     <>
       {cartItem ? (
-        <div className={styled.body} ref={bodyHeight}>
-          <CartTitle step={step} maxStep={maxStep} />
-          <NowComponents step={step} setStep={setStep} />
+        <>
+          <div className={styled.empty1}></div>
+          <div className={styled.body} ref={bodyHeight}>
+            <CartTitle step={step} maxStep={maxStep} />
+            <NowComponents step={step} setStep={setStep} />
+          </div>
           <BuyCart step={step} setStep={setStep} buyBar={buyBar} />
-        </div>
+        </>
       ) : (
-        <div className={styled.container}>
+        <>
+          <div className={styled.empty}></div>
           <div className={styled.noCart}>
             <i className="fa-solid fa-cart-arrow-down"></i>
             <i className="fa-regular fa-hand-point-down"></i>
             <p>您的購物車還沒有商品，趕緊去逛逛吧！！</p>
           </div>
-        </div>
+        </>
       )}
     </>
   )

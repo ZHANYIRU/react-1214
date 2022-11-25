@@ -64,12 +64,11 @@ export default function MemberInfo() {
 
     const fileName = formData.get('image_url').name
 
-    if(!fileName) {
-      return alert ('請先上傳圖片')
+    if (!fileName) {
+      return alert('請先上傳圖片')
     }
 
     const token = localStorage.getItem('token') || ''
-
 
     const result = await axios.post(
       'http://localhost:3001/member/post/api',
@@ -422,6 +421,7 @@ export default function MemberInfo() {
                   onClick={(e) => {
                     e.preventDefault()
                     newPost()
+                    setSelLocation(1)
                   }}
                 >
                   <p>發表貼文</p>
@@ -432,6 +432,7 @@ export default function MemberInfo() {
                     e.preventDefault()
                     setIsNew(false)
                     setPreview('')
+                    setSelLocation(1)
                   }}
                 >
                   <p>取消貼文</p>
@@ -448,6 +449,7 @@ export default function MemberInfo() {
           setCurrentPost={setCurrentPost}
           currentPost={currentPost}
           listLength={postList.length}
+          getPostList={getPostList}
         />
       )}
     </>
