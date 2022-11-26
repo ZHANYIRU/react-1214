@@ -8,6 +8,7 @@ function OkOrder(props) {
   }, [])
   return (
     <>
+      <div className={styled.empty1}></div>
       <p className={styled.ok}>成功下訂，感謝您的訂購！</p>
       <div className={styled.okCard}>
         <div className={styled.okText}>

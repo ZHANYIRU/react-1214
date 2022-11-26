@@ -1,9 +1,11 @@
 import dayjs from 'dayjs'
 import MemberContext from '../../../contexts/MemberContext'
+import ProCartContext from '../../../contexts/ProCartContext'
 import { useState, useEffect, useContext } from 'react'
 import styled from '../../../styles/order-scss/OrderTime.module.scss'
 function OrderTime({ open, momOrder }) {
   const { auth } = useContext(MemberContext)
+  const { orderNum } = useContext(ProCartContext)
   const { rows, proRows, roomRows, renRows, camRows } = momOrder
   const [total, setTotal] = useState([])
   const test = () => {
@@ -21,10 +23,8 @@ function OrderTime({ open, momOrder }) {
         )
       }
     }
-    console.log(rows)
   }
   useEffect(() => {
-    console.log(789)
     test()
   }, [rows])
 
@@ -35,7 +35,13 @@ function OrderTime({ open, momOrder }) {
           rows.map((el, i) => {
             const d = dayjs(el.created_time)
             return (
-              <div className={styled.timeWrap} key={el.order_num}>
+              <div
+                className={styled.timeWrap}
+                key={el.order_num}
+                onClick={() => {
+                  console.log(orderNum)
+                }}
+              >
                 <div className={styled.time}>
                   <p>{d.isValid() && d.format('MMM')}</p>
                   <p>{d.format('DD')}</p>

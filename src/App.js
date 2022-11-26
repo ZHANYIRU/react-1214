@@ -19,6 +19,7 @@ import Commnent from './pages/rental/components/Commnent'
 import ProductSee from './pages/rental/components/ProductSee'
 
 import Cart from './pages/Cart/Cart'
+import OkOrder from './pages/Cart/child-pages/OkOrder'
 import Order from './pages/Order/Order'
 import TestProducts from './pages/Cart/TestProducts/TestProducts'
 import Member from './pages/member/Member'
@@ -46,8 +47,8 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="/" element={<Home />} />
-              {/* <Route path="/product" element={<Product />} />
-              <Route path="/product/:product_sid" element={<ProductPage />} /> */}
+              <Route path="/product" element={<Product />} />
+              <Route path="/product/:product_sid" element={<ProductPage />} />
               <Route path="/camp" element={<Camp />} />
               <Route path="/camp/filter" element={<CampOneday />} />
               <Route
@@ -64,6 +65,7 @@ function App() {
               />
               <Route path="/commnent" element={<Commnent />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/cart/OK" element={<OkOrder />} />
               <Route path="/test" element={<TestProducts />} />
               <Route path="/social" element={<SocialWall />} />
               <Route path="/member" element={<Member />}>
