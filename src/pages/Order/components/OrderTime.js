@@ -21,7 +21,6 @@ function OrderTime({ open, momOrder }) {
         )
       }
     }
-    console.log(rows)
   }
   useEffect(() => {
     console.log(789)
