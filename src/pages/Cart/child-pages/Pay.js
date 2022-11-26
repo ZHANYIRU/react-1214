@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from '../../../styles/cart-scss/Pay.module.scss'
 import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 function Pay({ step, setStep }) {
-  const navigate = useNavigate()
+  const navigator = useNavigate()
   const testOrder = {
     amount: 1000,
     currency: 'TWD',
@@ -33,6 +33,7 @@ function Pay({ step, setStep }) {
           )
           console.log(data)
           if (data.returnCode === '0000') {
+            navigator('/')
             window.open(
               `${data?.info.paymentUrl.web}`,
               'hiking',
