@@ -204,6 +204,62 @@ export default function ProductPage() {
       </div>
     </div>
   )
+
+  const clotheChose = (
+    <>
+      <div
+        className={
+          size.S ? `${styled.standardBoxChose}` : `${styled.standardBox}`
+        }
+        onClick={() => {
+          if (size.S) {
+            return setSize({
+              S: false,
+              M: false,
+              L: false,
+            })
+          }
+          choseSize('S')
+        }}
+      >
+        S
+      </div>
+      <div
+        className={
+          size.M ? `${styled.standardBoxChose}` : `${styled.standardBox}`
+        }
+        onClick={() => {
+          if (size.M) {
+            return setSize({
+              S: false,
+              M: false,
+              L: false,
+            })
+          }
+          choseSize('M')
+        }}
+      >
+        M
+      </div>
+      <div
+        className={
+          size.L ? `${styled.standardBoxChose}` : `${styled.standardBox}`
+        }
+        onClick={() => {
+          if (size.L) {
+            return setSize({
+              S: false,
+              M: false,
+              L: false,
+            })
+          }
+          choseSize('L')
+        }}
+      >
+        L
+      </div>
+    </>
+  )
   useEffect(() => {
     getRondomProductData()
   }, [])
@@ -317,63 +373,7 @@ export default function ProductPage() {
 
                   <div className={styled.standard}>
                     <h2>商品規格</h2>
-                    <div
-                      className={
-                        size.S
-                          ? `${styled.standardBoxChose}`
-                          : `${styled.standardBox}`
-                      }
-                      onClick={() => {
-                        if (size.S) {
-                          return setSize({
-                            S: false,
-                            M: false,
-                            L: false,
-                          })
-                        }
-                        choseSize('S')
-                      }}
-                    >
-                      S
-                    </div>
-                    <div
-                      className={
-                        size.M
-                          ? `${styled.standardBoxChose}`
-                          : `${styled.standardBox}`
-                      }
-                      onClick={() => {
-                        if (size.M) {
-                          return setSize({
-                            S: false,
-                            M: false,
-                            L: false,
-                          })
-                        }
-                        choseSize('M')
-                      }}
-                    >
-                      M
-                    </div>
-                    <div
-                      className={
-                        size.L
-                          ? `${styled.standardBoxChose}`
-                          : `${styled.standardBox}`
-                      }
-                      onClick={() => {
-                        if (size.L) {
-                          return setSize({
-                            S: false,
-                            M: false,
-                            L: false,
-                          })
-                        }
-                        choseSize('L')
-                      }}
-                    >
-                      L
-                    </div>
+                    {(v.product_category_sid == 9 || 10) && clotheChose}
                   </div>
                   <h2>金額：{moneyFormat(v.product_price)}</h2>
                   <div className={styled.howNum}>
