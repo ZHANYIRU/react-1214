@@ -4,20 +4,16 @@ import React, { useState, useRef, useEffect } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import styled from '../../../styles/product-scss/product.module.scss'
 import { filter_if } from '../if.js'
-import log from 'eslint-plugin-react/lib/util/log'
 
 export default function ProductFilter({
   fixedd,
   mob,
-  setMob,
-  filterRef,
-  setFromFilterDataCard,
-  setFromFilterDataGender,
   datas,
   setDatas,
   setSearchKeyWord,
   inputKeyword,
   setInputKeyword,
+  getProductData,
 }) {
   const mobile = useMediaQuery({ query: '(max-width:390px)' })
   // const [genderFilter, setGenderFilter] = useState([{}])
@@ -48,24 +44,38 @@ export default function ProductFilter({
     getData()
   }
 
-  // const [lowPrice, setLowPrice] = useState('')
-  // const [highPrice, setHighPrice] = useState('')
-  // const [brand, setBrand] = useState('')
-  const brandOptions = [
-    { brand: 'Arcteryx 始祖鳥', id: 7 },
-    { brand: 'nnnnnnn', id: 1 },
-  ]
+  //fetch
+  const [getBrands, setGetBrand] = useState([{}])
+
+  const fetchBrand = async () => {
+    const response = await axios.get('http://localhost:3001/product/brands')
+    const r = response.data
+    setGetBrand(r)
+  }
+  let brand_sid_num
+  let brandNoReapeat
+  const nowBrandSid = () => {
+    //brand_sid
+    brand_sid_num = datas.map((v, i) => {
+      return v.brand_sid
+    })
+    // brand_sid_no-repeat
+    brandNoReapeat = brand_sid_num
+      .filter((v, i, arr) => {
+        return arr.indexOf(v) === i
+      })
+      .sort((a, b) => {
+        return a - b
+      })
+    return brandNoReapeat
+  }
+
+  // const [nowBrand, setNowBrand] = useState([...brandNoReapeat])
+  // console.log(brandNoReapeat)
 
   const [filterOpen, setFilterOpen] = useState(false)
 
-  // const [datas2, setDatas2] = useState([{}])
-
   const mbfilterRef = useRef('')
-
-  // let allProduct = 'http://localhost:3001/product/all'
-  // let price = 'http://localhost:3001/product/price'
-  // let brands = 'http://localhost:3001/product/brand'
-  // let price_brand = 'http://localhost:3001/product/filter'
 
   // '抗水（Water Resistant）',
   //'防潑水（Water Repellent）',
@@ -154,15 +164,18 @@ export default function ProductFilter({
           onChange={handleFieldChange}
           className={styled.filterSelect}
         >
-          <option value="">請選出廠牌</option>
-          {brandOptions.map((v, i) => {
-            return (
-              <option key={i} value={v.id}>
-                {v.brand}
-              </option>
-            )
+          <option value="0">請選出廠牌</option>
+          {getBrands.map((v, i) => {
+            if (nowBrandSid().includes(v.brand_sid)) {
+              return (
+                <option key={v.brand_sid} value={v.brand_sid}>
+                  {v.brand_name}
+                </option>
+              )
+            }
           })}
         </select>
+
         <div className={styled.genderRadio}>
           {genderOptions.map((v, i) => {
             return (
@@ -182,7 +195,7 @@ export default function ProductFilter({
           })}
         </div>
         <h2> 防水等級</h2>
-        
+
         <div className={styled.checkBoxWrap}>
           {wProofOptions.map((v, i) => {
             return (
@@ -213,9 +226,29 @@ export default function ProductFilter({
             )
           })}
         </div>
-        <button type="submit" className={styled.filterButton}>
-          送出
-        </button>
+        <div className={styled.btnGroup}>
+          <button type="submit" className={styled.filterButton}>
+            送出
+          </button>
+          <button
+            type="button"
+            className={styled.filterButton}
+            onClick={() => {
+              getProductData('all')
+              setFilter({
+                lowPrice: '',
+                highPrice: '',
+                brand: '',
+                gender: '1',
+                wProof: '1',
+              })
+              setProofList([])
+              setGenders('')
+            }}
+          >
+            清除
+          </button>
+        </div>
       </form>
     </div>
   )
@@ -297,12 +330,14 @@ export default function ProductFilter({
           className={styled.filterSelect}
         >
           <option value="">請選出廠牌</option>
-          {brandOptions.map((v, i) => {
-            return (
-              <option key={i} value={v.id}>
-                {v.brand}
-              </option>
-            )
+          {getBrands.map((v, i) => {
+            if (nowBrandSid().includes(v.brand_sid)) {
+              return (
+                <option key={v.brand_sid} value={v.brand_sid}>
+                  {v.brand_name}
+                </option>
+              )
+            }
           })}
         </select>
         <div className={styled.genderRadio}>
@@ -324,20 +359,6 @@ export default function ProductFilter({
           })}
         </div>
         <h2> 防水等級</h2>
-        {/* <div className={styled.checkBoxWrap}>
-          <div className={styled.checkBox}>
-            <input type="checkbox" id="wRes" value="wRes" />
-            <label htmlFor="wRes">抗水（Water Resistant）</label>
-          </div>
-          <div className={styled.checkBox}>
-            <input type="checkbox" id="wRep" value="wRep" />
-            <label htmlFor="wRep">防潑水（Water Repellent）</label>
-          </div>
-          <div className={styled.checkBox}>
-            <input type="checkbox" id="wProof" value="wProof" />
-            <label htmlFor="wProof">防水（Waterproof）</label>
-          </div>
-        </div> */}
         <div className={styled.checkBoxWrap}>
           {wProofOptions.map((v, i) => {
             return (
@@ -368,22 +389,36 @@ export default function ProductFilter({
             )
           })}
         </div>
-
-        <button
-          type="submit"
-          // onClick={(e) => {
-          //   e.preventDefault()
-          //
-          //   // filterData()
-          // }}
-          className={styled.filterButton}
-        >
-          送出
-        </button>
+        <div className={styled.btnGroup}>
+          <button type="submit" className={styled.filterButton}>
+            送出
+          </button>
+          <button
+            type="button"
+            className={styled.filterButton}
+            onClick={() => {
+              getProductData('all')
+              setFilter({
+                lowPrice: '',
+                highPrice: '',
+                brand: '',
+                gender: '1',
+                wProof: '1',
+              })
+              setProofList([])
+              setGenders('')
+            }}
+          >
+            清除
+          </button>
+        </div>
       </form>
     </div>
   )
-  useEffect(() => {}, [])
+  useEffect(() => {
+    fetchBrand()
+  }, [])
+
   return (
     <>
       {mobile || webFilter}

@@ -223,16 +223,12 @@ function Product() {
         {/* <div className={styled.cardBigBox}> */}
         <Product_filter
           fixedd={fixedd}
-          mob={mob}
-          setMob={setMob}
-          filterRef={filterRef}
-          setFromFilterDataCard={setFromFilterDataCard}
-          setFromFilterDataGender={setFromFilterDataGender}
           datas={datas}
           setDatas={setDatas}
           inputKeyword={inputKeyword}
           setInputKeyword={setInputKeyword}
           setSearchKeyWord={setSearchKeyWord}
+          getProductData={getProductData}
         />
         <div className={styled.cardbox}>
           {datas
