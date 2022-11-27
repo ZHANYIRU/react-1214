@@ -8,6 +8,7 @@ import PostMap from '../components/PostMap'
 import MemberContext from '../../../contexts/MemberContext'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { getFileInfo } from 'prettier'
 
 export default function MemberInfo() {
   const [isNew, setIsNew] = useState(false)
@@ -19,7 +20,7 @@ export default function MemberInfo() {
 
   const navigate = useNavigate()
 
-  const { data, auth } = useContext(MemberContext)
+  const { data, auth, getInfo } = useContext(MemberContext)
 
   const [locations, setLocations] = useState([])
   const [selLocation, setSelLocation] = useState(1)
@@ -83,6 +84,7 @@ export default function MemberInfo() {
     console.log(result.data)
     alert(result.data.success ? '新增成功' : '新增失敗')
     setIsNew(false)
+    getInfo()
     setPreview('')
   }
 
@@ -131,6 +133,7 @@ export default function MemberInfo() {
     if (result.data.success) {
       setIsEdit(false)
       getPostList()
+      getInfo()
       setIsDel(false)
     }
   }
@@ -178,8 +181,8 @@ export default function MemberInfo() {
             <h3>分享地圖</h3>
             <div className={styled.divider}></div>
             <div className={styled.overview}>
-              <PostMap />
-              <TotalHeight />
+              <PostMap postList={postList} />
+              <TotalHeight totalHeight={{height: data.total_height}} />
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import styled from '../../../styles/member-scss/MemberInfo.module.scss'
 // import TextareaAutosize from 'react-textarea-autosize'
@@ -16,8 +16,17 @@ export default function ProfileInfo() {
   const mid = usp.get('id')
   const navigate = useNavigate()
 
+  let initInfo = {
+    member_sid: mid,
+    nickname: '',
+    avatar: '',
+    intro: '',
+    total_height: 0,
+  }
+
   const  { data } = useContext(MemberContext)
 
+  const [info, setInfo] = useState(initInfo)
   const [isView, setIsView] = useState(false)
   const [postList, setPostList] = useState([])
   const [currentPost, setCurrentPost] = useState(0)
@@ -31,12 +40,26 @@ export default function ProfileInfo() {
     setPostList(rows.data)
   }
 
+  async function getInfo() {
+    const result = await axios.get(
+      `http://localhost:3001/member/profile/api?mid=${mid}`
+    )
+
+    // console.log(result.data)
+
+    if (result.data.rows) {
+      setInfo(result.data.rows[0])
+    } else {
+      navigate('/')
+    }
+  }
+
   useEffect(() => {
 
     if (mid === data.member_sid) {
       navigate('/member')
     }
-
+    getInfo()
     getPostList()
   }, [mid])
 
@@ -48,8 +71,8 @@ export default function ProfileInfo() {
             <h3>分享地圖</h3>
             <div className={styled.divider}></div>
             <div className={styled.overview}>
-              <PostMap />
-              <TotalHeight />
+              <PostMap postList={postList}/>
+              <TotalHeight totalHeight={{height: info.total_height}}/>
             </div>
           </div>
         </div>

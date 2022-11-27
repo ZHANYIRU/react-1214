@@ -16,11 +16,12 @@ function Profile(props) {
     nickname: '',
     avatar: '',
     intro: '',
+    total_height: 0,
   }
 
   const { data, auth } = useContext(MemberContext)
 
-  console.log('目前登入會員為:' + data.member_sid)
+  // console.log('目前登入會員為:' + data.member_sid)
 
   const [info, setInfo] = useState(initInfo)
   const [follow, setFollow] = useState([])
@@ -45,9 +46,11 @@ function Profile(props) {
     const rows = await axios.get(
       `http://localhost:3001/member/follow/api?mid=${mid}`
     )
+    // console.log('目前登入會員為:' + data.member_sid)
+    // console.log(JSON.stringify(rows.data))
 
     rows.data.map((v, i) => {
-      if (v.follow_sid === data.member_sid) {
+      if (v.member_sid === data.member_sid) {
         setIsFollowing(true)
       }
     })

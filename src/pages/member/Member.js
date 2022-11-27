@@ -8,34 +8,16 @@ import axios from 'axios'
 
 function Member(props) {
   const navigate = useNavigate()
-  const [follow, setFollow] = useState([])
-  const [following, setFollowing] = useState([])
 
-  const { data, setData, auth } = useContext(MemberContext)
+  const { data, setData, auth, follow, following } = useContext(MemberContext)
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       navigate('/login')
     }
-    getFollow()
-    getFollowing()
   }, [auth, data])
 
-  async function getFollow() {
-    const rows = await axios.get(
-      `http://localhost:3001/member/follow/api?mid=${data.member_sid}`
-    )
-    setFollow(rows.data)
-    console.log('followed by:' + rows.data.length)
-  }
 
-  async function getFollowing() {
-    const rows = await axios.get(
-      `http://localhost:3001/member/following/api?fid=${data.member_sid}`
-    )
-    setFollowing(rows.data)
-    console.log('following:' + rows.data.length)
-  }
 
   return (
     <>
