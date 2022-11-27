@@ -41,6 +41,7 @@ export default function ProductFilter({
   const handleFormSubmit = (e) => {
     // 阻擋預設form送出的行為
     e.preventDefault()
+
     getData()
   }
 
@@ -81,17 +82,74 @@ export default function ProductFilter({
   //'防潑水（Water Repellent）',
   //'防水（Waterproof）',
 
-  const filterRender = async (rotues) => {
-    const response = await axios.post(rotues, {
-      ...filters,
-    })
-    const data = response.data
-    filter_if(proofList, genders, data, setDatas)
+  const filterRender = () => {
+    // const response = await axios.post(rotues, {
+    //   ...filters,
+    // })
+    // const data = response.data
+    // filters.lowPrice ||
+    // filters.highPrice ||
+    // filters.brand ||
+    if (
+      filters.lowPrice &&
+      filters.highPrice &&
+      filters.brand &&
+      (genders || proofList)
+    ) {
+      const data = datas.filter((v, i) => {
+        return (
+          (v.product_price > filters.lowPrice) &
+          (v.product_price < filters.highPrice) &
+          (v.brand_sid == filters.brand)
+        )
+      })
+      filter_if(proofList, genders, data, setDatas)
+    } else if (filters.lowPrice && filters.highPrice && filters.brand) {
+      const data = datas.filter((v, i) => {
+        return (
+          (v.product_price > filters.lowPrice) &
+          (v.product_price < filters.highPrice) &
+          (v.brand_sid == filters.brand)
+        )
+      })
+      setDatas(data)
+    } else if (
+      filters.lowPrice &&
+      filters.highPrice &&
+      (genders || proofList)
+    ) {
+      const data = datas.filter((v, i) => {
+        return (
+          v.product_price > filters.lowPrice &&
+          v.product_price < filters.highPrice
+        )
+      })
+    } else if (filters.lowPrice && filters.highPrice) {
+      const data = datas.filter((v, i) => {
+        return (
+          v.product_price > filters.lowPrice &&
+          v.product_price < filters.highPrice
+        )
+      })
+      setDatas(data)
+    } else if (filters.brand && (genders || proofList)) {
+      const data = datas.filter((v, i) => {
+        return v.brand_sid == filters.brand
+      })
+      filter_if(proofList, genders, data, setDatas)
+    } else if (filters.brand) {
+      const data = datas.filter((v, i) => {
+        return v.brand_sid == filters.brand
+      })
+      setDatas(data)
+    } else {
+      filter_if(proofList, genders, datas, setDatas)
+    }
   }
 
   let filter = 'http://localhost:3001/product/filter'
 
-  const getData = async () => {
+  const getData = () => {
     if (Number(filters.lowPrice) > Number(filters.highPrice)) {
       alert('請檢查價格是否輸入錯誤')
       console.log('請檢查價格是否輸入錯誤')
@@ -102,7 +160,7 @@ export default function ProductFilter({
       genders ||
       proofList
     ) {
-      filterRender(filter)
+      filterRender()
     } else if (
       !filters.brand ||
       !filters.lowPrice ||
