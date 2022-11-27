@@ -756,10 +756,6 @@ export const ProCartContextProvider = ({ children }) => {
     let c = b.split('.')
     return c[0]
   }
-  const d = new Date()
-  // const orderNum = Math.ceil(Date.parse(new Date()) / 1000)
-  const orderNum = Date.parse(new Date())
-  console.log(orderNum)
   return (
     <ProCartContext.Provider
       value={{
@@ -795,7 +791,6 @@ export const ProCartContextProvider = ({ children }) => {
         ren,
         writeUser,
         setWriteUser,
-        orderNum,
       }}
     >
       {children}

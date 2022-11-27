@@ -1,9 +1,16 @@
-import React from 'react'
+import { useRef, useState, useEffect } from 'react'
 import styled from '../../../styles/cart-scss/Pay.module.scss'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+function subscribe(eventName, listener) {
+  document.addEventListener(eventName, listener)
+}
+
+function unsubscribe(eventName, listener) {
+  document.removeEventListener(eventName, listener)
+}
 function Pay({ step, setStep }) {
-  const navigator = useNavigate()
+  const newLinePay = useRef(null)
+  const [paid, setPaid] = useState(false)
   const testOrder = {
     amount: 1000,
     currency: 'TWD',
@@ -21,32 +28,48 @@ function Pay({ step, setStep }) {
       },
     ],
   }
+  useEffect(() => {
+    subscribe('paid', () => setPaid(true))
+    if (paid) {
+      setStep(step + 1)
+    }
+    return () => {
+      unsubscribe('paid')
+    }
+  }, [paid])
   return (
-    <div className={styled.pay}>
-      Pay
-      <button
-        onClick={async () => {
-          testOrder.orderId = new Date().getTime()
-          const { data } = await axios.post(
-            `http://localhost:3001/order/createOrder`,
-            testOrder
-          )
-          console.log(data)
-          if (data.returnCode === '0000') {
-            navigator('/')
-            window.open(
-              `${data?.info.paymentUrl.web}`,
-              'hiking',
-              'height=800,width=1000'
-            )
-          }
+    <>
+      <div className={styled.choose}>
+        <button
+          onClick={() => {
+            setStep(step - 1)
+          }}
+        >
+          重新選擇付款方式
+        </button>
+      </div>
 
-          // setStep(step + 1)
-        }}
-      >
-        結帳去
-      </button>
-    </div>
+      <div className={styled.pay}>
+        <button
+          onClick={async () => {
+            testOrder.orderId = new Date().getTime()
+            const { data } = await axios.post(
+              `http://localhost:3001/order/createOrder`,
+              testOrder
+            )
+            if (data.returnCode === '0000') {
+              newLinePay.current = window.open(
+                `${data?.info.paymentUrl.web}`,
+                'hiking',
+                'height=800,width=1000'
+              )
+            }
+          }}
+        >
+          LINE PAY 付款
+        </button>
+      </div>
+    </>
   )
 }
 

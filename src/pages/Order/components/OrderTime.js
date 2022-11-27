@@ -35,13 +35,7 @@ function OrderTime({ open, momOrder }) {
           rows.map((el, i) => {
             const d = dayjs(el.created_time)
             return (
-              <div
-                className={styled.timeWrap}
-                key={el.order_num}
-                onClick={() => {
-                  console.log(orderNum)
-                }}
-              >
+              <div className={styled.timeWrap} key={el.order_num}>
                 <div className={styled.time}>
                   <p>{d.isValid() && d.format('MMM')}</p>
                   <p>{d.format('DD')}</p>
