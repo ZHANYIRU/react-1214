@@ -1,5 +1,6 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useContext } from 'react'
 import styled from '../../../styles/cart-scss/Pay.module.scss'
+import ProCartContext from '../../../contexts/ProCartContext'
 import axios from 'axios'
 function subscribe(eventName, listener) {
   document.addEventListener(eventName, listener)
@@ -9,29 +10,85 @@ function unsubscribe(eventName, listener) {
   document.removeEventListener(eventName, listener)
 }
 function Pay({ step, setStep }) {
+  const { pro, ren, room, camp, cartPrice, moneyFormat } =
+    useContext(ProCartContext)
+  // console.log(pro, ren, room, camp, cartPrice)
+  console.log([...camp])
   const newLinePay = useRef(null)
   const [paid, setPaid] = useState(false)
   const testOrder = {
-    amount: 1000,
+    amount: cartPrice,
     currency: 'TWD',
     packages: [
       {
         id: 'products_1',
-        amount: 1000,
+        amount: cartPrice,
         products: [
           {
             name: '六角棒棒',
             quantity: 1,
-            price: 1000,
+            price: cartPrice,
           },
         ],
       },
     ],
   }
+  // const testOrder = {
+  //   amount: cartPrice,
+  //   currency: 'TWD',
+  //   packages: [
+  //     {
+  //       id: 'pro_1',
+  //       amount: cartPrice,
+  //       products: [
+  //         {
+  //           name: '六角棒棒',
+  //           quantity: 1,
+  //           price: cartPrice,
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       id: 'camp_1',
+  //       amount: cartPrice,
+  //       products: [
+  //         {
+  //           name: '六角棒棒',
+  //           quantity: 1,
+  //           price: cartPrice,
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       id: 'room_1',
+  //       amount: cartPrice,
+  //       products: [
+  //         {
+  //           name: '六角棒棒',
+  //           quantity: 1,
+  //           price: cartPrice,
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       id: 'ren_1',
+  //       amount: cartPrice,
+  //       products: [
+  //         {
+  //           name: '六角棒棒',
+  //           quantity: 1,
+  //           price: cartPrice,
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // }
   useEffect(() => {
     subscribe('paid', () => setPaid(true))
     if (paid) {
-      setStep(step + 1)
+      setTimeout(() => {
+        setStep(step + 1)
+      }, 2000)
     }
     return () => {
       unsubscribe('paid')
@@ -50,6 +107,10 @@ function Pay({ step, setStep }) {
       </div>
 
       <div className={styled.pay}>
+        <p>
+          總金額:{moneyFormat(cartPrice)}
+          <span>{paid ? '已付款' : '尚未付款'}</span>
+        </p>
         <button
           onClick={async () => {
             testOrder.orderId = new Date().getTime()
