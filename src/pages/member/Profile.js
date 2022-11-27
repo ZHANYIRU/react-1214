@@ -4,6 +4,8 @@ import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import MemberContext from '../../contexts/MemberContext'
 
+//TODO 頭像外框變化
+
 function Profile(props) {
   const navigate = useNavigate()
   const location = useLocation()

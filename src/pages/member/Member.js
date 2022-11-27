@@ -5,6 +5,8 @@ import { useEffect, useContext } from 'react'
 // import { useState } from 'react'
 import MemberContext from '../../contexts/MemberContext'
 
+//TODO 頭像外框變化
+
 function Member(props) {
   const navigate = useNavigate()
 

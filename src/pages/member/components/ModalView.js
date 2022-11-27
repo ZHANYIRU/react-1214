@@ -6,6 +6,8 @@ import { useContext, useEffect, useState, useRef } from 'react'
 import MemberContext from '../../../contexts/MemberContext'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
 
+//TODO 頭像外框變化
+
 export default function ModalView({
   getPostList,
   setIsView,

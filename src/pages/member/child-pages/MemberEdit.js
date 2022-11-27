@@ -8,6 +8,8 @@ import { useRef } from 'react'
 import MemberContext from '../../../contexts/MemberContext'
 import { useNavigate } from 'react-router-dom'
 
+//TODO 資料格式驗證
+
 export default function MemberEdit() {
   // const [profile, setProfile] = useState({
   //   avatar: '',
@@ -71,7 +73,14 @@ export default function MemberEdit() {
         },
       }
     )
-    getInfo()
+    if (result.data && result.data.success) {
+      alert('更新資料成功')
+      getInfo()
+    }
+    if (!result.data.success) {
+      alert('更新資料失敗')
+    }
+
     console.log(result.data)
   }
 
