@@ -139,6 +139,7 @@ function Product() {
             onClick={(e) => {
               searchStyle(e)
             }}
+            
           >
             <form action="">
               <input
@@ -244,7 +245,7 @@ function Product() {
                 >
                   <div className={styled.imgWrap}>
                     <img
-                      src="https://www.arcteryx.com.tw/media/catalog/product/cache/9f23c48e1ba32633494dfb89a2676b50/3/0/30698_l08370200_gamma-lt-jacket_m_habitat_1.jpg"
+                      src={`http://localhost:3001/imgs/zx/${v.product_img}`}
                       alt=""
                     />
                   </div>

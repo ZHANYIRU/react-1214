@@ -90,6 +90,7 @@ export default function ProductFilter({
     // filters.lowPrice ||
     // filters.highPrice ||
     // filters.brand ||
+
     if (
       filters.lowPrice &&
       filters.highPrice &&
@@ -124,6 +125,7 @@ export default function ProductFilter({
           v.product_price < filters.highPrice
         )
       })
+      filter_if(proofList, genders, data, setDatas)
     } else if (filters.lowPrice && filters.highPrice) {
       const data = datas.filter((v, i) => {
         return (

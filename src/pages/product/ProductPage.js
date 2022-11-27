@@ -121,7 +121,13 @@ export default function ProductPage() {
   const changeBtn = (e) => {
     setintroCom(!introCom)
   }
-
+  // mouseLeave Function
+  const msLeave = (v) => {
+    changePic.current.setAttribute(
+      'src',
+      `http://localhost:3001/imgs/zx/${v.product_imgs[0]}`
+    )
+  }
   // 商品介紹 or 商品評論
   const intro = datas.map((v, i) => {
     return (
@@ -138,12 +144,17 @@ export default function ProductPage() {
                 className={styled.card}
                 key={v.product_sid}
                 to={'/product/' + v.product_sid}
+                onClick={() => {
+                  getProductData()
+                }}
               >
                 <div>
-                  <img
-                    src="https://cdn1.cybassets.com/media/W1siZiIsIjE2MTQyL3Byb2R1Y3RzLzM2MzA1MjQwLzE2NjM5MDE2NDZfODM4NGYzMjY3ODcxNmYwOGQ3YTUuanBlZyJdLFsicCIsInRodW1iIiwiNjAweDYwMCJdXQ.jpeg?sha=0c0e2037acddca29"
-                    alt=""
-                  />
+                  <div className={styled.imgWrap}>
+                    <img
+                      src={`http://localhost:3001/imgs/zx/${v.product_img}`}
+                      alt=""
+                    />
+                  </div>
                   <p className={styled.p}>{v.product_name}</p>
                   <h2>
                     金額：<span>${v.product_price}</span>
@@ -265,7 +276,7 @@ export default function ProductPage() {
   }, [])
   useEffect(() => {
     getProductData()
-  }, [])
+  }, [product_sid])
 
   return (
     <>
@@ -286,74 +297,62 @@ export default function ProductPage() {
                 <div className={styled.imgBox}>
                   <div className={styled.bigImg}>
                     <img
-                      src="https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg"
+                      src={`http://localhost:3001/imgs/zx/${v.product_img}`}
                       alt=""
                       ref={changePic}
                     />
                   </div>
                   <div className={styled.imgGroup}>
                     <img
-                      src="https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg"
+                      src={`http://localhost:3001/imgs/zx/${v.product_imgs[0]}`}
                       alt=""
                       onMouseMove={() => {
                         changePic.current.setAttribute(
                           'src',
-                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg'
+                          `http://localhost:3001/imgs/zx/${v.product_imgs[0]}`
                         )
                       }}
                       onMouseLeave={() => {
-                        changePic.current.setAttribute(
-                          'src',
-                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg'
-                        )
+                        msLeave(v)
                       }}
                     />
                     <img
-                      src="https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384f6822100480585f0/800x.webp?source_format=jpg"
+                      src={`http://localhost:3001/imgs/zx/${v.product_imgs[1]}`}
                       alt=""
                       onMouseMove={() => {
                         changePic.current.setAttribute(
                           'src',
-                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384f6822100480585f0/800x.webp?source_format=jpg'
+                          `http://localhost:3001/imgs/zx/${v.product_imgs[1]}`
                         )
                       }}
                       onMouseLeave={() => {
-                        changePic.current.setAttribute(
-                          'src',
-                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg'
-                        )
+                        msLeave(v)
                       }}
                     />
                     <img
-                      src="https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a038499ed9f002a97789b/800x.webp?source_format=jpg"
+                      src={`http://localhost:3001/imgs/zx/${v.product_imgs[2]}`}
                       alt=""
                       onMouseMove={() => {
                         changePic.current.setAttribute(
                           'src',
-                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a038499ed9f002a97789b/800x.webp?source_format=jpg'
+                          `http://localhost:3001/imgs/zx/${v.product_imgs[2]}`
                         )
                       }}
                       onMouseLeave={() => {
-                        changePic.current.setAttribute(
-                          'src',
-                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg'
-                        )
+                        msLeave(v)
                       }}
                     />
                     <img
-                      src="https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384741e520042b11aff/800x.webp?source_format=jpg"
+                      src={`http://localhost:3001/imgs/zx/${v.product_imgs[3]}`}
                       alt=""
                       onMouseMove={() => {
                         changePic.current.setAttribute(
                           'src',
-                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384741e520042b11aff/800x.webp?source_format=jpg'
+                          `http://localhost:3001/imgs/zx/${v.product_imgs[3]}`
                         )
                       }}
                       onMouseLeave={() => {
-                        changePic.current.setAttribute(
-                          'src',
-                          'https://shoplineimg.com/5cb3fc58c267700001e04d1a/5f5a0384892c53004593cd6b/800x.webp?source_format=jpg'
-                        )
+                        msLeave(v)
                       }}
                     />
                   </div>
