@@ -1,6 +1,7 @@
 import styled from '../../../styles/member-scss/MemberInfo.module.scss'
 
 export default function TotalHeight(totalHeight) {
+
   return (
     <>
       <div className={styled.totalHeight}>

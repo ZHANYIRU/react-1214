@@ -7,12 +7,12 @@ import MemberContext from '../../contexts/MemberContext'
 //TODO 頭像外框變化
 
 function Profile(props) {
+  
   const navigate = useNavigate()
   const location = useLocation()
-
-  const usp = new URLSearchParams(location.search)
-  const mid = usp.get('id')
-
+  let usp = new URLSearchParams(location.search)
+  let mid = usp.get('id')
+  
   let initInfo = {
     member_sid: mid,
     nickname: '',
@@ -31,13 +31,14 @@ function Profile(props) {
   const [isFollowing, setIsFollowing] = useState(false)
 
   async function getInfo() {
+    usp = new URLSearchParams(location.search)
+    mid = usp.get('id')
+
     const result = await axios.get(
       `http://localhost:3001/member/profile/api?mid=${mid}`
     )
 
-    // console.log(result.data)
-
-    if (result.data.rows) {
+    if (result.data && result.data.rows[0]) {
       setInfo(result.data.rows[0])
     } else {
       navigate('/')
@@ -157,7 +158,7 @@ function Profile(props) {
                 navigate(`/profile?id=${mid}`)
               }}
             >
-              {info.avatar ? (
+              {info && info.avatar ? (
                 <img
                   src={`http://localhost:3001/uploads/avatar_${info.avatar}`}
                   alt="avatar"
@@ -175,7 +176,7 @@ function Profile(props) {
                 navigate(`/profile?id=${mid}`)
               }}
             >
-              {info.nickname}
+              {info && info.nickname}
             </h3>
             <p className={styled.highlight}>銀級玩家</p>
             <div className={styled.socials}>
@@ -226,7 +227,7 @@ function Profile(props) {
               </button>
             )}
 
-            <pre className={styled.intro}>{info.intro}</pre>
+            <pre className={styled.intro}>{info && info.intro}</pre>
           </aside>
           <article>
             <Outlet />

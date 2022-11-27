@@ -47,7 +47,7 @@ export default function ProfileInfo() {
 
     // console.log(result.data)
 
-    if (result.data.rows) {
+    if (result.data && result.data.rows[0]) {
       setInfo(result.data.rows[0])
     } else {
       navigate('/')
@@ -72,7 +72,7 @@ export default function ProfileInfo() {
             <div className={styled.divider}></div>
             <div className={styled.overview}>
               <PostMap postList={postList}/>
-              <TotalHeight totalHeight={{height: info.total_height}}/>
+              <TotalHeight totalHeight={info && info.total_height? {height: info.total_height} : 0}/>
             </div>
           </div>
         </div>
