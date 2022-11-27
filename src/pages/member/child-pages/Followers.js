@@ -5,24 +5,26 @@ import MemberContext from '../../../contexts/MemberContext'
 import axios from 'axios'
 
 export default function Followers() {
+  const navigate = useNavigate()
   const location = useLocation()
   const usp = new URLSearchParams(location.search)
-  const { data, auth, following, getFollowing } = useContext(MemberContext)
+  const { data, auth, following, getFollowing, getFollow } =
+    useContext(MemberContext)
   const [profileFollow, setProfileFollow] = useState([])
 
   const token = localStorage.getItem('token')
 
   const mid = usp.get('id') || data.member_sid || ''
 
-  console.log('關注列表ID:' + mid)
+  // console.log('關注列表ID:' + mid)
 
-  async function getFollow() {
+  async function getMyFollow() {
     const rows = await axios.get(
       `http://localhost:3001/member/follow/api?mid=${mid}`
     )
     setProfileFollow(rows.data)
-    console.log('追蹤者資料:' + JSON.stringify(rows.data))
-    console.log('使用者追蹤中資料' + JSON.stringify(following))
+    // console.log('追蹤者資料:' + JSON.stringify(rows.data))
+    // console.log('使用者追蹤中資料' + JSON.stringify(following))
   }
 
   async function unfollow(member_sid) {
@@ -43,6 +45,7 @@ export default function Followers() {
     console.log(result.data)
     if (result.data.success) {
       alert('取消關注成功')
+      getMyFollow()
       getFollow()
       getFollowing()
     }
@@ -57,6 +60,11 @@ export default function Followers() {
     if (!token) {
       return alert('請先登入會員')
     }
+
+    if (member_sid === data.member_sid) {
+      return alert('無法將自己加入關注')
+    }
+
     const result = await axios.post(
       `http://localhost:3001/member/follow/api?mid=${member_sid}`,
       {
@@ -72,6 +80,7 @@ export default function Followers() {
     console.log(result.data.success)
     if (result.data.success) {
       alert('關注成功')
+      getMyFollow()
       getFollow()
       getFollowing()
     }
@@ -81,8 +90,8 @@ export default function Followers() {
   }
 
   useEffect(() => {
-    getFollow()
-  }, [mid])
+    getMyFollow()
+  }, [mid, following])
 
   return (
     <>
@@ -98,13 +107,19 @@ export default function Followers() {
               {profileFollow.map((v, i) => {
                 return (
                   <div className={styled.user} key={i}>
-                    <div className={styled.portrait}>
+                    <div
+                      className={styled.portrait}
+                      onClick={() => {
+                        navigate(`/profile?id=${v.member_sid}`)
+                      }}
+                    >
                       {v.avatar ? (
                         <img
                           src={`http://localhost:3001/uploads/avatar_${v.avatar}`}
+                          alt="avatar"
                         ></img>
                       ) : (
-                        ""
+                        ''
                       )}
                     </div>
                     <h4>{v.nickname}</h4>

@@ -1,6 +1,6 @@
 import styled from '../../styles/member-scss/Member.module.scss'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
-import { useEffect, useState, useContext, useCallback } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import MemberContext from '../../contexts/MemberContext'
 
@@ -19,7 +19,7 @@ function Profile(props) {
     total_height: 0,
   }
 
-  const { data, auth } = useContext(MemberContext)
+  const { data, auth, getFollow, getFollowing } = useContext(MemberContext)
 
   // console.log('目前登入會員為:' + data.member_sid)
 
@@ -42,24 +42,27 @@ function Profile(props) {
     }
   }
 
-  async function getFollow() {
+  async function getMyFollow() {
     const rows = await axios.get(
       `http://localhost:3001/member/follow/api?mid=${mid}`
     )
     // console.log('目前登入會員為:' + data.member_sid)
-    // console.log(JSON.stringify(rows.data))
+    // console.log('會員的關注者為:'+ JSON.stringify(rows.data))
+
+    setIsFollowing(false)
 
     rows.data.map((v, i) => {
-      if (v.member_sid === data.member_sid) {
+      if (+v.member_sid === +data.member_sid) {
         setIsFollowing(true)
       }
+      return null
     })
 
     setFollow(rows.data)
     // console.log('followed by:' + rows.data.length)
   }
 
-  async function getFollowing() {
+  async function getMyFollowing() {
     const rows = await axios.get(
       `http://localhost:3001/member/following/api?fid=${mid}`
     )
@@ -90,6 +93,10 @@ function Profile(props) {
     if (result.data.success) {
       // alert('關注成功')
       setIsFollowing(true)
+      getFollow()
+      getFollowing()
+      getMyFollow()
+      getFollowing()
     }
     if (!result.data.success) {
       alert('關注失敗')
@@ -111,10 +118,12 @@ function Profile(props) {
         },
       }
     )
-    console.log(result.data)
+    // console.log(result.data)
     if (result.data.success) {
       // alert('取消關注成功')
       setIsFollowing(false)
+      getFollow()
+      getFollowing()
     }
     if (!result.data.success) {
       alert('取消關注失敗')
@@ -130,8 +139,8 @@ function Profile(props) {
       navigate('/member')
     }
 
-    getFollow()
-    getFollowing()
+    getMyFollow()
+    getMyFollowing()
     getInfo()
   }, [mid, data.member_sid, isFollowing])
 

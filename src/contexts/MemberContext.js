@@ -96,7 +96,7 @@ export const MemberContextProvider = function ({ children }) {
 
   return (
     <MemberContext.Provider
-      value={{ data, setData, auth, setAuth, resetData, getInfo, follow, following, setFollowing, getFollowing }}
+      value={{ data, setData, auth, setAuth, resetData, getInfo, follow, following, setFollowing, getFollowing, getFollow }}
     >
       {children}
     </MemberContext.Provider>

@@ -1,23 +1,23 @@
 import styled from '../../styles/member-scss/Member.module.scss'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { useEffect, useContext, useState } from 'react'
+import { useEffect, useContext } from 'react'
 // import axios from 'axios'
 // import { useState } from 'react'
 import MemberContext from '../../contexts/MemberContext'
-import axios from 'axios'
 
 function Member(props) {
   const navigate = useNavigate()
 
-  const { data, setData, auth, follow, following } = useContext(MemberContext)
+  const { data, auth, follow, following, getFollow, getFollowing } =
+    useContext(MemberContext)
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       navigate('/login')
     }
+    getFollow()
+    getFollowing()
   }, [auth, data])
-
-
 
   return (
     <>
