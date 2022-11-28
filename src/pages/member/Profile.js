@@ -3,6 +3,8 @@ import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import MemberContext from '../../contexts/MemberContext'
+import { avatarLevel } from './components/Avatar'
+import { titleLevel } from './components/Avatar'
 
 function Profile(props) {
   const navigate = useNavigate()
@@ -130,19 +132,19 @@ function Profile(props) {
     }
   }
 
-  function avatarLevel(height = 0) {
-    if (height > 3000) {
-      return styled.silver
-    }
-    return styled.bronze
-  }
+  // function avatarLevel(height = 0) {
+  //   if (height > 3000) {
+  //     return styled.silver
+  //   }
+  //   return styled.bronze
+  // }
 
-  function titleLevel(height = 0) {
-    if (height > 3000) {
-      return '銀級玩家'
-    }
-    return '銅級玩家'
-  }
+  // function titleLevel(height = 0) {
+  //   if (height > 3000) {
+  //     return '銀級玩家'
+  //   }
+  //   return '銅級玩家'
+  // }
 
   useEffect(() => {
     if (!location.search) {

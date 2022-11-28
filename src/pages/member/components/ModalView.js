@@ -5,6 +5,7 @@ import axios from 'axios'
 import { useContext, useEffect, useState, useRef } from 'react'
 import MemberContext from '../../../contexts/MemberContext'
 import { Link, useNavigate } from 'react-router-dom'
+import { modalAvatarLevel } from '../components/Avatar'
 
 export default function ModalView({
   getPostList,
@@ -133,12 +134,12 @@ export default function ModalView({
     console.log(rows.data)
   }
 
-  function avatarLevel(height = 0) {
-    if (height > 3000) {
-      return styled.silver
-    }
-    return styled.bronze
-  }
+  // function avatarLevel(height = 0) {
+  //   if (height > 3000) {
+  //     return styled.silver
+  //   }
+  //   return styled.bronze
+  // }
 
   useEffect(() => {
     getInfo()
@@ -171,7 +172,7 @@ export default function ModalView({
             <div className={styled.contentTop}>
               <div className={styled.contentFlex}>
                 <div
-                  className={`${styled.avatar} ${avatarLevel(
+                  className={`${styled.avatar} ${modalAvatarLevel(
                     user.total_height
                   )}`}
                   onClick={() => {
@@ -235,7 +236,7 @@ export default function ModalView({
                     <div key={i} className={styled.replyPost}>
                       <div className={`${styled.contentFlex} ${styled.left}`}>
                         <div
-                          className={`${styled.replyAvatar} ${avatarLevel(
+                          className={`${styled.replyAvatar} ${modalAvatarLevel(
                             v.total_height
                           )}`}
                           onClick={() => {

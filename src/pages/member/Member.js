@@ -4,6 +4,8 @@ import { useEffect, useContext } from 'react'
 // import axios from 'axios'
 // import { useState } from 'react'
 import MemberContext from '../../contexts/MemberContext'
+import { avatarLevel } from './components/Avatar'
+import { titleLevel } from './components/Avatar'
 
 function Member(props) {
   const navigate = useNavigate()
@@ -19,19 +21,19 @@ function Member(props) {
     getFollowing()
   }, [auth, data])
 
-  function avatarLevel(height = 0) {
-    if (height > 3000) {
-      return styled.silver
-    }
-    return styled.bronze
-  }
+  // function avatarLevel(height = 0) {
+  //   if (height > 3000) {
+  //     return styled.silver
+  //   }
+  //   return styled.bronze
+  // }
 
-  function titleLevel(height = 0) {
-    if (height > 3000) {
-      return '銀級玩家'
-    }
-    return '銅級玩家'
-  }
+  // function titleLevel(height = 0) {
+  //   if (height > 3000) {
+  //     return '銀級玩家'
+  //   }
+  //   return '銅級玩家'
+  // }
 
   return (
     <>
