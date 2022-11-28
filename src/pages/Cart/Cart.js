@@ -13,7 +13,6 @@ function Cart() {
   const bodyHeight = useRef(null)
   //給buyBar的判斷
   const [buyBar, setBuyBar] = useState(false)
-
   const scroll = () => {
     const windowH = window.innerHeight
     const bodyH = bodyHeight.current.clientHeight

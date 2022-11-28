@@ -121,7 +121,7 @@ function Navbar() {
           </Link>
         )}
         {auth ? (
-          <Link>
+          <span className={styled.logOut}>
             <span
               onClick={() => {
                 resetData()
@@ -131,7 +131,7 @@ function Navbar() {
             >
               會員登出
             </span>
-          </Link>
+          </span>
         ) : (
           <Link to="/join">
             {/* 切換會員登出 */}
