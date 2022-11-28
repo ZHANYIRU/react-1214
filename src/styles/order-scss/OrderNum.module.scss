@@ -47,19 +47,10 @@
 }
 
 .contentWrap {
-  padding-top: 10px;
   max-height: 0;
   overflow: hidden;
   transition: ease-in-out 0.7s;
-  margin-bottom: 50px;
-}
-
-.contentWrapOpen {
-  padding: 10px 0;
-  max-height: 50vh;
-  transition: ease-in-out 0.7s;
-  margin-bottom: 50px;
-  overflow: auto;
+  margin-bottom: 60px;
 }
 .proContentTitle,
 .roomContentTitle,
