@@ -12,8 +12,7 @@ function unsubscribe(eventName, listener) {
 function Pay({ step, setStep }) {
   const { pro, ren, room, camp, cartPrice, moneyFormat } =
     useContext(ProCartContext)
-  // console.log(pro, ren, room, camp, cartPrice)
-  console.log([...camp])
+  console.log(pro, ren, room, camp, cartPrice)
   const newLinePay = useRef(null)
   const [paid, setPaid] = useState(false)
   const testOrder = {
@@ -88,7 +87,7 @@ function Pay({ step, setStep }) {
     if (paid) {
       setTimeout(() => {
         setStep(step + 1)
-      }, 2000)
+      }, 1500)
     }
     return () => {
       unsubscribe('paid')

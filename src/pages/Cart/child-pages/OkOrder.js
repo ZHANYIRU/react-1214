@@ -13,8 +13,8 @@ function OkOrder(props) {
       <div className={styled.okCard}>
         <div className={styled.okText}>
           <h2>訂單編號：20222222222</h2>
-          <p>配送方式：全家大安店</p>
-          <p>付款方式：ＡＴＭ匯款</p>
+          <p>配送方式：宅配</p>
+          <p>付款方式：LINE PAY</p>
           <p>訂單日期：2022/12/14</p>
           <p>訂單總額：47,282</p>
         </div>

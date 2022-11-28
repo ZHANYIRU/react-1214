@@ -1,11 +1,7 @@
 import dayjs from 'dayjs'
-import MemberContext from '../../../contexts/MemberContext'
-import ProCartContext from '../../../contexts/ProCartContext'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import styled from '../../../styles/order-scss/OrderTime.module.scss'
 function OrderTime({ open, momOrder }) {
-  const { auth } = useContext(MemberContext)
-  const { orderNum } = useContext(ProCartContext)
   const { rows, proRows, roomRows, renRows, camRows } = momOrder
   const [total, setTotal] = useState([])
   const test = () => {

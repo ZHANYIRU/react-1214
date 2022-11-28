@@ -50,6 +50,7 @@ const proCartReducer = (state, action) => {
     moun,
     campSid,
     renSid,
+    deliveryFee,
     out,
     back,
   } = action.payload
@@ -72,9 +73,7 @@ const proCartReducer = (state, action) => {
     campIndex = state.items3.findIndex((el) => el.sid === campSid)
   }
   if (renSid) {
-    renIndex = state.items4.findIndex(
-      (el) => el.sid === renSid && el.size === size
-    )
+    renIndex = state.items4.findIndex((el) => el.sid === renSid)
   }
   //更新localStorage購物車-商品
   const updateCart = (upState, qty, price) => {
@@ -278,14 +277,14 @@ const proCartReducer = (state, action) => {
               end: end,
               out: out,
               back: back,
-              size: size,
+              deliveryFee: deliveryFee,
               img: img,
               price: price,
               qty: qty,
             },
           ],
           totalItem: state.totalItem + 1,
-          totalPrice: state.totalPrice + price * qty,
+          totalPrice: state.totalPrice + price * qty + deliveryFee,
         }
         const newTotalItem = state.totalItem
         const newTotalPrice = state.totalPrice
@@ -606,7 +605,7 @@ export const ProCartContextProvider = ({ children }) => {
     end,
     out,
     back,
-    size,
+    deliveryFee,
     price,
     qty,
     img
@@ -620,7 +619,7 @@ export const ProCartContextProvider = ({ children }) => {
         end,
         out,
         back,
-        size,
+        deliveryFee,
         price,
         qty,
         img,
