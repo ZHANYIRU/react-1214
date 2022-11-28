@@ -101,7 +101,7 @@ function Weather() {
           ) : (
             <span>
               {selectLocation.length !== 0 &&
-                selectLocation[0].time[1].parameter.parameterName}
+                selectLocation[0].time[2].parameter.parameterName}
             </span>
           )}
         </div>

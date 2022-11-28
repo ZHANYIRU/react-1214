@@ -14,7 +14,6 @@
   }
   .visible{
     margin: 0 auto;
-    // outline: red 1px solid;
     width: 750px;
     height: 200px;
     overflow: hidden;
@@ -58,15 +57,7 @@
       .back{
         transform: rotateX(180deg)
       }
-    
-      @keyframes rotateY {
-        from{
-            transform: rotateX(0deg);
-        }
-        to{
-            transform: rotateX(360deg);
-        }
-    }}
+    }
   }
   
 }
@@ -74,7 +65,7 @@
   display: flex;
   width: 100%;
   height: 100vh;
-  padding-top: 250px;
+  padding-top: 50px;
   justify-content:center;
   .pic{
     margin-right: 50px;
