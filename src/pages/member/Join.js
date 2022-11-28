@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom'
 import TextareaAutosize from 'react-textarea-autosize'
 import MemberContext from '../../contexts/MemberContext'
 
+//TODO 註冊資料格式驗證
+
 export default function Join(props) {
   const [showPass, setShowPass] = useState({
     myPass: false,

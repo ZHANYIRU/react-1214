@@ -37,7 +37,7 @@ function CartDetailRoom() {
                       <div className={styled.people}>
                         <p>人數：</p>
                         <div className={styled.qty}>
-                          {el.qty <= 1 ? (
+                          {el.quantity <= 1 ? (
                             <button
                               onClick={() => {
                                 minusOne2(el.sid, el.price)
@@ -55,7 +55,7 @@ function CartDetailRoom() {
                               －
                             </button>
                           )}
-                          <button>{el.qty}</button>
+                          <button>{el.quantity}</button>
                           <button
                             onClick={() => {
                               plusOne2(el.sid, el.price)
@@ -66,7 +66,7 @@ function CartDetailRoom() {
                         </div>
                         <p>人</p>
                       </div>
-                      <p>總金額：{moneyFormat(el.qty * el.price)}</p>
+                      <p>總金額：{moneyFormat(el.quantity * el.price)}</p>
                     </div>
                     <div className={styled.roomImg}>
                       <img
@@ -88,7 +88,7 @@ function CartDetailRoom() {
                   <i
                     className="fa-regular fa-trash-can"
                     onClick={() => {
-                      const t = el.qty * el.price
+                      const t = el.quantity * el.price
                       change(el, i)
                       setTimeout(() => {
                         delOne2(el.sid, t)
