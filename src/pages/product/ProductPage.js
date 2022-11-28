@@ -13,27 +13,99 @@ export default function ProductPage() {
   const { addProCart } = useContext(ProCartContext)
   //哪一筆評論的Index
   const [whichCom, setWhichCom] = useState(-1)
-
+  // //fetchSize
+  const [fetchSize, setFetchSize] = useState([{}])
+  // 尺寸選取
+  const [size2, setSize2] = useState([
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ])
+  //預設值
+  const shoseDefaultSize = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]
   //燈箱切換
   const [comLightBox, setComLightBox] = useState(false)
   //換圖
   const changePic = useRef()
   // 尺寸選取
   const [size, setSize] = useState({
-    S: true,
+    S: false,
     M: false,
     L: false,
   })
-  const whatSize = () => {
+
+  const whatSize = (v) => {
     if (Object.values(size)[0]) {
       return 'S'
     } else if (Object.values(size)[1]) {
       return 'M'
     } else if (Object.values(size)[2]) {
       return 'L'
+    } else if (size2[0]) {
+      if (v.product_category_sid == 7) {
+        return 'US8'
+      } else if (v.product_category_sid == 8) {
+        return 'US6'
+      }
+    } else if (size2[1]) {
+      if (v.product_category_sid == 7) {
+        return 'US8.5'
+      } else if (v.product_category_sid == 8) {
+        return 'US6.5'
+      }
+    } else if (size2[2]) {
+      if (v.product_category_sid == 7) {
+        return 'US9'
+      } else if (v.product_category_sid == 8) {
+        return 'US7'
+      }
+    } else if (size2[3]) {
+      if (v.product_category_sid == 7) {
+        return 'US9.5'
+      } else if (v.product_category_sid == 8) {
+        return 'US7.5'
+      }
+    } else if (size2[4]) {
+      if (v.product_category_sid == 7) {
+        return 'US10'
+      } else if (v.product_category_sid == 8) {
+        return 'US8'
+      }
+    } else if (size2[5]) {
+      if (v.product_category_sid == 7) {
+        return 'US10.5'
+      } else if (v.product_category_sid == 8) {
+        return 'US8.5'
+      }
+    } else if (size2[6]) {
+      if (v.product_category_sid == 7) {
+        return 'US11'
+      } else if (v.product_category_sid == 8) {
+        return 'US9'
+      }
+    } else if (size2[7]) {
+      if (v.product_category_sid == 7) {
+        return 'US11.5'
+      } else if (v.product_category_sid == 8) {
+        return 'US9.5'
+      }
     }
   }
-  //尺寸方法
+  //尺寸方法 (衣服)
   const choseSize = (choseOption) => {
     if (choseOption === 'S') {
       const choseSizeTarget = { ...size, S: true, M: false, L: false }
@@ -46,6 +118,7 @@ export default function ProductPage() {
       setSize(choseSizeTarget)
     }
   }
+
   //選擇數量
   const [num, setNum] = useState(1)
   //商品介紹、評論
@@ -103,13 +176,22 @@ export default function ProductPage() {
     },
   ])
   //我是fetch
-  const getProductData = async (url) => {
+  const getProductData = async () => {
     const response = await axios.get(
       `http://localhost:3001/product/${product_sid}`
     )
     const r = response.data
     console.log(r)
     setDatas(r)
+  }
+  //我是fetch Size的
+  const getSize2 = async () => {
+    const response = await axios.get(
+      `http://localhost:3001/product/size/${product_sid}`
+    )
+    const r = response.data
+    console.log(r)
+    setFetchSize(r)
   }
 
   //format currency
@@ -224,9 +306,36 @@ export default function ProductPage() {
       </div>
     </div>
   )
-
+  const shoseSize = () => {
+    return (
+      <>
+        <h2>商品規格</h2>
+        {fetchSize.map((v, i) => {
+          return (
+            <>
+              <div
+                className={
+                  size2[i]
+                    ? `${styled.standardBoxChose2}`
+                    : `${styled.standardBox2}`
+                }
+                onClick={() => {
+                  const newSize = [...shoseDefaultSize]
+                  newSize[i] = true
+                  setSize2(newSize)
+                }}
+              >
+                {v.size}
+              </div>
+            </>
+          )
+        })}
+      </>
+    )
+  }
   const clotheChose = (
     <>
+      <h2>商品規格</h2>
       <div
         className={
           size.S ? `${styled.standardBoxChose}` : `${styled.standardBox}`
@@ -286,7 +395,9 @@ export default function ProductPage() {
   useEffect(() => {
     getProductData()
   }, [product_sid])
-
+  useEffect(() => {
+    getSize2()
+  }, [])
   return (
     <>
       <div className={styled.empty}></div>
@@ -380,8 +491,12 @@ export default function ProductPage() {
                   </div>
 
                   <div className={styled.standard}>
-                    <h2>商品規格</h2>
-                    {(v.product_category_sid == 9 || 10) && clotheChose}
+                    {v.product_category_sid == 9 || v.product_category_sid == 10
+                      ? clotheChose
+                      : ''}
+                    {v.product_category_sid == 7 || v.product_category_sid == 8
+                      ? shoseSize(v)
+                      : ''}
                   </div>
                   <h2>金額：{moneyFormat(v.product_price)}</h2>
                   <div className={styled.howNum}>
@@ -421,7 +536,7 @@ export default function ProductPage() {
                     <button
                       className={styled.cart}
                       onClick={async () => {
-                        const SML = await whatSize()
+                        const SML = await whatSize(v)
                         addProCart(
                           product_sid,
                           v.product_name,
@@ -438,7 +553,8 @@ export default function ProductPage() {
                       <button
                         className={styled.buy}
                         onClick={async () => {
-                          const SML = await whatSize()
+                          let SML = await whatSize(v)
+
                           addProCart(
                             product_sid,
                             v.product_name,

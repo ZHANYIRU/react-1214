@@ -92,6 +92,7 @@ a{
     .standard{
         display: flex;
         align-items: center;
+        // flex-wrap: wrap;
         width: 100%;
         margin: 30px 0;
         //商品規格h2
@@ -119,6 +120,25 @@ a{
             }
             
         }
+        .standardBox2{
+            cursor: pointer;
+            margin-left: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 30px;
+            // border: 1px black solid;
+            box-shadow:  3px  3px 3px #ccc,-3px 0px 3px #ccc;
+            // filter: drop-shadow(3px 3px 10px #ccc);
+            font-size: .8rem;
+            font-weight: 700;
+            border-radius: 5px;
+            &:hover{
+                background-color: #FFDA16;
+            }
+            
+        }
         .standardBoxChose{
             margin-left: 20px;
             display: flex;
@@ -131,7 +151,26 @@ a{
             // filter: drop-shadow(3px 3px 10px #ccc);
             font-size: 1.5rem;
             font-weight: 700;
-            border-radius: 10px;
+            border-radius: 5px;
+            background-color: #FFDA16;
+            &:hover{
+                background-color: #FFDA16;
+            }
+            
+        }
+        .standardBoxChose2{
+            margin-left: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 30px;
+            // border: 1px black solid;
+            box-shadow:  3px  3px 3px #ccc,-3px 0px 3px #ccc;
+            // filter: drop-shadow(3px 3px 10px #ccc);
+            font-size: .8rem;
+            font-weight: 700;
+            border-radius: 5px;
             background-color: #FFDA16;
             &:hover{
                 background-color: #FFDA16;

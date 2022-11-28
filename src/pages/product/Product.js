@@ -41,7 +41,7 @@ function Product() {
       setSearch({ ...search, width: '40%' })
     }
   }
-  const [afterGenderData, setAfterGenderData] = useState('')
+
   //format currency
   const moneyFormat = (price) => {
     let a = Number(price)
@@ -49,10 +49,7 @@ function Product() {
     let c = b.split('.')
     return c[0]
   }
-  //拿到filter回傳值
-  const [fromFilterDataCard, setFromFilterDataCard] = useState('')
-  //拿到filter回傳值
-  const [fromFilterDataGender, setFromFilterDataGender] = useState('')
+
   // 手機板判定
   const mobile = useMediaQuery({ query: '(max-width:390px)' })
   //附style給filter
