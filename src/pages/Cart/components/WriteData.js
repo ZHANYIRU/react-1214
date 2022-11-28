@@ -183,7 +183,7 @@ function WriteData() {
             <div>
               <label htmlFor="">手機號碼</label>
               <input
-                value={writeUser.mobile}
+                value={writeUser.mobile ? writeUser.mobile : ''}
                 type="text"
                 name="mobile"
                 onChange={(e) => {

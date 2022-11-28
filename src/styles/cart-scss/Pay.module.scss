@@ -1,8 +1,41 @@
 @import '../global.scss';
+.choose{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  button{
+    border: none;
+    background-color: $darkGreen;
+    color: $yellow;
+    border-radius: 5px;
+    padding: 10px 20px;
+  }
+  
+}
 .pay {
   width: 50%;
-  height: 100vh;
+  height: 300px;
   background-color: #e3eee7;
-  margin: 50px auto 0;
+  margin: 30px auto 0;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  p{
+    margin-bottom: 50px;
+    font-size: 20px;
+  }
+  span{
+    margin-left: 15px;
+  }
+  button{
+    font-size: 20px;
+    border: none;
+    background-color: #00C43E;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+  }
 }

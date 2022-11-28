@@ -5,16 +5,21 @@ import { useEffect, useContext } from 'react'
 // import { useState } from 'react'
 import MemberContext from '../../contexts/MemberContext'
 
+//TODO 頭像外框變化
+
 function Member(props) {
   const navigate = useNavigate()
 
-  const { data, setData, auth } = useContext(MemberContext)
+  const { data, auth, follow, following, getFollow, getFollowing } =
+    useContext(MemberContext)
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
       navigate('/login')
     }
-  }, [auth])
+    getFollow()
+    getFollowing()
+  }, [auth, data])
 
   return (
     <>
@@ -56,7 +61,7 @@ function Member(props) {
                 }}
               >
                 <p className={styled.highlight}>關注</p>
-                <h3>7</h3>
+                <h3>{following.length}</h3>
               </div>
               <div
                 className={styled.social}
@@ -65,7 +70,7 @@ function Member(props) {
                 }}
               >
                 <p className={styled.highlight}>粉絲</p>
-                <h3>43</h3>
+                <h3>{follow.length}</h3>
               </div>
             </div>
             <pre className={styled.intro} readOnly>
