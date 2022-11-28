@@ -42,7 +42,7 @@ function CartDetailPro() {
                       <div className={styled.people}>
                         <p>數量：</p>
                         <div className={styled.qty}>
-                          {el.qty <= 1 ? (
+                          {el.quantity <= 1 ? (
                             <button
                               onClick={() => {
                                 minusOne(el.sid, el.size, el.price)
@@ -60,7 +60,7 @@ function CartDetailPro() {
                               －
                             </button>
                           )}
-                          <button>{el.qty}</button>
+                          <button>{el.quantity}</button>
                           <button
                             onClick={() => {
                               plusOne(el.sid, el.size, el.price)
@@ -70,7 +70,7 @@ function CartDetailPro() {
                           </button>
                         </div>
                       </div>
-                      <p>總金額：{moneyFormat(el.price * el.qty)}</p>
+                      <p>總金額：{moneyFormat(el.price * el.quantity)}</p>
                     </div>
                     <div className={styled.roomImg}>
                       <img
@@ -82,7 +82,7 @@ function CartDetailPro() {
                   <i
                     className="fa-regular fa-trash-can"
                     onClick={() => {
-                      const t = el.qty * el.price
+                      const t = el.quantity * el.price
                       change(el, i)
                       setTimeout(() => {
                         delOne(el.sid, el.size, t)
