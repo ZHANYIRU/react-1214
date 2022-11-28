@@ -272,6 +272,9 @@ function TestProducts() {
                 <div key={el.camp_sid}>
                   <p>{el.name}</p>
                   <p>{el.price}</p>
+                  <p>租：台北</p>
+                  <p>還：宜蘭</p>
+                  <p>運費：100</p>
                   <input
                     type="date"
                     value={date4.start}
@@ -296,22 +299,6 @@ function TestProducts() {
                       setdate4(newStart)
                     }}
                   />
-                  <select
-                    value={userSize2[i]}
-                    onChange={(e) => {
-                      const newSize = [...userSize2]
-                      newSize[i] = e.target.value
-                      setUserSize2(newSize)
-                    }}
-                  >
-                    {size2.map((el1, i1) => {
-                      return (
-                        <option value={el1} key={i1}>
-                          {el1}
-                        </option>
-                      )
-                    })}
-                  </select>
                   <select
                     value={qty4[i]}
                     onChange={(e) => {
@@ -340,7 +327,7 @@ function TestProducts() {
                       date4.end,
                       '台北',
                       '宜蘭',
-                      userSize2[i],
+                      100, //deliveryFee
                       el.price,
                       qty4[i],
                       'img'

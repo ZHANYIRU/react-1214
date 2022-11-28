@@ -96,7 +96,7 @@ function OrderNum({ momOrder, open, setOpen }) {
                     <label className={styled.orderNum} htmlFor={`${el.sid}`}>
                       <p> 訂單編號：{el.order_num}</p>
                       <p>金額：{moneyFormat(el.total)}</p>
-                      <i className="fa-solid fa-chevron-down"></i>
+                      <i className="fa-solid fa-chevron-up"></i>
                     </label>
                     <div
                       className={styled.recipient}
@@ -104,11 +104,11 @@ function OrderNum({ momOrder, open, setOpen }) {
                         closeWrap(el.sid)
                       }}
                     >
-                      <p>收件人：阿儒</p>
-                      <p>地址：新北市新莊區民安西路229巷6號5樓</p>
-                      <p>電話：0987654321</p>
-                      <p>付款方式：LINE PAY</p>
-                      <p>備註：安安</p>
+                      <p>收件人：{el.recipient}</p>
+                      <p>地址：{el.recipient_address}</p>
+                      <p>電話：{el.recipient_phone}</p>
+                      <p>付款方式：{el.payment}</p>
+                      <p>備註：{el.remark}</p>
                     </div>
                   </div>
                 </div>
@@ -117,6 +117,7 @@ function OrderNum({ momOrder, open, setOpen }) {
                   style={{
                     maxHeight: open.includes(el.sid) && '50vh',
                     overflow: open.includes(el.sid) && 'auto',
+                    paddingTop: open.includes(el.sid) && '10px',
                   }}
                 >
                   <div className={styled.pro}>

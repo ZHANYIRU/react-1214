@@ -7,6 +7,8 @@ import axios from 'axios'
 import _ from 'lodash'
 import InputIME from '../../components/InputIME'
 export default function Leaderboard() {
+  // 切換按鈕
+  const [switchBtn, setSwitchBtn] = useState(true)
   // 輸入用(可控表單元件用)
   const [inputKeyword, setInputKeyword] = useState('')
   // 按下搜尋按鈕用，真正搜尋用
@@ -16,17 +18,18 @@ export default function Leaderboard() {
   const getUsersBySearchWord = async (searchKeyword) => {
     try {
       if (switchBtn) {
+        console.log('hi')
         const response = await axios.get(
           'http://localhost:3001/product/borad/api3?search=' + searchKeyword
         )
         //設定到state裡
         setAllData(response.data)
-      } else if (switchBtn === false) {
-        const response = await axios.get(
-          'http://localhost:3001/product/borad/api?search=' + searchKeyword
-        )
-        //設定到state裡
-        setAllData(response.data)
+      } else if (!switchBtn) {
+        console.log('hi')
+        const a = yourFdData.filter((v, i) => {
+          return v.name.includes(searchKeyword)
+        })
+        setYourFdData(a)
       }
     } catch (e) {
       // 錯誤處理
@@ -38,6 +41,7 @@ export default function Leaderboard() {
     // 檢查，當都沒輸入時回復原本data
     if (searchKeyword === '') {
       fetchAll()
+      fetchYourFd()
       return
     }
     getUsersBySearchWord(searchKeyword)
@@ -81,17 +85,6 @@ export default function Leaderboard() {
     setAllData(data)
   }
 
-  // 切換按鈕
-  const [switchBtn, setSwitchBtn] = useState(true)
-  // const [fakeDataAll, setFakeDataAll] = useState([
-  //   {
-  //     member_sid: 1,
-  //     rank: 1,
-  //     avatar: 'https://pbs.twimg.com/media/FM12Yd3XEAIqM8S.jpg',
-  //     name: 'aka爬山高手',
-  //     total_height: 8377,
-  //   },
-  // ])
   const display = switchBtn ? allData : yourFdData
 
   const howHeight = (h) => {
@@ -107,7 +100,9 @@ export default function Leaderboard() {
     fetchAll()
     fetchYourFd()
   }, [])
-
+  // useEffect(() => {
+  //   getUsersBySearchWord()
+  // }, [switchBtn])
   return (
     <div className={styled.LeaderboardWrap}>
       <div className={styled.Leaderboard}>
