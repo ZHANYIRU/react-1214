@@ -242,16 +242,29 @@ function Product() {
                   key={v.product_sid}
                   to={'/product/' + v.product_sid}
                 >
-                  <div
-                    className={v.proof !== '0' ? styled.banner : ''}
-                    style={
-                      v.proof === '防水'
-                        ? { backgroundColor: 'rgb(0, 190, 164)' }
-                        : {}
-                    }
-                  >
-                    {v.proof !== '0' ? v.proof : ''}
-                  </div>
+                  {/* 右上角布條 抗水 防潑水 */}
+                  {v.proof === '抗水' || '防潑水' ? (
+                    <div
+                      className={v.proof !== '0' ? styled.banner : ''}
+                      style={
+                        v.proof === '防潑水'
+                          ? { backgroundColor: 'rgb(0, 190, 164)' }
+                          : {}
+                      }
+                    >
+                      {v.proof !== '0' ? v.proof : ''}
+                    </div>
+                  ) : (
+                    ''
+                  )}
+                  {/* 右上角布條  防水 */}
+                  {v.proof === '防水' ? (
+                    <div className={v.proof !== '0' ? styled.banner2 : ''}>
+                      {v.proof !== '0' ? v.proof : ''}
+                    </div>
+                  ) : (
+                    ''
+                  )}
                   <div className={styled.imgWrap}>
                     <img
                       src={`http://localhost:3001/imgs/zx/${v.product_img}`}

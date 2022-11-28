@@ -83,7 +83,8 @@ p{
         color: #000;
         font-weight: 700;
         &:hover{
-            font-size: 1.4rem;
+            color: #FF0F00;
+            font-size: 1.3rem;
         }
     }
     .product_nav_box1{
@@ -159,8 +160,27 @@ p{
             
                 /* 以上兩個，當作區塊時，必須使用 */
                 overflow: hidden;
-                background-color: rgb(0, 190, 164);
+                
                 background-color: rgb(84, 224, 249);
+                color: #fff;
+                font-size: 1.2rem;
+                line-height: 1.8rem;
+                width: 200px;
+                height: 30px;
+                position: absolute;
+                text-align: center;
+                top: 20px;
+                right: -60px;
+                transform: rotate(40deg);
+                z-index: 2;
+            }
+            .banner2{
+                /* content: url('檔案路徑'); */
+                display: block;
+            
+                /* 以上兩個，當作區塊時，必須使用 */
+                overflow: hidden;
+                background-color: rgb(95, 61, 246);
                 color: #fff;
                 font-size: 1.2rem;
                 line-height: 1.8rem;
@@ -438,6 +458,11 @@ input{
             font-size:.9rem;
             color: #000;
             font-weight: 700;
+            &:hover{
+                color: #FF0F00;
+                font-size: 1rem;
+                
+            }
         }
         .product_nav_box1{
                     @include nav_box;
