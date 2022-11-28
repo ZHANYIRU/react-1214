@@ -16,7 +16,6 @@ import Rental from './pages/rental/Rental'
 import Rental_detail from './pages/rental/Rental_detail'
 import Commnent from './pages/rental/components/Commnent'
 
-import ProductSee from './pages/rental/components/ProductSee'
 
 import Cart from './pages/Cart/Cart'
 import Order from './pages/Order/Order'
@@ -46,8 +45,8 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="/" element={<Home />} />
-              {/* <Route path="/product" element={<Product />} />
-              <Route path="/product/:product_sid" element={<ProductPage />} /> */}
+              <Route path="/product" element={<Product />} />
+              <Route path="/product/:product_sid" element={<ProductPage />} />
               <Route path="/camp" element={<Camp />} />
               <Route path="/camp/filter" element={<CampOneday />} />
               <Route
@@ -58,10 +57,7 @@ function App() {
               <Route path="/room/search" element={<RoomFilterPage />} />
               <Route path="/room/:room_sid" element={<RoomDetailPage />} />
               <Route path="/rental" element={<Rental />} />
-              <Route
-                path="/rental/:rental_product_sid"
-                element={<Rental_detail />}
-              />
+              <Route path="/rental/:sid" element={<Rental_detail />} />
               <Route path="/commnent" element={<Commnent />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/test" element={<TestProducts />} />

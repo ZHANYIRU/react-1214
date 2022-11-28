@@ -61,34 +61,27 @@
 
         .order{
             margin-right:20px;
-            width:400px;
+            width:450px;
             display:flex;
             justify-content: space-around;
 
             p{
                 cursor:pointer;
+                text-align:center;
             }
-            // :nth-chiild(2){
-            //     border-left:1px solid black;
-            // }
 
         }
     }
-    .order p:nth-child(2){
-        border-left :2px solid black;
-        padding-left:20px;
+    .order p{
+        border-left:2px solid black;
+        padding-left:10px;
     }
-    
-    .order p:nth-child(3){
-        border-left :2px solid black;
-        padding-left:20px;
-    }
-    
-    .order p:nth-child(4){
-        border-left :2px solid black;
-        padding-left:20px;
-    }
+    .order p:nth-child(1){
+        border-left :0px;
+        cursor:initial;
 
+    }
+    
     .rentalProductBox{
         width: 100%;
         display: flex;
