@@ -1,7 +1,9 @@
 import { useRef, useState, useEffect, useContext } from 'react'
 import styled from '../../../styles/cart-scss/Pay.module.scss'
 import ProCartContext from '../../../contexts/ProCartContext'
+import MemberContext from '../../../contexts/MemberContext'
 import axios from 'axios'
+import dayjs from 'dayjs'
 function subscribe(eventName, listener) {
   document.addEventListener(eventName, listener)
 }
@@ -9,79 +11,41 @@ function subscribe(eventName, listener) {
 function unsubscribe(eventName, listener) {
   document.removeEventListener(eventName, listener)
 }
-function Pay({ step, setStep }) {
-  const { pro, ren, room, camp, cartPrice, moneyFormat } =
+function Pay({ paySelect, familySelect, step, setStep, setForOk }) {
+  const { data } = useContext(MemberContext)
+  const { pro, ren, room, camp, cartPrice, moneyFormat, writeUser } =
     useContext(ProCartContext)
-  console.log(pro, ren, room, camp, cartPrice)
   const newLinePay = useRef(null)
   const [paid, setPaid] = useState(false)
   const testOrder = {
-    amount: cartPrice,
-    currency: 'TWD',
-    packages: [
-      {
-        id: 'products_1',
-        amount: cartPrice,
-        products: [
-          {
-            name: '資策會棒棒',
-            quantity: 1,
-            price: cartPrice,
-          },
-        ],
-      },
-    ],
+    order: {
+      amount: cartPrice,
+      currency: 'TWD',
+      packages: [
+        {
+          id: 'products_1',
+          amount: cartPrice,
+          products: [
+            {
+              name: 'hiking棒棒',
+              quantity: 1,
+              price: cartPrice,
+            },
+          ],
+        },
+      ],
+    },
+    totalOrder: {
+      pro: pro,
+      room: room,
+      camp: camp,
+      ren: ren,
+      memberSid: data.member_sid,
+      totalPrice: cartPrice,
+      pay: paySelect,
+      user: writeUser,
+    },
   }
-  // const testOrder = {
-  //   amount: cartPrice,
-  //   currency: 'TWD',
-  //   packages: [
-  //     {
-  //       id: 'pro_1',
-  //       amount: cartPrice,
-  //       products: [
-  //         {
-  //           name: '六角棒棒',
-  //           quantity: 1,
-  //           price: cartPrice,
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       id: 'camp_1',
-  //       amount: cartPrice,
-  //       products: [
-  //         {
-  //           name: '六角棒棒',
-  //           quantity: 1,
-  //           price: cartPrice,
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       id: 'room_1',
-  //       amount: cartPrice,
-  //       products: [
-  //         {
-  //           name: '六角棒棒',
-  //           quantity: 1,
-  //           price: cartPrice,
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       id: 'ren_1',
-  //       amount: cartPrice,
-  //       products: [
-  //         {
-  //           name: '六角棒棒',
-  //           quantity: 1,
-  //           price: cartPrice,
-  //         },
-  //       ],
-  //     },
-  //   ],
-  // }
   useEffect(() => {
     subscribe('paid', () => setPaid(true))
     if (paid) {
@@ -96,6 +60,13 @@ function Pay({ step, setStep }) {
   return (
     <>
       <div className={styled.choose}>
+        {/* <button
+          onClick={() => {
+            setStep(step + 1)
+          }}
+        >
+          下一步test
+        </button> */}
         <button
           onClick={() => {
             setStep(step - 1)
@@ -112,16 +83,24 @@ function Pay({ step, setStep }) {
         </p>
         <button
           onClick={async () => {
-            testOrder.orderId = new Date().getTime()
+            testOrder.order.orderId = new Date().getTime()
+            testOrder.order.packages[0].products[0].name = `訂單編號：${testOrder.order.orderId}`
             const { data } = await axios.post(
               `http://localhost:3001/order/createOrder`,
               testOrder
             )
             if (data.returnCode === '0000') {
+              setForOk({
+                orderN: testOrder.order.orderId,
+                family: familySelect,
+                pay: paySelect,
+                orderDay: dayjs(testOrder.order.orderId).format('YYYY-MM-DD'),
+                totalPrice: cartPrice,
+              })
               newLinePay.current = window.open(
                 `${data?.info.paymentUrl.web}`,
                 'hiking',
-                'height=800,width=1000'
+                'height=600,width=800'
               )
             }
           }}

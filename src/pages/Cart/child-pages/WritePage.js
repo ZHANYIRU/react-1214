@@ -2,7 +2,14 @@ import styled from '../../../styles/cart-scss/WritePage.module.scss'
 import CheckData from '../components/CheckData'
 import WriteData from '../components/WriteData'
 import { useEffect, useState } from 'react'
-function WritePage({ step, setStep }) {
+function WritePage({
+  step,
+  setStep,
+  familySelect,
+  setFamilySelect,
+  paySelect,
+  setPaySelect,
+}) {
   //旋轉狀態
   const [rotate, setRotate] = useState({
     transform: 'rotateY(180deg)',
@@ -61,7 +68,12 @@ function WritePage({ step, setStep }) {
       <div className={styled.camera}>
         <div className={styled.threeD} style={rotate}>
           <CheckData />
-          <WriteData />
+          <WriteData
+            familySelect={familySelect}
+            setFamilySelect={setFamilySelect}
+            paySelect={paySelect}
+            setPaySelect={setPaySelect}
+          />
         </div>
       </div>
     </>

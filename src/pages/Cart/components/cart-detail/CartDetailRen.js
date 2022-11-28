@@ -84,7 +84,7 @@ function CartDetailRen() {
                   <i
                     className="fa-regular fa-trash-can"
                     onClick={() => {
-                      const t = el.quantity * el.price
+                      const t = el.quantity * el.price + el.deliveryFee
                       change(el, i)
                       setTimeout(() => {
                         delOne4(el.sid, el.size, t)

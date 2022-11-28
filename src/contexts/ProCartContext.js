@@ -734,6 +734,13 @@ export const ProCartContextProvider = ({ children }) => {
       }
     })
   }
+  //結帳完清購物車
+  const cleanCart = () => {
+    dispatch({
+      type: 'RESET_CART',
+      payload: {},
+    })
+  }
   //填寫(收件人)
   const [writeUser, setWriteUser] = useState({
     name: '',
@@ -782,6 +789,7 @@ export const ProCartContextProvider = ({ children }) => {
         delOne3,
         delOne4,
         resetCart,
+        cleanCart,
         cartItem,
         cartPrice,
         pro,
