@@ -24,7 +24,7 @@ function Pay({ step, setStep }) {
         amount: cartPrice,
         products: [
           {
-            name: '六角棒棒',
+            name: '資策會棒棒',
             quantity: 1,
             price: cartPrice,
           },
