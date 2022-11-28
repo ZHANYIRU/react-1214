@@ -19,10 +19,6 @@ function OrderNum({ momOrder, open, setOpen }) {
       const newOpen = [...open, value]
       setOpen(newOpen)
     }
-    // else {
-    //   const newOpen = [...open, value]
-    //   setOpen(newOpen)
-    // }
   }
   const closeWrap = (sid) => {
     const newClose = open.filter((el2) => el2 !== sid)
@@ -306,7 +302,7 @@ function OrderNum({ momOrder, open, setOpen }) {
                                     alt=""
                                   />
                                 </div>
-                                <p>{el5.rental_product_name}</p>
+                                <p>{el5.rental_name}</p>
                                 <p>
                                   {el5.store_out}
                                   <i className="fa-solid fa-arrow-right"></i>

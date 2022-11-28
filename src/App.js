@@ -16,7 +16,6 @@ import Rental from './pages/rental/Rental'
 import Rental_detail from './pages/rental/Rental_detail'
 import Commnent from './pages/rental/components/Commnent'
 
-
 import Cart from './pages/Cart/Cart'
 import Order from './pages/Order/Order'
 import Confirm from './pages/Cart/child-pages/Confirm'

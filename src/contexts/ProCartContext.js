@@ -9,7 +9,7 @@ import Swal from 'sweetalert2'
 //       size: '',
 //       img: '',
 //       price: 0,
-//       qty: 0,
+//       quantity: 0,
 //     },
 //   ],
 //   items2: [
@@ -20,7 +20,7 @@ import Swal from 'sweetalert2'
 //       endDate: '',
 //       img: '',
 //       price: '',
-//       qty: 0,
+//       quantity: 0,
 //     },
 //   ],
 //   totalItem: 0,
