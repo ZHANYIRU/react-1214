@@ -35,7 +35,6 @@
                 height: 120px;
                 border-radius: 50%;
                 // background-image: linear-gradient(0deg,#ddd, #444);
-                background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
                 box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.5);
                 overflow: hidden;
                 margin: auto;
@@ -49,6 +48,14 @@
                     border: 10px solid transparent;
                     box-sizing: border-box;
                 }
+            }
+
+            .silver {
+                background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
+            }
+
+            .bronze {
+                background-image: conic-gradient(from 180deg at 50% 50%, #fff1c7 0deg, #b37e4a 69.37deg, #c27f3b 163.12deg, #98600c 275.62deg, #fff1c7 360deg);
             }
 
             h3 {

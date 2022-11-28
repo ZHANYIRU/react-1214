@@ -5,8 +5,6 @@ import { useEffect, useContext } from 'react'
 // import { useState } from 'react'
 import MemberContext from '../../contexts/MemberContext'
 
-//TODO 頭像外框變化
-
 function Member(props) {
   const navigate = useNavigate()
 
@@ -21,13 +19,29 @@ function Member(props) {
     getFollowing()
   }, [auth, data])
 
+  function avatarLevel(height = 0) {
+    if (height > 3000) {
+      return styled.silver
+    }
+    return styled.bronze
+  }
+
+  function titleLevel(height = 0) {
+    if (height > 3000) {
+      return '銀級玩家'
+    }
+    return '銅級玩家'
+  }
+
   return (
     <>
       <div className={styled.row}>
         <div className={styled.col}>
           <aside>
             <div
-              className={`${styled.avatar} ${styled.social}`}
+              className={`${styled.avatar} ${styled.social} ${avatarLevel(
+                data.total_height
+              )}`}
               onClick={() => {
                 navigate('/member')
               }}
@@ -52,7 +66,7 @@ function Member(props) {
             >
               {data.nickname}
             </h3>
-            <p className={styled.highlight}>銀級玩家</p>
+            <p className={styled.highlight}>{titleLevel(data.total_height)}</p>
             <div className={styled.socials}>
               <div
                 className={styled.social}

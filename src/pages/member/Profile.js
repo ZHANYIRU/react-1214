@@ -4,15 +4,12 @@ import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
 import MemberContext from '../../contexts/MemberContext'
 
-//TODO 頭像外框變化
-
 function Profile(props) {
-  
   const navigate = useNavigate()
   const location = useLocation()
   let usp = new URLSearchParams(location.search)
   let mid = usp.get('id')
-  
+
   let initInfo = {
     member_sid: mid,
     nickname: '',
@@ -133,6 +130,20 @@ function Profile(props) {
     }
   }
 
+  function avatarLevel(height = 0) {
+    if (height > 3000) {
+      return styled.silver
+    }
+    return styled.bronze
+  }
+
+  function titleLevel(height = 0) {
+    if (height > 3000) {
+      return '銀級玩家'
+    }
+    return '銅級玩家'
+  }
+
   useEffect(() => {
     if (!location.search) {
       navigate('/')
@@ -153,7 +164,9 @@ function Profile(props) {
         <div className={styled.col}>
           <aside className={styled.profile}>
             <div
-              className={`${styled.avatar} ${styled.social}`}
+              className={`${styled.avatar} ${styled.silver} ${
+                styled.social
+              } ${avatarLevel(info && info.total_height)}`}
               onClick={() => {
                 navigate(`/profile?id=${mid}`)
               }}
@@ -178,7 +191,9 @@ function Profile(props) {
             >
               {info && info.nickname}
             </h3>
-            <p className={styled.highlight}>銀級玩家</p>
+            <p className={styled.highlight}>
+              {titleLevel(info && info.total_height)}
+            </p>
             <div className={styled.socials}>
               <div
                 className={styled.social}

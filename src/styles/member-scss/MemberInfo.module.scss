@@ -267,6 +267,14 @@
 
             .contentTop {
 
+                .silver {
+                    background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
+                }
+
+                .bronze {
+                    background-image: conic-gradient(from 180deg at 50% 50%, #8A663B -46.87deg, #ecdac2 67.5deg, #B39471 183.75deg, #8A663B 313.12deg, #fff9f3 427.5deg);
+                }
+
                 h3 {
                     margin-bottom: 20px;
                 }
@@ -310,12 +318,13 @@
                         color: #999;
                     }
 
+
                     .avatar {
                         width: 60px;
                         height: 60px;
                         border-radius: 50%;
                         // background-image: linear-gradient(0deg,#ddd, #444);
-                        background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
+                        
                         overflow: hidden;
                         margin-right: 12px;
 
@@ -349,7 +358,6 @@
                             height: 45px;
                             border-radius: 50%;
                             // background-image: linear-gradient(0deg,#ddd, #444);
-                            background-image: conic-gradient(from 180deg at 50% 50%, #8A663B -46.87deg, #ecdac2 67.5deg, #B39471 183.75deg, #8A663B 313.12deg, #fff9f3 427.5deg);
                             overflow: hidden;
                             margin-right: 12px;
                             margin-left: 12px;
