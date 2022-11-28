@@ -1,25 +1,35 @@
 import { useEffect, useState } from 'react'
 import style from '../../../styles/room-scss/roomSelectBar.module.scss'
-// import dayjs from 'dayjs'
+import dayjs from 'dayjs'
 
 function RoomSelectBar({ detail }) {
   //房型資料定義
   const roomQTY = detail.room_qty
   const roomPrice = detail.room_price
-  const roomStart = detail.room_start_date
-  const defaultDate = roomStart && roomStart.split('T', 10)[0]
+  const roomEndDate = detail.room_end_date
+  const roomEnd = roomEndDate && roomEndDate.split('T', 10)[0]
 
   //預設入住日期加一天
-  const datePlus = Date.parse(defaultDate) + 86400000
-  // console.log('time', datePlus)
-  // const defaultCheckout = datePlus.getDate()
-  // console.log('date', defaultCheckout)
+  const date = Date.parse(new Date())
+  const today = dayjs(date).format('YYYY-MM-DD')
+  const tomorrow = dayjs(date + 86400000).format('YYYY-MM-DD')
+
+  const [night, setNight] = useState(1)
+
+  const stayNights = () => {
+    console.log('checkOut', checkOut)
+    console.log('checkIn', checkIn)
+    const days = (Date.parse(checkOut) - Date.parse(checkIn)) / 86400000
+    setNight(days)
+  }
 
   //記錄使用者選擇到的房間數
-  const [qty, setQty] = useState(0)
+  const [qty, setQty] = useState(1)
 
   //記錄使用者選擇的入住日期
-  const [checkIn, setCheckIn] = useState(defaultDate)
+  const [checkIn, setCheckIn] = useState(today)
+  //記錄使用者選擇的入住日期
+  const [checkOut, setCheckOut] = useState(tomorrow)
 
   //切換是否顯示selectBar
   const [showBar, setShowBar] = useState(false)
@@ -45,7 +55,7 @@ function RoomSelectBar({ detail }) {
     return () => {
       window.removeEventListener('scroll', show)
     }
-  }, [defaultDate])
+  }, [])
 
   return (
     <>
@@ -55,35 +65,48 @@ function RoomSelectBar({ detail }) {
           <label>入住日期</label>
           <input
             type="date"
-            value={checkIn}
+            min={today}
+            max={roomEnd && roomEnd}
+            value={checkIn ? checkIn : today}
             onChange={(e) => {
               const selDate = e.target.value
               setCheckIn(selDate)
             }}
           />
           <label>退房日期</label>
-          <input type="date" value="2022-02-11" />
+          <input
+            type="date"
+            min={tomorrow}
+            max={roomEnd && roomEnd}
+            value={checkOut ? checkOut : tomorrow}
+            onChange={(e) => {
+              const selDate = e.target.value
+              setCheckOut(selDate)
+            }}
+          />
           <label>床位</label>
           <select
             onChange={(e) => {
               const selectQty = e.target.value
               setQty(selectQty)
-              console.log(defaultDate)
+              stayNights()
             }}
           >
             {Array(roomQTY)
               .fill(1)
               .map((v, i) => {
                 return (
-                  <option key={i} value={i}>
-                    {i}
+                  <option key={i} value={i + 1}>
+                    {i + 1}
                   </option>
                 )
               })}
           </select>
         </div>
         <div className={style.price}>
-          共計：{qty > 0 ? `${qty * roomPrice}` : 0}元
+          共計{night && `${night}晚`}
+          {qty && `${qty}床位`}：
+          {qty && qty > 0 ? `${qty * roomPrice * night}` : 0}元
         </div>
         <div className={style.add}>加入購物車</div>
       </div>
