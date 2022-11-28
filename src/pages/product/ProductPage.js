@@ -399,7 +399,7 @@ export default function ProductPage() {
                       </div>
                     </div>
                   </div>
-                  <div className={styled.deliver}>
+                  {/* <div className={styled.deliver}>
                     <p>配送方式</p>
                     <label htmlFor="home">宅配</label>
                     <input type="radio" id="home" name="deliver" value="home" />
@@ -407,17 +407,40 @@ export default function ProductPage() {
                     <input type="radio" id="711" name="deliver" value="711" />
                     <label htmlFor="shop">實體店取貨</label>
                     <input type="radio" id="shop" name="deliver" value="shop" />
-                  </div>
+                  </div> */}
                   <div className={styled.buttonGroup}>
                     <button
                       className={styled.cart}
                       onClick={() => {
-                        addProCart('50', '我是衣服', 'S', 2500, 1)
+                        addProCart(
+                          product_sid,
+                          v.product_name,
+                          'S',
+                          Number(v.product_price),
+                          num,
+                          v.product_img
+                        )
                       }}
                     >
                       加入購物車
                     </button>
-                    <button className={styled.buy}>直接購買</button>
+                    <Link to="/cart">
+                      <button
+                        className={styled.buy}
+                        onClick={() => {
+                          addProCart(
+                            product_sid,
+                            v.product_name,
+                            'S',
+                            Number(v.product_price),
+                            num,
+                            v.product_img
+                          )
+                        }}
+                      >
+                        直接購買
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
