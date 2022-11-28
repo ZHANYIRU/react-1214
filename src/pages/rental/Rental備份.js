@@ -4,19 +4,17 @@ import Carousel from './components/Carousel'
 import Search from './components/Search'
 import RentalCard from './components/RentalCard'
 import rentalcss from '../../styles/rental-scss/rental.module.scss'
-// import RentalFilter from './components/RentalFilter'
+import RentalFilter from './components/RentalFilter'
 
 function Rental(props) {
   let [data, setData] = useState(null)
-  let [count, setCount] = useState(1)
 
   const rental_url = 'http://localhost:3001/rental/api'
 
   async function getList() {
     const response = await axios.get(rental_url)
     console.log(response.data)
-    setData(response.data.rows)
-    setCount(response.data.count['COUNT(1)'])
+    setData(response.data)
   }
 
   const priceOrder = function (text) {
@@ -47,14 +45,28 @@ function Rental(props) {
         {/* 搜尋元件 */}
         <Search setData={setData} />
 
-        {/* 篩選列表 */}
+        {/* 分類選單 */}
+        {/* <div className={rentalcss.categoryBox}>
+          <div className={rentalcss.box}>
+            <h2>最新上架</h2>
+            <h2>熱銷商品</h2>
+            <h2>露營帳篷</h2>
+          </div>
+          <div className={rentalcss.middle}>
+            <h2>商品類別</h2>
+          </div>
+          <div className={rentalcss.box}>
+            <h2>登山杖</h2>
+            <h2>保暖睡袋</h2>
+            <h2>登山躺椅</h2>
+          </div>
+        </div> */}
         <div className={rentalcss.orderShow}>
           <div className={rentalcss.filtermore}>
             <h2>進階搜尋</h2>
             <i className="fa fa-angle-double-down" aria-hidden="true"></i>
           </div>
           <div className={rentalcss.order}>
-            <p>一共{count}筆數</p>
             <p>最新上架</p>
             <p>最熱銷</p>
             <p onClick={() => priceOrder('highToLow')}>價格高到低</p>
@@ -66,7 +78,7 @@ function Rental(props) {
         <div className={rentalcss.rentalProductBox}>
           {data &&
             data.map((d) => {
-              return <RentalCard data={d} key={d.sid} />
+              return <RentalCard data={d} key={d.rental_product_sid} />
             })}
         </div>
       </div>
