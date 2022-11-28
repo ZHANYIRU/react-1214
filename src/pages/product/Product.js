@@ -139,7 +139,6 @@ function Product() {
             onClick={(e) => {
               searchStyle(e)
             }}
-            
           >
             <form action="">
               <input
@@ -243,6 +242,16 @@ function Product() {
                   key={v.product_sid}
                   to={'/product/' + v.product_sid}
                 >
+                  <div
+                    className={v.proof !== '0' ? styled.banner : ''}
+                    style={
+                      v.proof === '防水'
+                        ? { backgroundColor: 'rgb(0, 190, 164)' }
+                        : {}
+                    }
+                  >
+                    {v.proof !== '0' ? v.proof : ''}
+                  </div>
                   <div className={styled.imgWrap}>
                     <img
                       src={`http://localhost:3001/imgs/zx/${v.product_img}`}

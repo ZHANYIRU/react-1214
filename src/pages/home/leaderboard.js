@@ -24,13 +24,14 @@ export default function Leaderboard() {
         )
         //設定到state裡
         setAllData(response.data)
-      } else if (!switchBtn) {
-        console.log('hi')
-        const a = yourFdData.filter((v, i) => {
-          return v.name.includes(searchKeyword)
-        })
-        setYourFdData(a)
       }
+      //else if (!switchBtn) {
+      //   console.log('hi')
+      //   const a = yourFdData.filter((v, i) => {
+      //     return v.name.includes(searchKeyword)
+      //   })
+      //   setYourFdData(a)
+      // }
     } catch (e) {
       // 錯誤處理
       console.error(e.message)
@@ -41,7 +42,7 @@ export default function Leaderboard() {
     // 檢查，當都沒輸入時回復原本data
     if (searchKeyword === '') {
       fetchAll()
-      fetchYourFd()
+      // fetchYourFd()
       return
     }
     getUsersBySearchWord(searchKeyword)
@@ -131,51 +132,44 @@ export default function Leaderboard() {
             <div className={styled.name}>名稱</div>
             <div className={styled.height}>累積高度</div>
           </div>
-          {display.map((v, i) => {
-            const rank = i + 1
-            return (
-              <li key={v.member_sid}>
-                <div className={styled.ranking}>
-                  {rank}
-                  {rank == 1 ? (
-                    <i
-                      className="fa-solid fa-medal"
-                      style={{ color: 'gold' }}
-                    ></i>
-                  ) : (
-                    ''
-                  )}
-                  {rank == 2 ? (
-                    <i
-                      className="fa-solid fa-medal"
-                      style={{ color: 'silver' }}
-                    ></i>
-                  ) : (
-                    ''
-                  )}
-                  {rank == 3 ? (
-                    <i
-                      className="fa-solid fa-medal"
-                      style={{ color: 'brown' }}
-                    ></i>
-                  ) : (
-                    ''
-                  )}
-                </div>
-                <div className={styled.nameWrap}>
-                  <div className={styled.empty}>
-                    <div className={styled.imgBorder}>
-                      <div className={styled.imgWrap}>
-                        <img src={v.avatar} alt="" />
-                      </div>
-                    </div>
-                    <p>{v.name}</p>
+          <ul
+            className={display.length > 4 ? `${styled.flexUl}` : ''}
+            // style={
+            //   display.length > 5 ? { overflowY: 'scroll'} : ''
+            // }
+          >
+            {display.map((v, i) => {
+              const rank = i + 1
+              return (
+                <li key={v.member_sid}>
+                  <div className={styled.ranking}>
+                    {rank === 1 || 2 || 3 ? (
+                      <img
+                        src={`http://localhost:3001/imgs/zx/borad_${rank}.png`}
+                        alt=""
+                      />
+                    ) : (
+                      rank
+                    )}
+                    {rank !== 1 && rank !== 2 && rank !== 3 ? rank : ''}
                   </div>
-                </div>
-                <div className={styled.height}>{howHeight(v.total_height)}</div>
-              </li>
-            )
-          })}
+                  <div className={styled.nameWrap}>
+                    <div className={styled.empty}>
+                      <div className={styled.imgBorder}>
+                        <div className={styled.imgWrap}>
+                          <img src={v.avatar} alt="" />
+                        </div>
+                      </div>
+                      <p>{v.name}</p>
+                    </div>
+                  </div>
+                  <div className={styled.height}>
+                    {howHeight(v.total_height)}
+                  </div>
+                </li>
+              )
+            })}
+          </ul>
           <div className={styled.switchBtn}>
             <div
               className={styled.btnLeft}

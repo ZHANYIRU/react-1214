@@ -20,10 +20,19 @@ export default function ProductPage() {
   const changePic = useRef()
   // 尺寸選取
   const [size, setSize] = useState({
-    S: false,
+    S: true,
     M: false,
     L: false,
   })
+  const whatSize = () => {
+    if (Object.values(size)[0]) {
+      return 'S'
+    } else if (Object.values(size)[1]) {
+      return 'M'
+    } else if (Object.values(size)[2]) {
+      return 'L'
+    }
+  }
   //尺寸方法
   const choseSize = (choseOption) => {
     if (choseOption === 'S') {
@@ -411,11 +420,12 @@ export default function ProductPage() {
                   <div className={styled.buttonGroup}>
                     <button
                       className={styled.cart}
-                      onClick={() => {
+                      onClick={async () => {
+                        const SML = await whatSize()
                         addProCart(
                           product_sid,
                           v.product_name,
-                          'S',
+                          SML,
                           Number(v.product_price),
                           num,
                           v.product_img
@@ -427,11 +437,12 @@ export default function ProductPage() {
                     <Link to="/cart">
                       <button
                         className={styled.buy}
-                        onClick={() => {
+                        onClick={async () => {
+                          const SML = await whatSize()
                           addProCart(
                             product_sid,
                             v.product_name,
-                            'S',
+                            SML,
                             Number(v.product_price),
                             num,
                             v.product_img

@@ -34,6 +34,7 @@ import ProfileInfo from './pages/member/child-pages/ProfileInfo'
 import SocialWall from './pages/member/SocialWall'
 import RoomFilterPage from './pages/room/RoomFilterPage'
 import RoomDetailPage from './pages/room/RoomDetailPage'
+import Leaderboard from './pages/home/leaderboard'
 
 function App() {
   return (
@@ -66,6 +67,7 @@ function App() {
               <Route path="/cart" element={<Cart />} />
               <Route path="/test" element={<TestProducts />} />
               <Route path="/social" element={<SocialWall />} />
+              <Route path="/leaderboard" element={<Leaderboard />} />
               <Route path="/member" element={<Member />}>
                 <Route index element={<MemberInfo />} />
                 <Route path="/member/orders" element={<Order />} />
