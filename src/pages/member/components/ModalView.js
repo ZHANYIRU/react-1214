@@ -170,7 +170,11 @@ export default function ModalView({
                   onClick={() => {
                     setIsView(false)
                     setCurrentPost(0)
-                    navgigate(`/profile?id=${showData.member_sid}`)
+                    navgigate(
+                      `${showData.member_sid}` === `${data.member_sid}`
+                        ? `/member`
+                        : `/profile?id=${showData.member_sid}`
+                    )
                   }}
                 >
                   <img
@@ -228,7 +232,11 @@ export default function ModalView({
                           onClick={() => {
                             setIsView(false)
                             setCurrentPost(0)
-                            navgigate(`/profile?id=${v.member_sid}`)
+                            navgigate(
+                              `${v.member_sid}` === `${data.member_sid}`
+                                ? `/member`
+                                : `/profile?id=${v.member_sid}`
+                            )
                           }}
                         >
                           <img

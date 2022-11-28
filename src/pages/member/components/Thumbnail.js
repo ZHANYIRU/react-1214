@@ -18,7 +18,7 @@ export default function Thumbnail({
     >
       <img
         // src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
-        src={`http://localhost:3001/uploads/${postData.image_url}`}
+        src={`http://localhost:3001/uploads/thumb_${postData.image_url}`}
         alt="post"
       ></img>
       <div className={styled.postInfo}>

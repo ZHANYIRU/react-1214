@@ -381,7 +381,7 @@ export default function MemberInfo() {
                         {/* <option>地區</option> */}
                         {locations.map((v, i) => {
                           return (
-                            <option key={10 + i} value={v.sid}>
+                            <option key={i} value={v.sid}>
                               {v.name}
                             </option>
                           )

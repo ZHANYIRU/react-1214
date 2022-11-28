@@ -1,15 +1,39 @@
 import styled from '../../styles/member-scss/MemberInfo.module.scss'
 import styles from '../../styles/member-scss/SocialWall.module.scss'
 import ThumbnailView from './components/ThumbnailView'
-import { useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import ModalView from './components/ModalView'
 import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
+import MemberContext from '../../contexts/MemberContext'
 
 export default function SocialWall() {
+  const { data, auth } = useContext(MemberContext)
+
   const [isView, setIsView] = useState(false)
   const [tabFollow, setTabFollow] = useState(false)
+  const [socialList, setSocialList] = useState([])
+  const [currentPost, setCurrentPost] = useState(0)
 
   const navigate = useNavigate()
+
+  async function getSocialList() {
+    let fidQuery = ''
+    if (data.member_sid && tabFollow) {
+      fidQuery = `?fid=${data.member_sid}`
+    }
+
+    const rows = await axios.get(
+      `http://localhost:3001/member/social/api${fidQuery}`
+    )
+
+    setSocialList(rows.data)
+    console.log('social wall data length:' + rows.data.length)
+  }
+
+  useEffect(() => {
+    getSocialList()
+  }, [tabFollow])
 
   return (
     <>
@@ -33,6 +57,9 @@ export default function SocialWall() {
                   tabFollow ? `${styles.tab} ${styles.active}` : `${styles.tab}`
                 }
                 onClick={() => {
+                  if(!data.member_sid){
+                    return alert('請先登入會員')
+                  }
                   setTabFollow(true)
                 }}
               >
@@ -41,17 +68,26 @@ export default function SocialWall() {
             </div>
             <div className={styles.content}>
               <div className={styled.postList}>
-                {Array(14)
-                  .fill(1)
-                  .map((v, i) => {
-                    {/* return <ThumbnailView setIsView={setIsView} key={i} /> */}
-                  })}
+                {socialList.map((v, i) => {
+                  return (
+                    <ThumbnailView
+                      setIsView={setIsView}
+                      key={i}
+                      postData={v}
+                      postIndex={i}
+                      setCurrentPost={setCurrentPost}
+                    />
+                  )
+                })}
               </div>
             </div>
             <div className={styles.tags}>
               <div
                 className={`${styles.tag} ${styles.sel}`}
                 onClick={() => {
+                  if(!auth) {
+                    return alert ('請先登入會員')
+                  }
                   navigate('/member')
                 }}
               >
@@ -65,7 +101,16 @@ export default function SocialWall() {
           </div>
         </div>
       </div>
-      {isView && <ModalView setIsView={setIsView} />}
+      {isView && (
+        <ModalView
+          setIsView={setIsView}
+          showData={socialList[currentPost]}
+          setCurrentPost={setCurrentPost}
+          currentPost={currentPost}
+          listLength={socialList.length}
+          getPostList={getSocialList}
+        />
+      )}
     </>
   )
 }
