@@ -16,10 +16,10 @@ import Rental from './pages/rental/Rental'
 import Rental_detail from './pages/rental/Rental_detail'
 import Commnent from './pages/rental/components/Commnent'
 
-import ProductSee from './pages/rental/components/ProductSee'
 
 import Cart from './pages/Cart/Cart'
 import Order from './pages/Order/Order'
+import Confirm from './pages/Cart/child-pages/Confirm'
 import TestProducts from './pages/Cart/TestProducts/TestProducts'
 import Member from './pages/member/Member'
 import Login from './pages/member/Login'
@@ -59,12 +59,10 @@ function App() {
               <Route path="/room/search" element={<RoomFilterPage />} />
               <Route path="/room/:room_sid" element={<RoomDetailPage />} />
               <Route path="/rental" element={<Rental />} />
-              <Route
-                path="/rental/:rental_product_sid"
-                element={<Rental_detail />}
-              />
+              <Route path="/rental/:sid" element={<Rental_detail />} />
               <Route path="/commnent" element={<Commnent />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/pay/confirm" element={<Confirm />} />
               <Route path="/test" element={<TestProducts />} />
               <Route path="/social" element={<SocialWall />} />
               <Route path="/leaderboard" element={<Leaderboard />} />

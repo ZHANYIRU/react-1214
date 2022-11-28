@@ -1,5 +1,10 @@
-.cat{
+.filter{
     width: 100%;
+    display: flex;
+}
+
+.cat{
+    width: 80%;
     display: flex;
     justify-content: left;
 }
@@ -11,14 +16,20 @@
     flex-direction: column;
     color: black;
 
-    a{
+    Link{
         font-size: 20px;
         padding: 10px;
     }
+    div{
+        font-size: 20px;
+        padding: 10px;
+        cursor: pointer;
+    }
 }
+
 .catright{
     padding: 100px 0 70px 0;
-    width: 70%;
+    width: 90%;
 }
 
 .cards{

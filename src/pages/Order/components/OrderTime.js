@@ -1,9 +1,7 @@
 import dayjs from 'dayjs'
-import MemberContext from '../../../contexts/MemberContext'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import styled from '../../../styles/order-scss/OrderTime.module.scss'
 function OrderTime({ open, momOrder }) {
-  const { auth } = useContext(MemberContext)
   const { rows, proRows, roomRows, renRows, camRows } = momOrder
   const [total, setTotal] = useState([])
   const test = () => {
@@ -21,10 +19,8 @@ function OrderTime({ open, momOrder }) {
         )
       }
     }
-    console.log(rows)
   }
   useEffect(() => {
-    console.log(789)
     test()
   }, [rows])
 

@@ -7,7 +7,7 @@ import axios from 'axios'
 function CampHomeList() {
   //title資料
   const [campTitle, setCampTitle] = useState([{}])
-  //活動產品資料
+  //all活動產品資料
   const [campData, setCampData] = useState([{}])
 
   let title = 'title'

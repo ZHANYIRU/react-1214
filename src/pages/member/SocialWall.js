@@ -26,7 +26,7 @@ export default function SocialWall() {
                   setTabFollow(false)
                 }}
               >
-                <h3>全站山友</h3>
+                <h3>最新分享</h3>
               </div>
               <div
                 className={
@@ -44,7 +44,7 @@ export default function SocialWall() {
                 {Array(14)
                   .fill(1)
                   .map((v, i) => {
-                    return <ThumbnailView setIsView={setIsView} key={i} />
+                    {/* return <ThumbnailView setIsView={setIsView} key={i} /> */}
                   })}
               </div>
             </div>

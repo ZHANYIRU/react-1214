@@ -1,55 +1,151 @@
 import styled from '../../styles/member-scss/Member.module.scss'
-import { Outlet, useNavigate, useLocation, useFetcher } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'
+import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
-import { useContext } from 'react'
 import MemberContext from '../../contexts/MemberContext'
 
+//TODO 頭像外框變化
+
 function Profile(props) {
+  
   const navigate = useNavigate()
   const location = useLocation()
-
-  const usp = new URLSearchParams(location.search)
-  const mid = usp.get('id')
-
+  let usp = new URLSearchParams(location.search)
+  let mid = usp.get('id')
+  
   let initInfo = {
     member_sid: mid,
     nickname: '',
     avatar: '',
     intro: '',
+    total_height: 0,
   }
 
-  const { data } = useContext(MemberContext)
+  const { data, auth, getFollow, getFollowing } = useContext(MemberContext)
+
+  // console.log('目前登入會員為:' + data.member_sid)
 
   const [info, setInfo] = useState(initInfo)
+  const [follow, setFollow] = useState([])
+  const [following, setFollowing] = useState([])
+  const [isFollowing, setIsFollowing] = useState(false)
 
   async function getInfo() {
+    usp = new URLSearchParams(location.search)
+    mid = usp.get('id')
+
     const result = await axios.get(
       `http://localhost:3001/member/profile/api?mid=${mid}`
     )
 
-    // console.log(result.data)
-
-    if (result.data.rows) {
+    if (result.data && result.data.rows[0]) {
       setInfo(result.data.rows[0])
     } else {
       navigate('/')
     }
   }
 
-  console.log()
+  async function getMyFollow() {
+    const rows = await axios.get(
+      `http://localhost:3001/member/follow/api?mid=${mid}`
+    )
+    // console.log('目前登入會員為:' + data.member_sid)
+    // console.log('會員的關注者為:'+ JSON.stringify(rows.data))
+
+    setIsFollowing(false)
+
+    rows.data.map((v, i) => {
+      if (+v.member_sid === +data.member_sid) {
+        setIsFollowing(true)
+      }
+      return null
+    })
+
+    setFollow(rows.data)
+    // console.log('followed by:' + rows.data.length)
+  }
+
+  async function getMyFollowing() {
+    const rows = await axios.get(
+      `http://localhost:3001/member/following/api?fid=${mid}`
+    )
+
+    setFollowing(rows.data)
+    // console.log('following:' + rows.data.length)
+  }
+
+  async function addFollow() {
+    const token = localStorage.getItem('token') || ''
+
+    if (!token) {
+      return alert('請先登入會員')
+    }
+    const result = await axios.post(
+      `http://localhost:3001/member/follow/api?mid=${mid}`,
+      {
+        mid: mid,
+      },
+      {
+        headers: {
+          Authorization: token ? `Bearer ${token}` : '',
+        },
+      }
+    )
+
+    console.log(result.data.success)
+    if (result.data.success) {
+      // alert('關注成功')
+      setIsFollowing(true)
+      getFollow()
+      getFollowing()
+      getMyFollow()
+      getFollowing()
+    }
+    if (!result.data.success) {
+      alert('關注失敗')
+    }
+  }
+
+  async function unfollow() {
+    const token = localStorage.getItem('token') || ''
+
+    if (!token) {
+      return alert('請先登入會員')
+    }
+
+    const result = await axios.delete(
+      `http://localhost:3001/member/follow/api?mid=${mid}`,
+      {
+        headers: {
+          Authorization: token ? `Bearer ${token}` : '',
+        },
+      }
+    )
+    // console.log(result.data)
+    if (result.data.success) {
+      // alert('取消關注成功')
+      setIsFollowing(false)
+      getFollow()
+      getFollowing()
+    }
+    if (!result.data.success) {
+      alert('取消關注失敗')
+    }
+  }
 
   useEffect(() => {
     if (!location.search) {
       navigate('/')
     }
 
-    if (`${info.member_sid}` === `${data.member_sid}`) {
+    if (`${mid}` === `${data.member_sid}`) {
       navigate('/member')
     }
 
+    getMyFollow()
+    getMyFollowing()
     getInfo()
-  }, [info.member_sid])
+  }, [mid, data.member_sid, isFollowing])
 
   return (
     <>
@@ -59,12 +155,12 @@ function Profile(props) {
             <div
               className={`${styled.avatar} ${styled.social}`}
               onClick={() => {
-                navigate(`/profile/?mid=${mid}`)
+                navigate(`/profile?id=${mid}`)
               }}
             >
-              {info.avatar ? (
+              {info && info.avatar ? (
                 <img
-                  src={`http://localhost:3001/uploads/thumb_${info.avatar}`}
+                  src={`http://localhost:3001/uploads/avatar_${info.avatar}`}
                   alt="avatar"
                 ></img>
               ) : (
@@ -77,36 +173,61 @@ function Profile(props) {
             <h3
               className={styled.social}
               onClick={() => {
-                navigate(`/profile/?mid=${mid}`)
+                navigate(`/profile?id=${mid}`)
               }}
             >
-              {info.nickname}
+              {info && info.nickname}
             </h3>
             <p className={styled.highlight}>銀級玩家</p>
             <div className={styled.socials}>
               <div
                 className={styled.social}
                 onClick={() => {
-                  navigate(`/profile/following/?mid=${1}`)
+                  navigate(`/profile/following?id=${mid}`)
                 }}
               >
                 <p className={styled.highlight}>關注</p>
-                <h3>7</h3>
+                <h3>{following.length}</h3>
               </div>
               <div
                 className={styled.social}
                 onClick={() => {
-                  navigate('/profile/followers/?mid=1')
+                  navigate(`/profile/followers?id=${mid}`)
                 }}
               >
                 <p className={styled.highlight}>粉絲</p>
-                <h3>43</h3>
+                <h3>{follow.length}</h3>
               </div>
             </div>
-            <button className={styled.follow}>
-              <i className="fa-solid fa-user-plus"></i> 關注他
-            </button>
-            <pre className={styled.intro}>{info.intro}</pre>
+            {isFollowing ? (
+              <button
+                className={styled.follow}
+                onClick={() => {
+                  if (!auth) {
+                    alert('請先登入會員')
+                  } else {
+                    unfollow()
+                  }
+                }}
+              >
+                已關注
+              </button>
+            ) : (
+              <button
+                className={styled.follow}
+                onClick={() => {
+                  if (!auth) {
+                    alert('請先登入會員')
+                  } else {
+                    addFollow()
+                  }
+                }}
+              >
+                <i className="fa-solid fa-user-plus"></i> 關注他
+              </button>
+            )}
+
+            <pre className={styled.intro}>{info && info.intro}</pre>
           </aside>
           <article>
             <Outlet />
