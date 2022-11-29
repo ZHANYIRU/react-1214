@@ -54,6 +54,21 @@ function climbAnimation(distance) {
   return climb
 }
 
+function showMotto(height) {
+  let str = '新增一個貼文, 開始攻頂！'
+  if(height > 0){
+    str = '踏出第一步了, 加油！'
+  }
+  if(height > 5000){
+    str = '超過半山腰, 再接再厲！'
+  }
+  if(height > 7500){
+    str = '山頂就在眼前, 再加把勁！'
+  }
+
+  return <h3>{str}</h3>
+}
+
 export default function TotalHeight(totalHeight) {
   return (
     <>
@@ -61,6 +76,7 @@ export default function TotalHeight(totalHeight) {
         <img className={styles.sun} src={'./img/sun_face.png'} alt="sun" />
         <img className={styles.cloud1} src={'./img/cloud3.png'} alt="cloud" />
         <img className={styles.cloud2} src={'./img/cloud5.png'} alt="cloud" />
+        {showMotto(totalHeight.totalHeight.height)}
         <div className={styles.AnimationBox}>
           <Trekker
             className={styles.trekker}
