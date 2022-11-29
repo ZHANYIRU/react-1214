@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from 'react'
+
 import { Link, useParams, useLocation } from 'react-router-dom'
 import Slider from './components/slider'
 import Product_filter from './components/product_filter'
 import { useMediaQuery } from 'react-responsive'
-import _ from 'lodash'
+import _, { set } from 'lodash'
 
 import axios from 'axios'
 import styled from '../../styles/product-scss/product.module.scss'
@@ -12,6 +13,8 @@ import img2 from './img/img2.jpg'
 import img3 from './img/img3.jpg'
 
 function Product() {
+  //卡片
+  const [howLongCard, setHowLongCard] = useState(16)
   //圖片
   const data = [
     {
@@ -58,11 +61,11 @@ function Product() {
   const mobile = useMediaQuery({ query: '(max-width:390px)' })
   //附style給filter
   const [fixedd, setFixedd] = useState(false)
-
+  let windowScrollY = window.scrollY
   //偵測滾動時，filter要吸附的位置
   const scrollFilter = () => {
-    const windowScrollY = window.scrollY
     let Window_W = window.innerWidth
+    // console.log(windowScrollY)
     if (windowScrollY > 770 && Window_W > 500) {
       setFixedd(true)
     } else if (windowScrollY < 770 && Window_W > 500) {
@@ -83,7 +86,15 @@ function Product() {
       setMob(false)
     }
   }
-  //分頁呈現畫面
+
+  // const addCard = () => {
+  //   for (let i = 1; i <= datas.length; i++) {
+  //     if (windowScrollY >= `${710 + 900 * i}px`) {
+  //       return setHowLongCard(howLongCard + 16)
+  //     }
+  //   }
+  // }
+  // 抓取所有商品
   const [datas, setDatas] = useState([
     {
       product_sid: '1',
@@ -99,33 +110,20 @@ function Product() {
       size: 'S',
     },
   ])
-  // 抓取所有商品
-  const [getData, setGetData] = useState([{}])
-
-  //設定頁數
-  const [nowPage, setNowPage] = useState(1)
-  //設定每頁幾筆
-  const [perPage, setPerPage] = useState(20)
-  //設定總頁數
-  const [totalPage, setTotalPage] = useState(0)
 
   //Fetch產品
   const getProductData = async (url) => {
     try {
       const response = await axios.get(`http://localhost:3001/product/${url}`)
       const r = response.data
+
       setDatas(r)
-      setGetData(r)
-      // const pageList = _.chunk(r, perPage)
-      // console.log(pageList)
-      // if (pageList.length > 0) {
-      //   setTotalPage(pageList.length)
-      // }
     } catch (e) {
       console.log(e.message)
     }
   }
 
+  const min = Math.min(howLongCard, datas.length)
   //-------------------------------------------------------------------
   useEffect(() => {
     getProductData('all')
@@ -173,7 +171,6 @@ function Product() {
             </form>
           </div>
         )}
-
         {/* 種類專區 */}
         <div className={styled.product_nav} onDrag={() => {}}>
           <div className={styled.product_nav_box1}>
@@ -234,67 +231,142 @@ function Product() {
 
         {/* 卡片專區 */}
 
-        {/* <div className={styled.cardBigBox}> */}
-        <Product_filter
-          fixedd={fixedd}
-          datas={datas}
-          setDatas={setDatas}
-          inputKeyword={inputKeyword}
-          setInputKeyword={setInputKeyword}
-          setSearchKeyWord={setSearchKeyWord}
-          getProductData={getProductData}
-        />
-        <div className={styled.cardbox}>
-          {datas
+        <div className={styled.cardBigBox}>
+          <Product_filter
+            fixedd={fixedd}
+            datas={datas}
+            setDatas={setDatas}
+            inputKeyword={inputKeyword}
+            setInputKeyword={setInputKeyword}
+            setSearchKeyWord={setSearchKeyWord}
+            getProductData={getProductData}
+          />
+          <div className={styled.cardbox}>
+            {/* {datas
             .filter((v, i) => {
-              return v.product_name.includes(searchKeyword)
-            })
-            .map((v, i) => {
-              return (
-                <Link
-                  className={styled.card}
-                  key={v.product_sid}
-                  to={'/product/' + v.product_sid}
-                >
-                  {/* 右上角布條 抗水 防潑水 */}
-                  {v.proof === '抗水' || '防潑水' ? (
-                    <div
-                      className={v.proof !== '0' ? styled.banner : ''}
-                      style={
-                        v.proof === '防潑水'
-                          ? { backgroundColor: 'rgb(0, 190, 164)' }
-                          : {}
-                      }
-                    >
-                      {v.proof !== '0' ? v.proof : ''}
+              if (searchKeyword) {
+                return v.product_name.includes(searchKeyword)
+              } else {
+                return v
+              }
+            })} */}
+            {Array(min)
+              .fill(1)
+              .filter((v, i) => {
+                if (searchKeyword) {
+                  return v.product_name.includes(searchKeyword)
+                } else {
+                  return v
+                }
+              })
+              .map((v2, i) => {
+                const v = datas[i]
+
+                return (
+                  <Link
+                    className={styled.card}
+                    key={v.product_sid}
+                    to={'/product/' + v.product_sid}
+                  >
+                    {/* 右上角布條 抗水 防潑水 */}
+                    {v.proof === '抗水' || '防潑水' ? (
+                      <div
+                        className={v.proof !== '0' ? styled.banner : ''}
+                        style={
+                          v.proof === '防潑水'
+                            ? { backgroundColor: 'rgb(0, 190, 164)' }
+                            : {}
+                        }
+                      >
+                        {v.proof !== '0' ? v.proof : ''}
+                      </div>
+                    ) : (
+                      ''
+                    )}
+                    {/* 右上角布條  防水 */}
+                    {v.proof === '防水' ? (
+                      <div className={v.proof !== '0' ? styled.banner2 : ''}>
+                        {v.proof !== '0' ? v.proof : ''}
+                      </div>
+                    ) : (
+                      ''
+                    )}
+                    <div className={styled.imgWrap}>
+                      <img
+                        src={`http://localhost:3001/imgs/zx/${v.product_img}`}
+                        alt=""
+                      />
                     </div>
-                  ) : (
-                    ''
-                  )}
-                  {/* 右上角布條  防水 */}
-                  {v.proof === '防水' ? (
-                    <div className={v.proof !== '0' ? styled.banner2 : ''}>
-                      {v.proof !== '0' ? v.proof : ''}
+                    <p className={styled.p}>{v.product_name}</p>
+                    <h2>
+                      金額：<span>{moneyFormat(v.product_price)}</span>
+                    </h2>
+                  </Link>
+                )
+              })}
+
+            {/* 舊資料 */}
+            {/* {datas
+              .filter((v, i) => {
+                if (searchKeyword) {
+                  return v.product_name.includes(searchKeyword)
+                } else {
+                  return v
+                }
+              })
+              .map((v, i) => {
+                return (
+                  <Link
+                    className={styled.card}
+                    key={v.product_sid}
+                    to={'/product/' + v.product_sid}
+                  >
+                   
+                    {v.proof === '抗水' || '防潑水' ? (
+                      <div
+                        className={v.proof !== '0' ? styled.banner : ''}
+                        style={
+                          v.proof === '防潑水'
+                            ? { backgroundColor: 'rgb(0, 190, 164)' }
+                            : {}
+                        }
+                      >
+                        {v.proof !== '0' ? v.proof : ''}
+                      </div>
+                    ) : (
+                      ''
+                    )}
+                
+                    {v.proof === '防水' ? (
+                      <div className={v.proof !== '0' ? styled.banner2 : ''}>
+                        {v.proof !== '0' ? v.proof : ''}
+                      </div>
+                    ) : (
+                      ''
+                    )}
+                    <div className={styled.imgWrap}>
+                      <img
+                        src={`http://localhost:3001/imgs/zx/${v.product_img}`}
+                        alt=""
+                      />
                     </div>
-                  ) : (
-                    ''
-                  )}
-                  <div className={styled.imgWrap}>
-                    <img
-                      src={`http://localhost:3001/imgs/zx/${v.product_img}`}
-                      alt=""
-                    />
-                  </div>
-                  <p className={styled.p}>{v.product_name}</p>
-                  <h2>
-                    金額：<span>{moneyFormat(v.product_price)}</span>
-                  </h2>
-                </Link>
-              )
-            })}
+                    <p className={styled.p}>{v.product_name}</p>
+                    <h2>
+                      金額：<span>{moneyFormat(v.product_price)}</span>
+                    </h2>
+                  </Link>
+                )
+              })} */}
+          </div>
         </div>
+        <button
+          onClick={() => {
+            setHowLongCard(howLongCard + 16)
+          }}
+        >
+          按我看更多
+        </button>
       </div>
-      {/* </div> */}
     </>
   )
 }
