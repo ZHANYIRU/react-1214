@@ -44,15 +44,95 @@
     }
 
     .postMap {
-        width: 35%;
+        width: 34%;
+        // background-color: #ccc;
         aspect-ratio: 1/1.5;
-        background-color: #ccc;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+
+        .mapBg {
+            width: 100%;
+        }
+        h4{
+            position: absolute;
+            bottom: 0;
+        }
+
+        .pinBox {
+            position: absolute; 
+            transform: translate(-50%, 50%);
+            z-index: 10;
+            i {
+                font-size: 25px;
+                position: relative;
+                color: red;
+                z-index: 0;
+            }
+            .pinInfo {
+                position: absolute;
+                width: 200px;
+                transform: translate(-45%);
+                z-index: 10;
+                display: none;
+            }
+           
+            &:hover .pinInfo {
+                display: block;
+            }
+        }
     }
 
     .totalHeight {
         width: 60%;
         aspect-ratio: 2/1;
-        background-color: #ccc;
+        // background-color: #ccc;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        .sun {
+            width: 20%;
+            position: absolute;
+            top: 0;
+            right:10%;
+            transform: rotate(10deg);
+        }
+
+        .cloud1 {
+            width: 40%;
+            position: absolute;
+            top: 20%;
+        }
+
+        .cloud2 {
+            width: 40%;
+            position: absolute;
+            top: 45%;
+            right: 0;
+        }
+
+
+        .AnimationBox {
+            width: 100%;
+            // background-color: red;
+            position: relative;
+            margin-bottom: 30px;
+
+            .trekker {
+                position: absolute;
+                width: 50px;
+            }
+
+            .mountain {
+                position: relative;
+                width: 100%;
+            }
+        }
+
     }
 }
 
