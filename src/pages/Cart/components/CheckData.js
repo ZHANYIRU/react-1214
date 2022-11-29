@@ -18,8 +18,8 @@ function CheckData() {
                     <p>地址：{el.address}</p>
                     <p>預定日期：{el.startDate}</p>
                     <p>離開日期：{el.endDate}</p>
-                    <p>人數：{el.qty}人</p>
-                    <p>總金額：{moneyFormat(el.price * el.qty)}</p>
+                    <p>人數：{el.quantity}人</p>
+                    <p>總金額：{moneyFormat(el.price * el.quantity)}</p>
                   </div>
                   <div className={styled.checkImg}>
                     <img
@@ -52,8 +52,8 @@ function CheckData() {
                     <h2>{el.name}</h2>
                     <p>集合地址：{el.address}</p>
                     <p>預定日期：{el.startDate}</p>
-                    <p>人數：{el.qty}人</p>
-                    <p>總金額：{moneyFormat(el.price * el.qty)}</p>
+                    <p>人數：{el.quantity}人</p>
+                    <p>總金額：{moneyFormat(el.price * el.quantity)}</p>
                   </div>
                   <div className={styled.checkImg}>
                     <img
@@ -86,8 +86,8 @@ function CheckData() {
                     <h2>NorthFace外套</h2>
                     <p>尺寸：{el.size}</p>
                     <p>單價：{moneyFormat(el.price)}</p>
-                    <p>數量：{el.qty}</p>
-                    <p>總金額：{moneyFormat(el.price * el.qty)}</p>
+                    <p>數量：{el.quantity}</p>
+                    <p>總金額：{moneyFormat(el.price * el.quantity)}</p>
                   </div>
                   <div className={styled.checkImg}>
                     <img
@@ -112,16 +112,19 @@ function CheckData() {
                 >
                   <div className={styled.checkText}>
                     <h2>NorthFace睡袋</h2>
-                    <p>尺寸：{el.size}</p>
                     <p>
                       租還日期：{el.startDate}~{el.endDate}
                     </p>
                     <p>
                       租借－歸還：{el.out}-{el.back}
                     </p>
+                    <p>運費：{el.deliveryFee}</p>
                     <p>單價：{moneyFormat(el.price)}</p>
-                    <p>數量：{el.qty}</p>
-                    <p>總金額：{moneyFormat(el.price * el.qty)}</p>
+                    <p>數量：{el.quantity}</p>
+                    <p>
+                      總金額：
+                      {moneyFormat(el.price * el.quantity + el.deliveryFee)}
+                    </p>
                   </div>
                   <div className={styled.checkImg}>
                     <img
