@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { useMediaQuery } from 'react-responsive'
 import styled from '../../../styles/product-scss/product.module.scss'
 import { filter_if } from '../if.js'
+import Swal from 'sweetalert2'
 
 export default function ProductFilter({
   fixedd,
@@ -14,6 +15,7 @@ export default function ProductFilter({
   inputKeyword,
   setInputKeyword,
   getProductData,
+  nav,
 }) {
   const mobile = useMediaQuery({ query: '(max-width:390px)' })
   // const [genderFilter, setGenderFilter] = useState([{}])
@@ -29,8 +31,6 @@ export default function ProductFilter({
     lowPrice: '',
     highPrice: '',
     brand: '',
-    gender: '1',
-    wProof: '1',
   })
   // 輸入時抓到value
   const handleFieldChange = (e) => {
@@ -82,15 +82,21 @@ export default function ProductFilter({
   //'防潑水（Water Repellent）',
   //'防水（Waterproof）',
 
+  //sweetAlert2
+  const sweetAlert = (text) => {
+    Swal.fire({
+      title: `${text}`,
+      icon: 'info',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown',
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp',
+      },
+    })
+  }
+  //判斷
   const filterRender = () => {
-    // const response = await axios.post(rotues, {
-    //   ...filters,
-    // })
-    // const data = response.data
-    // filters.lowPrice ||
-    // filters.highPrice ||
-    // filters.brand ||
-
     if (
       filters.lowPrice &&
       filters.highPrice &&
@@ -153,7 +159,7 @@ export default function ProductFilter({
 
   const getData = () => {
     if (Number(filters.lowPrice) > Number(filters.highPrice)) {
-      alert('請檢查價格是否輸入錯誤')
+      sweetAlert('請檢查價格是否輸入錯誤')
       console.log('請檢查價格是否輸入錯誤')
     } else if (
       filters.lowPrice ||
@@ -164,15 +170,14 @@ export default function ProductFilter({
     ) {
       filterRender()
     } else if (
-      !filters.brand ||
-      !filters.lowPrice ||
-      !filters.highPrice ||
-      !genders ||
-      !wProofOptions
+      !filters.brand &&
+      !filters.lowPrice &&
+      !filters.highPrice &&
+      !genders &&
+      !proofList
     ) {
-      // alert('請填資料')
       console.log('請填資料')
-      alert('請填資料')
+      sweetAlert('請填資料')
     }
   }
 
@@ -242,6 +247,7 @@ export default function ProductFilter({
               <div key={i} className={styled.genderBox}>
                 <input
                   type="radio"
+                  id={v}
                   checked={genders === v}
                   name="gender"
                   value={v}
@@ -249,7 +255,7 @@ export default function ProductFilter({
                     setGenders(e.target.value)
                   }}
                 ></input>
-                <label> {v}</label>
+                <label htmlFor={v}> {v}</label>
               </div>
             )
           })}
@@ -294,7 +300,7 @@ export default function ProductFilter({
             type="button"
             className={styled.filterButton}
             onClick={() => {
-              getProductData('all')
+              getProductData(nav)
               setFilter({
                 lowPrice: '',
                 highPrice: '',
@@ -406,6 +412,7 @@ export default function ProductFilter({
               <div key={i} className={styled.genderBox}>
                 <input
                   type="radio"
+                  id={v}
                   checked={genders === v}
                   value={v}
                   name="gender"
@@ -413,7 +420,7 @@ export default function ProductFilter({
                     setGenders(e.target.value)
                   }}
                 ></input>
-                <label> {v}</label>
+                <label htmlFor={v}> {v}</label>
               </div>
             )
           })}
@@ -457,7 +464,7 @@ export default function ProductFilter({
             type="button"
             className={styled.filterButton}
             onClick={() => {
-              getProductData('all')
+              getProductData(nav)
               setFilter({
                 lowPrice: '',
                 highPrice: '',
