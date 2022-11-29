@@ -1,10 +1,10 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import styled from '../../../styles/product-scss/starRating.module.scss'
-
+import ProCartContext from '../../../contexts/ProCartContext'
 export default function StarRating() {
   //星星數
-  const [stars, setStar] = useState(0)
+  const { stars, setStar } = useContext(ProCartContext)
   //星星Hover
   const [hoverStar, setHoverStar] = useState(0)
   return (

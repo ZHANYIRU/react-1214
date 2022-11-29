@@ -1,10 +1,18 @@
 import styled from '../../../styles/order-scss/OrderNum.module.scss'
+import StarRating from '../../product/components/starRating'
+import ProCartContext from '../../../contexts/ProCartContext.js'
 import dayjs from 'dayjs'
-import { useState } from 'react'
-function OrderNum({ momOrder, open, setOpen }) {
+import axios from 'axios'
+import { useState, useContext } from 'react'
+import { getKeyValue } from 'eslint-plugin-react/lib/util/ast'
+function OrderNum({ momOrder, open, setOpen, setChange }) {
+  const { stars, setStar } = useContext(ProCartContext)
+  //母訂單+子訂單
   const { rows, proRows, roomRows, renRows, camRows } = momOrder
   //給lightBox
   const [lightOpen, setLightOpen] = useState(false)
+  //給看評價
+  const [lookLightBox, setLookSetLigjtBox] = useState(false)
   //格式化金額
   const moneyFormat = (price) => {
     let a = Number(price)
@@ -12,6 +20,12 @@ function OrderNum({ momOrder, open, setOpen }) {
     let c = b.split('.')
     return c[0]
   }
+  //給予評價顯示
+  const [evaluation, setEvaluation] = useState([])
+  //看評價顯示
+  const [lookEva, setLookEva] = useState([])
+  //寫評價
+  const [writeEva, setWriteEve] = useState('')
   //打開子訂單
   const openWrap = (e) => {
     const value = +e.target.value
@@ -24,50 +38,158 @@ function OrderNum({ momOrder, open, setOpen }) {
     const newClose = open.filter((el2) => el2 !== sid)
     setOpen(newClose)
   }
+  //讀取評價
+  const getEva = async (sid) => {
+    const { data } = await axios.get(
+      `http://localhost:3001/order/evaPro?sid=${sid}`
+    )
+    if (data) {
+      setLookEva(data)
+      setLookSetLigjtBox(!lookLightBox)
+    }
+  }
+  //寫入評價
+  const addEva = async (el) => {
+    if (writeEva === '') {
+      alert('請輸入文字')
+      return
+    }
+    const json = await {
+      sid: el.sid,
+      star: stars,
+      text: writeEva,
+    }
+    const { data } = await axios.post(
+      'http://localhost:3001/order/writeEvaPro',
+      json
+    )
+    if (data.affectedRows === 1) {
+      setStar(1)
+      setChange(true)
+      setLightOpen(!lightOpen)
+    }
+  }
   return (
     <>
-      {lightOpen && (
-        <div
-          className={styled.lightBgc}
-          onClick={(e) => {
-            setLightOpen(!lightOpen)
-          }}
-        >
-          <div
-            className={styled.lightbox}
-            onClick={(e) => {
-              e.stopPropagation()
-            }}
-          >
-            <div className={styled.lightName}>
-              <div className={styled.lightImg}>
-                <img
-                  src="https://assets.juksy.com/files/articles/112793/800x_100_w-61af971ed4cc6.jpg"
-                  alt=""
-                />
-              </div>
-              <p>
-                韓國超級巨星IUUUU韓國超級巨星IUUUU韓國超級巨星IUUUU韓國超級巨星IUUUU韓國超級巨星IUUUU韓國超級巨星IUUUU
-              </p>
-            </div>
-            <div className={styled.star}>
-              <i className="fa-regular fa-star"></i>
-              <i className="fa-regular fa-star"></i>
-              <i className="fa-regular fa-star"></i>
-              <i className="fa-regular fa-star"></i>
-              <i className="fa-regular fa-star"></i>
-            </div>
-            <textarea rows="6" placeholder="寫點甚麼...." />
-            <button
+      {/* 給評價 */}
+      {lightOpen &&
+        evaluation.map((el) => {
+          return (
+            <div
+              className={styled.lightBgc}
               onClick={(e) => {
+                setStar(1)
                 setLightOpen(!lightOpen)
               }}
+              key={el.sid}
             >
-              確認
-            </button>
-          </div>
-        </div>
-      )}
+              <div
+                className={styled.lightbox}
+                onClick={(e) => {
+                  e.stopPropagation()
+                }}
+              >
+                <div className={styled.lightName}>
+                  <div className={styled.lightImg}>
+                    <img
+                      src={`http://localhost:3001/imgs/zx/${el.product_img}`}
+                      alt=""
+                    />
+                  </div>
+                  <p>{el.product_name}</p>
+                </div>
+                <StarRating />
+                <textarea
+                  rows="6"
+                  placeholder="寫點甚麼...."
+                  onChange={(e) => setWriteEve(e.target.value)}
+                />
+                <button
+                  className={styled.yes}
+                  onClick={(e) => {
+                    addEva(el)
+                  }}
+                >
+                  確認
+                </button>
+              </div>
+            </div>
+          )
+        })}
+      {/* 看評價 */}
+      {lookLightBox &&
+        lookEva.map((el, i) => {
+          return (
+            <div
+              className={styled.lightBgc}
+              onClick={(e) => {
+                setStar(1)
+                setLookSetLigjtBox(!lookLightBox)
+              }}
+              key={el.sid}
+            >
+              <div
+                className={styled.lightbox}
+                onClick={(e) => {
+                  e.stopPropagation()
+                }}
+              >
+                <div className={styled.lightName}>
+                  <div className={styled.lightImg}>
+                    <img
+                      src={`http://localhost:3001/imgs/zx/${el.product_img}`}
+                      alt=""
+                    />
+                  </div>
+                  <p>{el.product_name}</p>
+                </div>
+                <div className={styled.lookMember}>
+                  <div className={styled.memberLeft}>
+                    <div className={styled.memImgWrap}>
+                      <img
+                        src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/iu-%E6%9D%8E%E7%9F%A5%E6%81%A9-1592068502.jpg?crop=0.502xw:1.00xh;0.498xw,0&resize=640:*"
+                        alt=""
+                      />
+                    </div>
+                    <div className={styled.memberText}>
+                      <p>阿克 銀級玩家</p>
+                      <span>{dayjs(el.messageTime).format('YYYY-MM-DD')}</span>
+                    </div>
+                  </div>
+                  <div className={styled.starRating}>
+                    {[...Array(5)].map((star, index) => {
+                      const totalStars = el.star
+                      index += 1
+                      return (
+                        <p
+                          key={index}
+                          className={
+                            index <= totalStars
+                              ? `${styled.on}`
+                              : `${styled.off}`
+                          }
+                        >
+                          <span className="star">&#9733;</span>
+                        </p>
+                      )
+                    })}
+                  </div>
+                </div>
+                <div className={styled.lookBottom}>
+                  <p>{el.message}</p>
+                  <button
+                    className={styled.close}
+                    onClick={(e) => {
+                      setLookSetLigjtBox(!lookLightBox)
+                    }}
+                  >
+                    關閉
+                  </button>
+                </div>
+              </div>
+            </div>
+          )
+        })}
 
       <div className={styled.numWrap}>
         {rows &&
@@ -138,7 +260,7 @@ function OrderNum({ momOrder, open, setOpen }) {
                             <div className={styled.contentDe}>
                               <div className={styled.imgWrap}>
                                 <img
-                                  src="https://cdn2.ettoday.net/images/4778/d4778980.jpg"
+                                  src={`http://localhost:3001/imgs/zx/${el2.product_img}`}
                                   alt=""
                                 />
                               </div>
@@ -147,13 +269,25 @@ function OrderNum({ momOrder, open, setOpen }) {
                               <p>{el2.qty}</p>
                               <p>{moneyFormat(el2.total)}</p>
                             </div>
-                            <button
-                              onClick={() => {
-                                setLightOpen(!lightOpen)
-                              }}
-                            >
-                              給予評價
-                            </button>
+                            {el2.star ? (
+                              <button
+                                onClick={() => {
+                                  getEva(el2.sid)
+                                }}
+                              >
+                                看評價
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => {
+                                  const proStars = [el2]
+                                  setEvaluation(proStars)
+                                  setLightOpen(!lightOpen)
+                                }}
+                              >
+                                給予評價
+                              </button>
+                            )}
                           </div>
                         ) : (
                           ''

@@ -762,9 +762,13 @@ export const ProCartContextProvider = ({ children }) => {
     let c = b.split('.')
     return c[0]
   }
+  //星星數量
+  const [stars, setStar] = useState(1)
   return (
     <ProCartContext.Provider
       value={{
+        stars,
+        setStar,
         getMountain,
         setGetMountain,
         userSelect,

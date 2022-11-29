@@ -93,11 +93,12 @@
   border-bottom: 1px solid #a09f9e;
   padding-bottom: 20px;
   button {
+    width: 78px;
+    height: 39px;
     border: none;
     background-color: $darkGreen;
     color: $yellow;
     border-radius: 5px;
-    padding: 10px 15px;
     font-size: 12px;
     font-weight: 300;
     margin: 0 0 0 auto;
@@ -192,7 +193,7 @@
     padding-left: 10px;
     outline: none;
   }
-  button {
+  .yes {
     border: none;
     background-color: $darkGreen;
     color: $yellow;
@@ -230,4 +231,87 @@
     margin-right: 15px;
     color: #426349;
   }
+}
+.lookMember {
+  display: flex;
+  align-items: center;
+}
+.memberLeft {
+  display: flex;
+}
+.memImgWrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-image: conic-gradient(
+    from 180deg at 50% 50%,
+    #f7f7f7 0deg,
+    #a09f9e 69.37deg,
+    #9a9998 163.12deg,
+    #4b4946 275.62deg,
+    #f7f7f7 360deg
+  );
+  box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  img {
+    border-radius: 50%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: 7px solid transparent;
+    box-sizing: border-box;
+  }
+}
+.memberText {
+  margin: 0 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  p {
+    font-weight: 500;
+  }
+  span {
+    font-size: 12px;
+    color: #a09f9e;
+  }
+}
+.lookBottom {
+  display: flex;
+  p {
+    font-size: 14px;
+    padding: 10px;
+    width: 80%;
+    height: 120px;
+    border: 1px solid black;
+    border-radius: 10px;
+  }
+  .close {
+    align-self: flex-end;
+    border: none;
+    background-color: $darkGreen;
+    color: $yellow;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 12px;
+    font-weight: 300;
+    margin: 0 0 0 auto;
+  }
+}
+.starRating {
+  background-color: #fff;
+  margin-right: 20px;
+  display: flex;
+  // width: 100%;
+  p {
+    background-color: #fff;
+    font-size: 1.5rem;
+    margin-right: 5px;
+  }
+}
+
+.on {
+  color: $yellow;
+}
+.off {
+  color: #ccc;
 }
