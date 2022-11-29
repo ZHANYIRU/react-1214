@@ -27,6 +27,8 @@ export const MemberContextProvider = function ({ children }) {
 
   const [data, setData] = useState(initInfo)
   const [auth, setAuth] = useState(false)
+  const [follow, setFollow] = useState([])
+  const [following, setFollowing] = useState([])
 
   async function getInfo() {
     const token = localStorage.getItem('token')
@@ -44,6 +46,22 @@ export const MemberContextProvider = function ({ children }) {
       setData(resetInfo)
       console.log(result.data)
     }
+  }
+
+  async function getFollow() {
+    const rows = await axios.get(
+      `http://localhost:3001/member/follow/api?mid=${data.member_sid}`
+    )
+    setFollow(rows.data)
+    console.log('followed by:' + rows.data.length)
+  }
+
+  async function getFollowing() {
+    const rows = await axios.get(
+      `http://localhost:3001/member/following/api?fid=${data.member_sid}`
+    )
+    setFollowing(rows.data)
+    console.log('following:' + rows.data.length)
   }
 
   function resetData() {
@@ -65,7 +83,11 @@ export const MemberContextProvider = function ({ children }) {
   useEffect(() => {
     if (data.member_sid === '') {
       setAuth(false)
+      setFollow([])
+      setFollowing([])
     }
+    getFollow()
+    getFollowing()
   }, [data])
 
   //  const getUpdateInfo = function () {
@@ -74,7 +96,7 @@ export const MemberContextProvider = function ({ children }) {
 
   return (
     <MemberContext.Provider
-      value={{ data, setData, auth, setAuth, resetData, getInfo }}
+      value={{ data, setData, auth, setAuth, resetData, getInfo, follow, following, setFollowing, getFollowing, getFollow }}
     >
       {children}
     </MemberContext.Provider>

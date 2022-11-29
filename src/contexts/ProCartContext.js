@@ -50,6 +50,7 @@ const proCartReducer = (state, action) => {
     moun,
     campSid,
     renSid,
+    deliveryFee,
     out,
     back,
   } = action.payload
@@ -72,9 +73,7 @@ const proCartReducer = (state, action) => {
     campIndex = state.items3.findIndex((el) => el.sid === campSid)
   }
   if (renSid) {
-    renIndex = state.items4.findIndex(
-      (el) => el.sid === renSid && el.size === size
-    )
+    renIndex = state.items4.findIndex((el) => el.sid === renSid)
   }
   //更新localStorage購物車-商品
   const updateCart = (upState, qty, price) => {
@@ -87,7 +86,7 @@ const proCartReducer = (state, action) => {
     if (proIndex > -1) {
       upState[proIndex] = {
         ...upState[proIndex],
-        qty: upState[proIndex].qty + qty,
+        quantity: upState[proIndex].quantity + qty,
       }
       const newState = {
         ...state,
@@ -111,7 +110,7 @@ const proCartReducer = (state, action) => {
     if (roomIndex > -1) {
       upState[roomIndex] = {
         ...upState[roomIndex],
-        qty: upState[roomIndex].qty + qty,
+        quantity: upState[roomIndex].quantity + qty,
       }
       const newState = {
         ...state,
@@ -135,7 +134,7 @@ const proCartReducer = (state, action) => {
     if (campIndex > -1) {
       upState[campIndex] = {
         ...upState[campIndex],
-        qty: upState[campIndex].qty + qty,
+        quantity: upState[campIndex].quantity + qty,
       }
       const newState = {
         ...state,
@@ -159,7 +158,7 @@ const proCartReducer = (state, action) => {
     if (renIndex > -1) {
       upState[renIndex] = {
         ...upState[renIndex],
-        qty: upState[renIndex].qty + qty,
+        quantity: upState[renIndex].quantity + qty,
       }
       const newState = {
         ...state,
@@ -187,7 +186,7 @@ const proCartReducer = (state, action) => {
               size: size,
               img: img,
               price: price,
-              qty: qty,
+              quantity: qty,
             },
           ],
           totalItem: state.totalItem + 1,
@@ -219,7 +218,7 @@ const proCartReducer = (state, action) => {
               moun: moun,
               img: img,
               price: price,
-              qty: qty,
+              quantity: qty,
             },
           ],
           totalItem: state.totalItem + 1,
@@ -250,7 +249,7 @@ const proCartReducer = (state, action) => {
               moun: moun,
               img: img,
               price: price,
-              qty: qty,
+              quantity: qty,
             },
           ],
           totalItem: state.totalItem + 1,
@@ -278,14 +277,14 @@ const proCartReducer = (state, action) => {
               end: end,
               out: out,
               back: back,
-              size: size,
+              deliveryFee: deliveryFee,
               img: img,
               price: price,
-              qty: qty,
+              quantity: qty,
             },
           ],
           totalItem: state.totalItem + 1,
-          totalPrice: state.totalPrice + price * qty,
+          totalPrice: state.totalPrice + price * qty + deliveryFee,
         }
         const newTotalItem = state.totalItem
         const newTotalPrice = state.totalPrice
@@ -320,7 +319,7 @@ const proCartReducer = (state, action) => {
         const upState = [...state.items]
         upState[proIndex] = {
           ...upState[proIndex],
-          qty: upState[proIndex].qty - 1,
+          quantity: upState[proIndex].quantity - 1,
         }
         const newState = {
           ...state,
@@ -336,7 +335,7 @@ const proCartReducer = (state, action) => {
         const upState = [...state.items2]
         upState[roomIndex] = {
           ...upState[roomIndex],
-          qty: upState[roomIndex].qty - 1,
+          quantity: upState[roomIndex].quantity - 1,
         }
         const newState = {
           ...state,
@@ -352,7 +351,7 @@ const proCartReducer = (state, action) => {
         const upState = [...state.items3]
         upState[campIndex] = {
           ...upState[campIndex],
-          qty: upState[campIndex].qty - 1,
+          quantity: upState[campIndex].quantity - 1,
         }
         const newState = {
           ...state,
@@ -368,7 +367,7 @@ const proCartReducer = (state, action) => {
         const upState = [...state.items4]
         upState[renIndex] = {
           ...upState[renIndex],
-          qty: upState[renIndex].qty - 1,
+          quantity: upState[renIndex].quantity - 1,
         }
         const newState = {
           ...state,
@@ -606,7 +605,7 @@ export const ProCartContextProvider = ({ children }) => {
     end,
     out,
     back,
-    size,
+    deliveryFee,
     price,
     qty,
     img
@@ -620,7 +619,7 @@ export const ProCartContextProvider = ({ children }) => {
         end,
         out,
         back,
-        size,
+        deliveryFee,
         price,
         qty,
         img,
@@ -670,17 +669,17 @@ export const ProCartContextProvider = ({ children }) => {
     })
   }
   //商品數量+1(租借)
-  const plusOne4 = (renSid, size, price) => {
+  const plusOne4 = (renSid, price) => {
     dispatch({
       type: 'PLUS',
-      payload: { renSid, size, price },
+      payload: { renSid, price },
     })
   }
   //商品數量-1(租借)
-  const minusOne4 = (renSid, size, price) => {
+  const minusOne4 = (renSid, price) => {
     dispatch({
       type: 'MINUS',
-      payload: { renSid, size, price },
+      payload: { renSid, price },
     })
   }
   //刪除單筆商品
@@ -756,9 +755,6 @@ export const ProCartContextProvider = ({ children }) => {
     let c = b.split('.')
     return c[0]
   }
-  const d = new Date()
-  const order_num = Date.parse(d)
-  console.log(order_num)
   return (
     <ProCartContext.Provider
       value={{

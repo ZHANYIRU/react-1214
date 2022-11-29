@@ -2,6 +2,8 @@ import styled from '../../styles/home-scss/Main.module.scss'
 import { useRef, useEffect, useState } from 'react'
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax'
 import Leaderboard from './leaderboard'
+import Weather from './Weather'
+import Bird from './Bird.js'
 function Main({ setFtr }) {
   const mainHeight = useRef(null)
   const [rotateCube, setRotateCube] = useState(true)
@@ -27,9 +29,7 @@ function Main({ setFtr }) {
 
     if (lastScroll > 180) {
       setRotateCube(!rotateCube)
-      console.log('消失', deg)
     } else if (lastScroll < 180) {
-      console.log('出現', deg)
       setRotateCube(true)
     }
   }
@@ -42,8 +42,9 @@ function Main({ setFtr }) {
   return (
     <>
       <div className={styled.main} ref={mainHeight}>
-        {/* <Weather /> */}
+        {rotateCube ? <Weather /> : ''}
         <div className={styled.section1}>
+          {rotateCube ? <Bird /> : ''}
           <ParallaxProvider speed={-10}>
             <div className={styled.visible}>
               <div className={styled.camera}>
@@ -60,7 +61,7 @@ function Main({ setFtr }) {
                 </div>
               </div>
             </div>
-            <Parallax speed={-5} translateX={[250, -50]}>
+            <Parallax speed={-5} translateX={[350, -120]}>
               <img src="/img/cloud1.png" alt="" />
             </Parallax>
             {/* <Parallax
@@ -71,10 +72,7 @@ function Main({ setFtr }) {
               <img src="/img/cloud1.png" alt="" />
             </Parallax> */}
 
-            <Parallax translateX={[300, -80]}>
-              <img src="/img/cloud1.png" alt="" />
-            </Parallax>
-            <Parallax translateX={[-150, 100]}>
+            <Parallax translateX={[-50, 120]}>
               <img src="/img/cloud1.png" alt="" />
             </Parallax>
           </ParallaxProvider>

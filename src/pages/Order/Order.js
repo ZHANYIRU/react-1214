@@ -24,7 +24,6 @@ function Order() {
     setMomOrder(res.data)
   }
   useEffect(() => {
-    console.log(456)
     getList()
   }, [auth])
   return (
