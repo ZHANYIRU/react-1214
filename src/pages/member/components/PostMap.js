@@ -1,4 +1,3 @@
-import log from 'eslint-plugin-react/lib/util/log'
 import { useEffect, useState } from 'react'
 import styled from '../../../styles/member-scss/MemberInfo.module.scss'
 
@@ -17,11 +16,11 @@ export default function PostMap(postList) {
   }
 
   function bottomPercent(y) {
-    {
-      console.log(
-        'y=' + y + '| %=' + ((y - 2422925) / (2798819 - 2422925)) * 100
-      )
-    }
+    // {
+    //   console.log(
+    //     'y=' + y + '| %=' + ((y - 2422925) / (2798819 - 2422925)) * 100
+    //   )
+    // }
     return ((y - 2422925) / (2798819 - 2422925)) * 100
   }
 

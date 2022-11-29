@@ -125,6 +125,8 @@
             .trekker {
                 position: absolute;
                 width: 50px;
+                animation-fill-mode: forwards;
+                z-index: 5;
             }
 
             .mountain {
