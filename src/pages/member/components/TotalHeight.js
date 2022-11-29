@@ -56,14 +56,17 @@ function climbAnimation(distance) {
 
 function showMotto(height) {
   let str = '新增一個貼文, 開始攻頂！'
-  if(height > 0){
+  if (height > 0) {
     str = '踏出第一步了, 加油！'
   }
-  if(height > 5000){
-    str = '超過半山腰, 再接再厲！'
+  if (height > 5000) {
+    str = '超過半山腰, 繼續努力！'
   }
-  if(height > 7500){
+  if (height > 7500) {
     str = '山頂就在眼前, 再加把勁！'
+  }
+  if (height >= 10000) {
+    str = '成功登頂, 恭喜你！'
   }
 
   return <h3>{str}</h3>

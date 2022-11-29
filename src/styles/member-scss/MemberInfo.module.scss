@@ -64,12 +64,11 @@
         .pinBox {
             position: absolute; 
             transform: translate(-50%, 50%);
-            z-index: 10;
             i {
                 font-size: 25px;
-                position: relative;
+                // position: relative;
                 color: red;
-                z-index: 0;
+                z-index: -1;
             }
             .pinInfo {
                 position: absolute;
@@ -81,6 +80,7 @@
            
             &:hover .pinInfo {
                 display: block;
+     
             }
         }
     }
@@ -95,10 +95,10 @@
         justify-content: flex-end;
 
         .sun {
-            width: 20%;
+            width: 18%;
             position: absolute;
             top: 0;
-            right:10%;
+            right:5%;
             transform: rotate(10deg);
         }
 
@@ -119,6 +119,7 @@
             text-align: center;
             position: relative;
             z-index: 20;
+            transform: translateY(-30px);
         }
 
         .AnimationBox {
