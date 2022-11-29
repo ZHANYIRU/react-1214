@@ -309,9 +309,9 @@ function OrderNum({ momOrder, open, setOpen }) {
                                   {el5.store_back}
                                 </p>
                                 <p>
-                                  {el5.out_date}
+                                  {dayjs(el5.out_date).format('YYYY-MM-DD')}
                                   <i className="fa-solid fa-arrow-down"></i>
-                                  {el5.back_date}
+                                  {dayjs(el5.back_date).format('YYYY-MM-DD')}
                                 </p>
                                 <p>{moneyFormat(el5.rental_price)}</p>
                                 <p>運費</p>
