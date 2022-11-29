@@ -3,6 +3,7 @@ import { Link, useParams, useLocation } from 'react-router-dom'
 import Slider from './components/slider'
 import Product_filter from './components/product_filter'
 import { useMediaQuery } from 'react-responsive'
+import _ from 'lodash'
 
 import axios from 'axios'
 import styled from '../../styles/product-scss/product.module.scss'
@@ -11,10 +12,6 @@ import img2 from './img/img2.jpg'
 import img3 from './img/img3.jpg'
 
 function Product() {
-  // 輸入用(可控表單元件用)
-  const [inputKeyword, setInputKeyword] = useState('')
-  // 按下搜尋按鈕用，真正搜尋用
-  const [searchKeyword, setSearchKeyWord] = useState('')
   //圖片
   const data = [
     {
@@ -42,6 +39,13 @@ function Product() {
     }
   }
 
+  // 輸入用(可控表單元件用)
+  const [inputKeyword, setInputKeyword] = useState('')
+  // 按下搜尋按鈕用，真正搜尋用
+  const [searchKeyword, setSearchKeyWord] = useState('')
+  //偵測是否為手機版面
+  const [mob, setMob] = useState(false)
+
   //format currency
   const moneyFormat = (price) => {
     let a = Number(price)
@@ -54,9 +58,7 @@ function Product() {
   const mobile = useMediaQuery({ query: '(max-width:390px)' })
   //附style給filter
   const [fixedd, setFixedd] = useState(false)
-  //偵測是否為手機版面
-  const [mob, setMob] = useState(false)
-  const filterRef = useRef('')
+
   //偵測滾動時，filter要吸附的位置
   const scrollFilter = () => {
     const windowScrollY = window.scrollY
@@ -81,7 +83,7 @@ function Product() {
       setMob(false)
     }
   }
-  //抓取fetch狀態
+  //分頁呈現畫面
   const [datas, setDatas] = useState([
     {
       product_sid: '1',
@@ -97,23 +99,38 @@ function Product() {
       size: 'S',
     },
   ])
-  const { product_sid } = useParams()
+  // 抓取所有商品
+  const [getData, setGetData] = useState([{}])
 
-  const [sid, getSid] = useState('')
+  //設定頁數
+  const [nowPage, setNowPage] = useState(1)
+  //設定每頁幾筆
+  const [perPage, setPerPage] = useState(20)
+  //設定總頁數
+  const [totalPage, setTotalPage] = useState(0)
 
   //Fetch產品
   const getProductData = async (url) => {
-    const response = await axios.get(`http://localhost:3001/product/${url}`)
-    const r = response.data
-    // console.log(r)
-    setDatas(r)
+    try {
+      const response = await axios.get(`http://localhost:3001/product/${url}`)
+      const r = response.data
+      setDatas(r)
+      setGetData(r)
+      // const pageList = _.chunk(r, perPage)
+      // console.log(pageList)
+      // if (pageList.length > 0) {
+      //   setTotalPage(pageList.length)
+      // }
+    } catch (e) {
+      console.log(e.message)
+    }
   }
 
   //-------------------------------------------------------------------
   useEffect(() => {
     getProductData('all')
 
-    window.addEventListener('resize', reSize)
+    // window.addEventListener('resize', reSize)
   }, [])
   useEffect(() => {
     window.addEventListener('scroll', scrollFilter)

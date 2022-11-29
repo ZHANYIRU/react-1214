@@ -7,122 +7,76 @@ import ProCartContext from '../../contexts/ProCartContext'
 import StarRating from './components/starRating'
 import CommentLightBox from './components/CommentLightBox'
 import comFakeData from './comFakeData'
+import Swal from 'sweetalert2'
 
 export default function ProductPage() {
   const { product_sid } = useParams()
   const { addProCart } = useContext(ProCartContext)
   //哪一筆評論的Index
   const [whichCom, setWhichCom] = useState(-1)
+  //衣服size
+  const clotheSize = ['S', 'M', 'L']
   // //fetchSize
   const [fetchSize, setFetchSize] = useState([{}])
-  // 尺寸選取
-  const [size2, setSize2] = useState([
-    true,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ])
   //預設值
-  const shoseDefaultSize = [
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-    false,
-  ]
+
+  // 尺寸選取
+  const [size2, setSize2] = useState()
+
   //燈箱切換
   const [comLightBox, setComLightBox] = useState(false)
   //換圖
   const changePic = useRef()
   // 尺寸選取
-  const [size, setSize] = useState({
-    S: false,
-    M: false,
-    L: false,
-  })
-
-  const whatSize = (v) => {
-    if (Object.values(size)[0]) {
-      return 'S'
-    } else if (Object.values(size)[1]) {
-      return 'M'
-    } else if (Object.values(size)[2]) {
-      return 'L'
-    } else if (size2[0]) {
-      if (v.product_category_sid == 7) {
-        return 'US8'
-      } else if (v.product_category_sid == 8) {
-        return 'US6'
-      }
-    } else if (size2[1]) {
-      if (v.product_category_sid == 7) {
-        return 'US8.5'
-      } else if (v.product_category_sid == 8) {
-        return 'US6.5'
-      }
-    } else if (size2[2]) {
-      if (v.product_category_sid == 7) {
-        return 'US9'
-      } else if (v.product_category_sid == 8) {
-        return 'US7'
-      }
-    } else if (size2[3]) {
-      if (v.product_category_sid == 7) {
-        return 'US9.5'
-      } else if (v.product_category_sid == 8) {
-        return 'US7.5'
-      }
-    } else if (size2[4]) {
-      if (v.product_category_sid == 7) {
-        return 'US10'
-      } else if (v.product_category_sid == 8) {
-        return 'US8'
-      }
-    } else if (size2[5]) {
-      if (v.product_category_sid == 7) {
-        return 'US10.5'
-      } else if (v.product_category_sid == 8) {
-        return 'US8.5'
-      }
-    } else if (size2[6]) {
-      if (v.product_category_sid == 7) {
-        return 'US11'
-      } else if (v.product_category_sid == 8) {
-        return 'US9'
-      }
-    } else if (size2[7]) {
-      if (v.product_category_sid == 7) {
-        return 'US11.5'
-      } else if (v.product_category_sid == 8) {
-        return 'US9.5'
-      }
-    }
-  }
-  //尺寸方法 (衣服)
-  const choseSize = (choseOption) => {
-    if (choseOption === 'S') {
-      const choseSizeTarget = { ...size, S: true, M: false, L: false }
-      setSize(choseSizeTarget)
-    } else if (choseOption === 'M') {
-      const choseSizeTarget = { ...size, S: false, M: true, L: false }
-      setSize(choseSizeTarget)
-    } else {
-      const choseSizeTarget = { ...size, S: false, M: false, L: true }
-      setSize(choseSizeTarget)
-    }
-  }
 
   //選擇數量
   const [num, setNum] = useState(1)
   //商品介紹、評論
   const [introCom, setintroCom] = useState(true)
+
+  //sweetAlert2
+  const sweetAlert = (text) => {
+    Swal.fire({
+      title: `${text}`,
+      icon: 'info',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown',
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp',
+      },
+    })
+  }
+
+  //加入購物車方法
+  const addCartFunction = (v) => {
+    Swal.fire({
+      title: '將此商品加入購物車?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '確定!',
+      cancelButtonText: '取消',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          icon: 'success',
+          title: '已加入!',
+          showCancelButton: false,
+        })
+        addProCart(
+          product_sid,
+          v.product_name,
+          size2,
+          Number(v.product_price),
+          num,
+          v.product_img
+        )
+      }
+    })
+  }
+
   //隨機產生3筆資料
   const [randomData, setRandomData] = useState([
     {
@@ -178,7 +132,7 @@ export default function ProductPage() {
   //我是fetch
   const getProductData = async () => {
     const response = await axios.get(
-      `http://localhost:3001/product/${product_sid}`
+      `http://localhost:3001/product/page/${product_sid}`
     )
     const r = response.data
     console.log(r)
@@ -306,87 +260,51 @@ export default function ProductPage() {
       </div>
     </div>
   )
-  const shoseSize = () => {
-    return (
-      <>
-        <h2>商品規格</h2>
-        {fetchSize.map((v, i) => {
-          return (
-            <>
-              <div
-                className={
-                  size2[i]
-                    ? `${styled.standardBoxChose2}`
-                    : `${styled.standardBox2}`
-                }
-                onClick={() => {
-                  const newSize = [...shoseDefaultSize]
-                  newSize[i] = true
-                  setSize2(newSize)
-                }}
-              >
-                {v.size}
-              </div>
-            </>
-          )
-        })}
-      </>
-    )
-  }
+  const shoseSize = (
+    <>
+      <h2>商品規格</h2>
+      {fetchSize.map((v, i) => {
+        return (
+          <>
+            <div
+              className={
+                size2 === v.size
+                  ? `${styled.standardBoxChose2}`
+                  : `${styled.standardBox2}`
+              }
+              onClick={() => {
+                setSize2(v.size)
+              }}
+            >
+              {v.size}
+            </div>
+          </>
+        )
+      })}
+    </>
+  )
+
   const clotheChose = (
     <>
       <h2>商品規格</h2>
-      <div
-        className={
-          size.S ? `${styled.standardBoxChose}` : `${styled.standardBox}`
-        }
-        onClick={() => {
-          if (size.S) {
-            return setSize({
-              S: false,
-              M: false,
-              L: false,
-            })
-          }
-          choseSize('S')
-        }}
-      >
-        S
-      </div>
-      <div
-        className={
-          size.M ? `${styled.standardBoxChose}` : `${styled.standardBox}`
-        }
-        onClick={() => {
-          if (size.M) {
-            return setSize({
-              S: false,
-              M: false,
-              L: false,
-            })
-          }
-          choseSize('M')
-        }}
-      >
-        M
-      </div>
-      <div
-        className={
-          size.L ? `${styled.standardBoxChose}` : `${styled.standardBox}`
-        }
-        onClick={() => {
-          if (size.L) {
-            return setSize({
-              S: false,
-              M: false,
-              L: false,
-            })
-          }
-          choseSize('L')
-        }}
-      >
-        L
-      </div>
+      {clotheSize.map((v, i) => {
+        return (
+          <>
+            <div
+              className={
+                size2 == clotheSize[i]
+                  ? `${styled.standardBoxChose}`
+                  : `${styled.standardBox}`
+              }
+              onClick={() => {
+                setSize2(v)
+              }}
+            >
+              {v}
+            </div>
+          </>
+        )
+      })}
     </>
   )
   useEffect(() => {
@@ -495,7 +413,7 @@ export default function ProductPage() {
                       ? clotheChose
                       : ''}
                     {v.product_category_sid == 7 || v.product_category_sid == 8
-                      ? shoseSize(v)
+                      ? shoseSize
                       : ''}
                   </div>
                   <h2>金額：{moneyFormat(v.product_price)}</h2>
@@ -523,42 +441,52 @@ export default function ProductPage() {
                       </div>
                     </div>
                   </div>
-                  {/* <div className={styled.deliver}>
-                    <p>配送方式</p>
-                    <label htmlFor="home">宅配</label>
-                    <input type="radio" id="home" name="deliver" value="home" />
-                    <label htmlFor="711">超商取貨</label>
-                    <input type="radio" id="711" name="deliver" value="711" />
-                    <label htmlFor="shop">實體店取貨</label>
-                    <input type="radio" id="shop" name="deliver" value="shop" />
-                  </div> */}
+
                   <div className={styled.buttonGroup}>
                     <button
                       className={styled.cart}
-                      onClick={async () => {
-                        const SML = await whatSize(v)
-                        addProCart(
-                          product_sid,
-                          v.product_name,
-                          SML,
-                          Number(v.product_price),
-                          num,
-                          v.product_img
-                        )
+                      onClick={() => {
+                        if (
+                          (v.product_category_sid == '7' ||
+                            v.product_category_sid == '8' ||
+                            v.product_category_sid == '9' ||
+                            v.product_category_sid == '10') &&
+                          !size2
+                        ) {
+                          return sweetAlert('請選尺寸')
+                        }
+                        addCartFunction(v)
                       }}
                     >
                       加入購物車
                     </button>
-                    <Link to="/cart">
+                    <Link
+                      to={
+                        (v.product_category_sid == '7' ||
+                          v.product_category_sid == '8' ||
+                          v.product_category_sid == '9' ||
+                          v.product_category_sid == '10') &&
+                        !size2
+                          ? ''
+                          : '/cart'
+                      }
+                    >
                       <button
                         className={styled.buy}
-                        onClick={async () => {
-                          let SML = await whatSize(v)
-
+                        onClick={() => {
+                          if (
+                            (v.product_category_sid == '7' ||
+                              v.product_category_sid == '8' ||
+                              v.product_category_sid == '9' ||
+                              v.product_category_sid == '10') &&
+                            !size2
+                          ) {
+                            return sweetAlert('請選尺寸')
+                          }
                           addProCart(
                             product_sid,
                             v.product_name,
-                            SML,
+                            size2,
                             Number(v.product_price),
                             num,
                             v.product_img
