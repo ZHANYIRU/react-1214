@@ -764,9 +764,13 @@ export const ProCartContextProvider = ({ children }) => {
   }
   //星星數量
   const [stars, setStar] = useState(1)
+  //開啟看評論
+  const [lookLightBox, setLookLightBox] = useState(false)
   return (
     <ProCartContext.Provider
       value={{
+        lookLightBox,
+        setLookLightBox,
         stars,
         setStar,
         getMountain,
