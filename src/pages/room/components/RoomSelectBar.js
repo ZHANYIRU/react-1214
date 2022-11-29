@@ -17,8 +17,8 @@ function RoomSelectBar({ detail }) {
   const [night, setNight] = useState(1)
 
   const stayNights = () => {
-    console.log('checkOut', checkOut)
-    console.log('checkIn', checkIn)
+    // console.log('checkOut', checkOut)
+    // console.log('checkIn', checkIn)
     const days = (Date.parse(checkOut) - Date.parse(checkIn)) / 86400000
     setNight(days)
   }

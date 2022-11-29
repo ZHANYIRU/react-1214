@@ -19,7 +19,7 @@
         img{
             display: block;
             margin: 0 auto;
-            width: 150px;
+            width: 120px;
         }
     }
     .tempareature{
@@ -31,20 +31,40 @@
             display: flex;
             flex-direction: column;
         }
+        .rain{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            i{
+                font-size: 1.3rem;
+                line-height: 1.3rem;
+                margin-right: 10px;
+            }
+        }
+        span{
+            font-size: 1.3rem;
+            line-height: 2rem;
+
+        }
     }
     .date{
         display: flex;
-        flex-direction: column;
-        align-items: center;    
+        align-items: center; 
+        .dateWrap{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        } 
+        .arrow i{
+            margin: 0 30px;
+            cursor: pointer;
+        }
     }
     span{
         display: inline-block;
         font-weight: 500;
         font-size: 1.2rem;
         line-height: 2.5rem;
-    }
-    .tempareature span{
-        font-size: 1.4rem;
     }
     select{
         margin-top: 10px;

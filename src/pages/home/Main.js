@@ -46,13 +46,15 @@ function Main({ setFtr }) {
         <div className={styled.section1}>
           {rotateCube ? <Bird /> : ''}
           <ParallaxProvider speed={-10}>
-            <div className={styled.visible}>
+            <div
+              className={styled.visible}
+              style={{ visibility: rotateCube ? 'visible' : 'hidden' }}
+            >
               <div className={styled.camera}>
                 <div
                   className={`${styled.cube}`}
                   style={{
                     transform: deg <= 180 && `rotateX(${deg}deg) `,
-                    visibility: rotateCube ? 'visible' : 'hidden',
                   }}
                 >
                   <div className={styled.bottom}>輕鬆簡單，就能入門爬山</div>

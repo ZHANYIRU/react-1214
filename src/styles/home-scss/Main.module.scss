@@ -25,9 +25,10 @@
   .camera{
     position: absolute;
     top:-275px;
-    width: 750px;
-    height:400px;
+    // width: 750px;
+    // height:400px;
     perspective: 24000px;
+    z-index: -999;
     //  perspective-origin: 50% 50%; 
 
     .cube{
