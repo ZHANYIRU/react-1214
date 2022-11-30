@@ -12,18 +12,25 @@ function CheckData() {
             <h2>營位/山莊</h2>
             {room.map((el, i) => {
               return (
-                <div className={styled.checkWrap} key={el.sid}>
+                <div
+                  className={styled.checkWrap}
+                  key={el.sid}
+                  style={{ height: '250px' }}
+                >
                   <div className={styled.checkText}>
                     <h2>{el.name}</h2>
                     <p>地址：{el.address}</p>
                     <p>預定日期：{el.startDate}</p>
                     <p>離開日期：{el.endDate}</p>
-                    <p>人數：{el.quantity}人</p>
-                    <p>總金額：{moneyFormat(el.price * el.quantity)}</p>
+                    <p>天數：{el.day}</p>
+                    <p>床位：{el.quantity}人</p>
+                    <p>
+                      總金額：{moneyFormat(el.price * el.quantity * el.day)}
+                    </p>
                   </div>
                   <div className={styled.checkImg}>
                     <img
-                      src="https://pix10.agoda.net/hotelImages/793414/-1/97f284bee5c75ff30e2658b179d5c9f1.jpg?ca=9&ce=1&s=1024x768"
+                      src={`http://localhost:3001/room_img/${el.img}`}
                       alt=""
                     />
                   </div>
@@ -111,15 +118,16 @@ function CheckData() {
                   key={`${el.size}+${el.sid}`}
                 >
                   <div className={styled.checkText}>
-                    <h2>NorthFace睡袋</h2>
+                    <h2>{el.name}</h2>
                     <p>
                       租還日期：{el.startDate}~{el.endDate}
                     </p>
                     <p>
                       租借－歸還：{el.out}-{el.back}
                     </p>
-                    <p>運費：{el.deliveryFee}</p>
                     <p>單價：{moneyFormat(el.price)}</p>
+                    <p>租借天數：{el.day}</p>
+                    <p>跨店費用：{el.deliveryFee}</p>
                     <p>數量：{el.quantity}</p>
                     <p>
                       總金額：
@@ -128,7 +136,7 @@ function CheckData() {
                   </div>
                   <div className={styled.checkImg}>
                     <img
-                      src="https://vencedor888.com/upload/1000_86.jpg"
+                      src={`http://localhost:3001/rental_img/${el.img}`}
                       alt=""
                     />
                   </div>

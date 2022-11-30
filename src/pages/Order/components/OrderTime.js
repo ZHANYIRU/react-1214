@@ -40,10 +40,11 @@ function OrderTime({ open, momOrder }) {
                   className={styled.border}
                   style={{
                     height:
-                      open.includes(el.sid) &&
+                      open.includes(el.order_sid) &&
                       (50 + total[i] * 200 > 534.5
-                        ? `${534.5}px`
-                        : `${50 + 30 + total[i] * 200}px`),
+                        ? // ? `${534.5}px`
+                          `${540.5}px`
+                        : `${50 + 26 + total[i] * 200}px`),
                   }}
                 />
               </div>

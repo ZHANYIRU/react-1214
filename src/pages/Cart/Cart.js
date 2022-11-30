@@ -8,6 +8,19 @@ import OkOrder from './child-pages/OkOrder'
 import ProCartContext from '../../contexts/ProCartContext'
 import { useState, useRef, useEffect, useContext } from 'react'
 function Cart() {
+  //寄送方式
+  const [familySelect, setFamilySelect] = useState('')
+  //付款方式
+  const [paySelect, setPaySelect] = useState('')
+  //for完成訂單的顯示
+  const [forOk, setForOk] = useState({
+    orderN: 0,
+    family: '',
+    pay: '',
+    orderDay: '',
+    totalPrice: 0,
+  })
+  //商品數量(項目)
   const { cartItem } = useContext(ProCartContext)
   //查看body高度
   const bodyHeight = useRef(null)
@@ -45,7 +58,16 @@ function Cart() {
           <div className={styled.empty1}></div>
           <div className={styled.body} ref={bodyHeight}>
             <CartTitle step={step} maxStep={maxStep} />
-            <NowComponents step={step} setStep={setStep} />
+            <NowComponents
+              step={step}
+              setStep={setStep}
+              forOk={forOk}
+              setForOk={setForOk}
+              familySelect={familySelect}
+              setFamilySelect={setFamilySelect}
+              paySelect={paySelect}
+              setPaySelect={setPaySelect}
+            />
           </div>
           <BuyCart step={step} setStep={setStep} buyBar={buyBar} />
         </>

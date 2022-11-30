@@ -74,7 +74,7 @@ function CartDetailPro() {
                     </div>
                     <div className={styled.roomImg}>
                       <img
-                        src="https://cdn2.ettoday.net/images/4778/d4778980.jpg"
+                        src={`http://localhost:3001/imgs/zx/${el.img}`}
                         alt=""
                       />
                     </div>

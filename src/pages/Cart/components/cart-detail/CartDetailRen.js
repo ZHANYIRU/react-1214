@@ -27,7 +27,7 @@ function CartDetailRen() {
                   key={`${el.sid}+${el.size}`}
                 >
                   <input type="checkbox" />
-                  <div className={styled.wrapRight} style={{ height: '250px' }}>
+                  <div className={styled.wrapRight} style={{ height: '280px' }}>
                     <div className={styled.roomText}>
                       <h2>{el.name}</h2>
                       <p>
@@ -37,14 +37,15 @@ function CartDetailRen() {
                         租借－歸還：{el.out}-{el.back}
                       </p>
                       <p>單價：{moneyFormat(el.price)}</p>
-                      <p>運費：{moneyFormat(el.deliveryFee)}</p>
+                      <p>租借天數：{el.day}</p>
+                      <p>跨店費用：{moneyFormat(el.deliveryFee)}</p>
                       <div className={styled.people}>
                         <p>數量：</p>
                         <div className={styled.qty}>
                           {el.quantity <= 1 ? (
                             <button
                               onClick={() => {
-                                minusOne4(el.sid, el.price)
+                                minusOne4(el.sid, el.price, el.day)
                               }}
                               disabled
                             >
@@ -53,7 +54,7 @@ function CartDetailRen() {
                           ) : (
                             <button
                               onClick={() => {
-                                minusOne4(el.sid, el.price)
+                                minusOne4(el.sid, el.price, el.day)
                               }}
                             >
                               －
@@ -62,7 +63,7 @@ function CartDetailRen() {
                           <button>{el.quantity}</button>
                           <button
                             onClick={() => {
-                              plusOne4(el.sid, el.price)
+                              plusOne4(el.sid, el.price, el.day)
                             }}
                           >
                             ＋
@@ -71,12 +72,14 @@ function CartDetailRen() {
                       </div>
                       <p>
                         總金額：
-                        {moneyFormat(el.price * el.quantity + el.deliveryFee)}
+                        {moneyFormat(
+                          el.price * el.quantity * el.day + el.deliveryFee
+                        )}
                       </p>
                     </div>
                     <div className={styled.roomImg}>
                       <img
-                        src="https://vencedor888.com/upload/1000_86.jpg"
+                        src={`http://localhost:3001/rental_img/${el.img}`}
                         alt=""
                       />
                     </div>
@@ -84,10 +87,10 @@ function CartDetailRen() {
                   <i
                     className="fa-regular fa-trash-can"
                     onClick={() => {
-                      const t = el.quantity * el.price
+                      const t = el.quantity * el.price * el.day + el.deliveryFee
                       change(el, i)
                       setTimeout(() => {
-                        delOne4(el.sid, el.size, t)
+                        delOne4(el.sid, t)
                       }, 500)
                     }}
                   ></i>
