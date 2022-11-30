@@ -118,15 +118,16 @@ function CheckData() {
                   key={`${el.size}+${el.sid}`}
                 >
                   <div className={styled.checkText}>
-                    <h2>NorthFace睡袋</h2>
+                    <h2>{el.name}</h2>
                     <p>
                       租還日期：{el.startDate}~{el.endDate}
                     </p>
                     <p>
                       租借－歸還：{el.out}-{el.back}
                     </p>
-                    <p>運費：{el.deliveryFee}</p>
                     <p>單價：{moneyFormat(el.price)}</p>
+                    <p>租借天數：{el.day}</p>
+                    <p>跨店費用：{el.deliveryFee}</p>
                     <p>數量：{el.quantity}</p>
                     <p>
                       總金額：
@@ -135,7 +136,7 @@ function CheckData() {
                   </div>
                   <div className={styled.checkImg}>
                     <img
-                      src="https://vencedor888.com/upload/1000_86.jpg"
+                      src={`http://localhost:3001/rental_img/${el.img}`}
                       alt=""
                     />
                   </div>

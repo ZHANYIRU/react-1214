@@ -74,7 +74,7 @@
     border: none;
   }
   p:first-child {
-    width: 64%;
+    width: 60%;
   }
   p:not(:first-child) {
     width: 12%;
@@ -132,7 +132,7 @@
 .proContent {
   .contentDe {
     p:nth-child(2) {
-      width: 53%;
+      width: 44.8%;
     }
   }
 }
@@ -140,7 +140,7 @@
 .roomContent {
   .contentDe {
     p:nth-child(2) {
-      width: 36.3%;
+      width: 34.2%;
     }
   }
 }
@@ -154,11 +154,10 @@
 .renContent {
   .contentDe {
     p:nth-child(2) {
-      width: 36%;
+      width: 30.7%;
       padding-right: 5px;
     }
     p:nth-child(4) {
-      height: 42px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;

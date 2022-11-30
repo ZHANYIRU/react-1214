@@ -37,7 +37,7 @@ function CartDetailRen() {
                         租借－歸還：{el.out}-{el.back}
                       </p>
                       <p>單價：{moneyFormat(el.price)}</p>
-                      <p>天數：{el.day}</p>
+                      <p>租借天數：{el.day}</p>
                       <p>跨店費用：{moneyFormat(el.deliveryFee)}</p>
                       <div className={styled.people}>
                         <p>數量：</p>
@@ -79,7 +79,7 @@ function CartDetailRen() {
                     </div>
                     <div className={styled.roomImg}>
                       <img
-                        src="https://vencedor888.com/upload/1000_86.jpg"
+                        src={`http://localhost:3001/rental_img/${el.img}`}
                         alt=""
                       />
                     </div>

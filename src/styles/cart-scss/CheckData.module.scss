@@ -10,10 +10,10 @@
   position: absolute;
   &::-webkit-scrollbar-track {
     -webkit-border-radius: 10px;
-    background: #4B5022;
+    background: #4b5022;
   }
 
-  >h2 {
+  > h2 {
     font-size: 25px;
     text-align: center;
   }
@@ -27,8 +27,8 @@
   flex-direction: column;
   align-items: center;
 
-  >h2 {
-    border-bottom: 3px solid #E0E5CF;
+  > h2 {
+    border-bottom: 3px solid #e0e5cf;
     padding: 10px 0;
     width: 90%;
     margin-bottom: 10px;
@@ -38,7 +38,7 @@
 .checkWrap {
   width: 90%;
   height: 200px;
-  background-color: #ECECEC;
+  background-color: #ececec;
   margin-bottom: 15px;
   border-radius: 5px;
   display: flex;
@@ -60,13 +60,13 @@
   }
 
   p:last-child {
-    color: #C25C5C;
+    color: #c25c5c;
   }
 }
 
 .checkImg {
   width: 150px;
-  height: 100px;
+  height: 150px;
 
   img {
     width: 100%;
@@ -87,7 +87,7 @@
   }
 
   i {
-    color: #48742C;
+    color: #48742c;
     margin-right: 5px;
   }
 }
