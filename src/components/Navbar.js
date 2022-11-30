@@ -119,8 +119,11 @@ function Navbar() {
         <div className={styled.navRight}>
           <Link to="/cart">
             <i className="fa-solid fa-cart-shopping"></i>
+            <span className={styled.cartItem}>
+              <p>{cartItem ? cartItem : 0}</p>
+            </span>
           </Link>
-          <span>{cartItem ? cartItem : 0}</span>
+
           <Link to="/member" onClick={loginBtn}>
             <i className="fa-solid fa-user"></i>
             <i className="fa-solid" style={{ paddingLeft: '10px' }}>
