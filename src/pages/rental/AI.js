@@ -80,9 +80,9 @@ const AI = () => {
           </div> */}
           {talk.map((e, i) => {
             return e.who === 'remote' ? (
-              <User_remote text={e.talk} />
+              <User_remote text={e.talk} key={i} />
             ) : (
-              <User_local text={e.talk} />
+              <User_local text={e.talk} key={i} />
             )
           })}
         </div>
