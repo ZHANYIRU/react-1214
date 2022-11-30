@@ -711,10 +711,10 @@ export const ProCartContextProvider = ({ children }) => {
     })
   }
   //刪除單筆租借
-  const delOne4 = (renSid, size, price) => {
+  const delOne4 = (renSid, price) => {
     dispatch({
       type: 'DEL',
-      payload: { renSid, size, price },
+      payload: { renSid, price },
     })
   }
   //清空購物車
