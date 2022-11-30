@@ -8,6 +8,7 @@ import PostMap from '../components/PostMap'
 import MemberContext from '../../../contexts/MemberContext'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import { getFileInfo } from 'prettier'
 
 export default function MemberInfo() {
@@ -67,7 +68,7 @@ export default function MemberInfo() {
     const fileName = formData.get('image_url').name
 
     if (!fileName) {
-      return alert('請先上傳圖片')
+      return Swal.fire({ logo: 'error', title: '請先上傳圖片' })
     }
 
     const token = localStorage.getItem('token') || ''
@@ -83,7 +84,7 @@ export default function MemberInfo() {
       }
     )
     console.log(result.data)
-    alert(result.data.success ? '新增成功' : '新增失敗')
+    Swal.fire({ title: result.data.success ? '新增成功' : '新增失敗' })
     setIsNew(false)
     getInfo()
     setPreview('')
@@ -106,7 +107,7 @@ export default function MemberInfo() {
       }
     )
     console.log(result.data)
-    alert(result.data.success ? '修改成功' : '修改失敗')
+    Swal.fire({ title: result.data.success ? '修改成功' : '修改失敗' })
     setIsEdit(false)
     setIsDel(false)
     getPostList()
@@ -130,7 +131,7 @@ export default function MemberInfo() {
     )
 
     console.log(result.data)
-    alert(result.data.success ? '刪除成功' : '刪除失敗')
+    Swal.fire({ title: result.data.success ? '刪除成功' : '刪除失敗' })
     if (result.data.success) {
       setIsEdit(false)
       getPostList()
@@ -165,9 +166,9 @@ export default function MemberInfo() {
     getPostList()
   }, [isNew, auth])
 
-  useEffect(()=>{
+  useEffect(() => {
     setUniqueLocations([...new Set(postList.map((item) => item.mountain_sid))])
-  },[postList])
+  }, [postList])
 
   //show preview
   function showPreview(e) {

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from '../../styles/member-scss/Login.module.scss'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import { useRef } from 'react'
 import { useContext } from 'react'
 import MemberContext from '../../contexts/MemberContext'
@@ -39,6 +40,7 @@ function Login(props) {
       localStorage.removeItem('token')
       setAuth(false)
       resetData()
+      Swal.fire({ icon: 'error', title: '登入失敗, 信箱或密碼錯誤' })
     }
   }
 

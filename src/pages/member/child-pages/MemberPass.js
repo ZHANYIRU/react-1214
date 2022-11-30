@@ -3,6 +3,7 @@ import { useContext, useRef, useState, useEffect } from 'react'
 import styled from '../../../styles/member-scss/MemberPass.module.scss'
 import MemberContext from '../../../contexts/MemberContext'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 //TODO 密碼格式驗證 確認密碼驗證
 
@@ -43,11 +44,13 @@ export default function MemberPass() {
       }
     )
 
-    if(result.data && result.data.success){
-      alert('密碼更新成功')
+    if (result.data && result.data.success) {
+      // alert('密碼更新成功')
+      Swal.fire({ icon: 'success', title: '密碼更新成功' })
     }
-    if(!result.data.success){
-      alert('密碼更新失敗')
+    if (!result.data.success) {
+      // alert('密碼更新失敗')
+      Swal.fire({ icon: 'error', title: '密碼更新失敗' })
     }
 
     console.log(result.data)

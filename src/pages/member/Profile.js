@@ -2,6 +2,7 @@ import styled from '../../styles/member-scss/Member.module.scss'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import MemberContext from '../../contexts/MemberContext'
 import { avatarLevel } from './components/Avatar'
 import { titleLevel } from './components/Avatar'
@@ -77,7 +78,7 @@ function Profile(props) {
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return alert('請先登入會員')
+      return Swal.fire({ title: '請先登入會員' })
     }
     const result = await axios.post(
       `http://localhost:3001/member/follow/api?mid=${mid}`,
@@ -101,7 +102,7 @@ function Profile(props) {
       getFollowing()
     }
     if (!result.data.success) {
-      alert('關注失敗')
+      Swal.fire({ logo: 'error', title: '關注失敗' })
     }
   }
 
@@ -109,7 +110,7 @@ function Profile(props) {
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return alert('請先登入會員')
+      return Swal.fire({ title: '請先登入會員' })
     }
 
     const result = await axios.delete(
@@ -128,7 +129,7 @@ function Profile(props) {
       getFollowing()
     }
     if (!result.data.success) {
-      alert('取消關注失敗')
+      Swal.fire({ logo: 'error', title: '取消關注失敗' })
     }
   }
 
@@ -218,7 +219,7 @@ function Profile(props) {
                 className={styled.follow}
                 onClick={() => {
                   if (!auth) {
-                    alert('請先登入會員')
+                    Swal.fire({ title: '請先登入會員' })
                   } else {
                     unfollow()
                   }
@@ -231,7 +232,7 @@ function Profile(props) {
                 className={styled.follow}
                 onClick={() => {
                   if (!auth) {
-                    alert('請先登入會員')
+                    Swal.fire({ title: '請先登入會員' })
                   } else {
                     addFollow()
                   }

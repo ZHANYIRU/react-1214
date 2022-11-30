@@ -4,6 +4,7 @@ import styled from '../../../styles/member-scss/MemberEdit.module.scss'
 import axios from 'axios'
 import TextareaAutosize from 'react-textarea-autosize'
 import dayjs from 'dayjs'
+import Swal from 'sweetalert2'
 import { useRef } from 'react'
 import MemberContext from '../../../contexts/MemberContext'
 import { useNavigate } from 'react-router-dom'
@@ -74,11 +75,11 @@ export default function MemberEdit() {
       }
     )
     if (result.data && result.data.success) {
-      alert('更新資料成功')
+      Swal.fire({ logo: 'success', title: '更新資料成功' })
       getInfo()
     }
     if (!result.data.success) {
-      alert('更新資料失敗')
+      Swal.fire({ logo: 'error', title: '更新資料失敗' })
     }
 
     console.log(result.data)
