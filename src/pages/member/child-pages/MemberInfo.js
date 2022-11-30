@@ -29,6 +29,7 @@ export default function MemberInfo() {
   const [selHeight, setSelHeight] = useState(0)
   const [postList, setPostList] = useState([])
   const [currentPost, setCurrentPost] = useState(0)
+  const [uniqueLocations, setUniqueLocations] = useState([])
 
   const newForm = useRef(null)
   const editForm = useRef(null)
@@ -164,6 +165,10 @@ export default function MemberInfo() {
     getPostList()
   }, [isNew, auth])
 
+  useEffect(() => {
+    setUniqueLocations([...new Set(postList.map((item) => item.mountain_sid))])
+  }, [postList])
+
   //show preview
   function showPreview(e) {
     if (e.target.files.length > 0) {
@@ -177,14 +182,32 @@ export default function MemberInfo() {
     <>
       <div className={styled.row}>
         <div className={styled.col}>
-          <div className={styled.card}>
+          <div className={`${styled.card} ${styled.infoCard}`}>
             <h3>分享地圖</h3>
+            <h4>{data.totalHeight}</h4>
             <div className={styled.divider}></div>
             <div className={styled.overview}>
+              <h4 className={styled.heightTag}>
+                累積海拔: {data.total_height}公尺
+              </h4>
               <PostMap postList={postList} />
-              <TotalHeight totalHeight={{height: data.total_height}} />
+              <TotalHeight totalHeight={{ height: data.total_height }} />
             </div>
           </div>
+        </div>
+      </div>
+      <div className={styled.summaryList}>
+        <div className={styled.summary}>
+          <p>分享貼文</p>
+          <h3>{postList.length}</h3>
+        </div>
+        <div className={styled.summary}>
+          <p>總計地點</p>
+          <h3>{uniqueLocations.length}</h3>
+        </div>
+        <div className={styled.summary}>
+          <p>累積海拔</p>
+          <h3 className={styled.altitude}>{data.total_height}m</h3>
         </div>
       </div>
       <div className={styled.row}>

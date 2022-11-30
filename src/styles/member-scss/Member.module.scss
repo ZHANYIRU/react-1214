@@ -26,6 +26,10 @@
             box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
             text-align: center;
 
+            .nameMobile {
+                display: none;
+            }
+
             .social {
                 cursor: pointer;
             }
@@ -131,4 +135,127 @@
 
     }
 
+}
+
+@media screen and (max-width: 1400px) {
+    .row {
+        .col {
+            width: 960px;
+            .btnGrp {
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+            }
+            article {
+                width: 600px;
+            }
+            
+        }
+        
+    }
+
+}
+
+@media screen and (max-width: 992px) {
+    .row {
+        .col {
+            width: 740px;
+            article {
+                width: 380px;
+            }
+
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .row {
+        .col {
+            width: 100%;
+            flex-direction: column;
+
+            aside {
+                top: 0;
+                width: 90%;
+                margin: auto;
+                position: relative;
+                margin-bottom: 30px;
+                height: auto;
+
+                .nameMobile {
+                    display: flex;
+                    align-items: flex-end;
+                    h3 {
+                        margin-right: 10px;
+                    }
+                }
+
+                .memberStats {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 10px;
+                    
+                    .nameWeb {
+                        display: none;
+                    }
+
+                    .socials {
+                        width: 60%;
+                        margin: 0;
+                        border: none;
+                        padding-bottom: 25px;
+                        justify-content: space-around;
+                    }
+
+                    .avatar {
+                        width: 100px;
+                        height: 100px;
+                        margin-left: 0;
+                    }
+
+                }
+
+                .intro {
+                    height: auto;
+                }
+
+                .btnGrp {
+                    flex-direction: row;
+                    gap: 3%;
+                }
+            }
+
+            article {
+                width: 90%;
+                margin: auto;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .row{
+        .col{
+            aside{
+                .btnGrp {
+                    button {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .row{
+        .col{
+            aside{
+                .btnGrp {
+                    flex-direction: column;
+                }
+            }
+        }
+    }
 }

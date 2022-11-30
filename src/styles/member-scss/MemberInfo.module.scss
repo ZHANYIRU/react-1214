@@ -43,6 +43,10 @@
         font-size: 20px;
     }
 
+    .heightTag {
+        display: none;
+    }
+
     .postMap {
         width: 34%;
         // background-color: #ccc;
@@ -606,4 +610,136 @@
             right: -60px;
         }
     }
+}
+
+.summaryList {
+    display: none;
+}
+
+@media screen and (max-width: 1400px) {
+    .overview {
+        justify-content: center;
+        position: relative;
+        .postMap {
+            width: 34%;
+            h4{
+                left: -170px;
+            }
+        }
+        .totalHeight {
+            display: none;
+        }
+        .heightTag {
+            display: block;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+    }
+ 
+    .postList {
+        gap: 4%;
+        .post {
+            width: 48%;
+        }
+    }
+ }
+
+@media screen and (max-width: 992px) {
+    .row {
+        h3 {
+            font-size: 26px;
+        }
+
+        .overview {
+            .postMap{
+                width: 50%;
+                margin-bottom: 40px;
+                h4{
+                    left: -74px;
+                }
+            }
+            .heightTag {
+                left: 0;
+                bottom: 0;
+            }
+        }
+        .postList {
+            gap: 0%;
+            .post {
+                width: 100%;
+            }
+        }
+        .postTitle {
+            button {
+                transform: translateY(3px);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .summaryList {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 30px;
+        .summary {
+            text-align: center;
+            p {
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+            h3 {
+                font-size: 32px;
+                font-weight: 700;
+            }
+            .altitude {
+                font-size: 26px;
+            }
+        }
+    }
+
+    .row {
+        .col{
+            .infoCard {
+                display: none;
+            }
+        }
+        .postTitle {
+            justify-content: center;
+            padding-bottom: 16px;
+            margin-top: -20px;
+            h3{
+                display: none;
+            }
+        }
+
+        .postList {
+            gap: 4%;
+            .post {
+                width: 48%;
+                p {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .row{
+        h3 {
+            font-size: 22px;
+        }
+        .postList {
+            gap: 0;
+            .post {
+                width: 100%;
+                p {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+    
 }
