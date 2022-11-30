@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import style from '../../../styles/room-scss/roomSelectBar.module.scss'
 import dayjs from 'dayjs'
+import ProCartContext from '../../../contexts/ProCartContext'
 
 function RoomSelectBar({ detail }) {
+  const { addRoomCart } = useContext(ProCartContext)
   //房型資料定義
   const roomQTY = detail.room_qty
   const roomPrice = detail.room_price
@@ -97,7 +99,8 @@ function RoomSelectBar({ detail }) {
           <label>床位</label>
           <select
             onChange={(e) => {
-              const selectQty = e.target.value
+              const selectQty = +e.target.value
+              console.log(typeof selectQty)
               setQty(selectQty)
             }}
           >
@@ -117,7 +120,26 @@ function RoomSelectBar({ detail }) {
           {qty && `${qty}床位`}：
           {qty && qty > 0 ? `${qty * roomPrice * night}` : 0}元
         </div>
-        <div className={style.add}>加入購物車</div>
+        <div
+          className={style.add}
+          onClick={() => {
+            addRoomCart(
+              detail.room_sid,
+              detail.room_name,
+              detail.room_address,
+              checkIn,
+              checkOut,
+              night,
+              detail.name,
+              detail.mountain_name + ' ' + detail.height + 'm',
+              detail.room_price,
+              qty,
+              detail.room_img
+            )
+          }}
+        >
+          加入購物車
+        </div>
       </div>
     </>
   )

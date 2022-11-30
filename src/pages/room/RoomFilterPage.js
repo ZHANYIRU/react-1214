@@ -49,7 +49,9 @@ function RoomFilterPage() {
   //將前一頁使用者選擇的選項清空
   const resetOption = () => {
     setChoose({ ...choose, location: '地區', mountain: '山區' })
-    mountainRows.length = 0
+    if (userSelect.length !== 0) {
+      mountainRows.length = 0
+    }
   }
   // const arrayEmpty = () => {
   //   roomRows.length === 0
@@ -61,6 +63,20 @@ function RoomFilterPage() {
     test.mountain = roomRows[0].mountain_name
     setChoose(test)
   }
+  const [service, setService] = useState([
+    '淋浴',
+    '沐浴用品',
+    '吹風機',
+    '毛巾',
+    '空調',
+    '電風扇',
+    '免費wifi',
+    '早餐',
+    '登山口接駁',
+    '登山諮詢',
+    '飲水機',
+    '插座',
+  ])
   return (
     <>
       <div className={style.warp}>
@@ -75,13 +91,15 @@ function RoomFilterPage() {
               }}
             >
               <option>{choose.location}</option>
-              {locationRows.map((v, i) => {
-                return (
-                  <option key={v.sid} value={v.sid}>
-                    {v.name}
-                  </option>
-                )
-              })}
+              {userSelect.length !== 0 &&
+                locationRows.length !== 0 &&
+                locationRows.map((v, i) => {
+                  return (
+                    <option key={v.sid} value={v.sid}>
+                      {v.name}
+                    </option>
+                  )
+                })}
             </select>
           </div>
           <div className={style.mountain}>
@@ -94,9 +112,8 @@ function RoomFilterPage() {
               }}
             >
               <option>{choose.mountain}</option>
-              {mountainRows.length !== 0
-                ? mountainRows &&
-                  mountainRows.map((v, i) => {
+              {userSelect.length !== 0 && mountainRows.length !== 0
+                ? mountainRows.map((v, i) => {
                     return (
                       <option key={v.mountain_sid} value={v.mountain_sid}>
                         {v.mountain_name}
@@ -163,62 +180,14 @@ function RoomFilterPage() {
                     </div>
                   </div>
                   <div className={style.facility}>
-                    <div>
-                      <img
-                        src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
-                        alt=""
-                      />
-                      <span>淋浴</span>
-                    </div>
-                    <div>
-                      <img
-                        src="https://cdn-icons-png.flaticon.com/128/911/911511.png"
-                        alt=""
-                      />
-                      <span>空調</span>
-                    </div>
-                    <div>
-                      <img
-                        src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
-                        alt=""
-                      />
-                      <span>淋浴</span>
-                    </div>
-                    <div>
-                      <img
-                        src="https://cdn-icons-png.flaticon.com/128/911/911511.png"
-                        alt=""
-                      />
-                      <span>空調</span>
-                    </div>
-                    <div>
-                      <img
-                        src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
-                        alt=""
-                      />
-                      <span>淋浴</span>
-                    </div>
-                    <div>
-                      <img
-                        src="https://cdn-icons-png.flaticon.com/128/911/911511.png"
-                        alt=""
-                      />
-                      <span>空調</span>
-                    </div>
-                    <div>
-                      <img
-                        src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
-                        alt=""
-                      />
-                      <span>淋浴</span>
-                    </div>
-                    <div>
-                      <img
-                        src="https://cdn-icons-png.flaticon.com/128/911/911511.png"
-                        alt=""
-                      />
-                      <span>空調</span>
-                    </div>
+                    {v.room_service_sid.split(',').map((v, i) => {
+                      return (
+                        <div key={i}>
+                          <img src={`/img/room_service_img/${v}.png`} alt="" />
+                          <span>{service[v - 1]}</span>
+                        </div>
+                      )
+                    })}
                   </div>
                   <div className={style.text}>
                     <span>距離登山口：{`${v.room_entry_distance}`}公里</span>
