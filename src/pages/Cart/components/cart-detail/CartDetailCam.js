@@ -30,8 +30,8 @@ function CartDetailCam() {
                   <div className={styled.wrapRight}>
                     <div className={styled.roomText}>
                       <h2>{el.name}</h2>
-                      <p>集合地址：{el.address}</p>
                       <p>預定日期：{el.startDate}</p>
+                      <p>天數：{el.dayname}</p>
                       <p>單價：{moneyFormat(el.price)}</p>
                       <div className={styled.people}>
                         <p>人數：</p>
