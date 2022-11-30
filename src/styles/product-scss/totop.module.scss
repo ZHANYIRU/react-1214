@@ -1,0 +1,43 @@
+@import '../global.scss';
+
+.toTop{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #fff;
+    position: fixed;
+    right: 60px;
+    bottom: 60px;
+    cursor: pointer;
+    .tt1{
+    position: absolute;
+    top: 30px;
+    left: 9px;
+    transform: rotate(-45deg);
+    width: 40px;
+    height: 10px;
+    background-color: #000;
+    }
+    .tt2{
+    position: absolute;
+    top: 30px;
+    right: 9px;
+    transform: rotate(45deg);
+    width: 40px;
+    height: 10px;
+    background-color: #000;
+    
+    }
+    &:hover{
+        background-color: red;
+        
+    }
+    &:hover>.tt1{
+        background-color: white;
+        
+    }
+    &:hover>.tt2{
+        background-color: white;
+        
+    }
+}

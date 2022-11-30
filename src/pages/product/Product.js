@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
-import ScrollTest from './components/scroll_test'
+// import ScrollTest from './components/scroll_test'
 import { Link, useParams, useLocation } from 'react-router-dom'
 import Slider from './components/slider'
 import Product_filter from './components/product_filter'
 import { useMediaQuery } from 'react-responsive'
 import _, { set } from 'lodash'
-
+import ToTop from './components/toTop'
 import axios from 'axios'
 import styled from '../../styles/product-scss/product.module.scss'
 import img1 from './img/img1.jpg'
@@ -13,6 +13,15 @@ import img2 from './img/img2.jpg'
 import img3 from './img/img3.jpg'
 
 function Product() {
+  const scrollTotop = () => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant',
+    })
+  }
+  const [toTop, setToTop] = useState(false)
+
   //目前點選的nav
   const [nav, setNav] = useState([
     'all',
@@ -76,9 +85,9 @@ function Product() {
     let Window_W = window.innerWidth
     let windowScrollY = window.scrollY
     // console.log(windowScrollY)
-    if (windowScrollY > 770 && Window_W > 500) {
+    if (windowScrollY > 630 && Window_W > 500) {
       setFixedd(true)
-    } else if (windowScrollY < 770 && Window_W > 500) {
+    } else if (windowScrollY < 630 && Window_W > 500) {
       setFixedd(false)
     }
   }
@@ -144,116 +153,127 @@ function Product() {
     window.addEventListener('scroll', scrollFilter)
   }, [fixedd])
 
+  useEffect(() => {}, [])
   return (
     <>
+      <ToTop />
       <div className={styled.container}>
         <div className={styled.empty}></div>
         {/* Slider */}
-        <Slider data={data} />
+        <Slider data={data} fixedd={fixedd} />
 
         {/* 搜尋專區 */}
         {mobile ? (
           ''
         ) : (
-          <div
-            className={styled.forms}
-            style={search}
-            onClick={(e) => {
-              searchStyle(e)
-            }}
-          >
-            <form
-              action=""
-              onSubmit={(e) => {
-                e.preventDefault()
+          <div className={fixedd ? `${styled.stickyWrapSearch}` : ''}>
+            <div
+              className={styled.forms}
+              style={search}
+              onClick={(e) => {
+                searchStyle(e)
               }}
             >
-              <input
-                className={styled.search}
-                type="text"
-                value={inputKeyword}
-                onChange={(e) => {
-                  setInputKeyword(e.target.value)
+              <form
+                action=""
+                onSubmit={(e) => {
+                  e.preventDefault()
                 }}
-              />
+              >
+                <input
+                  className={styled.search}
+                  type="text"
+                  value={inputKeyword}
+                  onChange={(e) => {
+                    setInputKeyword(e.target.value)
+                  }}
+                />
 
-              <i
-                className="fa-solid fa-magnifying-glass"
-                onClick={() => {
-                  setSearchKeyWord(inputKeyword)
-                }}
-              ></i>
-            </form>
+                <i
+                  className="fa-solid fa-magnifying-glass"
+                  onClick={() => {
+                    setSearchKeyWord(inputKeyword)
+                  }}
+                ></i>
+              </form>
+            </div>
           </div>
         )}
-        {/* 種類專區 */}
 
-        <div className={styled.product_nav}>
-          <div className={styled.product_nav_box1}>
-            <Link
-              onClick={() => {
-                setNav('new')
-                getProductData('new')
-              }}
-            >
-              <h2 style={nav === 'new' ? { color: 'red' } : {}}>最新上架</h2>
-            </Link>
-            {mobile ? <p>|</p> : ''}
-            <Link
-              onClick={() => {
-                setNav('hot')
-                getProductData('hot')
-              }}
-            >
-              <h2 style={nav === 'hot' ? { color: 'red' } : {}}>熱門商品</h2>
-            </Link>
-            {mobile ? <p>|</p> : ''}
-            <Link
-              onClick={() => {
-                setNav('clothe')
-                getProductData('clothe')
-              }}
-            >
-              <h2 style={nav === 'clothe' ? { color: 'red' } : {}}>男女服飾</h2>
-            </Link>
-            {mobile ? <p>|</p> : ''}
-          </div>
-          <div className={styled.product_nav_box2}>
-            <p>商品類別</p>
-          </div>
-          <div className={styled.product_nav_box3}>
-            <Link
-              onClick={() => {
-                setNav('bag')
-                getProductData('bag')
-              }}
-            >
-              <h2 style={nav === 'bag' ? { color: 'red' } : {}}>登山背包</h2>
-            </Link>
-            {mobile ? <p>|</p> : ''}
-            <Link
-              onClick={() => {
-                setNav('shose')
-                getProductData('shose')
-              }}
-            >
-              <h2 style={nav === 'shose' ? { color: 'red' } : {}}>登山鞋</h2>
-            </Link>
-            {mobile ? <p>|</p> : ''}
-            <Link
-              onClick={() => {
-                setNav('accessories')
-                getProductData('accessories')
-              }}
-            >
-              <h2 style={nav === 'accessories' ? { color: 'red' } : {}}>
-                專業配件
-              </h2>
-            </Link>
+        {/* 種類專區 */}
+        <div className={fixedd ? `${styled.stickyWrapCate}` : ''}>
+          <div
+            className={styled.product_nav}
+            style={fixedd ? { marginBottom: '10px' } : {}}
+          >
+            <div className={styled.product_nav_box1}>
+              <Link
+                onClick={() => {
+                  setNav('new')
+                  getProductData('new')
+                }}
+              >
+                <h2 style={nav === 'new' ? { color: 'red' } : {}}>最新上架</h2>
+              </Link>
+              {mobile ? <p>|</p> : ''}
+              <Link
+                onClick={() => {
+                  setNav('hot')
+                  getProductData('hot')
+                }}
+              >
+                <h2 style={nav === 'hot' ? { color: 'red' } : {}}>熱門商品</h2>
+              </Link>
+              {mobile ? <p>|</p> : ''}
+              <Link
+                onClick={() => {
+                  setNav('clothe')
+                  getProductData('clothe')
+                }}
+              >
+                <h2 style={nav === 'clothe' ? { color: 'red' } : {}}>
+                  男女服飾
+                </h2>
+              </Link>
+              {mobile ? <p>|</p> : ''}
+            </div>
+            <div className={styled.product_nav_box2}>
+              <p>商品類別</p>
+            </div>
+            <div className={styled.product_nav_box3}>
+              <Link
+                onClick={() => {
+                  setNav('bag')
+                  getProductData('bag')
+                }}
+              >
+                <h2 style={nav === 'bag' ? { color: 'red' } : {}}>登山背包</h2>
+              </Link>
+              {mobile ? <p>|</p> : ''}
+              <Link
+                onClick={() => {
+                  setNav('shose')
+                  getProductData('shose')
+                }}
+              >
+                <h2 style={nav === 'shose' ? { color: 'red' } : {}}>登山鞋</h2>
+              </Link>
+              {mobile ? <p>|</p> : ''}
+              <Link
+                onClick={() => {
+                  setNav('accessories')
+                  getProductData('accessories')
+                }}
+              >
+                <h2 style={nav === 'accessories' ? { color: 'red' } : {}}>
+                  專業配件
+                </h2>
+              </Link>
+            </div>
           </div>
         </div>
-
         {/* 卡片專區 */}
+        {/* {fixedd ? <div className={styled.empty}></div> : ''} */}
 
         <div className={styled.cardBigBox}>
           <Product_filter
@@ -390,19 +410,15 @@ function Product() {
                     )
                   })
               : ''}
+            <button
+              onClick={() => {
+                setHowLongCard(howLongCard + 16)
+              }}
+            >
+              按我看更多
+            </button>
           </div>
         </div>
-        <button
-          onClick={() => {
-            setHowLongCard(howLongCard + 16)
-          }}
-        >
-          按我看更多
-        </button>
-        <ScrollTest
-          setHowLongCard={setHowLongCard}
-          howLongCard={howLongCard}
-        />
       </div>
     </>
   )

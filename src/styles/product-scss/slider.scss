@@ -9,6 +9,16 @@
     margin-bottom: 20px;
     border-radius: 10px;
   }
+  .sliderFixedd{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    // height: 620px;
+    margin: 2px auto;
+    box-shadow: 0 0 6px #666666;
+    // margin-bottom: 20px;
+    border-radius: 10px;
+  }
   
   .slider-slide {
     position: absolute;

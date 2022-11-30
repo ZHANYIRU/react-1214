@@ -26,16 +26,38 @@ body{
     position: relative;
 
 }
+.stickyWrapSearch{
+    
+    z-index: 10;
+    position: sticky; 
+    top: 60px;
+    padding-top: 10px;
+     border-radius: 10px 10px;
+     overflow: hidden;
+     background-color: #E9D9A2;
+}
+.stickyWrapCate{
+    z-index: 10;
+    position: sticky;
+     top: 160px;
+     padding-top: 10px;
+     background-color: #E9D9A2;
+     border-radius: 10px 10px;
+     overflow: hidden;
+     
+}
 
 .forms{
     margin: 0 auto;
-    // width: 20%;
+    
+    width: 20%;
     position: relative;
     transition: .5s  linear;
     // display: flex;
     // justify-content:flex-start;
     .search{
         // text-align: center;
+        
         border-radius: 40px;
         padding-left: 10px;
         border: 1px rgb(140, 134, 134) solid;
@@ -45,6 +67,8 @@ body{
         margin-bottom: 50px;
         outline-style: none;
     }
+
+    
     i{
        position: absolute;
        right: 20px;
@@ -122,6 +146,7 @@ p{
             font-size: 1.1rem;
             transform: translateY(-5px);
             font-weight: 700;
+            // z-index: 11;
         }
     }
   }
@@ -129,19 +154,37 @@ p{
 
 
 
-
+.cardBigBox{
+    // position: relative;
+    margin: 0 auto;
+    z-index: -1;
+}
 
 
     .cardbox{
 
         // min-width: 912px;
+        
         width:100%;
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
-        justify-content:flex-start;
+        justify-content:space-around;
         align-items:flex-start;
-       
+        button{
+            width: 200px;
+            height: 50px;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+            background-color: rgb(120, 167, 110);
+            // color: wheat;
+            text-align: center;
+            margin: 0 auto;
+            &:hover{
+                background-color: $yellow;
+            }
+        }
        
         .card{
             width: 23%;
@@ -243,9 +286,9 @@ p{
         display: flex;
         position:absolute;
         justify-content:center;
-        top: 840px;
+        top: 900px;
         
-        right: 108%;
+        right: 106.8%;
         flex-shrink: .2;
         background-color: #F5F5F5;
         padding:10px;
@@ -260,12 +303,8 @@ p{
         display: flex;
         position:fixed;
         justify-content:center;
-        // min-width: 246px;
-        // width:16%;
-        // top: 0px;
-        top: 200px;
-        // right: 105%;
-        left: 30px;
+        top: 240px;
+        left: 50px;
         flex-shrink: .2;
         background-color: #F5F5F5;
         padding:10px;
@@ -384,7 +423,12 @@ input{
         min-width: 390px;
         position: relative;
         overflow: hidden;
-    
+        button{
+            outline: none;
+            background-color: red;
+            width: 200px;
+            height: 80px;
+        }
     }
     
     .cardbox{
@@ -397,7 +441,7 @@ input{
         gap: 10px;
         justify-content:space-between;
         align-items:flex-start;
-
+        z-index: 1;
        
        
         .card{
@@ -531,16 +575,19 @@ input{
          }
     }
  .filterTop{
-    width: 100%;
+    width: 50%;
     height: 80px;
     display: flex;
+    margin: 0 auto;
+    // justify-content: center;
     align-items: center;
     .forms{
-        width: 70%;
-        margin: 0 auto;
+        width: 80%;
+        margin: 0 auto;z-index: 1;
         .search{
             // text-align: center;
             border-radius: 40px;
+            
             padding-left: 10px;
             border: 1px #ccc solid;
             background-color:white;
