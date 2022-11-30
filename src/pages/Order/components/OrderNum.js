@@ -147,7 +147,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
       img = `http://localhost:3001/room_img/${el.room_img}`
     }
     if (el.rental_img) {
-      img = `http://localhost:3001/rental_img/${el.rental_img}`
+      img = `http://localhost:3001/rental_img/${el.rental_img[0]}`
     }
     if (el.mainImage) {
       img = `http://localhost:3001/room_img/${el.mainImage}`
@@ -487,7 +487,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                               <div className={styled.contentDe}>
                                 <div className={styled.imgWrap}>
                                   <img
-                                    src={`http://localhost:3001/rental_img/${el5.rental_img}`}
+                                    src={`http://localhost:3001/rental_img/${el5.rental_img[0]}`}
                                     alt=""
                                   />
                                 </div>

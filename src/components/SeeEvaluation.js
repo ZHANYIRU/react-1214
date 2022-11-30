@@ -15,7 +15,7 @@ function SeeEvaluation({ el }) {
       img = `http://localhost:3001/room_img/${el.room_img}`
     }
     if (el.rental_img) {
-      img = `http://localhost:3001/rental_img/${el.rental_img}`
+      img = `http://localhost:3001/rental_img/${el.rental_img[0]}`
     }
     if (el.mainImage) {
       img = `http://localhost:3001/room_img/${el.mainImage}`
