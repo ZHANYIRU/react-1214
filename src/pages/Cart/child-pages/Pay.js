@@ -51,7 +51,7 @@ function Pay({ paySelect, familySelect, step, setStep, setForOk }) {
     if (paid) {
       setTimeout(() => {
         setStep(step + 1)
-      }, 1500)
+      }, 1200)
     }
     return () => {
       unsubscribe('paid')

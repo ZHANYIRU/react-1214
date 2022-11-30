@@ -138,6 +138,22 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
       }
     }
   }
+  const photo = (el) => {
+    let img
+    if (el.product_img) {
+      img = `http://localhost:3001/imgs/zx/${el.product_img}`
+    }
+    if (el.room_img) {
+      img = `http://localhost:3001/room_img/${el.room_img}`
+    }
+    if (el.rental_img) {
+      img = `http://localhost:3001/rental_img/${el.rental_img}`
+    }
+    if (el.mainImage) {
+      img = `http://localhost:3001/room_img/${el.mainImage}`
+    }
+    return img
+  }
   return (
     <>
       {/* 給評價 */}
@@ -160,13 +176,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
               >
                 <div className={styled.lightName}>
                   <div className={styled.lightImg}>
-                    <img
-                      src={
-                        `http://localhost:3001/imgs/zx/${el.product_img}` ||
-                        `http://localhost:3001/room_img/${el.img}`
-                      }
-                      alt=""
-                    />
+                    <img src={photo(el)} alt="" />
                   </div>
                   <p>
                     {el.product_name ||
@@ -317,8 +327,9 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                       ) !== -1 && (
                         <div className={styled.roomContentTitle}>
                           <p>房間</p>
-                          <p>入住日期</p>
-                          <p>退房日期</p>
+                          <p>入住</p>
+                          <p>退房</p>
+                          <p>天數</p>
                           <p>單價</p>
                           <p>床位</p>
                           <p>金額</p>
@@ -336,7 +347,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                             <div className={styled.contentDe}>
                               <div className={styled.imgWrap}>
                                 <img
-                                  src={`http://localhost:3001/room_img/${el.img}`}
+                                  src={`http://localhost:3001/room_img/${el3.img}`}
                                   alt=""
                                 />
                               </div>
@@ -344,10 +355,11 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                                 <span>{el3.room_name}</span>
                                 <br />
                                 <br />
-                                <span>地址：{el3.room_details}</span>
+                                <span>地址：{el3.room_address}</span>
                               </p>
                               <p>{ds.isValid() && ds.format('YYYY-MM-DD')}</p>
                               <p>{de.isValid() && de.format('YYYY-MM-DD')}</p>
+                              <p>{el3.day}</p>
                               <p>{moneyFormat(el3.room_price)}</p>
                               <p>{el3.qty}</p>
                               <p>{moneyFormat(el3.total)}</p>
