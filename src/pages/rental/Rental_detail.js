@@ -312,10 +312,13 @@ const Rental_detail = () => {
                       Detail.rental_name,
                       day.borrowDay,
                       day.backDay,
+                      //總共天數
+                      (Date.parse(day.backDay) - Date.parse(day.borrowDay)) /
+                        86400000,
                       cartStore.borrowStore,
                       cartStore.backStore,
                       deliveryFee,
-                      borrowMoney,
+                      Detail.rental_price,
                       number,
                       Detail.rental_img[0],
                     ]
