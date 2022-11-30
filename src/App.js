@@ -14,8 +14,8 @@ import CampProduct from './pages/camp/CampProduct'
 import Room from './pages/room/Room'
 import Rental from './pages/rental/Rental'
 import Rental_detail from './pages/rental/Rental_detail'
+import AI from './pages/rental/AI'
 import Commnent from './pages/rental/components/Commnent'
-
 
 import Cart from './pages/Cart/Cart'
 import Order from './pages/Order/Order'
@@ -59,6 +59,8 @@ function App() {
               <Route path="/room/:room_sid" element={<RoomDetailPage />} />
               <Route path="/rental" element={<Rental />} />
               <Route path="/rental/:sid" element={<Rental_detail />} />
+
+              <Route path="/AI" element={<AI />} />
               <Route path="/commnent" element={<Commnent />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/pay/confirm" element={<Confirm />} />
