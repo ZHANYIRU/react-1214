@@ -27,9 +27,15 @@
         justify-content: space-around;
         text-align: center;
         div{
-            margin:0 20px;
+            width: 120px;
+            margin:0 15px;
             display: flex;
             flex-direction: column;
+        }
+        span{
+            font-size: 1.2rem;
+            line-height: 2rem;
+
         }
         .rain{
             display: flex;
@@ -40,11 +46,12 @@
                 line-height: 1.3rem;
                 margin-right: 10px;
             }
-        }
-        span{
-            font-size: 1.3rem;
-            line-height: 2rem;
-
+            span{
+                width: 120px;
+                font-size: 1.2rem;
+                line-height: 2rem;
+                text-align: start;
+            }
         }
     }
     .date{

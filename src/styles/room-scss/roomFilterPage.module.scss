@@ -89,10 +89,12 @@
     box-sizing: content-box;
 
     .cardImg{
-        background-image: url('./../../../public/img/room.jpg');
-        background-size: cover;
         width:50% ;
         border-radius: 10px;
+        img{
+            width: 100%;
+            object-fit: cover;
+        }
     }
 }
 .detail{

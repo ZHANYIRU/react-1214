@@ -10,7 +10,6 @@ function Weather() {
   const [locationWeather, setLocationWeather] = useState([])
   //新北市天氣資料
   const [newTaipei, setNewTaipei] = useState([])
-
   //使用者切換到地區天氣詳情
   const [selectLocation, setSelectLocation] = useState([])
 
@@ -26,7 +25,6 @@ function Weather() {
   ])
 
   //切換日期
-
   const [week, setWeek] = useState(0)
   const Plus = () => {
     if (week < 12) {
@@ -40,7 +38,7 @@ function Weather() {
     }
     return
   }
-
+  //全部地區天氣、預設新北市天氣
   const getWeatherData = async () => {
     const response = await axios.get(
       'https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-091?Authorization=CWB-85001E30-AF93-4B7B-AEEF-C98453EAAED6&format=JSON&elementName=MinT,MaxT,PoP12h,Wx,WeatherDescription'
@@ -48,7 +46,7 @@ function Weather() {
     setLocationWeather(response.data.records.locations[0].location)
     setNewTaipei(response.data.records.locations[0].location[3].weatherElement)
   }
-
+  //使用者切換到的地區天氣
   const getLocationWeather = async (e) => {
     const selLocation = e.target.value
     console.log('aaa', selLocation)
@@ -138,13 +136,19 @@ function Weather() {
               {selectLocation.length === 0 ? (
                 <span>
                   {newTaipei.length !== 0 &&
-                    newTaipei[0].time[week].elementValue[0].value}
+                  newTaipei[0].time[week].elementValue[0].value === ' '
+                    ? '未公布'
+                    : newTaipei.length !== 0 &&
+                      newTaipei[0].time[week].elementValue[0].value}
                   %
                 </span>
               ) : (
                 <span>
                   {selectLocation.length !== 0 &&
-                    selectLocation[0].time[week].elementValue[0].value}
+                  selectLocation[0].time[week].elementValue[0].value === ' '
+                    ? '未公布'
+                    : selectLocation.length !== 0 &&
+                      selectLocation[0].time[week].elementValue[0].value}
                   %
                 </span>
               )}
@@ -176,13 +180,19 @@ function Weather() {
               {selectLocation.length === 0 ? (
                 <span>
                   {newTaipei.length !== 0 &&
-                    newTaipei[0].time[week + 1].elementValue[0].value}
+                  newTaipei[0].time[week + 1].elementValue[0].value === ' '
+                    ? '未公布'
+                    : newTaipei.length !== 0 &&
+                      newTaipei[0].time[week + 1].elementValue[0].value}
                   %
                 </span>
               ) : (
                 <span>
                   {selectLocation.length !== 0 &&
-                    selectLocation[0].time[week + 1].elementValue[0].value}
+                  selectLocation[0].time[week + 1].elementValue[0].value === ' '
+                    ? '未公布'
+                    : selectLocation.length !== 0 &&
+                      selectLocation[0].time[week + 1].elementValue[0].value}
                   %
                 </span>
               )}

@@ -47,7 +47,7 @@
     }
 }
 .slideWrap{
-    width: 75%;
+    width: 80%;
     // overflow: hidden;
     margin:0 auto;
     .slide{
@@ -60,16 +60,10 @@
     //     display: flex;
     //     justify-content: center;
     //     width: 100%;
-        // .img{
-        //     // margin: 0 40px;
-        //     width: 100%;
-        //     img{
-        //         width: 80%;
-        //     }
-        // }
+        }
     // }
 }
-}
+
 
 .arrow{
     display: flex;
@@ -130,21 +124,28 @@
         flex-wrap: wrap;
     }
     .facility{
-        padding: 10px;
+        padding: 15px;
         background-color: #E0E5CF;
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
-        width: 120px;
-        height: 120px;
+        width: 125px;
+        height: 125px;
         border-radius: 5px;
-        margin: 12px 0 12px 24px;
+        margin: 15px 20px 15px 20px;
 
         img{
-            width: 50px;
+            width: 40px;
             // margin-bottom: 10px;
 
         }
+        span{
+            margin-top: 5px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            margin-left: 0
+        };
     }
 }
