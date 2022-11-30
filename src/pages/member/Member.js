@@ -68,10 +68,7 @@ function Member(props) {
                     alt="avatar"
                   ></img>
                 ) : (
-                  <img
-                    src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
-                    alt="postImg"
-                  ></img>
+                  <img src="/img/default_avatar.png" alt="avatar" />
                 )}
               </div>
               <div className={styled.nameWeb}>

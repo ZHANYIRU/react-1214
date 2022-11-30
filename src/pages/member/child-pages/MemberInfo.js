@@ -165,9 +165,9 @@ export default function MemberInfo() {
     getPostList()
   }, [isNew, auth])
 
-  useEffect(() => {
+  useEffect(()=>{
     setUniqueLocations([...new Set(postList.map((item) => item.mountain_sid))])
-  }, [postList])
+  },[postList])
 
   //show preview
   function showPreview(e) {
@@ -358,13 +358,13 @@ export default function MemberInfo() {
                     className="fa-regular fa-image"
                     style={{ color: preview ? '#fff' : '#666' }}
                   ></i>
-                  <label htmlFor="avatar" className={styled.avatarLabel}>
+                  <label htmlFor="image_url" className={styled.avatarLabel}>
                     上傳照片
                     <input
                       type="file"
                       accept="image/png, image/jpeg"
                       name="image_url"
-                      id="avatar"
+                      id="image_url"
                       onChange={(e) => {
                         showPreview(e)
                       }}

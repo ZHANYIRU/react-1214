@@ -54,6 +54,10 @@
                 }
             }
 
+            .gold {
+                background-image: conic-gradient(from 180deg at 50% 50%, #fff6c4 0deg, #ffc31c 69.37deg, #ecc900 163.12deg, #ffbf00 275.62deg, #fff6c4 360deg);
+            }
+
             .silver {
                 background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
             }
