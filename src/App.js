@@ -8,6 +8,7 @@ import Footer from './components/Footer'
 import Home from './pages/home/Home'
 import Product from './pages/product/Product'
 import ProductPage from './pages/product/ProductPage'
+import Custom from './pages/product/Custom'
 import Camp from './pages/camp/Camp'
 import CampOneday from './pages/camp/CampOneday'
 import CampProduct from './pages/camp/CampProduct'
@@ -15,7 +16,6 @@ import Room from './pages/room/Room'
 import Rental from './pages/rental/Rental'
 import Rental_detail from './pages/rental/Rental_detail'
 import Commnent from './pages/rental/components/Commnent'
-
 
 import Cart from './pages/Cart/Cart'
 import Order from './pages/Order/Order'
@@ -48,6 +48,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path="/" element={<Home />} />
               <Route path="/product" element={<Product />} />
+              <Route path="/product/Custom" element={<Custom />} />
               <Route path="/product/:product_sid" element={<ProductPage />} />
               <Route path="/camp" element={<Camp />} />
               <Route path="/camp/filter" element={<CampOneday />} />

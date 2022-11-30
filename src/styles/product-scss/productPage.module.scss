@@ -1,4 +1,3 @@
-
 @import '../global.scss';
 *{
     line-height: 1.2rem;
@@ -232,7 +231,7 @@ a{
     .buttonGroup{
         display: flex;
         width: 100%;
-        justify-content:start;
+        justify-content:flex-start;
         .cart{
             border-radius: 5px;
             background-color: #000;
@@ -424,7 +423,7 @@ a{
     border: 1px solid #ccc;
     .commonTitle{
         display: flex;
-        justify-content: start;
+        justify-content: flex-start;
         align-items: center;
         margin-bottom: 10px;
         .memberName{

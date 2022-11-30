@@ -1,10 +1,9 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 // import ScrollTest from './components/scroll_test'
-import { Link, useParams, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Slider from './components/slider'
-import Product_filter from './components/product_filter'
+import ProductFilter from './components/product_filter'
 import { useMediaQuery } from 'react-responsive'
-import _, { set } from 'lodash'
 import ToTop from './components/toTop'
 import axios from 'axios'
 import styled from '../../styles/product-scss/product.module.scss'
@@ -13,15 +12,6 @@ import img2 from './img/img2.jpg'
 import img3 from './img/img3.jpg'
 
 function Product() {
-  const scrollTotop = () => {
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: 'instant',
-    })
-  }
-  const [toTop, setToTop] = useState(false)
-
   //目前點選的nav
   const [nav, setNav] = useState()
   //卡片
@@ -57,8 +47,6 @@ function Product() {
   const [inputKeyword, setInputKeyword] = useState('')
   // 按下搜尋按鈕用，真正搜尋用
   const [searchKeyword, setSearchKeyWord] = useState('')
-  //偵測是否為手機版面
-  const [mob, setMob] = useState(false)
 
   //format currency
   const moneyFormat = (price) => {
@@ -85,19 +73,19 @@ function Product() {
     }
   }
 
-  const location = useLocation()
-  // 視窗寬度方法
-  const reSize = () => {
-    let Window_W = window.innerWidth
-    if (
-      Window_W < 500 &&
-      (location.pathname === '/product' || location.pathname === '/product/')
-    ) {
-      return setMob(true)
-    } else if (Window_W > 500) {
-      setMob(false)
-    }
-  }
+  // const location = useLocation()
+  // // 視窗寬度方法
+  // const reSize = () => {
+  //   let Window_W = window.innerWidth
+  //   if (
+  //     Window_W < 500 &&
+  //     (location.pathname === '/product' || location.pathname === '/product/')
+  //   ) {
+  //     return setMob(true)
+  //   } else if (Window_W > 500) {
+  //     setMob(false)
+  //   }
+  // }
 
   // const addCard = () => {
   //   for (let i = 1; i <= datas.length; i++) {
@@ -269,7 +257,7 @@ function Product() {
         {/* {fixedd ? <div className={styled.empty}></div> : ''} */}
 
         <div className={styled.cardBigBox}>
-          <Product_filter
+          <ProductFilter
             fixedd={fixedd}
             datas={datas}
             setDatas={setDatas}

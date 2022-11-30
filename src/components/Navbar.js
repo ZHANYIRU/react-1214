@@ -53,14 +53,34 @@ function Navbar() {
   const loginArea = (
     <>
       <div className={styled.loginBefore} style={loginBoxMob}>
-        <Link to="/login">
-          {/* 切換會員中心 */}
-          <span>會員登入</span>
-        </Link>
-        <Link to="/join">
-          {/* 切換會員登出 */}
-          <span>會員註冊</span>
-        </Link>
+        {auth ? (
+          <Link to="/member">
+            <span>會員中心</span>
+          </Link>
+        ) : (
+          <Link to="/login">
+            {/* 切換會員中心 */}
+            <span>會員登入</span>
+          </Link>
+        )}
+        {auth ? (
+          <span className={styled.logOut}>
+            <span
+              onClick={() => {
+                resetData()
+                localStorage.removeItem('token')
+                setAuth(false)
+              }}
+            >
+              會員登出
+            </span>
+          </span>
+        ) : (
+          <Link to="/join">
+            {/* 切換會員登出 */}
+            <span>會員註冊</span>
+          </Link>
+        )}
       </div>
     </>
   )
