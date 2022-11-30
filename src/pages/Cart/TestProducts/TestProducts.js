@@ -194,6 +194,7 @@ function TestProducts() {
                       '苗栗縣獅潭鄉',
                       date2.start,
                       date2.end,
+                      2,
                       '苗栗',
                       '阿拉斯加山',
                       el.price,

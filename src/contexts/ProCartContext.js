@@ -46,6 +46,7 @@ const proCartReducer = (state, action) => {
     address,
     start,
     end,
+    day,
     area,
     moun,
     campSid,
@@ -116,7 +117,7 @@ const proCartReducer = (state, action) => {
         ...state,
         items2: upState,
         totalItem: state.totalItem,
-        totalPrice: state.totalPrice + qty * price,
+        totalPrice: state.totalPrice + qty * price * day,
       }
       localStorage.setItem('roomCart', JSON.stringify(newState.items2))
       localStorage.setItem('totalPrice', JSON.stringify(newState.totalPrice))
@@ -214,6 +215,7 @@ const proCartReducer = (state, action) => {
               address: address,
               startDate: start,
               endDate: end,
+              day: day,
               area: area,
               moun: moun,
               img: img,
@@ -222,7 +224,7 @@ const proCartReducer = (state, action) => {
             },
           ],
           totalItem: state.totalItem + 1,
-          totalPrice: state.totalPrice + price * qty,
+          totalPrice: state.totalPrice + price * qty * day,
         }
         const newTotalItem = state.totalItem
         const newTotalPrice = state.totalPrice
@@ -341,7 +343,7 @@ const proCartReducer = (state, action) => {
           ...state,
           items2: upState,
           totalItem: state.totalItem,
-          totalPrice: state.totalPrice - price,
+          totalPrice: state.totalPrice - price * day,
         }
         localStorage.setItem('roomCart', JSON.stringify(newState.items2))
         localStorage.setItem('totalPrice', JSON.stringify(newState.totalPrice))
@@ -548,6 +550,7 @@ export const ProCartContextProvider = ({ children }) => {
     address,
     start,
     end,
+    day,
     area,
     moun,
     price,
@@ -562,6 +565,7 @@ export const ProCartContextProvider = ({ children }) => {
         address,
         start,
         end,
+        day,
         area,
         moun,
         price,
@@ -641,17 +645,17 @@ export const ProCartContextProvider = ({ children }) => {
     })
   }
   //商品數量+1(房間)
-  const plusOne2 = (roomSid, price) => {
+  const plusOne2 = (roomSid, price, day) => {
     dispatch({
       type: 'PLUS',
-      payload: { roomSid, price },
+      payload: { roomSid, price, day },
     })
   }
   //商品數量-1(房間)
-  const minusOne2 = (roomSid, price) => {
+  const minusOne2 = (roomSid, price, day) => {
     dispatch({
       type: 'MINUS',
-      payload: { roomSid, price },
+      payload: { roomSid, price, day },
     })
   }
   //商品數量+1(活動)
