@@ -24,7 +24,9 @@ function SeeEvaluation({ el }) {
         <div className={styled.lightName}>
           <div className={styled.lightImg}>
             <img
-              src={`http://localhost:3001/imgs/zx/${el.product_img}`}
+              src={`http://localhost:3001/imgs/zx/${
+                el.product_img || `http://localhost:3001/room_img/${el.img}`
+              }`}
               alt=""
             />
           </div>

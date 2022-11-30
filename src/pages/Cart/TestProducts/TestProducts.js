@@ -326,6 +326,7 @@ function TestProducts() {
                       el.name,
                       date4.start,
                       date4.end,
+                      3,
                       '台北',
                       '宜蘭',
                       100, //deliveryFee

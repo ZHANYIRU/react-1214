@@ -73,7 +73,7 @@ function CartDetailRoom() {
                     </div>
                     <div className={styled.roomImg}>
                       <img
-                        src="https://pix10.agoda.net/hotelImages/793414/-1/97f284bee5c75ff30e2658b179d5c9f1.jpg?ca=9&ce=1&s=1024x768"
+                        src={`http://localhost:3001/room_img/${el.img}`}
                         alt=""
                       />
                     </div>

@@ -165,7 +165,7 @@ const proCartReducer = (state, action) => {
         ...state,
         items4: upState,
         totalItem: state.totalItem,
-        totalPrice: state.totalPrice + qty * price,
+        totalPrice: state.totalPrice + qty * price * day,
       }
       localStorage.setItem('renCart', JSON.stringify(newState.items4))
       localStorage.setItem('totalPrice', JSON.stringify(newState.totalPrice))
@@ -277,6 +277,7 @@ const proCartReducer = (state, action) => {
               name: name,
               start: start,
               end: end,
+              day: day,
               out: out,
               back: back,
               deliveryFee: deliveryFee,
@@ -286,7 +287,7 @@ const proCartReducer = (state, action) => {
             },
           ],
           totalItem: state.totalItem + 1,
-          totalPrice: state.totalPrice + price * qty + deliveryFee,
+          totalPrice: state.totalPrice + price * qty * day + deliveryFee,
         }
         const newTotalItem = state.totalItem
         const newTotalPrice = state.totalPrice
@@ -375,7 +376,7 @@ const proCartReducer = (state, action) => {
           ...state,
           items4: upState,
           totalItem: state.totalItem,
-          totalPrice: state.totalPrice - price,
+          totalPrice: state.totalPrice - price * day,
         }
         localStorage.setItem('renCart', JSON.stringify(newState.items4))
         localStorage.setItem('totalPrice', JSON.stringify(newState.totalPrice))
@@ -607,6 +608,7 @@ export const ProCartContextProvider = ({ children }) => {
     name,
     start,
     end,
+    day,
     out,
     back,
     deliveryFee,
@@ -621,6 +623,7 @@ export const ProCartContextProvider = ({ children }) => {
         name,
         start,
         end,
+        day,
         out,
         back,
         deliveryFee,
@@ -673,17 +676,17 @@ export const ProCartContextProvider = ({ children }) => {
     })
   }
   //商品數量+1(租借)
-  const plusOne4 = (renSid, price) => {
+  const plusOne4 = (renSid, price, day) => {
     dispatch({
       type: 'PLUS',
-      payload: { renSid, price },
+      payload: { renSid, price, day },
     })
   }
   //商品數量-1(租借)
-  const minusOne4 = (renSid, price) => {
+  const minusOne4 = (renSid, price, day) => {
     dispatch({
       type: 'MINUS',
-      payload: { renSid, price },
+      payload: { renSid, price, day },
     })
   }
   //刪除單筆商品
