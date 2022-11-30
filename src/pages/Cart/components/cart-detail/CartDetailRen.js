@@ -37,7 +37,7 @@ function CartDetailRen() {
                         租借－歸還：{el.out}-{el.back}
                       </p>
                       <p>單價：{moneyFormat(el.price)}</p>
-                      <p>運費：{moneyFormat(el.deliveryFee)}</p>
+                      <p>跨店費用：{moneyFormat(el.deliveryFee)}</p>
                       <div className={styled.people}>
                         <p>數量：</p>
                         <div className={styled.qty}>

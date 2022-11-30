@@ -54,7 +54,7 @@ function TestProducts() {
       price: 1900,
     },
     {
-      camp_sid: 60,
+      camp_sid: 51,
       name: '高島縱走2022開團 - 含交通新手難度一日遊',
       price: 4000,
     },

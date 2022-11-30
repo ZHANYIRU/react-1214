@@ -12,7 +12,7 @@ function BuyCart({ step, setStep, buyBar }) {
       <>
         <div
           className={styled.buyCart}
-          style={{ position: buyBar && 'relative', left: buyBar && '0' }}
+          style={{ position: buyBar && 'relative' }}
         >
           <div className={styled.wrap}>
             <div>

@@ -1,18 +1,19 @@
 import styled from '../../../styles/order-scss/OrderNum.module.scss'
 import StarRating from '../../product/components/starRating'
 import ProCartContext from '../../../contexts/ProCartContext.js'
+import MemberContext from '../../../contexts/MemberContext'
+import SeeEvaluation from '../../../components/SeeEvaluation'
 import dayjs from 'dayjs'
 import axios from 'axios'
 import { useState, useContext } from 'react'
-import { getKeyValue } from 'eslint-plugin-react/lib/util/ast'
-function OrderNum({ momOrder, open, setOpen, setChange }) {
-  const { stars, setStar } = useContext(ProCartContext)
+function OrderNum({ momOrder, open, setOpen, change, setChange }) {
+  const { stars, setStar, lookLightBox, setLookLightBox } =
+    useContext(ProCartContext)
+  const { data } = useContext(MemberContext)
   //母訂單+子訂單
   const { rows, proRows, roomRows, renRows, camRows } = momOrder
   //給lightBox
   const [lightOpen, setLightOpen] = useState(false)
-  //給看評價
-  const [lookLightBox, setLookSetLigjtBox] = useState(false)
   //格式化金額
   const moneyFormat = (price) => {
     let a = Number(price)
@@ -39,13 +40,46 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
     setOpen(newClose)
   }
   //讀取評價
-  const getEva = async (sid) => {
-    const { data } = await axios.get(
-      `http://localhost:3001/order/evaPro?sid=${sid}`
-    )
-    if (data) {
-      setLookEva(data)
-      setLookSetLigjtBox(!lookLightBox)
+  const getEva = async (proSid, roomSid, renSid, campSid) => {
+    if (proSid) {
+      const res = await axios.get(
+        `http://localhost:3001/order/lookEva?proSid=${proSid}`
+      )
+      if (res.data) {
+        setLookEva(res.data)
+        setLookLightBox(!lookLightBox)
+        return
+      }
+    }
+    if (roomSid) {
+      const res = await axios.get(
+        `http://localhost:3001/order/lookEva?roomSid=${roomSid}`
+      )
+      if (res.data) {
+        setLookEva(res.data)
+        setLookLightBox(!lookLightBox)
+        return
+      }
+    }
+    if (renSid) {
+      const res = await axios.get(
+        `http://localhost:3001/order/lookEva?renSid=${renSid}`
+      )
+      if (res.data) {
+        setLookEva(res.data)
+        setLookLightBox(!lookLightBox)
+        return
+      }
+    }
+    if (campSid) {
+      const res = await axios.get(
+        `http://localhost:3001/order/lookEva?campSid=${campSid}`
+      )
+      if (res.data) {
+        setLookEva(res.data)
+        setLookLightBox(!lookLightBox)
+        return
+      }
     }
   }
   //寫入評價
@@ -55,18 +89,53 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
       return
     }
     const json = await {
-      sid: el.sid,
+      sid: el.order_sid,
       star: stars,
       text: writeEva,
     }
-    const { data } = await axios.post(
-      'http://localhost:3001/order/writeEvaPro',
-      json
-    )
-    if (data.affectedRows === 1) {
-      setStar(1)
-      setChange(true)
-      setLightOpen(!lightOpen)
+    if (el.product_sid) {
+      const res = await axios.post(
+        'http://localhost:3001/order/writeEvaPro',
+        json
+      )
+      if (res.data.affectedRows === 1) {
+        setStar(1)
+        setChange(!change)
+        setLightOpen(!lightOpen)
+      }
+    }
+    if (el.room_sid) {
+      const res = await axios.post(
+        'http://localhost:3001/order/writeEvaRoom',
+        json
+      )
+      if (res.data.affectedRows === 1) {
+        setStar(1)
+        setChange(!change)
+        setLightOpen(!lightOpen)
+      }
+    }
+    if (el.campaign_sid) {
+      const res = await axios.post(
+        'http://localhost:3001/order/writeEvaCamp',
+        json
+      )
+      if (res.data.affectedRows === 1) {
+        setStar(1)
+        setChange(!change)
+        setLightOpen(!lightOpen)
+      }
+    }
+    if (el.rental_sid) {
+      const res = await axios.post(
+        'http://localhost:3001/order/writeEvaRen',
+        json
+      )
+      if (res.data.affectedRows === 1) {
+        setStar(1)
+        setChange(!change)
+        setLightOpen(!lightOpen)
+      }
     }
   }
   return (
@@ -81,7 +150,7 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
                 setStar(1)
                 setLightOpen(!lightOpen)
               }}
-              key={el.sid}
+              key={el.order_sid}
             >
               <div
                 className={styled.lightbox}
@@ -96,7 +165,12 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
                       alt=""
                     />
                   </div>
-                  <p>{el.product_name}</p>
+                  <p>
+                    {el.product_name ||
+                      el.rental_name ||
+                      el.name ||
+                      el.room_name}
+                  </p>
                 </div>
                 <StarRating />
                 <textarea
@@ -106,8 +180,12 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
                 />
                 <button
                   className={styled.yes}
-                  onClick={(e) => {
-                    addEva(el)
+                  onClick={() => {
+                    console.log(el)
+                    if (el.product_sid) addEva(el)
+                    if (el.room_sid) addEva(el)
+                    if (el.campaign_sid) addEva(el)
+                    if (el.rental_sid) addEva(el)
                   }}
                 >
                   確認
@@ -119,99 +197,34 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
       {/* 看評價 */}
       {lookLightBox &&
         lookEva.map((el, i) => {
-          return (
-            <div
-              className={styled.lightBgc}
-              onClick={(e) => {
-                setStar(1)
-                setLookSetLigjtBox(!lookLightBox)
-              }}
-              key={el.sid}
-            >
-              <div
-                className={styled.lightbox}
-                onClick={(e) => {
-                  e.stopPropagation()
-                }}
-              >
-                <div className={styled.lightName}>
-                  <div className={styled.lightImg}>
-                    <img
-                      src={`http://localhost:3001/imgs/zx/${el.product_img}`}
-                      alt=""
-                    />
-                  </div>
-                  <p>{el.product_name}</p>
-                </div>
-                <div className={styled.lookMember}>
-                  <div className={styled.memberLeft}>
-                    <div className={styled.memImgWrap}>
-                      <img
-                        src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/iu-%E6%9D%8E%E7%9F%A5%E6%81%A9-1592068502.jpg?crop=0.502xw:1.00xh;0.498xw,0&resize=640:*"
-                        alt=""
-                      />
-                    </div>
-                    <div className={styled.memberText}>
-                      <p>阿克 銀級玩家</p>
-                      <span>{dayjs(el.messageTime).format('YYYY-MM-DD')}</span>
-                    </div>
-                  </div>
-                  <div className={styled.starRating}>
-                    {[...Array(5)].map((star, index) => {
-                      const totalStars = el.star
-                      index += 1
-                      return (
-                        <p
-                          key={index}
-                          className={
-                            index <= totalStars
-                              ? `${styled.on}`
-                              : `${styled.off}`
-                          }
-                        >
-                          <span className="star">&#9733;</span>
-                        </p>
-                      )
-                    })}
-                  </div>
-                </div>
-                <div className={styled.lookBottom}>
-                  <p>{el.message}</p>
-                  <button
-                    className={styled.close}
-                    onClick={(e) => {
-                      setLookSetLigjtBox(!lookLightBox)
-                    }}
-                  >
-                    關閉
-                  </button>
-                </div>
-              </div>
-            </div>
-          )
+          return <SeeEvaluation el={el} key={el.order_sid} />
         })}
 
       <div className={styled.numWrap}>
         {rows &&
           rows.map((el, i) => {
             return (
-              <div key={el.sid}>
+              <div key={el.order_sid}>
                 <div className={styled.camera}>
                   <div
                     className={styled.recipientWrap}
                     style={{
-                      transform: open.includes(el.sid) && 'rotateX(180deg)',
+                      transform:
+                        open.includes(el.order_sid) && 'rotateX(180deg)',
                     }}
                   >
                     <input
                       type="checkbox"
-                      value={`${el.sid}`}
-                      id={`${el.sid}`}
+                      value={`${el.order_sid}`}
+                      id={`${el.order_sid}`}
                       onClick={(e) => {
                         openWrap(e)
                       }}
                     />
-                    <label className={styled.orderNum} htmlFor={`${el.sid}`}>
+                    <label
+                      className={styled.orderNum}
+                      htmlFor={`${el.order_sid}`}
+                    >
                       <p> 訂單編號：{el.order_num}</p>
                       <p>金額：{moneyFormat(el.total)}</p>
                       <i className="fa-solid fa-chevron-up"></i>
@@ -219,7 +232,7 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
                     <div
                       className={styled.recipient}
                       onClick={() => {
-                        closeWrap(el.sid)
+                        closeWrap(el.order_sid)
                       }}
                     >
                       <p>收件人：{el.recipient}</p>
@@ -233,9 +246,9 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
                 <div
                   className={styled.contentWrap}
                   style={{
-                    maxHeight: open.includes(el.sid) && '50vh',
-                    overflow: open.includes(el.sid) && 'auto',
-                    paddingTop: open.includes(el.sid) && '10px',
+                    maxHeight: open.includes(el.order_sid) && '50vh',
+                    overflow: open.includes(el.order_sid) && 'auto',
+                    paddingTop: open.includes(el.order_sid) && '10px',
                   }}
                 >
                   <div className={styled.pro}>
@@ -255,7 +268,7 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
                         return el.order_num === el2.order_num ? (
                           <div
                             className={styled.proContent}
-                            key={`pro${el2.sid}`}
+                            key={`pro${el2.order_sid}`}
                           >
                             <div className={styled.contentDe}>
                               <div className={styled.imgWrap}>
@@ -272,7 +285,7 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
                             {el2.star ? (
                               <button
                                 onClick={() => {
-                                  getEva(el2.sid)
+                                  getEva(el2.order_sid, 0, 0, 0)
                                 }}
                               >
                                 看評價
@@ -280,8 +293,8 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
                             ) : (
                               <button
                                 onClick={() => {
-                                  const proStars = [el2]
-                                  setEvaluation(proStars)
+                                  const writeStars = [el2]
+                                  setEvaluation(writeStars)
                                   setLightOpen(!lightOpen)
                                 }}
                               >
@@ -304,7 +317,7 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
                           <p>入住日期</p>
                           <p>退房日期</p>
                           <p>單價</p>
-                          <p>天數</p>
+                          <p>床位</p>
                           <p>金額</p>
                         </div>
                       )}
@@ -315,7 +328,7 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
                         return el.order_num === el3.order_num ? (
                           <div
                             className={styled.roomContent}
-                            key={`room${el3.sid}`}
+                            key={`room${el3.order_sid}`}
                           >
                             <div className={styled.contentDe}>
                               <div className={styled.imgWrap}>
@@ -336,13 +349,25 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
                               <p>{el3.qty}</p>
                               <p>{moneyFormat(el3.total)}</p>
                             </div>
-                            <button
-                              onClick={() => {
-                                setLightOpen(!lightOpen)
-                              }}
-                            >
-                              給予評價
-                            </button>
+                            {el3.star ? (
+                              <button
+                                onClick={() => {
+                                  getEva(0, el3.order_sid, 0, 0)
+                                }}
+                              >
+                                看評價
+                              </button>
+                            ) : (
+                              <button
+                                onClick={() => {
+                                  const writeStars = [el3]
+                                  setEvaluation(writeStars)
+                                  setLightOpen(!lightOpen)
+                                }}
+                              >
+                                給予評價
+                              </button>
+                            )}
                           </div>
                         ) : (
                           ''
@@ -371,7 +396,7 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
                           el.order_num === el4.order_num && (
                             <div
                               className={styled.campContent}
-                              key={`cam${el4.sid}`}
+                              key={`cam${el4.order_sid}`}
                             >
                               <div className={styled.contentDe}>
                                 <div className={styled.imgWrap}>
@@ -392,13 +417,25 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
                                 <p>{el4.people}</p>
                                 <p>{moneyFormat(el4.total)}</p>
                               </div>
-                              <button
-                                onClick={() => {
-                                  setLightOpen(!lightOpen)
-                                }}
-                              >
-                                給予評價
-                              </button>
+                              {el4.star ? (
+                                <button
+                                  onClick={() => {
+                                    getEva(0, 0, 0, el4.order_sid)
+                                  }}
+                                >
+                                  看評價
+                                </button>
+                              ) : (
+                                <button
+                                  onClick={() => {
+                                    const writeStars = [el4]
+                                    setEvaluation(writeStars)
+                                    setLightOpen(!lightOpen)
+                                  }}
+                                >
+                                  給予評價
+                                </button>
+                              )}
                             </div>
                           )
                         )
@@ -416,7 +453,7 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
                           </p>
                           <p>日期</p>
                           <p>單價</p>
-                          <p>運費</p>
+                          <p>跨店費用</p>
                           <p>數量</p>
                           <p>金額</p>
                         </div>
@@ -427,7 +464,7 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
                           el.order_num === el5.order_num && (
                             <div
                               className={styled.renContent}
-                              key={`ren${el5.sid}`}
+                              key={`ren${el5.order_sid}`}
                             >
                               <div className={styled.contentDe}>
                                 <div className={styled.imgWrap}>
@@ -448,17 +485,29 @@ function OrderNum({ momOrder, open, setOpen, setChange }) {
                                   {dayjs(el5.back_date).format('YYYY-MM-DD')}
                                 </p>
                                 <p>{moneyFormat(el5.rental_price)}</p>
-                                <p>運費</p>
+                                <p>跨店費用</p>
                                 <p>{el5.qty}</p>
                                 <p>{moneyFormat(el5.total)}</p>
                               </div>
-                              <button
-                                onClick={() => {
-                                  setLightOpen(!lightOpen)
-                                }}
-                              >
-                                給予評價
-                              </button>
+                              {el5.star ? (
+                                <button
+                                  onClick={() => {
+                                    getEva(0, 0, el5.order_sid, 0)
+                                  }}
+                                >
+                                  看評價
+                                </button>
+                              ) : (
+                                <button
+                                  onClick={() => {
+                                    const writeStars = [el5]
+                                    setEvaluation(writeStars)
+                                    setLightOpen(!lightOpen)
+                                  }}
+                                >
+                                  給予評價
+                                </button>
+                              )}
                             </div>
                           )
                         )
