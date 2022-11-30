@@ -9,8 +9,10 @@ export default function ToTop() {
           window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
         }}
       >
-        <div className={styled.tt1}></div>
-        <div className={styled.tt2}></div>
+        <div className={styled.arrow}>
+          <div className={styled.tt1}></div>
+          <div className={styled.tt2}></div>
+        </div>
       </div>
     </>
   )

@@ -260,38 +260,42 @@ export default function ProductFilter({
             )
           })}
         </div>
-        <h2> 防水等級</h2>
 
-        <div className={styled.checkBoxWrap}>
-          {wProofOptions.map((v, i) => {
-            return (
-              <div className={styled.checkBox} key={i}>
-                <input
-                  type="checkbox"
-                  checked={proofList.includes(v)}
-                  value={v}
-                  id={i}
-                  onChange={(e) => {
-                    const value = e.target.value
+        {nav !== 'accessories' && (
+          <>
+            <h2> 防水等級</h2>
+            <div className={styled.checkBoxWrap}>
+              {wProofOptions.map((v, i) => {
+                return (
+                  <div className={styled.checkBox} key={i}>
+                    <input
+                      type="checkbox"
+                      checked={proofList.includes(v)}
+                      value={v}
+                      id={i}
+                      onChange={(e) => {
+                        const value = e.target.value
 
-                    if (proofList.includes(value)) {
-                      // 如果此項目值在state陣列中 -> 移出state陣列
-                      const newProofList = proofList.filter(
-                        (v2, i2) => v2 !== value
-                      )
-                      setProofList(newProofList)
-                    } else {
-                      // 如果不在此state陣列中 -> 加到state陣列中
-                      const newProofList = [...proofList, value]
-                      setProofList(newProofList)
-                    }
-                  }}
-                />
-                <label htmlFor={i}>{v}</label>
-              </div>
-            )
-          })}
-        </div>
+                        if (proofList.includes(value)) {
+                          // 如果此項目值在state陣列中 -> 移出state陣列
+                          const newProofList = proofList.filter(
+                            (v2, i2) => v2 !== value
+                          )
+                          setProofList(newProofList)
+                        } else {
+                          // 如果不在此state陣列中 -> 加到state陣列中
+                          const newProofList = [...proofList, value]
+                          setProofList(newProofList)
+                        }
+                      }}
+                    />
+                    <label htmlFor={i}>{v}</label>
+                  </div>
+                )
+              })}
+            </div>
+          </>
+        )}
         <div className={styled.btnGroup}>
           <button type="submit" className={styled.filterButton}>
             送出
@@ -300,6 +304,9 @@ export default function ProductFilter({
             type="button"
             className={styled.filterButton}
             onClick={() => {
+              if (!nav) {
+                getProductData('all')
+              }
               getProductData(nav)
               setFilter({
                 lowPrice: '',
@@ -425,37 +432,41 @@ export default function ProductFilter({
             )
           })}
         </div>
-        <h2> 防水等級</h2>
-        <div className={styled.checkBoxWrap}>
-          {wProofOptions.map((v, i) => {
-            return (
-              <div className={styled.checkBox} key={i}>
-                <input
-                  type="checkbox"
-                  checked={proofList.includes(v)}
-                  value={v}
-                  id={i}
-                  onChange={(e) => {
-                    const value = e.target.value
+        {nav !== 'accessories' && (
+          <>
+            <h2> 防水等級</h2>
+            <div className={styled.checkBoxWrap}>
+              {wProofOptions.map((v, i) => {
+                return (
+                  <div className={styled.checkBox} key={i}>
+                    <input
+                      type="checkbox"
+                      checked={proofList.includes(v)}
+                      value={v}
+                      id={i}
+                      onChange={(e) => {
+                        const value = e.target.value
 
-                    if (proofList.includes(value)) {
-                      // 如果此項目值在state陣列中 -> 移出state陣列
-                      const newProofList = proofList.filter(
-                        (v2, i2) => v2 !== value
-                      )
-                      setProofList(newProofList)
-                    } else {
-                      // 如果不在此state陣列中 -> 加到state陣列中
-                      const newProofList = [...proofList, value]
-                      setProofList(newProofList)
-                    }
-                  }}
-                />
-                <label htmlFor={i}>{v}</label>
-              </div>
-            )
-          })}
-        </div>
+                        if (proofList.includes(value)) {
+                          // 如果此項目值在state陣列中 -> 移出state陣列
+                          const newProofList = proofList.filter(
+                            (v2, i2) => v2 !== value
+                          )
+                          setProofList(newProofList)
+                        } else {
+                          // 如果不在此state陣列中 -> 加到state陣列中
+                          const newProofList = [...proofList, value]
+                          setProofList(newProofList)
+                        }
+                      }}
+                    />
+                    <label htmlFor={i}>{v}</label>
+                  </div>
+                )
+              })}
+            </div>
+          </>
+        )}
         <div className={styled.btnGroup}>
           <button type="submit" className={styled.filterButton}>
             送出
@@ -464,6 +475,9 @@ export default function ProductFilter({
             type="button"
             className={styled.filterButton}
             onClick={() => {
+              if (!nav) {
+                getProductData('all')
+              }
               getProductData(nav)
               setFilter({
                 lowPrice: '',

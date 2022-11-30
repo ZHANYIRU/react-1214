@@ -81,8 +81,6 @@ export default function Leaderboard() {
   const fetchAll = async () => {
     const response = await axios.get(`http://localhost:3001/product/borad/api2`)
     const data = response.data
-    // console.log(r)
-    console.log('我是全部')
     setAllData(data)
   }
 
@@ -177,7 +175,14 @@ export default function Leaderboard() {
                 setSwitchBtn(true)
                 fetchAll()
               }}
-              style={switchBtn ? { color: 'red' } : {}}
+              style={
+                switchBtn
+                  ? {
+                      backgroundColor: 'rgba(230, 189, 67, 0.701)',
+                      color: '#000',
+                    }
+                  : {}
+              }
             >
               全部排名
             </div>
@@ -187,7 +192,14 @@ export default function Leaderboard() {
                 setSwitchBtn(false)
                 fetchYourFd()
               }}
-              style={switchBtn ? {} : { color: 'red' }}
+              style={
+                switchBtn
+                  ? {}
+                  : {
+                      backgroundColor: 'rgba(230, 189, 67, 0.701)',
+                      color: '#000',
+                    }
+              }
             >
               好友排名
             </div>

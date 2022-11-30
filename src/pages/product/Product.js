@@ -23,14 +23,7 @@ function Product() {
   const [toTop, setToTop] = useState(false)
 
   //目前點選的nav
-  const [nav, setNav] = useState([
-    'all',
-    'new',
-    'clothe',
-    'bag',
-    'shose',
-    'accessories',
-  ])
+  const [nav, setNav] = useState()
   //卡片
   const [howLongCard, setHowLongCard] = useState(16)
   //圖片
@@ -287,22 +280,6 @@ function Product() {
             nav={nav}
           />
           <div className={styled.cardbox}>
-            {/* {datas
-            .filter((v, i) => {
-              if (searchKeyword) {
-                return v.product_name.includes(searchKeyword)
-              } else {
-                return v
-              }
-            })} */}
-
-            {/*  .filter((v, i) => {
-                if (searchKeyword) {
-                  return v.product_name.includes(searchKeyword)
-                } else {
-                  return v
-                }
-              }) */}
             {inputKeyword
               ? ''
               : Array(min)
@@ -410,15 +387,19 @@ function Product() {
                     )
                   })
               : ''}
+          </div>
+        </div>
+        {datas.length > 16 && (
+          <div className={styled.clickme}>
             <button
               onClick={() => {
                 setHowLongCard(howLongCard + 16)
               }}
             >
-              按我看更多
+              更多商品
             </button>
           </div>
-        </div>
+        )}
       </div>
     </>
   )

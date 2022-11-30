@@ -24,10 +24,32 @@ body{
     margin: 0 auto;
     min-width: 912px;
     position: relative;
-
+    .clickme{
+        margin-top: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        button{
+            font-size: 1.2rem;
+            font-weight: 700;
+            width: 200px;
+            height: 50px;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+            background-color: rgb(120, 167, 110);
+            // color: wheat;
+            text-align: center;
+            margin: 0 auto;
+            &:hover{
+                background-color: $yellow;
+            }
+        }
+    }
 }
 .stickyWrapSearch{
-    
+    // margin-left: -10px;
+    transition: .5s ease-in-out;
     z-index: 10;
     position: sticky; 
     top: 60px;
@@ -37,6 +59,7 @@ body{
      background-color: #E9D9A2;
 }
 .stickyWrapCate{
+    transition: .5s ease-in-out;
     z-index: 10;
     position: sticky;
      top: 160px;
@@ -144,7 +167,7 @@ p{
             @include text;
             text-align: center;
             font-size: 1.1rem;
-            transform: translateY(-5px);
+            transform: translateY(-10px);
             font-weight: 700;
             // z-index: 11;
         }
@@ -171,20 +194,8 @@ p{
         gap: 20px;
         justify-content:space-around;
         align-items:flex-start;
-        button{
-            width: 200px;
-            height: 50px;
-            border-radius: 10px;
-            outline: none;
-            border: none;
-            background-color: rgb(120, 167, 110);
-            // color: wheat;
-            text-align: center;
-            margin: 0 auto;
-            &:hover{
-                background-color: $yellow;
-            }
-        }
+       
+        
        
         .card{
             width: 23%;
@@ -423,12 +434,7 @@ input{
         min-width: 390px;
         position: relative;
         overflow: hidden;
-        button{
-            outline: none;
-            background-color: red;
-            width: 200px;
-            height: 80px;
-        }
+        
     }
     
     .cardbox{
@@ -575,7 +581,7 @@ input{
          }
     }
  .filterTop{
-    width: 50%;
+    width: 80%;
     height: 80px;
     display: flex;
     margin: 0 auto;

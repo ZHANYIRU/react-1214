@@ -180,10 +180,15 @@
                 width: 50%;
                 display: flex;
                 justify-content: center;
+                // border-radius: 5px;
+                // overflow: hidden;
                 align-items: center;
                 padding: 5px 0 ;
                 cursor: pointer;
                 background-color: rgba(10, 40, 14, 0.5);
+                a{
+                    color: rgba(230, 189, 67, 0.701);
+                  }
             }
             .btnRight{
                 width: 50%;
