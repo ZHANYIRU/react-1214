@@ -2,8 +2,27 @@ import style from '../../../styles/room-scss/roomDetail.module.scss'
 import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import RoomSelectBar from './RoomSelectBar'
+import { useState } from 'react'
 
 function RoomDetail({ detail }) {
+  const imgs = detail.room_imgs
+  const roomService = detail.room_service_sid
+  console.log('imgs', roomService)
+
+  const [service, setService] = useState([
+    '淋浴',
+    '沐浴用品',
+    '吹風機',
+    '毛巾',
+    '空調',
+    '電風扇',
+    '免費wifi',
+    '早餐',
+    '登山口接駁',
+    '登山諮詢',
+    '飲水機',
+    '插座',
+  ])
   return (
     <>
       <div className={style.cardWrap}>
@@ -47,35 +66,47 @@ function RoomDetail({ detail }) {
               >
                 <div className={style.img}>
                   <img
-                    src="https://www.hotelscombined.com.tw/himg/02/a1/b6/expediav2-3633483-2c7545-091043.jpg"
+                    src={
+                      imgs &&
+                      imgs.length !== 0 &&
+                      `http://localhost:3001/room_img/${imgs[0]}`
+                    }
                     alt=""
                   />
                 </div>
                 <div className={style.img}>
                   <img
-                    src="https://z1.muscache.cn/pictures/2caace88-ab77-498a-9d4e-23777b70b1bc.jpg"
+                    src={
+                      imgs &&
+                      imgs.length !== 0 &&
+                      `http://localhost:3001/room_img/${imgs[1]}`
+                    }
                     alt=""
                   />
                 </div>
                 <div className={style.img}>
                   <img
-                    src="https://chyfun.com/wp-content/uploads/20190923235607_35.webp"
+                    src={
+                      imgs &&
+                      imgs.length !== 0 &&
+                      `http://localhost:3001/room_img/${imgs[2]}`
+                    }
                     alt=""
                   />
                 </div>
                 <div className={style.img}>
                   <img
-                    src="https://chyfun.com/wp-content/uploads/20190923235607_35.webp"
+                    src={
+                      imgs &&
+                      imgs.length !== 0 &&
+                      `http://localhost:3001/room_img/${imgs[3]}`
+                    }
                     alt=""
                   />
                 </div>
               </Carousel>
             </div>
           </div>
-          {/* <div className={style.arrow}>
-            <i class="fa-solid fa-chevron-left"></i>
-            <i class="fa-solid fa-angle-right"></i>
-          </div> */}
         </div>
         <div className={style.bottom}>
           <div className={style.switch}>
@@ -84,84 +115,32 @@ function RoomDetail({ detail }) {
           </div>
           <div className={style.sec1}>
             <h4>營位/山莊</h4>
-            <span>南庄小美家民宿</span>
-            <span>營業時間：08:00 - 17:00</span>
-            <span>電話：0919 822 379</span>
-            <span>地址：353苗栗縣南庄鄉蓬萊村42份7-6號</span>
+            <span>{`${detail.room_name}`}</span>
+            <span>營業時間：{`${detail.room_business_hours}`}</span>
+            <span>電話：{`${detail.room_telephone}`}</span>
+            <span>地址：{`${detail.room_address}`}</span>
           </div>
           <div className={style.sec2}>
             <h4>登山口資訊</h4>
-            <span>鹿場登山口</span>
-            <span>住宿地點距離登山口：15 公里</span>
-            <span>加里山登山口森林露營區</span>
-            <span>地址：353苗栗縣南庄鄉東河村鹿場24鄰19-20號</span>
+            <span>{`${detail.room_entry_name}`}</span>
+            <span>
+              住宿地點距離登山口：{`${detail.room_entry_distance}`} 公里
+            </span>
+            <span>地址：{`${detail.room_entry_address}`}</span>
           </div>
           <div className={style.sec3}>
             <h4>提供設備</h4>
             <div className={style.facilityList}>
-              <div className={style.facility}>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
-                  alt=""
-                />
-                <div>淋浴</div>
-              </div>
-              <div className={style.facility}>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
-                  alt=""
-                />
-                <div>淋浴</div>
-              </div>
-              <div className={style.facility}>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
-                  alt=""
-                />
-                <div>淋浴</div>
-              </div>
-              <div className={style.facility}>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
-                  alt=""
-                />
-                <div>淋浴</div>
-              </div>
-              <div className={style.facility}>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
-                  alt=""
-                />
-                <div>淋浴</div>
-              </div>
-              <div className={style.facility}>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
-                  alt=""
-                />
-                <div>淋浴</div>
-              </div>
-              <div className={style.facility}>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
-                  alt=""
-                />
-                <div>淋浴</div>
-              </div>
-              <div className={style.facility}>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
-                  alt=""
-                />
-                <div>淋浴</div>
-              </div>
-              <div className={style.facility}>
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/1664/1664734.png"
-                  alt=""
-                />
-                <div>淋浴</div>
-              </div>
+              {roomService &&
+                roomService.length !== 0 &&
+                roomService.map((v, i) => {
+                  return (
+                    <div className={style.facility} key={i}>
+                      <img src={`/img/room_service_img/${v}.png`} alt="" />
+                      <span>{service[v - 1]}</span>
+                    </div>
+                  )
+                })}
             </div>
           </div>
           <div className={style.sec4}>

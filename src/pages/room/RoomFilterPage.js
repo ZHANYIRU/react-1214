@@ -130,7 +130,12 @@ function RoomFilterPage() {
           {display.map((v, i) => {
             return (
               <div className={style.cardWrap} key={v.room_sid}>
-                <div className={style.cardImg}></div>
+                <div className={style.cardImg}>
+                  <img
+                    src={`http://localhost:3001/room_img/${v.room_img}`}
+                    alt=""
+                  />
+                </div>
                 <div className={style.detail}>
                   <div className={style.title}>
                     <div className={style.roomName}>{v.room_name}</div>
@@ -216,9 +221,9 @@ function RoomFilterPage() {
                     </div>
                   </div>
                   <div className={style.text}>
-                    <span>距離登山口：{'15'}公里</span>
-                    <span>地址：353苗栗縣南庄鄉蓬萊村42份7-6號</span>
-                    <span>電話：0919 822 379</span>
+                    <span>距離登山口：{`${v.room_entry_distance}`}公里</span>
+                    <span>地址：{`${v.room_entry_address}`}</span>
+                    <span>電話：{`${v.room_telephone}`}</span>
                   </div>
                   <div className={style.bottom}>
                     <div className={style.price}>金額：${v.room_price}/人</div>

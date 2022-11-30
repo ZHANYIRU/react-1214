@@ -16,10 +16,18 @@ function RoomSelectBar({ detail }) {
 
   const [night, setNight] = useState(1)
 
-  const stayNights = () => {
-    console.log('checkOut', checkOut)
-    console.log('checkIn', checkIn)
-    const days = (Date.parse(checkOut) - Date.parse(checkIn)) / 86400000
+  const stayNightsI = (e) => {
+    const newCheckIn = e.target.value
+    // console.log('checkOut', newCheckOut)
+    // console.log('checkIn', checkIn)
+    const days = (Date.parse(checkOut) - Date.parse(newCheckIn)) / 86400000
+    setNight(days)
+  }
+  const stayNightsII = (e) => {
+    const newCheckOut = e.target.value
+    // console.log('checkOut', newCheckOut)
+    // console.log('checkIn', checkIn)
+    const days = (Date.parse(newCheckOut) - Date.parse(checkIn)) / 86400000
     setNight(days)
   }
 
@@ -71,6 +79,7 @@ function RoomSelectBar({ detail }) {
             onChange={(e) => {
               const selDate = e.target.value
               setCheckIn(selDate)
+              stayNightsI(e)
             }}
           />
           <label>退房日期</label>
@@ -82,6 +91,7 @@ function RoomSelectBar({ detail }) {
             onChange={(e) => {
               const selDate = e.target.value
               setCheckOut(selDate)
+              stayNightsII(e)
             }}
           />
           <label>床位</label>
@@ -89,7 +99,6 @@ function RoomSelectBar({ detail }) {
             onChange={(e) => {
               const selectQty = e.target.value
               setQty(selectQty)
-              stayNights()
             }}
           >
             {Array(roomQTY)

@@ -19,7 +19,12 @@ function RoomCardSearch({ selectRoom, setSelectRoom }) {
             return (
               <Link to={`/room/${v.room_sid}`}>
                 <div className={style.roomCard} key={v.room_sid}>
-                  <div className={style.cardImg}></div>
+                  <div className={style.cardImg}>
+                    <img
+                      src={`http://localhost:3001/room_img/${v.room_img}`}
+                      alt=""
+                    />
+                  </div>
                   <div className={style.icon}>
                     <div className={style.location}>
                       <span>
