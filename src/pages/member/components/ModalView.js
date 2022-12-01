@@ -2,11 +2,11 @@ import styled from '../../../styles/member-scss/MemberInfo.module.scss'
 import TextareaAutosize from 'react-textarea-autosize'
 import dayjs from 'dayjs'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import { useContext, useEffect, useState, useRef } from 'react'
 import MemberContext from '../../../contexts/MemberContext'
-import { Link, Navigate, useNavigate } from 'react-router-dom'
-
-//TODO 頭像外框變化
+import { Link, useNavigate } from 'react-router-dom'
+import { modalAvatarLevel } from '../components/Avatar'
 
 export default function ModalView({
   getPostList,
@@ -17,7 +17,7 @@ export default function ModalView({
   listLength,
 }) {
   // console.log(showData.member_sid)
-  const navgigate = useNavigate()
+  const navigate = useNavigate()
 
   const { data } = useContext(MemberContext)
 
@@ -58,7 +58,7 @@ export default function ModalView({
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return alert('請先登入會員')
+      return Swal.fire({ title: '請先登入會員' })
     }
 
     const result = await axios.post(
@@ -81,7 +81,7 @@ export default function ModalView({
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return alert('請先登入會員')
+      return Swal.fire({ title: '請先登入會員' })
     }
 
     const result = await axios.delete(
@@ -104,7 +104,7 @@ export default function ModalView({
     const formData = new FormData(replyForm.current)
 
     if (!token) {
-      return alert('請先登入會員')
+      return Swal.fire({ title: '請先登入會員' })
     }
 
     const result = await axios.post(
@@ -118,7 +118,7 @@ export default function ModalView({
       }
     )
     if (result.data.success) {
-      alert('成功回覆')
+      // alert('成功回覆')
       getReply()
       getPostList()
     }
@@ -134,6 +134,13 @@ export default function ModalView({
     setReplies(rows.data)
     console.log(rows.data)
   }
+
+  // function avatarLevel(height = 0) {
+  //   if (height > 3000) {
+  //     return styled.silver
+  //   }
+  //   return styled.bronze
+  // }
 
   useEffect(() => {
     getInfo()
@@ -166,11 +173,13 @@ export default function ModalView({
             <div className={styled.contentTop}>
               <div className={styled.contentFlex}>
                 <div
-                  className={styled.avatar}
+                  className={`${styled.avatar} ${modalAvatarLevel(
+                    user.total_height
+                  )}`}
                   onClick={() => {
                     setIsView(false)
                     setCurrentPost(0)
-                    navgigate(
+                    navigate(
                       `${showData.member_sid}` === `${data.member_sid}`
                         ? `/member`
                         : `/profile?id=${showData.member_sid}`
@@ -181,7 +190,7 @@ export default function ModalView({
                     src={
                       user.avatar
                         ? `http://localhost:3001/uploads/avatar_${user.avatar}`
-                        : 'https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg'
+                        : '/img/default_avatar.png'
                     }
                     alt="postImg"
                   ></img>
@@ -228,11 +237,13 @@ export default function ModalView({
                     <div key={i} className={styled.replyPost}>
                       <div className={`${styled.contentFlex} ${styled.left}`}>
                         <div
-                          className={styled.replyAvatar}
+                          className={`${styled.replyAvatar} ${modalAvatarLevel(
+                            v.total_height
+                          )}`}
                           onClick={() => {
                             setIsView(false)
                             setCurrentPost(0)
-                            navgigate(
+                            navigate(
                               `${v.member_sid}` === `${data.member_sid}`
                                 ? `/member`
                                 : `/profile?id=${v.member_sid}`
@@ -243,7 +254,7 @@ export default function ModalView({
                             src={
                               v.avatar
                                 ? `http://localhost:3001/uploads/avatar_${v.avatar}`
-                                : 'https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg'
+                                : '/img/default_avatar.png'
                             }
                             alt="postImg"
                           ></img>

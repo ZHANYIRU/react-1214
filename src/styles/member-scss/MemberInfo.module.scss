@@ -43,16 +43,108 @@
         font-size: 20px;
     }
 
+    .heightTag {
+        display: none;
+    }
+
     .postMap {
-        width: 35%;
+        width: 34%;
+        // background-color: #ccc;
         aspect-ratio: 1/1.5;
-        background-color: #ccc;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        position: relative;
+        z-index: 10;
+
+        .mapBg {
+            width: 100%;
+        }
+        h4{
+            position: absolute;
+            bottom: 0;
+        }
+
+        .pinBox {
+            position: absolute; 
+            transform: translate(-50%, 50%);
+            i {
+                font-size: 25px;
+                // position: relative;
+                color: red;
+                z-index: -1;
+            }
+            .pinInfo {
+                position: absolute;
+                width: 200px;
+                transform: translate(-45%);
+                z-index: 10;
+                display: none;
+            }
+           
+            &:hover .pinInfo {
+                display: block;
+     
+            }
+        }
     }
 
     .totalHeight {
         width: 60%;
         aspect-ratio: 2/1;
-        background-color: #ccc;
+        // background-color: #ccc;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+
+        .sun {
+            width: 18%;
+            position: absolute;
+            top: 0;
+            right:5%;
+            transform: rotate(10deg);
+        }
+
+        .cloud1 {
+            width: 40%;
+            position: absolute;
+            top: 20%;
+        }
+
+        .cloud2 {
+            width: 40%;
+            position: absolute;
+            top: 45%;
+            right: 0;
+        }
+
+        h3 {
+            text-align: center;
+            position: relative;
+            z-index: 20;
+            transform: translateY(-30px);
+        }
+
+        .AnimationBox {
+            width: 100%;
+            // background-color: red;
+            position: relative;
+            margin-bottom: 30px;
+
+            .trekker {
+                position: absolute;
+                width: 50px;
+                animation-fill-mode: forwards;
+                z-index: 5;
+            }
+
+            .mountain {
+                position: relative;
+                width: 100%;
+            }
+        }
+
     }
 }
 
@@ -267,6 +359,18 @@
 
             .contentTop {
 
+                .gold {
+                    background-image: conic-gradient(from 180deg at 50% 50%, #fffcf4 0deg, #ffbf00 69.37deg, #ffa600 163.12deg, #ab8100 275.62deg, #ffffff 360deg);
+                }
+
+                .silver {
+                    background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
+                }
+
+                .bronze {
+                    background-image: conic-gradient(from 180deg at 50% 50%, #fff1c7 0deg, #b37e4a 69.37deg, #c27f3b 163.12deg, #98600c 275.62deg, #fff1c7 360deg);
+                }
+
                 h3 {
                     margin-bottom: 20px;
                 }
@@ -310,12 +414,13 @@
                         color: #999;
                     }
 
+
                     .avatar {
                         width: 60px;
                         height: 60px;
                         border-radius: 50%;
                         // background-image: linear-gradient(0deg,#ddd, #444);
-                        background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
+                        
                         overflow: hidden;
                         margin-right: 12px;
 
@@ -349,7 +454,6 @@
                             height: 45px;
                             border-radius: 50%;
                             // background-image: linear-gradient(0deg,#ddd, #444);
-                            background-image: conic-gradient(from 180deg at 50% 50%, #8A663B -46.87deg, #ecdac2 67.5deg, #B39471 183.75deg, #8A663B 313.12deg, #fff9f3 427.5deg);
                             overflow: hidden;
                             margin-right: 12px;
                             margin-left: 12px;
@@ -510,4 +614,137 @@
             right: -60px;
         }
     }
+}
+
+.summaryList {
+    display: none;
+}
+
+@media screen and (max-width: 1400px) {
+    .overview {
+        justify-content: center;
+        position: relative;
+        .postMap {
+            width: 34%;
+            h4{
+                left: -170px;
+            }
+        }
+        .totalHeight {
+            display: none;
+        }
+        .heightTag {
+            display: block;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+    }
+ 
+    .postList {
+        gap: 4%;
+        .post {
+            width: 48%;
+        }
+    }
+ }
+
+@media screen and (max-width: 992px) {
+    .row {
+        h3 {
+            font-size: 26px;
+        }
+
+        .overview {
+            .postMap{
+                width: 50%;
+                margin-bottom: 40px;
+                h4{
+                    left: -74px;
+                }
+            }
+            .heightTag {
+                left: 0;
+                bottom: 0;
+            }
+        }
+        .postList {
+            gap: 0%;
+            .post {
+                width: 100%;
+            }
+        }
+        .postTitle {
+            button {
+                transform: translateY(3px);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .summaryList {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 30px;
+        .summary {
+            text-align: center;
+            p {
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+            h3 {
+                font-size: 32px;
+                font-weight: 700;
+            }
+            .altitude {
+                font-size: 26px;
+            }
+        }
+    }
+
+    .row {
+        .col{
+            .infoCard {
+                display: none;
+            }
+        }
+
+        .postTitle {
+            justify-content: center;
+            padding-bottom: 16px;
+            margin-top: -20px;
+            h3{
+                display: none;
+            }
+        }
+
+        .postList {
+            gap: 4%;
+            .post {
+                width: 48%;
+                p {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .row{
+        h3 {
+            font-size: 22px;
+        }
+        .postList {
+            gap: 0;
+            .post {
+                width: 100%;
+                p {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+    
 }

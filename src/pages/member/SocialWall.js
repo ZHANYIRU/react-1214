@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import ModalView from './components/ModalView'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import MemberContext from '../../contexts/MemberContext'
 
 export default function SocialWall() {
@@ -57,8 +58,8 @@ export default function SocialWall() {
                   tabFollow ? `${styles.tab} ${styles.active}` : `${styles.tab}`
                 }
                 onClick={() => {
-                  if(!data.member_sid){
-                    return alert('請先登入會員')
+                  if (!data.member_sid) {
+                    return Swal.fire({ title: '請先登入會員' })
                   }
                   setTabFollow(true)
                 }}
@@ -85,8 +86,8 @@ export default function SocialWall() {
               <div
                 className={`${styles.tag} ${styles.sel}`}
                 onClick={() => {
-                  if(!auth) {
-                    return alert ('請先登入會員')
+                  if (!auth) {
+                    return Swal.fire({ title: '請先登入會員' })
                   }
                   navigate('/member')
                 }}

@@ -8,6 +8,7 @@ import PostMap from '../components/PostMap'
 import MemberContext from '../../../contexts/MemberContext'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import { getFileInfo } from 'prettier'
 
 export default function MemberInfo() {
@@ -29,6 +30,7 @@ export default function MemberInfo() {
   const [selHeight, setSelHeight] = useState(0)
   const [postList, setPostList] = useState([])
   const [currentPost, setCurrentPost] = useState(0)
+  const [uniqueLocations, setUniqueLocations] = useState([])
 
   const newForm = useRef(null)
   const editForm = useRef(null)
@@ -66,7 +68,7 @@ export default function MemberInfo() {
     const fileName = formData.get('image_url').name
 
     if (!fileName) {
-      return alert('請先上傳圖片')
+      return Swal.fire({ logo: 'error', title: '請先上傳圖片' })
     }
 
     const token = localStorage.getItem('token') || ''
@@ -82,7 +84,7 @@ export default function MemberInfo() {
       }
     )
     console.log(result.data)
-    alert(result.data.success ? '新增成功' : '新增失敗')
+    Swal.fire({ title: result.data.success ? '新增成功' : '新增失敗' })
     setIsNew(false)
     getInfo()
     setPreview('')
@@ -105,7 +107,7 @@ export default function MemberInfo() {
       }
     )
     console.log(result.data)
-    alert(result.data.success ? '修改成功' : '修改失敗')
+    Swal.fire({ title: result.data.success ? '修改成功' : '修改失敗' })
     setIsEdit(false)
     setIsDel(false)
     getPostList()
@@ -129,7 +131,7 @@ export default function MemberInfo() {
     )
 
     console.log(result.data)
-    alert(result.data.success ? '刪除成功' : '刪除失敗')
+    Swal.fire({ title: result.data.success ? '刪除成功' : '刪除失敗' })
     if (result.data.success) {
       setIsEdit(false)
       getPostList()
@@ -164,6 +166,10 @@ export default function MemberInfo() {
     getPostList()
   }, [isNew, auth])
 
+  useEffect(() => {
+    setUniqueLocations([...new Set(postList.map((item) => item.mountain_sid))])
+  }, [postList])
+
   //show preview
   function showPreview(e) {
     if (e.target.files.length > 0) {
@@ -177,14 +183,32 @@ export default function MemberInfo() {
     <>
       <div className={styled.row}>
         <div className={styled.col}>
-          <div className={styled.card}>
+          <div className={`${styled.card} ${styled.infoCard}`}>
             <h3>分享地圖</h3>
+            <h4>{data.totalHeight}</h4>
             <div className={styled.divider}></div>
             <div className={styled.overview}>
+              <h4 className={styled.heightTag}>
+                累積海拔: {data.total_height}公尺
+              </h4>
               <PostMap postList={postList} />
-              <TotalHeight totalHeight={{height: data.total_height}} />
+              <TotalHeight totalHeight={{ height: data.total_height }} />
             </div>
           </div>
+        </div>
+      </div>
+      <div className={styled.summaryList}>
+        <div className={styled.summary}>
+          <p>分享貼文</p>
+          <h3>{postList.length}</h3>
+        </div>
+        <div className={styled.summary}>
+          <p>總計地點</p>
+          <h3>{uniqueLocations.length}</h3>
+        </div>
+        <div className={styled.summary}>
+          <p>累積海拔</p>
+          <h3 className={styled.altitude}>{data.total_height}m</h3>
         </div>
       </div>
       <div className={styled.row}>
@@ -335,13 +359,13 @@ export default function MemberInfo() {
                     className="fa-regular fa-image"
                     style={{ color: preview ? '#fff' : '#666' }}
                   ></i>
-                  <label htmlFor="avatar" className={styled.avatarLabel}>
+                  <label htmlFor="image_url" className={styled.avatarLabel}>
                     上傳照片
                     <input
                       type="file"
                       accept="image/png, image/jpeg"
                       name="image_url"
-                      id="avatar"
+                      id="image_url"
                       onChange={(e) => {
                         showPreview(e)
                       }}
