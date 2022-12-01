@@ -31,12 +31,14 @@ function Login(props) {
 
     if (result.data.success) {
       localStorage.setItem('token', `${result.data.token}`)
+      alert('登入成功')
       setAuth(true)
       navigate('/')
     }
 
     if (!result.data.success) {
       localStorage.removeItem('token')
+      alert('登入失敗')
       setAuth(false)
       resetData()
     }

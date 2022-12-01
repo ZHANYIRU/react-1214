@@ -94,7 +94,9 @@ export default function SocialWall() {
                 我的分享
                 <div className={styles.shade}></div>
               </div>
-              <div className={styles.tag}>
+              <div className={styles.tag} onClick={()=>{
+                navigate('/leaderboard')
+              }}>
                 英雄榜<div className={styles.shade}></div>
               </div>
             </div>
