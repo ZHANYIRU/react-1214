@@ -16,7 +16,6 @@ import Rental from './pages/rental/Rental'
 import Rental_detail from './pages/rental/Rental_detail'
 import Commnent from './pages/rental/components/Commnent'
 
-
 import Cart from './pages/Cart/Cart'
 import Order from './pages/Order/Order'
 import Confirm from './pages/Cart/child-pages/Confirm'
@@ -50,10 +49,7 @@ function App() {
               <Route path="/product/:product_sid" element={<ProductPage />} />
               <Route path="/camp" element={<Camp />} />
               <Route path="/camp/filter" element={<CampOneday />} />
-              <Route
-                path="/camp/:filter/:camp_product_sid"
-                element={<CampProduct />}
-              />
+              <Route path="/camp/:camp_sid" element={<CampProduct />} />
               <Route path="/room" element={<Room />} />
               <Route path="/room/search" element={<RoomFilterPage />} />
               <Route path="/room/:room_sid" element={<RoomDetailPage />} />

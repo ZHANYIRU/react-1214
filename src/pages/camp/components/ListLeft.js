@@ -5,7 +5,9 @@ import style from '../../../styles/camp-scss/campcat.module.scss'
 import axios from 'axios'
 
 function ListLeft({ setFilter }) {
-  const [title, setTitle] = useState([{ sid: '', campaign_type_name: '' }])
+  const [title, setTitle] = useState([
+    { camptype_sid: '', campaign_type_name: '' },
+  ])
   const fetchAll = async (url) => {
     try {
       const response = await axios.get(`http://localhost:3001/camp/${url}`)
@@ -25,17 +27,20 @@ function ListLeft({ setFilter }) {
       <div className={style.list}>
         {title.map((v, i) => {
           return (
-            <div
-              onClick={() => {
-                setFilter(v.sid)
-              }}
-            >
-              {v.campaign_type_name}
-            </div>
+            <>
+              <div
+                key={i}
+                onClick={() => {
+                  setFilter(v.camptype_sid)
+                }}
+              >
+                {v.campaign_type_name}
+              </div>
+            </>
           )
         })}
       </div>
-      <Link to="/camp/:filter/:camp_product_sid">產品單頁</Link>
+      <Link to="/camp/:camp_sid">產品單頁</Link>
     </>
   )
 }

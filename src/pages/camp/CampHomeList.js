@@ -4,7 +4,7 @@ import ListCard from './components/ListCard'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
-function CampHomeList() {
+function CampHomeList(sliderdata) {
   //title資料
   const [campTitle, setCampTitle] = useState([{}])
   //all活動產品資料
@@ -41,7 +41,7 @@ function CampHomeList() {
           .map((v, i) => {
             return (
               <>
-                <Link to={`/camp/${v.camp_url}`}>{v.campaign_type_name}</Link>
+                <Link to={`/camp/filter`}>{v.campaign_type_name} </Link>
                 <div className={style.listbox}>
                   {campData.map((v, i) => {
                     if (i < 4) {
@@ -69,8 +69,6 @@ function CampHomeList() {
             )
           })}
       </h2>
-
-      
     </div>
   )
 }

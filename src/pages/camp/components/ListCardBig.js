@@ -1,7 +1,9 @@
 import React from 'react'
+
 import style from '../../../styles/camp-scss/campcat.module.scss'
 
 function ListCardBig() {
+  
   return (
     <div className={style.listcardbig}>
       <div className={style.listcardimg}>
@@ -11,7 +13,7 @@ function ListCardBig() {
         <p>四崁水生態導覽 - 新北近郊親民步道，親子賞鳥聖地</p>
         <p>金額：$1,960</p>
         <div> 評價：stars</div>
-        <button>查看更多</button>
+        <button >查看更多</button>
       </div>
     </div>
   )

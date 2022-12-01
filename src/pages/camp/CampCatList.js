@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import style from '../../styles/camp-scss/campcat.module.scss'
 import ListCardBig from './components/ListCardBig'
 import ListLeft from './components/ListLeft'
 import axios from 'axios'
 
-function CampCatList({filter}) {
+function CampCatList({ filter }) {
+  const navigate = useNavigate()
+  //存navigate的sid
+
   //all活動產品資料
-  const [campData, setCampData] = useState([{}])
+  const [campData, setCampData] = useState([
+    {
+      sid: '1',
+    },
+  ])
 
   let all = 'all'
   const fetchAll = async (url) => {
@@ -15,6 +23,7 @@ function CampCatList({filter}) {
       const response = await axios.get(`http://localhost:3001/camp/${url}`)
       const data = response.data
       console.log('title')
+
       setCampData(data)
     } catch (e) {
       console.log(e.message)
@@ -49,7 +58,13 @@ function CampCatList({filter}) {
                       <p>{v.name}</p>
                       <p>金額：${v.price}</p>
                       <div> 評價：stars</div>
-                      <button>查看更多</button>
+                      <button
+                        onClick={() => {
+                          navigate(`/camp/${v.sid}`)
+                        }}
+                      >
+                        查看更多
+                      </button>
                     </div>
                   </div>
                 </>

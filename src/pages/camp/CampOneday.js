@@ -5,6 +5,9 @@ import style from '../../styles/camp-scss/campcat.module.scss'
 
 function CampOneday() {
   const [filter, setFilter] = useState(0)
+  useEffect(()=>{
+    setFilter()
+  },[])
   return (
     <div className={style.filter}>
       <ListLeft setFilter={setFilter} />
