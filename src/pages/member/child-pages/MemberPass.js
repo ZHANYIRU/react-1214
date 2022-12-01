@@ -46,11 +46,19 @@ export default function MemberPass() {
 
     if (result.data && result.data.success) {
       // alert('密碼更新成功')
-      Swal.fire({ icon: 'success', title: '密碼更新成功' })
+      Swal.fire({
+        icon: 'success',
+        title: '密碼更新成功',
+        confirmButtonColor: '#395c3f',
+      })
     }
     if (!result.data.success) {
       // alert('密碼更新失敗')
-      Swal.fire({ icon: 'error', title: '密碼更新失敗' })
+      Swal.fire({
+        icon: 'error',
+        title: '密碼更新失敗',
+        confirmButtonColor: '#395c3f',
+      })
     }
 
     console.log(result.data)

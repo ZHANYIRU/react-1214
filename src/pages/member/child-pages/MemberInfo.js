@@ -68,7 +68,11 @@ export default function MemberInfo() {
     const fileName = formData.get('image_url').name
 
     if (!fileName) {
-      return Swal.fire({ logo: 'error', title: '請先上傳圖片' })
+      return Swal.fire({
+        logo: 'error',
+        title: '請先上傳圖片',
+        confirmButtonColor: '#395c3f',
+      })
     }
 
     const token = localStorage.getItem('token') || ''
@@ -84,7 +88,10 @@ export default function MemberInfo() {
       }
     )
     console.log(result.data)
-    Swal.fire({ title: result.data.success ? '新增成功' : '新增失敗' })
+    Swal.fire({
+      title: result.data.success ? '新增成功' : '新增失敗',
+      confirmButtonColor: '#395c3f',
+    })
     setIsNew(false)
     getInfo()
     setPreview('')
@@ -107,7 +114,10 @@ export default function MemberInfo() {
       }
     )
     console.log(result.data)
-    Swal.fire({ title: result.data.success ? '修改成功' : '修改失敗' })
+    Swal.fire({
+      title: result.data.success ? '修改成功' : '修改失敗',
+      confirmButtonColor: '#395c3f',
+    })
     setIsEdit(false)
     setIsDel(false)
     getPostList()
@@ -131,7 +141,10 @@ export default function MemberInfo() {
     )
 
     console.log(result.data)
-    Swal.fire({ title: result.data.success ? '刪除成功' : '刪除失敗' })
+    Swal.fire({
+      title: result.data.success ? '刪除成功' : '刪除失敗',
+      confirmButtonColor: '#395c3f',
+    })
     if (result.data.success) {
       setIsEdit(false)
       getPostList()

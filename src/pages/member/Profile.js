@@ -78,7 +78,7 @@ function Profile(props) {
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員' })
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#395c3f' })
     }
     const result = await axios.post(
       `http://localhost:3001/member/follow/api?mid=${mid}`,
@@ -102,7 +102,11 @@ function Profile(props) {
       getFollowing()
     }
     if (!result.data.success) {
-      Swal.fire({ logo: 'error', title: '關注失敗' })
+      Swal.fire({
+        logo: 'error',
+        title: '關注失敗',
+        confirmButtonColor: '#395c3f',
+      })
     }
   }
 
@@ -110,7 +114,7 @@ function Profile(props) {
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員' })
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#395c3f' })
     }
 
     const result = await axios.delete(
@@ -129,7 +133,11 @@ function Profile(props) {
       getFollowing()
     }
     if (!result.data.success) {
-      Swal.fire({ logo: 'error', title: '取消關注失敗' })
+      Swal.fire({
+        logo: 'error',
+        title: '取消關注失敗',
+        confirmButtonColor: '#395c3f',
+      })
     }
   }
 
@@ -219,7 +227,10 @@ function Profile(props) {
                 className={styled.follow}
                 onClick={() => {
                   if (!auth) {
-                    Swal.fire({ title: '請先登入會員' })
+                    Swal.fire({
+                      title: '請先登入會員',
+                      confirmButtonColor: '#395c3f',
+                    })
                   } else {
                     unfollow()
                   }
@@ -232,7 +243,10 @@ function Profile(props) {
                 className={styled.follow}
                 onClick={() => {
                   if (!auth) {
-                    Swal.fire({ title: '請先登入會員' })
+                    Swal.fire({
+                      title: '請先登入會員',
+                      confirmButtonColor: '#395c3f',
+                    })
                   } else {
                     addFollow()
                   }

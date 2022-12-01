@@ -32,7 +32,7 @@ export default function Followers() {
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員' })
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#395c3f' })
     }
 
     const result = await axios.delete(
@@ -52,7 +52,11 @@ export default function Followers() {
     }
     if (!result.data.success) {
       // alert('取消關注失敗')
-      Swal.fire({ icon: 'error', title: '取消關注失敗' })
+      Swal.fire({
+        icon: 'error',
+        title: '取消關注失敗',
+        confirmButtonColor: '#395c3f',
+      })
     }
   }
 
@@ -60,11 +64,15 @@ export default function Followers() {
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員' })
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#395c3f' })
     }
 
     if (member_sid === data.member_sid) {
-      return Swal.fire({ icon: 'error', title: '無法將自己加入關注' })
+      return Swal.fire({
+        icon: 'error',
+        title: '無法將自己加入關注',
+        confirmButtonColor: '#395c3f',
+      })
     }
 
     const result = await axios.post(
@@ -87,7 +95,11 @@ export default function Followers() {
       getFollowing()
     }
     if (!result.data.success) {
-      Swal.fire({ icon: 'error', title: '關注失敗' })
+      Swal.fire({
+        icon: 'error',
+        title: '關注失敗',
+        confirmButtonColor: '#395c3f',
+      })
     }
   }
 
@@ -144,7 +156,10 @@ export default function Followers() {
                         className={styled.follow}
                         onClick={() => {
                           if (!token && !auth) {
-                            return Swal.fire({ title: '請先登入會員' })
+                            return Swal.fire({
+                              title: '請先登入會員',
+                              confirmButtonColor: '#395c3f',
+                            })
                           }
                           addFollow(v.member_sid)
                         }}

@@ -59,7 +59,10 @@ export default function SocialWall() {
                 }
                 onClick={() => {
                   if (!data.member_sid) {
-                    return Swal.fire({ title: '請先登入會員' })
+                    return Swal.fire({
+                      title: '請先登入會員',
+                      confirmButtonColor: '#395c3f',
+                    })
                   }
                   setTabFollow(true)
                 }}
@@ -87,7 +90,10 @@ export default function SocialWall() {
                 className={`${styles.tag} ${styles.sel}`}
                 onClick={() => {
                   if (!auth) {
-                    return Swal.fire({ title: '請先登入會員' })
+                    return Swal.fire({
+                      title: '請先登入會員',
+                      confirmButtonColor: '#395c3f',
+                    })
                   }
                   navigate('/member')
                 }}
@@ -95,9 +101,12 @@ export default function SocialWall() {
                 我的分享
                 <div className={styles.shade}></div>
               </div>
-              <div className={styles.tag} onClick={()=>{
-                navigate('/leaderboard')
-              }}>
+              <div
+                className={styles.tag}
+                onClick={() => {
+                  navigate('/leaderboard')
+                }}
+              >
                 英雄榜<div className={styles.shade}></div>
               </div>
             </div>

@@ -75,11 +75,19 @@ export default function MemberEdit() {
       }
     )
     if (result.data && result.data.success) {
-      Swal.fire({ logo: 'success', title: '更新資料成功' })
+      Swal.fire({
+        logo: 'success',
+        title: '更新資料成功',
+        confirmButtonColor: '#395c3f',
+      })
       getInfo()
     }
     if (!result.data.success) {
-      Swal.fire({ logo: 'error', title: '更新資料失敗' })
+      Swal.fire({
+        logo: 'error',
+        title: '更新資料失敗',
+        confirmButtonColor: '#395c3f',
+      })
     }
 
     console.log(result.data)

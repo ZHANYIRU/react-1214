@@ -32,17 +32,21 @@ function Login(props) {
 
     if (result.data.success) {
       localStorage.setItem('token', `${result.data.token}`)
-      alert('登入成功')
+      // alert('登入成功')
       setAuth(true)
       navigate('/')
     }
 
     if (!result.data.success) {
       localStorage.removeItem('token')
-      alert('登入失敗')
+      // alert('登入失敗')
       setAuth(false)
       resetData()
-      Swal.fire({ icon: 'error', title: '登入失敗, 信箱或密碼錯誤' })
+      Swal.fire({
+        icon: 'error',
+        title: '登入失敗, 信箱或密碼錯誤',
+        confirmButtonColor: '#395c3f',
+      })
     }
   }
 
