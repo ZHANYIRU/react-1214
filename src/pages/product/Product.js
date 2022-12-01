@@ -377,7 +377,9 @@ function Product() {
               : ''}
           </div>
         </div>
-        {datas.length > 16 && (
+        {datas.length === howLongCard ? (
+          ''
+        ) : (
           <div className={styled.clickme}>
             <button
               onClick={() => {

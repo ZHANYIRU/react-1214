@@ -165,7 +165,9 @@ export default function Leaderboard() {
                     </div>
                   </div>
                   <div className={styled.height}>
-                    {howHeight(v.total_height)}
+                    {!memberData.auth && !switchBtn
+                      ? '你尚未登入'
+                      : howHeight(v.total_height)}
                   </div>
                 </li>
               )
