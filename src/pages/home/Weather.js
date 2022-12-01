@@ -58,6 +58,56 @@ function Weather() {
     )
     setWeek(0)
   }
+  //天氣代碼
+  const weatherTypes = {
+    isThunderstorm: [15, 16, 17, 18, 21, 22, 33, 34, 35, 36, 41],
+    isSunny: [1, 2, 3],
+    isCloudy: [4, 5, 6, 7, 24, 25, 26, 27, 28],
+    isPartiallyClearWithRain: [
+      8, 9, 10, 11, 12, 13, 14, 19, 20, 29, 30, 31, 32, 38, 39,
+    ],
+    isSnowing: [23, 37, 42],
+  }
+  //判斷回傳代碼是哪一種天氣圖示
+  const [switchClick, setSwitchClick] = useState(true)
+
+  const codeNewTaipei =
+    newTaipei.length !== 0 && +newTaipei[1].time[week].elementValue[1].value
+  const codeSelectLocation =
+    selectLocation.length !== 0 &&
+    +selectLocation[1].time[week].elementValue[1].value
+
+  //新code or舊code
+  const display = switchClick ? codeNewTaipei : codeSelectLocation
+  const codeType = () => {
+    if (weatherTypes.isThunderstorm.indexOf(display) !== -1) {
+      return 'isPartiallyClearWithRain'
+    } else if (weatherTypes.isSunny.indexOf(display) !== -1) {
+      return 'isSunny'
+    } else if (weatherTypes.isCloudy.indexOf(display) !== -1) {
+      return 'isCloudy'
+    } else if (weatherTypes.isPartiallyClearWithRain.indexOf(display) !== -1) {
+      return 'isPartiallyClearWithRain'
+    } else if (weatherTypes.isSnowing.indexOf(display) !== -1) {
+      return 'isSnowing'
+    }
+    // } else {
+    //   if (weatherTypes.isThunderstorm.indexOf(codeNewTaipei) !== -1) {
+    //     return 'isPartiallyClearWithRain'
+    //   } else if (weatherTypes.isSunny.indexOf(codeNewTaipei) !== -1) {
+    //     return 'isSunny'
+    //   } else if (weatherTypes.isCloudy.indexOf(codeNewTaipei) !== -1) {
+    //     return 'isCloudy'
+    //   } else if (
+    //     weatherTypes.isPartiallyClearWithRain.indexOf(codeNewTaipei) !== -1
+    //   ) {
+    //     return 'isPartiallyClearWithRain'
+    //   } else if (weatherTypes.isSnowing.indexOf(codeNewTaipei) !== -1) {
+    //     return 'isSnowing'
+    //   }
+    // }
+  }
+
   useEffect(() => {
     getWeatherData()
   }, [])
@@ -107,7 +157,7 @@ function Weather() {
           </div>
         </div>
         <div className={style.icon}>
-          <img src="/img/sun.png" alt="" />
+          <img src={`/img/weather_icon/${codeType()}.png`} alt="" />
         </div>
         <div className={style.tempareature}>
           <div>
@@ -213,7 +263,14 @@ function Weather() {
           )}
         </div>
         <div className={style.locationSelect}>
-          <select onChange={getLocationWeather}>
+          <select
+            onChange={(e) => {
+              getLocationWeather(e)
+              if (switchClick) {
+                setSwitchClick(false)
+              }
+            }}
+          >
             <option>{newTaipei.length !== 0 && '新北市'}</option>
             {locationWeather.map((v, i) => {
               return (

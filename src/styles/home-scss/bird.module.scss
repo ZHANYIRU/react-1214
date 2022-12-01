@@ -6,8 +6,6 @@
     padding-top: 120px;
     width:20%;
     height: 100px;
-    // position: relative;
-    // top:120px;
     .imgWrap{
         position: absolute;
         width: 100%;    
@@ -23,5 +21,70 @@
     }
     to{
         transform: translateY(60px);
+    }
+}
+
+.lightBox{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(1, 1, 1, 0.677);
+    padding-top: 150px;
+    .cardWrap{
+        padding: 35px 100px;
+        margin:50px auto;
+        width: 750px;
+        height: 450px;
+        background-color: white;
+        border-radius: 10px;
+        .title{
+            overflow: hidden;
+            position: absolute;
+            top:325px;
+            left:525px;
+            width: 100px;
+            height: 190px;
+            span{
+                color: rgb(187, 196, 187);
+                position: absolute;
+                top:65px;
+                left:-40px;
+                font-size: 15rem;
+                font-weight: 900;
+                text-shadow: 5px 5px 5px rgba(108, 108, 108, 0.686)
+                
+            }
+        }
+        p{
+            width: 450px;
+            margin: 35px auto;
+            line-height: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        .options{
+            width: 420px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            input{
+                font-size: 1.3rem;
+                margin-bottom:25px;
+                
+            }
+        }
+        .buttons{
+            margin-top: 20px ;
+            width: 550px;
+            display: flex;
+            justify-content: space-around;
+        button{
+            border-radius: 5px;
+            background-color: $yellow;
+            font-weight: 700;
+        border:none;
+        padding: 10px 50px;
+        }
+    }
     }
 }

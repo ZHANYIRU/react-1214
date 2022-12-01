@@ -20,10 +20,10 @@ function Main({ setFtr }) {
     } else {
       setFtr(false)
     }
-    const cubeHeight = window.innerHeight * 3
+    const cubeHeight = window.innerHeight * 4
     const UserScrollY = window.scrollY
     if (UserScrollY < cubeHeight) {
-      lastScroll = window.scrollY / 4
+      lastScroll = window.scrollY / 15
       setDeg(lastScroll)
     }
 
