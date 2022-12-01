@@ -5,10 +5,11 @@ import Stack from '@mui/material/Stack'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward'
 
-export default function CustomIcons({ totalPages, setPage }) {
+export default function CustomIcons({ totalPages, conditions, setConditions }) {
   return (
     <Stack spacing={2}>
       <Pagination
+        page={conditions.page}
         count={totalPages}
         renderItem={(item) => (
           <PaginationItem
@@ -17,7 +18,7 @@ export default function CustomIcons({ totalPages, setPage }) {
           />
         )}
         onChange={(e, page) => {
-          setPage(page)
+          setConditions({ ...conditions, page: page })
         }}
       />
     </Stack>
