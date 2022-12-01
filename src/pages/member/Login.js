@@ -45,7 +45,7 @@ function Login(props) {
       Swal.fire({
         icon: 'error',
         title: '登入失敗, 信箱或密碼錯誤',
-        confirmButtonColor: '#395c3f',
+        confirmButtonColor: '#216326',
       })
     }
   }

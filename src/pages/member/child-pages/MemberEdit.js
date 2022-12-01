@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useMemo } from 'react'
 import { useState } from 'react'
 import styled from '../../../styles/member-scss/MemberEdit.module.scss'
 import axios from 'axios'
@@ -8,8 +8,9 @@ import Swal from 'sweetalert2'
 import { useRef } from 'react'
 import MemberContext from '../../../contexts/MemberContext'
 import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 
-//TODO 資料格式驗證
+//TODO 資料格式驗證 useForm 在refresh會吃不到default value
 
 export default function MemberEdit() {
   // const [profile, setProfile] = useState({
@@ -23,21 +24,30 @@ export default function MemberEdit() {
   //   intro: '',
   // })
 
-  const navigate = useNavigate()
-
   const { data, setData, getInfo, auth } = useContext(MemberContext)
 
-  // console.log(data)
+  const navigate = useNavigate()
 
   const [preview, setPreview] = useState('')
   const [myBirth, setMyBirth] = useState('')
+
+  const updateForm = useRef(null)
 
   useEffect(() => {
     let dateBirth = data.birthday
       ? dayjs(data.birthday).format('YYYY-MM-DD')
       : ''
+    console.log('生日為' + dateBirth)
     setMyBirth(dateBirth)
-  }, [])
+  }, [data])
+
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    getValues,
+    reset,
+  } = useForm({ shouldUnregister: false })
 
   useEffect(() => {
     if (!localStorage.getItem('token')) {
@@ -45,7 +55,10 @@ export default function MemberEdit() {
     }
   }, [auth])
 
-  const updateForm = useRef(null)
+  useEffect(() => {
+    // reset form with user data
+    reset(data)
+  }, [data])
 
   // async function getInfo() {
   //   const result = await axios.get('http://localhost:3001/member/api?id=668')
@@ -59,9 +72,8 @@ export default function MemberEdit() {
   // console.log(result.data.rows[0])
   // }
 
-  async function updateInfo() {
+  const updateInfo = async function () {
     const formData = new FormData(updateForm.current)
-
     const token = localStorage.getItem('token') || ''
 
     const result = await axios.put(
@@ -78,7 +90,7 @@ export default function MemberEdit() {
       Swal.fire({
         logo: 'success',
         title: '更新資料成功',
-        confirmButtonColor: '#395c3f',
+        confirmButtonColor: '#216326',
       })
       getInfo()
     }
@@ -86,7 +98,7 @@ export default function MemberEdit() {
       Swal.fire({
         logo: 'error',
         title: '更新資料失敗',
-        confirmButtonColor: '#395c3f',
+        confirmButtonColor: '#216326',
       })
     }
 
@@ -99,10 +111,6 @@ export default function MemberEdit() {
     }
   }
 
-  // useEffect(() => {
-  //   getInfo()
-  // }, [])
-
   return (
     <>
       <div className={styled.row}>
@@ -110,7 +118,11 @@ export default function MemberEdit() {
           <div className={styled.card}>
             <h3>編輯會員資料</h3>
             <div className={styled.divider}></div>
-            <form ref={updateForm} encType="multipart/form-data">
+            <form
+              ref={updateForm}
+              encType="multipart/form-data"
+              onSubmit={handleSubmit(updateInfo)}
+            >
               <div className={styled.avatar}>
                 {data.avatar || preview ? (
                   <img
@@ -147,44 +159,82 @@ export default function MemberEdit() {
               <p>(打*號為必填欄位)</p>
               <div className={styled.formRow}>
                 <label className={styled.required}>姓名</label>
-                <input type="text" defaultValue={data.name} name="name"></input>
+                <input
+                  type="text"
+                  // defaultValue={data.name}
+                  {...register('name', {
+                    value: data.name,
+                    required: '*姓名不得為空白',
+                  })}
+                ></input>
+                {errors.name && (
+                  <p className={styled.errMsg}>{errors.name.message}</p>
+                )}
+                {console.log('姓名為:' + getValues('name'))}
               </div>
               <div className={styled.formRow}>
                 <label className={styled.required}>顯示名稱</label>
                 <input
                   type="text"
                   defaultValue={data.nickname}
-                  name="nickname"
+                  {...register('nickname', { required: '*顯示名稱不得為空白' })}
                 ></input>
+                {errors.nickname && (
+                  <p className={styled.errMsg}>{errors.nickname.message}</p>
+                )}
               </div>
               <div className={styled.formRow}>
                 <label htmlFor="mobile">手機號碼</label>
                 <input
                   type="text"
-                  name="mobile"
+                  {...register('mobile', {
+                    pattern: {
+                      value: /^09\d{2}-?\d{3}-?\d{3}$/,
+                      message: '*請輸入正確的手機號碼格式',
+                    },
+                  })}
                   defaultValue={data.mobile}
                 ></input>
+                {errors.mobile && (
+                  <p className={styled.errMsg}>{errors.mobile.message}</p>
+                )}
               </div>
               <div className={styled.formRow}>
                 <label htmlFor="email" className={styled.required}>
                   電子信箱
                 </label>
                 <input
-                  type="email"
-                  name="email"
+                  type="text"
+                  {...register('email', {
+                    required: '電子信箱不得為空白',
+                    pattern: {
+                      value:
+                        /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/,
+                      message: '*請輸入正確的電子信箱格式',
+                    },
+                  })}
                   defaultValue={data.email}
                 ></input>
+                {errors.email && (
+                  <p className={styled.errMsg}>{errors.email.message}</p>
+                )}
               </div>
               <div className={styled.formRow}>
                 <label htmlFor="birthday">生日</label>
                 <input
                   type="date"
-                  name="birthday"
-                  value={myBirth}
-                  onChange={(e) => {
+                  {...register('birthday', {
+                    valueAsDate: true,
+                    validate: (value) => value < Date.now() || '錯誤的生日日期'
+                  })}
+                  value={myBirth} 
+                  onChange={(e)=>{
                     setMyBirth(e.target.value)
                   }}
                 ></input>
+                {errors.birthday && (
+                  <p className={styled.errMsg}>{errors.birthday.message}</p>
+                )}
               </div>
               <div className={styled.formRow}>
                 <label htmlFor="address" className={styled.forTxtArea}>
@@ -215,10 +265,10 @@ export default function MemberEdit() {
               </div>
               {/* bonus: 驗證碼API */}
               <button
-                onClick={(e) => {
-                  e.preventDefault()
-                  updateInfo()
-                }}
+              // onClick={(e) => {
+              //   e.preventDefault()
+              //   updateInfo()
+              // }}
               >
                 更新資料
               </button>

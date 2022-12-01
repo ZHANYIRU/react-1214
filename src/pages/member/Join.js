@@ -2,6 +2,7 @@ import { useRef } from 'react'
 import { useState, useEffect, useContext } from 'react'
 import styled from '../../styles/member-scss/Join.module.scss'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import { useNavigate } from 'react-router-dom'
 import TextareaAutosize from 'react-textarea-autosize'
 import MemberContext from '../../contexts/MemberContext'
@@ -24,11 +25,11 @@ export default function Join(props) {
 
   const navigate = useNavigate()
 
-  const [showSuccess, setShowSuccess] = useState(false)
+  // const [showSuccess, setShowSuccess] = useState(false)
 
   const joinForm = useRef(null)
 
-  async function handleSumbit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
 
     const formData = new FormData(joinForm.current)
@@ -40,7 +41,15 @@ export default function Join(props) {
 
     if (result.data.success) {
       localStorage.setItem('token', `${result.data.token}`)
-      setShowSuccess(true)
+      Swal.fire({ title: '註冊成功', confirmButtonColor: '#216326' })
+      // setShowSuccess(true)
+    }
+    if (!result.data.success) {
+      Swal.fire({
+        logo: 'error',
+        title: '註冊失敗',
+        confirmButtonColor: '#216326',
+      })
     }
 
     // console.log(result.data)
@@ -151,12 +160,12 @@ export default function Join(props) {
                 />
               </div>
               {/* bonus: 驗證碼API */}
-              <button onClick={handleSumbit}>註冊會員</button>
+              <button onClick={handleSubmit}>註冊會員</button>
             </form>
           </div>
         </div>
       </div>
-      {showSuccess && (
+      {/* {showSuccess && (
         <div className={styled.alertBg}>
           <div className={styled.alert}>
             <h3>註冊成功！</h3>
@@ -171,7 +180,7 @@ export default function Join(props) {
             </button>
           </div>
         </div>
-      )}
+      )} */}
     </>
   )
 }

@@ -9,7 +9,7 @@ import MemberContext from '../../../contexts/MemberContext'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-import { getFileInfo } from 'prettier'
+
 
 export default function MemberInfo() {
   const [isNew, setIsNew] = useState(false)
@@ -71,7 +71,7 @@ export default function MemberInfo() {
       return Swal.fire({
         logo: 'error',
         title: '請先上傳圖片',
-        confirmButtonColor: '#395c3f',
+        confirmButtonColor: '#216326',
       })
     }
 
@@ -90,7 +90,7 @@ export default function MemberInfo() {
     console.log(result.data)
     Swal.fire({
       title: result.data.success ? '新增成功' : '新增失敗',
-      confirmButtonColor: '#395c3f',
+      confirmButtonColor: '#216326',
     })
     setIsNew(false)
     getInfo()
@@ -116,7 +116,7 @@ export default function MemberInfo() {
     console.log(result.data)
     Swal.fire({
       title: result.data.success ? '修改成功' : '修改失敗',
-      confirmButtonColor: '#395c3f',
+      confirmButtonColor: '#216326',
     })
     setIsEdit(false)
     setIsDel(false)
@@ -143,7 +143,7 @@ export default function MemberInfo() {
     console.log(result.data)
     Swal.fire({
       title: result.data.success ? '刪除成功' : '刪除失敗',
-      confirmButtonColor: '#395c3f',
+      confirmButtonColor: '#216326',
     })
     if (result.data.success) {
       setIsEdit(false)

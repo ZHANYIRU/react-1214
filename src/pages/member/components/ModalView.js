@@ -58,7 +58,7 @@ export default function ModalView({
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員' })
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
     }
 
     const result = await axios.post(
@@ -81,7 +81,7 @@ export default function ModalView({
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員' })
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
     }
 
     const result = await axios.delete(
@@ -104,7 +104,7 @@ export default function ModalView({
     const formData = new FormData(replyForm.current)
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員' })
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
     }
 
     const result = await axios.post(

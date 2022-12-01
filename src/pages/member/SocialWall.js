@@ -61,7 +61,7 @@ export default function SocialWall() {
                   if (!data.member_sid) {
                     return Swal.fire({
                       title: '請先登入會員',
-                      confirmButtonColor: '#395c3f',
+                      confirmButtonColor: '#216326',
                     })
                   }
                   setTabFollow(true)
@@ -92,7 +92,7 @@ export default function SocialWall() {
                   if (!auth) {
                     return Swal.fire({
                       title: '請先登入會員',
-                      confirmButtonColor: '#395c3f',
+                      confirmButtonColor: '#216326',
                     })
                   }
                   navigate('/member')
