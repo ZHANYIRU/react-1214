@@ -10,3 +10,19 @@ form{
     height: 800px;
     border: 1px black solid;
 }
+
+
+
+//----
+.container{
+    margin: 0 auto;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    .display{
+        width: 50%;
+    }
+    .setting{
+        width: 50%;
+    }
+}

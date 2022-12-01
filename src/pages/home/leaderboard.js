@@ -70,10 +70,13 @@ export default function Leaderboard() {
   const [allData, setAllData] = useState([{}])
 
   const fetchYourFd = async (searchKeyword) => {
+    console.log('我是測試1', memberData.data.member_sid)
+
     const response = await axios.get(
       `http://localhost:3001/product/borad/api?mid=${memberData.data.member_sid}`
     )
     const data = response.data
+
     // console.log(r)
     setYourFdData(data)
   }
@@ -98,7 +101,7 @@ export default function Leaderboard() {
   useEffect(() => {
     fetchAll()
     fetchYourFd()
-  }, [])
+  }, [memberData.auth])
   // useEffect(() => {
   //   getUsersBySearchWord()
   // }, [switchBtn])

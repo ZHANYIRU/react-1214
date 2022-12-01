@@ -4,8 +4,10 @@ import { useState, useContext } from 'react'
 import ProCartContext from '../contexts/ProCartContext'
 import { useMediaQuery } from 'react-responsive'
 import MemberContext from '../contexts/MemberContext'
+import { useNavigate } from 'react-router-dom'
 
 function Navbar() {
+  const navigate = useNavigate()
   //定義Navbar 手機板
   const mobile = useMediaQuery({ query: '(max-width:390px)' })
   const { cartItem } = useContext(ProCartContext)
@@ -23,6 +25,7 @@ function Navbar() {
   })
   const loginBtn = (e) => {
     e.preventDefault()
+    console.log('aaaaaaaaaaaa')
     if (loginBox.top === '-20px') {
       setLoginBox({ ...loginBox, top: '70px' })
     } else {
@@ -54,32 +57,53 @@ function Navbar() {
     <>
       <div className={styled.loginBefore} style={loginBoxMob}>
         {auth ? (
-          <Link to="/member">
+          <span
+            className={styled.logOut}
+            onClick={(e) => {
+              loginBtnMMob(e)
+              navigate('/member')
+            }}
+          >
             <span>會員中心</span>
-          </Link>
+          </span>
         ) : (
-          <Link to="/login">
+          <span className={styled.logOut}>
             {/* 切換會員中心 */}
-            <span>會員登入</span>
-          </Link>
+            <span
+              onClick={(e) => {
+                loginBtnMMob(e)
+                navigate('/login')
+              }}
+            >
+              會員登入
+            </span>
+          </span>
         )}
         {auth ? (
           <span className={styled.logOut}>
             <span
-              onClick={() => {
+              onClick={(e) => {
                 resetData()
                 localStorage.removeItem('token')
                 setAuth(false)
+                loginBtnMMob(e)
               }}
             >
               會員登出
             </span>
           </span>
         ) : (
-          <Link to="/join">
+          <span className={styled.logOut}>
             {/* 切換會員登出 */}
-            <span>會員註冊</span>
-          </Link>
+            <span
+              onClick={(e) => {
+                loginBtnMMob(e)
+                navigate('/join')
+              }}
+            >
+              會員註冊
+            </span>
+          </span>
         )}
       </div>
     </>
@@ -131,20 +155,35 @@ function Navbar() {
       </nav>
       <div className={styled.loginBefore} style={loginBox}>
         {auth ? (
-          <Link to="/member">
-            <span>會員中心</span>
-          </Link>
+          <span className={styled.logOut}>
+            <span
+              onClick={(e) => {
+                loginBtn(e)
+                navigate('/member')
+              }}
+            >
+              會員中心
+            </span>
+          </span>
         ) : (
-          <Link to="/login">
+          <span className={styled.logOut}>
             {/* 切換會員中心 */}
-            <span>會員登入</span>
-          </Link>
+            <span
+              onClick={(e) => {
+                loginBtn(e)
+                navigate('/login')
+              }}
+            >
+              會員登入
+            </span>
+          </span>
         )}
         {auth ? (
           <span className={styled.logOut}>
             <span
-              onClick={() => {
+              onClick={(e) => {
                 resetData()
+                loginBtn(e)
                 localStorage.removeItem('token')
                 setAuth(false)
               }}
@@ -153,10 +192,17 @@ function Navbar() {
             </span>
           </span>
         ) : (
-          <Link to="/join">
+          <span className={styled.logOut}>
             {/* 切換會員登出 */}
-            <span>會員註冊</span>
-          </Link>
+            <span
+              onClick={(e) => {
+                loginBtn(e)
+                navigate('/join')
+              }}
+            >
+              會員註冊
+            </span>
+          </span>
         )}
       </div>
     </>
