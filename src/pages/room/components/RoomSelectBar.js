@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import style from '../../../styles/room-scss/roomSelectBar.module.scss'
 import dayjs from 'dayjs'
+import ProCartContext from '../../../contexts/ProCartContext'
 
 function RoomSelectBar({ detail }) {
+  const { addRoomCart } = useContext(ProCartContext)
   //房型資料定義
   const roomQTY = detail.room_qty
   const roomPrice = detail.room_price
@@ -16,10 +18,18 @@ function RoomSelectBar({ detail }) {
 
   const [night, setNight] = useState(1)
 
-  const stayNights = () => {
-    console.log('checkOut', checkOut)
-    console.log('checkIn', checkIn)
-    const days = (Date.parse(checkOut) - Date.parse(checkIn)) / 86400000
+  const stayNightsI = (e) => {
+    const newCheckIn = e.target.value
+    // console.log('checkOut', newCheckOut)
+    // console.log('checkIn', checkIn)
+    const days = (Date.parse(checkOut) - Date.parse(newCheckIn)) / 86400000
+    setNight(days)
+  }
+  const stayNightsII = (e) => {
+    const newCheckOut = e.target.value
+    // console.log('checkOut', newCheckOut)
+    // console.log('checkIn', checkIn)
+    const days = (Date.parse(newCheckOut) - Date.parse(checkIn)) / 86400000
     setNight(days)
   }
 
@@ -71,6 +81,7 @@ function RoomSelectBar({ detail }) {
             onChange={(e) => {
               const selDate = e.target.value
               setCheckIn(selDate)
+              stayNightsI(e)
             }}
           />
           <label>退房日期</label>
@@ -82,14 +93,15 @@ function RoomSelectBar({ detail }) {
             onChange={(e) => {
               const selDate = e.target.value
               setCheckOut(selDate)
+              stayNightsII(e)
             }}
           />
           <label>床位</label>
           <select
             onChange={(e) => {
-              const selectQty = e.target.value
+              const selectQty = +e.target.value
+              console.log(typeof selectQty)
               setQty(selectQty)
-              stayNights()
             }}
           >
             {Array(roomQTY)
@@ -108,7 +120,26 @@ function RoomSelectBar({ detail }) {
           {qty && `${qty}床位`}：
           {qty && qty > 0 ? `${qty * roomPrice * night}` : 0}元
         </div>
-        <div className={style.add}>加入購物車</div>
+        <div
+          className={style.add}
+          onClick={() => {
+            addRoomCart(
+              detail.room_sid,
+              detail.room_name,
+              detail.room_address,
+              checkIn,
+              checkOut,
+              night,
+              detail.name,
+              detail.mountain_name + ' ' + detail.height + 'm',
+              detail.room_price,
+              qty,
+              detail.room_img
+            )
+          }}
+        >
+          加入購物車
+        </div>
       </div>
     </>
   )

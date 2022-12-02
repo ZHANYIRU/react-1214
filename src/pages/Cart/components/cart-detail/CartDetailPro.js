@@ -37,7 +37,10 @@ function CartDetailPro() {
                   <div className={styled.wrapRight}>
                     <div className={styled.roomText}>
                       <h2>{el.name}</h2>
-                      <p>尺寸：{el.size}</p>
+                      <p>
+                        {el.size && '尺寸：'}
+                        {el.size}
+                      </p>
                       <p>單價：{moneyFormat(el.price)}</p>
                       <div className={styled.people}>
                         <p>數量：</p>
@@ -74,7 +77,7 @@ function CartDetailPro() {
                     </div>
                     <div className={styled.roomImg}>
                       <img
-                        src="https://cdn2.ettoday.net/images/4778/d4778980.jpg"
+                        src={`http://localhost:3001/imgs/zx/${el.img}`}
                         alt=""
                       />
                     </div>

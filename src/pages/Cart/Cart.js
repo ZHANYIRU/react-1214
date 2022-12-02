@@ -8,7 +8,27 @@ import OkOrder from './child-pages/OkOrder'
 import ProCartContext from '../../contexts/ProCartContext'
 import { useState, useRef, useEffect, useContext } from 'react'
 function Cart() {
+  //寄送方式
+  const [familySelect, setFamilySelect] = useState('')
+  //付款方式
+  const [paySelect, setPaySelect] = useState('')
+  //for完成訂單的顯示
+  const [forOk, setForOk] = useState({
+    orderN: 0,
+    family: '',
+    pay: '',
+    orderDay: '',
+    totalPrice: 0,
+  })
+  //商品數量(項目)
   const { cartItem } = useContext(ProCartContext)
+  //最大流程數
+  const maxStep = 4
+  //流程的狀態
+  const [step, setStep] = useState(1)
+  //動態元件
+  const components = [CartDetail, WritePage, Pay, OkOrder]
+  const NowComponents = components[step - 1]
   //查看body高度
   const bodyHeight = useRef(null)
   //給buyBar的判斷
@@ -31,25 +51,30 @@ function Cart() {
       }
     }
   }, [cartItem])
-  //最大流程數
-  const maxStep = 4
-  //流程的狀態
-  const [step, setStep] = useState(1)
-  //動態元件
-  const components = [CartDetail, WritePage, Pay, OkOrder]
-  const NowComponents = components[step - 1]
   return (
     <>
-      {cartItem ? (
+      {step === 4 || cartItem !== 0 ? (
         <>
           <div className={styled.empty1}></div>
           <div className={styled.body} ref={bodyHeight}>
             <CartTitle step={step} maxStep={maxStep} />
-            <NowComponents step={step} setStep={setStep} />
+            <NowComponents
+              step={step}
+              setStep={setStep}
+              forOk={forOk}
+              setForOk={setForOk}
+              familySelect={familySelect}
+              setFamilySelect={setFamilySelect}
+              paySelect={paySelect}
+              setPaySelect={setPaySelect}
+            />
           </div>
           <BuyCart step={step} setStep={setStep} buyBar={buyBar} />
         </>
       ) : (
+        ''
+      )}
+      {cartItem === 0 && step !== 4 && (
         <>
           <div className={styled.empty}></div>
           <div className={styled.noCart}>

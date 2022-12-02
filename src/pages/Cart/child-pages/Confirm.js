@@ -5,11 +5,13 @@ function Confirm() {
   const location = useLocation()
   useEffect(() => {
     const transID = new URLSearchParams(location.search).get('transactionId')
+    const orderID = new URLSearchParams(location.search).get('orderId')
     if (transID) {
       axios
-        .get(`http://localhost:3001/order/pay/confirm?transactionId=${transID}`)
-        .then((res) => {
-          console.log(res)
+        .get(
+          `http://localhost:3001/order/pay/confirm?transactionId=${transID}&orderId=${orderID}`
+        )
+        .then(async (res) => {
           window.opener.focus()
           // 通知opener(原付款視窗已付款完成)
           const event = new CustomEvent('paid', {
@@ -23,7 +25,6 @@ function Confirm() {
         .catch((error) => console.log(error))
     }
   }, [])
-
   return (
     <>
       <div style={{ width: '100%', height: '100px' }}></div>

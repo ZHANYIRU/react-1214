@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import style from '../../styles/camp-scss/campcat.module.scss'
 import ListCardBig from './components/ListCardBig'
 import ListLeft from './components/ListLeft'
 import axios from 'axios'
 
-function CampCatList({filter}) {
+function CampCatList({ filter }) {
+  const navigate = useNavigate()
+  //存navigate的sid
+
   //all活動產品資料
-  const [campData, setCampData] = useState([{}])
+  const [campData, setCampData] = useState([
+    {
+      sid: '1',
+    },
+  ])
 
   let all = 'all'
   const fetchAll = async (url) => {
@@ -15,11 +23,17 @@ function CampCatList({filter}) {
       const response = await axios.get(`http://localhost:3001/camp/${url}`)
       const data = response.data
       console.log('title')
+
       setCampData(data)
     } catch (e) {
       console.log(e.message)
     }
   }
+//查詢分類結果的長度
+  const campLength = campData.filter((v, i) => {
+    return v.campaign_type_sid === filter
+  })
+
   useEffect(() => {
     fetchAll('all')
   }, [])
@@ -31,7 +45,7 @@ function CampCatList({filter}) {
           天數<select></select>
           <button>查詢</button>
         </div>
-        <div>查詢結果</div>
+        <div>查詢結果 {campLength.length}</div>
         <div>麵包屑/麵包屑/麵包屑/麵包屑</div>
         <div className={style.cards}>
           {campData
@@ -43,13 +57,21 @@ function CampCatList({filter}) {
                 <>
                   <div className={style.listcardbig} key={v.sid}>
                     <div className={style.listcardimg}>
-                      <img src="https://s3.amazonaws.com/imagescloud/images/medias/annexes/annexe-camping-2022.jpg" />
+                    <img
+                          src={`http://localhost:3001/n7/campmain/${v.mainImage}`}
+                        />
                     </div>
                     <div className={style.listcardbigtext}>
                       <p>{v.name}</p>
                       <p>金額：${v.price}</p>
                       <div> 評價：stars</div>
-                      <button>查看更多</button>
+                      <button
+                        onClick={() => {
+                          navigate(`/camp/${v.sid}`)
+                        }}
+                      >
+                        查看更多
+                      </button>
                     </div>
                   </div>
                 </>

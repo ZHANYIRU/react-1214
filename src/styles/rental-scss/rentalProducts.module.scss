@@ -1,0 +1,160 @@
+@import '../global.scss';
+.empty{
+    width: 100%;
+    height: 60px;
+}
+.container{
+    margin:0px 300px;
+    width:80%;
+
+
+    // 種類商品條 可能會棄案
+    // .categoryBox{
+    //     width: 95%;
+    //     margin: 0 auto;
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: center;
+    
+    //     .box{
+    //         width: 45%;
+    //         height: 50px;
+    //         display: flex;
+    //         justify-content:space-around;
+    //         align-items: center;
+    //         border-bottom: 1px solid black;
+    //         border-top: 1px solid black;
+    
+    //     }
+    //     .middle{
+    //         height: 50px;
+    //         width: 10%;
+    //         display: flex;
+    //         justify-content: center;
+    //         border-bottom: 1px solid black;
+    //         h2{
+    //             transform: translateY(-10px);
+    //         }
+    //     }
+    
+    // }
+    .orderShow{
+        background-color: #ccc;
+        width:98%;
+        margin:0 auto;
+        height:50px;
+        display:flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 5px;
+        
+
+        .filtermore{
+            display:flex;
+            align-items:center;
+            padding-left:20px;
+
+            h2,i{
+                cursor:pointer;
+            }
+        }
+
+        .order{
+            margin-right:20px;
+            width:400px;
+            display:flex;
+            justify-content: space-around;
+
+            p{
+                cursor:pointer;
+            }
+        }
+    }
+    .order p:nth-child(2){
+        border-left :2px solid black;
+        padding-left:20px;
+    }
+    
+    .order p:nth-child(3){
+        border-left :2px solid black;
+        padding-left:20px;
+    }
+    
+    .order p:nth-child(4){
+        border-left :2px solid black;
+        padding-left:20px;
+    }
+
+    
+
+    .rentalProductBox{
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        margin:0 auto; 
+        // justify-content:;
+ 
+        justify-content:flex-start;
+        a{
+            width: 25%;
+        }
+        .rentalProduct{
+            // border:1px solid black;
+            // width: 25%;
+            padding:15px;
+            // width:295px;
+            color:black;
+         
+            .cardBody{
+                width: 100%;
+                background-color: #fff;
+                border-radius:10px;
+                box-shadow: 3px 3px 3px #ccc;
+                padding:5px 30px;
+        
+        
+                .imageContainer{
+                    width:200px;
+                    overflow: hidden;
+                    height:200px;
+                    margin: 0 auto;
+                    img{
+                        width:100%;
+                        height:100%;
+                        object-fit:cover;
+                        transition:all 0.3s ease;
+                        &:hover{
+                            transform:scale(1.25)
+                        }
+                    }
+                }
+        
+                .rental_product_name{
+                    display:flex;
+                    align-items: center;
+                    font-size:25px;
+                    text-transform: uppercase;
+                    height: 50px;
+                } 
+                .price{
+                    color:black;
+                    font-size:22px;
+                    font-weight: 700;
+                    margin:20px 0;
+                    span{
+                        color:red;
+                    }
+                }
+                .star{
+                    margin:20px 0;
+                    color:yellow;
+                }
+            }
+            
+        }
+    }
+
+}
+
+
+// ＴＯ自己 不要亂加東西!!

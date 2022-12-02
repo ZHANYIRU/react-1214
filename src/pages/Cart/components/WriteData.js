@@ -3,11 +3,10 @@ import { useState, useContext, useEffect } from 'react'
 import MemberContext from '../../../contexts/MemberContext'
 import ProCartContext from '../../../contexts/ProCartContext'
 import styled from '../../../styles/cart-scss/writeData.module.scss'
-function WriteData() {
+function WriteData({ familySelect, setFamilySelect, paySelect, setPaySelect }) {
   const { data } = useContext(MemberContext)
   const { writeUser, setWriteUser } = useContext(ProCartContext)
-  const [familySelect, setFamilySelect] = useState('')
-  const [paySelect, setPaySelect] = useState('')
+
   //(訂購人)
   const [memberUser, setMemberUser] = useState({
     name: '',
@@ -226,18 +225,6 @@ function WriteData() {
               />
             </div>
           </div>
-        </div>
-        <div className={styled.area}>
-          <div className={styled.address}>
-            <h3>地址</h3>
-            <select name="" id="">
-              <option value="">新北市</option>
-            </select>
-            <select name="" id="">
-              <option value="">木柵區</option>
-            </select>
-          </div>
-          <input type="text" />
         </div>
       </div>
     </>

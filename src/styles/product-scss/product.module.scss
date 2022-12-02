@@ -22,20 +22,65 @@ body{
 .container{
     width: 60%;
     margin: 0 auto;
-    min-width: 912px;
+    // min-width: 912px;
     position: relative;
-
+    .clickme{
+        margin-top: 20px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        button{
+            font-size: 1.2rem;
+            font-weight: 700;
+            width: 200px;
+            height: 50px;
+            border-radius: 10px;
+            outline: none;
+            border: none;
+            background-color: rgb(120, 167, 110);
+            // color: wheat;
+            text-align: center;
+            margin: 0 auto;
+            &:hover{
+                background-color: $yellow;
+            }
+        }
+    }
+}
+.stickyWrapSearch{
+    // margin-left: -10px;
+    transition: .5s ease-in-out;
+    z-index: 10;
+    position: sticky; 
+    top: 60px;
+    padding-top: 10px;
+     border-radius: 10px 10px;
+     overflow: hidden;
+     background-color: #E9D9A2;
+}
+.stickyWrapCate{
+    transition: .5s ease-in-out;
+    z-index: 10;
+    position: sticky;
+     top: 160px;
+     padding-top: 10px;
+     background-color: #E9D9A2;
+     border-radius: 10px 10px;
+     overflow: hidden;
+     
 }
 
 .forms{
     margin: 0 auto;
-    // width: 20%;
+    
+    width: 20%;
     position: relative;
     transition: .5s  linear;
     // display: flex;
     // justify-content:flex-start;
     .search{
         // text-align: center;
+        
         border-radius: 40px;
         padding-left: 10px;
         border: 1px rgb(140, 134, 134) solid;
@@ -45,6 +90,8 @@ body{
         margin-bottom: 50px;
         outline-style: none;
     }
+
+    
     i{
        position: absolute;
        right: 20px;
@@ -70,6 +117,7 @@ p{
 
 //--------------------------------
 .product_nav{
+    width: 100%;
     margin: 0 auto;
     display: flex;
     flex-wrap: nowrap;
@@ -83,7 +131,8 @@ p{
         color: #000;
         font-weight: 700;
         &:hover{
-            font-size: 1.4rem;
+            // color: #FF0F00;
+            font-size: 1.3rem;
         }
     }
     .product_nav_box1{
@@ -119,8 +168,9 @@ p{
             @include text;
             text-align: center;
             font-size: 1.1rem;
-            transform: translateY(-5px);
+            transform: translateY(-10px);
             font-weight: 700;
+            // z-index: 11;
         }
     }
   }
@@ -128,22 +178,28 @@ p{
 
 
 
-
+.cardBigBox{
+    // position: relative;
+    margin: 0 auto;
+    z-index: -1;
+}
 
 
     .cardbox{
 
         // min-width: 912px;
+        
         width:100%;
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap:wrap;
         gap: 20px;
         justify-content:flex-start;
         align-items:flex-start;
        
+        
        
         .card{
-            width: 23%;
+            width: 23.5%;
             // border: 1px black solid;
             // height: 370px;
             border-radius: 10px;
@@ -152,8 +208,48 @@ p{
             box-shadow: 0px 4px 16px rgba(0,0,0,.25);
             cursor: pointer;
             overflow: hidden;
+            position: relative;
+            .banner {
+                /* content: url('檔案路徑'); */
+                display: block;
             
+                /* 以上兩個，當作區塊時，必須使用 */
+                overflow: hidden;
+                
+                background-color: rgb(84, 224, 249);
+                color: #fff;
+                font-size: 1.2rem;
+                line-height: 1.8rem;
+                width: 200px;
+                height: 30px;
+                position: absolute;
+                text-align: center;
+                top: 20px;
+                right: -60px;
+                transform: rotate(40deg);
+                z-index: 2;
+            }
+            .banner2{
+                /* content: url('檔案路徑'); */
+                display: block;
+            
+                /* 以上兩個，當作區塊時，必須使用 */
+                overflow: hidden;
+                background-color: rgb(95, 61, 246);
+                color: #fff;
+                font-size: 1.2rem;
+                line-height: 1.8rem;
+                width: 200px;
+                height: 30px;
+                position: absolute;
+                text-align: center;
+                top: 20px;
+                right: -60px;
+                transform: rotate(40deg);
+                z-index: 2;
+            }
         }
+        
         .imgWrap{
             width: 100%;
             height: 280px;
@@ -163,6 +259,7 @@ p{
             &:hover img{
                 transition: .5s;
                 transform:scale(1.2,1.2);
+                z-index: 1;
             }
            
             img{
@@ -175,6 +272,7 @@ p{
         }
         a{
             color: #000;
+           
         }
         p{
             margin-bottom: 0px;
@@ -200,9 +298,9 @@ p{
         display: flex;
         position:absolute;
         justify-content:center;
-        top: 840px;
+        top: 900px;
         
-        right: 108%;
+        right: 106.8%;
         flex-shrink: .2;
         background-color: #F5F5F5;
         padding:10px;
@@ -217,12 +315,8 @@ p{
         display: flex;
         position:fixed;
         justify-content:center;
-        // min-width: 246px;
-        // width:16%;
-        // top: 0px;
-        top: 200px;
-        // right: 105%;
-        left: 30px;
+        top: 240px;
+        left: 50px;
         flex-shrink: .2;
         background-color: #F5F5F5;
         padding:10px;
@@ -265,7 +359,7 @@ input{
     // text-align: center;
     display: flex;
     // justify-content: center;
-    justify-content: start;
+    justify-content: flex-start;
     .genderBox{
         width: 100%;
         text-align: center;
@@ -341,7 +435,7 @@ input{
         min-width: 390px;
         position: relative;
         overflow: hidden;
-    
+        
     }
     
     .cardbox{
@@ -354,13 +448,13 @@ input{
         gap: 10px;
         justify-content:space-between;
         align-items:flex-start;
-
+        z-index: 1;
        
        
         .card{
             width: 48%;
             border-radius: 10px;
-            height: 350px;
+            height: 260px;
             padding: 15px;
             background-color: #fff;
             box-shadow: 0px 4px 16px rgba(0,0,0,.25);
@@ -368,7 +462,7 @@ input{
         }
         .imgWrap{
             width: 100%;
-            height: 200px;
+            height: 150px;
             display: flex;
             justify-content: center;
             img{
@@ -381,11 +475,11 @@ input{
         
         p{
             margin-bottom: 10px;
-            height: 80px;
-            line-height: 1.2rem;
+            height: 55px;
+            line-height: 1.1rem;
         }
         h2{
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             span{
                 color:#FF0F00;
             }
@@ -415,6 +509,11 @@ input{
             font-size:.9rem;
             color: #000;
             font-weight: 700;
+            &:hover{
+                // color: #FF0F00;
+                font-size: 1rem;
+                
+            }
         }
         .product_nav_box1{
                     @include nav_box;
@@ -483,16 +582,19 @@ input{
          }
     }
  .filterTop{
-    width: 100%;
+    width: 80%;
     height: 80px;
     display: flex;
+    margin: 0 auto;
+    // justify-content: center;
     align-items: center;
     .forms{
-        width: 70%;
-        margin: 0 auto;
+        width: 80%;
+        margin: 0 auto;z-index: 1;
         .search{
             // text-align: center;
             border-radius: 40px;
+            
             padding-left: 10px;
             border: 1px #ccc solid;
             background-color:white;
@@ -606,3 +708,116 @@ input{
 }
 
 }
+
+
+
+@media  screen and (max-width:1700px) {
+    .cardbox{
+
+        // min-width: 912px;
+        
+        width:100%;
+        display: flex;
+        flex-wrap:wrap;
+        gap: 10px;
+        justify-content:flex-start;
+        align-items:flex-start;
+       
+        
+       
+        .card{
+            width: 24%;
+            // border: 1px black solid;
+            // height: 370px;
+            border-radius: 10px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0px 4px 16px rgba(0,0,0,.25);
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            .banner {
+                /* content: url('檔案路徑'); */
+                display: block;
+            
+                /* 以上兩個，當作區塊時，必須使用 */
+                overflow: hidden;
+                
+                background-color: rgb(84, 224, 249);
+                color: #fff;
+                font-size: 1.2rem;
+                line-height: 1.8rem;
+                width: 200px;
+                height: 30px;
+                position: absolute;
+                text-align: center;
+                top: 20px;
+                right: -60px;
+                transform: rotate(40deg);
+                z-index: 2;
+            }
+            .banner2{
+                /* content: url('檔案路徑'); */
+                display: block;
+            
+                /* 以上兩個，當作區塊時，必須使用 */
+                overflow: hidden;
+                background-color: rgb(95, 61, 246);
+                color: #fff;
+                font-size: 1.2rem;
+                line-height: 1.8rem;
+                width: 200px;
+                height: 30px;
+                position: absolute;
+                text-align: center;
+                top: 20px;
+                right: -60px;
+                transform: rotate(40deg);
+                z-index: 2;
+            }
+        }
+        
+        .imgWrap{
+            width: 100%;
+            height: 280px;
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+            &:hover img{
+                transition: .5s;
+                transform:scale(1.2,1.2);
+                z-index: 1;
+            }
+           
+            img{
+                width: 100%;
+                object-fit:cover;
+                margin-bottom: 10px;
+               
+            }
+            
+        }
+        a{
+            color: #000;
+           
+        }
+        p{
+            margin-bottom: 0px;
+            height: 50px;
+            line-height: 1rem;
+            font-size: .9rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        h2{
+            font-size: 1.2rem;
+            span{
+                color:#FF0F00;
+            }
+        }    
+
+    }
+    }
