@@ -60,7 +60,7 @@
   margin: 0 0 0 auto;
   div {
     display: flex;
-    margin-top: 20px;
+    margin-top: 35px;
     label {
       width: 25%;
     }
@@ -72,7 +72,7 @@
       padding-left: 5px;
       resize: none;
     }
-    input{
+    input {
       height: 25px;
     }
   }
@@ -88,7 +88,7 @@
 }
 .home {
   margin-left: 35px;
-  input:nth-child(3){
+  input:nth-child(3) {
     margin-left: 20px;
   }
 }
