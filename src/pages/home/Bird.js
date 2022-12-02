@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import style from '../../styles/home-scss/bird.module.scss'
+import Swal from 'sweetalert2'
 
 function Bird({ show, setShow, couponData, setCouponData }) {
   //複製折扣碼 取得value
@@ -7,9 +8,16 @@ function Bird({ show, setShow, couponData, setCouponData }) {
 
   //問題集
   const [question, setQuestion] = useState([
-    { Q: '請問你今年幾歲', Ans: ['18歲', '25歲', '35歲'] },
-    { Q: '請問你養過幾隻狗', Ans: ['1隻', '2隻', '3隻'] },
-    { Q: '請問你的婚姻狀況', Ans: ['未婚', '已婚', '不提供'] },
+    { Q: '請問你今年幾歲', Ans: ['18歲', '25歲', '35歲'], correct: '18歲' },
+    { Q: '請問你養過幾隻狗', Ans: ['1隻', '2隻', '3隻'], correct: '2隻' },
+    { Q: '請問你的婚姻狀況', Ans: ['未婚', '已婚', '不提供'], correct: '未婚' },
+  ])
+
+  //使用者選擇到的答案
+  const [userAnswer, setUserAnswer] = useState([
+    { Ans: '' },
+    { Ans: '' },
+    { Ans: '' },
   ])
 
   //設定目前為第幾題
@@ -20,6 +28,8 @@ function Bird({ show, setShow, couponData, setCouponData }) {
 
   //切換折扣碼頁面
   const [couponPage, setCouponPage] = useState(false)
+
+  const [checkSwitch, setCheckSwitch] = useState(true)
 
   const coupon_id = Math.floor(Math.random() * 3)
 
@@ -56,21 +66,57 @@ function Bird({ show, setShow, couponData, setCouponData }) {
                 <div className={style.title}>
                   <span>{num + 1}</span>
                 </div>
-                <p>{question[num].Q}</p>
-                <div className={style.options}>
-                  <label>
-                    <input type="radio" name={question[num].Q} />
-                    {question[num].Ans[0]}
-                  </label>
-                  <label>
-                    <input type="radio" name={question[num].Q} />
-                    {question[num].Ans[1]}
-                  </label>
-                  <label>
-                    <input type="radio" name={question[num].Q} />
-                    {question[num].Ans[2]}
-                  </label>
-                </div>
+                {question.map((v, i) => {
+                  if (num === i) {
+                    return (
+                      <>
+                        <div className={style.options}>
+                          <p>{v.Q}</p>
+                          <label>
+                            <input
+                              type="radio"
+                              name={v.Q}
+                              value={v.Ans[0]}
+                              onChange={(e) => {
+                                const newAns = { ...userAnswer }
+                                newAns[i].Ans = e.target.value
+                                setUserAnswer(newAns)
+                              }}
+                            />
+                            {v.Ans[0]}
+                          </label>
+                          <label>
+                            <input
+                              type="radio"
+                              name={v.Q}
+                              value={v.Ans[1]}
+                              onChange={(e) => {
+                                const newAns = { ...userAnswer }
+                                newAns[i].Ans = e.target.value
+                                setUserAnswer(newAns)
+                              }}
+                            />
+                            {v.Ans[1]}
+                          </label>
+                          <label>
+                            <input
+                              type="radio"
+                              name={v.Q}
+                              value={v.Ans[2]}
+                              onChange={(e) => {
+                                const newAns = { ...userAnswer }
+                                newAns[i].Ans = e.target.value
+                                setUserAnswer(newAns)
+                              }}
+                            />
+                            {v.Ans[2]}
+                          </label>
+                        </div>
+                      </>
+                    )
+                  }
+                })}
+
                 <div className={style.buttons}>
                   <button
                     onClick={() => {
@@ -85,7 +131,16 @@ function Bird({ show, setShow, couponData, setCouponData }) {
                   </button>
                   <button
                     onClick={() => {
-                      if (num < question.length - 1) {
+                      setCheckSwitch(false)
+                      const CorrectAns = question[num].correct
+                      const AnsValid = userAnswer[num].Ans
+                      if (CorrectAns !== AnsValid) {
+                        Swal.fire({
+                          icon: 'error',
+                          title: '答案錯誤',
+                          confirmButtonText: '再試一次',
+                        })
+                      } else if (num < question.length - 1) {
                         setNum(num + 1)
                         if (num === 1) {
                           console.log('btn', num)
