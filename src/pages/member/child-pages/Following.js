@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { useContext, useEffect, useState } from 'react'
 import MemberContext from '../../../contexts/MemberContext'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default function Following() {
   const navigate = useNavigate()
@@ -29,7 +30,7 @@ export default function Following() {
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return alert('請先登入會員')
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
     }
 
     const result = await axios.delete(
@@ -42,12 +43,16 @@ export default function Following() {
     )
     console.log(result.data)
     if (result.data.success) {
-      alert('取消關注成功')
+      // alert('取消關注成功')
       getFollowingInfo()
       getFollowing()
     }
     if (!result.data.success) {
-      alert('取消關注失敗')
+      Swal.fire({
+        icon: 'error',
+        title: '取消關注失敗',
+        confirmButtonColor: '#216326',
+      })
     }
   }
 
@@ -55,11 +60,15 @@ export default function Following() {
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return alert('請先登入會員')
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
     }
 
     if (member_sid === data.member_sid) {
-      return alert('無法將自己加入關注')
+      return Swal.fire({
+        icon: 'error',
+        title: '無法將自己加入關注',
+        confirmButtonColor: '#216326',
+      })
     }
 
     const result = await axios.post(
@@ -76,12 +85,16 @@ export default function Following() {
 
     console.log(result.data.success)
     if (result.data.success) {
-      alert('關注成功')
+      // alert('關注成功')
       getFollowingInfo()
       getFollowing()
     }
     if (!result.data.success) {
-      alert('關注失敗')
+      Swal.fire({
+        icon: 'error',
+        title: '關注失敗',
+        confirmButtonColor: '#216326',
+      })
     }
   }
 
@@ -106,7 +119,11 @@ export default function Following() {
                     <div
                       className={styled.portrait}
                       onClick={() => {
-                        navigate(`/profile?id=${v.member_sid}`)
+                        navigate(
+                          `${v.member_sid}` === `${data.member_sid}`
+                            ? `/member`
+                            : `/profile?id=${v.member_sid}`
+                        )
                       }}
                     >
                       {v.avatar ? (
@@ -115,7 +132,7 @@ export default function Following() {
                           alt="avatar"
                         ></img>
                       ) : (
-                        ''
+                        <img src="/img/default_avatar.png" alt="avatar" />
                       )}
                     </div>
                     <h4>{v.nickname}</h4>
@@ -134,7 +151,10 @@ export default function Following() {
                         className={styled.follow}
                         onClick={() => {
                           if (!token && !auth) {
-                            return alert('請先登入會員')
+                            return Swal.fire({
+                              title: '請先登入會員',
+                              confirmButtonColor: '#216326',
+                            })
                           }
                           addFollow(v.member_sid)
                         }}

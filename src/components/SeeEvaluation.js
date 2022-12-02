@@ -7,6 +7,7 @@ function SeeEvaluation({ el }) {
   const { lookLightBox, setLookLightBox, setStar } = useContext(ProCartContext)
   const { data } = useContext(MemberContext)
   const photo = (el) => {
+    console.log(el)
     let img
     if (el.product_img) {
       img = `http://localhost:3001/imgs/zx/${el.product_img}`

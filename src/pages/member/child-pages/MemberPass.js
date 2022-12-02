@@ -3,8 +3,11 @@ import { useContext, useRef, useState, useEffect } from 'react'
 import styled from '../../../styles/member-scss/MemberPass.module.scss'
 import MemberContext from '../../../contexts/MemberContext'
 import { useNavigate } from 'react-router-dom'
+import Swal from 'sweetalert2'
+import { useForm } from 'react-hook-form'
+// import { ErrorMessage } from '@hookform/error-message'
 
-//TODO 密碼格式驗證 確認密碼驗證
+//check bug 密碼格式驗證 確認密碼驗證
 
 export default function MemberPass() {
   const [showPass, setShowPass] = useState({
@@ -12,6 +15,12 @@ export default function MemberPass() {
     showNew: false,
     showVer: false,
   })
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    getValues,
+  } = useForm()
 
   const navigate = useNavigate()
 
@@ -27,7 +36,9 @@ export default function MemberPass() {
 
   const passForm = useRef(null)
 
-  async function updatePass() {
+  const updatePass = async function () {
+    // e.preventDefault()
+
     const formData = new FormData(passForm.current)
 
     const token = localStorage.getItem('token') || ''
@@ -43,11 +54,23 @@ export default function MemberPass() {
       }
     )
 
-    if(result.data && result.data.success){
-      alert('密碼更新成功')
+    if (result.data && result.data.success) {
+      // alert('密碼更新成功')
+      Swal.fire({
+        icon: 'success',
+        title: '密碼更新成功',
+        confirmButtonColor: '#216326',
+      }).then((result) => {
+        navigate('/member')
+      })
     }
-    if(!result.data.success){
-      alert('密碼更新失敗')
+    if (!result.data.success) {
+      // alert('密碼更新失敗')
+      Swal.fire({
+        icon: 'error',
+        title: '密碼更新失敗',
+        confirmButtonColor: '#216326',
+      })
     }
 
     console.log(result.data)
@@ -60,13 +83,20 @@ export default function MemberPass() {
           <div className={styled.card}>
             <h3>修改密碼</h3>
             <div className={styled.divider}></div>
-            <form ref={passForm}>
+            <form ref={passForm} onSubmit={handleSubmit(updatePass)}>
               <div className={styled.formRow}>
                 <label htmlFor="password">目前的密碼</label>
                 <input
                   type={showPass.showNow ? 'text ' : 'password'}
-                  name="password"
+                  placeholder="請輸入目前的密碼"
+                  // name="password"
+                  {...register('password', {
+                    required: '*請輸入目前的密碼',
+                  })}
                 ></input>
+                {errors.password && (
+                  <p className={styled.errMsg}>{errors.password.message}</p>
+                )}
                 <div
                   className={styled.showPass}
                   onClick={() => {
@@ -84,8 +114,21 @@ export default function MemberPass() {
                 <label htmlFor="newPass">輸入新密碼</label>
                 <input
                   type={showPass.showNew ? 'text ' : 'password'}
-                  name="newPass"
+                  {...register('newPass', {
+                    required: '*新密碼不得為空白',
+                    pattern: {
+                      value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/,
+                      message: '*請輸入6-20字元大小寫英文字母和數字',
+                    },
+                    validate: (value) =>
+                      value !== getValues('password') ||
+                      '*新密碼不得與舊密碼相同',
+                  })}
+                  placeholder="6-20字元, 包含大小寫英文字母和數字"
                 ></input>
+                {errors.newPass && (
+                  <p className={styled.errMsg}>{errors.newPass.message}</p>
+                )}
                 <div
                   className={styled.showPass}
                   onClick={() => {
@@ -101,7 +144,15 @@ export default function MemberPass() {
               </div>
               <div className={styled.formRow}>
                 <label htmlFor="verPass">確認新密碼</label>
-                <input type={showPass.showVer ? 'text ' : 'password'}></input>
+                <input
+                  type={showPass.showVer ? 'text ' : 'password'}
+                  {...register('verPass', {
+                    validate: (value) => value === getValues('newPass'),
+                  })}
+                ></input>
+                {errors.verPass && (
+                  <p className={styled.errMsg}>*請再次輸入新密碼</p>
+                )}
                 <div
                   className={styled.showPass}
                   onClick={() => {
@@ -118,10 +169,10 @@ export default function MemberPass() {
               {/* bonus 驗證API */}
               <div className={styled.btnGroup}>
                 <button
-                  onClick={(e) => {
-                    e.preventDefault()
-                    updatePass()
-                  }}
+                  type="submit"
+                  // onClick={(e) => {
+                  //   updatePass(e)
+                  // }}
                 >
                   設定新密碼
                 </button>

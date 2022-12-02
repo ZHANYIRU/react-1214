@@ -293,7 +293,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                               </div>
                               <p>{el2.product_name}</p>
                               <p>{moneyFormat(el2.product_price)}</p>
-                              <p>{el2.size}</p>
+                              <p>{el2.size !== '0' ? el2.size : ''}</p>
                               <p>{el2.qty}</p>
                               <p>{moneyFormat(el2.total)}</p>
                             </div>

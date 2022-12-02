@@ -57,8 +57,8 @@ function CheckData() {
                 <div className={styled.checkWrap} key={el.sid}>
                   <div className={styled.checkText}>
                     <h2>{el.name}</h2>
-                    <p>集合地址：{el.address}</p>
                     <p>預定日期：{el.startDate}</p>
+                    <p>天數：{el.dayname}</p>
                     <p>人數：{el.quantity}人</p>
                     <p>總金額：{moneyFormat(el.price * el.quantity)}</p>
                   </div>
@@ -90,15 +90,18 @@ function CheckData() {
               return (
                 <div className={styled.checkWrap} key={`${el.size}+${el.sid}`}>
                   <div className={styled.checkText}>
-                    <h2>NorthFace外套</h2>
-                    <p>尺寸：{el.size}</p>
+                    <h2>{el.name}</h2>
+                    <p>
+                      {el.size && '尺寸：'}
+                      {el.size && el.size}
+                    </p>
                     <p>單價：{moneyFormat(el.price)}</p>
                     <p>數量：{el.quantity}</p>
                     <p>總金額：{moneyFormat(el.price * el.quantity)}</p>
                   </div>
                   <div className={styled.checkImg}>
                     <img
-                      src="https://cdn2.ettoday.net/images/4778/d4778980.jpg"
+                      src={`http://localhost:3001/imgs/zx/${el.img}`}
                       alt=""
                     />
                   </div>
@@ -127,11 +130,13 @@ function CheckData() {
                     </p>
                     <p>單價：{moneyFormat(el.price)}</p>
                     <p>租借天數：{el.day}</p>
-                    <p>跨店費用：{el.deliveryFee}</p>
+                    <p>跨店費用：{moneyFormat(el.deliveryFee)}</p>
                     <p>數量：{el.quantity}</p>
                     <p>
                       總金額：
-                      {moneyFormat(el.price * el.quantity + el.deliveryFee)}
+                      {moneyFormat(
+                        el.price * el.quantity * el.day + el.deliveryFee
+                      )}
                     </p>
                   </div>
                   <div className={styled.checkImg}>

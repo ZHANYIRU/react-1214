@@ -24,12 +24,13 @@ export default function ProfileInfo() {
     total_height: 0,
   }
 
-  const  { data } = useContext(MemberContext)
+  const { data } = useContext(MemberContext)
 
   const [info, setInfo] = useState(initInfo)
   const [isView, setIsView] = useState(false)
   const [postList, setPostList] = useState([])
   const [currentPost, setCurrentPost] = useState(0)
+  const [uniqueLocations, setUniqueLocations] = useState([])
 
   async function getPostList() {
     const rows = await axios.get(
@@ -55,7 +56,10 @@ export default function ProfileInfo() {
   }
 
   useEffect(() => {
+    setUniqueLocations([...new Set(postList.map((item) => item.mountain_sid))])
+  }, [postList])
 
+  useEffect(() => {
     if (mid === data.member_sid) {
       navigate('/member')
     }
@@ -67,14 +71,35 @@ export default function ProfileInfo() {
     <>
       <div className={styled.row}>
         <div className={styled.col}>
-          <div className={styled.card}>
+          <div className={`${styled.card} ${styled.infoCard}`}>
             <h3>分享地圖</h3>
             <div className={styled.divider}></div>
             <div className={styled.overview}>
-              <PostMap postList={postList}/>
-              <TotalHeight totalHeight={info && info.total_height? {height: info.total_height} : 0}/>
+              <h4 className={styled.heightTag}>
+                累積海拔: {info.total_height}公尺
+              </h4>
+              <PostMap postList={postList} />
+              <TotalHeight
+                totalHeight={
+                  info && info.total_height ? { height: info.total_height } : 0
+                }
+              />
             </div>
           </div>
+        </div>
+      </div>
+      <div className={styled.summaryList}>
+        <div className={styled.summary}>
+          <p>分享貼文</p>
+          <h3>{postList.length}</h3>
+        </div>
+        <div className={styled.summary}>
+          <p>總計地點</p>
+          <h3>{uniqueLocations.length}</h3>
+        </div>
+        <div className={styled.summary}>
+          <p>累積海拔</p>
+          <h3 className={styled.altitude}>{info.total_height}m</h3>
         </div>
       </div>
       <div className={styled.row}>
