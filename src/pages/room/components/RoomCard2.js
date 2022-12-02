@@ -9,7 +9,7 @@ function RoomCard({ roomlist }) {
   return (
     <>
       <div className={style.titleWrap}>
-        <h4 className={style.roomMainTitle}>玉山熱門住宿</h4>
+        <h4 className={style.roomMainTitle}>馬武霸山熱門住宿</h4>
       </div>
       <div className={style.roomCardGroup}>
         {M2rows &&
@@ -17,7 +17,12 @@ function RoomCard({ roomlist }) {
             return (
               <Link to={`/room/${v.room_sid}`}>
                 <div className={style.roomCard} key={v.room_sid}>
-                  <div className={style.cardImg}></div>
+                <div className={style.cardImg}>
+                    <img
+                      src={`http://localhost:3001/room_img/${v.room_img}`}
+                      alt=""
+                    />
+                  </div>
                   <div className={style.icon}>
                     <div className={style.location}>
                       <span>

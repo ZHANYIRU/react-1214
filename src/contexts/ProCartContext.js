@@ -9,7 +9,7 @@ import Swal from 'sweetalert2'
 //       size: '',
 //       img: '',
 //       price: 0,
-//       qty: 0,
+//       quantity: 0,
 //     },
 //   ],
 //   items2: [
@@ -20,7 +20,7 @@ import Swal from 'sweetalert2'
 //       endDate: '',
 //       img: '',
 //       price: '',
-//       qty: 0,
+//       quantity: 0,
 //     },
 //   ],
 //   totalItem: 0,
@@ -46,6 +46,8 @@ const proCartReducer = (state, action) => {
     address,
     start,
     end,
+    dayname,
+    day,
     area,
     moun,
     campSid,
@@ -116,7 +118,7 @@ const proCartReducer = (state, action) => {
         ...state,
         items2: upState,
         totalItem: state.totalItem,
-        totalPrice: state.totalPrice + qty * price,
+        totalPrice: state.totalPrice + qty * price * day,
       }
       localStorage.setItem('roomCart', JSON.stringify(newState.items2))
       localStorage.setItem('totalPrice', JSON.stringify(newState.totalPrice))
@@ -164,7 +166,7 @@ const proCartReducer = (state, action) => {
         ...state,
         items4: upState,
         totalItem: state.totalItem,
-        totalPrice: state.totalPrice + qty * price,
+        totalPrice: state.totalPrice + qty * price * day,
       }
       localStorage.setItem('renCart', JSON.stringify(newState.items4))
       localStorage.setItem('totalPrice', JSON.stringify(newState.totalPrice))
@@ -214,6 +216,7 @@ const proCartReducer = (state, action) => {
               address: address,
               startDate: start,
               endDate: end,
+              day: day,
               area: area,
               moun: moun,
               img: img,
@@ -222,7 +225,7 @@ const proCartReducer = (state, action) => {
             },
           ],
           totalItem: state.totalItem + 1,
-          totalPrice: state.totalPrice + price * qty,
+          totalPrice: state.totalPrice + price * qty * day,
         }
         const newTotalItem = state.totalItem
         const newTotalPrice = state.totalPrice
@@ -243,8 +246,8 @@ const proCartReducer = (state, action) => {
             {
               sid: campSid,
               name: name,
-              address: address,
               startDate: start,
+              dayname: dayname,
               area: area,
               moun: moun,
               img: img,
@@ -275,6 +278,7 @@ const proCartReducer = (state, action) => {
               name: name,
               start: start,
               end: end,
+              day: day,
               out: out,
               back: back,
               deliveryFee: deliveryFee,
@@ -284,7 +288,7 @@ const proCartReducer = (state, action) => {
             },
           ],
           totalItem: state.totalItem + 1,
-          totalPrice: state.totalPrice + price * qty + deliveryFee,
+          totalPrice: state.totalPrice + price * qty * day + deliveryFee,
         }
         const newTotalItem = state.totalItem
         const newTotalPrice = state.totalPrice
@@ -341,7 +345,7 @@ const proCartReducer = (state, action) => {
           ...state,
           items2: upState,
           totalItem: state.totalItem,
-          totalPrice: state.totalPrice - price,
+          totalPrice: state.totalPrice - price * day,
         }
         localStorage.setItem('roomCart', JSON.stringify(newState.items2))
         localStorage.setItem('totalPrice', JSON.stringify(newState.totalPrice))
@@ -373,7 +377,7 @@ const proCartReducer = (state, action) => {
           ...state,
           items4: upState,
           totalItem: state.totalItem,
-          totalPrice: state.totalPrice - price,
+          totalPrice: state.totalPrice - price * day,
         }
         localStorage.setItem('renCart', JSON.stringify(newState.items4))
         localStorage.setItem('totalPrice', JSON.stringify(newState.totalPrice))
@@ -548,6 +552,7 @@ export const ProCartContextProvider = ({ children }) => {
     address,
     start,
     end,
+    day,
     area,
     moun,
     price,
@@ -562,6 +567,7 @@ export const ProCartContextProvider = ({ children }) => {
         address,
         start,
         end,
+        day,
         area,
         moun,
         price,
@@ -574,8 +580,8 @@ export const ProCartContextProvider = ({ children }) => {
   const addCampCart = (
     campSid,
     name,
-    address,
     start,
+    dayname,
     area,
     moun,
     price,
@@ -587,8 +593,8 @@ export const ProCartContextProvider = ({ children }) => {
       payload: {
         campSid,
         name,
-        address,
         start,
+        dayname,
         area,
         moun,
         price,
@@ -603,6 +609,7 @@ export const ProCartContextProvider = ({ children }) => {
     name,
     start,
     end,
+    day,
     out,
     back,
     deliveryFee,
@@ -617,6 +624,7 @@ export const ProCartContextProvider = ({ children }) => {
         name,
         start,
         end,
+        day,
         out,
         back,
         deliveryFee,
@@ -641,17 +649,17 @@ export const ProCartContextProvider = ({ children }) => {
     })
   }
   //商品數量+1(房間)
-  const plusOne2 = (roomSid, price) => {
+  const plusOne2 = (roomSid, price, day) => {
     dispatch({
       type: 'PLUS',
-      payload: { roomSid, price },
+      payload: { roomSid, price, day },
     })
   }
   //商品數量-1(房間)
-  const minusOne2 = (roomSid, price) => {
+  const minusOne2 = (roomSid, price, day) => {
     dispatch({
       type: 'MINUS',
-      payload: { roomSid, price },
+      payload: { roomSid, price, day },
     })
   }
   //商品數量+1(活動)
@@ -669,17 +677,17 @@ export const ProCartContextProvider = ({ children }) => {
     })
   }
   //商品數量+1(租借)
-  const plusOne4 = (renSid, price) => {
+  const plusOne4 = (renSid, price, day) => {
     dispatch({
       type: 'PLUS',
-      payload: { renSid, price },
+      payload: { renSid, price, day },
     })
   }
   //商品數量-1(租借)
-  const minusOne4 = (renSid, price) => {
+  const minusOne4 = (renSid, price, day) => {
     dispatch({
       type: 'MINUS',
-      payload: { renSid, price },
+      payload: { renSid, price, day },
     })
   }
   //刪除單筆商品
@@ -704,10 +712,10 @@ export const ProCartContextProvider = ({ children }) => {
     })
   }
   //刪除單筆租借
-  const delOne4 = (renSid, size, price) => {
+  const delOne4 = (renSid, price) => {
     dispatch({
       type: 'DEL',
-      payload: { renSid, size, price },
+      payload: { renSid, price },
     })
   }
   //清空購物車
@@ -734,6 +742,13 @@ export const ProCartContextProvider = ({ children }) => {
       }
     })
   }
+  //結帳完清購物車
+  const cleanCart = () => {
+    dispatch({
+      type: 'RESET_CART',
+      payload: {},
+    })
+  }
   //填寫(收件人)
   const [writeUser, setWriteUser] = useState({
     name: '',
@@ -755,9 +770,17 @@ export const ProCartContextProvider = ({ children }) => {
     let c = b.split('.')
     return c[0]
   }
+  //星星數量
+  const [stars, setStar] = useState(1)
+  //開啟看評論
+  const [lookLightBox, setLookLightBox] = useState(false)
   return (
     <ProCartContext.Provider
       value={{
+        lookLightBox,
+        setLookLightBox,
+        stars,
+        setStar,
         getMountain,
         setGetMountain,
         userSelect,
@@ -782,6 +805,7 @@ export const ProCartContextProvider = ({ children }) => {
         delOne3,
         delOne4,
         resetCart,
+        cleanCart,
         cartItem,
         cartPrice,
         pro,

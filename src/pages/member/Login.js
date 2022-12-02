@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styled from '../../styles/member-scss/Login.module.scss'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import { useRef } from 'react'
 import { useContext } from 'react'
 import MemberContext from '../../contexts/MemberContext'
@@ -31,14 +32,21 @@ function Login(props) {
 
     if (result.data.success) {
       localStorage.setItem('token', `${result.data.token}`)
+      // alert('登入成功')
       setAuth(true)
       navigate('/')
     }
 
     if (!result.data.success) {
       localStorage.removeItem('token')
+      // alert('登入失敗')
       setAuth(false)
       resetData()
+      Swal.fire({
+        icon: 'error',
+        title: '登入失敗, 信箱或密碼錯誤',
+        confirmButtonColor: '#216326',
+      })
     }
   }
 

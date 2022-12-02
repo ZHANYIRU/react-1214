@@ -4,10 +4,14 @@ import { Parallax, ParallaxProvider } from 'react-scroll-parallax'
 import Leaderboard from './leaderboard'
 import Weather from './Weather'
 import Bird from './Bird.js'
+import axios from 'axios'
+
 function Main({ setFtr }) {
   const mainHeight = useRef(null)
   const [rotateCube, setRotateCube] = useState(true)
   const [deg, setDeg] = useState(0)
+  //bird 開關state
+  const [show, setShow] = useState(false)
 
   //記錄上個scroll
   let lastScroll
@@ -20,10 +24,10 @@ function Main({ setFtr }) {
     } else {
       setFtr(false)
     }
-    const cubeHeight = window.innerHeight * 3
+    const cubeHeight = window.innerHeight * 4
     const UserScrollY = window.scrollY
     if (UserScrollY < cubeHeight) {
-      lastScroll = window.scrollY / 4
+      lastScroll = window.scrollY / 15
       setDeg(lastScroll)
     }
 
@@ -33,7 +37,17 @@ function Main({ setFtr }) {
       setRotateCube(true)
     }
   }
+
+  //coupon
+  const [couponData, setCouponData] = useState({})
+
+  //fetch 折扣券db
+  async function getCoupon() {
+    const response = await axios.get(`http://localhost:3001/room/coupon`)
+    setCouponData(response.data.couponRows)
+  }
   useEffect(() => {
+    getCoupon()
     window.addEventListener('scroll', scroll)
     return () => {
       window.removeEventListener('scroll', scroll)
@@ -44,15 +58,27 @@ function Main({ setFtr }) {
       <div className={styled.main} ref={mainHeight}>
         {rotateCube ? <Weather /> : ''}
         <div className={styled.section1}>
-          {rotateCube ? <Bird /> : ''}
+          {rotateCube ? (
+            <Bird
+              show={show}
+              setShow={setShow}
+              couponData={couponData}
+              setCouponData={setCouponData}
+            />
+          ) : (
+            ''
+          )}
           <ParallaxProvider speed={-10}>
-            <div className={styled.visible}>
+            <div
+              className={styled.visible}
+              style={{ visibility: rotateCube && !show ? 'visible' : 'hidden' }}
+            >
               <div className={styled.camera}>
                 <div
                   className={`${styled.cube}`}
                   style={{
                     transform: deg <= 180 && `rotateX(${deg}deg) `,
-                    visibility: rotateCube ? 'visible' : 'hidden',
+                    visibility: rotateCube && !show ? 'visible' : 'hidden',
                   }}
                 >
                   <div className={styled.bottom}>輕鬆簡單，就能入門爬山</div>
@@ -100,6 +126,9 @@ function Main({ setFtr }) {
         <div className={styled.section3}>
           <Leaderboard />
         </div>
+        {/* <div className={styled.section3}>
+          <Leaderboard />
+        </div> */}
       </div>
     </>
   )

@@ -5,12 +5,12 @@
     margin: 0 auto;
     border-radius: 10px 10px 10px 10px;
     overflow: hidden;
-    background-color: rgba(90, 76, 76, 0.311);
+    // background-color: rgba(90, 76, 76, 0.311);
     padding: 10px;
     z-index: 10;
     .Leaderboard{
         // z-index: 100;
-      
+        overflow: hidden;
         width: 80%;
        
         margin: 0 auto;
@@ -50,9 +50,10 @@
             width: 100%;
             // border: 1px black solid;
             border-radius:   8px 8px 0 0;
-            overflow: hidden;
+           
             .head{
                 width: 100%;
+                border-radius:   8px 8px 0 0;
                 display: flex;
                 font-size: 1.2rem;
                 line-height: 1.2rem;
@@ -63,6 +64,7 @@
                     display: flex;
                     justify-content: center;
                     width: 15%;
+                    
                 }
                 .name{
                     display: flex;
@@ -76,77 +78,87 @@
                 }
             }
             
-    
-            li:nth-child(even){
-                background-color: rgba(10, 40, 14, 0.5);
+            .flexUl{
+                height: 420px;
+                overflow-y: scroll;
             }
-            li:nth-child(odd){
-                background-color: rgba(41, 79, 28, 0.5);
-            }
-            li{
-               
-                padding: 5px 10px;
-                display: flex;
-                align-items: center;
-                    .ranking{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        // margin-right: 5px;
-                        width: 15%;
-                        font-size: 1.5rem;
-                        i{
-                            margin-left: 10px;
-                            font-size: 2rem;
-                        }
-                    }
-                    .nameWrap{
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        width: 40%;
-                        .empty{
-                            margin-left: 110px;
-                            width: 100%;
-                            display: flex;
-                            align-items: center;
-                        }
-                        .imgBorder{
-                            margin-right: 20px;
+           
+            ul{
+                // height: ;
+                li:nth-child(even){
+                    background-color: rgba(10, 40, 14, 0.5);
+                }
+                li:nth-child(odd){
+                    background-color: rgba(41, 79, 28, 0.5);
+                }
+                li{
+                    padding: 5px 10px;
+                    height: 100px;
+                    display: flex;
+                    align-items: center;
+                        .ranking{
                             display: flex;
                             justify-content: center;
                             align-items: center;
-                             width: 60px;
-                            height: 60px;
-                            border-radius: 50%;
-                        background: linear-gradient(#3401f0, #6b41e7,#9b06e6);
-                            .imgWrap{
+                            // margin-right: 5px;
+                            width: 15%;
+                            font-size: 2.2rem;
+                            color: #FFED90;
+                            font-weight: 700;
+                            i{
+                                margin-left: 10px;
+                                font-size: 2rem;
+                            }
+                        }
+                        .nameWrap{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            width: 40%;
+                            .empty{
+                                margin-left: 110px;
+                                width: 100%;
+                                display: flex;
+                                align-items: center;
+                            }
+                            .imgBorder{
+                                margin-right: 20px;
                                 display: flex;
                                 justify-content: center;
                                 align-items: center;
-                                width: 50px;
-                                height: 50px;
+                                 width: 60px;
+                                height: 60px;
                                 border-radius: 50%;
-                                img{
+                            background: linear-gradient(#3401f0, #6b41e7,#9b06e6);
+                                .imgWrap{
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
                                     width: 50px;
                                     height: 50px;
-                                    object-fit: cover;
                                     border-radius: 50%;
+                                    img{
+                                        width: 50px;
+                                        height: 50px;
+                                        object-fit: cover;
+                                        border-radius: 50%;
+                                    }
                                 }
                             }
+                            p{
+                                font-size: 1.2rem;
+                                color: white;
+                            }
+        
                         }
-                        p{
-                            font-size: 1.2rem;
-                            color: white;
+                        .height{
+                            display: flex;
+                            justify-content: flex-start;
+                            width: 45%;
                         }
-    
-                    }
-                    .height{
-                        display: flex;
-                        justify-content: flex-start;
-                        width: 45%;
-                    }
-             }
+                 }
+            }
+            
             
         }
         .switchBtn:nth-child(1){
@@ -168,10 +180,15 @@
                 width: 50%;
                 display: flex;
                 justify-content: center;
+                // border-radius: 5px;
+                // overflow: hidden;
                 align-items: center;
                 padding: 5px 0 ;
                 cursor: pointer;
                 background-color: rgba(10, 40, 14, 0.5);
+                a{
+                    color: rgba(230, 189, 67, 0.701);
+                  }
             }
             .btnRight{
                 width: 50%;
