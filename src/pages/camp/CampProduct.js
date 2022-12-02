@@ -14,6 +14,9 @@ function CampProduct() {
   const [usp] = useSearchParams()
   console.log(camp_sid)
 
+  //數量
+  const [num, setNum] = useState(1)
+
   const fetchAll = async () => {
     try {
       const response = await axios.get(`http://localhost:3001/camp/${camp_sid}`)
@@ -47,7 +50,7 @@ function CampProduct() {
                           <span>
                             <i className="fa-solid fa-map-location-dot"></i>
                           </span>
-                          <p>{v.location_name}</p>
+                          <span>{v.location_name}</span>
                         </div>
                         <div className={style.mountain}>
                           <span>
@@ -55,15 +58,38 @@ function CampProduct() {
                           </span>
                           <span>{v.mountain_name}</span>
                         </div>
-                        <div>人數區</div>
                         <div>金額：{v.price}</div>
                         <div>評價：stars</div>
+                        <div className={style.howNum}>
+                          <p>商品數量</p>
+                          <div className={style.numBox}>
+                            <div className={style.numBox1}>
+                              <i
+                                className="fa-solid fa-minus"
+                                onClick={() => {
+                                  if (num < 2) return
+                                  setNum(num - 1)
+                                }}
+                              ></i>
+                            </div>
+                            <div className={style.numBox2}>{num}</div>
+                            <div className={style.numBox3}>
+                              <i
+                                className="fa-solid fa-plus"
+                                onClick={() => {
+                                  if (num > v.product_inventory) return
+                                  setNum(num + 1)
+                                }}
+                              ></i>
+                            </div>
+                          </div>
+                        </div>
+                        <button>加入購物車</button>
                       </div>
                       <div>
-                        train
                         <img src="https://s3.amazonaws.com/imagescloud/images/medias/annexes/annexe-camping-2022.jpg" />
                       </div>
-                      <div>火車左右按鈕</div>
+                      <div>detailsimgs</div>
                     </div>
                     <div className={style.switch}>
                       <div>介紹</div>
