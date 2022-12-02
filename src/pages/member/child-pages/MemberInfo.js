@@ -69,7 +69,7 @@ export default function MemberInfo() {
 
     if (!fileName) {
       return Swal.fire({
-        logo: 'error',
+        icon: 'error',
         title: '請先上傳圖片',
         confirmButtonColor: '#216326',
       })

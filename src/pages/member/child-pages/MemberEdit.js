@@ -96,7 +96,7 @@ export default function MemberEdit() {
     )
     if (result.data && result.data.success) {
       Swal.fire({
-        logo: 'success',
+        icon: 'success',
         title: '更新資料成功',
         confirmButtonColor: '#216326',
       })
@@ -104,8 +104,8 @@ export default function MemberEdit() {
     }
     if (!result.data.success) {
       Swal.fire({
-        logo: 'error',
-        title: '更新資料失敗',
+        icon: 'error',
+        title: `更新資料失敗${result.data.error}`,
         confirmButtonColor: '#216326',
       })
     }

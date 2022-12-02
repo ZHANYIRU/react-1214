@@ -17,6 +17,7 @@ function Member(props) {
     if (!localStorage.getItem('token')) {
       navigate('/login')
     }
+
     getFollow()
     getFollowing()
   }, [auth, data])

@@ -62,8 +62,8 @@ export default function Join(props) {
     }
     if (!result.data.success) {
       Swal.fire({
-        logo: 'error',
-        title: '註冊失敗',
+        icon: 'error',
+        title: `註冊失敗${result.data.error}`,
         confirmButtonColor: '#216326',
       })
     }
