@@ -8,7 +8,7 @@ import Footer from './components/Footer'
 import Home from './pages/home/Home'
 import Product from './pages/product/Product'
 import ProductPage from './pages/product/ProductPage'
-import Custom from './pages/product/Custom'
+import Customs from './pages/product/Customs'
 import Camp from './pages/camp/Camp'
 import CampOneday from './pages/camp/CampOneday'
 import CampProduct from './pages/camp/CampProduct'
@@ -49,7 +49,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path="/" element={<Home />} />
               <Route path="/product" element={<Product />} />
-              <Route path="/product/Custom" element={<Custom />} />
+              <Route path="/product/Custom" element={<Customs />} />
               <Route path="/product/:product_sid" element={<ProductPage />} />
               <Route path="/camp" element={<Camp />} />
               <Route path="/camp/filter" element={<CampOneday />} />

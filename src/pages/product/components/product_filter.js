@@ -41,7 +41,6 @@ export default function ProductFilter({
   const handleFormSubmit = (e) => {
     // 阻擋預設form送出的行為
     e.preventDefault()
-
     getData()
   }
 
