@@ -136,6 +136,12 @@
                 }
             }
 
+            .errMsg {
+                position: absolute;
+                top: 36px;
+                left: 30%;
+            }
+
             textarea {
                 width: 70%;
                 border-radius: 5px;

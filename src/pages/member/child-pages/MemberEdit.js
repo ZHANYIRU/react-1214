@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo } from 'react'
+import { useContext, useEffect } from 'react'
 import { useState } from 'react'
 import styled from '../../../styles/member-scss/MemberEdit.module.scss'
 import axios from 'axios'
@@ -10,7 +10,7 @@ import MemberContext from '../../../contexts/MemberContext'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 
-//TODO 資料格式驗證 useForm 在refresh會吃不到default value
+//TODO 測試註冊資料格式驗證BUG (date)
 
 export default function MemberEdit() {
   // const [profile, setProfile] = useState({
@@ -41,6 +41,10 @@ export default function MemberEdit() {
     setMyBirth(dateBirth)
   }, [data])
 
+  useEffect(() => {
+    reset(data)
+  }, [])
+
   const {
     register,
     formState: { errors },
@@ -59,6 +63,10 @@ export default function MemberEdit() {
     // reset form with user data
     reset(data)
   }, [data])
+
+  useEffect(() => {
+    reset({ birthday: myBirth })
+  }, [myBirth])
 
   // async function getInfo() {
   //   const result = await axios.get('http://localhost:3001/member/api?id=668')
@@ -170,7 +178,6 @@ export default function MemberEdit() {
                 {errors.name && (
                   <p className={styled.errMsg}>{errors.name.message}</p>
                 )}
-                {console.log('姓名為:' + getValues('name'))}
               </div>
               <div className={styled.formRow}>
                 <label className={styled.required}>顯示名稱</label>
@@ -225,15 +232,15 @@ export default function MemberEdit() {
                   type="date"
                   {...register('birthday', {
                     valueAsDate: true,
-                    validate: (value) => value < Date.now() || '錯誤的生日日期'
+                    max: Date.now(),
                   })}
-                  value={myBirth} 
-                  onChange={(e)=>{
+                  value={myBirth}
+                  onChange={(e) => {
                     setMyBirth(e.target.value)
                   }}
                 ></input>
                 {errors.birthday && (
-                  <p className={styled.errMsg}>{errors.birthday.message}</p>
+                  <p className={styled.errMsg}>'錯誤的生日日期'</p>
                 )}
               </div>
               <div className={styled.formRow}>

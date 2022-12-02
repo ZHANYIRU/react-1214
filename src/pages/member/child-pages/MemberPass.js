@@ -7,8 +7,6 @@ import Swal from 'sweetalert2'
 import { useForm } from 'react-hook-form'
 // import { ErrorMessage } from '@hookform/error-message'
 
-//check bug 密碼格式驗證 確認密碼驗證
-
 export default function MemberPass() {
   const [showPass, setShowPass] = useState({
     showNow: false,
