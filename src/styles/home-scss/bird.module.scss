@@ -33,7 +33,7 @@
             display: none;
 
         }
-        &:before:hover{
+        &:hover:before{
             transform: translateY(15px);
             display: block;
 
@@ -50,7 +50,7 @@
 }
 
 .lightBox{
-    position: relative;
+    position: fixed;
     width: 100vw;
     height: 100vh;
     background-color: rgba(1, 1, 1, 0.677);
@@ -86,7 +86,7 @@
             overflow: hidden;
             position: absolute;
             top:250px;
-            left:500px;
+            left:510px;
             width: 200px;
             height: 350px;
             span{

@@ -9,7 +9,7 @@ function Bird({ show, setShow, couponData, setCouponData }) {
   const [question, setQuestion] = useState([
     { Q: '請問你今年幾歲', Ans: ['18歲', '25歲', '35歲'] },
     { Q: '請問你養過幾隻狗', Ans: ['1隻', '2隻', '3隻'] },
-    { Q: '請問你今年幾歲', Ans: ['18歲', '25歲', '35歲'] },
+    { Q: '請問你的婚姻狀況', Ans: ['未婚', '已婚', '不提供'] },
   ])
 
   //設定目前為第幾題
@@ -31,8 +31,6 @@ function Bird({ show, setShow, couponData, setCouponData }) {
             className={style.imgWrap}
             onClick={() => {
               setShow(true)
-              console.log('test', couponData[0])
-              console.log('number', coupon_id)
             }}
           ></div>
         </div>
@@ -166,7 +164,7 @@ function Bird({ show, setShow, couponData, setCouponData }) {
                       <button
                         className={style.copyBtn}
                         onClick={() => {
-                          console.log('copy', couponCode.current)
+                          console.log('copy', couponCode.current.textContent)
                         }}
                       >
                         複製

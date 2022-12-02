@@ -44,7 +44,6 @@ function Main({ setFtr }) {
   //fetch 折扣券db
   async function getCoupon() {
     const response = await axios.get(`http://localhost:3001/room/coupon`)
-    console.log(response.data.couponRows)
     setCouponData(response.data.couponRows)
   }
   useEffect(() => {
