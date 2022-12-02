@@ -18,7 +18,7 @@ export default function Customs(props) {
   const bgImages = [
     {
       alt: '白T',
-      src: 'https://ourcodeworld.com/public-media/gallery/gallery-5d5afd3f1c7d6.png',
+      src: '/img/gallery-5d5afd3f1c7d6.png',
     },
     {
       alt: '排汗衫',
@@ -134,6 +134,7 @@ export default function Customs(props) {
       if (modalType === 'bg') setBg(modifiedImage)
       if (modalType === 'photo') {
         pasteImage.src = modifiedImage
+        pasteImage.setAttribute('crossOrigin', 'Anonymous')
         pasteImage.onload = function () {
           const image = new fabric.Image(pasteImage)
           image.set({
@@ -154,6 +155,7 @@ export default function Customs(props) {
       height: canvasWidth,
     })
     setCanvas(canvas)
+    bgImages[0].setAttribute('crossOrigin', 'Anonymous')
     fabric.Image.fromURL(bgImages[0].src, function (img) {
       img.scaleToWidth(canvas.width)
       img.scaleToHeight(canvas.height)
@@ -206,10 +208,11 @@ export default function Customs(props) {
   }
 
   function savePic() {
-    const base64 = picRef.current.toDataURL({
-      format: 'jpeg',
-      quality: 1,
-    })
+    // const base64 = picRef.current.toDataURL({
+    //   format: 'jpeg',
+    //   quality: 1,
+    // })
+    const base64 = picRef.current.toDataURL()
     console.log(base64)
   }
   // useEffect(() => {
