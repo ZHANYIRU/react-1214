@@ -126,6 +126,9 @@ function Main({ setFtr }) {
         <div className={styled.section3}>
           <Leaderboard />
         </div>
+        {/* <div className={styled.section3}>
+          <Leaderboard />
+        </div> */}
       </div>
     </>
   )

@@ -6,6 +6,23 @@ import dayjs from 'dayjs'
 function SeeEvaluation({ el }) {
   const { lookLightBox, setLookLightBox, setStar } = useContext(ProCartContext)
   const { data } = useContext(MemberContext)
+  const photo = (el) => {
+    console.log(el)
+    let img
+    if (el.product_img) {
+      img = `http://localhost:3001/imgs/zx/${el.product_img}`
+    }
+    if (el.room_img) {
+      img = `http://localhost:3001/room_img/${el.room_img}`
+    }
+    if (el.rental_img) {
+      img = `http://localhost:3001/rental_img/${el.rental_img[0]}`
+    }
+    if (el.mainImage) {
+      img = `http://localhost:3001/room_img/${el.mainImage}`
+    }
+    return img
+  }
   return (
     <div
       className={styled.lightBgc}
@@ -23,12 +40,7 @@ function SeeEvaluation({ el }) {
       >
         <div className={styled.lightName}>
           <div className={styled.lightImg}>
-            <img
-              src={`http://localhost:3001/imgs/zx/${
-                el.product_img || `http://localhost:3001/room_img/${el.img}`
-              }`}
-              alt=""
-            />
+            <img src={photo(el)} alt="" />
           </div>
           <p>{el.product_name || el.rental_name || el.name || el.room_name}</p>
         </div>

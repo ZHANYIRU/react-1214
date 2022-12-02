@@ -8,12 +8,14 @@ import Footer from './components/Footer'
 import Home from './pages/home/Home'
 import Product from './pages/product/Product'
 import ProductPage from './pages/product/ProductPage'
+import Customs from './pages/product/Customs'
 import Camp from './pages/camp/Camp'
 import CampOneday from './pages/camp/CampOneday'
 import CampProduct from './pages/camp/CampProduct'
 import Room from './pages/room/Room'
 import Rental from './pages/rental/Rental'
 import Rental_detail from './pages/rental/Rental_detail'
+import AI from './pages/rental/AI'
 import Commnent from './pages/rental/components/Commnent'
 
 import Cart from './pages/Cart/Cart'
@@ -33,6 +35,7 @@ import ProfileInfo from './pages/member/child-pages/ProfileInfo'
 import SocialWall from './pages/member/SocialWall'
 import RoomFilterPage from './pages/room/RoomFilterPage'
 import RoomDetailPage from './pages/room/RoomDetailPage'
+import Leaderboard from './pages/home/leaderboard'
 
 function App() {
   return (
@@ -46,6 +49,7 @@ function App() {
               <Route index element={<Home />} />
               <Route path="/" element={<Home />} />
               <Route path="/product" element={<Product />} />
+              <Route path="/product/Custom" element={<Customs />} />
               <Route path="/product/:product_sid" element={<ProductPage />} />
               <Route path="/camp" element={<Camp />} />
               <Route path="/camp/filter" element={<CampOneday />} />
@@ -58,11 +62,14 @@ function App() {
               <Route path="/room/:room_sid" element={<RoomDetailPage />} />
               <Route path="/rental" element={<Rental />} />
               <Route path="/rental/:sid" element={<Rental_detail />} />
+
+              <Route path="/AI" element={<AI />} />
               <Route path="/commnent" element={<Commnent />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/pay/confirm" element={<Confirm />} />
               <Route path="/test" element={<TestProducts />} />
               <Route path="/social" element={<SocialWall />} />
+              <Route path="/leaderboard" element={<Leaderboard />} />
               <Route path="/member" element={<Member />}>
                 <Route index element={<MemberInfo />} />
                 <Route path="/member/orders" element={<Order />} />

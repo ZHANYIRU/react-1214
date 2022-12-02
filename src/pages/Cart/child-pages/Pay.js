@@ -51,7 +51,7 @@ function Pay({ paySelect, familySelect, step, setStep, setForOk }) {
     if (paid) {
       setTimeout(() => {
         setStep(step + 1)
-      }, 1500)
+      }, 1200)
     }
     return () => {
       unsubscribe('paid')
@@ -60,13 +60,13 @@ function Pay({ paySelect, familySelect, step, setStep, setForOk }) {
   return (
     <>
       <div className={styled.choose}>
-        {/* <button
+        <button
           onClick={() => {
             setStep(step + 1)
           }}
         >
           下一步test
-        </button> */}
+        </button>
         <button
           onClick={() => {
             setStep(step - 1)

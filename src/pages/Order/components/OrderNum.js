@@ -138,6 +138,22 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
       }
     }
   }
+  const photo = (el) => {
+    let img
+    if (el.product_img) {
+      img = `http://localhost:3001/imgs/zx/${el.product_img}`
+    }
+    if (el.room_img) {
+      img = `http://localhost:3001/room_img/${el.room_img}`
+    }
+    if (el.rental_img) {
+      img = `http://localhost:3001/rental_img/${el.rental_img[0]}`
+    }
+    if (el.mainImage) {
+      img = `http://localhost:3001/room_img/${el.mainImage}`
+    }
+    return img
+  }
   return (
     <>
       {/* 給評價 */}
@@ -160,13 +176,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
               >
                 <div className={styled.lightName}>
                   <div className={styled.lightImg}>
-                    <img
-                      src={
-                        `http://localhost:3001/imgs/zx/${el.product_img}` ||
-                        `http://localhost:3001/room_img/${el.img}`
-                      }
-                      alt=""
-                    />
+                    <img src={photo(el)} alt="" />
                   </div>
                   <p>
                     {el.product_name ||
@@ -262,6 +272,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                         <div className={styled.proContentTitle}>
                           <p>商品</p>
                           <p>單價</p>
+                          <p>尺寸</p>
                           <p>數量</p>
                           <p>金額</p>
                         </div>
@@ -282,6 +293,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                               </div>
                               <p>{el2.product_name}</p>
                               <p>{moneyFormat(el2.product_price)}</p>
+                              <p>{el2.size !== '0' ? el2.size : ''}</p>
                               <p>{el2.qty}</p>
                               <p>{moneyFormat(el2.total)}</p>
                             </div>
@@ -317,8 +329,9 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                       ) !== -1 && (
                         <div className={styled.roomContentTitle}>
                           <p>房間</p>
-                          <p>入住日期</p>
-                          <p>退房日期</p>
+                          <p>入住</p>
+                          <p>退房</p>
+                          <p>天數</p>
                           <p>單價</p>
                           <p>床位</p>
                           <p>金額</p>
@@ -336,7 +349,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                             <div className={styled.contentDe}>
                               <div className={styled.imgWrap}>
                                 <img
-                                  src={`http://localhost:3001/room_img/${el.img}`}
+                                  src={`http://localhost:3001/room_img/${el3.img}`}
                                   alt=""
                                 />
                               </div>
@@ -344,10 +357,11 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                                 <span>{el3.room_name}</span>
                                 <br />
                                 <br />
-                                <span>地址：{el3.room_details}</span>
+                                <span>地址：{el3.room_address}</span>
                               </p>
                               <p>{ds.isValid() && ds.format('YYYY-MM-DD')}</p>
                               <p>{de.isValid() && de.format('YYYY-MM-DD')}</p>
+                              <p>{el3.day}</p>
                               <p>{moneyFormat(el3.room_price)}</p>
                               <p>{el3.qty}</p>
                               <p>{moneyFormat(el3.total)}</p>
@@ -455,6 +469,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                             租<i className="fa-solid fa-arrow-right"></i>還
                           </p>
                           <p>日期</p>
+                          <p>天數</p>
                           <p>單價</p>
                           <p>跨店費用</p>
                           <p>數量</p>
@@ -472,14 +487,16 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                               <div className={styled.contentDe}>
                                 <div className={styled.imgWrap}>
                                   <img
-                                    src="https://cdn2.ettoday.net/images/4778/d4778980.jpg"
+                                    src={`http://localhost:3001/rental_img/${el5.rental_img[0]}`}
                                     alt=""
                                   />
                                 </div>
                                 <p>{el5.rental_name}</p>
                                 <p>
                                   {el5.store_out}
-                                  <i className="fa-solid fa-arrow-right"></i>
+                                  <br />
+                                  <i className="fa-solid fa-arrow-down"></i>
+                                  <br />
                                   {el5.store_back}
                                 </p>
                                 <p>
@@ -487,8 +504,9 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                                   <i className="fa-solid fa-arrow-down"></i>
                                   {dayjs(el5.back_date).format('YYYY-MM-DD')}
                                 </p>
+                                <p>{el5.day}</p>
                                 <p>{moneyFormat(el5.rental_price)}</p>
-                                <p>跨店費用</p>
+                                <p>{el5.deliveryFee}</p>
                                 <p>{el5.qty}</p>
                                 <p>{moneyFormat(el5.total)}</p>
                               </div>

@@ -44,7 +44,7 @@ function OrderTime({ open, momOrder }) {
                       (50 + total[i] * 200 > 534.5
                         ? // ? `${534.5}px`
                           `${540.5}px`
-                        : `${50 + total[i] * 200}px`),
+                        : `${50 + 26 + total[i] * 200}px`),
                   }}
                 />
               </div>

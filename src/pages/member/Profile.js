@@ -2,17 +2,17 @@ import styled from '../../styles/member-scss/Member.module.scss'
 import { Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { useEffect, useState, useContext } from 'react'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import MemberContext from '../../contexts/MemberContext'
-
-//TODO 頭像外框變化
+import { avatarLevel } from './components/Avatar'
+import { titleLevel } from './components/Avatar'
 
 function Profile(props) {
-  
   const navigate = useNavigate()
   const location = useLocation()
   let usp = new URLSearchParams(location.search)
   let mid = usp.get('id')
-  
+
   let initInfo = {
     member_sid: mid,
     nickname: '',
@@ -78,7 +78,7 @@ function Profile(props) {
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return alert('請先登入會員')
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
     }
     const result = await axios.post(
       `http://localhost:3001/member/follow/api?mid=${mid}`,
@@ -102,7 +102,11 @@ function Profile(props) {
       getFollowing()
     }
     if (!result.data.success) {
-      alert('關注失敗')
+      Swal.fire({
+        logo: 'error',
+        title: '關注失敗',
+        confirmButtonColor: '#216326',
+      })
     }
   }
 
@@ -110,7 +114,7 @@ function Profile(props) {
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return alert('請先登入會員')
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
     }
 
     const result = await axios.delete(
@@ -129,9 +133,27 @@ function Profile(props) {
       getFollowing()
     }
     if (!result.data.success) {
-      alert('取消關注失敗')
+      Swal.fire({
+        logo: 'error',
+        title: '取消關注失敗',
+        confirmButtonColor: '#216326',
+      })
     }
   }
+
+  // function avatarLevel(height = 0) {
+  //   if (height > 3000) {
+  //     return styled.silver
+  //   }
+  //   return styled.bronze
+  // }
+
+  // function titleLevel(height = 0) {
+  //   if (height > 3000) {
+  //     return '銀級玩家'
+  //   }
+  //   return '銅級玩家'
+  // }
 
   useEffect(() => {
     if (!location.search) {
@@ -153,7 +175,9 @@ function Profile(props) {
         <div className={styled.col}>
           <aside className={styled.profile}>
             <div
-              className={`${styled.avatar} ${styled.social}`}
+              className={`${styled.avatar} ${styled.silver} ${
+                styled.social
+              } ${avatarLevel(info && info.total_height)}`}
               onClick={() => {
                 navigate(`/profile?id=${mid}`)
               }}
@@ -164,10 +188,7 @@ function Profile(props) {
                   alt="avatar"
                 ></img>
               ) : (
-                <img
-                  src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
-                  alt="postImg"
-                ></img>
+                <img src="/img/default_avatar.png" alt="avatar" />
               )}
             </div>
             <h3
@@ -178,7 +199,9 @@ function Profile(props) {
             >
               {info && info.nickname}
             </h3>
-            <p className={styled.highlight}>銀級玩家</p>
+            <p className={styled.highlight}>
+              {titleLevel(info && info.total_height)}
+            </p>
             <div className={styled.socials}>
               <div
                 className={styled.social}
@@ -204,7 +227,10 @@ function Profile(props) {
                 className={styled.follow}
                 onClick={() => {
                   if (!auth) {
-                    alert('請先登入會員')
+                    Swal.fire({
+                      title: '請先登入會員',
+                      confirmButtonColor: '#216326',
+                    })
                   } else {
                     unfollow()
                   }
@@ -217,7 +243,10 @@ function Profile(props) {
                 className={styled.follow}
                 onClick={() => {
                   if (!auth) {
-                    alert('請先登入會員')
+                    Swal.fire({
+                      title: '請先登入會員',
+                      confirmButtonColor: '#216326',
+                    })
                   } else {
                     addFollow()
                   }

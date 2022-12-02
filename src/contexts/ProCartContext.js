@@ -46,6 +46,7 @@ const proCartReducer = (state, action) => {
     address,
     start,
     end,
+    dayname,
     day,
     area,
     moun,
@@ -245,8 +246,8 @@ const proCartReducer = (state, action) => {
             {
               sid: campSid,
               name: name,
-              address: address,
               startDate: start,
+              dayname: dayname,
               area: area,
               moun: moun,
               img: img,
@@ -579,8 +580,8 @@ export const ProCartContextProvider = ({ children }) => {
   const addCampCart = (
     campSid,
     name,
-    address,
     start,
+    dayname,
     area,
     moun,
     price,
@@ -592,8 +593,8 @@ export const ProCartContextProvider = ({ children }) => {
       payload: {
         campSid,
         name,
-        address,
         start,
+        dayname,
         area,
         moun,
         price,
@@ -711,10 +712,10 @@ export const ProCartContextProvider = ({ children }) => {
     })
   }
   //刪除單筆租借
-  const delOne4 = (renSid, size, price) => {
+  const delOne4 = (renSid, price) => {
     dispatch({
       type: 'DEL',
-      payload: { renSid, size, price },
+      payload: { renSid, price },
     })
   }
   //清空購物車

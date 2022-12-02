@@ -249,8 +249,8 @@ function TestProducts() {
                     addCampCart(
                       el.camp_sid,
                       el.name,
-                      '集合在中央分隔島',
                       date2.start,
+                      '三天二夜',
                       '木柵',
                       '拉拉山',
                       el.price,

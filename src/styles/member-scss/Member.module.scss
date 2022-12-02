@@ -26,6 +26,10 @@
             box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
             text-align: center;
 
+            .nameMobile {
+                display: none;
+            }
+
             .social {
                 cursor: pointer;
             }
@@ -35,7 +39,6 @@
                 height: 120px;
                 border-radius: 50%;
                 // background-image: linear-gradient(0deg,#ddd, #444);
-                background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
                 box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.5);
                 overflow: hidden;
                 margin: auto;
@@ -49,6 +52,18 @@
                     border: 10px solid transparent;
                     box-sizing: border-box;
                 }
+            }
+
+            .gold {
+                background-image: conic-gradient(from 180deg at 50% 50%, #fff6c4 0deg, #ffc31c 69.37deg, #ecc900 163.12deg, #ffbf00 275.62deg, #fff6c4 360deg);
+            }
+
+            .silver {
+                background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
+            }
+
+            .bronze {
+                background-image: conic-gradient(from 180deg at 50% 50%, #fff1c7 0deg, #b37e4a 69.37deg, #c27f3b 163.12deg, #98600c 275.62deg, #fff1c7 360deg);
             }
 
             h3 {
@@ -124,4 +139,127 @@
 
     }
 
+}
+
+@media screen and (max-width: 1400px) {
+    .row {
+        .col {
+            width: 960px;
+            .btnGrp {
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+            }
+            article {
+                width: 600px;
+            }
+            
+        }
+        
+    }
+
+}
+
+@media screen and (max-width: 992px) {
+    .row {
+        .col {
+            width: 740px;
+            article {
+                width: 380px;
+            }
+
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .row {
+        .col {
+            width: 100%;
+            flex-direction: column;
+
+            aside {
+                top: 0;
+                width: 90%;
+                margin: auto;
+                position: relative;
+                margin-bottom: 30px;
+                height: auto;
+
+                .nameMobile {
+                    display: flex;
+                    align-items: flex-end;
+                    h3 {
+                        margin-right: 10px;
+                    }
+                }
+
+                .memberStats {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 10px;
+                    
+                    .nameWeb {
+                        display: none;
+                    }
+
+                    .socials {
+                        width: 60%;
+                        margin: 0;
+                        border: none;
+                        padding-bottom: 25px;
+                        justify-content: space-around;
+                    }
+
+                    .avatar {
+                        width: 100px;
+                        height: 100px;
+                        margin-left: 0;
+                    }
+
+                }
+
+                .intro {
+                    height: auto;
+                }
+
+                .btnGrp {
+                    flex-direction: row;
+                    gap: 3%;
+                }
+            }
+
+            article {
+                width: 90%;
+                margin: auto;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .row{
+        .col{
+            aside{
+                .btnGrp {
+                    button {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .row{
+        .col{
+            aside{
+                .btnGrp {
+                    flex-direction: column;
+                }
+            }
+        }
+    }
 }

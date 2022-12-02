@@ -226,18 +226,6 @@ function WriteData({ familySelect, setFamilySelect, paySelect, setPaySelect }) {
             </div>
           </div>
         </div>
-        <div className={styled.area}>
-          <div className={styled.address}>
-            <h3>地址</h3>
-            <select name="" id="">
-              <option value="">新北市</option>
-            </select>
-            <select name="" id="">
-              <option value="">木柵區</option>
-            </select>
-          </div>
-          <input type="text" />
-        </div>
       </div>
     </>
   )

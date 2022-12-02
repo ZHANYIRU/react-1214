@@ -6,7 +6,7 @@ function OkOrder({ forOk }) {
   const { cleanCart, setWriteUser, moneyFormat } = useContext(ProCartContext)
   const navigate = useNavigate()
   useEffect(() => {
-    // cleanCart()
+    cleanCart()
     //清空收件人資料
     setWriteUser({
       ...setWriteUser,

@@ -1,4 +1,5 @@
 import { useState, useContext } from 'react'
+import Swal from 'sweetalert2'
 import ProCartContext from '../../../contexts/ProCartContext'
 import MemberContext from '../../../contexts/MemberContext'
 import styled from '../../../styles/cart-scss/BuyCart.module.scss'
@@ -35,7 +36,19 @@ function BuyCart({ step, setStep, buyBar }) {
             {auth && (
               <button
                 onClick={() => {
-                  setStep(step + 1)
+                  Swal.fire({
+                    title: '確認結帳?',
+                    icon: 'question',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '確定!',
+                    cancelButtonText: '取消',
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      setStep(step + 1)
+                    }
+                  })
                 }}
               >
                 買單去
