@@ -27,20 +27,21 @@ function CartDetailRoom() {
                   key={el.sid}
                 >
                   <input type="checkbox" />
-                  <div className={styled.wrapRight} style={{ height: '250px' }}>
+                  <div className={styled.wrapRight} style={{ height: '280px' }}>
                     <div className={styled.roomText}>
                       <h2>{el.name}</h2>
                       <p>地址：{el.address}</p>
                       <p>預定日期：{el.startDate}</p>
                       <p>離開日期：{el.endDate}</p>
+                      <p>天數：{el.day}</p>
                       <p>單價：{moneyFormat(el.price)}</p>
                       <div className={styled.people}>
-                        <p>人數：</p>
+                        <p>床位：</p>
                         <div className={styled.qty}>
                           {el.quantity <= 1 ? (
                             <button
                               onClick={() => {
-                                minusOne2(el.sid, el.price)
+                                minusOne2(el.sid, el.price, el.day)
                               }}
                               disabled
                             >
@@ -49,7 +50,7 @@ function CartDetailRoom() {
                           ) : (
                             <button
                               onClick={() => {
-                                minusOne2(el.sid, el.price)
+                                minusOne2(el.sid, el.price, el.day)
                               }}
                             >
                               －
@@ -58,19 +59,21 @@ function CartDetailRoom() {
                           <button>{el.quantity}</button>
                           <button
                             onClick={() => {
-                              plusOne2(el.sid, el.price)
+                              plusOne2(el.sid, el.price, el.day)
                             }}
                           >
                             ＋
                           </button>
                         </div>
-                        <p>人</p>
+                        <p>床</p>
                       </div>
-                      <p>總金額：{moneyFormat(el.quantity * el.price)}</p>
+                      <p>
+                        總金額：{moneyFormat(el.quantity * el.price * el.day)}
+                      </p>
                     </div>
                     <div className={styled.roomImg}>
                       <img
-                        src="https://pix10.agoda.net/hotelImages/793414/-1/97f284bee5c75ff30e2658b179d5c9f1.jpg?ca=9&ce=1&s=1024x768"
+                        src={`http://localhost:3001/room_img/${el.img}`}
                         alt=""
                       />
                     </div>
@@ -88,7 +91,7 @@ function CartDetailRoom() {
                   <i
                     className="fa-regular fa-trash-can"
                     onClick={() => {
-                      const t = el.quantity * el.price
+                      const t = el.quantity * el.price * el.day
                       change(el, i)
                       setTimeout(() => {
                         delOne2(el.sid, t)

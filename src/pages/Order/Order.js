@@ -9,6 +9,8 @@ function Order() {
   const { data, auth } = useContext(MemberContext)
   //打開子訂單+時間線增長的狀態
   const [open, setOpen] = useState([])
+  //動態切換評價按鈕
+  const [change, setChange] = useState(false)
   const [momOrder, setMomOrder] = useState([
     {
       rows: [],
@@ -25,7 +27,7 @@ function Order() {
   }
   useEffect(() => {
     getList()
-  }, [auth])
+  }, [auth, change])
   return (
     <div className={styled.orderRight}>
       <div className={styled.search}>
@@ -34,7 +36,13 @@ function Order() {
       </div>
       <div className={styled.orderBottom}>
         <OrderTime momOrder={momOrder} open={open} />
-        <OrderNum momOrder={momOrder} open={open} setOpen={setOpen} />
+        <OrderNum
+          momOrder={momOrder}
+          open={open}
+          setOpen={setOpen}
+          change={change}
+          setChange={setChange}
+        />
       </div>
     </div>
   )

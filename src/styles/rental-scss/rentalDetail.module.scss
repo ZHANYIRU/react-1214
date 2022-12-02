@@ -20,7 +20,7 @@
 
 
     .left{
-        width:40%;   
+        width:35%;   
         // height: 100%;
 
         .imgmain{
@@ -33,16 +33,16 @@
     }
     }
     .right{
-        width:60%;
+        width:65%;
         height:100%;
         padding-left:80px;
         display:flex;
         flex-direction: column;
         // justify-content: center;
         h2,p, .flex{
-            margin-bottom:40px;
+            margin-bottom:30px;
             font-size:18px;
-            font-weight:500
+            font-weight:500;
         }
         .addcart{
             align-self:center;
@@ -77,7 +77,7 @@
         width: 100%;
         
         div:first-child{
-            width:230px;
+            width:270px;
         }
         
         button{
@@ -146,26 +146,28 @@
     .cardbox{
         display:flex;
         justify-content: space-between;
+        width:100%;
+        border:1px solid black;
+        overflow:hidden;
+        // .card{
+        //     width:30%;
+        //     padding:20px;
+        //     // border:1px solid #ccc;
+        //     box-shadow: 1px 4px 3px 3px #ccc;
+        //     border-radius: 5px;
+        //     .imgwrap{
 
-        .card{
-            width:30%;
-            padding:20px;
-            // border:1px solid #ccc;
-            box-shadow: 1px 4px 3px 3px #ccc;
-            border-radius: 5px;
-            .imgwrap{
+        //         img{
+        //             width:100%;
+        //         }
+        //     }
 
-                img{
-                    width:100%;
-                }
-            }
-
-            p:nth-child(3){
-                font-size:18px;
-                font-weight: 500;
-            }
+        //     p:nth-child(3){
+        //         font-size:18px;
+        //         font-weight: 500;
+        //     }
             
-        }
+        // }
     }
 }
 
@@ -228,6 +230,9 @@
     }
     
 
+    .rental_price {
+        margin-right:auto;
+    }
     
     
 }

@@ -20,15 +20,16 @@
     margin-top:300px;
     position: fixed;
     bottom: 350px;
-    left: 550px;
+    left: 575px;
   }
   .camera{
     position: absolute;
     z-index: -20;
     top:-275px;
-    width: 750px;
-    height:400px;
+    // width: 750px;
+    // height:400px;
     perspective: 24000px;
+    z-index: -999;
     //  perspective-origin: 50% 50%; 
 
     .cube{
@@ -102,5 +103,5 @@
 }
 .section3{
   width: 100%;
-  height: 100vh;
+  height: 150vh;
 }

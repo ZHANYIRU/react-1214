@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import '../../../styles/product-scss/slider.scss'
-function Slider({ data }) {
+function Slider({ data, fixedd }) {
   const [currentId, setCurrentId] = useState(0)
   const jumpTo = (id) => {
     setCurrentId(id)
@@ -18,7 +18,7 @@ function Slider({ data }) {
   }, [currentId])
 
   return (
-    <div className="slider">
+    <div className={fixedd ? 'sliderFixedd' : 'slider'}>
       {data.map((el, id) => (
         <div
           className={`slider-slide ${

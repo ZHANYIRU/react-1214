@@ -53,14 +53,34 @@ function Navbar() {
   const loginArea = (
     <>
       <div className={styled.loginBefore} style={loginBoxMob}>
-        <Link to="/login">
-          {/* 切換會員中心 */}
-          <span>會員登入</span>
-        </Link>
-        <Link to="/join">
-          {/* 切換會員登出 */}
-          <span>會員註冊</span>
-        </Link>
+        {auth ? (
+          <Link to="/member">
+            <span>會員中心</span>
+          </Link>
+        ) : (
+          <Link to="/login">
+            {/* 切換會員中心 */}
+            <span>會員登入</span>
+          </Link>
+        )}
+        {auth ? (
+          <span className={styled.logOut}>
+            <span
+              onClick={() => {
+                resetData()
+                localStorage.removeItem('token')
+                setAuth(false)
+              }}
+            >
+              會員登出
+            </span>
+          </span>
+        ) : (
+          <Link to="/join">
+            {/* 切換會員登出 */}
+            <span>會員註冊</span>
+          </Link>
+        )}
       </div>
     </>
   )
@@ -99,8 +119,11 @@ function Navbar() {
         <div className={styled.navRight}>
           <Link to="/cart">
             <i className="fa-solid fa-cart-shopping"></i>
+            <span className={styled.cartItem}>
+              <p>{cartItem ? cartItem : 0}</p>
+            </span>
           </Link>
-          <span>{cartItem ? cartItem : 0}</span>
+
           <Link to="/member" onClick={loginBtn}>
             <i className="fa-solid fa-user"></i>
             <i className="fa-solid" style={{ paddingLeft: '10px' }}>

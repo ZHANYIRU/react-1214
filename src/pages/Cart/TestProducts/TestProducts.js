@@ -54,7 +54,7 @@ function TestProducts() {
       price: 1900,
     },
     {
-      camp_sid: 60,
+      camp_sid: 51,
       name: '高島縱走2022開團 - 含交通新手難度一日遊',
       price: 4000,
     },
@@ -194,6 +194,7 @@ function TestProducts() {
                       '苗栗縣獅潭鄉',
                       date2.start,
                       date2.end,
+                      2,
                       '苗栗',
                       '阿拉斯加山',
                       el.price,
@@ -248,8 +249,8 @@ function TestProducts() {
                     addCampCart(
                       el.camp_sid,
                       el.name,
-                      '集合在中央分隔島',
                       date2.start,
+                      '三天二夜',
                       '木柵',
                       '拉拉山',
                       el.price,
@@ -325,6 +326,7 @@ function TestProducts() {
                       el.name,
                       date4.start,
                       date4.end,
+                      3,
                       '台北',
                       '宜蘭',
                       100, //deliveryFee

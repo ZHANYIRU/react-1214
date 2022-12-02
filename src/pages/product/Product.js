@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from 'react'
-import { Link, useParams, useLocation } from 'react-router-dom'
+import { useState, useEffect } from 'react'
+// import ScrollTest from './components/scroll_test'
+import { Link } from 'react-router-dom'
 import Slider from './components/slider'
-import Product_filter from './components/product_filter'
+import ProductFilter from './components/product_filter'
 import { useMediaQuery } from 'react-responsive'
-
+import ToTop from './components/toTop'
 import axios from 'axios'
 import styled from '../../styles/product-scss/product.module.scss'
 import img1 from './img/img1.jpg'
@@ -11,10 +12,10 @@ import img2 from './img/img2.jpg'
 import img3 from './img/img3.jpg'
 
 function Product() {
-  // 輸入用(可控表單元件用)
-  const [inputKeyword, setInputKeyword] = useState('')
-  // 按下搜尋按鈕用，真正搜尋用
-  const [searchKeyword, setSearchKeyWord] = useState('')
+  //目前點選的nav
+  const [nav, setNav] = useState()
+  //卡片
+  const [howLongCard, setHowLongCard] = useState(16)
   //圖片
   const data = [
     {
@@ -41,7 +42,12 @@ function Product() {
       setSearch({ ...search, width: '40%' })
     }
   }
-  const [afterGenderData, setAfterGenderData] = useState('')
+
+  // 輸入用(可控表單元件用)
+  const [inputKeyword, setInputKeyword] = useState('')
+  // 按下搜尋按鈕用，真正搜尋用
+  const [searchKeyword, setSearchKeyWord] = useState('')
+
   //format currency
   const moneyFormat = (price) => {
     let a = Number(price)
@@ -49,42 +55,46 @@ function Product() {
     let c = b.split('.')
     return c[0]
   }
-  //拿到filter回傳值
-  const [fromFilterDataCard, setFromFilterDataCard] = useState('')
-  //拿到filter回傳值
-  const [fromFilterDataGender, setFromFilterDataGender] = useState('')
+
   // 手機板判定
   const mobile = useMediaQuery({ query: '(max-width:390px)' })
   //附style給filter
   const [fixedd, setFixedd] = useState(false)
-  //偵測是否為手機版面
-  const [mob, setMob] = useState(false)
-  const filterRef = useRef('')
+
   //偵測滾動時，filter要吸附的位置
   const scrollFilter = () => {
-    const windowScrollY = window.scrollY
     let Window_W = window.innerWidth
-    if (windowScrollY > 770 && Window_W > 500) {
+    let windowScrollY = window.scrollY
+    // console.log(windowScrollY)
+    if (windowScrollY > 630 && Window_W > 500) {
       setFixedd(true)
-    } else if (windowScrollY < 770 && Window_W > 500) {
+    } else if (windowScrollY < 630 && Window_W > 500) {
       setFixedd(false)
     }
   }
 
-  const location = useLocation()
-  // 視窗寬度方法
-  const reSize = () => {
-    let Window_W = window.innerWidth
-    if (
-      Window_W < 500 &&
-      (location.pathname === '/product' || location.pathname === '/product/')
-    ) {
-      return setMob(true)
-    } else if (Window_W > 500) {
-      setMob(false)
-    }
-  }
-  //抓取fetch狀態
+  // const location = useLocation()
+  // // 視窗寬度方法
+  // const reSize = () => {
+  //   let Window_W = window.innerWidth
+  //   if (
+  //     Window_W < 500 &&
+  //     (location.pathname === '/product' || location.pathname === '/product/')
+  //   ) {
+  //     return setMob(true)
+  //   } else if (Window_W > 500) {
+  //     setMob(false)
+  //   }
+  // }
+
+  // const addCard = () => {
+  //   for (let i = 1; i <= datas.length; i++) {
+  //     if (windowScrollY >= `${710 + 900 * i}px`) {
+  //       return setHowLongCard(howLongCard + 16)
+  //     }
+  //   }
+  // }
+  // 抓取所有商品
   const [datas, setDatas] = useState([
     {
       product_sid: '1',
@@ -100,165 +110,285 @@ function Product() {
       size: 'S',
     },
   ])
-  const { product_sid } = useParams()
-
-  const [sid, getSid] = useState('')
 
   //Fetch產品
   const getProductData = async (url) => {
-    const response = await axios.get(`http://localhost:3001/product/${url}`)
-    const r = response.data
-    // console.log(r)
-    setDatas(r)
+    try {
+      const response = await axios.get(`http://localhost:3001/product/${url}`)
+      const r = response.data
+
+      setDatas(r)
+    } catch (e) {
+      console.log(e.message)
+    }
   }
 
+  const min = Math.min(howLongCard, datas.length)
   //-------------------------------------------------------------------
   useEffect(() => {
     getProductData('all')
 
-    window.addEventListener('resize', reSize)
+    // window.addEventListener('resize', reSize)
   }, [])
   useEffect(() => {
     window.addEventListener('scroll', scrollFilter)
   }, [fixedd])
 
+  useEffect(() => {}, [])
   return (
     <>
+      <ToTop />
       <div className={styled.container}>
         <div className={styled.empty}></div>
         {/* Slider */}
-        <Slider data={data} />
+        <Slider data={data} fixedd={fixedd} />
 
         {/* 搜尋專區 */}
         {mobile ? (
           ''
         ) : (
-          <div
-            className={styled.forms}
-            style={search}
-            onClick={(e) => {
-              searchStyle(e)
-            }}
-            
-          >
-            <form action="">
-              <input
-                className={styled.search}
-                type="text"
-                value={inputKeyword}
-                onChange={(e) => {
-                  setInputKeyword(e.target.value)
+          <div className={fixedd ? `${styled.stickyWrapSearch}` : ''}>
+            <div
+              className={styled.forms}
+              style={search}
+              onClick={(e) => {
+                searchStyle(e)
+              }}
+            >
+              <form
+                action=""
+                onSubmit={(e) => {
+                  e.preventDefault()
                 }}
-              />
+              >
+                <input
+                  className={styled.search}
+                  type="text"
+                  value={inputKeyword}
+                  onChange={(e) => {
+                    setInputKeyword(e.target.value)
+                  }}
+                />
 
-              <i
-                className="fa-solid fa-magnifying-glass"
-                onClick={() => {
-                  setSearchKeyWord(inputKeyword)
-                }}
-              ></i>
-            </form>
+                <i
+                  className="fa-solid fa-magnifying-glass"
+                  onClick={() => {
+                    setSearchKeyWord(inputKeyword)
+                  }}
+                ></i>
+              </form>
+            </div>
           </div>
         )}
 
         {/* 種類專區 */}
-        <div className={styled.product_nav} onDrag={() => {}}>
-          <div className={styled.product_nav_box1}>
-            <Link
-              onClick={() => {
-                getProductData('new')
-              }}
-            >
-              <h2>最新上架</h2>
-            </Link>
-            {mobile ? <p>|</p> : ''}
-            <Link
-              onClick={() => {
-                getProductData('hot')
-              }}
-            >
-              <h2>熱門商品</h2>
-            </Link>
-            {mobile ? <p>|</p> : ''}
-            <Link
-              onClick={() => {
-                getProductData('clothe')
-              }}
-            >
-              <h2>男女服飾</h2>
-            </Link>
-            {mobile ? <p>|</p> : ''}
-          </div>
-          <div className={styled.product_nav_box2}>
-            <p>商品類別</p>
-          </div>
-          <div className={styled.product_nav_box3}>
-            <Link
-              onClick={() => {
-                getProductData('bag')
-              }}
-            >
-              <h2>登山背包</h2>
-            </Link>
-            {mobile ? <p>|</p> : ''}
-            <Link
-              onClick={() => {
-                getProductData('shose')
-              }}
-            >
-              <h2>登山鞋</h2>
-            </Link>
-            {mobile ? <p>|</p> : ''}
-            <Link
-              onClick={() => {
-                getProductData('accessories')
-              }}
-            >
-              <h2>專業配件</h2>
-            </Link>
+        <div className={fixedd ? `${styled.stickyWrapCate}` : ''}>
+          <div
+            className={styled.product_nav}
+            style={fixedd ? { marginBottom: '10px' } : {}}
+          >
+            <div className={styled.product_nav_box1}>
+              <Link
+                onClick={() => {
+                  setNav('new')
+                  getProductData('new')
+                }}
+              >
+                <h2 style={nav === 'new' ? { color: 'red' } : {}}>最新上架</h2>
+              </Link>
+              {mobile ? <p>|</p> : ''}
+              <Link
+                onClick={() => {
+                  setNav('hot')
+                  getProductData('hot')
+                }}
+              >
+                <h2 style={nav === 'hot' ? { color: 'red' } : {}}>熱門商品</h2>
+              </Link>
+              {mobile ? <p>|</p> : ''}
+              <Link
+                onClick={() => {
+                  setNav('clothe')
+                  getProductData('clothe')
+                }}
+              >
+                <h2 style={nav === 'clothe' ? { color: 'red' } : {}}>
+                  男女服飾
+                </h2>
+              </Link>
+              {mobile ? <p>|</p> : ''}
+            </div>
+            <div className={styled.product_nav_box2}>
+              <p>商品類別</p>
+            </div>
+            <div className={styled.product_nav_box3}>
+              <Link
+                onClick={() => {
+                  setNav('bag')
+                  getProductData('bag')
+                }}
+              >
+                <h2 style={nav === 'bag' ? { color: 'red' } : {}}>登山背包</h2>
+              </Link>
+              {mobile ? <p>|</p> : ''}
+              <Link
+                onClick={() => {
+                  setNav('shose')
+                  getProductData('shose')
+                }}
+              >
+                <h2 style={nav === 'shose' ? { color: 'red' } : {}}>登山鞋</h2>
+              </Link>
+              {mobile ? <p>|</p> : ''}
+              <Link
+                onClick={() => {
+                  setNav('accessories')
+                  getProductData('accessories')
+                }}
+              >
+                <h2 style={nav === 'accessories' ? { color: 'red' } : {}}>
+                  專業配件
+                </h2>
+              </Link>
+            </div>
           </div>
         </div>
-
         {/* 卡片專區 */}
+        {/* {fixedd ? <div className={styled.empty}></div> : ''} */}
 
-        {/* <div className={styled.cardBigBox}> */}
-        <Product_filter
-          fixedd={fixedd}
-          datas={datas}
-          setDatas={setDatas}
-          inputKeyword={inputKeyword}
-          setInputKeyword={setInputKeyword}
-          setSearchKeyWord={setSearchKeyWord}
-          getProductData={getProductData}
-        />
-        <div className={styled.cardbox}>
-          {datas
-            .filter((v, i) => {
-              return v.product_name.includes(searchKeyword)
-            })
-            .map((v, i) => {
-              return (
-                <Link
-                  className={styled.card}
-                  key={v.product_sid}
-                  to={'/product/' + v.product_sid}
-                >
-                  <div className={styled.imgWrap}>
-                    <img
-                      src={`http://localhost:3001/imgs/zx/${v.product_img}`}
-                      alt=""
-                    />
-                  </div>
-                  <p className={styled.p}>{v.product_name}</p>
-                  <h2>
-                    金額：<span>{moneyFormat(v.product_price)}</span>
-                  </h2>
-                </Link>
-              )
-            })}
+        <div className={styled.cardBigBox}>
+          <ProductFilter
+            fixedd={fixedd}
+            datas={datas}
+            setDatas={setDatas}
+            inputKeyword={inputKeyword}
+            setInputKeyword={setInputKeyword}
+            setSearchKeyWord={setSearchKeyWord}
+            getProductData={getProductData}
+            nav={nav}
+          />
+          <div className={styled.cardbox}>
+            {inputKeyword
+              ? ''
+              : Array(min)
+                  .fill(1)
+                  .map((v2, i) => {
+                    const v = datas[i]
+
+                    return (
+                      <Link
+                        className={styled.card}
+                        key={v.product_sid}
+                        to={'/product/' + v.product_sid}
+                      >
+                        {/* 右上角布條 抗水 防潑水 */}
+                        {v.proof === '抗水' || '防潑水' ? (
+                          <div
+                            className={v.proof !== '0' ? styled.banner : ''}
+                            style={
+                              v.proof === '防潑水'
+                                ? { backgroundColor: 'rgb(0, 190, 164)' }
+                                : {}
+                            }
+                          >
+                            {v.proof !== '0' ? v.proof : ''}
+                          </div>
+                        ) : (
+                          ''
+                        )}
+                        {/* 右上角布條  防水 */}
+                        {v.proof === '防水' ? (
+                          <div
+                            className={v.proof !== '0' ? styled.banner2 : ''}
+                          >
+                            {v.proof !== '0' ? v.proof : ''}
+                          </div>
+                        ) : (
+                          ''
+                        )}
+                        <div className={styled.imgWrap}>
+                          <img
+                            src={`http://localhost:3001/imgs/zx/${v.product_img}`}
+                            alt=""
+                          />
+                        </div>
+                        <p className={styled.p}>{v.product_name}</p>
+                        <h2>
+                          金額：<span>{moneyFormat(v.product_price)}</span>
+                        </h2>
+                      </Link>
+                    )
+                  })}
+
+            {/* 舊資料 */}
+            {inputKeyword
+              ? datas
+                  .filter((v, i) => {
+                    if (searchKeyword) {
+                      return v.product_name.includes(searchKeyword)
+                    } else {
+                      return v
+                    }
+                  })
+                  .map((v, i) => {
+                    return (
+                      <Link
+                        className={styled.card}
+                        key={v.product_sid}
+                        to={'/product/' + v.product_sid}
+                      >
+                        {v.proof === '抗水' || '防潑水' ? (
+                          <div
+                            className={v.proof !== '0' ? styled.banner : ''}
+                            style={
+                              v.proof === '防潑水'
+                                ? { backgroundColor: 'rgb(0, 190, 164)' }
+                                : {}
+                            }
+                          >
+                            {v.proof !== '0' ? v.proof : ''}
+                          </div>
+                        ) : (
+                          ''
+                        )}
+
+                        {v.proof === '防水' ? (
+                          <div
+                            className={v.proof !== '0' ? styled.banner2 : ''}
+                          >
+                            {v.proof !== '0' ? v.proof : ''}
+                          </div>
+                        ) : (
+                          ''
+                        )}
+                        <div className={styled.imgWrap}>
+                          <img
+                            src={`http://localhost:3001/imgs/zx/${v.product_img}`}
+                            alt=""
+                          />
+                        </div>
+                        <p className={styled.p}>{v.product_name}</p>
+                        <h2>
+                          金額：<span>{moneyFormat(v.product_price)}</span>
+                        </h2>
+                      </Link>
+                    )
+                  })
+              : ''}
+          </div>
         </div>
+        {datas.length > 16 && (
+          <div className={styled.clickme}>
+            <button
+              onClick={() => {
+                setHowLongCard(howLongCard + 16)
+              }}
+            >
+              更多商品
+            </button>
+          </div>
+        )}
       </div>
-      {/* </div> */}
     </>
   )
 }
