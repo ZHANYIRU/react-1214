@@ -157,3 +157,38 @@
 }
 
 
+.more{
+    background-color: rgb(218, 218, 218);
+    width:98%;
+    margin:0 auto;
+    height:300px;
+    border-radius: 5px;
+    flex-direction: column;
+}
+
+
+
+.filtermorecontainer{
+        width:80%;
+        height:100%;
+        border:1px solid black;
+        margin:auto;
+    .kind{
+        display:flex;
+        height:33%;
+        align-items: center;
+        
+        
+        p{
+            width:200px;
+            // border:1px solid black;
+            text-align: center;
+            
+        };  
+        .checkboxcontainer{
+            display:flex;
+            justify-content: space-around;
+            width:500px;
+        }  
+    }
+}
