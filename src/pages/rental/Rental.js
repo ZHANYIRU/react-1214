@@ -21,8 +21,11 @@ function Rental(props) {
     high_price: undefined,
     page: 1,
     order_by: '',
+    brand: [],
+    feature: '',
   })
 
+  const brandOption = ['TiiTENT', 'Snow Peak', 'ZANE ARTS', 'HILLEBERG']
   const rental_url_new = 'http://localhost:3001/rental/pageApi'
 
   async function getList() {
@@ -33,6 +36,7 @@ function Rental(props) {
       }
     }
     const u = new URLSearchParams(newConditions)
+    console.log(u)
     //const response = await axios.get(rental_url_new + `?page=${page}`)
     const response = await axios.get(rental_url_new + `?` + u.toString())
     console.log(response.data)
@@ -120,14 +124,39 @@ function Rental(props) {
             <div className={rentalcss.kind}>
               <p>品牌</p>
               <div className={rentalcss.checkboxcontainer}>
-                <div>
-                  <input type="checkbox" />
-                  <label>測試資料</label>
-                </div>
-                <div>
-                  <input type="checkbox" />
-                  <label>測試資料二</label>
-                </div>
+                {brandOption.map((v, i) => {
+                  return (
+                    <div key={i}>
+                      <input
+                        type="checkbox"
+                        checked={conditions.brand.includes(v)}
+                        value={v}
+                        onChange={(e) => {
+                          const value = e.target.value
+                          if (conditions.brand.includes(v)) {
+                            const delbrand = conditions.brand.filter(
+                              (c) => c !== value
+                            )
+                            setConditions({
+                              ...conditions,
+                              brand: delbrand,
+                              page: 1,
+                            })
+                          } else {
+                            const addbrand = conditions.brand
+                            addbrand.push(value)
+                            setConditions({
+                              ...conditions,
+                              brand: addbrand,
+                              page: 1,
+                            })
+                          }
+                        }}
+                      />
+                      <label htmlFor="">{v}</label>
+                    </div>
+                  )
+                })}
               </div>
             </div>
             <div className={rentalcss.kind}>
@@ -135,11 +164,11 @@ function Rental(props) {
               <div className={rentalcss.checkboxcontainer}>
                 <div>
                   <input type="checkbox" />
-                  <label>測試資料</label>
+                  <label>二人帳</label>
                 </div>
                 <div>
                   <input type="checkbox" />
-                  <label>測試資料二</label>
+                  <label>四人帳</label>
                 </div>
               </div>
             </div>
@@ -147,18 +176,43 @@ function Rental(props) {
               <p>排序</p>
               <div className={rentalcss.checkboxcontainer}>
                 <div>
-                  <input type="checkbox" />
-                  <label>測試資料</label>
+                  <input
+                    type="radio"
+                    name="order_by"
+                    value=""
+                    onClick={() => {
+                      console.log('123')
+                    }}
+                  />
+                  <label>最新上架</label>
+                  <input
+                    type="radio"
+                    name="order_by"
+                    value="price_DESC"
+                    onClick={() =>
+                      setConditions({ ...conditions, order_by: 'price_DESC' })
+                    }
+                  />
+                  <label>價格高到低</label>
+                  <input
+                    type="radio"
+                    name="order_by"
+                    value="price_ASC"
+                    onClick={() =>
+                      setConditions({ ...conditions, order_by: 'price_ASC' })
+                    }
+                  />
+                  <label>價格低到高</label>
                 </div>
-                <div>
+                {/* <div>
                   <input type="checkbox" />
                   <label>測試資料二</label>
-                </div>
+                </div> */}
               </div>
             </div>
-            <div className={rentalcss.kind}>
+            {/* <div className={rentalcss.kind}>
               <button>篩選商品</button>
-            </div>
+            </div> */}
           </div>
         </div>
 
