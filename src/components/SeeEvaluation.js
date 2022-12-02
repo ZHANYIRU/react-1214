@@ -2,12 +2,12 @@ import { useContext } from 'react'
 import styled from '../styles/order-scss/OrderNum.module.scss'
 import ProCartContext from '../contexts/ProCartContext'
 import MemberContext from '../contexts/MemberContext'
+import { titleLevel } from '../pages/member/components/Avatar'
 import dayjs from 'dayjs'
 function SeeEvaluation({ el }) {
   const { lookLightBox, setLookLightBox, setStar } = useContext(ProCartContext)
   const { data } = useContext(MemberContext)
   const photo = (el) => {
-    console.log(el)
     let img
     if (el.product_img) {
       img = `http://localhost:3001/imgs/zx/${el.product_img}`
@@ -22,6 +22,15 @@ function SeeEvaluation({ el }) {
       img = `http://localhost:3001/room_img/${el.mainImage}`
     }
     return img
+  }
+  const levelColor = (height = 0) => {
+    if (height > 10000) {
+      return styled.gold
+    }
+    if (height > 3000) {
+      return styled.silver
+    }
+    return styled.bronze
   }
   return (
     <div
@@ -46,7 +55,11 @@ function SeeEvaluation({ el }) {
         </div>
         <div className={styled.lookMember}>
           <div className={styled.memberLeft}>
-            <div className={styled.memImgWrap}>
+            <div
+              className={`${styled.memImgWrap} ${levelColor(
+                data.total_height
+              )}`}
+            >
               {data && data.avatar ? (
                 <img
                   src={`http://localhost:3001/uploads/avatar_${data.avatar}`}
@@ -60,7 +73,9 @@ function SeeEvaluation({ el }) {
               )}
             </div>
             <div className={styled.memberText}>
-              <p>{data && data.nickname} 銀級玩家</p>
+              <p>
+                {data && data.nickname} {data && titleLevel(data.total_height)}
+              </p>
               <span>{dayjs(el.messageTime).format('YYYY-MM-DD')}</span>
             </div>
           </div>
