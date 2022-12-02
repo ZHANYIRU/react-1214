@@ -111,3 +111,26 @@
     }
     
 }
+.mainImage{
+    width: 100%;
+}
+.detailsimgs{
+    width: 200px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.buy{
+    border-radius: 5px;
+            border: none;
+            background-color: #000;
+            color: white;
+            padding: 10px;
+            width: 150px;
+            
+            &:hover{
+                background-color: yellow;
+                color: black;
+                border: none;
+            }
+}

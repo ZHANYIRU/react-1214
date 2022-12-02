@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+
 import style from '../../styles/camp-scss/camphome.module.scss'
 import ListCard from './components/ListCard'
 import { Link } from 'react-router-dom'
@@ -41,7 +42,10 @@ function CampHomeList(sliderdata) {
           .map((v, i) => {
             return (
               <>
-                <Link to={`/camp/filter`}>{v.campaign_type_name} </Link>
+                <Link to={`/camp/filter`} key={i}>
+                  {v.campaign_type_name}
+                  
+                </Link>
                 <div className={style.listbox}>
                   {campData.map((v, i) => {
                     if (i < 4) {

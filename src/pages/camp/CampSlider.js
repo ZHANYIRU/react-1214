@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import style from '../../styles/camp-scss/camphome.module.scss'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 function CampSlider() {
   let all = 'all'
   //all活動產品資料
   const [campData, setCampData] = useState([{}])
+
+  const navigate = useNavigate()
 
   const fetchAll = async (url) => {
     try {
@@ -53,7 +56,10 @@ function CampSlider() {
                         <p>{v.brife_describe}</p>
                       </div>
 
-                      <button>我要報名</button>
+                      <button onClick={() => {
+                          navigate(`/camp/${v.sid}`)
+                        }}
+                        >我要報名</button>
                     </div>
                   </div>
                 </div>

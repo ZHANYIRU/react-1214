@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react'
-
-import { Link } from 'react-router-dom'
 import style from '../../../styles/camp-scss/campcat.module.scss'
 import axios from 'axios'
 
@@ -40,7 +38,6 @@ function ListLeft({ setFilter }) {
           )
         })}
       </div>
-      <Link to="/camp/:camp_sid">產品單頁</Link>
     </>
   )
 }

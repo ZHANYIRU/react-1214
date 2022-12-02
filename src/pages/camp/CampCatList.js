@@ -29,6 +29,11 @@ function CampCatList({ filter }) {
       console.log(e.message)
     }
   }
+//查詢分類結果的長度
+  const campLength = campData.filter((v, i) => {
+    return v.campaign_type_sid === filter
+  })
+
   useEffect(() => {
     fetchAll('all')
   }, [])
@@ -40,7 +45,7 @@ function CampCatList({ filter }) {
           天數<select></select>
           <button>查詢</button>
         </div>
-        <div>查詢結果</div>
+        <div>查詢結果 {campLength.length}</div>
         <div>麵包屑/麵包屑/麵包屑/麵包屑</div>
         <div className={style.cards}>
           {campData
@@ -52,7 +57,9 @@ function CampCatList({ filter }) {
                 <>
                   <div className={style.listcardbig} key={v.sid}>
                     <div className={style.listcardimg}>
-                      <img src="https://s3.amazonaws.com/imagescloud/images/medias/annexes/annexe-camping-2022.jpg" />
+                    <img
+                          src={`http://localhost:3001/n7/campmain/${v.mainImage}`}
+                        />
                     </div>
                     <div className={style.listcardbigtext}>
                       <p>{v.name}</p>
