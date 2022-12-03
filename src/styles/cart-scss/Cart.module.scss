@@ -114,17 +114,20 @@
 }
 
 @media screen and (max-width: 576px) {
+  .body {
+    max-height: 300vh;
+  }
   .cardWrap {
-    .cartTitle{
-      div:last-child{
+    .cartTitle {
+      div:last-child {
         margin-right: 0;
       }
     }
-    .text{
+    .text {
       justify-content: space-around;
       margin-left: 0;
-      p{
-        margin-right: 0; 
+      p {
+        margin-right: 0;
       }
     }
   }

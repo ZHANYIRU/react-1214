@@ -27,7 +27,7 @@ function CartDetailRoom() {
                   key={el.sid}
                 >
                   <input type="checkbox" />
-                  <div className={styled.wrapRight} style={{ height: '280px' }}>
+                  <div className={`${styled.wrapRight} ${styled.roomR}`}>
                     <div className={styled.roomText}>
                       <h2>{el.name}</h2>
                       <p>地址：{el.address}</p>

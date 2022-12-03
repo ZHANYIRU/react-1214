@@ -31,3 +31,46 @@
     font-size: 30px;
   }
 }
+.mobileBuyCartTop,
+.mobileBuyCartBottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.mobileBuyCartTop {
+  width: 50%;
+}
+.mobileBuyCartBottom {
+  width: 40%;
+}
+@media screen and (max-width: 576px) {
+  .buyCart {
+    height: 110px;
+  }
+  .wrap {
+    width: 100%;
+    flex-direction: column;
+    p {
+      font-size: 16px;
+    }
+  }
+  .mobileBuyCartTop,
+  .mobileBuyCartBottom {
+    width: 95%;
+  }
+  .mobileBuyCartTop {
+    justify-content: space-around;
+  }
+  .mobileBuyCartBottom {
+    justify-content: space-around;
+    button {
+      padding: 10px 10px;
+      font-size: 10px;
+    }
+  }
+  .price {
+    p {
+      font-size: 25px;
+    }
+  }
+}

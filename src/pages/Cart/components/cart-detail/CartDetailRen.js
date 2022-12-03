@@ -27,7 +27,7 @@ function CartDetailRen() {
                   key={`${el.sid}+${el.size}`}
                 >
                   <input type="checkbox" />
-                  <div className={styled.wrapRight} style={{ height: '280px' }}>
+                  <div className={`${styled.wrapRight} ${styled.renR}`}>
                     <div className={styled.roomText}>
                       <h2>{el.name}</h2>
                       <p>

@@ -37,10 +37,13 @@ function CartDetailPro() {
                   <div className={styled.wrapRight}>
                     <div className={styled.roomText}>
                       <h2>{el.name}</h2>
-                      <p>
-                        {el.size && '尺寸：'}
-                        {el.size}
-                      </p>
+                      {el.size && (
+                        <p>
+                          尺寸：
+                          {el.size}
+                        </p>
+                      )}
+
                       <p>單價：{moneyFormat(el.price)}</p>
                       <div className={styled.people}>
                         <p>數量：</p>
