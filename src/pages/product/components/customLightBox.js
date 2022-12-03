@@ -24,32 +24,12 @@ export default function CustomLightBox({
     <>
       <div className={styled.customLightBox}>
         <div className={styled.customLightBoxBg}>
-          <div className={styled.canvasModal}>
-            <canvas id="canvasModal"></canvas>
-          </div>
-          <div className={styled.rightbox}>
+          <div className={styled.topArea}>
             <form
               onChange={(e) => {
                 e.preventDefault()
               }}
             >
-              <button
-                type="button"
-                onClick={() => {
-                  addPhoto()
-                  setShow(false)
-                }}
-              >
-                確定送出照片
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  canvasModal.clear()
-                }}
-              >
-                清除
-              </button>
               <input
                 type="file"
                 id="imageUpload"
@@ -59,6 +39,35 @@ export default function CustomLightBox({
                 }}
               />
             </form>
+            <img
+              src=""
+              alt="escape"
+              onClick={() => {
+                setShow(false)
+              }}
+            />
+          </div>
+          <div className={styled.canvasModal}>
+            <canvas id="canvasModal"></canvas>
+          </div>
+          <div className={styled.bottonBox}>
+            <button
+              type="button"
+              onClick={() => {
+                addPhoto()
+                setShow(false)
+              }}
+            >
+              確定
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                canvasModal.clear()
+              }}
+            >
+              清除
+            </button>
           </div>
         </div>
       </div>
