@@ -13,7 +13,7 @@ export default function CommentLightBox({
         setComLightBox(false)
       }}
     >
-      <div className={styled.comView}>
+      <div className={styled.comView} onClick={(e) => e.stopPropagation()}>
         <div className={styled.leftArea}>
           <div className={styled.picAndNameWrap}>
             <div className={styled.imgBorder}>

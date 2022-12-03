@@ -9,24 +9,29 @@
 .comLightBox{
     background-color: rgba(7, 2, 2, 0.507);
     width: 100%;
-    height: calc(100vh - 60px);
-    top: 60px;
+    height: 100vh;
+    // height: calc(100vh - 60px);
+    top: 0px;
     position: fixed;
-    z-index: 10;
+    z-index: 88;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .comView{
+    min-width: 536px;
     // margin: 0 auto;
-    width: 55%;
+    width: 40%;
     // height: 350px;
     background-color: #fff;
     display: flex;
+    border-radius: 10px;
+
     .leftArea{
         width: 45%;
         padding: 20px 40px;
         .picAndNameWrap{
+            width: 250px;
             display: flex;
             align-items: center;
             height: 110px;
@@ -36,13 +41,13 @@
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    width: 100px;
-                    height: 100px;
+                    width: 70px;
+                    height: 70px;
                     border-radius: 50%;
                     background: linear-gradient(#3401f0, #6b41e7,#9b06e6);
                 .imgWrap{
-                    width: 90px;
-                    height: 90px;
+                    width: 60px;
+                    height: 60px;
                     border-radius: 50%;
                     overflow: hidden;
                     img{
@@ -53,7 +58,7 @@
                 }
             }
             .Name{
-                font-size: 2rem;
+                font-size: 1.3rem;
             }
         }
         .howStar{
@@ -61,12 +66,12 @@
         }
     }
     .rightArea{
-        width: 45%;
+        width: 55%;
         padding: 20px 40px;
         .comDate{
             display: flex;
             align-items: center;
-            height: 110px;
+            height: 80px;
         }
         .comText{
             line-height: 2rem;

@@ -1,13 +1,14 @@
 import React from 'react'
-// import styled from '../../styles/product-scss/Custom.module.scss'
-import { form } from 'react-bootstrap'
+import styled from '../../styles/product-scss/Custom.module.scss'
+// import { Form } from 'react-bootstrap'
 import { useRef } from 'react'
 import { fabric } from 'fabric'
 import { useEffect, useState } from 'react'
-import { border } from '@mui/system'
+import CustomLightBox from './components/customLightBox'
 export default function Customs(props) {
   const picRef = useRef()
   const [color, setColor] = useState('#000000')
+  const [bgColor, setBgColor] = useState('')
   const [uploadImage, setUploadImage] = useState('')
   const [modalType, setModalType] = useState('')
   const [modalTitle, setModalTitle] = useState('')
@@ -19,14 +20,22 @@ export default function Customs(props) {
     {
       alt: '白T',
       src: '/img/gallery-5d5afd3f1c7d6.png',
+      color: 'white',
     },
     {
       alt: '排汗衫',
-      src: 'https://img.my-best.tw/press_component/item_part_images/7d79babb7e1ec7e8820a87202a9c6590.jpg?ixlib=rails-4.2.0&q=70&lossless=0&w=640&h=640&fit=clip',
+      src: '/img/gallery-5d5afd3f1c7d6.png',
+      color: 'black',
     },
     {
       alt: '排汗衫2',
       src: 'https://img.my-best.tw/press_component/item_part_images/7cbcd08ae9afa0e80ba0155dd08242e1.png?ixlib=rails-4.2.0&q=70&lossless=0&w=640&h=640&fit=clip',
+      color: 'red',
+    },
+    {
+      alt: '排汗衫3',
+      src: 'https://img.my-best.tw/press_component/item_part_images/7cbcd08ae9afa0e80ba0155dd08242e1.png?ixlib=rails-4.2.0&q=70&lossless=0&w=640&h=640&fit=clip',
+      color: '#ccc',
     },
   ]
 
@@ -35,7 +44,7 @@ export default function Customs(props) {
     type === 'bg' ? setModalTitle() : setModalTitle()
     setShow(true)
   }
-
+  //換背景圖
   const setBg = (src) => {
     if (!canvas) return
     fabric.Image.fromURL(src, function (img) {
@@ -69,7 +78,7 @@ export default function Customs(props) {
         selectable: false,
         evented: false,
       })
-      image.scaleToWidth(200)
+      image.scaleToWidth(300)
       canvasModal.setHeight(image.height * image.scaleY)
       console.log(image)
       setUploadImage(image)
@@ -79,27 +88,17 @@ export default function Customs(props) {
   const renderBgImages = () => {
     return bgImages.map((image) => {
       return (
-        <img
-          onClick={() => setBg(image.src)}
-          role="button"
-          key={image.alt}
-          src={image.src}
-          className="img-thumbnail w-25"
-          alt={image.alt}
-        />
+        <>
+          <div
+            className={styled.everyColor}
+            style={{ backgroundColor: `${image.color}` }}
+            onClick={() => {
+              setBgColor(image.color)
+            }}
+          ></div>
+        </>
       )
     })
-    // return props.bgImages.map((image) => {
-    //   return (
-    //     <img
-    //       onClick={() => setBg(image.src)}
-    //       role="button"
-    //       key={image.alt}
-    //       src={image.src}
-    //       alt={image.alt}
-    //     />
-    //   )
-    // })
   }
 
   const reset = () => {
@@ -114,7 +113,7 @@ export default function Customs(props) {
   }
 
   const output = () => {
-    var image = canvas
+    const image = canvas
       .toDataURL('image/png')
       .replace('image/png', 'image/octet-stream')
     const a = document.createElement('a')
@@ -148,6 +147,47 @@ export default function Customs(props) {
     }
   }
 
+  const initDeleteIcon = () => {
+    const deleteImg = document.createElement('img')
+    deleteImg.src = '/img/close-circle-outline.svg'
+    deleteImg.classList.add('deleteBtn')
+
+    const control = {
+      x: 0.5,
+      y: -0.5,
+      offsetY: -16,
+      offsetX: 16,
+      cursorStyle: 'pointer',
+      mouseUpHandler: (eventData, transform) =>
+        deleteObject(eventData, transform),
+      render: renderIcon(deleteImg),
+      cornerSize: 24,
+    }
+
+    fabric.Object.prototype.controls.deleteControl = new fabric.Control(control)
+    fabric.Textbox.prototype.controls.deleteControl = new fabric.Control(
+      control
+    )
+
+    function renderIcon(icon) {
+      return function renderIcon(ctx, left, top, styleOverride, fabricObject) {
+        const size = control.cornerSize
+        ctx.save()
+        ctx.translate(left, top)
+        ctx.rotate(fabric.util.degreesToRadians(fabricObject.angle))
+        ctx.drawImage(icon, -size / 2, -size / 2, size, size)
+        ctx.restore()
+      }
+    }
+
+    function deleteObject(eventData, transform) {
+      var target = transform.target
+      var canvas = target.canvas
+      canvas.remove(target)
+      canvas.requestRenderAll()
+    }
+  }
+
   useEffect(() => {
     let canvasWidth = 500
     const canvas = new fabric.Canvas('canvas', {
@@ -155,13 +195,15 @@ export default function Customs(props) {
       height: canvasWidth,
     })
     setCanvas(canvas)
-    bgImages[0].setAttribute('crossOrigin', 'Anonymous')
+
     fabric.Image.fromURL(bgImages[0].src, function (img) {
+      // img.setAttribute('crossOrigin', 'Anonymous')
       img.scaleToWidth(canvas.width)
       img.scaleToHeight(canvas.height)
       canvas.setBackgroundImage(img)
       canvas.requestRenderAll()
     })
+    initDeleteIcon()
   }, [])
 
   // useEffect(() => {
@@ -208,21 +250,11 @@ export default function Customs(props) {
   }
 
   function savePic() {
-    // const base64 = picRef.current.toDataURL({
-    //   format: 'jpeg',
-    //   quality: 1,
-    // })
+    // uploadImage.hasControls = false
+    // uploadImage.hasBorders = false
     const base64 = picRef.current.toDataURL()
     console.log(base64)
   }
-  // useEffect(() => {
-  //   const setOrder = (order) => {
-  //     const obj = canvas.getActiveObject()
-  //     if (!obj) return
-  //     if (order === 'top') obj.bringToFront()
-  //     if (order === 'bottom') obj.sendToBack()
-  //   }
-  // }, [])
 
   // fabric.Image.fromURL(props.bgImages[0].src, function (img) {
   //   img.scaleToWidth(canvas.width)
@@ -233,124 +265,90 @@ export default function Customs(props) {
 
   return (
     <>
-      <div>5</div>
-      <div>5</div>
-      <div>5</div>
-      <div>5</div>
-      <div>5</div>
-      <div>5</div>
-      <div>5</div>
-      <main className="custom container-fluid position-relative">
-        <div className="custom_page d-flex justify-content-center flex-wrap">
-          <div className="d-flex flex-wrap">
-            <div className="col-md-8 col-12 mat_space d-flex align-items-center justify-content-center">
-              <canvas
-                id="canvas"
-                style={{ border: '1px black solid' }}
-                ref={picRef}
-              ></canvas>
-            </div>
-            <div
-              className="rightArea"
-              style={{ height: '500px', border: '1px black solid' }}
+      <div className={styled.empty}></div>
+      {show && (
+        <CustomLightBox
+          addPhoto={addPhoto}
+          uploadPhoto={uploadPhoto}
+          canvasModal={canvasModal}
+          setShow={setShow}
+          setUploadImage={setUploadImage}
+          setCanvasModal={setCanvasModal}
+        />
+      )}
+      <div className={styled.customBox}>
+        <div className={styled.leftArea}>
+          <div
+            className={styled.canvasWrap}
+            style={{ background: `${bgColor}` }}
+          >
+            <canvas id="canvas" ref={picRef}></canvas>
+          </div>
+        </div>
+        <div className={styled.rightArea}>
+          <div className={styled.colorOptions}>{renderBgImages()}</div>
+          <div className={styled.addImgae}>
+            <button
+              onClick={() => handleShow('photo')}
+              type="button"
+              className="btn_f"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
             >
-              <div className="selectOptions">{renderBgImages()}</div>
-              <div className="d-flex flex-column align-items-start mt-4 h-50">
-                <div className="mt-2 mb-auto">
-                  <button
-                    onClick={() => handleShow('photo')}
-                    type="button"
-                    className="btn_f"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
-                  >
-                    {'燈箱按鈕'}
-                  </button>
+              新增照片
+            </button>
+          </div>
+          <div className={styled.addText}>
+            <input
+              type="color"
+              value={color}
+              onChange={(e) => setColor(e.target.value)}
+              style={{ height: '35px', width: '35px' }}
+              className="mx-2"
+            />
+            <input type="text" className="" id="text_input" />
+            <button
+              onClick={() => {
+                addText()
+              }}
+              type="button"
+              className="btn_f"
+              id="add_text_btn"
+            >
+              加入文字
+            </button>
+            <div className={styled.addCart}>
+              <button onClick={reset} type="button" className="btn_g mt-2">
+                重設
+              </button>
+              <button
+                onClick={output}
+                className="btn_l ms-2 mt-2"
+                type="button"
+              >
+                下載
+              </button>
 
-                  {/* <div className="mt-2">{renderStickers()}</div> */}
-
-                  <div className="d-flex justify-content-start mt-3">
-                    <input
-                      type="color"
-                      value={color}
-                      onChange={(e) => setColor(e.target.value)}
-                      style={{ height: '35px', width: '35px' }}
-                      className="mx-2"
-                    />
-                    <input
-                      type="text"
-                      className="col w-75 me-2"
-                      id="text_input"
-                    />
-                    <button
-                      onClick={() => {
-                        addText()
-                      }}
-                      type="button"
-                      className="btn_f"
-                      id="add_text_btn"
-                    >
-                      加入文字
-                    </button>
-                  </div>
-                </div>
-                <div className="d-flex flex-wrap mt-2">
-                  <button onClick={reset} type="button" className="btn_g mt-2">
-                    重設
-                  </button>
-                  <button
-                    onClick={output}
-                    className="btn_l ms-2 mt-2"
-                    type="button"
-                  >
-                    下載
-                  </button>
-                  <form
-                    onChange={(e) => {
-                      e.preventDefault()
-                    }}
-                  >
-                    <button
-                      type="button"
-                      onClick={() => {
-                        addPhoto()
-                      }}
-                    >
-                      確定送出照片
-                    </button>
-                    <input
-                      type="file"
-                      id="imageUpload"
-                      accept="image/*"
-                      onChange={uploadPhoto}
-                    />
-
-                    <button
-                      type="button"
-                      onClick={() => {
-                        savePic()
-                      }}
-                    >
-                      存檔成base64
-                    </button>
-                  </form>
-                </div>
-              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  savePic()
+                }}
+              >
+                加入購物車
+              </button>
             </div>
           </div>
         </div>
+      </div>
+      <main className="custom container-fluid position-relative">
+        {/* <canvas id="canvasModal"></canvas> */}
+
         {/* <div className="position-absolute d-flex align-items-end logo_wrap"> */}
         {/* <h2>你誰</h2> */}
         {/* </div> */}
         {/* <div className="text-center"></div> */}
       </main>
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
-      <br />
     </>
   )
 }

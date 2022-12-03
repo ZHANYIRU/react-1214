@@ -1,28 +1,105 @@
 @import '../global.scss';
 
-
-form{
-    
-    
+body{
+    position: relative;
 }
-.canvasArea{
-    width: 800px;
-    height: 800px;
-    border: 1px black solid;
+
+.empty{
+    width: 100%;
+    height: 60px;
 }
 
 
-
-//----
-.container{
-    margin: 0 auto;
+.customBox{
     width: 80%;
     display: flex;
     justify-content: center;
-    .display{
+    margin: 0 auto;
+    border:  1px black solid;
+    .leftArea{
         width: 50%;
+        .canvasWrap{
+            overflow: hidden;
+            padding-left: -5px;
+            width: 410px;
+            height: 500px;
+        }
     }
-    .setting{
+    .rightArea{
         width: 50%;
+        gap: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content:space-around;
+        align-items:center;
+        border:  1px rgb(228, 78, 78) solid;
+        button{
+            border-radius: 5px;
+            border: .5px #ccc solid;
+            &:hover{
+                background-color: $yellow;
+            }
+        }
+        .colorOptions{
+            width: 30%;
+            display: flex;
+            justify-content:space-around;
+            cursor: pointer;
+            .everyColor{
+                width: 50px;
+                height: 50px;
+                
+            }
+        }
+        .addImgae{
+            
+        }
+        .addText{
+
+        }
+        .addCart{
+            display: flex;
+            gap: 10px;
+        }
     }
+}
+
+
+.customLightBox{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    z-index: 88;
+    background-color: rgba(24, 22, 22, 0.66);
+    button{
+        background-color: $yellow;
+        border: .5s #ccc solid;
+    }
+    .customLightBoxBg{
+        width: 80%;
+        margin: 0 auto;
+        background-color: rgba(255, 255, 255, 0.66);
+        display: flex;
+    justify-content: center;
+    .canvasModal{
+        width: 50%;
+        height: 500px;
+        border: 1px rgb(31, 29, 29) solid;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        canvas{
+           
+        }
+    }
+    .rightbox{
+        width: 50%;
+        height: 350px;
+        border-radius: 10px;
+    }
+    form{
+        width: 100%;
+    }
+    }
+    
 }
