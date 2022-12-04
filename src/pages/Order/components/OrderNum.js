@@ -85,43 +85,63 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
       })
       return
     }
-    const json = await {
-      sid: el.order_sid,
-      star: stars,
-      text: writeEva,
-    }
-    if (el.product_sid) {
-      const res = await axios.post(`${MY_HOST}/order/writeEvaPro`, json)
-      if (res.data.affectedRows === 1) {
-        setStar(1)
-        setChange(!change)
-        setLightOpen(!lightOpen)
+    Swal.fire({
+      title: '確認送出?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '確定!',
+      cancelButtonText: '取消',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          icon: 'success',
+          title: '已完成',
+          showConfirmButton: false,
+          timer: 1200,
+        })
+        setTimeout(async () => {
+          const json = await {
+            sid: el.order_sid,
+            star: stars,
+            text: writeEva,
+          }
+          if (el.product_sid) {
+            const res = await axios.post(`${MY_HOST}/order/writeEvaPro`, json)
+            if (res.data.affectedRows === 1) {
+              setStar(1)
+              setChange(!change)
+              setLightOpen(!lightOpen)
+            }
+          }
+          if (el.room_sid) {
+            const res = await axios.post(`${MY_HOST}/order/writeEvaRoom`, json)
+            if (res.data.affectedRows === 1) {
+              setStar(1)
+              setChange(!change)
+              setLightOpen(!lightOpen)
+            }
+          }
+          if (el.campaign_sid) {
+            const res = await axios.post(`${MY_HOST}/order/writeEvaCamp`, json)
+            if (res.data.affectedRows === 1) {
+              setStar(1)
+              setChange(!change)
+              setLightOpen(!lightOpen)
+            }
+          }
+          if (el.rental_sid) {
+            const res = await axios.post(`${MY_HOST}/order/writeEvaRen`, json)
+            if (res.data.affectedRows === 1) {
+              setStar(1)
+              setChange(!change)
+              setLightOpen(!lightOpen)
+            }
+          }
+        }, 1200)
       }
-    }
-    if (el.room_sid) {
-      const res = await axios.post(`${MY_HOST}/order/writeEvaRoom`, json)
-      if (res.data.affectedRows === 1) {
-        setStar(1)
-        setChange(!change)
-        setLightOpen(!lightOpen)
-      }
-    }
-    if (el.campaign_sid) {
-      const res = await axios.post(`${MY_HOST}/order/writeEvaCamp`, json)
-      if (res.data.affectedRows === 1) {
-        setStar(1)
-        setChange(!change)
-        setLightOpen(!lightOpen)
-      }
-    }
-    if (el.rental_sid) {
-      const res = await axios.post(`${MY_HOST}/order/writeEvaRen`, json)
-      if (res.data.affectedRows === 1) {
-        setStar(1)
-        setChange(!change)
-        setLightOpen(!lightOpen)
-      }
-    }
+    })
   }
   const photo = (el) => {
     let img

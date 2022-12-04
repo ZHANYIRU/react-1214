@@ -123,9 +123,18 @@
   width: 85%;
   margin-top: 25px;
   margin-left: auto;
+  display: flex;
   input{
     border: none;
     outline: none;
     height: 25px;
+  }
+  h4{
+    margin-left:100px ;
+    font-size: 25px;
+  }
+  span:last-child{
+    margin-left: 15px;
+    color:#c25c5c ;
   }
 }

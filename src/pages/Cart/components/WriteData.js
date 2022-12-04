@@ -12,8 +12,8 @@ function WriteData({
   setUseCoupon,
 }) {
   const { data } = useContext(MemberContext)
-  const { writeUser, setWriteUser } = useContext(ProCartContext)
-
+  const { writeUser, setWriteUser, cartPrice, moneyFormat } =
+    useContext(ProCartContext)
   //(訂購人)
   const [memberUser, setMemberUser] = useState({
     name: '',
@@ -43,6 +43,31 @@ function WriteData({
       email: data.email,
     })
   }
+  const [couponStyle, setCouponStyle] = useState(0)
+  //使用狀態
+  // if (
+  //   useCoupon === 'Hiking837' ||
+  //   useCoupon === 'Hero837' ||
+  //   useCoupon === 'Happy837'
+  // ) {
+  //   setCouponStyle(true)
+  //   console.log(123)
+  // } else {
+  //   setCouponStyle(false)
+  //   console.log(456)
+  // }
+  //優惠卷的金額
+  let coupon = 0
+  if (useCoupon === 'Hiking837') {
+    coupon = 100
+  }
+  if (useCoupon === 'Hero837') {
+    coupon = 80
+  }
+  if (useCoupon === 'Happy837') {
+    coupon = 50
+  }
+
   useEffect(() => {
     getUserInfo()
   }, [])
@@ -241,6 +266,18 @@ function WriteData({
             name="coupon"
             onChange={(e) => setUseCoupon(e.target.value)}
           />
+          <h4>
+            總金額：
+            <span
+              style={{
+                textDecoration: couponStyle && 'line-through',
+                color: couponStyle && '#777777',
+              }}
+            >
+              {moneyFormat(cartPrice)}
+            </span>
+            <span>{moneyFormat(cartPrice - coupon)}</span>
+          </h4>
         </div>
       </div>
     </>
