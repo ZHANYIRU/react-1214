@@ -26,7 +26,6 @@ function CartDetailRoom() {
                   }
                   key={el.sid}
                 >
-                  <input type="checkbox" />
                   <div className={`${styled.wrapRight} ${styled.roomR}`}>
                     <div className={styled.roomText}>
                       <h2>{el.name}</h2>

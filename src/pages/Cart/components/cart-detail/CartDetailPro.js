@@ -33,7 +33,6 @@ function CartDetailPro() {
                   }
                   key={`${el.sid}+${el.size}`}
                 >
-                  <input type="checkbox" />
                   <div className={styled.wrapRight}>
                     <div className={styled.roomText}>
                       <h2>{el.name}</h2>

@@ -270,13 +270,13 @@ function WriteData({
             總金額：
             <span
               style={{
-                textDecoration: couponStyle && 'line-through',
-                color: couponStyle && '#777777',
+                textDecoration: coupon !== 0 && 'line-through',
+                color: coupon !== 0 && '#777777',
               }}
             >
               {moneyFormat(cartPrice)}
             </span>
-            <span>{moneyFormat(cartPrice - coupon)}</span>
+            <span>{coupon !== 0 && moneyFormat(cartPrice - coupon)}</span>
           </h4>
         </div>
       </div>
