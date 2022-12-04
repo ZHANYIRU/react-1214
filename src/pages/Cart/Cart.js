@@ -8,6 +8,16 @@ import OkOrder from './child-pages/OkOrder'
 import ProCartContext from '../../contexts/ProCartContext'
 import { useState, useRef, useEffect, useContext } from 'react'
 function Cart() {
+  //勾選自動帶入會員資料
+  const [same, setSame] = useState(false)
+  //填寫(收件人)
+  const [writeUser, setWriteUser] = useState({
+    name: '',
+    mobile: 0,
+    address: '',
+    email: '',
+    text: '',
+  })
   //寄送方式
   const [familySelect, setFamilySelect] = useState('')
   //付款方式
@@ -71,6 +81,10 @@ function Cart() {
               setPaySelect={setPaySelect}
               useCoupon={useCoupon}
               setUseCoupon={setUseCoupon}
+              same={same}
+              setSame={setSame}
+              writeUser={writeUser}
+              setWriteUser={setWriteUser}
             />
           </div>
           <BuyCart step={step} setStep={setStep} buyBar={buyBar} />

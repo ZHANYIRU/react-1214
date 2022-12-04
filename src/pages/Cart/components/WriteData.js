@@ -10,10 +10,13 @@ function WriteData({
   setPaySelect,
   useCoupon,
   setUseCoupon,
+  same,
+  setSame,
+  writeUser,
+  setWriteUser,
 }) {
   const { data } = useContext(MemberContext)
-  const { writeUser, setWriteUser, cartPrice, moneyFormat } =
-    useContext(ProCartContext)
+  const { cartPrice, moneyFormat } = useContext(ProCartContext)
   //(訂購人)
   const [memberUser, setMemberUser] = useState({
     name: '',
@@ -22,9 +25,6 @@ function WriteData({
     email: '',
     text: '',
   })
-
-  //勾選自動帶入會員資料
-  const [same, setSame] = useState(false)
   const family = ['宅配', '郵寄']
   const pay = ['ATM匯款', 'LINE PAY', '信用卡']
   const handleM = (e) => {
@@ -43,19 +43,6 @@ function WriteData({
       email: data.email,
     })
   }
-  const [couponStyle, setCouponStyle] = useState(0)
-  //使用狀態
-  // if (
-  //   useCoupon === 'Hiking837' ||
-  //   useCoupon === 'Hero837' ||
-  //   useCoupon === 'Happy837'
-  // ) {
-  //   setCouponStyle(true)
-  //   console.log(123)
-  // } else {
-  //   setCouponStyle(false)
-  //   console.log(456)
-  // }
   //優惠卷的金額
   let coupon = 0
   if (useCoupon === 'Hiking837') {
@@ -67,7 +54,6 @@ function WriteData({
   if (useCoupon === 'Happy837') {
     coupon = 50
   }
-
   useEffect(() => {
     getUserInfo()
   }, [])

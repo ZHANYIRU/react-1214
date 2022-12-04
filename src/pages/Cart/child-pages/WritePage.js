@@ -1,8 +1,7 @@
 import styled from '../../../styles/cart-scss/WritePage.module.scss'
 import CheckData from '../components/CheckData'
 import WriteData from '../components/WriteData'
-import ProCartContext from '../../../contexts/ProCartContext'
-import { useEffect, useState, useContext } from 'react'
+import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
 function WritePage({
   step,
@@ -13,9 +12,12 @@ function WritePage({
   setPaySelect,
   useCoupon,
   setUseCoupon,
+  same,
+  setSame,
+  writeUser,
+  setWriteUser,
 }) {
-  const { writeUser } = useContext(ProCartContext)
-  //旋轉狀態
+  // //填寫資料旋轉狀態
   const [rotate, setRotate] = useState({
     transform: 'rotateY(180deg)',
   })
@@ -115,6 +117,10 @@ function WritePage({
             setPaySelect={setPaySelect}
             useCoupon={useCoupon}
             setUseCoupon={setUseCoupon}
+            same={same}
+            setSame={setSame}
+            writeUser={writeUser}
+            setWriteUser={setWriteUser}
           />
         </div>
       </div>
