@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from '../../styles/product-scss/Custom.module.scss'
 // import { Form } from 'react-bootstrap'
-import { useRef } from 'react'
+import { useRef, useState, useContext, useEffect } from 'react'
+import ProCartContext from '../../contexts/ProCartContext'
 import { fabric } from 'fabric'
-import { useEffect, useState } from 'react'
 import CustomLightBox from './components/customLightBox'
 import custom1 from './img/custom1.png'
 import custom2 from './img/custom2.png'
@@ -19,6 +19,8 @@ export default function Customs(props) {
   const [canvas, setCanvas] = useState('')
   const [canvasModal, setCanvasModal] = useState('')
   const [show, setShow] = useState(false)
+  const { addProCart } = useContext(ProCartContext)
+  const [customImage, setCustomImage] = useState()
   // 尺寸選取
   const [size2, setSize2] = useState()
   //衣服size
@@ -265,6 +267,7 @@ export default function Customs(props) {
     // uploadImage.hasControls = false
     // uploadImage.hasBorders = false
     const base64 = picRef.current.toDataURL()
+    setCustomImage(base64)
     console.log(base64)
   }
 
@@ -291,7 +294,7 @@ export default function Customs(props) {
           </div>
         </div>
         <div className={styled.rightArea}>
-          <h2 className={styled.customTitle}>客製化排汗衫</h2>
+          <h1 className={styled.customTitle}>客製化排汗衫</h1>
           <div className={styled.colorOptions}>顏色{renderBgImages()}</div>
           <div className={styled.size}>{clotheChose}</div>
           <div className={styled.addImgae}>
@@ -330,6 +333,7 @@ export default function Customs(props) {
               type="button"
               onClick={() => {
                 savePic()
+                addProCart(719, '客製排汗衫', 'S', 2990, 1, customImage)
               }}
             >
               加入購物車
