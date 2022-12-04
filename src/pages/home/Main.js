@@ -5,6 +5,7 @@ import Leaderboard from './leaderboard'
 import Weather from './Weather'
 import Bird from './Bird.js'
 import axios from 'axios'
+import Group from './Group'
 
 function Main({ setFtr }) {
   const mainHeight = useRef(null)
@@ -124,11 +125,11 @@ function Main({ setFtr }) {
           </div>
         </div>
         <div className={styled.section3}>
+          <Group />
+        </div>
+        <div className={styled.section4}>
           <Leaderboard />
         </div>
-        {/* <div className={styled.section3}>
-          <Leaderboard />
-        </div> */}
       </div>
     </>
   )
