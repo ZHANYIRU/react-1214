@@ -5,6 +5,10 @@ import { useRef } from 'react'
 import { fabric } from 'fabric'
 import { useEffect, useState } from 'react'
 import CustomLightBox from './components/customLightBox'
+import custom1 from './img/custom1.png'
+import custom2 from './img/custom2.png'
+import custom3 from './img/custom3.png'
+import custom4 from './img/custom4.png'
 export default function Customs(props) {
   const picRef = useRef()
   const [color, setColor] = useState('#000000')
@@ -15,27 +19,54 @@ export default function Customs(props) {
   const [canvas, setCanvas] = useState('')
   const [canvasModal, setCanvasModal] = useState('')
   const [show, setShow] = useState(false)
+  // 尺寸選取
+  const [size2, setSize2] = useState()
+  //衣服size
+  const clotheSize = ['S', 'M', 'L']
+  const clotheChose = (
+    <>
+      <h2>商品規格</h2>
+      {clotheSize.map((v, i) => {
+        return (
+          <>
+            <div
+              className={
+                size2 == clotheSize[i]
+                  ? `${styled.standardBoxChose}`
+                  : `${styled.standardBox}`
+              }
+              onClick={() => {
+                setSize2(v)
+              }}
+            >
+              {v}
+            </div>
+          </>
+        )
+      })}
+    </>
+  )
 
   const bgImages = [
     {
       alt: '白T',
-      src: '/img/gallery-5d5afd3f1c7d6.png',
-      color: 'white',
+      src: custom1,
+      color: '#184A43',
     },
     {
       alt: '排汗衫',
-      src: '/img/gallery-5d5afd3f1c7d6.png',
-      color: 'black',
+      src: custom2,
+      color: '#3B4358',
     },
     {
       alt: '排汗衫2',
-      src: 'https://img.my-best.tw/press_component/item_part_images/7cbcd08ae9afa0e80ba0155dd08242e1.png?ixlib=rails-4.2.0&q=70&lossless=0&w=640&h=640&fit=clip',
-      color: 'red',
+      src: custom3,
+      color: '#424547',
     },
     {
       alt: '排汗衫3',
-      src: 'https://img.my-best.tw/press_component/item_part_images/7cbcd08ae9afa0e80ba0155dd08242e1.png?ixlib=rails-4.2.0&q=70&lossless=0&w=640&h=640&fit=clip',
-      color: '#ccc',
+      src: custom4,
+      color: '#184992',
     },
   ]
 
@@ -86,14 +117,16 @@ export default function Customs(props) {
     }
   }
   const renderBgImages = () => {
-    return bgImages.map((image) => {
+    return bgImages.map((image, i) => {
       return (
         <>
           <div
             className={styled.everyColor}
             style={{ backgroundColor: `${image.color}` }}
+            key={i}
             onClick={() => {
-              setBgColor(image.color)
+              // setBgColor(image.color)
+              setBg(image.src)
             }}
           ></div>
         </>
@@ -133,7 +166,7 @@ export default function Customs(props) {
       if (modalType === 'bg') setBg(modifiedImage)
       if (modalType === 'photo') {
         pasteImage.src = modifiedImage
-        pasteImage.setAttribute('crossOrigin', 'Anonymous')
+        // pasteImage.setAttribute('crossOrigin', 'Anonymous')
         pasteImage.onload = function () {
           const image = new fabric.Image(pasteImage)
           image.set({
@@ -149,7 +182,7 @@ export default function Customs(props) {
 
   const initDeleteIcon = () => {
     const deleteImg = document.createElement('img')
-    deleteImg.src = '/img/close-circle-outline.svg'
+    deleteImg.src = '/img/close_circle_outline.svg'
     deleteImg.classList.add('deleteBtn')
 
     const control = {
@@ -189,7 +222,7 @@ export default function Customs(props) {
   }
 
   useEffect(() => {
-    let canvasWidth = 500
+    let canvasWidth = 450
     const canvas = new fabric.Canvas('canvas', {
       width: canvasWidth,
       height: canvasWidth,
@@ -204,27 +237,6 @@ export default function Customs(props) {
       canvas.requestRenderAll()
     })
     initDeleteIcon()
-  }, [])
-
-  // useEffect(() => {
-  //   let canvasW = 500
-  //   let canvasH = 500
-
-  //   const canvas = new fabric.Canvas('canvas', {
-  //     width: canvasW,
-  //     height: canvasH,
-  //   })
-
-  //   setCanvas(canvas)
-  // }, [])
-
-  useEffect(() => {
-    let canvasWidth = 300
-    const canvasModal = new fabric.Canvas('canvasModal', {
-      width: canvasWidth,
-      height: canvasWidth,
-    })
-    setCanvasModal(canvasModal)
   }, [])
 
   const addText = () => {
@@ -256,13 +268,6 @@ export default function Customs(props) {
     console.log(base64)
   }
 
-  // fabric.Image.fromURL(props.bgImages[0].src, function (img) {
-  //   img.scaleToWidth(canvas.width)
-  //   img.scaleToHeight(canvas.height)
-  //   canvas.setBackgroundImage(img)
-  //   canvas.requestRenderAll()
-  // })
-
   return (
     <>
       <div className={styled.empty}></div>
@@ -286,16 +291,18 @@ export default function Customs(props) {
           </div>
         </div>
         <div className={styled.rightArea}>
-          <div className={styled.colorOptions}>{renderBgImages()}</div>
+          <h2 className={styled.customTitle}>客製化排汗衫</h2>
+          <div className={styled.colorOptions}>顏色{renderBgImages()}</div>
+          <div className={styled.size}>{clotheChose}</div>
           <div className={styled.addImgae}>
-            <button
-              onClick={() => handleShow('photo')}
-              type="button"
-              className="btn_f"
-              data-bs-toggle="modal"
-              data-bs-target="#exampleModal"
-            >
+            <button onClick={() => handleShow('photo')} type="button">
               新增照片
+            </button>
+            <button onClick={reset} type="button">
+              重設
+            </button>
+            <button onClick={output} type="button">
+              下載
             </button>
           </div>
           <div className={styled.addText}>
@@ -317,27 +324,24 @@ export default function Customs(props) {
             >
               加入文字
             </button>
-            <div className={styled.addCart}>
-              <button onClick={reset} type="button" className="btn_g mt-2">
-                重設
-              </button>
-              <button
-                onClick={output}
-                className="btn_l ms-2 mt-2"
-                type="button"
-              >
-                下載
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  savePic()
-                }}
-              >
-                加入購物車
-              </button>
-            </div>
+          </div>
+          <div className={styled.addCart}>
+            <button
+              type="button"
+              onClick={() => {
+                savePic()
+              }}
+            >
+              加入購物車
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                savePic()
+              }}
+            >
+              直接購買
+            </button>
           </div>
         </div>
       </div>

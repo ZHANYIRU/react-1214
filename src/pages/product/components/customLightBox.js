@@ -25,28 +25,31 @@ export default function CustomLightBox({
       <div className={styled.customLightBox}>
         <div className={styled.customLightBoxBg}>
           <div className={styled.topArea}>
-            <form
-              onChange={(e) => {
-                e.preventDefault()
-              }}
-            >
-              <input
-                type="file"
-                id="imageUpload"
-                accept="image/*"
-                onChange={(e) => {
-                  uploadPhoto(e)
+            <div className={styled.title}>新增照片</div>
+            <div className={styled.escape}>
+              <img
+                src="/img/close_circle_outline.svg"
+                alt="escape"
+                onClick={() => {
+                  setShow(false)
                 }}
               />
-            </form>
-            <img
-              src=""
-              alt="escape"
-              onClick={() => {
-                setShow(false)
+            </div>
+          </div>
+          <form
+            onChange={(e) => {
+              e.preventDefault()
+            }}
+          >
+            <input
+              type="file"
+              id="imageUpload"
+              accept="image/*"
+              onChange={(e) => {
+                uploadPhoto(e)
               }}
             />
-          </div>
+          </form>
           <div className={styled.canvasModal}>
             <canvas id="canvasModal"></canvas>
           </div>

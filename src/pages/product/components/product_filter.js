@@ -197,7 +197,6 @@ export default function ProductFilter({
   // filter樣式 (電腦版)
   const webFilter = (
     <div className={fixedd ? `${styled.filter2}` : `${styled.filter}`}>
-      {mob ? '' : ''}
       <form onSubmit={handleFormSubmit}>
         <h2>價格</h2>
         <div className={styled.pricebox}>
@@ -240,28 +239,27 @@ export default function ProductFilter({
           })}
         </select>
 
-        <div className={styled.genderRadio}>
-          {genderOptions.map((v, i) => {
-            return (
-              <div key={i} className={styled.genderBox}>
-                <input
-                  type="radio"
-                  id={v}
-                  checked={genders === v}
-                  name="gender"
-                  value={v}
-                  onChange={(e) => {
-                    setGenders(e.target.value)
-                  }}
-                ></input>
-                <label htmlFor={v}> {v}</label>
-              </div>
-            )
-          })}
-        </div>
-
         {nav !== 'accessories' && (
           <>
+            <div className={styled.genderRadio}>
+              {genderOptions.map((v, i) => {
+                return (
+                  <div key={i} className={styled.genderBox}>
+                    <input
+                      type="radio"
+                      id={v}
+                      checked={genders === v}
+                      name="gender"
+                      value={v}
+                      onChange={(e) => {
+                        setGenders(e.target.value)
+                      }}
+                    ></input>
+                    <label htmlFor={v}> {v}</label>
+                  </div>
+                )
+              })}
+            </div>
             <h2> 防水等級</h2>
             <div className={styled.checkBoxWrap}>
               {wProofOptions.map((v, i) => {
