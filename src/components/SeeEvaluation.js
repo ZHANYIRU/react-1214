@@ -67,7 +67,7 @@ function SeeEvaluation({ el }) {
                 ></img>
               ) : (
                 <img
-                  src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
+                  src="http://localhost:3000/img/default_avatar.png"
                   alt="postImg"
                 ></img>
               )}

@@ -12,6 +12,8 @@ function Cart() {
   const [familySelect, setFamilySelect] = useState('')
   //付款方式
   const [paySelect, setPaySelect] = useState('')
+  //優惠卷
+  const [useCoupon, setUseCoupon] = useState('')
   //for完成訂單的顯示
   const [forOk, setForOk] = useState({
     orderN: 0,
@@ -67,6 +69,8 @@ function Cart() {
               setFamilySelect={setFamilySelect}
               paySelect={paySelect}
               setPaySelect={setPaySelect}
+              useCoupon={useCoupon}
+              setUseCoupon={setUseCoupon}
             />
           </div>
           <BuyCart step={step} setStep={setStep} buyBar={buyBar} />
