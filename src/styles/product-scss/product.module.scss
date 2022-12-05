@@ -37,12 +37,13 @@ body{
             border-radius: 10px;
             outline: none;
             border: none;
-            background-color: rgb(120, 167, 110);
-            // color: wheat;
+            background-color: #004a13;
+            color: white;
             text-align: center;
             margin: 0 auto;
             &:hover{
                 background-color: $yellow;
+                color: #000;
             }
         }
     }
@@ -356,6 +357,12 @@ p{
     align-items: center;
     margin-top: 10px;
     margin-bottom: 10px;
+    input{
+        border-radius: 5px;
+        background-color: #fff;
+        outline: none;
+        border: #ccc .5px solid;
+    }
 }
 .dash{
     width: 10px;
@@ -400,7 +407,7 @@ input{
 }
 .filterButton{
     border-radius: 5px;
-    background-color: #FF0F00;
+    background-color: #004a13;
     font-size: 1.2rem;
     color: #fff;
     border: none;
@@ -435,7 +442,7 @@ input{
         margin: 5px 0 5px 0;
     }
 }
-@media screen and (max-width:1350px) {
+@media screen and (max-width:1550px) {
     .cardBigBox{
         width: 100%;
         // position: relative;
@@ -443,7 +450,64 @@ input{
         z-index: -1;
     }
     
-    
+    .product_nav{
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content:center;
+        align-items: center;
+        height: 45px;
+        margin-bottom: 50px;
+        transition: .5s inherit;
+        h2{
+            font-size: 1.2rem;
+            color: #000;
+            font-weight: 700;
+            &:hover{
+                // color: #FF0F00;
+                font-size: 1.3rem;
+            }
+        }
+        .product_nav_box1{
+                    @include nav_box;
+                    // padding-left: 50px;
+                    flex-grow: 0.4;
+            div{
+                @include text;
+            }
+            a{
+                text-decoration: none;
+            }
+        }
+        .product_nav_box3{
+                    @include nav_box;
+                    // padding-right: 50px;
+                    flex-grow: 0.4;
+            div{
+                @include text;
+            }
+            a{
+                text-decoration: none;
+            }
+        }
+        .product_nav_box2{
+            flex-grow: 0.2;
+            height: 100%;
+           position: relative;
+           border-bottom: 2px black solid;
+           flex-shrink: 1;
+            
+            p{
+                @include text;
+                text-align: center;
+                font-size: .8rem;
+                transform: translateY(-10px);
+                font-weight: 700;
+                // z-index: 11;
+            }
+        }
+      }
         .cardbox{
     
             // min-width: 912px;
@@ -556,6 +620,192 @@ input{
         }
 }
 
+
+@media screen and (max-width:1100px) {
+    .cardBigBox{
+        width: 100%;
+        // position: relative;
+        margin: 0 auto;
+        z-index: -1;
+    }
+    
+    .product_nav{
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content:center;
+        align-items: center;
+        height: 45px;
+        margin-bottom: 50px;
+        transition: .5s inherit;
+        h2{
+            font-size: 1.2rem;
+            color: #000;
+            font-weight: 700;
+            &:hover{
+                // color: #FF0F00;
+                font-size: 1.3rem;
+            }
+        }
+        .product_nav_box1{
+                    @include nav_box;
+                    // padding-left: 50px;
+                    flex-grow: 0.4;
+            h2{
+                font-size: 1rem;
+                font-weight: 700;
+                font-family: 'Noto Sans TC', sans-serif;
+            }
+            a{
+                text-decoration: none;
+            }
+        }
+        .product_nav_box3{
+                    @include nav_box;
+                    // padding-right: 50px;
+                    flex-grow: 0.4;
+            h2{
+                font-size: 1.2rem;
+                font-weight: 700;
+                font-family: 'Noto Sans TC', sans-serif;
+            }
+            a{
+                text-decoration: none;
+            }
+        }
+        .product_nav_box2{
+            flex-grow: 0.2;
+            height: 100%;
+           position: relative;
+           border-bottom: 2px black solid;
+           flex-shrink: 1;
+            
+            p{
+                @include text;
+                text-align: center;
+                font-size: .8rem;
+                transform: translateY(-10px);
+                font-weight: 700;
+                // z-index: 11;
+            }
+        }
+      }
+        .cardbox{
+    
+            // min-width: 912px;
+            
+            width:100%;
+            display: flex;
+            flex-wrap:wrap;
+            // gap: 20px;
+            justify-content:flex-start;
+            align-items:flex-start;
+           
+            .cardWrap{
+                width: 50%;
+                padding: 10px;
+                // overflow: hidden;
+            }
+           
+            .card{
+                width: 100%;
+                padding: 15px;
+                border-radius: 10px;
+                background-color: #fff;
+                box-shadow: 0px 4px 16px rgba(0,0,0,.25);
+                cursor: pointer;
+                overflow: hidden;
+                position: relative;
+                .banner {
+                    /* content: url('檔案路徑'); */
+                    display: block;
+                
+                    /* 以上兩個，當作區塊時，必須使用 */
+                    overflow: hidden;
+                    
+                    background-color: rgb(84, 224, 249);
+                    color: #fff;
+                    font-size: 1.2rem;
+                    line-height: 1.8rem;
+                    width: 200px;
+                    height: 30px;
+                    position: absolute;
+                    text-align: center;
+                    top: 20px;
+                    right: -60px;
+                    transform: rotate(40deg);
+                    z-index: 2;
+                }
+                .banner2{
+                    /* content: url('檔案路徑'); */
+                    display: block;
+                
+                    /* 以上兩個，當作區塊時，必須使用 */
+                    overflow: hidden;
+                    background-color: rgb(95, 61, 246);
+                    color: #fff;
+                    font-size: 1.2rem;
+                    line-height: 1.8rem;
+                    width: 200px;
+                    height: 30px;
+                    position: absolute;
+                    text-align: center;
+                    top: 20px;
+                    right: -60px;
+                    transform: rotate(40deg);
+                    z-index: 2;
+                }
+            }
+            
+            .imgWrap{
+                width: 100%;
+                height: 280px;
+                display: flex;
+                justify-content: center;
+                overflow: hidden;
+                &:hover img{
+                    transition: .5s;
+                    transform:scale(1.2,1.2);
+                    z-index: 1;
+                }
+               
+                img{
+                    width: 100%;
+                    object-fit:cover;
+                    margin-bottom: 10px;
+                   
+                }
+                
+            }
+            a{
+                color: #000;
+               
+            }
+            p{
+                margin-bottom: 0px;
+                height: 50px;
+                line-height: 1rem;
+                font-size: .9rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+            }
+            h2{
+                font-size: 1.2rem;
+                span{
+                    color:#FF0F00;
+                }
+            }    
+    
+        }
+}
+
+
+
+
 @media screen and (max-width:390px) {
     @mixin text{
         font-size: 1rem;
@@ -583,12 +833,13 @@ input{
                 border-radius: 10px;
                 outline: none;
                 border: none;
-                background-color: rgb(120, 167, 110);
-                // color: wheat;
+                background-color: #004a13;
+                color: white;
                 text-align: center;
                 margin: 0 auto;
                 &:hover{
                     background-color: $yellow;
+                    color: #000;
                 }
             }
         }
@@ -658,6 +909,7 @@ input{
     .product_nav{
         margin: 0 auto;
         width: 100%;
+
         display: flex;
         flex-wrap: nowrap;
         justify-content:center;
@@ -690,6 +942,9 @@ input{
             a{
                 text-decoration: none;
             }
+            h2{
+                font-size: .9rem;
+            }
         }
         .product_nav_box3{
                     @include nav_box;
@@ -699,6 +954,9 @@ input{
                     background-color: #F3DD8E;
             a{
                 text-decoration: none;
+            }
+            h2{
+                font-size: .9rem;
             }
         }
         .product_nav_box2{
@@ -842,7 +1100,7 @@ input{
 .filterButton{
     width: 45%;
     border-radius: 5px;
-    background-color: #FF0F00;
+    background-color: #004a13;
     font-size: 1.2rem;
     color: #fff;
     border: none;
@@ -878,113 +1136,3 @@ input{
 
 
 
-// @media  screen and (max-width:1700px) {
-//     .cardbox{
-
-//         // min-width: 912px;
-        
-//         width:100%;
-//         display: flex;
-//         flex-wrap:wrap;
-//         gap: 10px;
-//         justify-content:flex-start;
-//         align-items:flex-start;
-       
-        
-       
-//         .card{
-//             width: 24%;
-//             // border: 1px black solid;
-//             // height: 370px;
-//             border-radius: 10px;
-//             padding: 15px;
-//             background-color: #fff;
-//             box-shadow: 0px 4px 16px rgba(0,0,0,.25);
-//             cursor: pointer;
-//             overflow: hidden;
-//             position: relative;
-//             .banner {
-//                 /* content: url('檔案路徑'); */
-//                 display: block;
-            
-//                 /* 以上兩個，當作區塊時，必須使用 */
-//                 overflow: hidden;
-                
-//                 background-color: rgb(84, 224, 249);
-//                 color: #fff;
-//                 font-size: 1.2rem;
-//                 line-height: 1.8rem;
-//                 width: 200px;
-//                 height: 30px;
-//                 position: absolute;
-//                 text-align: center;
-//                 top: 20px;
-//                 right: -60px;
-//                 transform: rotate(40deg);
-//                 z-index: 2;
-//             }
-//             .banner2{
-//                 /* content: url('檔案路徑'); */
-//                 display: block;
-            
-//                 /* 以上兩個，當作區塊時，必須使用 */
-//                 overflow: hidden;
-//                 background-color: rgb(95, 61, 246);
-//                 color: #fff;
-//                 font-size: 1.2rem;
-//                 line-height: 1.8rem;
-//                 width: 200px;
-//                 height: 30px;
-//                 position: absolute;
-//                 text-align: center;
-//                 top: 20px;
-//                 right: -60px;
-//                 transform: rotate(40deg);
-//                 z-index: 2;
-//             }
-//         }
-        
-//         .imgWrap{
-//             width: 100%;
-//             height: 280px;
-//             display: flex;
-//             justify-content: center;
-//             overflow: hidden;
-//             &:hover img{
-//                 transition: .5s;
-//                 transform:scale(1.2,1.2);
-//                 z-index: 1;
-//             }
-           
-//             img{
-//                 width: 100%;
-//                 object-fit:cover;
-//                 margin-bottom: 10px;
-               
-//             }
-            
-//         }
-//         a{
-//             color: #000;
-           
-//         }
-//         p{
-//             margin-bottom: 0px;
-//             height: 50px;
-//             line-height: 1rem;
-//             font-size: .9rem;
-//             overflow: hidden;
-//             text-overflow: ellipsis;
-//             display: -webkit-box;
-//             -webkit-line-clamp: 3;
-//             -webkit-box-orient: vertical;
-//         }
-//         h2{
-//             font-size: 1.2rem;
-//             span{
-//                 color:#FF0F00;
-//             }
-//         }    
-
-//     }
-//     }

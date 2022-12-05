@@ -5,6 +5,7 @@ import { useRef, useState, useContext, useEffect } from 'react'
 import ProCartContext from '../../contexts/ProCartContext'
 import { fabric } from 'fabric'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import CustomLightBox from './components/customLightBox'
 import custom1 from './img/custom1.png'
 import custom2 from './img/custom2.png'
@@ -13,7 +14,9 @@ import custom4 from './img/custom4.png'
 export default function Customs(props) {
   const picRef = useRef()
   const [color, setColor] = useState('#000000')
-  const [bgColor, setBgColor] = useState('')
+  const [choseWhitchSid, setChoseWhitchSid] = useState('')
+  const [choseWhitchClothe, setChoseWhitchClothe] = useState('')
+  const [num, setNum] = useState(1)
   const [uploadImage, setUploadImage] = useState('')
   const [modalType, setModalType] = useState('')
   const [modalTitle, setModalTitle] = useState('')
@@ -22,6 +25,27 @@ export default function Customs(props) {
   const [show, setShow] = useState(false)
   const { addProCart } = useContext(ProCartContext)
   const [customImage, setCustomImage] = useState('a')
+  //format currency
+  const moneyFormat = (price) => {
+    let a = Number(price)
+    let b = a.toLocaleString('zh-TW', { style: 'currency', currency: 'TWD' })
+    let c = b.split('.')
+    return c[0]
+  }
+  //sweetAlert2
+  const sweetAlert = (text) => {
+    Swal.fire({
+      title: `${text}`,
+      icon: 'info',
+      scrollbarPadding: true,
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown',
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp',
+      },
+    })
+  }
   // 尺寸選取
   const [size2, setSize2] = useState()
   //衣服size
@@ -52,22 +76,26 @@ export default function Customs(props) {
 
   const bgImages = [
     {
-      alt: '白T',
+      sid: 719,
+      alt: '客製化 排汗衫 (綠)',
       src: custom1,
       color: '#184A43',
     },
     {
-      alt: '排汗衫',
+      sid: 720,
+      alt: '客製化 排汗衫 (灰藍)',
       src: custom2,
       color: '#3B4358',
     },
     {
-      alt: '排汗衫2',
+      sid: 721,
+      alt: '客製化 排汗衫 (灰)',
       src: custom3,
       color: '#424547',
     },
     {
-      alt: '排汗衫3',
+      sid: 722,
+      alt: '客製化 排汗衫 (深藍)',
       src: custom4,
       color: '#184992',
     },
@@ -86,6 +114,28 @@ export default function Customs(props) {
 
       canvas.setBackgroundImage(img)
       canvas.requestRenderAll()
+    })
+  }
+
+  //加入購物車方法
+  const addCartFunction = () => {
+    Swal.fire({
+      title: '將此商品加入購物車?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '確定!',
+      cancelButtonText: '取消',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          icon: 'success',
+          title: '已加入!',
+          showCancelButton: false,
+        })
+        savePic()
+      }
     })
   }
 
@@ -128,7 +178,8 @@ export default function Customs(props) {
             style={{ backgroundColor: `${image.color}` }}
             key={i}
             onClick={() => {
-              // setBgColor(image.color)
+              setChoseWhitchClothe(image.alt)
+              setChoseWhitchSid(image.sid)
               setBg(image.src)
             }}
           ></div>
@@ -296,20 +347,26 @@ export default function Customs(props) {
       .post('http://localhost:3001/product/custom', fd, config)
       .then((response) => {
         customImg = response.data
-        console.log(customImg);
-        addProCart(719, '客製排汗衫', 'S', 2990, 1, customImg)
+        console.log(customImg)
+        addProCart(
+          choseWhitchSid,
+          choseWhitchClothe,
+          size2,
+          4990,
+          num,
+          customImg
+        )
         setCustomImage(customImg)
       })
   }
 
-  //將檔案丟到後端處理並儲存
-  async function customImageSave() {
-    const response = await axios.post('http://localhost:3001/product/custom', {
-      customIamge: customImage,
-    })
-    const r = response.data
-    console.log('我事後端', r)
-  }
+  // //將檔案丟到後端處理並儲存
+  // async function customImageSave() {
+  //   const response = await axios.post('http://localhost:3001/product/custom', {
+  //     customIamge: customImage,
+  //   })
+  //   const r = response.data
+  // }
 
   useEffect(() => {}, [customImage])
 
@@ -328,10 +385,7 @@ export default function Customs(props) {
       )}
       <div className={styled.customBox}>
         <div className={styled.leftArea}>
-          <div
-            className={styled.canvasWrap}
-            style={{ background: `${bgColor}` }}
-          >
+          <div className={styled.canvasWrap}>
             <canvas id="canvas" ref={picRef}></canvas>
           </div>
         </div>
@@ -339,6 +393,30 @@ export default function Customs(props) {
           <h1 className={styled.customTitle}>客製化排汗衫</h1>
           <div className={styled.colorOptions}>顏色{renderBgImages()}</div>
           <div className={styled.size}>{clotheChose}</div>
+          <h2 className={styled.price}>金額：{moneyFormat(4990)}</h2>
+          <div className={styled.howNum}>
+            <p>商品數量</p>
+            <div className={styled.numBox}>
+              <div className={styled.numBox1}>
+                <i
+                  className="fa-solid fa-minus"
+                  onClick={() => {
+                    if (num < 2) return
+                    setNum(num - 1)
+                  }}
+                ></i>
+              </div>
+              <div className={styled.numBox2}>{num}</div>
+              <div className={styled.numBox3}>
+                <i
+                  className="fa-solid fa-plus"
+                  onClick={() => {
+                    setNum(num + 1)
+                  }}
+                ></i>
+              </div>
+            </div>
+          </div>
           <div className={styled.addImgae}>
             <button onClick={() => handleShow('photo')} type="button">
               新增照片
@@ -374,7 +452,12 @@ export default function Customs(props) {
             <button
               type="button"
               onClick={async () => {
-                savePic()
+                if (!size2) {
+                  return sweetAlert('請選尺寸')
+                } else {
+                  // savePic()
+                  addCartFunction()
+                }
               }}
             >
               加入購物車
@@ -382,7 +465,11 @@ export default function Customs(props) {
             <button
               type="button"
               onClick={() => {
-                customImageSave()
+                if (!size2) {
+                  return sweetAlert('請選尺寸')
+                } else {
+                  savePic()
+                }
               }}
             >
               直接購買

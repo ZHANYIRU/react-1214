@@ -36,10 +36,50 @@ body{
     }
     .rightArea{
         width: 50%;
-        gap: 30px;
+        gap: 20px;
         display: flex;
         flex-direction: column;
         align-items:center;
+        .price{
+            width: 80%;
+            font-size: 1.5rem;
+            font-weight: 700;   
+            text-align: left;
+        }
+        .howNum{
+            width: 80%;
+            display: flex;
+            // justify-content: center;
+            align-items: center;
+            margin-bottom: 20px;
+            p{
+                font-size: 1.2rem;
+                font-weight: 700;
+                margin-right: 30px;
+            }
+            .numBox{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.3rem;
+                border: 1px solid #ccc;
+                
+                .numBox1{
+                    border-right: 1px solid #ccc;
+                    padding: 5px;
+                    cursor: pointer;
+                }
+                .numBox2{
+                    padding: 5px;
+                }
+                .numBox3{
+                    border-left: 1px solid #ccc;
+                    padding: 5px;
+                    cursor: pointer;
+                }
+            }
+            
+        }
         .customTitle{
             width: 80%;
             text-align: left;
@@ -178,7 +218,7 @@ body{
         width: 40%;
         // padding: 10px;
         margin: 120px auto 0 auto;
-        background-color: rgba(255, 255, 255, 0.719);
+        background-color: #fff;
         border-radius: 10px;
         display: flex;
         flex-direction: column;
@@ -190,11 +230,11 @@ body{
             display: flex;
             justify-content:space-between;
             align-items: center;
-            border-bottom: 2px solid black;
+            border-bottom: 1px solid #ccc;
             .title{
                 margin-left: 10px;
                 font-size: 1.5rem;
-                font-weight: 400;
+                font-weight: 300;
             }
             .escape{
                 cursor: pointer;
@@ -227,21 +267,30 @@ body{
             gap: 50px;
             width: 100%;
             margin-bottom:30px ;
-            button{
-                background-color: rgb(172, 172, 234);
+            button:nth-child(1){
+                background-color: #004a13;
+                color: white;
                 border: .5s #ccc solid;
-                width: 50px;
-                height: 30px;
+                width:60px;
+                height: 35px;
                 border-radius: 5px;
                 border:none ;
+                &:hover{
+                    background-color: $yellow;
+                    color: black;
+                }
             }
             button:nth-child(2){
-                background-color: #fff;
-                border: .5s #ccc solid;
-                width: 50px;
-                height: 30px;
+                background-color: #ccc;
+                color: black;
+                width:60px;
+                height: 35px;
                 border-radius: 5px;
                 border:none ;
+                &:hover{
+                    background-color: $yellow;
+                    color: black;
+                }
             }
         }
     }

@@ -124,6 +124,9 @@ function Navbar() {
               <Link to="/product">登山用品</Link>
             </li>
             <li>
+              <Link to="/product/custom">客製衣服</Link>
+            </li>
+            <li>
               <Link to="/camp">套裝行程</Link>
             </li>
             <li>

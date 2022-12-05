@@ -1,8 +1,8 @@
-import log from 'eslint-plugin-react/lib/util/log'
 import React from 'react'
-import { useState, useContext, useEffect, useCallback } from 'react'
+import { useState, useContext, useEffect, useCallback, useRef } from 'react'
 import MemberContext from '../../contexts/MemberContext'
 import styled from '../../styles/home-scss/Leaderboard.module.scss'
+import styled2 from '../../styles/home-scss/Background.module.scss'
 import axios from 'axios'
 import _ from 'lodash'
 import InputIME from '../../components/InputIME'
@@ -70,8 +70,6 @@ export default function Leaderboard() {
   const [allData, setAllData] = useState([{}])
 
   const fetchYourFd = async (searchKeyword) => {
-    console.log('我是測試1', memberData.data.member_sid)
-
     const response = await axios.get(
       `http://localhost:3001/product/borad/api?mid=${memberData.data.member_sid}`
     )
@@ -106,18 +104,25 @@ export default function Leaderboard() {
   //   getUsersBySearchWord()
   // }, [switchBtn])
   return (
-    <div className={styled.LeaderboardWrap}>
-      <div className={styled.Leaderboard}>
-        <div className={styled.topWrap}>
-          <h2>登山英雄排行榜</h2>
-          <form action="">
-            <i className="fa-solid fa-magnifying-glass"></i>
-            <InputIME
-              value={searchKeyword}
-              onChange={handleChange}
-              placeholder="搜尋山友"
-            />
-            {/* <input
+    <>
+      <div className={styled2.bgc}>
+        <div className={`${styled2.box} ${styled2.div1}`}></div>
+        <div className={`${styled2.box} ${styled2.div2}`}></div>
+        <div className={`${styled2.box} ${styled2.div3}`}></div>
+      </div>
+
+      <div className={styled.LeaderboardWrap}>
+        <div className={styled.Leaderboard}>
+          <div className={styled.topWrap}>
+            <h2>登山英雄排行榜</h2>
+            <form action="">
+              <i className="fa-solid fa-magnifying-glass"></i>
+              <InputIME
+                value={searchKeyword}
+                onChange={handleChange}
+                placeholder="搜尋山友"
+              />
+              {/* <input
               type="text"
               placeholder="搜尋山友"
               value={inputKeyword}
@@ -125,92 +130,93 @@ export default function Leaderboard() {
                 setInputKeyword(e.target.value)
               }}
             /> */}
-          </form>
-        </div>
-        <div className={styled.board}>
-          <div className={styled.head}>
-            <div className={styled.ranking}>名次</div>
-            <div className={styled.name}>名稱</div>
-            <div className={styled.height}>累積高度</div>
+            </form>
           </div>
-          <ul
-            className={display.length > 4 ? `${styled.flexUl}` : ''}
-            // style={
-            //   display.length > 5 ? { overflowY: 'scroll'} : ''
-            // }
-          >
-            {display.map((v, i) => {
-              const rank = i + 1
-              return (
-                <li key={v.member_sid}>
-                  <div className={styled.ranking}>
-                    {rank === 1 || 2 || 3 ? (
-                      <img
-                        src={`http://localhost:3001/imgs/zx/borad_${rank}.png`}
-                        alt=""
-                      />
-                    ) : (
-                      rank
-                    )}
-                    {rank !== 1 && rank !== 2 && rank !== 3 ? rank : ''}
-                  </div>
-                  <div className={styled.nameWrap}>
-                    <div className={styled.empty}>
-                      <div className={styled.imgBorder}>
-                        <div className={styled.imgWrap}>
-                          <img src={v.avatar} alt="" />
-                        </div>
-                      </div>
-                      <p>{v.name}</p>
-                    </div>
-                  </div>
-                  <div className={styled.height}>
-                    {!memberData.auth && !switchBtn
-                      ? '你尚未登入'
-                      : howHeight(v.total_height)}
-                  </div>
-                </li>
-              )
-            })}
-          </ul>
-          <div className={styled.switchBtn}>
-            <div
-              className={styled.btnLeft}
-              onClick={() => {
-                setSwitchBtn(true)
-                fetchAll()
-              }}
-              style={
-                switchBtn
-                  ? {
-                      backgroundColor: 'rgba(230, 189, 67, 0.701)',
-                      color: '#000',
-                    }
-                  : {}
-              }
-            >
-              全部排名
+          <div className={styled.board}>
+            <div className={styled.head}>
+              <div className={styled.ranking}>名次</div>
+              <div className={styled.name}>名稱</div>
+              <div className={styled.height}>累積高度</div>
             </div>
-            <div
-              className={styled.btnRight}
-              onClick={() => {
-                setSwitchBtn(false)
-                fetchYourFd()
-              }}
-              style={
-                switchBtn
-                  ? {}
-                  : {
-                      backgroundColor: 'rgba(230, 189, 67, 0.701)',
-                      color: '#000',
-                    }
-              }
+            <ul
+              className={display.length > 4 ? `${styled.flexUl}` : ''}
+              // style={
+              //   display.length > 5 ? { overflowY: 'scroll'} : ''
+              // }
             >
-              好友排名
+              {display.map((v, i) => {
+                const rank = i + 1
+                return (
+                  <li key={v.member_sid}>
+                    <div className={styled.ranking}>
+                      {rank === 1 || 2 || 3 ? (
+                        <img
+                          src={`http://localhost:3001/imgs/zx/borad_${rank}.png`}
+                          alt=""
+                        />
+                      ) : (
+                        rank
+                      )}
+                      {rank !== 1 && rank !== 2 && rank !== 3 ? rank : ''}
+                    </div>
+                    <div className={styled.nameWrap}>
+                      <div className={styled.empty}>
+                        <div className={styled.imgBorder}>
+                          <div className={styled.imgWrap}>
+                            <img src={v.avatar} alt="" />
+                          </div>
+                        </div>
+                        <p>{v.name}</p>
+                      </div>
+                    </div>
+                    <div className={styled.height}>
+                      {!memberData.auth && !switchBtn
+                        ? '你尚未登入'
+                        : howHeight(v.total_height)}
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
+            <div className={styled.switchBtn}>
+              <div
+                className={styled.btnLeft}
+                onClick={() => {
+                  setSwitchBtn(true)
+                  fetchAll()
+                }}
+                style={
+                  switchBtn
+                    ? {
+                        backgroundColor: 'rgba(230, 189, 67, 0.701)',
+                        color: '#000',
+                      }
+                    : {}
+                }
+              >
+                全部排名
+              </div>
+              <div
+                className={styled.btnRight}
+                onClick={() => {
+                  setSwitchBtn(false)
+                  fetchYourFd()
+                }}
+                style={
+                  switchBtn
+                    ? {}
+                    : {
+                        backgroundColor: 'rgba(230, 189, 67, 0.701)',
+                        color: '#000',
+                      }
+                }
+              >
+                好友排名
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
