@@ -16,7 +16,7 @@ function BuyCart({ step, setStep, buyBar }) {
           style={{ position: buyBar && 'relative' }}
         >
           <div className={styled.wrap}>
-            <div>
+            {/* <div>
               <input
                 type="checkbox"
                 id="check"
@@ -26,7 +26,7 @@ function BuyCart({ step, setStep, buyBar }) {
                 }}
               />
               <label htmlFor="check">全選</label>
-            </div>
+            </div> */}
             <p>總訂購數量：{cartItem ? cartItem : 0}</p>
             <div className={styled.price}>
               <span>總金額：</span>

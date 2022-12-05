@@ -2,8 +2,8 @@ import styled from '../../../styles/cart-scss/OK.module.scss'
 import ProCartContext from '../../../contexts/ProCartContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useContext } from 'react'
-function OkOrder({ forOk }) {
-  const { cleanCart, setWriteUser, moneyFormat } = useContext(ProCartContext)
+function OkOrder({ forOk, setWriteUser }) {
+  const { cleanCart, moneyFormat } = useContext(ProCartContext)
   const navigate = useNavigate()
   useEffect(() => {
     cleanCart()

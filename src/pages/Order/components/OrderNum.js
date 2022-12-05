@@ -1,15 +1,15 @@
 import styled from '../../../styles/order-scss/OrderNum.module.scss'
+import { MY_HOST } from '../../../my-config'
 import StarRating from '../../product/components/starRating'
 import ProCartContext from '../../../contexts/ProCartContext.js'
-import MemberContext from '../../../contexts/MemberContext'
 import SeeEvaluation from '../../../components/SeeEvaluation'
+import Swal from 'sweetalert2'
 import dayjs from 'dayjs'
 import axios from 'axios'
 import { useState, useContext } from 'react'
 function OrderNum({ momOrder, open, setOpen, change, setChange }) {
   const { stars, setStar, lookLightBox, setLookLightBox } =
     useContext(ProCartContext)
-  const { data } = useContext(MemberContext)
   //母訂單+子訂單
   const { rows, proRows, roomRows, renRows, camRows } = momOrder
   //給lightBox
@@ -42,9 +42,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
   //讀取評價
   const getEva = async (proSid, roomSid, renSid, campSid) => {
     if (proSid) {
-      const res = await axios.get(
-        `http://localhost:3001/order/lookEva?proSid=${proSid}`
-      )
+      const res = await axios.get(`${MY_HOST}/order/lookEva?proSid=${proSid}`)
       if (res.data) {
         setLookEva(res.data)
         setLookLightBox(!lookLightBox)
@@ -52,9 +50,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
       }
     }
     if (roomSid) {
-      const res = await axios.get(
-        `http://localhost:3001/order/lookEva?roomSid=${roomSid}`
-      )
+      const res = await axios.get(`${MY_HOST}/order/lookEva?roomSid=${roomSid}`)
       if (res.data) {
         setLookEva(res.data)
         setLookLightBox(!lookLightBox)
@@ -62,9 +58,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
       }
     }
     if (renSid) {
-      const res = await axios.get(
-        `http://localhost:3001/order/lookEva?renSid=${renSid}`
-      )
+      const res = await axios.get(`${MY_HOST}/order/lookEva?renSid=${renSid}`)
       if (res.data) {
         setLookEva(res.data)
         setLookLightBox(!lookLightBox)
@@ -72,9 +66,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
       }
     }
     if (campSid) {
-      const res = await axios.get(
-        `http://localhost:3001/order/lookEva?campSid=${campSid}`
-      )
+      const res = await axios.get(`${MY_HOST}/order/lookEva?campSid=${campSid}`)
       if (res.data) {
         setLookEva(res.data)
         setLookLightBox(!lookLightBox)
@@ -85,72 +77,85 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
   //寫入評價
   const addEva = async (el) => {
     if (writeEva === '') {
-      alert('請輸入文字')
+      Swal.fire({
+        icon: 'error',
+        title: '評價內容不得為空',
+        showConfirmButton: false,
+        timer: 1500,
+      })
       return
     }
-    const json = await {
-      sid: el.order_sid,
-      star: stars,
-      text: writeEva,
-    }
-    if (el.product_sid) {
-      const res = await axios.post(
-        'http://localhost:3001/order/writeEvaPro',
-        json
-      )
-      if (res.data.affectedRows === 1) {
-        setStar(1)
-        setChange(!change)
-        setLightOpen(!lightOpen)
+    Swal.fire({
+      title: '確認送出?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: '確定!',
+      cancelButtonText: '取消',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          icon: 'success',
+          title: '已完成',
+          showConfirmButton: false,
+          timer: 1200,
+        })
+        setTimeout(async () => {
+          const json = await {
+            sid: el.order_sid,
+            star: stars,
+            text: writeEva,
+          }
+          if (el.product_sid) {
+            const res = await axios.post(`${MY_HOST}/order/writeEvaPro`, json)
+            if (res.data.affectedRows === 1) {
+              setStar(1)
+              setChange(!change)
+              setLightOpen(!lightOpen)
+            }
+          }
+          if (el.room_sid) {
+            const res = await axios.post(`${MY_HOST}/order/writeEvaRoom`, json)
+            if (res.data.affectedRows === 1) {
+              setStar(1)
+              setChange(!change)
+              setLightOpen(!lightOpen)
+            }
+          }
+          if (el.campaign_sid) {
+            const res = await axios.post(`${MY_HOST}/order/writeEvaCamp`, json)
+            if (res.data.affectedRows === 1) {
+              setStar(1)
+              setChange(!change)
+              setLightOpen(!lightOpen)
+            }
+          }
+          if (el.rental_sid) {
+            const res = await axios.post(`${MY_HOST}/order/writeEvaRen`, json)
+            if (res.data.affectedRows === 1) {
+              setStar(1)
+              setChange(!change)
+              setLightOpen(!lightOpen)
+            }
+          }
+        }, 1200)
       }
-    }
-    if (el.room_sid) {
-      const res = await axios.post(
-        'http://localhost:3001/order/writeEvaRoom',
-        json
-      )
-      if (res.data.affectedRows === 1) {
-        setStar(1)
-        setChange(!change)
-        setLightOpen(!lightOpen)
-      }
-    }
-    if (el.campaign_sid) {
-      const res = await axios.post(
-        'http://localhost:3001/order/writeEvaCamp',
-        json
-      )
-      if (res.data.affectedRows === 1) {
-        setStar(1)
-        setChange(!change)
-        setLightOpen(!lightOpen)
-      }
-    }
-    if (el.rental_sid) {
-      const res = await axios.post(
-        'http://localhost:3001/order/writeEvaRen',
-        json
-      )
-      if (res.data.affectedRows === 1) {
-        setStar(1)
-        setChange(!change)
-        setLightOpen(!lightOpen)
-      }
-    }
+    })
   }
   const photo = (el) => {
     let img
     if (el.product_img) {
-      img = `http://localhost:3001/imgs/zx/${el.product_img}`
+      img = `${MY_HOST}/imgs/zx/${el.product_img}`
     }
     if (el.room_img) {
-      img = `http://localhost:3001/room_img/${el.room_img}`
+      img = `${MY_HOST}/room_img/${el.room_img}`
     }
     if (el.rental_img) {
-      img = `http://localhost:3001/rental_img/${el.rental_img[0]}`
+      img = `${MY_HOST}/rental_img/${el.rental_img[0]}`
     }
     if (el.mainImage) {
-      img = `http://localhost:3001/room_img/${el.mainImage}`
+      img = `${MY_HOST}/room_img/${el.mainImage}`
     }
     return img
   }
@@ -359,7 +364,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                             <div className={styled.contentDe}>
                               <div className={styled.imgWrap}>
                                 <img
-                                  src={`http://localhost:3001/room_img/${el3.img}`}
+                                  src={`${MY_HOST}/room_img/${el3.img}`}
                                   alt=""
                                 />
                               </div>
@@ -497,7 +502,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                               <div className={styled.contentDe}>
                                 <div className={styled.imgWrap}>
                                   <img
-                                    src={`http://localhost:3001/rental_img/${el5.rental_img[0]}`}
+                                    src={`${MY_HOST}/rental_img/${el5.rental_img[0]}`}
                                     alt=""
                                   />
                                 </div>

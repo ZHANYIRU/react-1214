@@ -3,10 +3,20 @@ import { useState, useContext, useEffect } from 'react'
 import MemberContext from '../../../contexts/MemberContext'
 import ProCartContext from '../../../contexts/ProCartContext'
 import styled from '../../../styles/cart-scss/writeData.module.scss'
-function WriteData({ familySelect, setFamilySelect, paySelect, setPaySelect }) {
+function WriteData({
+  familySelect,
+  setFamilySelect,
+  paySelect,
+  setPaySelect,
+  useCoupon,
+  setUseCoupon,
+  same,
+  setSame,
+  writeUser,
+  setWriteUser,
+}) {
   const { data } = useContext(MemberContext)
-  const { writeUser, setWriteUser } = useContext(ProCartContext)
-
+  const { cartPrice, moneyFormat } = useContext(ProCartContext)
   //(訂購人)
   const [memberUser, setMemberUser] = useState({
     name: '',
@@ -15,9 +25,6 @@ function WriteData({ familySelect, setFamilySelect, paySelect, setPaySelect }) {
     email: '',
     text: '',
   })
-
-  //勾選自動帶入會員資料
-  const [same, setSame] = useState(false)
   const family = ['宅配', '郵寄']
   const pay = ['ATM匯款', 'LINE PAY', '信用卡']
   const handleM = (e) => {
@@ -36,6 +43,17 @@ function WriteData({ familySelect, setFamilySelect, paySelect, setPaySelect }) {
       email: data.email,
     })
   }
+  //優惠卷的金額
+  let coupon = 0
+  if (useCoupon === 'Hiking837') {
+    coupon = 100
+  }
+  if (useCoupon === 'Hero837') {
+    coupon = 80
+  }
+  if (useCoupon === 'Happy837') {
+    coupon = 50
+  }
   useEffect(() => {
     getUserInfo()
   }, [])
@@ -43,44 +61,6 @@ function WriteData({ familySelect, setFamilySelect, paySelect, setPaySelect }) {
     <>
       <div className={styled.writeWrap}>
         <h2>填寫資料</h2>
-        <div className={styled.catchPay}>
-          <div className={styled.catch}>
-            <span>取件方式</span>
-            <select
-              value={familySelect}
-              onChange={(e) => {
-                setFamilySelect(e.target.value)
-              }}
-            >
-              <option value="">----請選擇----</option>
-              {family.map((v, i) => {
-                return (
-                  <option value={v} key={i}>
-                    {v}
-                  </option>
-                )
-              })}
-            </select>
-          </div>
-          <div className={styled.pay}>
-            <span>付款方式</span>
-            <select
-              value={paySelect}
-              onChange={(e) => {
-                setPaySelect(e.target.value)
-              }}
-            >
-              <option value="">----請選擇----</option>
-              {pay.map((v, i) => {
-                return (
-                  <option value={v} key={i}>
-                    {v}
-                  </option>
-                )
-              })}
-            </select>
-          </div>
-        </div>
         <div className={styled.buyPeople}>
           <h2>訂購人資料</h2>
           <div className={styled.buyInput}>
@@ -225,6 +205,65 @@ function WriteData({ familySelect, setFamilySelect, paySelect, setPaySelect }) {
               />
             </div>
           </div>
+        </div>
+        <div className={styled.catchPay}>
+          <div className={styled.catch}>
+            <span>取件方式</span>
+            <select
+              value={familySelect}
+              onChange={(e) => {
+                setFamilySelect(e.target.value)
+              }}
+            >
+              <option value="">----請選擇----</option>
+              {family.map((v, i) => {
+                return (
+                  <option value={v} key={i}>
+                    {v}
+                  </option>
+                )
+              })}
+            </select>
+          </div>
+          <div className={styled.pay}>
+            <span>付款方式</span>
+            <select
+              value={paySelect}
+              onChange={(e) => {
+                setPaySelect(e.target.value)
+              }}
+            >
+              <option value="">----請選擇----</option>
+              {pay.map((v, i) => {
+                return (
+                  <option value={v} key={i}>
+                    {v}
+                  </option>
+                )
+              })}
+            </select>
+          </div>
+        </div>
+        <div className={styled.useCoupon}>
+          <span>使用優惠卷：</span>
+          <input
+            value={useCoupon}
+            type="text"
+            name="coupon"
+            onChange={(e) => setUseCoupon(e.target.value)}
+          />
+          <h4>
+            總金額：
+            <span
+              style={{
+                textDecoration: coupon !== 0 && 'line-through',
+                color: coupon !== 0 && '#777777',
+              }}
+            >
+              {moneyFormat(cartPrice)}
+            </span>
+            <span>{coupon !== 0 && moneyFormat(cartPrice - coupon)}</span>
+          </h4>
         </div>
       </div>
     </>

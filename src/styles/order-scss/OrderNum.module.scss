@@ -121,6 +121,8 @@
     .imgWrap {
       width: 92px;
       height: 92px;
+      border-radius: 5px;
+      overflow: hidden;
       img {
         width: 100%;
         height: 100%;
@@ -242,14 +244,6 @@
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background-image: conic-gradient(
-    from 180deg at 50% 50%,
-    #f7f7f7 0deg,
-    #a09f9e 69.37deg,
-    #9a9998 163.12deg,
-    #4b4946 275.62deg,
-    #f7f7f7 360deg
-  );
   box-shadow: 1px 4px 4px rgba(0, 0, 0, 0.5);
   overflow: hidden;
   img {
@@ -260,6 +254,38 @@
     border: 7px solid transparent;
     box-sizing: border-box;
   }
+}
+.gold {
+  background-image: conic-gradient(
+    from 180deg at 50% 50%,
+    #fff6c4 0deg,
+    #ffc31c 69.37deg,
+    #ecc900 163.12deg,
+    #ffbf00 275.62deg,
+    #fff6c4 360deg
+  );
+}
+
+.silver {
+  background-image: conic-gradient(
+    from 180deg at 50% 50%,
+    #f7f7f7 0deg,
+    #a09f9e 69.37deg,
+    #9a9998 163.12deg,
+    #4b4946 275.62deg,
+    #f7f7f7 360deg
+  );
+}
+
+.bronze {
+  background-image: conic-gradient(
+    from 180deg at 50% 50%,
+    #fff1c7 0deg,
+    #b37e4a 69.37deg,
+    #c27f3b 163.12deg,
+    #98600c 275.62deg,
+    #fff1c7 360deg
+  );
 }
 .memberText {
   margin: 0 20px;

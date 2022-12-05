@@ -11,25 +11,45 @@ function subscribe(eventName, listener) {
 function unsubscribe(eventName, listener) {
   document.removeEventListener(eventName, listener)
 }
-function Pay({ paySelect, familySelect, step, setStep, setForOk }) {
+function Pay({
+  paySelect,
+  familySelect,
+  step,
+  setStep,
+  setForOk,
+  useCoupon,
+  writeUser,
+}) {
   const { data } = useContext(MemberContext)
-  const { pro, ren, room, camp, cartPrice, moneyFormat, writeUser } =
+  const { pro, ren, room, camp, cartPrice, moneyFormat } =
     useContext(ProCartContext)
+  //用來開啟新視窗
   const newLinePay = useRef(null)
   const [paid, setPaid] = useState(false)
+  //優惠卷的金額
+  let coupon = 0
+  if (useCoupon === 'Hiking837') {
+    coupon = 100
+  }
+  if (useCoupon === 'Hero837') {
+    coupon = 80
+  }
+  if (useCoupon === 'Happy837') {
+    coupon = 50
+  }
   const testOrder = {
     order: {
-      amount: cartPrice,
+      amount: cartPrice - coupon,
       currency: 'TWD',
       packages: [
         {
           id: 'products_1',
-          amount: cartPrice,
+          amount: cartPrice - coupon,
           products: [
             {
               name: 'hiking棒棒',
               quantity: 1,
-              price: cartPrice,
+              price: cartPrice - coupon,
             },
           ],
         },
@@ -41,7 +61,7 @@ function Pay({ paySelect, familySelect, step, setStep, setForOk }) {
       camp: camp,
       ren: ren,
       memberSid: data.member_sid,
-      totalPrice: cartPrice,
+      totalPrice: cartPrice - coupon,
       pay: paySelect,
       user: writeUser,
     },
@@ -60,13 +80,13 @@ function Pay({ paySelect, familySelect, step, setStep, setForOk }) {
   return (
     <>
       <div className={styled.choose}>
-        <button
+        {/* <button
           onClick={() => {
             setStep(step + 1)
           }}
         >
           下一步test
-        </button>
+        </button> */}
         <button
           onClick={() => {
             setStep(step - 1)
@@ -78,7 +98,7 @@ function Pay({ paySelect, familySelect, step, setStep, setForOk }) {
 
       <div className={styled.pay}>
         <p>
-          總金額:{moneyFormat(cartPrice)}
+          總金額:{moneyFormat(cartPrice - coupon)}
           <span>{paid ? '已付款' : '尚未付款'}</span>
         </p>
         <button
@@ -95,7 +115,7 @@ function Pay({ paySelect, familySelect, step, setStep, setForOk }) {
                 family: familySelect,
                 pay: paySelect,
                 orderDay: dayjs(testOrder.order.orderId).format('YYYY-MM-DD'),
-                totalPrice: cartPrice,
+                totalPrice: cartPrice - coupon,
               })
               newLinePay.current = window.open(
                 `${data?.info.paymentUrl.web}`,
