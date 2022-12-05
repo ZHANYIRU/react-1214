@@ -5,17 +5,22 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding:3rem 0rem;
+    padding-top:1rem;
+    margin-top:20px;
+    // border:1px solid black;
 
+    input{
+        width:300px;
+    }
     input,
     button {
-        font-size: 2rem;
+        font-size: 1rem;
         padding: 0.25rem;
         border: 3px solid rgb(43, 0, 43)
     }
 
     button {
-        background-color: rgb(73, 1, 73);
+        background-color: rgb(126, 226, 171);
         color:white;
     }
 }

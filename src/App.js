@@ -16,6 +16,7 @@ import Room from './pages/room/Room'
 import Rental from './pages/rental/Rental'
 import Rental_detail from './pages/rental/Rental_detail'
 import AI from './pages/rental/AI'
+import Store from './pages/rental/Store'
 import Commnent from './pages/rental/components/Commnent'
 
 import Cart from './pages/Cart/Cart'
@@ -61,6 +62,7 @@ function App() {
               <Route path="/rental/:sid" element={<Rental_detail />} />
 
               <Route path="/AI" element={<AI />} />
+              <Route path="/store" element={<Store />} />
               <Route path="/commnent" element={<Commnent />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/pay/confirm" element={<Confirm />} />

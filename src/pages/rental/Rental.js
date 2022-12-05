@@ -5,7 +5,7 @@ import Search from './components/Search'
 import RentalCard from './components/RentalCard'
 import rentalcss from '../../styles/rental-scss/rental.module.scss'
 // import RentalFilter from './components/RentalFilter'
-import { useLocation } from 'react-router-dom'
+// import { useLocation } from 'react-router-dom'
 import CustomIcons from './components/CustomIcons'
 
 function Rental(props) {
@@ -22,10 +22,11 @@ function Rental(props) {
     page: 1,
     order_by: '',
     brand: [],
-    feature: '',
+    label: [],
   })
 
   const brandOption = ['TiiTENT', 'Snow Peak', 'ZANE ARTS', 'HILLEBERG']
+  const labelOption = ['二人帳', '四人帳']
   const rental_url_new = 'http://localhost:3001/rental/pageApi'
 
   async function getList() {
@@ -45,26 +46,6 @@ function Rental(props) {
     setTotalPages(response.data.totalPages)
   }
 
-  // 這兩種篩選最終都要廢棄
-  // const priceOrder = function (text) {
-  //   const newData = [...data]
-
-  //   newData.sort((a, b) => {
-  //     if (text === 'lowToHigh') {
-  //       return a.rental_price - b.rental_price
-  //     } else {
-  //       return b.rental_price - a.rental_price
-  //     }
-  //   })
-  //   setData(newData)
-  // }
-  // const timeOrder = function () {
-  //   const newData = [...data]
-  //   newData.sort((a, b) => {
-  //     return Date.parse(a.rental_time) - Date.parse(b.rental_time)
-  //   })
-  //   setData(newData)
-  // }
   useEffect(() => {
     getList()
   }, [conditions])
@@ -72,15 +53,7 @@ function Rental(props) {
   return (
     <>
       <div className={rentalcss.empty}></div>
-      {/*  <button
-        onClick={() => {
-          setPage(page + 1)
-        }}
-      >
-        +
-      </button> */}
 
-      {/* <RentalFilter /> */}
       <div className={rentalcss.container}>
         {/* 製作輪播牆 */}
         <Carousel />
@@ -100,18 +73,28 @@ function Rental(props) {
           </div>
           <div className={rentalcss.order}>
             <p>一共{count}筆數</p>
-            <p>最新上架</p>
+            <p
+              onClick={() =>
+                setConditions({ ...conditions, order_by: 'time_DESC', page: 1 })
+              }
+            >
+              最新上架
+            </p>
             <p>最熱銷</p>
             <p
               onClick={() =>
-                setConditions({ ...conditions, order_by: 'price_DESC' })
+                setConditions({
+                  ...conditions,
+                  order_by: 'price_DESC',
+                  page: 1,
+                })
               }
             >
               價格高到低
             </p>
             <p
               onClick={() =>
-                setConditions({ ...conditions, order_by: 'price_ASC' })
+                setConditions({ ...conditions, order_by: 'price_ASC', page: 1 })
               }
             >
               價格低到高
@@ -162,14 +145,40 @@ function Rental(props) {
             <div className={rentalcss.kind}>
               <p>特色</p>
               <div className={rentalcss.checkboxcontainer}>
-                <div>
-                  <input type="checkbox" />
-                  <label>二人帳</label>
-                </div>
-                <div>
-                  <input type="checkbox" />
-                  <label>四人帳</label>
-                </div>
+                {labelOption &&
+                  labelOption.map((v, i) => {
+                    return (
+                      <div key={i}>
+                        <input
+                          type="checkbox"
+                          checked={conditions.label.includes(v)}
+                          value={v}
+                          onChange={(e) => {
+                            const value = e.target.value
+                            if (conditions.label.includes(v)) {
+                              const dellabel = conditions.label.filter(
+                                (c) => c !== value
+                              )
+                              setConditions({
+                                ...conditions,
+                                label: dellabel,
+                                page: 1,
+                              })
+                            } else {
+                              const addlabel = conditions.label
+                              addlabel.push(value)
+                              setConditions({
+                                ...conditions,
+                                label: addlabel,
+                                page: 1,
+                              })
+                            }
+                          }}
+                        />
+                        <label htmlFor="">{v}</label>
+                      </div>
+                    )
+                  })}
               </div>
             </div>
             <div className={rentalcss.kind}>
@@ -181,7 +190,11 @@ function Rental(props) {
                     name="order_by"
                     value=""
                     onClick={() => {
-                      console.log('123')
+                      setConditions({
+                        ...conditions,
+                        order_by: 'time_DESC',
+                        page: 1,
+                      })
                     }}
                   />
                   <label>最新上架</label>
@@ -190,7 +203,11 @@ function Rental(props) {
                     name="order_by"
                     value="price_DESC"
                     onClick={() =>
-                      setConditions({ ...conditions, order_by: 'price_DESC' })
+                      setConditions({
+                        ...conditions,
+                        order_by: 'price_DESC',
+                        page: 1,
+                      })
                     }
                   />
                   <label>價格高到低</label>
@@ -199,20 +216,17 @@ function Rental(props) {
                     name="order_by"
                     value="price_ASC"
                     onClick={() =>
-                      setConditions({ ...conditions, order_by: 'price_ASC' })
+                      setConditions({
+                        ...conditions,
+                        order_by: 'price_ASC',
+                        page: 1,
+                      })
                     }
                   />
                   <label>價格低到高</label>
                 </div>
-                {/* <div>
-                  <input type="checkbox" />
-                  <label>測試資料二</label>
-                </div> */}
               </div>
             </div>
-            {/* <div className={rentalcss.kind}>
-              <button>篩選商品</button>
-            </div> */}
           </div>
         </div>
 
