@@ -21,7 +21,7 @@ export default function Customs(props) {
   const [canvasModal, setCanvasModal] = useState('')
   const [show, setShow] = useState(false)
   const { addProCart } = useContext(ProCartContext)
-  const [customImage, setCustomImage] = useState()
+  const [customImage, setCustomImage] = useState('a')
   // 尺寸選取
   const [size2, setSize2] = useState()
   //衣服size
@@ -265,9 +265,43 @@ export default function Customs(props) {
   }
 
   function savePic() {
-    const base64 = picRef.current.toDataURL()
-    setCustomImage(base64)
+    const img = picRef.current.toDataURL()
+
+    const arr = img.split(',')
+    const mime = arr[0].match(/:(.*?);/)[1]
+    const bstr = atob(arr[1])
+    let n = bstr.length
+    const u8arr = new Uint8Array(n)
+    while (n) {
+      u8arr[n - 1] = bstr.charCodeAt(n - 1)
+      n -= 1 // to make eslint happy
+    }
+    const filename = Date.now()
+    const dataURLtoFile = new File([u8arr], filename, { type: mime })
+    console.log(dataURLtoFile)
+    const fd = new FormData()
+    fd.append('avatar', dataURLtoFile)
+    return toBackEndImg(fd)
   }
+
+  // const fd = new FormData()
+  // fd.append('img', dataURLtoFile, 'canvasPic')
+
+  const toBackEndImg = (fd) => {
+    let customImg
+    const config = {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    }
+    axios
+      .post('http://localhost:3001/product/custom', fd, config)
+      .then((response) => {
+        customImg = response.data
+        console.log(customImg);
+        addProCart(719, '客製排汗衫', 'S', 2990, 1, customImg)
+        setCustomImage(customImg)
+      })
+  }
+
   //將檔案丟到後端處理並儲存
   async function customImageSave() {
     const response = await axios.post('http://localhost:3001/product/custom', {
@@ -276,6 +310,9 @@ export default function Customs(props) {
     const r = response.data
     console.log('我事後端', r)
   }
+
+  useEffect(() => {}, [customImage])
+
   return (
     <>
       <div className={styled.empty}></div>
@@ -336,10 +373,8 @@ export default function Customs(props) {
           <div className={styled.addCart}>
             <button
               type="button"
-              onClick={() => {
+              onClick={async () => {
                 savePic()
-
-                addProCart(719, '客製排汗衫', 'S', 2990, 1, customImage)
               }}
             >
               加入購物車

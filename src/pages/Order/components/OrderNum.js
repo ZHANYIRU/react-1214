@@ -286,10 +286,20 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                           >
                             <div className={styled.contentDe}>
                               <div className={styled.imgWrap}>
-                                <img
-                                  src={`http://localhost:3001/imgs/zx/${el2.product_img}`}
-                                  alt=""
-                                />
+                                {el2.product_sid === 719 ||
+                                el2.product_sid === 720 ||
+                                el2.product_sid === 721 ||
+                                el2.product_sid === 722 ? (
+                                  <img
+                                    src={`http://localhost:3001/uploads/${el2.custom_img}`}
+                                    alt=""
+                                  />
+                                ) : (
+                                  <img
+                                    src={`http://localhost:3001/imgs/zx/${el2.product_img}`}
+                                    alt=""
+                                  />
+                                )}
                               </div>
                               <p>{el2.product_name}</p>
                               <p>{moneyFormat(el2.product_price)}</p>

@@ -76,10 +76,20 @@ function CartDetailPro() {
                       <p>總金額：{moneyFormat(el.price * el.quantity)}</p>
                     </div>
                     <div className={styled.roomImg}>
-                      <img
-                        src={`http://localhost:3001/imgs/zx/${el.img}`}
-                        alt=""
-                      />
+                      {el.sid === 719 ||
+                      el.sid === 720 ||
+                      el.sid === 721 ||
+                      el.sid === 722 ? (
+                        <img
+                          src={`http://localhost:3001/uploads/${el.img}`}
+                          alt=""
+                        />
+                      ) : (
+                        <img
+                          src={`http://localhost:3001/imgs/zx/${el.img}`}
+                          alt=""
+                        />
+                      )}
                     </div>
                   </div>
                   <i
