@@ -12,6 +12,9 @@ function SeeEvaluation({ el }) {
     if (el.product_img) {
       img = `http://localhost:3001/imgs/zx/${el.product_img}`
     }
+    if (el.custom_img) {
+      img = `http://localhost:3001/uploads/${el.custom_img}`
+    }
     if (el.room_img) {
       img = `http://localhost:3001/room_img/${el.room_img}`
     }

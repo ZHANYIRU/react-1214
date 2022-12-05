@@ -144,9 +144,13 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
     })
   }
   const photo = (el) => {
+    console.log(el)
     let img
     if (el.product_img) {
       img = `${MY_HOST}/imgs/zx/${el.product_img}`
+    }
+    if (el.custom_img) {
+      img = `${MY_HOST}/uploads/${el.custom_img}`
     }
     if (el.room_img) {
       img = `${MY_HOST}/room_img/${el.room_img}`

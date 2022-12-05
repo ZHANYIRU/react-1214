@@ -64,7 +64,6 @@ function App() {
               <Route path="/commnent" element={<Commnent />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/pay/confirm" element={<Confirm />} />
-              <Route path="/test" element={<TestProducts />} />
               <Route path="/social" element={<SocialWall />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
               <Route path="/member" element={<Member />}>
