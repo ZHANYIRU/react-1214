@@ -5,9 +5,9 @@
   "dependencies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@hookform/error-message": "^2.0.1",
     "@mui/icons-material": "^5.10.15",
     "@mui/material": "^5.10.15",
-    "@hookform/error-message": "^2.0.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -26,6 +26,7 @@
     "react-bootstrap": "^2.6.0",
     "react-classlist": "^1.1.2",
     "react-day-picker": "^8.3.7",
+    "react-dayjs": "^0.3.2",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.40.0",
     "react-responsive": "^9.0.0",

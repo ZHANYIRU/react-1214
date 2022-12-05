@@ -1,11 +1,14 @@
 import { useContext, useEffect, useState } from 'react'
-
+import ProCartContext from '../../contexts/ProCartContext'
 import style from '../../styles/camp-scss/camphome.module.scss'
-import ListCard from './components/ListCard'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 function CampHomeList(sliderdata) {
+  const { filterCon, setFilterCon } = useContext(ProCartContext)
+
+  console.log(filterCon)
+
   //title資料
   const [campTitle, setCampTitle] = useState([{}])
   //all活動產品資料
@@ -42,31 +45,40 @@ function CampHomeList(sliderdata) {
           .map((v, i) => {
             return (
               <>
-                <Link to={`/camp/filter`} key={i}>
+                <Link
+                  to={`/camp/filter`}
+                  key={i}
+                  onClick={() => {
+                    setFilterCon(v.camptype_sid)
+                  }}
+                >
                   {v.campaign_type_name}
-                  
                 </Link>
                 <div className={style.listbox}>
-                  {campData.map((v, i) => {
-                    if (i < 4) {
-                      return (
-                        <>
-                          <div className={style.listcard}>
-                            <div>
-                              <img src="https://s3.amazonaws.com/imagescloud/images/medias/annexes/annexe-camping-2022.jpg" />
+                  {campData
+                    .filter((v2, i2) => {
+                      return v.camptype_sid == v2.camptype_sid
+                    })
+                    .map((v2, i2) => {
+                      if (i2 < 4) {
+                        return (
+                          <>
+                            <div className={style.listcard}>
+                              <div>
+                                <img src="https://s3.amazonaws.com/imagescloud/images/medias/annexes/annexe-camping-2022.jpg" />
+                              </div>
+                              <div className={style.listcardtext}>
+                                <p>{v2.camp_name}</p>
+                                <p>金額：{v2.price}</p>
+                                <div> 評價：stars</div>
+                              </div>
                             </div>
-                            <div className={style.listcardtext}>
-                              <p>{v.name}</p>
-                              <p>金額：{v.price}</p>
-                              <div> 評價：stars</div>
-                            </div>
-                          </div>
-                        </>
-                      )
-                    } else {
-                      return
-                    }
-                  })}
+                          </>
+                        )
+                      } else {
+                        return
+                      }
+                    })}
                 </div>
                 <div className={style.listpage}></div>
               </>

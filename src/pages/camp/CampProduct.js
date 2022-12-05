@@ -45,13 +45,13 @@ function CampProduct() {
                   <>
                     <div className={style.card}>
                       <div className={style.cardtop}>
-                        <h2>{v.name}</h2>
+                        <h2>{v.camp_name}</h2>
                         <div>
                           <div className={style.location}>
                             <span>
                               <i className="fa-solid fa-map-location-dot"></i>
                             </span>
-                            <span>{v.location_name}</span>
+                            <span>{v.name}</span>
                           </div>
                           <div className={style.mountain}>
                             <span>

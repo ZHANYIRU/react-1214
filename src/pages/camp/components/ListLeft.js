@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import style from '../../../styles/camp-scss/campcat.module.scss'
 import axios from 'axios'
+import ProCartContext from '../../../contexts/ProCartContext'
 
 function ListLeft({ setFilter }) {
+  
   const [title, setTitle] = useState([
     { camptype_sid: '', campaign_type_name: '' },
   ])
@@ -12,6 +14,7 @@ function ListLeft({ setFilter }) {
       const data = response.data
 
       setTitle(data)
+      
     } catch (e) {
       console.log(e.message)
     }

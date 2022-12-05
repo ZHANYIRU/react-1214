@@ -763,6 +763,13 @@ export const ProCartContextProvider = ({ children }) => {
   const [userSelect, setUserSelect] = useState([])
   //在篩選頁面獲得相對應山的房型
   const [getMountain, setGetMountain] = useState([])
+
+ //camp filter
+ const [filterCon, setFilterCon]= useState(0)
+
+
+
+
   //金錢格式化
   const moneyFormat = (price) => {
     let a = Number(price)
@@ -777,6 +784,8 @@ export const ProCartContextProvider = ({ children }) => {
   return (
     <ProCartContext.Provider
       value={{
+        filterCon, 
+        setFilterCon,
         lookLightBox,
         setLookLightBox,
         stars,
