@@ -4,6 +4,7 @@ import styled from '../../styles/product-scss/Custom.module.scss'
 import { useRef, useState, useContext, useEffect } from 'react'
 import ProCartContext from '../../contexts/ProCartContext'
 import { fabric } from 'fabric'
+import axios from 'axios'
 import CustomLightBox from './components/customLightBox'
 import custom1 from './img/custom1.png'
 import custom2 from './img/custom2.png'
@@ -264,13 +265,17 @@ export default function Customs(props) {
   }
 
   function savePic() {
-    // uploadImage.hasControls = false
-    // uploadImage.hasBorders = false
     const base64 = picRef.current.toDataURL()
     setCustomImage(base64)
-    console.log(base64)
   }
-
+  //將檔案丟到後端處理並儲存
+  async function customImageSave() {
+    const response = await axios.post('http://localhost:3001/product/custom', {
+      customIamge: customImage,
+    })
+    const r = response.data
+    console.log('我事後端', r)
+  }
   return (
     <>
       <div className={styled.empty}></div>
@@ -333,6 +338,7 @@ export default function Customs(props) {
               type="button"
               onClick={() => {
                 savePic()
+
                 addProCart(719, '客製排汗衫', 'S', 2990, 1, customImage)
               }}
             >
@@ -341,7 +347,7 @@ export default function Customs(props) {
             <button
               type="button"
               onClick={() => {
-                savePic()
+                customImageSave()
               }}
             >
               直接購買
