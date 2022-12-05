@@ -36,7 +36,7 @@
             align-items: center;
             height: 110px;
             margin-bottom: 10px;
-                .imgBorder{
+            .imgBorder{
                     margin-right: 30px;
                     display: flex;
                     justify-content: center;
@@ -44,7 +44,7 @@
                     width: 70px;
                     height: 70px;
                     border-radius: 50%;
-                    background: linear-gradient(#3401f0, #6b41e7,#9b06e6);
+                    // background: linear-gradient(#3401f0, #6b41e7,#9b06e6);
                 .imgWrap{
                     width: 60px;
                     height: 60px;
@@ -56,6 +56,17 @@
                         object-fit: cover;
                     }
                 }
+            }
+            .gold {
+                background-image: conic-gradient(from 180deg at 50% 50%, #fffcf4 0deg, #ffbf00 69.37deg, #ffa600 163.12deg, #ab8100 275.62deg, #ffffff 360deg);
+            }
+            
+            .silver {
+                background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
+            }
+            
+            .bronze {
+                background-image: conic-gradient(from 180deg at 50% 50%, #fff1c7 0deg, #b37e4a 69.37deg, #c27f3b 163.12deg, #98600c 275.62deg, #fff1c7 360deg);
             }
             .Name{
                 font-size: 1.3rem;

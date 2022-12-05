@@ -10,6 +10,15 @@ import comFakeData from './comFakeData'
 import Swal from 'sweetalert2'
 
 export default function ProductPage() {
+  function avatarLevel(height = 0) {
+    if (height > 10000) {
+      return styled.gold
+    }
+    if (height > 3000) {
+      return styled.silver
+    }
+    return styled.bronze
+  }
   const { product_sid } = useParams()
   const { addProCart } = useContext(ProCartContext)
   //哪一筆評論的Index
@@ -182,6 +191,28 @@ export default function ProductPage() {
         <p className={styled.intro}>{v.product_spec}</p>
         <div className={styled.introTitle}>特色說明</div>
         <p className={styled.intro}>{v.product_feature}</p>
+        <div className={styled.introTitle}>鑑賞期說明</div>
+        <p>
+          依據消費者保護法之規定，消費者得於收到商品或接受服務後七天內，以退回商品或書面通知方式解除契約，無須說明理由及負擔任何費用或對價。但以下情形例外不適用：
+          易於腐敗、保存期限較短或解約時即將逾期。
+          <br />
+          <br />
+          1.依消費者要求所為之客製化給付。 報紙、期刊或雜誌。
+          <br />
+          2.經消費者拆封之影音商品或電腦軟體。
+          <br />
+          3.非以有形媒介提供之數位內容或一經提供即為完成之線上服務，經消費者事先同意始提供。
+          <br />
+          4.已拆封之個人衛生用品。 國際航空客運服務。
+          <br />
+          5.故若賣家販售的商品為以上不適用於7天鑑賞期之商品，根據法律規定，還請賣家先於商品頁面上載明，若事先未載明則無法排除適用，請賣家務必注意。
+          同時，七天鑑賞期指的是猶豫期而非試用期喔！商品須在完整且可還原狀態下才能進行退貨。
+          <br />
+          <br />
+          因此，若賣家遇到買家退貨商品有逾越檢查必要之使用痕跡或需酌收費用才可還原的情形時，賣家可與買家協調商品整新費用等必要支出。
+          <br />
+          🔔 註：七天鑑賞期的算法是從收到商品的隔天開始算七天，且包含例假日。
+        </p>
         <div className={styled.introTitle}>猜你喜歡</div>
         <div className={styled.guessYouLike}>
           {randomData.map((v, i) => {
@@ -227,7 +258,11 @@ export default function ProductPage() {
           return (
             <div className={styled.commonBox}>
               <div className={styled.commonTitle}>
-                <div className={styled.commonTitle_img_border}>
+                <div
+                  className={`${
+                    styled.commonTitle_img_border
+                  } ${avatarLevel()}`}
+                >
                   <div className={styled.commonTitle_img}>
                     <img
                       src="https://cdn2.ettoday.net/images/2253/2253152.jpg"

@@ -390,7 +390,9 @@ export default function Customs(props) {
           </div>
         </div>
         <div className={styled.rightArea}>
-          <h1 className={styled.customTitle}>客製化排汗衫</h1>
+          <h1 className={styled.customTitle}>
+            {choseWhitchClothe ? choseWhitchClothe : '客製化 排汗衫 (綠)'}
+          </h1>
           <div className={styled.colorOptions}>顏色{renderBgImages()}</div>
           <div className={styled.size}>{clotheChose}</div>
           <h2 className={styled.price}>金額：{moneyFormat(4990)}</h2>

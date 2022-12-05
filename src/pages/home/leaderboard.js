@@ -7,6 +7,16 @@ import axios from 'axios'
 import _ from 'lodash'
 import InputIME from '../../components/InputIME'
 export default function Leaderboard() {
+  function avatarLevel(height = 0) {
+    if (height > 10000) {
+      return styled.gold
+    }
+    if (height > 3000) {
+      return styled.silver
+    }
+    return styled.bronze
+  }
+
   // 切換按鈕
   const [switchBtn, setSwitchBtn] = useState(true)
   // 輸入用(可控表單元件用)
@@ -161,15 +171,26 @@ export default function Leaderboard() {
                     </div>
                     <div className={styled.nameWrap}>
                       <div className={styled.empty}>
-                        <div className={styled.imgBorder}>
+                        <div
+                          className={`${styled.imgBorder} ${avatarLevel(
+                            v.total_height
+                          )}`}
+                        >
                           <div className={styled.imgWrap}>
-                            <img src={v.avatar} alt="" />
+                            {v && v.avatar ? (
+                              <img
+                                src={`http://localhost:3001/uploads/avatar_${v.avatar}`}
+                                alt="avatar"
+                              ></img>
+                            ) : (
+                              <img src="/img/default_avatar.png" alt="avatar" />
+                            )}
                           </div>
                         </div>
                         <p>{v.name}</p>
                       </div>
                     </div>
-                    <div className={styled.height}>
+                    <div className={`${styled.height} `}>
                       {!memberData.auth && !switchBtn
                         ? '你尚未登入'
                         : howHeight(v.total_height)}
