@@ -67,7 +67,8 @@
 .checkImg {
   width: 150px;
   height: 150px;
-
+  border-radius: 5px;
+  overflow: hidden;
   img {
     width: 100%;
     height: 100%;
@@ -78,7 +79,7 @@
 .icon {
   position: absolute;
   top: 12px;
-  left: 65%;
+  left: 60%;
   display: flex;
   font-size: 14px;
 

@@ -11,9 +11,17 @@ function subscribe(eventName, listener) {
 function unsubscribe(eventName, listener) {
   document.removeEventListener(eventName, listener)
 }
-function Pay({ paySelect, familySelect, step, setStep, setForOk, useCoupon }) {
+function Pay({
+  paySelect,
+  familySelect,
+  step,
+  setStep,
+  setForOk,
+  useCoupon,
+  writeUser,
+}) {
   const { data } = useContext(MemberContext)
-  const { pro, ren, room, camp, cartPrice, moneyFormat, writeUser } =
+  const { pro, ren, room, camp, cartPrice, moneyFormat } =
     useContext(ProCartContext)
   //用來開啟新視窗
   const newLinePay = useRef(null)
