@@ -3,8 +3,6 @@ import ProCartContext from '../../contexts/ProCartContext'
 import { Link } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import style from '../../styles/camp-scss/campcat.module.scss'
-import ListCardBig from './components/ListCardBig'
-import ListLeft from './components/ListLeft'
 import axios from 'axios'
 
 function CampCatList({ filter }) {
@@ -19,14 +17,28 @@ function CampCatList({ filter }) {
     },
   ])
 
+  //select天數資料
+  const [campDay, setCampDay] = useState([])
+
+  //select難度資料
+  const [campLevel, setCampLevel] = useState([])
+
   let all = 'all'
+  let select = 'select'
+  let level = 'level'
+
   const fetchAll = async (url) => {
     try {
       const response = await axios.get(`http://localhost:3001/camp/${url}`)
       const data = response.data
-      console.log('title')
-
-      setCampData(data)
+      console.log('all')
+      if (url === 'select') {
+        setCampDay(data)
+      } else if (url === 'all') {
+        setCampData(data)
+      } else if (url === 'level') {
+        setCampLevel(data)
+      }
     } catch (e) {
       console.log(e.message)
     }
@@ -52,17 +64,35 @@ function CampCatList({ filter }) {
 
   useEffect(() => {
     fetchAll('all')
+    fetchAll('select')
+    fetchAll('level')
   }, [])
   return (
     <div className={style.cat}>
       <div className={style.catright}>
-        <div>
-          登山難度<select></select>
-          天數<select></select>
-          <button>查詢</button>
-        </div>
+        天數
+        <select>
+          {console.log(campDay)}
+          {campDay.map((v, i) => {
+            return <option>{v.dayname}</option>
+          })}
+        </select>
+        難度
+        <select>
+          {console.log(campLevel)}
+          {campLevel.map((v2, i) => {
+            if (v2.level == 1) {
+              v2.level = '簡單'
+            } else if (v2.level == 2) {
+              v2.level = '中階'
+            } else if (v2.level == 3) {
+              v2.level = '困難'
+            }
+            return <option>{v2.level}</option>
+          })}
+        </select>
+        <button>查詢</button>
         <div>查詢結果 {campAlreadyFilter.length}</div>
-        <div>麵包屑/麵包屑/麵包屑/麵包屑</div>
         <div className={style.cards}>
           {filteredData.map((v, i) => {
             return (

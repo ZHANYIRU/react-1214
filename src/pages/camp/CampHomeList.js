@@ -2,12 +2,15 @@ import { useContext, useEffect, useState } from 'react'
 import ProCartContext from '../../contexts/ProCartContext'
 import style from '../../styles/camp-scss/camphome.module.scss'
 import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 function CampHomeList(sliderdata) {
   const { filterCon, setFilterCon } = useContext(ProCartContext)
 
   console.log(filterCon)
+
+  const navigate = useNavigate()
 
   //title資料
   const [campTitle, setCampTitle] = useState([{}])
@@ -63,7 +66,12 @@ function CampHomeList(sliderdata) {
                       if (i2 < 4) {
                         return (
                           <>
-                            <div className={style.listcard}>
+                            <div
+                              className={style.listcard}
+                              onClick={() => {
+                                navigate(`/camp/${v2.sid}`)
+                              }}
+                            >
                               <div>
                                 <img src="https://s3.amazonaws.com/imagescloud/images/medias/annexes/annexe-camping-2022.jpg" />
                               </div>

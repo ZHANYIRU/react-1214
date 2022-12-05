@@ -115,6 +115,7 @@ function CampSlider() {
                       <div className={style.sliderdot}></div>
                       <div className={style.sliderdot}></div>
                       <div className={style.sliderdot}></div>
+                      <div className={style.sliderdot}></div>
                     </div>
                   </div>
                 </>

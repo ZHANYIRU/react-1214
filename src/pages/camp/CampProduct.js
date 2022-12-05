@@ -37,7 +37,6 @@ function CampProduct() {
       <div className={style.product}>
         <ListLeft />
         <div className={style.pright}>
-          <div>麵包屑/麵包屑/麵包屑/麵包屑</div>
           {campSid.length !== 0 &&
             campSid.map((v, i) => {
               if (i < 1) {
