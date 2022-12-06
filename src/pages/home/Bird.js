@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import style from '../../styles/home-scss/bird.module.scss'
 import Swal from 'sweetalert2'
 
-function Bird({ show, setShow, couponData, setCouponData }) {
+function Bird({ show, setShow, couponData }) {
   //複製折扣碼 取得value
   const couponCode = useRef(null)
 

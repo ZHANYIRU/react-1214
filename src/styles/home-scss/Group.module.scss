@@ -41,6 +41,7 @@
     text-align: center;
     width:400px;
     .text{
+        text-align: start;
         line-height: 1.5rem;
         margin-top: 25px;
         background-color: white;
@@ -80,6 +81,15 @@
         background-color: rgb(87, 168, 87);
         margin: 0 10px 10px 0;
 
+    }
+    .count{
+        display: flex;
+       span{
+        display: block;
+        width: 50px;
+    }
+    
+      
     }
 
     p{ 

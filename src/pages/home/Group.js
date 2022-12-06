@@ -3,24 +3,15 @@ import style from '../../styles/home-scss/Group.module.scss'
 import dayjs from 'dayjs'
 
 function Group() {
-  //   const [countDown, setCountDown] = useState({
-  //     Day: '',
-  //     Min: '',
-  //     Sec: '',
-  //   })
-  function calulateTimeLeft() {
-    let year = new Date().getFullYear() // 獲取現在的年份
-    let month = new Date().getMonth() //
+  const calulateTimeLeft = () => {
+    const dateFormat = 'YYYY-MM-DD HH:mm:ss'
+    const now = dayjs(new Date()).format(dateFormat)
+    const deadline = dayjs('2022-12-31 23:59:59').format(dateFormat)
 
     let different = null
     let timeLeft = {}
 
-    // 如果現在的月份已經超過10月，則算到下一年 若現在月份沒有超過10月，則用今年的年份來計算
-    if (month > 10) {
-      different = new Date(`${12}/${31}/${year}`) - new Date()
-    } else {
-      different = new Date(`${12}/${31}/${year}`) - new Date()
-    }
+    different = new Date(deadline).getTime() - new Date(now).getTime()
 
     if (different > 0) {
       timeLeft = {
@@ -30,34 +21,11 @@ function Group() {
         seconds: Math.floor((different / 1000) % 60),
       }
     }
-
     return timeLeft
   }
 
-  // 以 calulateTimeLeft 回傳值 初始化距離 10/10 剩下的時間
+  //  以 calulateTimeLeft 回傳值
   const [timeLeft, setTimeLeft] = useState(calulateTimeLeft())
-
-  //   const minus = () => {
-  //     // const dateFormat = 'YYYY, MM, D, H, m, s'
-  //     // const now = dayjs(new Date()).format(dateFormat)
-  //     // const deadline = dayjs('2022-12-31 23:59:59').format(dateFormat)
-  //     const now = new Date().getTime()
-  //     const deadline = new Date(2022, 12, 31, 23, 59, 59).getTime()
-  //     // const count = new Date(deadline).getTime() - new Date(now).getTime()
-  //     console.log(now)
-  //     console.log(deadline)
-  //     console.log('...', deadline - now)
-  //     const howlong = deadline - now
-  //     console.log(howlong)
-  //     const DD =
-
-  // const newCountDown = {...countDown}
-  //     setCountDown(newCountDown, Day:DDay)
-  // return new Date(deadline).getTime() - new Date(now).getTime()
-  //   }
-
-  //   const count = setInterval(minus, 1000)
-  //     console.log('相減', count)
 
   useEffect(() => {
     let id = setInterval(() => {
@@ -85,10 +53,11 @@ function Group() {
       </div>
       <div className={style.right}>
         <div className={style.countDown}>
-          <div>
-            {' '}
-            {timeLeft.days}:{timeLeft.hours}:{timeLeft.minutes}:
-            {timeLeft.seconds}
+          <div className={style.count}>
+            <span>{timeLeft.days}</span>
+            <span>{timeLeft.hours}</span>
+            <span>{timeLeft.minutes}</span>
+            <span>{timeLeft.seconds}</span>
           </div>
           <div className={style.one}>
             <span>0</span>

@@ -6,6 +6,7 @@ import Weather from './Weather'
 import Bird from './Bird.js'
 import axios from 'axios'
 import Group from './Group'
+import Post from './Post'
 
 function Main({ setFtr }) {
   const mainHeight = useRef(null)
@@ -47,8 +48,19 @@ function Main({ setFtr }) {
     const response = await axios.get(`http://localhost:3001/room/coupon`)
     setCouponData(response.data.couponRows)
   }
+
+  //po文data
+  const [postData, setPostData] = useState([])
+
+  //fetch Po文的資料
+  async function getPost() {
+    const response = await axios.get(`http://localhost:3001/room/post`)
+    setPostData(response.data.postRows)
+  }
+
   useEffect(() => {
     getCoupon()
+    getPost()
     window.addEventListener('scroll', scroll)
     return () => {
       window.removeEventListener('scroll', scroll)
@@ -130,6 +142,10 @@ function Main({ setFtr }) {
         <div className={styled.section4}>
           <Leaderboard />
         </div>
+        <div className={styled.section5}>
+          <Post postData={postData} />
+        </div>
+
       </div>
     </>
   )
