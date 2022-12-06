@@ -55,45 +55,48 @@
         flex-direction: column;
         text-align: center;
         position: relative;
-        z-index: 10;
+        // z-index: 10;
 
         .mapBg {
             width: 100%;
         }
-        h4{
+
+        h4 {
             position: absolute;
             bottom: 0;
         }
 
         .pinBox {
-            position: absolute; 
+            position: absolute;
             transform: translate(-50%, 50%);
             z-index: 10;
             i {
                 font-size: 25px;
-                // position: relative;
+                position: relative;
                 color: red;
                 z-index: -1;
                 transition: 0.1s;
                 cursor: pointer;
             }
+
             .pinInfo {
                 position: absolute;
                 width: 200px;
                 transform: translate(-45%);
-                z-index: 10;
                 display: none;
+                z-index: 20;
             }
-           
+
             &:hover {
                 .pinInfo {
-                display: block;
-                 
+                    
+                    display: block;
+                }
+
+                i {
+                    transform: scale(1.2);
+                }
             }
-            i{
-                transform: scale(1.2);
-            }   
-        }
         }
     }
 
@@ -110,7 +113,7 @@
             width: 18%;
             position: absolute;
             top: 0;
-            right:5%;
+            right: 5%;
             transform: rotate(10deg);
         }
 
@@ -171,8 +174,8 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
-        
-        &:hover{
+
+        &:hover {
             background-color: $darkYellow;
         }
 
@@ -194,7 +197,7 @@
     background: #fff;
     // background-color: #aaa;
     margin-top: 8px;
-    margin-bottom:16px;
+    margin-bottom: 16px;
 }
 
 .postList {
@@ -242,6 +245,7 @@
                 font-size: 20px;
                 transition: 0.2s;
                 cursor: pointer;
+
                 &:hover {
                     color: #ddd;
                 }
@@ -408,14 +412,15 @@
 
                 i {
                     padding-right: 16px;
-                    &:hover{
+
+                    &:hover {
                         color: red;
                     }
                 }
 
                 .liked {
                     color: red;
-       
+
                 }
 
                 .liking {
@@ -439,7 +444,7 @@
                     justify-content: space-between;
 
                     &.left {
-                        justify-content:flex-start;
+                        justify-content: flex-start;
                     }
 
                     h4 {
@@ -459,7 +464,8 @@
                         height: 60px;
                         border-radius: 50%;
                         // background-image: linear-gradient(0deg,#ddd, #444);
-                        
+                        cursor: pointer;
+
                         overflow: hidden;
                         margin-right: 12px;
 
@@ -496,7 +502,7 @@
                             overflow: hidden;
                             margin-right: 12px;
                             margin-left: 12px;
-                            
+                            cursor: pointer;
 
                             img {
                                 border-radius: 50%;
@@ -562,6 +568,7 @@
                     color: red;
                     cursor: pointer;
                     transition: 0.1s;
+
                     &:hover {
                         color: rgb(240, 0, 0);
                     }
@@ -595,8 +602,9 @@
                 padding: 6px;
                 border-radius: 5px;
                 background-color: $yellow;
+
                 &:hover {
-                    background: $darkYellow;   
+                    background: $darkYellow;
                 }
             }
 
@@ -629,6 +637,7 @@
 
         &.btnDone {
             background-color: $yellow;
+
             &:hover {
                 background-color: $darkYellow;
             }
@@ -637,6 +646,7 @@
         &.btnCancel {
             background-color: red;
             color: #fff;
+
             &:hover {
                 background-color: rgb(240, 0, 0);
             }
@@ -675,15 +685,19 @@
     .overview {
         justify-content: center;
         position: relative;
+
         .postMap {
             width: 34%;
-            h4{
+
+            h4 {
                 left: -170px;
             }
         }
+
         .totalHeight {
             display: none;
         }
+
         .heightTag {
             display: block;
             position: absolute;
@@ -691,14 +705,15 @@
             bottom: 0;
         }
     }
- 
+
     .postList {
         gap: 4%;
+
         .post {
             width: 48%;
         }
     }
- }
+}
 
 @media screen and (max-width: 992px) {
     .row {
@@ -707,24 +722,29 @@
         }
 
         .overview {
-            .postMap{
+            .postMap {
                 width: 50%;
                 margin-bottom: 40px;
-                h4{
+
+                h4 {
                     left: -74px;
                 }
             }
+
             .heightTag {
                 left: 0;
                 bottom: 0;
             }
         }
+
         .postList {
             gap: 0%;
+
             .post {
                 width: 100%;
             }
         }
+
         .postTitle {
             button {
                 transform: translateY(3px);
@@ -738,16 +758,20 @@
         display: flex;
         justify-content: space-around;
         margin-bottom: 30px;
+
         .summary {
             text-align: center;
+
             p {
                 font-weight: 700;
                 margin-bottom: 10px;
             }
+
             h3 {
                 font-size: 32px;
                 font-weight: 700;
             }
+
             .altitude {
                 font-size: 26px;
             }
@@ -755,7 +779,7 @@
     }
 
     .row {
-        .col{
+        .col {
             .infoCard {
                 display: none;
             }
@@ -765,15 +789,18 @@
             justify-content: center;
             padding-bottom: 16px;
             margin-top: -20px;
-            h3{
+
+            h3 {
                 display: none;
             }
         }
 
         .postList {
             gap: 4%;
+
             .post {
                 width: 48%;
+
                 p {
                     font-size: 16px;
                 }
@@ -783,19 +810,22 @@
 }
 
 @media screen and (max-width: 576px) {
-    .row{
+    .row {
         h3 {
             font-size: 22px;
         }
+
         .postList {
             gap: 0;
+
             .post {
                 width: 100%;
+
                 p {
                     font-size: 20px;
                 }
             }
         }
     }
-    
+
 }

@@ -165,6 +165,8 @@ export default function ModalView({
         // z-index over nav bar?
         onClick={() => {
           setIsView(false)
+          setCurrentPost(0)
+          // setLocationList(0)
         }}
       >
         <div

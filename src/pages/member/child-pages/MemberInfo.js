@@ -204,7 +204,7 @@ export default function MemberInfo() {
               <h4 className={styled.heightTag}>
                 累積海拔: {data.total_height}公尺
               </h4>
-              <PostMap postList={postList} />
+              <PostMap postList={postList} getPostList={getPostList} />
               <TotalHeight totalHeight={{ height: data.total_height }} />
             </div>
           </div>
