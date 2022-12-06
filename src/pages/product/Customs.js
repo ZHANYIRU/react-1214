@@ -12,10 +12,37 @@ import custom2 from './img/custom2.png'
 import custom3 from './img/custom3.png'
 import custom4 from './img/custom4.png'
 export default function Customs(props) {
+  const bgImages = [
+    {
+      sid: 719,
+      alt: '客製化 排汗衫 (綠)',
+      src: custom1,
+      color: '#184A43',
+    },
+    {
+      sid: 720,
+      alt: '客製化 排汗衫 (灰藍)',
+      src: custom2,
+      color: '#3B4358',
+    },
+    {
+      sid: 721,
+      alt: '客製化 排汗衫 (灰)',
+      src: custom3,
+      color: '#424547',
+    },
+    {
+      sid: 722,
+      alt: '客製化 排汗衫 (深藍)',
+      src: custom4,
+      color: '#184992',
+    },
+  ]
   const picRef = useRef()
   const [color, setColor] = useState('#000000')
-  const [choseWhitchSid, setChoseWhitchSid] = useState('')
-  const [choseWhitchClothe, setChoseWhitchClothe] = useState('')
+  const [choseWhitchSid, setChoseWhitchSid] = useState(719)
+  const [choseWhitchClothe, setChoseWhitchClothe] =
+    useState('客製化 排汗衫 (綠)')
   const [num, setNum] = useState(1)
   const [uploadImage, setUploadImage] = useState('')
   const [modalType, setModalType] = useState('')
@@ -57,6 +84,7 @@ export default function Customs(props) {
         return (
           <>
             <div
+              key={i}
               className={
                 size2 == clotheSize[i]
                   ? `${styled.standardBoxChose}`
@@ -73,33 +101,6 @@ export default function Customs(props) {
       })}
     </>
   )
-
-  const bgImages = [
-    {
-      sid: 719,
-      alt: '客製化 排汗衫 (綠)',
-      src: custom1,
-      color: '#184A43',
-    },
-    {
-      sid: 720,
-      alt: '客製化 排汗衫 (灰藍)',
-      src: custom2,
-      color: '#3B4358',
-    },
-    {
-      sid: 721,
-      alt: '客製化 排汗衫 (灰)',
-      src: custom3,
-      color: '#424547',
-    },
-    {
-      sid: 722,
-      alt: '客製化 排汗衫 (深藍)',
-      src: custom4,
-      color: '#184992',
-    },
-  ]
 
   const handleShow = (type) => {
     setModalType(type)
@@ -335,16 +336,21 @@ export default function Customs(props) {
     return toBackEndImg(fd)
   }
 
-  const toBackEndImg = (fd) => {
-    let newCustomImg
+  const toBackEndImg = async (fd) => {
+    let newCustomImg = ''
     const config = {
       headers: { 'Content-Type': 'multipart/form-data' },
     }
-    axios
-      .post('http://localhost:3001/product/custom', fd, config)
-      .then((response) => {
-        newCustomImg = response.data
-        console.log(newCustomImg)
+    try {
+      const response = await axios.post(
+        'http://localhost:3001/product/custom',
+        fd,
+        config
+      )
+
+      newCustomImg = response.data
+      console.log(newCustomImg)
+      if (newCustomImg) {
         addProCart(
           choseWhitchSid,
           choseWhitchClothe,
@@ -354,10 +360,15 @@ export default function Customs(props) {
           newCustomImg
         )
         setCustomImage(newCustomImg)
-      })
+      } else {
+        sweetAlert('伺服器忙碌請再試一次')
+      }
+    } catch (err) {
+      console.log(err)
+    }
   }
 
-  useEffect(() => {}, [customImage])
+  useEffect(() => {}, [])
 
   return (
     <>

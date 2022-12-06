@@ -184,7 +184,7 @@ function Product() {
         )}
 
         {/* 種類專區 */}
-        <div className={fixedd ? `${styled.stickyWrapCate}` : ''}>
+        <div className={fixedd ? `${styled.stickyWrapCate}` : `${styled.scrollWrap}`}>
           <div
             className={styled.product_nav}
             style={fixedd ? { marginBottom: '10px' } : {}}
@@ -253,6 +253,7 @@ function Product() {
                 </h2>
               </Link>
             </div>
+           
           </div>
         </div>
         {/* 卡片專區 */}
