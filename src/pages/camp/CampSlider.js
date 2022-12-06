@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import style from '../../styles/camp-scss/camphome.module.scss'
 import { useNavigate } from 'react-router-dom'
+import Slider from 'react-slick'
 import axios from 'axios'
-import DayJS from 'react-dayjs'
 
 function CampSlider() {
   let all = 'all'
@@ -20,6 +20,21 @@ function CampSlider() {
       console.log(e.message)
     }
   }
+
+  //輪播
+  // const [render, setRender] = useState([
+  //   {
+  //     dots: true,
+  //     infinite: true,
+  //     slidesToShow: 1,
+  //     slidesToScroll: 1,
+  //     autoplay: true,
+  //     speed: 1000,
+  //     autoplaySpeed: 1000,
+  //     cssEase: 'linear',
+  //   },
+  // ])
+  const sliderRef = useRef('')
 
   useEffect(() => {
     fetchAll('all')
@@ -62,66 +77,76 @@ function CampSlider() {
 
   return (
     <>
-      {timeLeft.length !== 0 &&
-        campData
-          .filter((v, i) => {
-            return v.campaign_type_name === '一日單攻報名行程'
-          })
-          .map((v, i) => {
-            if (i <= 5) {
+      <Slider
+        dots={true}
+        infinite={true}
+        slidesToShow={1}
+        slidesToScroll={1}
+        autoplay={true}
+        speed={2000}
+        autoplaySpeed={5000}
+        cssEase="linear"
+      >
+        
+        {timeLeft.length !== 0 &&
+          campData
+            .filter((v, i) => {
+              return v.campaign_type_name === '一日單攻報名行程'
+            })
+            .map((v, i) => {
+              // if (i <= 5) {
               return (
-                <>
-                  <div>
-                    <div className={style.slider}>
-                      <div className={style.dayonepic}>
-                        <img
-                          src={`http://localhost:3001/n7/campmain/${v.mainImage}`}
-                        />
-                      </div>
-                      <div className={style.dayoneright}>
-                        <div className={style.bar}>
-                          <div className={style.barlong}>
-                            <div className={style.barshort}></div>
-                          </div>
-                          <div className={style.limit}>
-                            <p>報名人數限制：{v.qty}人 , 已報名：39人</p>
-                            <p>
-                              截止報名：{v.camp_joinenddate}, 報名倒數：距離還有
-                              {timeLeft[i].days}天{timeLeft[i].hours}時
-                              {timeLeft[i].minutes}分 {timeLeft[i].seconds}秒
-                            </p>
-                          </div>
-                        </div>
-                        <div className={style.context}>
-                          <div className={style.text}>
-                            <h3>{v.camp_name}</h3>
-                            <h4>活動日期：{v.camp_startdate} </h4>
-                            <p>{v.brife_describe}</p>
-                          </div>
-
-                          <button
-                            onClick={() => {
-                              navigate(`/camp/${v.sid}`)
-                            }}
-                          >
-                            我要報名
-                          </button>
-                        </div>
-                      </div>
+                <div key={i}>
+                  <div className={style.slider}>
+                    <div className={style.dayonepic}>
+                      <img
+                        src={`http://localhost:3001/n7/campmain/${v.mainImage}`}
+                      />
                     </div>
+                    <div className={style.dayoneright}>
+                      <div className={style.bar}>
+                        <div className={style.barlong}>
+                          <div className={style.barshort}></div>
+                        </div>
+                        <div className={style.limit}>
+                          <p>報名人數限制：{v.qty}人 , 已報名：39人</p>
+                          <p>
+                            截止報名：{v.camp_joinenddate}, 報名倒數：距離還有
+                            {timeLeft[i].days}天{timeLeft[i].hours}時
+                            {timeLeft[i].minutes}分 {timeLeft[i].seconds}秒
+                          </p>
+                        </div>
+                      </div>
+                      <div className={style.context}>
+                        <div className={style.text}>
+                          <h3>{v.camp_name}</h3>
+                          <h4>活動日期：{v.camp_startdate} </h4>
+                          <p>{v.brife_describe}</p>
+                        </div>
 
-                    <div className={style.sliderdots}>
-                      <div className={style.sliderdot}></div>
-                      <div className={style.sliderdot}></div>
-                      <div className={style.sliderdot}></div>
-                      <div className={style.sliderdot}></div>
-                      <div className={style.sliderdot}></div>
+                        <button
+                          onClick={() => {
+                            navigate(`/camp/${v.sid}`)
+                          }}
+                        >
+                          我要報名
+                        </button>
+                      </div>
                     </div>
                   </div>
-                </>
+
+                  {/* <div className={style.sliderdots}>
+                      <div className={style.sliderdot}></div>
+                      <div className={style.sliderdot}></div>
+                      <div className={style.sliderdot}></div>
+                      <div className={style.sliderdot}></div>
+                      <div className={style.sliderdot}></div>
+                    </div> */}
+                </div>
               )
-            }
-          })}
+              // }
+            })}
+      </Slider>
     </>
   )
 }

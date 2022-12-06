@@ -73,7 +73,9 @@ function CampHomeList(sliderdata) {
                               }}
                             >
                               <div>
-                                <img src="https://s3.amazonaws.com/imagescloud/images/medias/annexes/annexe-camping-2022.jpg" />
+                                <img
+                                  src={`http://localhost:3001/n7/campmain/${v2.mainImage}`}
+                                />
                               </div>
                               <div className={style.listcardtext}>
                                 <p>{v2.camp_name}</p>

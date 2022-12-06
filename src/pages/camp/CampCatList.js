@@ -55,7 +55,7 @@ function CampCatList({ filter }) {
     })
   }
   const campAlreadyFilter = campData.filter((v, i) => {
-    return v.campaign_type_sid === filter
+    return v.campaign_type_sid === filterCon
   })
 
   const f = campData.filter((v, i) => {
@@ -93,6 +93,7 @@ function CampCatList({ filter }) {
         </select>
         <button>查詢</button>
         <div>查詢結果 {campAlreadyFilter.length}</div>
+        {console.log(campAlreadyFilter)}
         <div className={style.cards}>
           {filteredData.map((v, i) => {
             return (
