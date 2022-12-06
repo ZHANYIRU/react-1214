@@ -7,18 +7,9 @@ const Search = ({ conditions, setConditions }) => {
   const InputHandler = (e) => {
     setInput(e.target.value)
   }
-
-  // const searchURL = 'http://localhost:3001/rental/pageApi?search='
-  // async function search() {
-  //   const response = await axios.get(searchURL + `${input}`)
-  //   console.log(response)
-  //   setData(response.data.rows)
-  //   setTotalPages(response.data.totalPages)
-  // }
-
   return (
     <div className={styled.search}>
-      <input type="text" onChange={InputHandler} />
+      <input type="text" onChange={InputHandler} placeholder="商品搜尋"/>
       <button
         onClick={() => {
           setConditions({ ...conditions, search: input, page: 1 })

@@ -58,19 +58,16 @@ function Rental(props) {
         {/* 製作輪播牆 */}
         <Carousel />
         {/* 搜尋元件 */}
-        <Search
-          setData={setData}
-          setTotalPages={setTotalPages}
-          conditions={conditions}
-          setConditions={setConditions}
-        />
 
         {/* 篩選列表 */}
         <div className={rentalcss.orderShow}>
-          <div className={rentalcss.filtermore}>
-            <h2>進階搜尋</h2>
-            <i className="fa fa-angle-double-down" aria-hidden="true"></i>
+          <div className={rentalcss.category}>
+            <p>全部商品</p>
+            <p>露營帳篷</p>
+            <p>戶外桌椅</p>
+            <p>戶外電器</p>
           </div>
+          {/* <div className={rentalcss.nameSearch}></div> */}
           <div className={rentalcss.order}>
             <p>一共{count}筆數</p>
             <p
@@ -99,6 +96,13 @@ function Rental(props) {
             >
               價格低到高
             </p>
+            <Search
+              setData={setData}
+              setTotalPages={setTotalPages}
+              conditions={conditions}
+              setConditions={setConditions}
+            />
+            <i class="fa-solid fa-filter"></i>
           </div>
         </div>
 

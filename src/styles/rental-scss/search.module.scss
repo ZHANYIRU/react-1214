@@ -1,16 +1,17 @@
 @import '../global.scss';
 
 .search {
-    width: 100%;
+    // width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top:1rem;
-    margin-top:20px;
+    margin-right:10px;
+    // padding-top:1rem;
+    // margin-top:20px;
     // border:1px solid black;
 
     input{
-        width:300px;
+        width:200px;
     }
     input,
     button {

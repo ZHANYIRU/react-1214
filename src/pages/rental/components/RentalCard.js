@@ -26,13 +26,13 @@ function RentalCard({ data }) {
             <p>
               品牌：<span>{data.rental_brand}</span>
             </p>
-            <div className={rentalcss.star}>
+            {/* <div className={rentalcss.star}>
               <i className="fa-solid fa-star"></i>
               <i className="fa-solid fa-star"></i>
               <i className="fa-solid fa-star"></i>
               <i className="fa-solid fa-star"></i>
               <i className="fa-solid fa-star"></i>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
