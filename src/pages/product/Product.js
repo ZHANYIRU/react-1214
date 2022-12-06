@@ -184,7 +184,11 @@ function Product() {
         )}
 
         {/* 種類專區 */}
-        <div className={fixedd ? `${styled.stickyWrapCate}` : `${styled.scrollWrap}`}>
+        <div
+          className={
+            fixedd ? `${styled.stickyWrapCate}` : `${styled.scrollWrap}`
+          }
+        >
           <div
             className={styled.product_nav}
             style={fixedd ? { marginBottom: '10px' } : {}}
@@ -221,8 +225,16 @@ function Product() {
               {mobile ? <p>|</p> : ''}
             </div>
             <div className={styled.product_nav_box2}>
-              <p>商品類別</p>
+              {mobile ? '' : <p>商品類別</p>}
+              {mobile ? (
+                <Link to="/product/custom">
+                  <h2>客製衣服</h2>
+                </Link>
+              ) : (
+                ''
+              )}
             </div>
+            {mobile ? <p>|</p> : ''}
             <div className={styled.product_nav_box3}>
               <Link
                 onClick={() => {
@@ -253,7 +265,6 @@ function Product() {
                 </h2>
               </Link>
             </div>
-           
           </div>
         </div>
         {/* 卡片專區 */}
@@ -284,7 +295,16 @@ function Product() {
                           <div
                             className={styled.card}
                             onClick={() => {
-                              linkToDetail(`/product/${v.product_sid}`)
+                              if (
+                                v.product_sid === 719 ||
+                                v.product_sid === 720 ||
+                                v.product_sid === 721 ||
+                                v.product_sid === 722
+                              ) {
+                                linkToDetail(`/product/custom`)
+                              } else {
+                                linkToDetail(`/product/${v.product_sid}`)
+                              }
                             }}
                           >
                             {/* 右上角布條 抗水 防潑水 */}
@@ -346,7 +366,16 @@ function Product() {
                         <div
                           className={styled.card}
                           onClick={() => {
-                            linkToDetail(`/product/${v.product_sid}`)
+                            if (
+                              v.product_sid === 719 ||
+                              v.product_sid === 720 ||
+                              v.product_sid === 721 ||
+                              v.product_sid === 722
+                            ) {
+                              linkToDetail(`/product/custom`)
+                            } else {
+                              linkToDetail(`/product/${v.product_sid}`)
+                            }
                           }}
                         >
                           {v.proof === '抗水' || '防潑水' ? (
