@@ -8,8 +8,12 @@ import StarRating from './components/starRating'
 import CommentLightBox from './components/CommentLightBox'
 import comFakeData from './comFakeData'
 import Swal from 'sweetalert2'
+import { useMediaQuery } from 'react-responsive'
 
 export default function ProductPage() {
+  //useMediaQuery
+  const minPc = useMediaQuery({ query: '(max-width:1100px)' })
+  //會員頭像邊框
   function avatarLevel(height = 0) {
     if (height > 10000) {
       return styled.gold
@@ -183,6 +187,60 @@ export default function ProductPage() {
       `http://localhost:3001/imgs/zx/${v.product_imgs[0]}`
     )
   }
+  // guessUlike 2卡片
+  const guessUlike_2_card = randomData.map((v, i) => {
+    if (i < 2)
+      return (
+        <Link
+          className={styled.card}
+          key={v.product_sid}
+          to={'/product/' + v.product_sid}
+          onClick={() => {
+            getProductData()
+          }}
+        >
+          <div>
+            <div className={styled.imgWrap}>
+              <img
+                src={`http://localhost:3001/imgs/zx/${v.product_img}`}
+                alt=""
+              />
+            </div>
+            <p className={styled.p}>{v.product_name}</p>
+            <h2>
+              金額：<span>${v.product_price}</span>
+            </h2>
+          </div>
+        </Link>
+      )
+  })
+  // guessUlike 3卡片
+  const guessUlike_3_card = randomData.map((v, i) => {
+    return (
+      <Link
+        className={styled.card}
+        key={v.product_sid}
+        to={'/product/' + v.product_sid}
+        onClick={() => {
+          getProductData()
+        }}
+      >
+        <div>
+          <div className={styled.imgWrap}>
+            <img
+              src={`http://localhost:3001/imgs/zx/${v.product_img}`}
+              alt=""
+            />
+          </div>
+          <p className={styled.p}>{v.product_name}</p>
+          <h2>
+            金額：<span>${v.product_price}</span>
+          </h2>
+        </div>
+      </Link>
+    )
+  })
+
   // 商品介紹 or 商品評論
   const intro = datas.map((v, i) => {
     return (
@@ -215,31 +273,7 @@ export default function ProductPage() {
         </p>
         <div className={styled.introTitle}>猜你喜歡</div>
         <div className={styled.guessYouLike}>
-          {randomData.map((v, i) => {
-            return (
-              <Link
-                className={styled.card}
-                key={v.product_sid}
-                to={'/product/' + v.product_sid}
-                onClick={() => {
-                  getProductData()
-                }}
-              >
-                <div>
-                  <div className={styled.imgWrap}>
-                    <img
-                      src={`http://localhost:3001/imgs/zx/${v.product_img}`}
-                      alt=""
-                    />
-                  </div>
-                  <p className={styled.p}>{v.product_name}</p>
-                  <h2>
-                    金額：<span>${v.product_price}</span>
-                  </h2>
-                </div>
-              </Link>
-            )
-          })}
+          {minPc ? guessUlike_2_card : guessUlike_3_card}
         </div>
       </div>
     )

@@ -335,38 +335,27 @@ export default function Customs(props) {
     return toBackEndImg(fd)
   }
 
-  // const fd = new FormData()
-  // fd.append('img', dataURLtoFile, 'canvasPic')
-
   const toBackEndImg = (fd) => {
-    let customImg
+    let newCustomImg
     const config = {
       headers: { 'Content-Type': 'multipart/form-data' },
     }
     axios
       .post('http://localhost:3001/product/custom', fd, config)
       .then((response) => {
-        customImg = response.data
-        console.log(customImg)
+        newCustomImg = response.data
+        console.log(newCustomImg)
         addProCart(
           choseWhitchSid,
           choseWhitchClothe,
           size2,
           4990,
           num,
-          customImg
+          newCustomImg
         )
-        setCustomImage(customImg)
+        setCustomImage(newCustomImg)
       })
   }
-
-  // //將檔案丟到後端處理並儲存
-  // async function customImageSave() {
-  //   const response = await axios.post('http://localhost:3001/product/custom', {
-  //     customIamge: customImage,
-  //   })
-  //   const r = response.data
-  // }
 
   useEffect(() => {}, [customImage])
 
