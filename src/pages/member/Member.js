@@ -67,6 +67,7 @@ function Member(props) {
                   <img
                     src={`http://localhost:3001/uploads/avatar_${data.avatar}`}
                     alt="avatar"
+                    loading="lazy"
                   ></img>
                 ) : (
                   <img src="/img/default_avatar.png" alt="avatar" />

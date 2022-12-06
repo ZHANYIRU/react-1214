@@ -27,7 +27,12 @@ export default function PostMap(postList) {
   return (
     <>
       <div className={styled.postMap}>
-        <img className={styled.magBg} src={'/img/taiwan.png'} alt="taiwanMap" />
+        <img
+          className={styled.magBg}
+          src={'/img/taiwan.png'}
+          alt="taiwanMap"
+          loading="lazy"
+        />
         {postList.postList.map((el, i) => {
           return (
             <div

@@ -272,6 +272,7 @@ export default function MemberInfo() {
                     postList[currentPost].image_url
                   }
                   alt="postImg"
+                  loading="lazy"
                 ></img>
               </div>
               <div className={styled.editContent}>

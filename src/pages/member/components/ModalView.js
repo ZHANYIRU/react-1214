@@ -103,12 +103,14 @@ export default function ModalView({
     const token = localStorage.getItem('token') || ''
 
     const formData = new FormData(replyForm.current)
+    
+    // console.log('是否有留言內容: ' + !!formData.get('context').trim());
 
     if (!token) {
       return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
     }
 
-    if (!formData.context) {
+    if (!formData.get('context').trim()) {
       return Swal.fire({
         title: '請輸入留言內容',
         confirmButtonColor: '#216326',
@@ -175,6 +177,7 @@ export default function ModalView({
             <img
               src={`http://localhost:3001/uploads/${showData.image_url}`}
               alt="postImg"
+              loading="lazy"
             ></img>
           </div>
           <div className={styled.editContent}>
@@ -201,6 +204,7 @@ export default function ModalView({
                         : '/img/default_avatar.png'
                     }
                     alt="postImg"
+                    loading="lazy"
                   ></img>
                 </div>
                 <h4>{user.nickname}</h4>
@@ -272,6 +276,7 @@ export default function ModalView({
                                 : '/img/default_avatar.png'
                             }
                             alt="postImg"
+                            loading="lazy"
                           ></img>
                         </div>
 
