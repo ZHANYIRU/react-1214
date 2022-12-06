@@ -28,6 +28,7 @@ export default function ModalView({
     total_height: 0,
   })
   const [liked, setLiked] = useState(false)
+  const [liking, setLiking] = useState(false)
   const [replies, setReplies] = useState([])
 
   const replyForm = useRef(null)
@@ -105,6 +106,13 @@ export default function ModalView({
 
     if (!token) {
       return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
+    }
+
+    if (!formData.context) {
+      return Swal.fire({
+        title: '請輸入留言內容',
+        confirmButtonColor: '#216326',
+      })
     }
 
     const result = await axios.post(
@@ -200,14 +208,21 @@ export default function ModalView({
                   <span
                     onClick={() => {
                       removeLike()
+                      setLiking(false)
                     }}
                   >
-                    {showData.likes} <i className="fa-solid fa-heart"></i>
+                    {showData.likes}{' '}
+                    <i
+                      className={`fa-solid fa-heart ${styled.liked} ${
+                        liking && styled.liking
+                      }`}
+                    ></i>
                   </span>
                 ) : (
                   <span
                     onClick={() => {
                       addLike()
+                      setLiking(true)
                     }}
                   >
                     {showData.likes} <i className="fa-regular fa-heart"></i>
