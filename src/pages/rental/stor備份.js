@@ -34,46 +34,10 @@ const Store = () => {
       <div className={styled.container}>
         <div className={styled.middlecontainer}>
           <div className={styled.left}>
-            {zoneChoice === '北區' && (
-              <div
-                className={`${styled.redball}`}
-                style={{ top: '70px', left: '330px' }}
-              >
-                大安
-              </div>
-            )}
-            {zoneChoice === '北區' && (
-              <div
-                className={`${styled.redball}`}
-                style={{ top: '73px', left: '290px' }}
-              >
-                八德
-              </div>
-            )}
-            {zoneChoice === '中區' && (
-              <div
-                className={`${styled.redball}`}
-                style={{ top: '150px', left: '240px' }}
-              >
-                臺中
-              </div>
-            )}
-            {zoneChoice === '南區' && (
-              <div
-                className={`${styled.redball}`}
-                style={{ top: '370px', left: '200px' }}
-              >
-                高雄
-              </div>
-            )}
-            {zoneChoice === '東區' && (
-              <div
-                className={`${styled.redball}`}
-                style={{ top: '200px', left: '330px' }}
-              >
-                花蓮
-              </div>
-            )}
+            <div
+            //     className={`${styled.redball}`}
+            //   style={{ border: '1px solid black', top: '240px', left: '70px;' }}
+            ></div>
           </div>
           <div className={styled.right}>
             <div className={`${styled.flex}`}>
@@ -139,7 +103,6 @@ const Store = () => {
             </div>
             <div className={`${styled.flex} ${styled.thirddiv}`}>
               <pre>{showStore.store_introduction}</pre>
-              
             </div>
           </div>
         </div>

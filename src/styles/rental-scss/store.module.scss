@@ -2,11 +2,11 @@
 
 .empty{
     width: 100%;
-    height: 70px;
+    height: 100px;
 }
 .container{
     width:80%;
-    height:70vh;
+    height:50vh;
     // border:1px solid green;
     margin:0 auto;
     box-sizing: border-box;
@@ -23,21 +23,28 @@
 // 左半邊的部份
 .left{
     width:40%;
-    // border:1px solid blue;
-    .picdiv{
-        width:70%;
-        overflow: hidden;
-        margin:0 auto;
-        img{
-            width:100%;
-        }
+    height:600px;
+    background-image: url("../../../public/img/taiwan.png");
+    background-repeat: no-repeat;
+    background-size: 55%;
+    background-position: 50%;
+    position: relative;
+
+    .redball{
+        position:absolute;
+        width:15px;
+        height:15px;
+        border-radius: 50%;
+        background-color: red;
     }
+    
    
 }
 
 .right{
     padding:20px;
     width:60%;
+    height:700px;
     // border:1px solid black;
 
     .flex{
@@ -51,8 +58,12 @@
             width:60%;
             div{
                 width:100%;
+                height:300px;
+                overflow: hidden;
                 img{
-                    width:100%;
+                    // width:100%;
+                    height: 100%;
+                    object-fit: cover;
                 }
             }
         }
@@ -77,8 +88,18 @@
 .thirddiv{
     width:75%;
     padding-top:20px;
-    p{
-        font-size:20px;
-        font-weight:400;
+    // font-size:20px;
+    pre{
+        // width:200px;
+        
+        // font-weight:400;
+        // height:250px;
+        word-wrap:break-word;
+        white-space: pre-wrap;
+        // word-wrap: break-word;
     }
+    // pre {
+    //     white-space: pre-wrap;
+    //     word-wrap: break-word;
+    // }
 }
