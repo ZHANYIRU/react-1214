@@ -249,7 +249,7 @@ function TestProducts() {
                     addCampCart(
                       el.camp_sid,
                       el.name,
-                      date2.start,
+                      date3,
                       '三天二夜',
                       '木柵',
                       '拉拉山',
