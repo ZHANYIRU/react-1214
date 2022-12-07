@@ -28,6 +28,7 @@ export default function ModalView({
     total_height: 0,
   })
   const [liked, setLiked] = useState(false)
+  const [liking, setLiking] = useState(false)
   const [replies, setReplies] = useState([])
 
   const replyForm = useRef(null)
@@ -102,9 +103,18 @@ export default function ModalView({
     const token = localStorage.getItem('token') || ''
 
     const formData = new FormData(replyForm.current)
+    
+    // console.log('是否有留言內容: ' + !!formData.get('context').trim());
 
     if (!token) {
       return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
+    }
+
+    if (!formData.get('context').trim()) {
+      return Swal.fire({
+        title: '請輸入留言內容',
+        confirmButtonColor: '#216326',
+      })
     }
 
     const result = await axios.post(
@@ -155,6 +165,8 @@ export default function ModalView({
         // z-index over nav bar?
         onClick={() => {
           setIsView(false)
+          setCurrentPost(0)
+          // setLocationList(0)
         }}
       >
         <div
@@ -167,6 +179,7 @@ export default function ModalView({
             <img
               src={`http://localhost:3001/uploads/${showData.image_url}`}
               alt="postImg"
+              loading="lazy"
             ></img>
           </div>
           <div className={styled.editContent}>
@@ -193,6 +206,7 @@ export default function ModalView({
                         : '/img/default_avatar.png'
                     }
                     alt="postImg"
+                    loading="lazy"
                   ></img>
                 </div>
                 <h4>{user.nickname}</h4>
@@ -200,14 +214,21 @@ export default function ModalView({
                   <span
                     onClick={() => {
                       removeLike()
+                      setLiking(false)
                     }}
                   >
-                    {showData.likes} <i className="fa-solid fa-heart"></i>
+                    {showData.likes}{' '}
+                    <i
+                      className={`fa-solid fa-heart ${styled.liked} ${
+                        liking && styled.liking
+                      }`}
+                    ></i>
                   </span>
                 ) : (
                   <span
                     onClick={() => {
                       addLike()
+                      setLiking(true)
                     }}
                   >
                     {showData.likes} <i className="fa-regular fa-heart"></i>
@@ -257,6 +278,7 @@ export default function ModalView({
                                 : '/img/default_avatar.png'
                             }
                             alt="postImg"
+                            loading="lazy"
                           ></img>
                         </div>
 

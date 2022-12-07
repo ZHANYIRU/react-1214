@@ -12,6 +12,9 @@ function SeeEvaluation({ el }) {
     if (el.product_img) {
       img = `http://localhost:3001/imgs/zx/${el.product_img}`
     }
+    if (el.custom_img) {
+      img = `http://localhost:3001/uploads/${el.custom_img}`
+    }
     if (el.room_img) {
       img = `http://localhost:3001/room_img/${el.room_img}`
     }
@@ -19,7 +22,7 @@ function SeeEvaluation({ el }) {
       img = `http://localhost:3001/rental_img/${el.rental_img[0]}`
     }
     if (el.mainImage) {
-      img = `http://localhost:3001/room_img/${el.mainImage}`
+      img = `http://localhost:3001/n7/campmain/${el.mainImage}`
     }
     return img
   }
@@ -51,7 +54,9 @@ function SeeEvaluation({ el }) {
           <div className={styled.lightImg}>
             <img src={photo(el)} alt="" />
           </div>
-          <p>{el.product_name || el.rental_name || el.name || el.room_name}</p>
+          <p>
+            {el.product_name || el.rental_name || el.camp_name || el.room_name}
+          </p>
         </div>
         <div className={styled.lookMember}>
           <div className={styled.memberLeft}>

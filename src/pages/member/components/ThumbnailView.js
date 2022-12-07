@@ -17,6 +17,7 @@ export default function ThumbnailView({
       <img
         src={`http://localhost:3001/uploads/thumb_${postData.image_url}`}
         alt="post"
+        loading="lazy"
       ></img>
       <div className={styled.postInfo}>
         <p>

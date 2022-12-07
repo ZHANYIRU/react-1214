@@ -137,9 +137,6 @@ function Navbar() {
             <li>
               <Link to="/social">山友分享</Link>
             </li>
-            <li>
-              <Link to="/test">Test</Link>
-            </li>
           </ul>
         </div>
         <div className={styled.navRight}>
@@ -153,7 +150,7 @@ function Navbar() {
           <Link to="/member" onClick={loginBtn}>
             <i className="fa-solid fa-user"></i>
             <i className="fa-solid" style={{ paddingLeft: '10px' }}>
-              {data.nickname}
+              {data.nickname ? data.nickname : ''}
             </i>
           </Link>
         </div>
@@ -226,8 +223,10 @@ function Navbar() {
         <div className={styled.navRight}>
           <Link to="/cart">
             <i className="fa-solid fa-cart-shopping"></i>
+            <span className={styled.cartItem}>
+              <p>{cartItem ? cartItem : 0}</p>
+            </span>
           </Link>
-          <span>{cartItem}</span>
           <Link to="/member" onClick={loginBtnMMob}>
             <i className="fa-solid fa-user"></i>
           </Link>

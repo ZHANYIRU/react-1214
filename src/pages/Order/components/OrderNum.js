@@ -144,9 +144,13 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
     })
   }
   const photo = (el) => {
+    console.log(el)
     let img
     if (el.product_img) {
       img = `${MY_HOST}/imgs/zx/${el.product_img}`
+    }
+    if (el.custom_img) {
+      img = `${MY_HOST}/uploads/${el.custom_img}`
     }
     if (el.room_img) {
       img = `${MY_HOST}/room_img/${el.room_img}`
@@ -155,7 +159,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
       img = `${MY_HOST}/rental_img/${el.rental_img[0]}`
     }
     if (el.mainImage) {
-      img = `${MY_HOST}/room_img/${el.mainImage}`
+      img = `${MY_HOST}/n7/campmain/${el.mainImage}`
     }
     return img
   }
@@ -186,7 +190,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                   <p>
                     {el.product_name ||
                       el.rental_name ||
-                      el.name ||
+                      el.camp_name ||
                       el.room_name}
                   </p>
                 </div>
@@ -199,7 +203,6 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                 <button
                   className={styled.yes}
                   onClick={() => {
-                    console.log(el)
                     if (el.product_sid) addEva(el)
                     if (el.room_sid) addEva(el)
                     if (el.campaign_sid) addEva(el)
@@ -284,6 +287,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                       )}
                     {proRows &&
                       proRows.map((el2, i2) => {
+                        console.log(el2)
                         return el.order_num === el2.order_num ? (
                           <div
                             className={styled.proContent}
@@ -323,6 +327,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                             ) : (
                               <button
                                 onClick={() => {
+                                  setWriteEve('')
                                   const writeStars = [el2]
                                   setEvaluation(writeStars)
                                   setLightOpen(!lightOpen)
@@ -374,7 +379,9 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                                 <br />
                                 <span>地址：{el3.room_address}</span>
                               </p>
-                              <p>{ds.isValid() && ds.format('YYYY-MM-DD')}</p>
+                              <p style={{ marginRight: '5px' }}>
+                                {ds.isValid() && ds.format('YYYY-MM-DD')}
+                              </p>
                               <p>{de.isValid() && de.format('YYYY-MM-DD')}</p>
                               <p>{el3.day}</p>
                               <p>{moneyFormat(el3.room_price)}</p>
@@ -392,6 +399,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                             ) : (
                               <button
                                 onClick={() => {
+                                  setWriteEve('')
                                   const writeStars = [el3]
                                   setEvaluation(writeStars)
                                   setLightOpen(!lightOpen)
@@ -414,7 +422,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                         <div className={styled.campContentTitle}>
                           <p>活動</p>
                           <p>開始日期</p>
-                          <p>結束日期</p>
+                          <p>天數</p>
                           <p>單價</p>
                           <p>人數</p>
                           <p>金額</p>
@@ -423,7 +431,6 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                     {camRows &&
                       camRows.map((el4, i4) => {
                         const ds = dayjs(el4.date_start)
-                        const de = dayjs(el4.date_end)
                         return (
                           el.order_num === el4.order_num && (
                             <div
@@ -433,18 +440,15 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                               <div className={styled.contentDe}>
                                 <div className={styled.imgWrap}>
                                   <img
-                                    src="https://cdn2.ettoday.net/images/4778/d4778980.jpg"
+                                    src={`${MY_HOST}/n7/campmain/${el4.mainImage}`}
                                     alt=""
                                   />
                                 </div>
                                 <p>
-                                  <span>{el4.name}</span>
-                                  <br />
-                                  <br />
-                                  <span>地址：板橋</span>
+                                  <span>{el4.camp_name}</span>
                                 </p>
                                 <p>{ds.isValid() && ds.format('YYYY-MM-DD')}</p>
-                                <p>{de.isValid() && de.format('YYYY-MM-DD')}</p>
+                                <p>{el4.dayname}</p>
                                 <p>{moneyFormat(el4.price)}</p>
                                 <p>{el4.people}</p>
                                 <p>{moneyFormat(el4.total)}</p>
@@ -460,6 +464,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                               ) : (
                                 <button
                                   onClick={() => {
+                                    setWriteEve('')
                                     const writeStars = [el4]
                                     setEvaluation(writeStars)
                                     setLightOpen(!lightOpen)
@@ -536,6 +541,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                               ) : (
                                 <button
                                   onClick={() => {
+                                    setWriteEve('')
                                     const writeStars = [el5]
                                     setEvaluation(writeStars)
                                     setLightOpen(!lightOpen)

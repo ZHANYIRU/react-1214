@@ -5,6 +5,69 @@ import { Link } from 'react-router-dom'
 function RoomCard({ roomlist }) {
   const { M2rows } = roomlist
   // console.log(M2rows)
+  const starCount = (e) => {
+    if (e > 0 && e === 1) {
+      return (
+        <>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+        </>
+      )
+    } else if (e > 0 && e === 2) {
+      return (
+        <>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+        </>
+      )
+    } else if (e > 0 && e === 3) {
+      return (
+        <>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+        </>
+      )
+    } else if (e > 0 && e === 4) {
+      return (
+        <>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+        </>
+      )
+    } else if (e > 0 && e === 5) {
+      return (
+        <>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+        </>
+      )
+    } else if (e <= 0) {
+      return (
+        <>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+        </>
+      )
+    }
+  }
 
   return (
     <>
@@ -17,7 +80,7 @@ function RoomCard({ roomlist }) {
             return (
               <Link to={`/room/${v.room_sid}`}>
                 <div className={style.roomCard} key={v.room_sid}>
-                <div className={style.cardImg}>
+                  <div className={style.cardImg}>
                     <img
                       src={`http://localhost:3001/room_img/${v.room_img}`}
                       alt=""
@@ -40,11 +103,10 @@ function RoomCard({ roomlist }) {
                   </div>
                   <h4 className={style.roomName}>{v.room_name}</h4>
                   <div className={style.star}>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <i className="fa-solid fa-star"></i>
-                    <span className={style.commentQTY}>(2)</span>
+                  {starCount(Math.round(v.Average))}
+                    <span className={style.commentQTY}>
+                    ({v.commentQty > 0 ? v.commentQty : 0})
+                    </span>
                   </div>
                   <div className={style.price}>
                     ＄{v.room_price}

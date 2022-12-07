@@ -1,17 +1,16 @@
 @import '../global.scss';
-.choose{
+.choose {
   width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 30px;
-  button{
+  button {
     border: none;
     background-color: $darkGreen;
     color: $yellow;
     border-radius: 5px;
     padding: 10px 20px;
   }
-  
 }
 .pay {
   width: 50%;
@@ -23,19 +22,31 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  p{
+  p {
     margin-bottom: 50px;
     font-size: 20px;
   }
-  span{
+  span {
     margin-left: 15px;
   }
-  button{
+  button {
     font-size: 20px;
     border: none;
-    background-color: #00C43E;
+    background-color: #00c43e;
     color: white;
     padding: 20px;
     border-radius: 10px;
   }
+}
+.payCard {
+  width: 50%;
+  height: 500px;
+  background-color: #e3eee7;
+  margin: 30px auto 0;
+  border-radius: 10px;
+  padding-top: 20px;
+}
+.form {
+  width: 50%;
+  margin: 30px auto;
 }
