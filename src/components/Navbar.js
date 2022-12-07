@@ -221,8 +221,10 @@ function Navbar() {
         <div className={styled.navRight}>
           <Link to="/cart">
             <i className="fa-solid fa-cart-shopping"></i>
+            <span className={styled.cartItem}>
+              <p>{cartItem ? cartItem : 0}</p>
+            </span>
           </Link>
-          <span>{cartItem}</span>
           <Link to="/member" onClick={loginBtnMMob}>
             <i className="fa-solid fa-user"></i>
           </Link>
