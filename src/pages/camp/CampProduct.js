@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import ListLeft from './components/ListLeft'
 import style from '../../styles/camp-scss/campproduct.module.scss'
 import { useSearchParams, useParams } from 'react-router-dom'
 import axios from 'axios'
 import dayjs from 'dayjs'
+import ProCartContext from '../../contexts/ProCartContext'
 
 function CampProduct() {
+  const { addCampCart } = useContext(ProCartContext)
   const { camp_sid } = useParams()
   //sid活動產品資料
   const [campSid, setCampSid] = useState([])
@@ -99,6 +101,7 @@ function CampProduct() {
               if (i < 1) {
                 return (
                   <>
+                    {console.log(v)}
                     <div className={style.card}>
                       <div className={style.cardtop}>
                         <h2>{v.camp_name}</h2>
@@ -154,7 +157,32 @@ function CampProduct() {
                               </div>
                             </div>
                           </div>
-                          <button className={style.buy}>加入購物車</button>
+                          <button
+                            className={style.buy}
+                            onClick={() => {
+                              let a
+                              if (v.campaign_days_sid === 1) {
+                                a = '一日遊'
+                              } else if (v.campaign_days_sid === 2) {
+                                a = '兩天一夜'
+                              } else if (v.campaign_days_sid === 3) {
+                                a = '三天兩夜'
+                              }
+                              addCampCart(
+                                v.sid,
+                                v.camp_name,
+                                chooseDate,
+                                a,
+                                v.name,
+                                v.mountain_name,
+                                v.price,
+                                num,
+                                v.mainImage
+                              )
+                            }}
+                          >
+                            加入購物車
+                          </button>
                         </div>
                         <div className={style.mainImage}>
                           <img

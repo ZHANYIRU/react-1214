@@ -21,7 +21,10 @@ function CampCatList({ filter }) {
   const [campDay, setCampDay] = useState([])
 
   //select難度資料
-  const [campLevel, setCampLevel] = useState([])
+  // const [campLevel, setCampLevel] = useState([])
+
+  //存select選中的天數
+  const [seldays, setSeldays] = useState('')
 
   let all = 'all'
   let select = 'select'
@@ -36,14 +39,15 @@ function CampCatList({ filter }) {
         setCampDay(data)
       } else if (url === 'all') {
         setCampData(data)
-      } else if (url === 'level') {
-        setCampLevel(data)
       }
+      // else if (url === 'level') {
+      //   setCampLevel(data)
+      // }
     } catch (e) {
       console.log(e.message)
     }
   }
-  //查詢分類結果的長度
+
   let filteredData
   if (+filter) {
     filteredData = campData.filter((v, i) => {
@@ -53,14 +57,26 @@ function CampCatList({ filter }) {
     filteredData = campData.filter((v, i) => {
       return v.campaign_type_sid === filterCon
     })
+    if (seldays) {
+      filteredData = filteredData.filter((v, i) => {
+        return v.campaign_days_sid === +seldays
+      })
+    }
   }
-  const campAlreadyFilter = campData.filter((v, i) => {
-    return v.campaign_type_sid === filterCon
-  })
 
-  const f = campData.filter((v, i) => {
+  //查詢分類結果的長度
+  let campAlreadyFilter = campData.filter((v, i) => {
     return v.campaign_type_sid === filterCon
   })
+  if (seldays) {
+    campAlreadyFilter = filteredData.filter((v, i) => {
+      return v.campaign_days_sid === +seldays
+    })
+  }
+
+  // const f = campData.filter((v, i) => {
+  //   return v.campaign_type_sid === filterCon
+  // })
 
   useEffect(() => {
     fetchAll('all')
@@ -70,14 +86,21 @@ function CampCatList({ filter }) {
   return (
     <div className={style.cat}>
       <div className={style.catright}>
-        天數
-        <select>
-          {console.log(campDay)}
+        篩選活動天數
+        <select
+          value={seldays}
+          onChange={(e) => {
+            const D = e.currentTarget.value
+            setSeldays(D)
+          }}
+        >
+          <option value="">請選擇</option>
+          {console.log(seldays)}
           {campDay.map((v, i) => {
-            return <option>{v.dayname}</option>
+            return <option value={v.campday_sid}>{v.dayname}</option>
           })}
         </select>
-        難度
+        {/* 山的難度
         <select>
           {console.log(campLevel)}
           {campLevel.map((v2, i) => {
@@ -90,8 +113,7 @@ function CampCatList({ filter }) {
             }
             return <option>{v2.level}</option>
           })}
-        </select>
-        <button>查詢</button>
+        </select> */}
         <div>查詢結果 {campAlreadyFilter.length}</div>
         {console.log(campAlreadyFilter)}
         <div className={style.cards}>
