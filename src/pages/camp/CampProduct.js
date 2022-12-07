@@ -119,7 +119,7 @@ function CampProduct() {
                             </span>
                             <span>{v.mountain_name}</span>
                           </div>
-                          <label>請選擇報名日期</label>
+                          <label className={style.stitle}>請選擇報名日期</label>
                           <input
                             type="date"
                             min={today}
@@ -131,8 +131,8 @@ function CampProduct() {
                             }}
                           />
                           {console.log(chooseDate)}
-                          <div>金額：{v.price}</div>
-                          <div>評價：stars</div>
+                          <div className={style.price}>金額：{v.price}</div>
+                          <div className={style.price}>評價：stars</div>
                           <div className={style.howNum}>
                             <p>商品數量</p>
                             <div className={style.numBox}>
