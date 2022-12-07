@@ -25,7 +25,6 @@ function Navbar() {
   })
   const loginBtn = (e) => {
     e.preventDefault()
-    console.log('aaaaaaaaaaaa')
     if (loginBox.top === '-20px') {
       setLoginBox({ ...loginBox, top: '70px' })
     } else {

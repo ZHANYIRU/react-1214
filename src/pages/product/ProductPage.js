@@ -304,7 +304,7 @@ export default function ProductPage() {
          */}
 
         <p className={styled.write} onClick={() => {}}>
-          {[...Array(5)].map((star, index) => {
+          {[...Array(4)].map((star, index) => {
             const tatalStar = Math.floor(avgStar)
             index += 1
             return (
