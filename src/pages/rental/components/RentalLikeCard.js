@@ -3,7 +3,7 @@ import styled from '../../../styles/rental-scss/rentalLike.module.scss'
 import { Link } from 'react-router-dom'
 function RentalLikeCard({ data }) {
   return (
-    <Link to={`/rental/${data.sid}`}>
+    <Link to={`/rental/${data.sid}`} style={{ width: '30.333%' }}>
       {/* 外層 */}
 
       <div className={styled.cardBody}>

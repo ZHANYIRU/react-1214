@@ -53,7 +53,7 @@
             display:flex;
             justify-content: space-between;
             align-items: center;
-            width:400px;
+            width:300px;
             // border:1px solid black;
             p{
                 margin-right:20px;
@@ -80,10 +80,11 @@
             align-items: center;
             // border:1px solid black;
 
-            p{
+            p,i{
                 cursor:pointer;
                 text-align:center;
             }
+
 
         }
     }
@@ -111,9 +112,10 @@
         .rentalProduct{
             // border:1px solid black;
             // width: 25%;
-            padding:15px 40px;
+            padding:15px 35px;
             // width:295px;
             color:black;
+            overflow:hidden;
          
             .cardBody{
                 width: 100%;
@@ -122,6 +124,7 @@
                 box-shadow: 3px 3px 3px #ccc;
                 padding:5px 20px;
                 border:1px solid black;
+                overflow: hidden;
                 // justify-content: center;
         
         
@@ -144,9 +147,16 @@
                 .rental_product_name{
                     display:flex;
                     align-items: center;
-                    font-size:20px;
+                    font-size:16px;
                     text-transform: uppercase;
-                    height: 50px;
+                    height: 40px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    
+                    
                 } 
                 .price{
                     color:black;
@@ -156,11 +166,11 @@
                     span{
                         color:red;
                     }
+                    p{
+                        margin:10px 0;
+                    }
                 }
-                .star{
-                    margin:20px 0;
-                    color:yellow;
-                }
+                
             }
             
         }

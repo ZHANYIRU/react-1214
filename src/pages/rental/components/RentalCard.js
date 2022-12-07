@@ -41,20 +41,3 @@ function RentalCard({ data }) {
 }
 
 export default RentalCard
-
-// import React from 'react'
-// import rentalcss from '../../../styles/Rental/rentalProducts.module.scss'
-
-// function RentalProduct({ data }) {
-//   return (
-//     <div className={rentalcss.rentalProduct}>
-//       <div className={rentalcss.imageContainer}>
-//         <img src={data.src.large} alt="" />
-//       </div>
-//       <p>商品名稱：{data.photographer}</p>
-//       <p>價格：$100</p>
-//     </div>
-//   )
-// }
-
-// export default RentalProduct
