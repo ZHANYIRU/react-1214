@@ -1,19 +1,39 @@
 import React, { useRef, useState, useContext } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import styled from '../../styles/product-scss/productPage.module.scss'
 import axios from 'axios'
 import { useEffect } from 'react'
+import MemberContext from '../../contexts/MemberContext'
 import ProCartContext from '../../contexts/ProCartContext'
 import StarRating from './components/starRating'
 import CommentLightBox from './components/CommentLightBox'
-import comFakeData from './comFakeData'
+// import comFakeData from './comFakeData'
 import Swal from 'sweetalert2'
+import { useMediaQuery } from 'react-responsive'
 
 export default function ProductPage() {
+  const navigate = useNavigate()
+  //評價state
+  const [commentFetch, setCommentFetch] = useState([])
+  //useMediaQuery
+  const minPc = useMediaQuery({ query: '(max-width:1100px)' })
+  //會員頭像邊框
+  function avatarLevel(height = 0) {
+    if (height > 10000) {
+      return styled.gold
+    }
+    if (height > 3000) {
+      return styled.silver
+    }
+    return styled.bronze
+  }
   const { product_sid } = useParams()
+  const memberData = useContext(MemberContext)
   const { addProCart } = useContext(ProCartContext)
+  //平均星數
+  const [avgStar, setAvgStar] = useState(0)
   //哪一筆評論的Index
-  const [whichCom, setWhichCom] = useState(-1)
+  const [whichCom, setWhichCom] = useState(0)
   //衣服size
   const clotheSize = ['S', 'M', 'L']
   // //fetchSize
@@ -163,6 +183,17 @@ export default function ProductPage() {
     console.log(r)
     setRandomData(r)
   }
+  //取得評論資訊
+  const comMentData = async () => {
+    const response = await axios.get(
+      `http://localhost:3001/product/comment?pid=${product_sid}`
+    )
+    const r = response.data.rows
+    const r2 = response.data.rows2[0].avgStar
+    console.log(response.data)
+    setCommentFetch(r)
+    setAvgStar(r2)
+  }
   // 切換開關方法
   const changeBtn = (e) => {
     setintroCom(!introCom)
@@ -174,6 +205,60 @@ export default function ProductPage() {
       `http://localhost:3001/imgs/zx/${v.product_imgs[0]}`
     )
   }
+  // guessUlike 2卡片
+  const guessUlike_2_card = randomData.map((v, i) => {
+    if (i < 2)
+      return (
+        <Link
+          className={styled.card}
+          key={v.product_sid}
+          to={'/product/' + v.product_sid}
+          onClick={() => {
+            getProductData()
+          }}
+        >
+          <div>
+            <div className={styled.imgWrap}>
+              <img
+                src={`http://localhost:3001/imgs/zx/${v.product_img}`}
+                alt=""
+              />
+            </div>
+            <p className={styled.p}>{v.product_name}</p>
+            <h2>
+              金額：<span>${v.product_price}</span>
+            </h2>
+          </div>
+        </Link>
+      )
+  })
+  // guessUlike 3卡片
+  const guessUlike_3_card = randomData.map((v, i) => {
+    return (
+      <Link
+        className={styled.card}
+        key={v.product_sid}
+        to={'/product/' + v.product_sid}
+        onClick={() => {
+          getProductData()
+        }}
+      >
+        <div>
+          <div className={styled.imgWrap}>
+            <img
+              src={`http://localhost:3001/imgs/zx/${v.product_img}`}
+              alt=""
+            />
+          </div>
+          <p className={styled.p}>{v.product_name}</p>
+          <h2>
+            金額：<span>${v.product_price}</span>
+          </h2>
+        </div>
+      </Link>
+    )
+  })
+
   // 商品介紹 or 商品評論
   const intro = datas.map((v, i) => {
     return (
@@ -182,33 +267,31 @@ export default function ProductPage() {
         <p className={styled.intro}>{v.product_spec}</p>
         <div className={styled.introTitle}>特色說明</div>
         <p className={styled.intro}>{v.product_feature}</p>
+        <div className={styled.introTitle}>鑑賞期說明</div>
+        <p>
+          依據消費者保護法之規定，消費者得於收到商品或接受服務後七天內，以退回商品或書面通知方式解除契約，無須說明理由及負擔任何費用或對價。但以下情形例外不適用：
+          易於腐敗、保存期限較短或解約時即將逾期。
+          <br />
+          <br />
+          1.依消費者要求所為之客製化給付。 報紙、期刊或雜誌。
+          <br />
+          2.經消費者拆封之影音商品或電腦軟體。
+          <br />
+          3.非以有形媒介提供之數位內容或一經提供即為完成之線上服務，經消費者事先同意始提供。
+          <br />
+          4.已拆封之個人衛生用品。 國際航空客運服務。
+          <br />
+          5.故若賣家販售的商品為以上不適用於7天鑑賞期之商品，根據法律規定，還請賣家先於商品頁面上載明，若事先未載明則無法排除適用，請賣家務必注意。
+          同時，七天鑑賞期指的是猶豫期而非試用期喔！商品須在完整且可還原狀態下才能進行退貨。
+          <br />
+          <br />
+          因此，若賣家遇到買家退貨商品有逾越檢查必要之使用痕跡或需酌收費用才可還原的情形時，賣家可與買家協調商品整新費用等必要支出。
+          <br />
+          🔔 註：七天鑑賞期的算法是從收到商品的隔天開始算七天，且包含例假日。
+        </p>
         <div className={styled.introTitle}>猜你喜歡</div>
         <div className={styled.guessYouLike}>
-          {randomData.map((v, i) => {
-            return (
-              <Link
-                className={styled.card}
-                key={v.product_sid}
-                to={'/product/' + v.product_sid}
-                onClick={() => {
-                  getProductData()
-                }}
-              >
-                <div>
-                  <div className={styled.imgWrap}>
-                    <img
-                      src={`http://localhost:3001/imgs/zx/${v.product_img}`}
-                      alt=""
-                    />
-                  </div>
-                  <p className={styled.p}>{v.product_name}</p>
-                  <h2>
-                    金額：<span>${v.product_price}</span>
-                  </h2>
-                </div>
-              </Link>
-            )
-          })}
+          {minPc ? guessUlike_2_card : guessUlike_3_card}
         </div>
       </div>
     )
@@ -217,34 +300,74 @@ export default function ProductPage() {
   const com = (
     <div className={styled.comWrap}>
       <div className={styled.starBox}>
-        <StarRating />
+        {/* <StarRating />
+         */}
+
         <p className={styled.write} onClick={() => {}}>
-          (19)
+          {[...Array(4)].map((star, index) => {
+            const tatalStar = Math.floor(avgStar)
+            index += 1
+            return (
+              <p
+                key={index}
+                className={
+                  index <= tatalStar ? `${styled.on}` : `${styled.off}`
+                }
+              >
+                <span className="star">&#9733;</span>
+              </p>
+            )
+          })}
         </p>
+        <p>{avgStar} &nbsp; 顆星</p>
       </div>
       <div className={styled.commonArea}>
-        {comFakeData.map((v, i) => {
+        {commentFetch.map((v, i) => {
           return (
             <div className={styled.commonBox}>
               <div className={styled.commonTitle}>
-                <div className={styled.commonTitle_img_border}>
+                <div
+                  className={`${styled.commonTitle_img_border} ${avatarLevel(
+                    v.total_height
+                  )}`}
+                  onClick={() => {
+                    navigate(
+                      `${memberData.data.member_sid}` === `${v.member_sid}`
+                        ? `/member`
+                        : `/profile?id=${v.member_sid}`
+                    )
+                  }}
+                >
                   <div className={styled.commonTitle_img}>
-                    <img
-                      src="https://cdn2.ettoday.net/images/2253/2253152.jpg"
-                      alt=""
-                    />
+                    {v && v.avatar ? (
+                      <img
+                        src={`http://localhost:3001/uploads/avatar_${v.avatar}`}
+                        alt="avatar"
+                      ></img>
+                    ) : (
+                      <img src="/img/default_avatar.png" alt="avatar" />
+                    )}
                   </div>
                 </div>
 
-                <div className={styled.memberName}>{v.name}</div>
+                <div className={styled.memberName}>{v.nickname}</div>
               </div>
-              <div className={styled.commonText}>{v.text}</div>
+              <div className={styled.commonText}>{v.message}</div>
               <div className={styled.howStar}>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
+                {[...Array(5)].map((star2, index) => {
+                  const totalStars = v.star
+                  index += 1
+                  return (
+                    <p
+                      key={index}
+                      className={
+                        index <= totalStars ? `${styled.on}` : `${styled.off}`
+                      }
+                    >
+                      <span className="star">&#9733;</span>
+                    </p>
+                  )
+                })}
               </div>
               <div
                 className={styled.readMore}
@@ -317,12 +440,15 @@ export default function ProductPage() {
   useEffect(() => {
     getSize2()
   }, [])
+  useEffect(() => {
+    comMentData()
+  }, [])
   return (
     <>
       <div className={styled.empty}></div>
       {comLightBox && (
         <CommentLightBox
-          comFakeData={comFakeData}
+          commentFetch={commentFetch}
           whichCom={whichCom}
           setComLightBox={setComLightBox}
         />
@@ -342,58 +468,23 @@ export default function ProductPage() {
                     />
                   </div>
                   <div className={styled.imgGroup}>
-                    <img
-                      src={`http://localhost:3001/imgs/zx/${v.product_imgs[0]}`}
-                      alt=""
-                      onMouseMove={() => {
-                        changePic.current.setAttribute(
-                          'src',
-                          `http://localhost:3001/imgs/zx/${v.product_imgs[0]}`
-                        )
-                      }}
-                      onMouseLeave={() => {
-                        msLeave(v)
-                      }}
-                    />
-                    <img
-                      src={`http://localhost:3001/imgs/zx/${v.product_imgs[1]}`}
-                      alt=""
-                      onMouseMove={() => {
-                        changePic.current.setAttribute(
-                          'src',
-                          `http://localhost:3001/imgs/zx/${v.product_imgs[1]}`
-                        )
-                      }}
-                      onMouseLeave={() => {
-                        msLeave(v)
-                      }}
-                    />
-                    <img
-                      src={`http://localhost:3001/imgs/zx/${v.product_imgs[2]}`}
-                      alt=""
-                      onMouseMove={() => {
-                        changePic.current.setAttribute(
-                          'src',
-                          `http://localhost:3001/imgs/zx/${v.product_imgs[2]}`
-                        )
-                      }}
-                      onMouseLeave={() => {
-                        msLeave(v)
-                      }}
-                    />
-                    <img
-                      src={`http://localhost:3001/imgs/zx/${v.product_imgs[3]}`}
-                      alt=""
-                      onMouseMove={() => {
-                        changePic.current.setAttribute(
-                          'src',
-                          `http://localhost:3001/imgs/zx/${v.product_imgs[3]}`
-                        )
-                      }}
-                      onMouseLeave={() => {
-                        msLeave(v)
-                      }}
-                    />
+                    {[...Array(5)].map((v2, i2) => {
+                      return (
+                        <img
+                          src={`http://localhost:3001/imgs/zx/${v.product_imgs[i2]}`}
+                          alt=""
+                          onMouseMove={() => {
+                            changePic.current.setAttribute(
+                              'src',
+                              `http://localhost:3001/imgs/zx/${v.product_imgs[i2]}`
+                            )
+                          }}
+                          onMouseLeave={() => {
+                            msLeave(v)
+                          }}
+                        />
+                      )
+                    })}
                   </div>
                 </div>
 

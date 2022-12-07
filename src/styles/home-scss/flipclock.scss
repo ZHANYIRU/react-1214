@@ -1,0 +1,17 @@
+.FlipClock {
+    // border: 1px solid red;
+    justify-content:space-between;
+    margin-bottom: 20px;
+  }
+.FlipClock .flipUnitContainer{
+    height: 60px;
+    width: 50px;
+  }
+
+.FlipClock .flipUnitContainer .ContainerTitle {
+    width: 100%;
+    top: -30px;
+    left: -5px;
+    font-size: 15px;
+    text-transform: uppercase;
+}

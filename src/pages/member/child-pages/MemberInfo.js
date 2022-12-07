@@ -69,7 +69,7 @@ export default function MemberInfo() {
 
     if (!fileName) {
       return Swal.fire({
-        logo: 'error',
+        icon: 'error',
         title: '請先上傳圖片',
         confirmButtonColor: '#216326',
       })
@@ -204,7 +204,7 @@ export default function MemberInfo() {
               <h4 className={styled.heightTag}>
                 累積海拔: {data.total_height}公尺
               </h4>
-              <PostMap postList={postList} />
+              <PostMap postList={postList} getPostList={getPostList} />
               <TotalHeight totalHeight={{ height: data.total_height }} />
             </div>
           </div>
@@ -272,6 +272,7 @@ export default function MemberInfo() {
                     postList[currentPost].image_url
                   }
                   alt="postImg"
+                  loading="lazy"
                 ></img>
               </div>
               <div className={styled.editContent}>

@@ -25,7 +25,6 @@ function Navbar() {
   })
   const loginBtn = (e) => {
     e.preventDefault()
-    console.log('aaaaaaaaaaaa')
     if (loginBox.top === '-20px') {
       setLoginBox({ ...loginBox, top: '70px' })
     } else {
@@ -124,6 +123,9 @@ function Navbar() {
               <Link to="/product">登山用品</Link>
             </li>
             <li>
+              <Link to="/product/custom">客製衣服</Link>
+            </li>
+            <li>
               <Link to="/camp">套裝行程</Link>
             </li>
             <li>
@@ -148,7 +150,7 @@ function Navbar() {
           <Link to="/member" onClick={loginBtn}>
             <i className="fa-solid fa-user"></i>
             <i className="fa-solid" style={{ paddingLeft: '10px' }}>
-              {data.nickname}
+              {data.nickname ? data.nickname : ''}
             </i>
           </Link>
         </div>
@@ -221,8 +223,10 @@ function Navbar() {
         <div className={styled.navRight}>
           <Link to="/cart">
             <i className="fa-solid fa-cart-shopping"></i>
+            <span className={styled.cartItem}>
+              <p>{cartItem ? cartItem : 0}</p>
+            </span>
           </Link>
-          <span>{cartItem}</span>
           <Link to="/member" onClick={loginBtnMMob}>
             <i className="fa-solid fa-user"></i>
           </Link>

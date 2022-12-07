@@ -8,30 +8,7 @@
     line-height: 3rem;
     font-weight: 700;
     letter-spacing:5px;
-    margin-bottom: 150px;
-    &::after{
-        content: "";
-        width: 300px;
-        height: 180px;
-        position: absolute;
-        background-size: contain;
-        // background-image: url('../../../public/img/cloud.png');
-        background-repeat: no-repeat;
-        left: 50px;
-        top:200px
-    }
-    &::before{
-        content: "";
-        width: 300px;
-        height: 180px;
-        position: absolute;
-        background-size: contain;
-        // background-image: url('../../../public/img/cloud2.png');
-        background-repeat: no-repeat;
-        right: 0px;
-        top:450px;
-        z-index: -1;
-    }
+    margin-bottom: 50px;
 }
 .box {
     width: 100%;
@@ -82,7 +59,7 @@
         position: absolute;
         bottom: 0;
         img{
-          width:100%;
+          width:1920px;
           height: 100%
         }
       }
@@ -90,7 +67,42 @@
         position: absolute;
         bottom: -50px;
         img{
-          width:100%;
+          width:1920px;
           height: 100%
         }
       }
+
+    @media screen and (max-width: 1400px) {
+      .title{
+        font-size: 1.8rem;
+      }
+    }
+    
+    @media screen and (max-width: 992px) {
+      
+    }
+    
+    @media screen and (max-width: 768px) {  
+      .title{
+        font-size: 1.5rem;
+      }
+    }
+    
+    @media screen and (max-width: 576px) {
+      .title{
+        font-size: 1.4rem;
+        line-height: 2.5rem;
+
+      }
+    }
+    
+    @media screen and (max-width: 450px) {
+      .title{
+        padding-top: 115px;
+        font-size: 1.2rem;
+        line-height: 2rem;
+        margin-bottom: 35px;
+
+
+      }
+    }

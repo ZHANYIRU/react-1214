@@ -190,7 +190,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                   <p>
                     {el.product_name ||
                       el.rental_name ||
-                      el.name ||
+                      el.camp_name ||
                       el.room_name}
                   </p>
                 </div>
@@ -203,7 +203,6 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                 <button
                   className={styled.yes}
                   onClick={() => {
-                    console.log(el)
                     if (el.product_sid) addEva(el)
                     if (el.room_sid) addEva(el)
                     if (el.campaign_sid) addEva(el)
@@ -288,6 +287,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                       )}
                     {proRows &&
                       proRows.map((el2, i2) => {
+                        console.log(el2)
                         return el.order_num === el2.order_num ? (
                           <div
                             className={styled.proContent}
@@ -327,6 +327,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                             ) : (
                               <button
                                 onClick={() => {
+                                  setWriteEve('')
                                   const writeStars = [el2]
                                   setEvaluation(writeStars)
                                   setLightOpen(!lightOpen)
@@ -378,7 +379,9 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                                 <br />
                                 <span>地址：{el3.room_address}</span>
                               </p>
-                              <p>{ds.isValid() && ds.format('YYYY-MM-DD')}</p>
+                              <p style={{ marginRight: '5px' }}>
+                                {ds.isValid() && ds.format('YYYY-MM-DD')}
+                              </p>
                               <p>{de.isValid() && de.format('YYYY-MM-DD')}</p>
                               <p>{el3.day}</p>
                               <p>{moneyFormat(el3.room_price)}</p>
@@ -396,6 +399,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                             ) : (
                               <button
                                 onClick={() => {
+                                  setWriteEve('')
                                   const writeStars = [el3]
                                   setEvaluation(writeStars)
                                   setLightOpen(!lightOpen)
@@ -427,7 +431,6 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                     {camRows &&
                       camRows.map((el4, i4) => {
                         const ds = dayjs(el4.date_start)
-                        console.log(el4)
                         return (
                           el.order_num === el4.order_num && (
                             <div
@@ -443,9 +446,6 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                                 </div>
                                 <p>
                                   <span>{el4.camp_name}</span>
-                                  <br />
-                                  <br />
-                                  <span>地址：板橋</span>
                                 </p>
                                 <p>{ds.isValid() && ds.format('YYYY-MM-DD')}</p>
                                 <p>{el4.dayname}</p>
@@ -464,6 +464,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                               ) : (
                                 <button
                                   onClick={() => {
+                                    setWriteEve('')
                                     const writeStars = [el4]
                                     setEvaluation(writeStars)
                                     setLightOpen(!lightOpen)
@@ -540,6 +541,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                               ) : (
                                 <button
                                   onClick={() => {
+                                    setWriteEve('')
                                     const writeStars = [el5]
                                     setEvaluation(writeStars)
                                     setLightOpen(!lightOpen)

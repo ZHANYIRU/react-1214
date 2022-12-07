@@ -4,7 +4,7 @@
     height: 60px;
 }
 .container{
-    margin:0px 300px;
+    margin:0px auto;
     width:80%;
 
 
@@ -47,34 +47,50 @@
         align-items: center;
         justify-content: space-between;
         border-radius: 5px;
+        padding:0 20px;
         
-
-        .filtermore{
+        .category{
             display:flex;
-            align-items:center;
-            padding-left:20px;
-
-            h2,i{
+            justify-content: space-between;
+            align-items: center;
+            width:300px;
+            // border:1px solid black;
+            p{
+                margin-right:20px;
                 cursor:pointer;
+                text-align:center;
+                
             }
         }
+        // .nameSearch{
+        //     display:flex;
+        //     align-items:center;
+        //     padding-left:20px;
+
+        //     h2,i{
+        //         cursor:pointer;
+        //     }
+        // }
 
         .order{
-            margin-right:20px;
-            width:450px;
+            
+            // width:500px;
             display:flex;
             justify-content: space-around;
+            align-items: center;
+            // border:1px solid black;
 
-            p{
+            p,i{
                 cursor:pointer;
                 text-align:center;
             }
+
 
         }
     }
     .order p{
         border-left:2px solid black;
-        padding-left:10px;
+        padding:0 10px;
     }
     .order p:nth-child(1){
         border-left :0px;
@@ -96,16 +112,20 @@
         .rentalProduct{
             // border:1px solid black;
             // width: 25%;
-            padding:15px;
+            padding:15px 35px;
             // width:295px;
             color:black;
+            overflow:hidden;
          
             .cardBody{
                 width: 100%;
                 background-color: #fff;
                 border-radius:10px;
                 box-shadow: 3px 3px 3px #ccc;
-                padding:5px 30px;
+                padding:5px 20px;
+                border:1px solid black;
+                overflow: hidden;
+                // justify-content: center;
         
         
                 .imageContainer{
@@ -127,23 +147,30 @@
                 .rental_product_name{
                     display:flex;
                     align-items: center;
-                    font-size:25px;
+                    font-size:16px;
                     text-transform: uppercase;
-                    height: 50px;
+                    height: 40px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                    
+                    
                 } 
                 .price{
                     color:black;
-                    font-size:22px;
+                    font-size:20px;
                     font-weight: 700;
-                    margin:20px 0;
+                    margin:10px 0;
                     span{
                         color:red;
                     }
+                    p{
+                        margin:10px 0;
+                    }
                 }
-                .star{
-                    margin:20px 0;
-                    color:yellow;
-                }
+                
             }
             
         }
@@ -169,9 +196,8 @@
 
 
 .filtermorecontainer{
-        width:80%;
         height:100%;
-        border:1px solid black;
+        // border:1px solid black;
         margin:auto;
     .kind{
         display:flex;
