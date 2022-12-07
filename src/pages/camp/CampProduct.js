@@ -45,9 +45,9 @@ function CampProduct() {
 
         <h4>行程規劃</h4>
         <div className={style.schedule}>
-          <p>{v.schedule_day1}</p>
-          <p>{v.schedule_day2}</p>
-          <p>{v.schedule_day3}</p>
+          <pre>{v.schedule_day1}</pre>
+          <pre>{v.schedule_day2}</pre>
+          <pre>{v.schedule_day3}</pre>
         </div>
 
         <h4>注意事項</h4>
@@ -169,7 +169,7 @@ function CampProduct() {
                                 a = '三天兩夜'
                               }
                               addCampCart(
-                                v.sid,
+                                v.c_sid,
                                 v.camp_name,
                                 chooseDate,
                                 a,
@@ -184,21 +184,23 @@ function CampProduct() {
                             加入購物車
                           </button>
                         </div>
-                        <div className={style.mainImage}>
-                          <img
-                            src={`http://localhost:3001/n7/campmain/${v.mainImage}`}
-                          />
-                        </div>
-                        <div className={style.detailsimgs}>
-                          <img
-                            src={`http://localhost:3001/n7/${v.detailImages[0]}`}
-                          />
-                          <img
-                            src={`http://localhost:3001/n7/${v.detailImages[1]}`}
-                          />
-                          <img
-                            src={`http://localhost:3001/n7/${v.detailImages[2]}`}
-                          />
+                        <div className={style.imgearea}>
+                          <div className={style.mainImage}>
+                            <img
+                              src={`http://localhost:3001/n7/campmain/${v.mainImage}`}
+                            />
+                          </div>
+                          <div className={style.detailsimgs}>
+                            <img
+                              src={`http://localhost:3001/n7/${v.detailImages[0]}`}
+                            />
+                            <img
+                              src={`http://localhost:3001/n7/${v.detailImages[1]}`}
+                            />
+                            <img
+                              src={`http://localhost:3001/n7/${v.detailImages[2]}`}
+                            />
+                          </div>
                         </div>
                       </div>
                       <div className={style.switch}>

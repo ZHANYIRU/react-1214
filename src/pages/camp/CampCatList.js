@@ -13,7 +13,7 @@ function CampCatList({ filter }) {
   //all活動產品資料
   const [campData, setCampData] = useState([
     {
-      sid: '1',
+      c_sid: '1',
     },
   ])
 
@@ -120,7 +120,7 @@ function CampCatList({ filter }) {
           {filteredData.map((v, i) => {
             return (
               <>
-                <div className={style.listcardbig} key={v.sid}>
+                <div className={style.listcardbig} key={v.c_sid}>
                   <div className={style.listcardimg}>
                     <img
                       src={`http://localhost:3001/n7/campmain/${v.mainImage}`}
@@ -132,7 +132,7 @@ function CampCatList({ filter }) {
                     <div> 評價：stars</div>
                     <button
                       onClick={() => {
-                        navigate(`/camp/${v.sid}`)
+                        navigate(`/camp/${v.c_sid}`)
                       }}
                     >
                       查看更多

@@ -83,11 +83,10 @@ function CampSlider() {
         slidesToShow={1}
         slidesToScroll={1}
         autoplay={true}
-        speed={2000}
-        autoplaySpeed={5000}
+        //speed={2000}
+        autoplaySpeed={4000}
         cssEase="linear"
       >
-        
         {timeLeft.length !== 0 &&
           campData
             .filter((v, i) => {
@@ -126,7 +125,7 @@ function CampSlider() {
 
                         <button
                           onClick={() => {
-                            navigate(`/camp/${v.sid}`)
+                            navigate(`/camp/${v.c_sid}`)
                           }}
                         >
                           我要報名
