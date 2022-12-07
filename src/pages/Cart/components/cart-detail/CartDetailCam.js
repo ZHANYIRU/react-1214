@@ -26,7 +26,7 @@ function CartDetailCam() {
                   }
                   key={el.sid}
                 >
-                  <div className={styled.wrapRight}>
+                  <div className={`${styled.wrapRight} ${styled.camR}`}>
                     <div className={styled.roomText}>
                       <h2>{el.name}</h2>
                       <p>預定日期：{el.startDate}</p>
@@ -68,7 +68,7 @@ function CartDetailCam() {
                     </div>
                     <div className={styled.roomImg}>
                       <img
-                        src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
+                        src={`http://localhost:3001/n7/campmain/${el.img}`}
                         alt=""
                       />
                     </div>
