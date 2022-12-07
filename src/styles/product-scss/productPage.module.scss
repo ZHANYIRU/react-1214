@@ -200,6 +200,7 @@ a{
             .numBox1{
                 border-right: 1px solid #ccc;
                 padding: 5px;
+                cursor: pointer;
             }
             .numBox2{
                 padding: 5px;
@@ -207,6 +208,7 @@ a{
             .numBox3{
                 border-left: 1px solid #ccc;
                 padding: 5px;
+                cursor: pointer;
             }
         }
         
@@ -229,6 +231,7 @@ a{
         margin-bottom: 50px;
     }
     .buttonGroup{
+        margin-top: 30px;
         display: flex;
         width: 100%;
         justify-content:flex-start;
@@ -326,7 +329,7 @@ a{
    
     .card{
         width: 30%;
-        height: 300px;
+        height: 330px;
         // border: 1px black solid;
         border-radius: 10px;
         padding: 15px;
@@ -344,7 +347,7 @@ a{
             }
             img{
                 width: 100%;
-                object-fit: contain;
+                object-fit: cover;
                 margin-bottom: 10px;
             }
         }

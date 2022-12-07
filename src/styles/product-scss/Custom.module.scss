@@ -1,28 +1,249 @@
 @import '../global.scss';
 
-
-form{
-    
-    
+body{
+    position: relative;
 }
-.canvasArea{
-    width: 800px;
-    height: 800px;
-    border: 1px black solid;
+
+.empty{
+    width: 100%;
+    height: 60px;
 }
 
 
-
-//----
-.container{
-    margin: 0 auto;
-    width: 80%;
+.customBox{
+    width: 65%;
     display: flex;
     justify-content: center;
-    .display{
+    margin:80px  auto 0 auto;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    .leftArea{
         width: 50%;
+        display: flex;
+        justify-content: center;
+        
+        .canvasWrap{
+            background-color: #fff;
+            overflow: hidden;
+            padding-left: -5px;
+            width: 410px;
+            height: 500px;
+            canvas{
+                // background-color: red;
+            }
+        }
     }
-    .setting{
+    .rightArea{
         width: 50%;
+        gap: 30px;
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+        .customTitle{
+            width: 80%;
+            text-align: left;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+        button{
+            border-radius: 5px;
+            border: .5px #ccc solid;
+            &:hover{
+                background-color: $yellow;
+            }
+        }
+        .colorOptions{
+            width: 80%;
+            display: flex;
+            align-items: center;
+            line-height: 1.2rem;
+            font-size: 1.3rem;
+            font-weight: 500;
+            cursor: pointer;
+            .everyColor{
+                border: #ccc 1px solid;
+                margin-left: 20px;
+                width: 40px;
+                height: 40px;
+            }
+        }
+        .size{
+            width: 80%;
+            display: flex;
+            align-items: center;
+            line-height: 1.2rem;
+            font-size: 1.3rem;
+            .standardBoxChose{
+                margin-left: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 35px;
+                height: 35px;
+                // border: 1px black solid;
+                box-shadow:  3px  3px 3px #ccc,-3px 0px 3px #ccc;
+                // filter: drop-shadow(3px 3px 10px #ccc);
+                font-size: 1.5rem;
+                font-weight: 700;
+                border-radius: 10px;
+                background-color: #FFDA16;
+                &:hover{
+                    background-color: #FFDA16;
+                }
+                
+            }
+            .standardBox{
+                cursor: pointer;
+                margin-left: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 35px;
+                height: 35px;
+                // border: 1px black solid;
+                box-shadow:  3px  3px 3px #ccc,-3px 0px 3px #ccc;
+                // filter: drop-shadow(3px 3px 10px #ccc);
+                font-size: 1.5rem;
+                font-weight: 700;
+                border-radius: 10px;
+                &:hover{
+                    background-color: #FFDA16;
+                }
+                
+            }
+        }
+        .addImgae{
+            width: 80%;
+            display: flex;
+            justify-content: flex-start;
+            gap: 30px;
+            button{
+                padding:8px;
+                font-size: 1rem;
+            }
+            button:nth-child(1){
+                background-color: #004a13;
+                color:white;
+                padding:8px;
+                font-size: 1rem;
+                &:hover{
+                    background-color: $yellow;
+                    color:black;
+                }
+            }
+        }
+        .addText{
+            width: 80%;
+            button{
+                margin-left: 10px;
+                background-color: #004a13;
+                color:white;
+                padding:8px;
+                font-size: 1rem;
+                &:hover{
+                    background-color: $yellow;
+                    color:black;
+                }
+            }
+        }
+        .addCart{
+            width: 80%;
+            display: flex;
+            gap: 50px;
+            button{
+                background-color: #000;
+                border: none;
+                color: white;
+                padding: 10px;
+                width: 130px;
+                &:hover{
+                    background-color: $yellow;
+                    color:black
+                }
+            }
+        }
     }
 }
+
+
+.customLightBox{
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    position: fixed;
+    z-index: 90;
+    background-color: rgba(24, 22, 22, 0.66);
+    .customLightBoxBg{
+        width: 40%;
+        // padding: 10px;
+        margin: 120px auto 0 auto;
+        background-color: rgba(255, 255, 255, 0.719);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+       
+        .topArea{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content:space-between;
+            align-items: center;
+            border-bottom: 2px solid black;
+            .title{
+                margin-left: 10px;
+                font-size: 1.5rem;
+                font-weight: 400;
+            }
+            .escape{
+                cursor: pointer;
+            }
+            
+        }
+        form{
+            margin-top: 10px;
+            margin-left: 10px;
+            width: 60%;
+            input{
+                width: 100%;
+            }
+        }
+        .canvasModal{
+            margin: 15px 0;
+            width: 100%;
+            height: 450px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            // align-items: center;
+            // background-color: red;
+            
+        }
+        .bottonBox{
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            width: 100%;
+            margin-bottom:30px ;
+            button{
+                background-color: rgb(172, 172, 234);
+                border: .5s #ccc solid;
+                width: 50px;
+                height: 30px;
+                border-radius: 5px;
+                border:none ;
+            }
+            button:nth-child(2){
+                background-color: #fff;
+                border: .5s #ccc solid;
+                width: 50px;
+                height: 30px;
+                border-radius: 5px;
+                border:none ;
+            }
+        }
+    }
+}
+

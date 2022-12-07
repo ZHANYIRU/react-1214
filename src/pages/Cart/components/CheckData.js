@@ -91,19 +91,26 @@ function CheckData() {
                 <div className={styled.checkWrap} key={`${el.size}+${el.sid}`}>
                   <div className={styled.checkText}>
                     <h2>{el.name}</h2>
-                    <p>
-                      {el.size && '尺寸：'}
-                      {el.size && el.size}
-                    </p>
+                    {el.size && <p>尺寸：{el.size && el.size}</p>}
                     <p>單價：{moneyFormat(el.price)}</p>
                     <p>數量：{el.quantity}</p>
                     <p>總金額：{moneyFormat(el.price * el.quantity)}</p>
                   </div>
                   <div className={styled.checkImg}>
-                    <img
-                      src={`http://localhost:3001/imgs/zx/${el.img}`}
-                      alt=""
-                    />
+                    {el.sid === 719 ||
+                    el.sid === 720 ||
+                    el.sid === 721 ||
+                    el.sid === 722 ? (
+                      <img
+                        src={`http://localhost:3001/uploads/${el.img}`}
+                        alt=""
+                      />
+                    ) : (
+                      <img
+                        src={`http://localhost:3001/imgs/zx/${el.img}`}
+                        alt=""
+                      />
+                    )}
                   </div>
                 </div>
               )
@@ -117,13 +124,13 @@ function CheckData() {
               return (
                 <div
                   className={styled.checkWrap}
-                  style={{ height: '250px' }}
+                  style={{ height: '280px' }}
                   key={`${el.size}+${el.sid}`}
                 >
                   <div className={styled.checkText}>
                     <h2>{el.name}</h2>
                     <p>
-                      租還日期：{el.startDate}~{el.endDate}
+                      租還日期：{el.start}~{el.end}
                     </p>
                     <p>
                       租借－歸還：{el.out}-{el.back}

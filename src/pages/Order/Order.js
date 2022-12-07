@@ -1,5 +1,5 @@
 import styled from '../../styles/order-scss/Order.module.scss'
-import { MY_HOST } from './myConfig'
+import { MY_HOST } from '../../my-config'
 import MemberContext from '../../contexts/MemberContext'
 import OrderTime from './components/OrderTime'
 import OrderNum from './components/OrderNum'

@@ -22,7 +22,7 @@ body{
 .container{
     width: 60%;
     margin: 0 auto;
-    // min-width: 912px;
+    // min-width: 1000px;
     position: relative;
     .clickme{
         margin-top: 20px;
@@ -62,7 +62,7 @@ body{
     transition: .5s ease-in-out;
     z-index: 10;
     position: sticky;
-     top: 160px;
+     top: 130px;
      padding-top: 10px;
      background-color: #E9D9A2;
      border-radius: 10px 10px;
@@ -87,7 +87,7 @@ body{
         margin:  0 auto;
         width: 100%;
         height: 50px;
-        margin-bottom: 50px;
+        margin-bottom: 20px;
         outline-style: none;
     }
 
@@ -179,6 +179,7 @@ p{
 
 
 .cardBigBox{
+    width: 100%;
     // position: relative;
     margin: 0 auto;
     z-index: -1;
@@ -192,18 +193,20 @@ p{
         width:100%;
         display: flex;
         flex-wrap:wrap;
-        gap: 20px;
+        // gap: 20px;
         justify-content:flex-start;
         align-items:flex-start;
        
-        
+        .cardWrap{
+            width: 25%;
+            padding: 10px;
+            // overflow: hidden;
+        }
        
         .card{
-            width: 23.5%;
-            // border: 1px black solid;
-            // height: 370px;
-            border-radius: 10px;
+            width: 100%;
             padding: 15px;
+            border-radius: 10px;
             background-color: #fff;
             box-shadow: 0px 4px 16px rgba(0,0,0,.25);
             cursor: pointer;
@@ -306,9 +309,17 @@ p{
         padding:10px;
         border-radius: 10px;
         box-shadow: 3px 3px 6px rgb(127, 126, 126);
-        h2{
-            font-size: 1.3rem;
-         }
+        .sort{
+            display: flex;
+            align-items: center;
+            h2{
+                font-size: 1.3rem;
+             }
+             i{
+                margin-left: 15px;
+                cursor: pointer;
+             }
+        }
     }
     
     .filter2{
@@ -322,9 +333,18 @@ p{
         padding:10px;
         border-radius: 10px;
         box-shadow: 3px 3px 6px rgb(127, 126, 126);
-        h2{
-            font-size: 1.3rem;
-         }
+        .sort{
+            display: flex;
+            align-items: center;
+            h2{
+                font-size: 1.3rem;
+             }
+             i{
+                margin-left: 15px;
+                cursor: pointer;
+             }
+        }
+       
     }
 
 
@@ -415,8 +435,126 @@ input{
         margin: 5px 0 5px 0;
     }
 }
-
-
+@media screen and (max-width:1350px) {
+    .cardBigBox{
+        width: 100%;
+        // position: relative;
+        margin: 0 auto;
+        z-index: -1;
+    }
+    
+    
+        .cardbox{
+    
+            // min-width: 912px;
+            
+            width:100%;
+            display: flex;
+            flex-wrap:wrap;
+            // gap: 20px;
+            justify-content:flex-start;
+            align-items:flex-start;
+           
+            .cardWrap{
+                width: 33.33333%;
+                padding: 10px;
+                // overflow: hidden;
+            }
+           
+            .card{
+                width: 100%;
+                padding: 15px;
+                border-radius: 10px;
+                background-color: #fff;
+                box-shadow: 0px 4px 16px rgba(0,0,0,.25);
+                cursor: pointer;
+                overflow: hidden;
+                position: relative;
+                .banner {
+                    /* content: url('檔案路徑'); */
+                    display: block;
+                
+                    /* 以上兩個，當作區塊時，必須使用 */
+                    overflow: hidden;
+                    
+                    background-color: rgb(84, 224, 249);
+                    color: #fff;
+                    font-size: 1.2rem;
+                    line-height: 1.8rem;
+                    width: 200px;
+                    height: 30px;
+                    position: absolute;
+                    text-align: center;
+                    top: 20px;
+                    right: -60px;
+                    transform: rotate(40deg);
+                    z-index: 2;
+                }
+                .banner2{
+                    /* content: url('檔案路徑'); */
+                    display: block;
+                
+                    /* 以上兩個，當作區塊時，必須使用 */
+                    overflow: hidden;
+                    background-color: rgb(95, 61, 246);
+                    color: #fff;
+                    font-size: 1.2rem;
+                    line-height: 1.8rem;
+                    width: 200px;
+                    height: 30px;
+                    position: absolute;
+                    text-align: center;
+                    top: 20px;
+                    right: -60px;
+                    transform: rotate(40deg);
+                    z-index: 2;
+                }
+            }
+            
+            .imgWrap{
+                width: 100%;
+                height: 280px;
+                display: flex;
+                justify-content: center;
+                overflow: hidden;
+                &:hover img{
+                    transition: .5s;
+                    transform:scale(1.2,1.2);
+                    z-index: 1;
+                }
+               
+                img{
+                    width: 100%;
+                    object-fit:cover;
+                    margin-bottom: 10px;
+                   
+                }
+                
+            }
+            a{
+                color: #000;
+               
+            }
+            p{
+                margin-bottom: 0px;
+                height: 50px;
+                line-height: 1rem;
+                font-size: .9rem;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+            }
+            h2{
+                font-size: 1.2rem;
+                span{
+                    color:#FF0F00;
+                }
+            }    
+    
+        }
+}
 
 @media screen and (max-width:390px) {
     @mixin text{
@@ -436,23 +574,51 @@ input{
         position: relative;
         overflow: hidden;
         
+        .clickme{
+            button{
+                font-size: 1rem;
+                font-weight: 700;
+                width:150px;
+                height: 40px;
+                border-radius: 10px;
+                outline: none;
+                border: none;
+                background-color: rgb(120, 167, 110);
+                // color: wheat;
+                text-align: center;
+                margin: 0 auto;
+                &:hover{
+                    background-color: $yellow;
+                }
+            }
+        }
     }
-    
+
+    // .cardBigBox{
+    //     width: 100%;
+    //     display: flex;
+    //     flex-direction: column;
+    //     justify-content: center;
+    //     flex-wrap: wrap;
+    //     gap:0px
+    // }
+   
     .cardbox{
 
         // min-width: 912px;
-        width:95%;
+        width:100%;
         margin:  0 auto;
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
-        justify-content:space-between;
-        align-items:flex-start;
+        // justify-content:space-between;
+        // align-items:flex-start;
         z-index: 1;
-       
+        .cardWrap{
+            width: 50%;
+        }
        
         .card{
-            width: 48%;
+            width: 100%;
             border-radius: 10px;
             height: 260px;
             padding: 15px;
@@ -554,6 +720,7 @@ input{
         }
       }
 
+      
 // --------------------------------------------------------
      
 
@@ -711,113 +878,113 @@ input{
 
 
 
-@media  screen and (max-width:1700px) {
-    .cardbox{
+// @media  screen and (max-width:1700px) {
+//     .cardbox{
 
-        // min-width: 912px;
+//         // min-width: 912px;
         
-        width:100%;
-        display: flex;
-        flex-wrap:wrap;
-        gap: 10px;
-        justify-content:flex-start;
-        align-items:flex-start;
+//         width:100%;
+//         display: flex;
+//         flex-wrap:wrap;
+//         gap: 10px;
+//         justify-content:flex-start;
+//         align-items:flex-start;
        
         
        
-        .card{
-            width: 24%;
-            // border: 1px black solid;
-            // height: 370px;
-            border-radius: 10px;
-            padding: 15px;
-            background-color: #fff;
-            box-shadow: 0px 4px 16px rgba(0,0,0,.25);
-            cursor: pointer;
-            overflow: hidden;
-            position: relative;
-            .banner {
-                /* content: url('檔案路徑'); */
-                display: block;
+//         .card{
+//             width: 24%;
+//             // border: 1px black solid;
+//             // height: 370px;
+//             border-radius: 10px;
+//             padding: 15px;
+//             background-color: #fff;
+//             box-shadow: 0px 4px 16px rgba(0,0,0,.25);
+//             cursor: pointer;
+//             overflow: hidden;
+//             position: relative;
+//             .banner {
+//                 /* content: url('檔案路徑'); */
+//                 display: block;
             
-                /* 以上兩個，當作區塊時，必須使用 */
-                overflow: hidden;
+//                 /* 以上兩個，當作區塊時，必須使用 */
+//                 overflow: hidden;
                 
-                background-color: rgb(84, 224, 249);
-                color: #fff;
-                font-size: 1.2rem;
-                line-height: 1.8rem;
-                width: 200px;
-                height: 30px;
-                position: absolute;
-                text-align: center;
-                top: 20px;
-                right: -60px;
-                transform: rotate(40deg);
-                z-index: 2;
-            }
-            .banner2{
-                /* content: url('檔案路徑'); */
-                display: block;
+//                 background-color: rgb(84, 224, 249);
+//                 color: #fff;
+//                 font-size: 1.2rem;
+//                 line-height: 1.8rem;
+//                 width: 200px;
+//                 height: 30px;
+//                 position: absolute;
+//                 text-align: center;
+//                 top: 20px;
+//                 right: -60px;
+//                 transform: rotate(40deg);
+//                 z-index: 2;
+//             }
+//             .banner2{
+//                 /* content: url('檔案路徑'); */
+//                 display: block;
             
-                /* 以上兩個，當作區塊時，必須使用 */
-                overflow: hidden;
-                background-color: rgb(95, 61, 246);
-                color: #fff;
-                font-size: 1.2rem;
-                line-height: 1.8rem;
-                width: 200px;
-                height: 30px;
-                position: absolute;
-                text-align: center;
-                top: 20px;
-                right: -60px;
-                transform: rotate(40deg);
-                z-index: 2;
-            }
-        }
+//                 /* 以上兩個，當作區塊時，必須使用 */
+//                 overflow: hidden;
+//                 background-color: rgb(95, 61, 246);
+//                 color: #fff;
+//                 font-size: 1.2rem;
+//                 line-height: 1.8rem;
+//                 width: 200px;
+//                 height: 30px;
+//                 position: absolute;
+//                 text-align: center;
+//                 top: 20px;
+//                 right: -60px;
+//                 transform: rotate(40deg);
+//                 z-index: 2;
+//             }
+//         }
         
-        .imgWrap{
-            width: 100%;
-            height: 280px;
-            display: flex;
-            justify-content: center;
-            overflow: hidden;
-            &:hover img{
-                transition: .5s;
-                transform:scale(1.2,1.2);
-                z-index: 1;
-            }
+//         .imgWrap{
+//             width: 100%;
+//             height: 280px;
+//             display: flex;
+//             justify-content: center;
+//             overflow: hidden;
+//             &:hover img{
+//                 transition: .5s;
+//                 transform:scale(1.2,1.2);
+//                 z-index: 1;
+//             }
            
-            img{
-                width: 100%;
-                object-fit:cover;
-                margin-bottom: 10px;
+//             img{
+//                 width: 100%;
+//                 object-fit:cover;
+//                 margin-bottom: 10px;
                
-            }
+//             }
             
-        }
-        a{
-            color: #000;
+//         }
+//         a{
+//             color: #000;
            
-        }
-        p{
-            margin-bottom: 0px;
-            height: 50px;
-            line-height: 1rem;
-            font-size: .9rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-        }
-        h2{
-            font-size: 1.2rem;
-            span{
-                color:#FF0F00;
-            }
-        }    
+//         }
+//         p{
+//             margin-bottom: 0px;
+//             height: 50px;
+//             line-height: 1rem;
+//             font-size: .9rem;
+//             overflow: hidden;
+//             text-overflow: ellipsis;
+//             display: -webkit-box;
+//             -webkit-line-clamp: 3;
+//             -webkit-box-orient: vertical;
+//         }
+//         h2{
+//             font-size: 1.2rem;
+//             span{
+//                 color:#FF0F00;
+//             }
+//         }    
 
-    }
-    }
+//     }
+//     }

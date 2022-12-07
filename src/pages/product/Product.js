@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 // import ScrollTest from './components/scroll_test'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
 import Slider from './components/slider'
 import ProductFilter from './components/product_filter'
 import { useMediaQuery } from 'react-responsive'
@@ -12,6 +13,7 @@ import img2 from './img/img2.jpg'
 import img3 from './img/img3.jpg'
 
 function Product() {
+  const linkToDetail = useNavigate()
   //目前點選的nav
   const [nav, setNav] = useState()
   //卡片
@@ -276,47 +278,54 @@ function Product() {
                     const v = datas[i]
 
                     return (
-                      <Link
-                        className={styled.card}
-                        key={v.product_sid}
-                        to={'/product/' + v.product_sid}
-                      >
-                        {/* 右上角布條 抗水 防潑水 */}
-                        {v.proof === '抗水' || '防潑水' ? (
+                      <>
+                        <div className={styled.cardWrap} key={v.product_sid}>
                           <div
-                            className={v.proof !== '0' ? styled.banner : ''}
-                            style={
-                              v.proof === '防潑水'
-                                ? { backgroundColor: 'rgb(0, 190, 164)' }
-                                : {}
-                            }
+                            className={styled.card}
+                            onClick={() => {
+                              linkToDetail(`/product/${v.product_sid}`)
+                            }}
                           >
-                            {v.proof !== '0' ? v.proof : ''}
+                            {/* 右上角布條 抗水 防潑水 */}
+                            {v.proof === '抗水' || '防潑水' ? (
+                              <div
+                                className={v.proof !== '0' ? styled.banner : ''}
+                                style={
+                                  v.proof === '防潑水'
+                                    ? { backgroundColor: 'rgb(0, 190, 164)' }
+                                    : {}
+                                }
+                              >
+                                {v.proof !== '0' ? v.proof : ''}
+                              </div>
+                            ) : (
+                              ''
+                            )}
+                            {/* 右上角布條  防水 */}
+                            {v.proof === '防水' ? (
+                              <div
+                                className={
+                                  v.proof !== '0' ? styled.banner2 : ''
+                                }
+                              >
+                                {v.proof !== '0' ? v.proof : ''}
+                              </div>
+                            ) : (
+                              ''
+                            )}
+                            <div className={styled.imgWrap}>
+                              <img
+                                src={`http://localhost:3001/imgs/zx/${v.product_img}`}
+                                alt=""
+                              />
+                            </div>
+                            <p className={styled.p}>{v.product_name}</p>
+                            <h2>
+                              金額：<span>{moneyFormat(v.product_price)}</span>
+                            </h2>
                           </div>
-                        ) : (
-                          ''
-                        )}
-                        {/* 右上角布條  防水 */}
-                        {v.proof === '防水' ? (
-                          <div
-                            className={v.proof !== '0' ? styled.banner2 : ''}
-                          >
-                            {v.proof !== '0' ? v.proof : ''}
-                          </div>
-                        ) : (
-                          ''
-                        )}
-                        <div className={styled.imgWrap}>
-                          <img
-                            src={`http://localhost:3001/imgs/zx/${v.product_img}`}
-                            alt=""
-                          />
                         </div>
-                        <p className={styled.p}>{v.product_name}</p>
-                        <h2>
-                          金額：<span>{moneyFormat(v.product_price)}</span>
-                        </h2>
-                      </Link>
+                      </>
                     )
                   })}
 
@@ -332,46 +341,49 @@ function Product() {
                   })
                   .map((v, i) => {
                     return (
-                      <Link
-                        className={styled.card}
-                        key={v.product_sid}
-                        to={'/product/' + v.product_sid}
-                      >
-                        {v.proof === '抗水' || '防潑水' ? (
-                          <div
-                            className={v.proof !== '0' ? styled.banner : ''}
-                            style={
-                              v.proof === '防潑水'
-                                ? { backgroundColor: 'rgb(0, 190, 164)' }
-                                : {}
-                            }
-                          >
-                            {v.proof !== '0' ? v.proof : ''}
-                          </div>
-                        ) : (
-                          ''
-                        )}
+                      <div className={styled.cardWrap} key={v.product_sid}>
+                        <div
+                          className={styled.card}
+                          onClick={() => {
+                            linkToDetail(`/product/${v.product_sid}`)
+                          }}
+                        >
+                          {v.proof === '抗水' || '防潑水' ? (
+                            <div
+                              className={v.proof !== '0' ? styled.banner : ''}
+                              style={
+                                v.proof === '防潑水'
+                                  ? { backgroundColor: 'rgb(0, 190, 164)' }
+                                  : {}
+                              }
+                            >
+                              {v.proof !== '0' ? v.proof : ''}
+                            </div>
+                          ) : (
+                            ''
+                          )}
 
-                        {v.proof === '防水' ? (
-                          <div
-                            className={v.proof !== '0' ? styled.banner2 : ''}
-                          >
-                            {v.proof !== '0' ? v.proof : ''}
+                          {v.proof === '防水' ? (
+                            <div
+                              className={v.proof !== '0' ? styled.banner2 : ''}
+                            >
+                              {v.proof !== '0' ? v.proof : ''}
+                            </div>
+                          ) : (
+                            ''
+                          )}
+                          <div className={styled.imgWrap}>
+                            <img
+                              src={`http://localhost:3001/imgs/zx/${v.product_img}`}
+                              alt=""
+                            />
                           </div>
-                        ) : (
-                          ''
-                        )}
-                        <div className={styled.imgWrap}>
-                          <img
-                            src={`http://localhost:3001/imgs/zx/${v.product_img}`}
-                            alt=""
-                          />
+                          <p className={styled.p}>{v.product_name}</p>
+                          <h2>
+                            金額：<span>{moneyFormat(v.product_price)}</span>
+                          </h2>
                         </div>
-                        <p className={styled.p}>{v.product_name}</p>
-                        <h2>
-                          金額：<span>{moneyFormat(v.product_price)}</span>
-                        </h2>
-                      </Link>
+                      </div>
                     )
                   })
               : ''}
