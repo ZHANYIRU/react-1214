@@ -64,7 +64,7 @@ function CheckData() {
                   </div>
                   <div className={styled.checkImg}>
                     <img
-                      src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
+                      src={`http://localhost:3001/n7/campmain/${el.img}`}
                       alt=""
                     />
                   </div>
