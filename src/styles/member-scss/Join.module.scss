@@ -16,7 +16,7 @@
     box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
     border-radius: 13px;
     box-sizing: border-box;
-    padding: 100px 120px 100px 120px;
+    padding: 100px 140px 100px 140px;
 
     button {
         width: 200px;
@@ -108,7 +108,7 @@
             position: relative;
 
             label {
-                width: 15%;
+                width: 100px;
                 text-align-last: justify;
                 font-size: 20px;
                 flex-shrink: 0;
@@ -130,10 +130,17 @@
                 border: none;
                 outline: none;
                 transition: 0.2s;
+                padding-left: 4px;
 
                 &:focus {
                     outline: 2px solid #ccc;
                 }
+            }
+
+            .errMsg {
+                position: absolute;
+                top: 36px;
+                left: 30%;
             }
 
             textarea {
@@ -144,6 +151,7 @@
                 overflow: hidden;
                 transition: 0.2s;
                 line-height: 22px;
+                padding-left: 4px;
 
                 &:focus {
                     outline: 2px solid #ccc;

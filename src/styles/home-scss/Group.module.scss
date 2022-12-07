@@ -1,0 +1,121 @@
+@import '../global.scss';
+
+.left{
+    // padding-left: 45px;
+    width: 400px;
+    text-align: center;
+    h3{
+        font-size:2rem;
+        line-height: 2.5rem;
+    }
+    .icon{
+        display: flex;
+        justify-content: center;
+        span{
+            display: inline-block;
+            margin-top: 20px;
+            padding-right: 10px;
+            font-weight: 700;
+            i {
+                font-size: 1.5rem;
+                color:#48742C;
+            }
+        }
+        }
+    .text{
+        text-align: start;
+        line-height: 1.5rem;
+        margin-top: 25px;
+        background-color: white;
+        padding: 25px 40px;
+        width: 425px;
+        border-radius: 10px;
+    }
+}
+.midddle{
+    width: 600px;
+    h2{
+        padding-bottom: 50px;
+        text-align: center;
+        font-size: 3rem;
+    }
+   .imgWrap{
+    // width: 500px;
+    img{
+        width: 100%;
+    }
+    
+   } 
+}
+
+.right{
+    margin-top: 50px;
+    .wrap{
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+    text-align: center;
+    width:400px;
+    .text{
+        text-align: start;
+        line-height: 1.5rem;
+        margin-top: 25px;
+        background-color: white;
+        padding: 20px 45px;
+        width: 350px;
+        border-radius: 10px;
+    }
+    .click{
+        text-align: center;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 145px;
+        padding: 15px 30px;
+        background-color: $yellow;
+        font-weight: 700;
+        font-size: 1.3rem;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    }
+    .price{
+        margin:25px 0;
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+}
+
+.countDown{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    .one, .two, .three{
+        display: flex;
+        justify-content: flex-end;
+        font-weight: 500;
+    }
+    .two, .three{
+        margin-left: 15px;
+    }
+
+    span{
+        border-radius: 5px;
+        padding: 15px 9px;
+        font-size: 2rem;
+        // background-color: rgb(87, 168, 87);
+        margin: 0 0px 0px 13px;
+
+    }
+
+    p{ 
+        width: 70px;
+        vertical-align:center;
+        padding: 18px 0px;
+        // margin: 0 15px 0 0;
+        font-size: 1.3rem;
+    }
+
+}
+

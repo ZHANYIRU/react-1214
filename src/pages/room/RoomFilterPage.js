@@ -77,6 +77,69 @@ function RoomFilterPage() {
     '飲水機',
     '插座',
   ])
+  const starCount = (e) => {
+    if (e > 0 && e === 1) {
+      return (
+        <>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+        </>
+      )
+    } else if (e > 0 && e === 2) {
+      return (
+        <>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+        </>
+      )
+    } else if (e > 0 && e === 3) {
+      return (
+        <>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+        </>
+      )
+    } else if (e > 0 && e === 4) {
+      return (
+        <>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+        </>
+      )
+    } else if (e > 0 && e === 5) {
+      return (
+        <>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+          <i className="fa-solid fa-star"></i>
+        </>
+      )
+    } else if (e <= 0) {
+      return (
+        <>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+          <i className="fa-solid fa-star" style={{ color: 'gray' }}></i>
+        </>
+      )
+    }
+  }
   return (
     <>
       <div className={style.warp}>
@@ -157,11 +220,11 @@ function RoomFilterPage() {
                   <div className={style.title}>
                     <div className={style.roomName}>{v.room_name}</div>
                     <div className={style.star}>
-                      <i className="fa-solid fa-star"></i>
-                      <i className="fa-solid fa-star"></i>
-                      <i className="fa-solid fa-star"></i>
-                      <i className="fa-solid fa-star"></i>
-                      <span className={style.commentQTY}>(2)</span>
+                      {starCount(Math.round(v.Average))}
+
+                      <span className={style.commentQTY}>
+                        ({v.commentQty > 0 ? v.commentQty : 0})
+                      </span>
                     </div>
                   </div>
                   <div className={style.icon}>
