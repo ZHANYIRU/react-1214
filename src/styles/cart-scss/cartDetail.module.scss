@@ -121,6 +121,12 @@
     object-fit: contain;
   }
 }
+.campImg {
+  img {
+    width: 100%;
+    object-fit: cover;
+  }
+}
 .icon {
   position: absolute;
   top: 10px;

@@ -66,7 +66,7 @@ function CartDetailCam() {
                       </div>
                       <p>總金額：{moneyFormat(el.quantity * el.price)}</p>
                     </div>
-                    <div className={styled.roomImg}>
+                    <div className={`${styled.roomImg} ${styled.campImg}`}>
                       <img
                         src={`http://localhost:3001/n7/campmain/${el.img}`}
                         alt=""
