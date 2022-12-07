@@ -148,7 +148,7 @@ function Navbar() {
           <Link to="/member" onClick={loginBtn}>
             <i className="fa-solid fa-user"></i>
             <i className="fa-solid" style={{ paddingLeft: '10px' }}>
-              {data.nickname}
+              {data.nickname ? data.nickname : ''}
             </i>
           </Link>
         </div>

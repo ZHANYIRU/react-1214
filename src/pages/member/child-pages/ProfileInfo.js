@@ -78,7 +78,7 @@ export default function ProfileInfo() {
               <h4 className={styled.heightTag}>
                 累積海拔: {info.total_height}公尺
               </h4>
-              <PostMap postList={postList} />
+              <PostMap postList={postList} getPostList={getPostList} />
               <TotalHeight
                 totalHeight={
                   info && info.total_height ? { height: info.total_height } : 0

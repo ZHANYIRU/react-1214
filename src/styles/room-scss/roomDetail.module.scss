@@ -78,6 +78,7 @@
     // display: flex;
 
     .switch{
+        cursor: pointer;
         display: flex;
         width: 100%;
         margin-top: 50px;
@@ -89,8 +90,9 @@
             width: 50%;
             padding: 15px 100px;    
     }
-    .intro{
+    .line{
         border-bottom: 5px solid Green;  
+        transition: 0.5s;
     }
 }
     span{

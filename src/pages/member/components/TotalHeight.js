@@ -76,9 +76,24 @@ export default function TotalHeight(totalHeight) {
   return (
     <>
       <div className={styles.totalHeight}>
-        <img className={styles.sun} src={'./img/sun_face.png'} alt="sun" />
-        <img className={styles.cloud1} src={'./img/cloud3.png'} alt="cloud" />
-        <img className={styles.cloud2} src={'./img/cloud5.png'} alt="cloud" />
+        <img
+          className={styles.sun}
+          src={'./img/sun_face.png'}
+          alt="sun"
+          loading="lazy"
+        />
+        <img
+          className={styles.cloud1}
+          src={'./img/cloud3.png'}
+          alt="cloud"
+          loading="lazy"
+        />
+        <img
+          className={styles.cloud2}
+          src={'./img/cloud5.png'}
+          alt="cloud"
+          loading="lazy"
+        />
         {showMotto(totalHeight.totalHeight.height)}
         <div className={styles.AnimationBox}>
           <Trekker
@@ -86,11 +101,13 @@ export default function TotalHeight(totalHeight) {
             src={'./img/tozan_trekking_man.png'}
             alt="trekker"
             distance={totalHeight.totalHeight.height}
+            loading="lazy"
           ></Trekker>
           <img
             className={styles.mountain}
             src={'/img/mountain_yama.png'}
             alt="mountain"
+            loading="lazy"
           />
         </div>
         <h4>
