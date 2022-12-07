@@ -18,22 +18,13 @@ export default function Carousel() {
   return (
     <Slider {...settings} className={styled.carouselBox}>
       <div className={styled.carouselWrap}>
-        <img
-          src="http://localhost:3001/rental_img/a帳篷_工作區域 1.png"
-          alt=""
-        />
+        <img src="a帳篷_工作區域 1.png" alt="" />
       </div>
       <div className={styled.carouselWrap}>
-        <img
-          src="http://localhost:3001/rental_img/b睡袋_工作區域 1.png"
-          alt=""
-        />
+        <img src="/b睡袋_工作區域 1.png" alt="" />
       </div>
       <div className={styled.carouselWrap}>
-        <img
-          src="http://localhost:3001/rental_img/c電扇_工作區域 1.png"
-          alt=""
-        />
+        <img src="/c電扇_工作區域 1.png" alt="" />
       </div>
     </Slider>
   )

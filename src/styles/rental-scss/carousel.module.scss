@@ -2,8 +2,9 @@
 
 
 .carouselBox{
-    width:90%;
+    width:98%;
     margin:0 auto;
+    margin-bottom:25px;
     
     // overflow:hidden;
 }
@@ -14,9 +15,10 @@
     border-radius:10px;
     overflow:hidden;
     img{
+        width: 100%;
         object-fit: cover;
-        aspect-ratio: 16/7;
-        width:100%;
+        // aspect-ratio: 16/7;
+        // width:100%;
 
 
     }

@@ -1,31 +1,28 @@
 @import '../global.scss';
 .titleWrap{
-    margin: 50px auto 25px auto;
+    margin: 20px auto 25px 300px;
     width: 75%;
 }
 .roomMainTitle{
-    padding: 10px 30px;
+    padding: 10px 0px;
     font-size: 1.4rem;
 }
 .roomCardGroup{
-    // position: absolute;
-    width:80%;
+    width:1400px;
     margin: 0 auto;
     display: flex;
-    padding-left: 50px;
-    justify-content: flex-start;
-    // justify-content: flex-start;
-    // padding: 0 50px;
+    justify-content: center;
+ 
     a{
         color: black;
-        width: 20%;
+        width: 275px;
         display: block;
         margin-right: 75px;
     }
 }
 .roomCard{
     flex-shrink: 0;
-    margin: 0 20px 50px 20px;
+    margin: 0px 35px 50px 35px;
     padding: 18px;
     width: 100%;
     background-color: white;
@@ -84,4 +81,133 @@ font-size: 1.2rem;
 }
 .price span{
 font-size: 1rem;
+}
+
+@media screen and (max-width: 1400px) {
+    .titleWrap{
+        margin: 20px 0px 25px 150px;
+        width: 75%;
+    }
+    .roomMainTitle{
+        padding: 10px 0px;
+        font-size: 1.4rem;
+    }
+    .roomCardGroup{
+        width:95%;
+        flex-wrap:  wrap;
+        justify-content: flex-start;
+        a{
+            width:260px;
+            margin-right: 50px;
+        }
+   
+    }
+
+}
+
+@media screen and (max-width: 992px) {
+    .titleWrap{
+        margin: 20px 0px 25px 200px;
+    }
+    .roomMainTitle{
+        padding: 10px 0px;
+        font-size: 1.4rem;
+    }
+
+    .roomCardGroup{
+        width:95%;
+        a{
+            width: 250px;
+            margin-right: 50px;
+        }
+
+        .roomCard{
+            padding: 13px;
+            margin: 0 20px 10px 20px;
+
+            .cardImg{
+                width: 100%;
+                height: 150px;
+                border-radius: 5px;
+                overflow: hidden;
+                img{
+                    width: 100%;
+                    height: 100%;
+                    object-fit:cover;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {  
+    .titleWrap{
+        margin: 20px 0px 25px 175px;
+    }
+    .roomMainTitle{
+        padding: 10px 0px;
+        font-size: 1.4rem;
+    }
+    .roomCardGroup{
+        width:95%;
+        flex-wrap: wrap;
+        a{
+            width: 225px;
+            margin-right:40px;
+        } 
+    }
+  
+    .roomName{
+        margin-top: 10px;
+        font-size: 1.1rem;
+        font-weight: 700;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .titleWrap{
+        margin: 20px 0px 25px 50px;
+    }
+    .roomCardGroup{
+      width:100%;
+
+        flex-wrap: wrap;
+        a{
+            width: 200px;
+            height: 355px;
+        }
+        .icon{
+            span{
+                font-size: 0.9rem;
+                margin-top: 10px;
+                padding-right: 10px;
+                font-weight: 700;
+            }
+            }
+    }
+
+    .roomName{
+        font-size: 1rem;
+    }
+    .price{
+        font-size: 1.1rem;
+        }
+        .price span{
+        font-size: 0.9rem;
+        }
+}
+
+@media screen and (max-width: 450px) {
+    
+    .roomCardGroup{
+        width:95%;
+        flex-wrap: wrap;
+        a{
+            width: 175px;
+            margin-right: 10px;
+
+        }
+       
+    }
+   
 }
