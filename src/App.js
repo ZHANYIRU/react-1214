@@ -36,6 +36,7 @@ import SocialWall from './pages/member/SocialWall'
 import RoomFilterPage from './pages/room/RoomFilterPage'
 import RoomDetailPage from './pages/room/RoomDetailPage'
 import Leaderboard from './pages/home/leaderboard'
+import ResetPass from './pages/member/ResetPass'
 
 function App() {
   return (
@@ -82,6 +83,7 @@ function App() {
               </Route>
               <Route path="/login" element={<Login />} />
               <Route path="/join" element={<Join />} />
+              <Route path="/resetPass" element={<ResetPass />} />
             </Route>
           </Routes>
           <Footer />

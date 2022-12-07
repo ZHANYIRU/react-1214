@@ -50,6 +50,25 @@ function Login(props) {
     }
   }
 
+  const forgotPass = async function () {
+    const formData = new FormData(loginForm.current)
+
+    if (!formData.get('email')) {
+      return Swal.fire({
+        icon: 'error',
+        title: '請輸入電子信箱',
+        confirmButtonColor: '#216326',
+      })
+    }
+
+    const result = await axios.post(
+      'http://localhost:3001/member/forgotPass/api',
+      formData
+    )
+
+    alert(result.data)
+    // alert(formData.get('email'))
+  }
   return (
     <>
       <div className={styled.row}>
@@ -97,6 +116,14 @@ function Login(props) {
                   }}
                 >
                   註冊新會員
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                    forgotPass()
+                  }}
+                >
+                  忘記密碼
                 </button>
               </div>
             </form>
