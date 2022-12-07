@@ -30,9 +30,10 @@ export default function ProductPage() {
   const { product_sid } = useParams()
   const memberData = useContext(MemberContext)
   const { addProCart } = useContext(ProCartContext)
-
+  //平均星數
+  const [avgStar, setAvgStar] = useState(0)
   //哪一筆評論的Index
-  const [whichCom, setWhichCom] = useState(-1)
+  const [whichCom, setWhichCom] = useState(0)
   //衣服size
   const clotheSize = ['S', 'M', 'L']
   // //fetchSize
@@ -187,8 +188,11 @@ export default function ProductPage() {
     const response = await axios.get(
       `http://localhost:3001/product/comment?pid=${product_sid}`
     )
-    const r = response.data
+    const r = response.data.rows
+    const r2 = response.data.rows2[0].avgStar
+    console.log(response.data)
     setCommentFetch(r)
+    setAvgStar(r2)
   }
   // 切換開關方法
   const changeBtn = (e) => {
@@ -296,10 +300,26 @@ export default function ProductPage() {
   const com = (
     <div className={styled.comWrap}>
       <div className={styled.starBox}>
-        <StarRating />
+        {/* <StarRating />
+         */}
+
         <p className={styled.write} onClick={() => {}}>
-          (4.5)
+          {[...Array(5)].map((star, index) => {
+            const tatalStar = Math.floor(avgStar)
+            index += 1
+            return (
+              <p
+                key={index}
+                className={
+                  index <= tatalStar ? `${styled.on}` : `${styled.off}`
+                }
+              >
+                <span className="star">&#9733;</span>
+              </p>
+            )
+          })}
         </p>
+        <p>{avgStar} &nbsp; 顆星</p>
       </div>
       <div className={styled.commonArea}>
         {commentFetch.map((v, i) => {
@@ -334,7 +354,7 @@ export default function ProductPage() {
               </div>
               <div className={styled.commonText}>{v.message}</div>
               <div className={styled.howStar}>
-                {[...Array(5)].map((star, index) => {
+                {[...Array(5)].map((star2, index) => {
                   const totalStars = v.star
                   index += 1
                   return (
@@ -448,58 +468,23 @@ export default function ProductPage() {
                     />
                   </div>
                   <div className={styled.imgGroup}>
-                    <img
-                      src={`http://localhost:3001/imgs/zx/${v.product_imgs[0]}`}
-                      alt=""
-                      onMouseMove={() => {
-                        changePic.current.setAttribute(
-                          'src',
-                          `http://localhost:3001/imgs/zx/${v.product_imgs[0]}`
-                        )
-                      }}
-                      onMouseLeave={() => {
-                        msLeave(v)
-                      }}
-                    />
-                    <img
-                      src={`http://localhost:3001/imgs/zx/${v.product_imgs[1]}`}
-                      alt=""
-                      onMouseMove={() => {
-                        changePic.current.setAttribute(
-                          'src',
-                          `http://localhost:3001/imgs/zx/${v.product_imgs[1]}`
-                        )
-                      }}
-                      onMouseLeave={() => {
-                        msLeave(v)
-                      }}
-                    />
-                    <img
-                      src={`http://localhost:3001/imgs/zx/${v.product_imgs[2]}`}
-                      alt=""
-                      onMouseMove={() => {
-                        changePic.current.setAttribute(
-                          'src',
-                          `http://localhost:3001/imgs/zx/${v.product_imgs[2]}`
-                        )
-                      }}
-                      onMouseLeave={() => {
-                        msLeave(v)
-                      }}
-                    />
-                    <img
-                      src={`http://localhost:3001/imgs/zx/${v.product_imgs[3]}`}
-                      alt=""
-                      onMouseMove={() => {
-                        changePic.current.setAttribute(
-                          'src',
-                          `http://localhost:3001/imgs/zx/${v.product_imgs[3]}`
-                        )
-                      }}
-                      onMouseLeave={() => {
-                        msLeave(v)
-                      }}
-                    />
+                    {[...Array(5)].map((v2, i2) => {
+                      return (
+                        <img
+                          src={`http://localhost:3001/imgs/zx/${v.product_imgs[i2]}`}
+                          alt=""
+                          onMouseMove={() => {
+                            changePic.current.setAttribute(
+                              'src',
+                              `http://localhost:3001/imgs/zx/${v.product_imgs[i2]}`
+                            )
+                          }}
+                          onMouseLeave={() => {
+                            msLeave(v)
+                          }}
+                        />
+                      )
+                    })}
                   </div>
                 </div>
 

@@ -412,22 +412,27 @@ a{
     display: flex;
     align-items: center;
     margin: 10px 0 20px 0;
-    
-    .write{
+    p{
         font-size: 1.2rem;
-        // width: 100px;
+    }
+    .write{
+        
         border-radius: 5px;
         border: none;
         padding: 10px 15px;
-        // background-color: black;
-            color: black;
-            font-weight: 700;
-            cursor: pointer;
+        color: black;
+        font-weight: 700;
+        cursor: pointer;
+        display: flex;
         &:hover{
             // background-color: red;
             color: red;
         }
+        p{
+            font-size: 1.5rem;
+        }
     }
+    
 }
 
 .commonArea{
@@ -455,6 +460,7 @@ a{
         }
     
         .commonTitle_img_border{
+            cursor: pointer;
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -962,6 +968,19 @@ a{
                      }
                 }
             }
+            
+
+            .gold {
+                background-image: conic-gradient(from 180deg at 50% 50%, #fffcf4 0deg, #ffbf00 69.37deg, #ffa600 163.12deg, #ab8100 275.62deg, #ffffff 360deg);
+            }
+
+            .silver {
+                background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
+            }
+
+            .bronze {
+                background-image: conic-gradient(from 180deg at 50% 50%, #fff1c7 0deg, #b37e4a 69.37deg, #c27f3b 163.12deg, #98600c 275.62deg, #fff1c7 360deg);
+            }
         }
         .commonText{
             line-height: 1.5rem;
@@ -1436,6 +1455,19 @@ a{
                         object-fit: cover;
                      }
                 }
+            }
+            
+
+            .gold {
+                background-image: conic-gradient(from 180deg at 50% 50%, #fffcf4 0deg, #ffbf00 69.37deg, #ffa600 163.12deg, #ab8100 275.62deg, #ffffff 360deg);
+            }
+
+            .silver {
+                background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
+            }
+
+            .bronze {
+                background-image: conic-gradient(from 180deg at 50% 50%, #fff1c7 0deg, #b37e4a 69.37deg, #c27f3b 163.12deg, #98600c 275.62deg, #fff1c7 360deg);
             }
         }
         .commonText{
@@ -1921,6 +1953,19 @@ a{
                         object-fit: cover;
                      }
                 }
+            }
+            
+
+            .gold {
+                background-image: conic-gradient(from 180deg at 50% 50%, #fffcf4 0deg, #ffbf00 69.37deg, #ffa600 163.12deg, #ab8100 275.62deg, #ffffff 360deg);
+            }
+
+            .silver {
+                background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
+            }
+
+            .bronze {
+                background-image: conic-gradient(from 180deg at 50% 50%, #fff1c7 0deg, #b37e4a 69.37deg, #c27f3b 163.12deg, #98600c 275.62deg, #fff1c7 360deg);
             }
         }
         .commonText{
