@@ -4,7 +4,12 @@
     line-height: 1.2rem;
     font-family: 'Noto Sans TC', sans-serif;
 }
-
+.on {
+    color: $yellow;
+  }
+  .off {
+    color: #ccc;
+  }
 
 .comLightBox{
     background-color: rgba(7, 2, 2, 0.507);
@@ -28,14 +33,13 @@
     border-radius: 10px;
 
     .leftArea{
-        width: 45%;
-        padding: 20px 40px;
+        width: 35%;
+        padding: 20px 40px 40px 40px;
         .picAndNameWrap{
-            width: 250px;
+            width: 150px;
             display: flex;
             align-items: center;
             height: 110px;
-            margin-bottom: 10px;
             .imgBorder{
                     margin-right: 30px;
                     display: flex;
@@ -45,6 +49,7 @@
                     height: 70px;
                     border-radius: 50%;
                     // background: linear-gradient(#3401f0, #6b41e7,#9b06e6);
+                   
                 .imgWrap{
                     width: 60px;
                     height: 60px;
@@ -73,12 +78,15 @@
             }
         }
         .howStar{
-            
+            display: flex;
+            p{
+                font-size: 1.5rem;
+            }
         }
     }
     .rightArea{
-        width: 55%;
-        padding: 20px 40px;
+        width: 65%;
+        padding: 20px 40px 40px 40px;
         .comDate{
             display: flex;
             align-items: center;

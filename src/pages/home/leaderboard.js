@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useContext, useEffect, useCallback, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 import MemberContext from '../../contexts/MemberContext'
 import styled from '../../styles/home-scss/Leaderboard.module.scss'
 import styled2 from '../../styles/home-scss/Background.module.scss'
@@ -17,6 +18,9 @@ export default function Leaderboard() {
     return styled.bronze
   }
 
+  const navigate = useNavigate()
+  //別人的會員資料
+  const [socialList, setSocialList] = useState([])
   // 切換按鈕
   const [switchBtn, setSwitchBtn] = useState(true)
   // 輸入用(可控表單元件用)
@@ -35,18 +39,27 @@ export default function Leaderboard() {
         //設定到state裡
         setAllData(response.data)
       }
-      //else if (!switchBtn) {
-      //   console.log('hi')
-      //   const a = yourFdData.filter((v, i) => {
-      //     return v.name.includes(searchKeyword)
-      //   })
-      //   setYourFdData(a)
-      // }
     } catch (e) {
       // 錯誤處理
       console.error(e.message)
     }
   }
+
+  //fetch點選到的會員資訊
+  async function getSocialList() {
+    let fidQuery = ''
+    if (memberData.data.member_sid) {
+      fidQuery = `?fid=${memberData.data.member_sid}`
+    }
+
+    const rows = await axios.get(
+      `http://localhost:3001/member/social/api${fidQuery}`
+    )
+
+    setSocialList(rows.data)
+    console.log('social wall data length:' + rows.data.length)
+  }
+
   // 處理過濾的函式
   const handleSearch = (searchKeyword) => {
     // 檢查，當都沒輸入時回復原本data
@@ -108,6 +121,11 @@ export default function Leaderboard() {
   }
   useEffect(() => {
     fetchAll()
+  }, [memberData.auth])
+  useEffect(() => {
+    getSocialList()
+  }, [])
+  useEffect(() => {
     fetchYourFd()
   }, [memberData.auth])
   // useEffect(() => {
@@ -175,6 +193,14 @@ export default function Leaderboard() {
                           className={`${styled.imgBorder} ${avatarLevel(
                             v.total_height
                           )}`}
+                          onClick={() => {
+                            navigate(
+                              `${memberData.data.member_sid}` ===
+                                `${v.member_sid}`
+                                ? `/member`
+                                : `/profile?id=${v.member_sid}`
+                            )
+                          }}
                         >
                           <div className={styled.imgWrap}>
                             {v && v.avatar ? (
@@ -187,7 +213,7 @@ export default function Leaderboard() {
                             )}
                           </div>
                         </div>
-                        <p>{v.name}</p>
+                        <p>{v.nickname}</p>
                       </div>
                     </div>
                     <div className={`${styled.height} `}>

@@ -1,16 +1,20 @@
 import React, { useRef, useState, useContext } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import styled from '../../styles/product-scss/productPage.module.scss'
 import axios from 'axios'
 import { useEffect } from 'react'
+import MemberContext from '../../contexts/MemberContext'
 import ProCartContext from '../../contexts/ProCartContext'
 import StarRating from './components/starRating'
 import CommentLightBox from './components/CommentLightBox'
-import comFakeData from './comFakeData'
+// import comFakeData from './comFakeData'
 import Swal from 'sweetalert2'
 import { useMediaQuery } from 'react-responsive'
 
 export default function ProductPage() {
+  const navigate = useNavigate()
+  //評價state
+  const [commentFetch, setCommentFetch] = useState([])
   //useMediaQuery
   const minPc = useMediaQuery({ query: '(max-width:1100px)' })
   //會員頭像邊框
@@ -24,7 +28,9 @@ export default function ProductPage() {
     return styled.bronze
   }
   const { product_sid } = useParams()
+  const memberData = useContext(MemberContext)
   const { addProCart } = useContext(ProCartContext)
+
   //哪一筆評論的Index
   const [whichCom, setWhichCom] = useState(-1)
   //衣服size
@@ -176,6 +182,14 @@ export default function ProductPage() {
     console.log(r)
     setRandomData(r)
   }
+  //取得評論資訊
+  const comMentData = async () => {
+    const response = await axios.get(
+      `http://localhost:3001/product/comment?pid=${product_sid}`
+    )
+    const r = response.data
+    setCommentFetch(r)
+  }
   // 切換開關方法
   const changeBtn = (e) => {
     setintroCom(!introCom)
@@ -284,36 +298,56 @@ export default function ProductPage() {
       <div className={styled.starBox}>
         <StarRating />
         <p className={styled.write} onClick={() => {}}>
-          (19)
+          (4.5)
         </p>
       </div>
       <div className={styled.commonArea}>
-        {comFakeData.map((v, i) => {
+        {commentFetch.map((v, i) => {
           return (
             <div className={styled.commonBox}>
               <div className={styled.commonTitle}>
                 <div
-                  className={`${
-                    styled.commonTitle_img_border
-                  } ${avatarLevel()}`}
+                  className={`${styled.commonTitle_img_border} ${avatarLevel(
+                    v.total_height
+                  )}`}
+                  onClick={() => {
+                    navigate(
+                      `${memberData.data.member_sid}` === `${v.member_sid}`
+                        ? `/member`
+                        : `/profile?id=${v.member_sid}`
+                    )
+                  }}
                 >
                   <div className={styled.commonTitle_img}>
-                    <img
-                      src="https://cdn2.ettoday.net/images/2253/2253152.jpg"
-                      alt=""
-                    />
+                    {v && v.avatar ? (
+                      <img
+                        src={`http://localhost:3001/uploads/avatar_${v.avatar}`}
+                        alt="avatar"
+                      ></img>
+                    ) : (
+                      <img src="/img/default_avatar.png" alt="avatar" />
+                    )}
                   </div>
                 </div>
 
-                <div className={styled.memberName}>{v.name}</div>
+                <div className={styled.memberName}>{v.nickname}</div>
               </div>
-              <div className={styled.commonText}>{v.text}</div>
+              <div className={styled.commonText}>{v.message}</div>
               <div className={styled.howStar}>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
-                <i className="fa-solid fa-star"></i>
+                {[...Array(5)].map((star, index) => {
+                  const totalStars = v.star
+                  index += 1
+                  return (
+                    <p
+                      key={index}
+                      className={
+                        index <= totalStars ? `${styled.on}` : `${styled.off}`
+                      }
+                    >
+                      <span className="star">&#9733;</span>
+                    </p>
+                  )
+                })}
               </div>
               <div
                 className={styled.readMore}
@@ -386,12 +420,15 @@ export default function ProductPage() {
   useEffect(() => {
     getSize2()
   }, [])
+  useEffect(() => {
+    comMentData()
+  }, [])
   return (
     <>
       <div className={styled.empty}></div>
       {comLightBox && (
         <CommentLightBox
-          comFakeData={comFakeData}
+          commentFetch={commentFetch}
           whichCom={whichCom}
           setComLightBox={setComLightBox}
         />

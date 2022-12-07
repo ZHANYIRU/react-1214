@@ -10,17 +10,14 @@
 }
 
 
-.gold {
-    background-image: conic-gradient(from 180deg at 50% 50%, #fffcf4 0deg, #ffbf00 69.37deg, #ffa600 163.12deg, #ab8100 275.62deg, #ffffff 360deg);
-}
+.on {
+    color: $yellow;
+  }
+  .off {
+    color: #ccc;
+  }
 
-.silver {
-    background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
-}
 
-.bronze {
-    background-image: conic-gradient(from 180deg at 50% 50%, #fff1c7 0deg, #b37e4a 69.37deg, #c27f3b 163.12deg, #98600c 275.62deg, #fff1c7 360deg);
-}
 
 
 
@@ -34,7 +31,7 @@
 }
 
 .card{
-    width: 60%;
+    width: 70%;
     margin: 0 auto;
     background-color: #fff;
     border-radius: 10px  ;
@@ -437,12 +434,16 @@ a{
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 5px;
 }
 .commonBox{
     padding: 15px 30px;
     width: 32%;
     border: 1px solid #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
     .commonTitle{
         display: flex;
         justify-content: flex-start;
@@ -461,6 +462,7 @@ a{
                 height: 60px;
                 border-radius: 50%;
             background: linear-gradient(#3401f0, #6b41e7,#9b06e6);
+            
             .commonTitle_img{
                 width: 50px;
                 height: 50px;
@@ -473,6 +475,17 @@ a{
                  }
             }
         }
+        .gold {
+            background-image: conic-gradient(from 180deg at 50% 50%, #fffcf4 0deg, #ffbf00 69.37deg, #ffa600 163.12deg, #ab8100 275.62deg, #ffffff 360deg);
+        }
+        
+        .silver {
+            background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
+        }
+        
+        .bronze {
+            background-image: conic-gradient(from 180deg at 50% 50%, #fff1c7 0deg, #b37e4a 69.37deg, #c27f3b 163.12deg, #98600c 275.62deg, #fff1c7 360deg);
+        }
     }
     .commonText{
         line-height: 1.5rem;
@@ -484,6 +497,7 @@ a{
         -webkit-box-orient: vertical;
     }
     .howStar{
+        display: flex;
         color: #FFDA16;
         margin-bottom: 20px;
     }
