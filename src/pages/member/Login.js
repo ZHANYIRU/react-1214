@@ -66,9 +66,25 @@ function Login(props) {
       formData
     )
 
-    alert(result.data)
+    if (result) {
+      if (result.data.message === '密碼重置信已寄出') {
+        return Swal.fire({
+          icon: 'success',
+          title: result.data.message,
+          confirmButtonColor: '#216326',
+        })
+      }
+      return Swal.fire({
+        icon: 'error',
+        title: result.data.message,
+        confirmButtonColor: '#216326',
+      })
+    }
+
+    // alert(result.data)
     // alert(formData.get('email'))
   }
+
   return (
     <>
       <div className={styled.row}>

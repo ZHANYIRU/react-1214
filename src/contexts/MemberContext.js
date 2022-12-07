@@ -1,5 +1,6 @@
 import { createContext, useEffect, useState } from 'react'
 import axios from 'axios'
+import dayjs from 'dayjs'
 
 const MemberContext = createContext({})
 
@@ -39,7 +40,10 @@ export const MemberContextProvider = function ({ children }) {
       },
     })
     if (result.data.rows) {
-      setData(result.data.rows[0])
+      setData({
+        ...result.data.rows[0],
+        birthday: dayjs(result.data.rows[0].birthday).format('YYYY-MM-DD'),
+      })
       console.log(result.data.rows[0])
       setAuth(true)
     } else {
@@ -96,7 +100,19 @@ export const MemberContextProvider = function ({ children }) {
 
   return (
     <MemberContext.Provider
-      value={{ data, setData, auth, setAuth, resetData, getInfo, follow, following, setFollowing, getFollowing, getFollow }}
+      value={{
+        data,
+        setData,
+        auth,
+        setAuth,
+        resetData,
+        getInfo,
+        follow,
+        following,
+        setFollowing,
+        getFollowing,
+        getFollow,
+      }}
     >
       {children}
     </MemberContext.Provider>
