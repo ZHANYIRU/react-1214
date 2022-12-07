@@ -159,7 +159,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
       img = `${MY_HOST}/rental_img/${el.rental_img[0]}`
     }
     if (el.mainImage) {
-      img = `${MY_HOST}/room_img/${el.mainImage}`
+      img = `${MY_HOST}/n7/campmain/${el.mainImage}`
     }
     return img
   }
@@ -418,7 +418,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                         <div className={styled.campContentTitle}>
                           <p>活動</p>
                           <p>開始日期</p>
-                          <p>結束日期</p>
+                          <p>天數</p>
                           <p>單價</p>
                           <p>人數</p>
                           <p>金額</p>
@@ -427,7 +427,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                     {camRows &&
                       camRows.map((el4, i4) => {
                         const ds = dayjs(el4.date_start)
-                        const de = dayjs(el4.date_end)
+                        console.log(el4)
                         return (
                           el.order_num === el4.order_num && (
                             <div
@@ -437,18 +437,18 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                               <div className={styled.contentDe}>
                                 <div className={styled.imgWrap}>
                                   <img
-                                    src="https://cdn2.ettoday.net/images/4778/d4778980.jpg"
+                                    src={`${MY_HOST}/n7/campmain/${el4.mainImage}`}
                                     alt=""
                                   />
                                 </div>
                                 <p>
-                                  <span>{el4.name}</span>
+                                  <span>{el4.camp_name}</span>
                                   <br />
                                   <br />
                                   <span>地址：板橋</span>
                                 </p>
                                 <p>{ds.isValid() && ds.format('YYYY-MM-DD')}</p>
-                                <p>{de.isValid() && de.format('YYYY-MM-DD')}</p>
+                                <p>{el4.dayname}</p>
                                 <p>{moneyFormat(el4.price)}</p>
                                 <p>{el4.people}</p>
                                 <p>{moneyFormat(el4.total)}</p>
