@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react'
+import React, { useEffect, useState, useContext, useRef } from 'react'
 import ListLeft from './components/ListLeft'
 import style from '../../styles/camp-scss/campproduct.module.scss'
 import { useSearchParams, useParams } from 'react-router-dom'
@@ -7,6 +7,7 @@ import dayjs from 'dayjs'
 import ProCartContext from '../../contexts/ProCartContext'
 
 function CampProduct() {
+  const picRef = useRef()
   const { addCampCart } = useContext(ProCartContext)
   const { camp_sid } = useParams()
   //sid活動產品資料
@@ -184,21 +185,54 @@ function CampProduct() {
                             加入購物車
                           </button>
                         </div>
-                        <div className={style.imgearea}>
+                        <div className={style.imgarea}>
                           <div className={style.mainImage}>
                             <img
+                              ref={picRef}
                               src={`http://localhost:3001/n7/campmain/${v.mainImage}`}
+                              alt=""
                             />
                           </div>
                           <div className={style.detailsimgs}>
                             <img
+                              onClick={() => {
+                                picRef.current.setAttribute(
+                                  'src',
+                                  `http://localhost:3001/n7/campmain/${v.mainImage}`
+                                )
+                              }}
+                              src={`http://localhost:3001/n7/campmain/${v.mainImage}`}
+                              alt=""
+                            />
+                            <img
+                              onClick={() => {
+                                picRef.current.setAttribute(
+                                  'src',
+                                  `http://localhost:3001/n7/${v.detailImages[0]}`
+                                )
+                              }}
                               src={`http://localhost:3001/n7/${v.detailImages[0]}`}
+                              alt=""
                             />
                             <img
+                              onClick={() => {
+                                picRef.current.setAttribute(
+                                  'src',
+                                  `http://localhost:3001/n7/${v.detailImages[1]}`
+                                )
+                              }}
                               src={`http://localhost:3001/n7/${v.detailImages[1]}`}
+                              alt=""
                             />
                             <img
+                              onClick={() => {
+                                picRef.current.setAttribute(
+                                  'src',
+                                  `http://localhost:3001/n7/${v.detailImages[2]}`
+                                )
+                              }}
                               src={`http://localhost:3001/n7/${v.detailImages[2]}`}
+                              alt=""
                             />
                           </div>
                         </div>
