@@ -18,7 +18,7 @@ import Rental_detail from './pages/rental/Rental_detail'
 import AI from './pages/rental/AI'
 import Store from './pages/rental/Store'
 import Commnent from './pages/rental/components/Commnent'
-
+import SunClouds from './components/sunCloud'
 import Cart from './pages/Cart/Cart'
 import Order from './pages/Order/Order'
 import Confirm from './pages/Cart/child-pages/Confirm'
@@ -49,6 +49,8 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="/" element={<Home />} />
+              <Route path="/animations" element={<SunClouds />} />
+
               <Route path="/product" element={<Product />} />
               <Route path="/product/Custom" element={<Customs />} />
               <Route path="/product/:product_sid" element={<ProductPage />} />

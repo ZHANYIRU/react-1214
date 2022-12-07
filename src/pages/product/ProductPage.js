@@ -304,7 +304,7 @@ export default function ProductPage() {
          */}
 
         <p className={styled.write} onClick={() => {}}>
-          {[...Array(4)].map((star, index) => {
+          {[...Array(5)].map((star, index) => {
             const tatalStar = Math.floor(avgStar)
             index += 1
             return (
@@ -387,24 +387,25 @@ export default function ProductPage() {
   const shoseSize = (
     <>
       <h2>商品規格</h2>
-      {fetchSize.map((v, i) => {
-        return (
-          <>
-            <div
-              className={
-                size2 === v.size
-                  ? `${styled.standardBoxChose2}`
-                  : `${styled.standardBox2}`
-              }
-              onClick={() => {
-                setSize2(v.size)
-              }}
-            >
-              {v.size}
-            </div>
-          </>
-        )
-      })}
+      {product_sid &&
+        fetchSize.map((v, i) => {
+          return (
+            <>
+              <div
+                className={
+                  size2 === v.size
+                    ? `${styled.standardBoxChose2}`
+                    : `${styled.standardBox2}`
+                }
+                onClick={() => {
+                  setSize2(v.size)
+                }}
+              >
+                {v.size}
+              </div>
+            </>
+          )
+        })}
     </>
   )
 
@@ -433,16 +434,16 @@ export default function ProductPage() {
   )
   useEffect(() => {
     getRondomProductData()
-  }, [])
+  }, [product_sid])
   useEffect(() => {
     getProductData()
   }, [product_sid])
   useEffect(() => {
     getSize2()
-  }, [])
+  }, [product_sid])
   useEffect(() => {
     comMentData()
-  }, [])
+  }, [product_sid])
   return (
     <>
       <div className={styled.empty}></div>
