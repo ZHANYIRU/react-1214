@@ -26,8 +26,7 @@ function CartDetailCam() {
                   }
                   key={el.sid}
                 >
-                  <input type="checkbox" />
-                  <div className={styled.wrapRight}>
+                  <div className={`${styled.wrapRight} ${styled.camR}`}>
                     <div className={styled.roomText}>
                       <h2>{el.name}</h2>
                       <p>預定日期：{el.startDate}</p>
@@ -67,9 +66,9 @@ function CartDetailCam() {
                       </div>
                       <p>總金額：{moneyFormat(el.quantity * el.price)}</p>
                     </div>
-                    <div className={styled.roomImg}>
+                    <div className={`${styled.roomImg} ${styled.campImg}`}>
                       <img
-                        src="https://learn.100mountain.com/wp-content/uploads/2020/06/P9181685.jpg"
+                        src={`http://localhost:3001/n7/campmain/${el.img}`}
                         alt=""
                       />
                     </div>

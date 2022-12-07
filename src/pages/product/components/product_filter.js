@@ -17,6 +17,7 @@ export default function ProductFilter({
   getProductData,
   nav,
 }) {
+  const [priceToggle, setPriceToggle] = useState('')
   const mobile = useMediaQuery({ query: '(max-width:390px)' })
   // const [genderFilter, setGenderFilter] = useState([{}])
   const genderOptions = ['男', '女']
@@ -156,6 +157,27 @@ export default function ProductFilter({
 
   let filter = 'http://localhost:3001/product/filter'
 
+  //金錢切換toggle
+  // const priceBtn = (text) => {
+  //   if (priceToggle === 'asc') {
+  //     const d = [...datas]
+  //     //sort無淺拷貝
+  //     d.sort((a, b) => {
+  //       return a.product_price - b.product_price
+  //     })
+  //     setDatas(d)
+  //     setPriceToggle(text)
+  //   } else if (priceToggle === 'desc') {
+  //     const d = [...datas]
+  //     //sort無淺拷貝
+  //     d.sort((a, b) => {
+  //       return b.product_price - a.product_price
+  //     })
+  //     setDatas(d)
+  //     setPriceToggle(text)
+  //   }
+  // }
+
   const getData = () => {
     if (Number(filters.lowPrice) > Number(filters.highPrice)) {
       sweetAlert('請檢查價格是否輸入錯誤')
@@ -197,9 +219,58 @@ export default function ProductFilter({
   // filter樣式 (電腦版)
   const webFilter = (
     <div className={fixedd ? `${styled.filter2}` : `${styled.filter}`}>
-      {mob ? '' : ''}
       <form onSubmit={handleFormSubmit}>
-        <h2>價格</h2>
+        <div className={styled.sort}>
+          <h2>價格</h2>
+          {!priceToggle ? (
+            <i
+              className="fa-solid fa-sort"
+              onClick={() => {
+                const d = [...datas]
+                //sort無淺拷貝
+                d.sort((a, b) => {
+                  return a.product_price - b.product_price
+                })
+                setDatas(d)
+                setPriceToggle('asc')
+              }}
+            ></i>
+          ) : (
+            ''
+          )}
+          {priceToggle === 'desc' ? (
+            <i
+              class="fa-solid  fa-arrow-down-wide-short"
+              onClick={() => {
+                const d = [...datas]
+                //sort無淺拷貝
+                d.sort((a, b) => {
+                  return a.product_price - b.product_price
+                })
+                setDatas(d)
+                setPriceToggle('asc')
+              }}
+            ></i>
+          ) : (
+            ''
+          )}
+          {priceToggle === 'asc' ? (
+            <i
+              class="fa-solid  fa-arrow-down-short-wide"
+              onClick={() => {
+                const d = [...datas]
+                //sort無淺拷貝
+                d.sort((a, b) => {
+                  return b.product_price - a.product_price
+                })
+                setDatas(d)
+                setPriceToggle('desc')
+              }}
+            ></i>
+          ) : (
+            ''
+          )}
+        </div>
         <div className={styled.pricebox}>
           <input
             size="5"
@@ -240,28 +311,27 @@ export default function ProductFilter({
           })}
         </select>
 
-        <div className={styled.genderRadio}>
-          {genderOptions.map((v, i) => {
-            return (
-              <div key={i} className={styled.genderBox}>
-                <input
-                  type="radio"
-                  id={v}
-                  checked={genders === v}
-                  name="gender"
-                  value={v}
-                  onChange={(e) => {
-                    setGenders(e.target.value)
-                  }}
-                ></input>
-                <label htmlFor={v}> {v}</label>
-              </div>
-            )
-          })}
-        </div>
-
         {nav !== 'accessories' && (
           <>
+            <div className={styled.genderRadio}>
+              {genderOptions.map((v, i) => {
+                return (
+                  <div key={i} className={styled.genderBox}>
+                    <input
+                      type="radio"
+                      id={v}
+                      checked={genders === v}
+                      name="gender"
+                      value={v}
+                      onChange={(e) => {
+                        setGenders(e.target.value)
+                      }}
+                    ></input>
+                    <label htmlFor={v}> {v}</label>
+                  </div>
+                )
+              })}
+            </div>
             <h2> 防水等級</h2>
             <div className={styled.checkBoxWrap}>
               {wProofOptions.map((v, i) => {
@@ -350,20 +420,55 @@ export default function ProductFilter({
             </form>
           </div>
           <div className={styled.icon}>
-            <i
-              className="fa-solid fa-sort"
-              onClick={() => {
-                const d = [...datas]
-                //sort無淺拷貝
-                d.sort((a, b) => {
-                  return a.product_price - b.product_price
-                })
-                // const newDatas = [...datas, a]
-                console.log(d)
-                // console.log(newDatas)
-                setDatas(d)
-              }}
-            ></i>
+            {!priceToggle ? (
+              <i
+                className="fa-solid fa-sort"
+                onClick={() => {
+                  const d = [...datas]
+                  //sort無淺拷貝
+                  d.sort((a, b) => {
+                    return a.product_price - b.product_price
+                  })
+                  setDatas(d)
+                  setPriceToggle('asc')
+                }}
+              ></i>
+            ) : (
+              ''
+            )}
+            {priceToggle === 'desc' ? (
+              <i
+                class="fa-solid  fa-arrow-down-wide-short"
+                onClick={() => {
+                  const d = [...datas]
+                  //sort無淺拷貝
+                  d.sort((a, b) => {
+                    return a.product_price - b.product_price
+                  })
+                  setDatas(d)
+                  setPriceToggle('asc')
+                }}
+              ></i>
+            ) : (
+              ''
+            )}
+            {priceToggle === 'asc' ? (
+              <i
+                class="fa-solid  fa-arrow-down-short-wide"
+                onClick={() => {
+                  const d = [...datas]
+                  //sort無淺拷貝
+                  d.sort((a, b) => {
+                    return b.product_price - a.product_price
+                  })
+                  setDatas(d)
+                  setPriceToggle('desc')
+                }}
+              ></i>
+            ) : (
+              ''
+            )}
+
             <i
               className="fa-solid fa-filter"
               onClick={() => {

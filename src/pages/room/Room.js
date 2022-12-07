@@ -13,11 +13,6 @@ function Room({ data, setData }) {
     const { data } = await axios.get('http://localhost:3001/room/list')
     setRoomList(data)
   }
-  useEffect(() => {
-    getSearchList()
-    getList()
-  }, [])
-
   //fetch searchbar內容
   const [searchbar, setSearchBar] = useState([])
   async function getSearchList() {
@@ -33,19 +28,29 @@ function Room({ data, setData }) {
   const [keyWord, setKeyWord] = useState('')
 
   //監控內容高度
-  const [ftr, setFtr] = useState(false)
-  const mainHeight = useRef()
+  const [ftrRoom, setFtrRoom] = useState(false)
+  const roomHeight = useRef()
   const scroll = () => {
-    const windowH = window.innerHeight
-    const mainH = mainHeight.current.clientHeight
+    const windowH = window.innerHeight - 200
+    const roomH = roomHeight.current.clientHeight
     const windowScrollY = window.scrollY
-    if (windowScrollY + windowH * 0.8 > mainH) {
-      setFtr(true)
+    if (windowScrollY + windowH * 0.8 > roomH) {
+      console.log('windowH', windowH)
+      console.log('roomH', roomH)
+      console.log('windowScrollY', windowScrollY)
+      console.log('111')
+      setFtrRoom(true)
     } else {
-      setFtr(false)
+      console.log('222')
+
+      setFtrRoom(false)
     }
   }
+
   useEffect(() => {
+    getSearchList()
+    getList()
+    setFtrRoom(false)
     window.addEventListener('scroll', scroll)
     return () => {
       window.removeEventListener('scroll', scroll)
@@ -58,7 +63,10 @@ function Room({ data, setData }) {
         <div className={`${style.box} ${style.div2}`}></div>
         <div className={`${style.box} ${style.div3}`}></div>
       </div>
-      <div className={style.divWrap} style={{ visibility: ftr && 'hidden' }}>
+      <div
+        className={style.divWrap}
+        style={{ visibility: ftrRoom && 'hidden' }}
+      >
         <div className={`${style.box2} ${style.div4}`}>
           <img src="/img/4.png" alt="" />
         </div>
@@ -67,7 +75,7 @@ function Room({ data, setData }) {
         </div>
       </div>
 
-      <div className={style.container} ref={mainHeight}>
+      <div className={style.container} ref={roomHeight}>
         <h2
           className={style.title}
           onClick={(e) => {

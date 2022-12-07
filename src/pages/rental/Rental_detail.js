@@ -81,7 +81,7 @@ const Rental_detail = () => {
     get_rental_detail()
     get_store()
     get_Like()
-  }, [])
+  }, [sid])
 
   return (
     <>
@@ -108,7 +108,9 @@ const Rental_detail = () => {
                             key={i}
                             style={{
                               border: `${
-                                checkPic === i ? '1px solid black' : 'none'
+                                checkPic === i
+                                  ? '2px solid rgb(255,255,255)'
+                                  : 'none'
                               }`,
                             }}
                           >
@@ -350,15 +352,11 @@ const Rental_detail = () => {
               <div className={styled.section3}>
                 <div>
                   <h3>商品規格</h3>
-                  <p>
-                    規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格
-                  </p>
+                  <pre>{Detail.rental_introdution}</pre>
                 </div>
                 <div>
                   <h3>特色說明</h3>
-                  <p>
-                    規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格規格
-                  </p>
+                  <pre>{Detail.rental_specification}</pre>
                 </div>
               </div>
             )}

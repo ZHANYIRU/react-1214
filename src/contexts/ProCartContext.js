@@ -749,20 +749,19 @@ export const ProCartContextProvider = ({ children }) => {
       payload: {},
     })
   }
-  //填寫(收件人)
-  const [writeUser, setWriteUser] = useState({
-    name: '',
-    mobile: 0,
-    address: '',
-    email: '',
-    text: '',
-  })
   //room search結果
   const [data, setData] = useState([])
   //room地區 篩選結果
   const [userSelect, setUserSelect] = useState([])
   //在篩選頁面獲得相對應山的房型
   const [getMountain, setGetMountain] = useState([])
+
+ //camp filter
+ const [filterCon, setFilterCon]= useState(0)
+
+
+
+
   //金錢格式化
   const moneyFormat = (price) => {
     let a = Number(price)
@@ -777,6 +776,8 @@ export const ProCartContextProvider = ({ children }) => {
   return (
     <ProCartContext.Provider
       value={{
+        filterCon, 
+        setFilterCon,
         lookLightBox,
         setLookLightBox,
         stars,
@@ -812,8 +813,6 @@ export const ProCartContextProvider = ({ children }) => {
         room,
         camp,
         ren,
-        writeUser,
-        setWriteUser,
       }}
     >
       {children}

@@ -2,6 +2,7 @@ import styled from '../../../styles/cart-scss/WritePage.module.scss'
 import CheckData from '../components/CheckData'
 import WriteData from '../components/WriteData'
 import { useEffect, useState } from 'react'
+import Swal from 'sweetalert2'
 function WritePage({
   step,
   setStep,
@@ -9,8 +10,14 @@ function WritePage({
   setFamilySelect,
   paySelect,
   setPaySelect,
+  useCoupon,
+  setUseCoupon,
+  same,
+  setSame,
+  writeUser,
+  setWriteUser,
 }) {
-  //旋轉狀態
+  // //填寫資料旋轉狀態
   const [rotate, setRotate] = useState({
     transform: 'rotateY(180deg)',
   })
@@ -18,6 +25,41 @@ function WritePage({
   const [check, setCheck] = useState('填寫資料')
   //結帳按鈕出現與否
   const [buy, setBuy] = useState(false)
+  const buyPay = () => {
+    if (familySelect === '') {
+      Swal.fire({
+        icon: 'error',
+        title: '請選擇取件方式',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+      return
+    }
+    if (paySelect === '') {
+      Swal.fire({
+        icon: 'error',
+        title: '請選擇付款方式',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+      return
+    }
+    if (
+      writeUser.name === '' ||
+      writeUser.mobile === '' ||
+      writeUser.address === '' ||
+      writeUser.email === ''
+    ) {
+      Swal.fire({
+        icon: 'error',
+        title: '請輸入完整的收件人資料',
+        showConfirmButton: false,
+        timer: 1500,
+      })
+    } else {
+      setStep(step + 1)
+    }
+  }
   //進這元件的時候，滾動到視窗最上面
   useEffect(() => {
     window.scrollTo({
@@ -58,7 +100,7 @@ function WritePage({
         {buy && (
           <button
             onClick={() => {
-              setStep(step + 1)
+              buyPay()
             }}
           >
             付款去
@@ -73,6 +115,12 @@ function WritePage({
             setFamilySelect={setFamilySelect}
             paySelect={paySelect}
             setPaySelect={setPaySelect}
+            useCoupon={useCoupon}
+            setUseCoupon={setUseCoupon}
+            same={same}
+            setSame={setSame}
+            writeUser={writeUser}
+            setWriteUser={setWriteUser}
           />
         </div>
       </div>

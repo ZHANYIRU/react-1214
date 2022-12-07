@@ -1,0 +1,105 @@
+@import '../global.scss';
+
+.empty{
+    width: 100%;
+    height: 100px;
+}
+.container{
+    width:80%;
+    height:50vh;
+    // border:1px solid green;
+    margin:0 auto;
+    box-sizing: border-box;
+
+    
+   
+}
+
+.middlecontainer{
+    width:100%;
+    display:flex;
+}
+
+// 左半邊的部份
+.left{
+    width:40%;
+    height:600px;
+    background-image: url("../../../public/img/taiwan.png");
+    background-repeat: no-repeat;
+    background-size: 55%;
+    background-position: 50%;
+    position: relative;
+
+    .redball{
+        position:absolute;
+        width:15px;
+        height:15px;
+        border-radius: 50%;
+        background-color: red;
+    }
+    
+   
+}
+
+.right{
+    padding:20px;
+    width:60%;
+    height:700px;
+    // border:1px solid black;
+
+    .flex{
+        display:flex;
+
+        div:nth-child(1){
+            width:40%;
+        }
+
+        div:nth-child(2){
+            width:60%;
+            div{
+                width:100%;
+                height:300px;
+                overflow: hidden;
+                img{
+                    // width:100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+
+    }
+}
+
+.storetitle{
+    font-size:25px;
+}
+
+
+.seconddiv{
+    border-bottom:10px solid #ccc;
+    padding-bottom:20px;
+
+    div{
+        margin-top:auto;
+    }
+}
+
+.thirddiv{
+    width:75%;
+    padding-top:20px;
+    // font-size:20px;
+    pre{
+        // width:200px;
+        
+        // font-weight:400;
+        // height:250px;
+        word-wrap:break-word;
+        white-space: pre-wrap;
+        // word-wrap: break-word;
+    }
+    // pre {
+    //     white-space: pre-wrap;
+    //     word-wrap: break-word;
+    // }
+}
