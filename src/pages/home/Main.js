@@ -58,9 +58,19 @@ function Main({ setFtr }) {
     setPostData(response.data.postRows)
   }
 
+  //一日單攻活動data
+  const [oneday, setOneday] = useState([])
+
+  //fetch 一日單攻活動資料
+  async function getOneday() {
+    const response = await axios.get(`http://localhost:3001/room/oneday`)
+    setOneday(response.data.onedayRows[0])
+  }
+
   useEffect(() => {
     getCoupon()
     getPost()
+    getOneday()
     window.addEventListener('scroll', scroll)
     return () => {
       window.removeEventListener('scroll', scroll)
@@ -137,7 +147,7 @@ function Main({ setFtr }) {
           </div>
         </div>
         <div className={styled.section3}>
-          <Group />
+          <Group oneday={oneday} />
         </div>
         <div className={styled.section4}>
           <Leaderboard />
@@ -145,7 +155,6 @@ function Main({ setFtr }) {
         <div className={styled.section5}>
           <Post postData={postData} />
         </div>
-
       </div>
     </>
   )

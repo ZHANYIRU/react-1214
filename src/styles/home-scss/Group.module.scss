@@ -1,17 +1,35 @@
 @import '../global.scss';
 
 .left{
-    padding-left: 45px;
+    // padding-left: 45px;
     width: 400px;
     text-align: center;
     h3{
         font-size:2rem;
         line-height: 2.5rem;
     }
-    p{
-        font-weight: 500;
-        font-size: 1.2rem;
-        line-height: 3rem;
+    .icon{
+        display: flex;
+        justify-content: center;
+        span{
+            display: inline-block;
+            margin-top: 20px;
+            padding-right: 10px;
+            font-weight: 700;
+            i {
+                font-size: 1.5rem;
+                color:#48742C;
+            }
+        }
+        }
+    .text{
+        text-align: start;
+        line-height: 1.5rem;
+        margin-top: 25px;
+        background-color: white;
+        padding: 25px 40px;
+        width: 425px;
+        border-radius: 10px;
     }
 }
 .midddle{
@@ -31,6 +49,7 @@
 }
 
 .right{
+    margin-top: 50px;
     .wrap{
         height: 300px;
         display: flex;
@@ -62,40 +81,40 @@
 
     }
     .price{
-        font-size: 1.5rem;
+        margin:25px 0;
+        font-size: 1.3rem;
         font-weight: 700;
     }
 }
 
 .countDown{
-
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     .one, .two, .three{
         display: flex;
         justify-content: flex-end;
         font-weight: 500;
     }
+    .two, .three{
+        margin-left: 15px;
+    }
+
     span{
         border-radius: 5px;
         padding: 15px 9px;
         font-size: 2rem;
-        background-color: rgb(87, 168, 87);
-        margin: 0 10px 10px 0;
+        // background-color: rgb(87, 168, 87);
+        margin: 0 0px 0px 13px;
 
-    }
-    .count{
-        display: flex;
-       span{
-        display: block;
-        width: 50px;
-    }
-    
-      
     }
 
     p{ 
-        padding: 18px 8px;
-        margin: 0 10px 10px 0;
-        font-size: 2rem;
+        width: 70px;
+        vertical-align:center;
+        padding: 18px 0px;
+        // margin: 0 15px 0 0;
+        font-size: 1.3rem;
     }
 
 }

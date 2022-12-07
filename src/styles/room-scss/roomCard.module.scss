@@ -1,6 +1,6 @@
 @import '../global.scss';
 .titleWrap{
-    margin: 20px auto 25px auto;
+    margin: 20px auto 25px 300px;
     width: 75%;
 }
 .roomMainTitle{
@@ -85,7 +85,7 @@ font-size: 1rem;
 
 @media screen and (max-width: 1400px) {
     .titleWrap{
-        margin: 20px 0px 25px 200px;
+        margin: 20px 0px 25px 150px;
         width: 75%;
     }
     .roomMainTitle{
@@ -94,8 +94,8 @@ font-size: 1rem;
     }
     .roomCardGroup{
         width:95%;
-
         flex-wrap:  wrap;
+        justify-content: flex-start;
         a{
             width:260px;
             margin-right: 50px;

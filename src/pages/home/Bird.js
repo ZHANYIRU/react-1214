@@ -8,7 +8,11 @@ function Bird({ show, setShow, couponData }) {
 
   //問題集
   const [question, setQuestion] = useState([
-    { Q: '請問你今年幾歲', Ans: ['18歲', '25歲', '35歲'], correct: '18歲' },
+    {
+      Q: '登山時的正確穿衣方法？',
+      Ans: ['18歲', '洋蔥式穿法', '35歲'],
+      correct: '洋蔥式穿法',
+    },
     { Q: '請問你養過幾隻狗', Ans: ['1隻', '2隻', '3隻'], correct: '2隻' },
     { Q: '請問你的婚姻狀況', Ans: ['未婚', '已婚', '不提供'], correct: '未婚' },
   ])
@@ -219,7 +223,11 @@ function Bird({ show, setShow, couponData }) {
                       <button
                         className={style.copyBtn}
                         onClick={() => {
-                          console.log('copy', couponCode.current.textContent)
+                          const val = couponCode.current.textContent
+                          console.log('copy', val)
+                          window.getSelection().selectAllChildren(val)
+                          document.execCommand('Copy')
+                          alert('已複製好，可貼粘。')
                         }}
                       >
                         複製
