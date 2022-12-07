@@ -46,7 +46,18 @@
         width: 50%;
         text-align: center;
         padding: 20px;
-        border-bottom: solid 3px  rgb(14, 68, 32);
+        border-bottom: solid 1px  rgb(14, 68, 32);
+    }
+    .underLine{
+        font-weight: 400;
+        border-bottom: 5px solid rgb(14, 68, 32);
+    }
+    .productIntro{
+        width: 50%;
+        text-align: center;
+        font-weight: 500;
+        font-size: 1.5rem;
+        transform: translateY(1px);
     }
 }
 
@@ -134,3 +145,4 @@
                 border: none;
             }
 }
+

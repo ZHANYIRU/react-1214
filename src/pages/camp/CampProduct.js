@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import ListLeft from './components/ListLeft'
 import style from '../../styles/camp-scss/campproduct.module.scss'
 import { useSearchParams, useParams } from 'react-router-dom'
 import axios from 'axios'
+import dayjs from 'dayjs'
+import ProCartContext from '../../contexts/ProCartContext'
 
 function CampProduct() {
+  const { addCampCart } = useContext(ProCartContext)
   const { camp_sid } = useParams()
   //sid活動產品資料
   const [campSid, setCampSid] = useState([])
@@ -12,10 +15,66 @@ function CampProduct() {
 
   //抓url的/?camp_sid=多少
   const [usp] = useSearchParams()
-  console.log(camp_sid)
+  //console.log(camp_sid)
 
-  //數量
+  //存選擇的數量
   const [num, setNum] = useState(1)
+
+  //今天的日期
+  const date = Date.parse(new Date())
+  //最的日期
+  const today = dayjs(date + 172800000).format('YYYY-MM-DD')
+
+  //存報名的日期
+  const [chooseDate, setChooseDate] = useState(today)
+
+  //商品介紹、評論
+  const [introCom, setintroCom] = useState(true)
+
+  // 切換開關方法
+  const changeBtn = (e) => {
+    setintroCom(!introCom)
+  }
+
+  //活動介紹區塊
+  const intro = campSid.map((v, i) => {
+    return (
+      <div id="introduction">
+        <h4>活動介紹</h4>
+        <p>{v.brife_describe}</p>
+
+        <h4>行程規劃</h4>
+        <div className={style.schedule}>
+          <p>{v.schedule_day1}</p>
+          <p>{v.schedule_day2}</p>
+          <p>{v.schedule_day3}</p>
+        </div>
+
+        <h4>注意事項</h4>
+        <p>
+          出發前請留意氣象資訊，山區天氣變化多端，早晚以及越往山上溫差越大，穿著建議以洋蔥式穿法。不管是在夏季或冬季氣候，高山氣溫還是明顯偏低，切記要做好保暖才不會容易引發高山症。
+          另外，每個人對於溫度的感受不盡相同，請務必根據自己的身體條件，做好穿著和攜帶衣物的責任。
+          如所攜帶之裝備不足以完成行程的人，以及對個人或團隊安全有所危害者，領隊嚮導有權要求撤退並陪同之。
+          行進間，除領隊或嚮導有特別安排，請勿超前隊伍自行脫隊，或刻意落後，為了各位夥伴安全，讓領隊及嚮導好好待在身旁。
+          行程中有任何問題如擔心、害怕、心生疑慮，或遇到不敢通過的地形等，請務必告知領隊或嚮導，我們將盡最大的努力提供最好的服務。
+          初學者如尚不適應登山行程、或裝備不熟悉者，切記量力而為。建議將背包總重量（含背包本身、行動水、午餐、行動糧）控制在八公斤以下。
+          請在出發前就多加進行自主訓練，訓練方向請針對心肺和肌力，跑步、游泳、重訓、深蹲等多方加強。
+          請審慎評估自身能力再進行報名。
+          此次行程安全為第一考量，落實無痕山林，一起當個友愛大自然的孩子吧！
+          爬山過程中，如遇身體不適，或有任何情況發生，請盡快告知領隊或嚮導，請勿硬撐而讓自己陷入危險當中。
+        </p>
+        <h5>【報名前請務必詳閱 條款及細則 ＆ 裝備說明】 </h5>
+      </div>
+    )
+  })
+
+  //評論區塊
+  const com = (
+    <div id="comment">
+      <h4>評論數量</h4>
+      <h5>【報名前請務必詳閱 條款及細則 ＆ 裝備說明】 </h5>
+    </div>
+  )
 
   const fetchAll = async () => {
     try {
@@ -37,21 +96,21 @@ function CampProduct() {
       <div className={style.product}>
         <ListLeft />
         <div className={style.pright}>
-          <div>麵包屑/麵包屑/麵包屑/麵包屑</div>
           {campSid.length !== 0 &&
             campSid.map((v, i) => {
               if (i < 1) {
                 return (
                   <>
+                    {console.log(v)}
                     <div className={style.card}>
                       <div className={style.cardtop}>
-                        <h2>{v.name}</h2>
+                        <h2>{v.camp_name}</h2>
                         <div>
                           <div className={style.location}>
                             <span>
                               <i className="fa-solid fa-map-location-dot"></i>
                             </span>
-                            <span>{v.location_name}</span>
+                            <span>{v.name}</span>
                           </div>
                           <div className={style.mountain}>
                             <span>
@@ -59,6 +118,18 @@ function CampProduct() {
                             </span>
                             <span>{v.mountain_name}</span>
                           </div>
+                          <label>請選擇報名日期</label>
+                          <input
+                            type="date"
+                            min={today}
+                            max={dayjs(v.camp_joinenddate).format('YYYY-MM-DD')}
+                            value={chooseDate ? chooseDate : today}
+                            onChange={(e) => {
+                              const myDate = e.target.value
+                              setChooseDate(myDate)
+                            }}
+                          />
+                          {console.log(chooseDate)}
                           <div>金額：{v.price}</div>
                           <div>評價：stars</div>
                           <div className={style.howNum}>
@@ -72,6 +143,7 @@ function CampProduct() {
                                     setNum(num - 1)
                                   }}
                                 ></i>
+                                {/* {console.log(num)} */}
                               </div>
                               <div className={style.numBox2}>{num}</div>
                               <div className={style.numBox3}>
@@ -85,7 +157,32 @@ function CampProduct() {
                               </div>
                             </div>
                           </div>
-                          <button className={style.buy}>加入購物車</button>
+                          <button
+                            className={style.buy}
+                            onClick={() => {
+                              let a
+                              if (v.campaign_days_sid === 1) {
+                                a = '一日遊'
+                              } else if (v.campaign_days_sid === 2) {
+                                a = '兩天一夜'
+                              } else if (v.campaign_days_sid === 3) {
+                                a = '三天兩夜'
+                              }
+                              addCampCart(
+                                v.sid,
+                                v.camp_name,
+                                chooseDate,
+                                a,
+                                v.name,
+                                v.mountain_name,
+                                v.price,
+                                num,
+                                v.mainImage
+                              )
+                            }}
+                          >
+                            加入購物車
+                          </button>
                         </div>
                         <div className={style.mainImage}>
                           <img
@@ -105,11 +202,41 @@ function CampProduct() {
                         </div>
                       </div>
                       <div className={style.switch}>
-                        <div>介紹</div>
-                        <div>評論(12)</div>
+                        <div
+                          className={
+                            introCom
+                              ? `${style.productIntro} ${style.underLine}`
+                              : `${style.productIntro}`
+                          }
+                          onClick={(e) => {
+                            if (!introCom) {
+                              changeBtn()
+                            } else {
+                              return
+                            }
+                          }}
+                        >
+                          介紹
+                        </div>
+                        <div
+                          className={
+                            !introCom
+                              ? `${style.productIntro} ${style.underLine}`
+                              : `${style.productIntro}`
+                          }
+                          onClick={() => {
+                            if (introCom) {
+                              changeBtn()
+                            } else {
+                              return
+                            }
+                          }}
+                        >
+                          評論(12)
+                        </div>
                       </div>
                       <div className={style.cardcontext}>
-                        <div id="introduction">
+                        {/* <div id="introduction">
                           <h4>活動介紹</h4>
                           <p>{v.brife_describe}</p>
 
@@ -138,7 +265,8 @@ function CampProduct() {
                         <div id="comment">
                           <h4>評論數量</h4>
                           <h5>【報名前請務必詳閱 條款及細則 ＆ 裝備說明】 </h5>
-                        </div>
+                        </div> */}
+                        {introCom ? intro : com}
                       </div>
                     </div>
                   </>
