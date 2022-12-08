@@ -5,8 +5,8 @@ import axios from 'axios'
 import { useEffect } from 'react'
 import MemberContext from '../../contexts/MemberContext'
 import ProCartContext from '../../contexts/ProCartContext'
-import StarRating from './components/starRating'
 import CommentLightBox from './components/CommentLightBox'
+import ProductComment from './components/ProductComment'
 // import comFakeData from './comFakeData'
 import Swal from 'sweetalert2'
 import { useMediaQuery } from 'react-responsive'
@@ -166,6 +166,7 @@ export default function ProductPage() {
     )
     const r = response.data
     console.log(r)
+    // const  ascSize = r.filter((v)=> )
     setFetchSize(r)
   }
 
@@ -393,15 +394,15 @@ export default function ProductPage() {
             <>
               <div
                 className={
-                  size2 === v.size
+                  size2 === v
                     ? `${styled.standardBoxChose2}`
                     : `${styled.standardBox2}`
                 }
                 onClick={() => {
-                  setSize2(v.size)
+                  setSize2(v)
                 }}
               >
-                {v.size}
+                {v}
               </div>
             </>
           )
@@ -492,13 +493,27 @@ export default function ProductPage() {
                 <div className={styled.productText}>
                   <div className={styled.productTitle}>
                     <h1>{v.product_name}</h1>
-                    <Link>
-                      <i className="fa-solid fa-star"></i>
-                      <i className="fa-solid fa-star"></i>
-                      <i className="fa-solid fa-star"></i>
-                      <i className="fa-solid fa-star"></i>
-                      <i className="fa-solid fa-star"></i>
-                    </Link>
+                    <div className={styled.starBox}>
+                      <p className={styled.write} onClick={() => {}}>
+                        {[...Array(5)].map((star, index) => {
+                          const tatalStar = Math.floor(avgStar)
+                          index += 1
+                          return (
+                            <p
+                              key={index}
+                              className={
+                                index <= tatalStar
+                                  ? `${styled.on}`
+                                  : `${styled.off}`
+                              }
+                            >
+                              <span className="star">&#9733;</span>
+                            </p>
+                          )
+                        })}
+                      </p>
+                      <p>{avgStar} &nbsp; </p>
+                    </div>
                   </div>
 
                   <div className={styled.standard}>
@@ -628,7 +643,17 @@ export default function ProductPage() {
               商品評論
             </div>
           </div>
-          {introCom ? intro : com}
+          {introCom ? (
+            intro
+          ) : (
+            <ProductComment
+              avgStar={avgStar}
+              commentFetch={commentFetch}
+              memberData={memberData}
+              setWhichCom={setWhichCom}
+              setComLightBox={setComLightBox}
+            />
+          )}
           <div className={styled.empty}></div>
         </div>
       </div>

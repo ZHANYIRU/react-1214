@@ -43,14 +43,13 @@ function App() {
     <BrowserRouter>
       <MemberContextProvider>
         <ProCartContextProvider>
+          <SunClouds />
           <Navbar />
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="/" element={<Home />} />
-              <Route path="/animations" element={<SunClouds />} />
-
               <Route path="/product" element={<Product />} />
               <Route path="/product/Custom" element={<Customs />} />
               <Route path="/product/:product_sid" element={<ProductPage />} />
