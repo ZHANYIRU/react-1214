@@ -28,6 +28,11 @@ export default function SunCloud() {
       </div>
       <div className={styled.wrap}>
         <div className={styled.box}></div>
+        <div className={styled.box1}></div>
+        <div className={styled.box2}></div>
+        <div className={styled.box3}></div>
+        <div className={styled.box4}></div>
+        <div className={styled.box5}></div>
       </div>
     </div>
   )
