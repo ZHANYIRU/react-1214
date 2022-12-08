@@ -19,7 +19,7 @@ function RoomDetail({ detail, el }) {
 
   // const roomData = detailNoComment.length === 0 ? detail : detailNoComment
   // 切換評論 or 房型介紹
-  console.log('roomData', detail)
+  // console.log('roomData', detail)
   // console.log('detailNoComment', detailNoComment)
 
   const [showIntro, setShowIntro] = useState(true)
@@ -286,7 +286,7 @@ function RoomDetail({ detail, el }) {
                 {starCount(Math.round(detail.Average))}
 
                 <span className={style.commentQTY}>
-                  ({detail.commentQty > 0 ? detail.commentQty : 0})
+                  ({detail.commentQty > 0 ? detail.commentQty : '目前沒有評論'})
                 </span>
               </div>
               <div className={style.commenAll}>

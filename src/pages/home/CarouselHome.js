@@ -9,42 +9,88 @@ const CarouselHome = ({ oneday }) => {
     width: '100%',
     height: '400px',
   }
+  const imgs = oneday.detailImages
   return (
-    <div className="CarouselGroup">
-      <div className="groupbutton" onClick={() => reactSwipeEl.prev()}>
-        <i className="fa-solid fa-angle-left"></i>
-      </div>
-      <ReactSwipe
-        className="carousel"
-        swipeOptions={{ continuous: false }}
-        ref={(el) => (reactSwipeEl = el)}
-      >
-        <div className="item">
-          <img
-            style={imageStyles}
-            // alt={`slide${i}`}
-            src={`http://localhost:3001/room_img/HeHuan.jpg`}
-          />
+    <>
+      {imgs && imgs.length !== 0 && (
+        <div className="CarouselGroup">
+          <div className="groupbutton" onClick={() => reactSwipeEl.prev()}>
+            <i className="fa-solid fa-angle-left"></i>
+          </div>
+          <ReactSwipe
+            className="carousel"
+            swipeOptions={{ continuous: false }}
+            ref={(el) => (reactSwipeEl = el)}
+          >
+            <div className="item">
+              <img
+                style={imageStyles}
+                alt=""
+                src={`http://localhost:3001/room_img/HeHuan.jpg`}
+              />
+            </div>
+            <div className="item">
+              <img
+                style={imageStyles}
+                alt=""
+                src={`http://localhost:3001/room_img/HeHuan2.jpg`}
+              />
+            </div>
+            <div className="item">
+              <img
+                style={imageStyles}
+                alt=""
+                src={`http://localhost:3001/room_img/MaWu.jpg`}
+              />
+            </div>
+
+            <div className="item">
+              <img
+                style={imageStyles}
+                alt=''
+                src={`http://localhost:3001/n7/campmain/${oneday.mainImage}`}
+              />
+            </div>
+            <div className="item">
+              <img
+                style={imageStyles}
+                alt=''
+                src={
+                  imgs &&
+                  imgs.length !== 0 &&
+                  `http://localhost:3001/n7/${imgs[0]}`
+                }
+              />
+            </div>
+            <div className="item">
+              <img
+                style={imageStyles}
+                alt=''
+                src={
+                  imgs &&
+                  imgs.length !== 0 &&
+                  `http://localhost:3001/n7/${imgs[1]}`
+                }
+              />
+            </div>
+            <div className="item">
+              <img
+                style={imageStyles}
+                alt=''
+                src={
+                  imgs &&
+                  imgs.length !== 0 &&
+                  `http://localhost:3001/n7/${imgs[2]}`
+                }
+              />
+            </div>
+          </ReactSwipe>
+          <div className="groupbutton" onClick={() => reactSwipeEl.next()}>
+            <i className="fa-solid fa-angle-right"></i>
+          </div>
         </div>
-        <div className="item">
-          <img
-            style={imageStyles}
-            // alt={`slide${i}`}
-            src={`http://localhost:3001/room_img/HeHuan2.jpg`}
-          />
-        </div>
-        <div className="item">
-          <img
-            style={imageStyles}
-            // alt={`slide${i}`}
-            src={`http://localhost:3001/room_img/MaWu.jpg`}
-          />
-        </div>
-      </ReactSwipe>
-      <div className="groupbutton" onClick={() => reactSwipeEl.next()}>
-        <i className="fa-solid fa-angle-right"></i>
-      </div>
-    </div>
+      )}
+    </>
   )
 }
 
