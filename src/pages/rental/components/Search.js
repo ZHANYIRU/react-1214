@@ -9,10 +9,20 @@ const Search = ({ conditions, setConditions }) => {
   }
   return (
     <div className={styled.search}>
-      <input type="text" onChange={InputHandler} placeholder="商品搜尋"/>
+      <input type="text" onChange={InputHandler} placeholder="商品搜尋" />
       <button
         onClick={() => {
-          setConditions({ ...conditions, search: input, page: 1 })
+          setConditions({
+            ...conditions,
+            category: '',
+            search: input,
+            low_price: undefined,
+            high_price: undefined,
+            page: 1,
+            order_by: '',
+            brand: [],
+            label: [],
+          })
         }}
       >
         <i className="fa-solid fa-magnifying-glass"></i>
