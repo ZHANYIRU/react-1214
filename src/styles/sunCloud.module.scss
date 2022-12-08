@@ -7,7 +7,7 @@
         background-color: #618072;
         position: relative;
         transition: 2s;
-        animation: fade 2s linear;   
+        // animation: fade 2s linear;   
 
     .wrap{
         position: absolute;
@@ -60,35 +60,7 @@
         height: 150px;
         border-radius: 50%;
     }
-    .cloud1{
-        position: relative;
-        top: 200px;
-        width: 300px;
-        height: 100px;
-        border-radius :50px; ;
-        background-color: #fff;
-        animation: move 8s linear infinite;
-    }
-    .cloud1::before{
-        content: '';
-        position: absolute;
-        top: -50px;
-        left: 50px;
-        background: #fff;
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-    }
-    .cloud1::after{
-        content: '';
-        position: absolute;
-        top: -75px;
-        left: 90px;
-        background: #fff;
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-    }
+    
     .sun{
         top: -100px;
         left: 50px;
@@ -150,12 +122,20 @@
     font-size: 5rem;
     color:#fff;
     display:inline-block;
-    // opacity: 0;
     animation: textanimate 1s linear ;
+    animation-fill-mode: forwards;
     font-family: 'Kdam Thmor Pro', sans-serif;
     // font-family: 'Rampart One', cursive;
 }
-
+.loader span:nth-child(1){
+    animation-delay: 0s;
+}
+.loader span:nth-child(2){
+    animation-delay: 0.3s;
+}
+.loader span:nth-child(3){
+    animation-delay: .6s;
+}
 
 
 
@@ -170,10 +150,10 @@
 
 @keyframes wrapTrasn {
     0%{
-       left: 30%;
+       left: 40%;
     }
     100%{
-        left: 75%;
+        left: 60%;
     }
 }
 
@@ -181,15 +161,16 @@
 
     @keyframes textanimate {
         0%{
-            opacity: 0;
             transform: translateY(-150%);
         }
-        50%{
-            opacity: 0.5;
+        30%{
+            
             transform: translateY(-100%);
         }
+        66%{
+            transform: translateY(-50%);
+        }
         100%{
-            opacity: 1;
             transform: translateY(0%);
         }
     }
