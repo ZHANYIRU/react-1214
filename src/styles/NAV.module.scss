@@ -203,7 +203,7 @@
   }
 } 
 
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 837px) {
   .navBarBigWrap {
     position: fixed;
     z-index: 88;
@@ -212,6 +212,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-top: 12px;
     padding-bottom: 10px;
     .mobTopWrap {
       position: relative;
@@ -265,11 +266,12 @@
           content: '';
           display: inline-block;
           position: absolute;
-          top: -8px;
-          right: 10px;
+          top: -15px;
+          left: 75%;
           border-style: solid;
-          border-width: 1px 15px 8.8px 15px;
+          border-width: 8px;
           border-color: transparent transparent #5f5f5f transparent;
+          transform: rotate(0deg) translateX(-50%) scaleX(70%);
         }
       }
 
@@ -282,7 +284,7 @@
         // z-index: 2;
         // overflow: hidden;
         a {
-          margin-left: 10px;
+          margin-left: 20px;
         }
       }
     }
