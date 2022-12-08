@@ -96,16 +96,6 @@ function WritePage({
         >
           {check}
         </button>
-
-        {buy && (
-          <button
-            onClick={() => {
-              buyPay()
-            }}
-          >
-            付款去
-          </button>
-        )}
       </div>
       <div className={styled.camera}>
         <div className={styled.threeD} style={rotate}>
@@ -124,6 +114,17 @@ function WritePage({
           />
         </div>
       </div>
+      {buy && (
+        <div className={styled.goBuy}>
+          <button
+            onClick={() => {
+              buyPay()
+            }}
+          >
+            付款去
+          </button>
+        </div>
+      )}
     </>
   )
 }
