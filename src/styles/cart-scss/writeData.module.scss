@@ -53,6 +53,7 @@
   border-bottom: 3px solid white;
   padding: 0px 0 15px;
   margin-bottom: 25px;
+  margin-top: 20px;
 }
 .buyInput,
 .receiveInput {
@@ -116,5 +117,24 @@
   }
   h3 {
     width: 31%;
+  }
+}
+.useCoupon {
+  width: 85%;
+  margin-top: 25px;
+  margin-left: auto;
+  display: flex;
+  input {
+    border: none;
+    outline: none;
+    height: 25px;
+  }
+  h4 {
+    margin-left: 70px;
+    font-size: 25px;
+  }
+  span:last-child {
+    margin-left: 15px;
+    color: #c25c5c;
   }
 }

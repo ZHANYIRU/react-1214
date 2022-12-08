@@ -8,6 +8,7 @@ function Home() {
     <>
       <Background ftr={ftr} />
       <Main setFtr={setFtr} />
+      <div></div>
     </>
   )
 }

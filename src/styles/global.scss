@@ -1,8 +1,7 @@
 $darkGreen: #01170d;
 $lightGreen: #d9ded9;
 $yellow: #ffda16;
-
-
+$darkYellow: #ffc116;
 
 * {
   box-sizing: border-box;
@@ -133,18 +132,18 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-a{
-  text-decoration:none ;
+a {
+  text-decoration: none;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   width: 10px;
 }
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track {
   // background: rgba(128, 128, 128, 0.494);
-  background: #4B5022;
+  background: #4b5022;
 }
-::-webkit-scrollbar-thumb{
-  background: #FFDA16;
+::-webkit-scrollbar-thumb {
+  background: #ffda16;
   border-radius: 10px;
 }
