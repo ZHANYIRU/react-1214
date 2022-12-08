@@ -38,7 +38,7 @@ export default function MemberEdit() {
 
   useEffect(() => {
     let dateBirth = data.birthday ? data.birthday : ''
-    console.log('生日為' + data.birthday)
+    // console.log('生日為' + data.birthday)
     setMyBirth(dateBirth)
   }, [data])
 
@@ -111,7 +111,7 @@ export default function MemberEdit() {
       })
     }
 
-    console.log(result.data)
+    // console.log(result.data)
   }
 
   function showPreview(e) {

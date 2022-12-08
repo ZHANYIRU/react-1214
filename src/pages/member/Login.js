@@ -27,7 +27,7 @@ function Login(props) {
       'http://localhost:3001/member/login/api',
       formData
     )
-    console.log(result.data)
+    // console.log(result.data)
     // setData({...data, member_sid: result.data.member_sid})
 
     if (result.data.success) {

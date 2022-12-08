@@ -494,6 +494,7 @@
 
                     .replyPost {
                         margin-bottom: 30px;
+                        position: relative;
 
                         .replyAvatar {
                             width: 45px;
@@ -530,7 +531,12 @@
                         i {
                             padding-right: 10px;
                         }
-
+                        .replyDate {
+                            position: absolute;
+                            right: 10px;
+                            top: 0;
+                            text-align: right;
+                        }
                     }
 
                 }

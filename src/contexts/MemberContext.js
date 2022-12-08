@@ -42,13 +42,13 @@ export const MemberContextProvider = function ({ children }) {
     if (result.data.rows) {
       setData({
         ...result.data.rows[0],
-        birthday: dayjs(result.data.rows[0].birthday).format('YYYY-MM-DD'),
+        birthday: result.data.rows[0].birthday ? dayjs(result.data.rows[0].birthday).format('YYYY-MM-DD') : "",
       })
-      console.log(result.data.rows[0])
+      // console.log(result.data.rows[0])
       setAuth(true)
     } else {
       setData(resetInfo)
-      console.log(result.data)
+      // console.log(result.data)
     }
   }
 
@@ -57,7 +57,7 @@ export const MemberContextProvider = function ({ children }) {
       `http://localhost:3001/member/follow/api?mid=${data.member_sid}`
     )
     setFollow(rows.data)
-    console.log('followed by:' + rows.data.length)
+    // console.log('followed by:' + rows.data.length)
   }
 
   async function getFollowing() {
@@ -65,7 +65,7 @@ export const MemberContextProvider = function ({ children }) {
       `http://localhost:3001/member/following/api?fid=${data.member_sid}`
     )
     setFollowing(rows.data)
-    console.log('following:' + rows.data.length)
+    // console.log('following:' + rows.data.length)
   }
 
   function resetData() {

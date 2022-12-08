@@ -92,7 +92,7 @@ function Profile(props) {
       }
     )
 
-    console.log(result.data.success)
+    // console.log(result.data.success)
     if (result.data.success) {
       // alert('關注成功')
       setIsFollowing(true)

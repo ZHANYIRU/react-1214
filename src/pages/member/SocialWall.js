@@ -29,7 +29,7 @@ export default function SocialWall() {
     )
 
     setSocialList(rows.data)
-    console.log('social wall data length:' + rows.data.length)
+    // console.log('social wall data length:' + rows.data.length)
   }
 
   useEffect(() => {
