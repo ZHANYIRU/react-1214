@@ -4,19 +4,46 @@ import '../../styles/home-scss/carouselHome.scss'
 const CarouselHome = ({ oneday }) => {
   let reactSwipeEl
 
+  const imageStyles = {
+    margin: '0 auto',
+    width: '100%',
+    height: '400px',
+  }
   return (
-    <div className='CarouselHome'>
+    <div className="CarouselGroup">
+      <div className="groupbutton" onClick={() => reactSwipeEl.prev()}>
+        <i className="fa-solid fa-angle-left"></i>
+      </div>
       <ReactSwipe
         className="carousel"
         swipeOptions={{ continuous: false }}
         ref={(el) => (reactSwipeEl = el)}
       >
-        <div>PANE 1</div>
-        <div>PANE 2</div>
-        <div>PANE 3</div>
+        <div className="item">
+          <img
+            style={imageStyles}
+            // alt={`slide${i}`}
+            src={`http://localhost:3001/room_img/HeHuan.jpg`}
+          />
+        </div>
+        <div className="item">
+          <img
+            style={imageStyles}
+            // alt={`slide${i}`}
+            src={`http://localhost:3001/room_img/HeHuan2.jpg`}
+          />
+        </div>
+        <div className="item">
+          <img
+            style={imageStyles}
+            // alt={`slide${i}`}
+            src={`http://localhost:3001/room_img/MaWu.jpg`}
+          />
+        </div>
       </ReactSwipe>
-      <button onClick={() => reactSwipeEl.next()}>Next</button>
-      <button onClick={() => reactSwipeEl.prev()}>Previous</button>
+      <div className="groupbutton" onClick={() => reactSwipeEl.next()}>
+        <i className="fa-solid fa-angle-right"></i>
+      </div>
     </div>
   )
 }

@@ -1,0 +1,48 @@
+.csService{
+    width: 100px;
+    height: 100px;
+    position: fixed;
+    bottom: 180px;
+    right:10px;
+    z-index:100;
+    .fake{
+        &:before{
+            content: '需要任何協助嗎？';
+            position: absolute;
+            width: 135px;
+            height: 50px;
+            background-color: rgba(255, 255, 255);
+            top:-15px;
+            right:100px;
+            transition: .5s;
+            display: none;
+            padding: 12px 5px;
+            text-align: center;
+            border: 3px dashed green;
+            border-radius: 10px;
+            font-size: 0.9rem;
+    
+        }
+        &:hover:before{
+    
+            display: block;
+    
+        }
+    }
+   
+    img{
+        cursor: pointer;
+        width: 100%;
+        &:hover{
+            transform: scale(1.1);
+            transition: .5s;
+        }
+        
+    }
+    .csWrap{
+        position: absolute;
+        top:-600px;
+        right: 0px;
+    }
+   
+}

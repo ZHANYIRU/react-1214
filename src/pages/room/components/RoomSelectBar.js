@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from 'react'
 import style from '../../../styles/room-scss/roomSelectBar.module.scss'
 import dayjs from 'dayjs'
 import ProCartContext from '../../../contexts/ProCartContext'
+import Swal from 'sweetalert2'
 
 function RoomSelectBar({ detail }) {
   const { addRoomCart } = useContext(ProCartContext)
@@ -123,6 +124,12 @@ function RoomSelectBar({ detail }) {
         <div
           className={style.add}
           onClick={() => {
+            Swal.fire({
+              icon: 'success',
+              title: '已成功加入購物車',
+              showConfirmButton: false,
+              timer: 1500,
+            })
             addRoomCart(
               detail.room_sid,
               detail.room_name,

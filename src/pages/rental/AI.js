@@ -3,7 +3,7 @@ import styled from '../../styles/rental-scss/AI.module.scss'
 import axios from 'axios'
 import User_local from './components/User_local'
 import User_remote from './components/User_remote'
-const AI = () => {
+const AI = ({ setCs }) => {
   const [question, setQuestion] = useState([])
   // const [answer, setAnswer] = useState([])
   const [talk, setTalk] = useState([
@@ -55,6 +55,15 @@ const AI = () => {
     <>
       <div className={styled.empty}></div>
       <div className={styled.body}>
+        <div className={styled.closeBar}>
+          <i
+            className="fa-solid fa-xmark"
+            onClick={() => {
+              setCs(false)
+            }}
+          ></i>
+        </div>
+
         <div className={styled.dialogue}>
           {/* 客服回話 */}
           {/* <div className={styled.user_remote}>
@@ -90,6 +99,7 @@ const AI = () => {
           <input
             name="question"
             type="text"
+            placeholder="請輸入您的問題"
             onChange={(e) => {
               setQuestion(e.target.value)
             }}
@@ -100,7 +110,7 @@ const AI = () => {
               axiosQuestion()
             }}
           >
-            請輸入問題
+            送出
           </button>
         </div>
       </div>

@@ -31,7 +31,7 @@ function Post({ postData }) {
                   <span>
                     <i className="fa-solid fa-map-location-dot"></i>
                   </span>
-                  <span>{v.location_name}</span>
+                  <span>{v.name}</span>
                 </div>
                 <div className={style.mountain}>
                   <span>
@@ -54,7 +54,7 @@ function Post({ postData }) {
                       alt=""
                     />
                   </div>
-                  <span>{v.name}</span>
+                  <span>{v.nickname}</span>
                 </div>
                 <div className={style.postDate}>
                   {v.created_at.split('T', 10)[0]}

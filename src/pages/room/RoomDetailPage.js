@@ -7,12 +7,14 @@ import { useParams, Link } from 'react-router-dom'
 function RoomDetailPage() {
   const { room_sid } = useParams()
   const [detail, setDetail] = useState([])
+  // const [detailNoComment, setDetailNoComment] = useState([])
   async function getData() {
     const response = await axios.get(
       `http://localhost:3001/room/getRoomDetail/${room_sid}`
     )
     // console.log(response.data.rows[0])
     setDetail(response.data.rows[0])
+    // setDetailNoComment(response.data.rowsNoComment[0])
   }
 
   useEffect(() => {
