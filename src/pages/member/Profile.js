@@ -175,9 +175,9 @@ function Profile(props) {
         <div className={styled.col}>
           <aside className={styled.profile}>
             <div
-              className={`${styled.avatar} ${styled.silver} ${
-                styled.social
-              } ${avatarLevel(info && info.total_height)}`}
+              className={`${styled.avatar} ${styled.social} ${avatarLevel(
+                info && info.total_height
+              )}`}
               onClick={() => {
                 navigate(`/profile?id=${mid}`)
               }}

@@ -69,7 +69,7 @@
         .pinBox {
             position: absolute;
             transform: translate(-50%, 50%);
-            z-index: 10;
+
             i {
                 font-size: 25px;
                 position: relative;
@@ -88,6 +88,7 @@
             }
 
             &:hover {
+                z-index: 10;
                 .pinInfo {
                     
                     display: block;

@@ -30,6 +30,7 @@ export default function ModalView({
   const [liked, setLiked] = useState(false)
   const [liking, setLiking] = useState(false)
   const [replies, setReplies] = useState([])
+  const [replyTxt, setReplyTxt] = useState('')
 
   const replyForm = useRef(null)
 
@@ -103,7 +104,7 @@ export default function ModalView({
     const token = localStorage.getItem('token') || ''
 
     const formData = new FormData(replyForm.current)
-    
+
     // console.log('是否有留言內容: ' + !!formData.get('context').trim());
 
     if (!token) {
@@ -131,6 +132,7 @@ export default function ModalView({
       // alert('成功回覆')
       getReply()
       getPostList()
+      setReplyTxt('')
     }
 
     console.log(result.data)
@@ -312,6 +314,10 @@ export default function ModalView({
                     maxRows="1"
                     maxLength="120"
                     placeholder="留言...(30字以內)"
+                    value={replyTxt}
+                    onChange={(e) => {
+                      setReplyTxt(e.target.value)
+                    }}
                     name="context"
                   />
                 </span>
