@@ -75,6 +75,7 @@ export default function ModalView({
     )
     getPostList()
     setLiked(true)
+    setLiking(false)
 
     // console.log(result.data)
   }
@@ -149,6 +150,10 @@ export default function ModalView({
 
   async function deleteReply(mid, sid, pid) {
     const token = localStorage.getItem('token') || ''
+
+    // return alert(
+    //   `要刪除的回覆sid為${sid}, 發表者mid為${mid}, 回覆的貼文pid為${pid}`
+    // )
 
     if (!token) {
       return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
@@ -327,7 +332,7 @@ export default function ModalView({
                             <br></br>
                             <span
                               style={{ color: '#E00' }}
-                              onClick={() => {
+                              onClick={(e) => {
                                 deleteReply(v.member_sid, v.sid, v.post_sid)
                               }}
                             >
