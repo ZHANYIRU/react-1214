@@ -7,6 +7,9 @@ import rentalcss from '../../styles/rental-scss/rental.module.scss'
 // import RentalFilter from './components/RentalFilter'
 // import { useLocation } from 'react-router-dom'
 import CustomIcons from './components/CustomIcons'
+import FilterAll from '../rental/components/FilterAll'
+import Filter1 from '../rental/components/Filter1'
+import Filter2 from '../rental/components/Filter2'
 
 function Rental(props) {
   const [data, setData] = useState(null)
@@ -28,8 +31,8 @@ function Rental(props) {
     label: [],
   })
 
-  const brandOption = ['TiiTENT', 'Snow Peak', 'ZANE ARTS', 'HILLEBERG']
-  const labelOption = ['二人帳', '四人帳']
+  // const brandOption = ['TiiTENT', 'Snow Peak', 'ZANE ARTS', 'HILLEBERG']
+  // const labelOption = ['二人帳', '四人帳']
   const rental_url_new = 'http://localhost:3001/rental/pageApi'
 
   async function getList() {
@@ -66,9 +69,23 @@ function Rental(props) {
         <div className={rentalcss.orderShow}>
           <div className={rentalcss.category}>
             <p
-              style={conditions.category === '' ? { color: 'red' } : {}}
+              style={
+                conditions.category === '' && conditions.search == ''
+                  ? { color: 'red' }
+                  : {}
+              }
               onClick={() =>
-                setConditions({ ...conditions, category: '', page: 1 })
+                setConditions({
+                  ...conditions,
+                  category: '',
+                  search: '',
+                  low_price: undefined,
+                  high_price: undefined,
+                  page: 1,
+                  order_by: '',
+                  brand: [],
+                  label: [],
+                })
               }
             >
               全部商品
@@ -152,20 +169,20 @@ function Rental(props) {
               conditions={conditions}
               setConditions={setConditions}
             />
-            {conditions.search ? (
+            {/* {conditions.search || conditions.category === '' ? (
               ''
-            ) : (
-              <i
-                onClick={() => {
-                  setShowFilter(showFilter ? false : true)
-                }}
-                className="fa-solid fa-filter"
-              ></i>
-            )}
+            ) : ( */}
+            <i
+              onClick={() => {
+                setShowFilter(showFilter ? false : true)
+              }}
+              className="fa-solid fa-filter"
+            ></i>
+            {/* )} */}
           </div>
         </div>
         {/* 用按鈕決定要不要秀出篩選匡 */}
-        {showFilter && (
+        {/* {showFilter && (
           <div className={rentalcss.more}>
             <div className={rentalcss.filtermorecontainer}>
               <div className={rentalcss.kind}>
@@ -293,8 +310,16 @@ function Rental(props) {
               </div>
             </div>
           </div>
+        )} */}
+        {showFilter && conditions.category === '' && (
+          <FilterAll conditions={conditions} setConditions={setConditions} />
         )}
-
+        {showFilter && conditions.category === '帳篷' && (
+          <Filter1 conditions={conditions} setConditions={setConditions} />
+        )}
+        {showFilter && conditions.category === '露營椅' && (
+          <Filter2 conditions={conditions} setConditions={setConditions} />
+        )}
         {/* 卡片元件 */}
         <div className={rentalcss.rentalProductBox}>
           {data &&

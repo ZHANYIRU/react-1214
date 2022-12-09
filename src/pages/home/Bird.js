@@ -10,11 +10,23 @@ function Bird({ show, setShow, couponData }) {
   const [question, setQuestion] = useState([
     {
       Q: '登山時的正確穿衣方法？',
-      Ans: ['18歲', '洋蔥式穿法', '35歲'],
+      Ans: ['駱駝式穿法', '洋蔥式穿法', '輕薄排汗最佳'],
       correct: '洋蔥式穿法',
     },
-    { Q: '請問你養過幾隻狗', Ans: ['1隻', '2隻', '3隻'], correct: '2隻' },
-    { Q: '請問你的婚姻狀況', Ans: ['未婚', '已婚', '不提供'], correct: '未婚' },
+    {
+      Q: '如果迷路不小心在山中迷路該怎麼辦？',
+      Ans: [
+        '延著剛剛走過的路，原路走回去就好！',
+        '原地待援，不要模糊的印象繼續走下去',
+        '延著溪谷走就會下山',
+      ],
+      correct: '原地待援，不要模糊的印象繼續走下去',
+    },
+    {
+      Q: '陡峭的下坡地形要怎麼過？',
+      Ans: ['面向坡面', '背對坡面', '緩慢滑行'],
+      correct: '面向坡面',
+    },
   ])
 
   //使用者選擇到的答案
@@ -236,10 +248,14 @@ function Bird({ show, setShow, couponData }) {
                   </div>
                   <div className={style.detail}>
                     <span>
+                      折價：＄{couponData[coupon_id].coupon_discount}元
+                    </span>
+                    <span>
                       有效期限：{couponData[coupon_id].coupon_validation}
                     </span>
                   </div>
                   <button
+                    className={style.close}
                     onClick={() => {
                       setNum(0)
                       setShow(false)

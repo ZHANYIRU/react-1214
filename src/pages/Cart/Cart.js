@@ -97,7 +97,7 @@ function Cart() {
           <div className={styled.empty}></div>
           <div className={styled.noCart}>
             <i className="fa-solid fa-cart-arrow-down"></i>
-            <i className="fa-regular fa-hand-point-down"></i>
+            {/* <i className="fa-regular fa-hand-point-down"></i> */}
             <p>您的購物車還沒有商品，趕緊去逛逛吧！！</p>
           </div>
         </>

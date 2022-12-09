@@ -126,14 +126,14 @@ p{
     align-items: center;
     height: 45px;
     margin-bottom: 50px;
-    transition: .5s inherit;
+    
     h2{
         font-size: 1.2rem;
         color: #000;
         font-weight: 700;
+        transition: .3s ;
         &:hover{
-            // color: #FF0F00;
-            font-size: 1.3rem;
+           transform: scale(1.2,1.2)
         }
     }
     .product_nav_box1{
@@ -443,6 +443,9 @@ input{
     }
 }
 @media screen and (max-width:1550px) {
+    .bear{
+        height: 200px;
+    }
     .cardBigBox{
         width: 100%;
         // position: relative;
@@ -666,7 +669,7 @@ input{
                     // padding-right: 50px;
                     flex-grow: 0.4;
             h2{
-                font-size: 1.2rem;
+                font-size: 1rem;
                 font-weight: 700;
                 font-family: 'Noto Sans TC', sans-serif;
             }
@@ -806,7 +809,7 @@ input{
 
 
 
-@media screen and (max-width:390px) {
+@media screen and (max-width:800px) {
     @mixin text{
         font-size: 1rem;
         font-weight: 700;

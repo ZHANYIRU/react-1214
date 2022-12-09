@@ -3,7 +3,8 @@ import style from '../../styles/home-scss/Group.module.scss'
 import dayjs from 'dayjs'
 import FlipClock from 'x-react-flipclock'
 import '../../styles/home-scss/flipclock.scss'
-// import CarouselHome from './CarouselHome'
+import CarouselHome from './CarouselHome'
+import { Link } from 'react-router-dom'
 
 function Group({ oneday }) {
   const calulateTimeLeft = () => {
@@ -74,15 +75,14 @@ function Group({ oneday }) {
       <div className={style.midddle}>
         <h2>一日單攻報名倒數</h2>
         <div className={style.imgWrap}>
-          {/* <img src="../../../public/img/" alt="" /> */}
-          {/* <CarouselHome oneday={oneday} /> */}
+          <CarouselHome oneday={oneday} />
         </div>
       </div>
       <div className={style.right}>
         <div className={style.flipClock}>
           <FlipClock
             type="countdown"
-            count_to="2022-12-31 23:59:59"
+            count_to={`${oneday.camp_joinenddate} 23:59:59`}
             units={[
               {
                 sep: ':',
@@ -120,22 +120,25 @@ function Group({ oneday }) {
           </div> */}
           <div className={style.two}>
             <p>已報名</p>
-            <span>23</span>
+            <span>{oneday.totalPeople}</span>
             <p>人</p>
           </div>
           <div className={style.three}>
             <p>剩餘</p>
-            <span>07</span>
+            <span>{oneday.qty - oneday.totalPeople}</span>
             <p>人</p>
           </div>
         </div>
         <div className={style.wrap}>
           <div className={style.text}>
-            <h3>{oneday.camp_startdate}</h3>
-            <h3>{oneday.camp_joinenddate}</h3>
+            <h3>活動名稱：{oneday.camp_name}</h3>
+            <h3>活動日期：{oneday.camp_startdate}</h3>
+            <h3>報名截止日期：{oneday.camp_joinenddate}</h3>
           </div>
           <div className={style.price}>費用：${oneday.price} 元 / 人</div>
-          <div className={style.click}>我要報名</div>
+          <Link to={`/camp/${oneday.sid}`}>
+            <div className={style.click}>查看詳情</div>
+          </Link>
         </div>
       </div>
     </>

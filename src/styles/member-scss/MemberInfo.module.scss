@@ -69,7 +69,7 @@
         .pinBox {
             position: absolute;
             transform: translate(-50%, 50%);
-            z-index: 10;
+
             i {
                 font-size: 25px;
                 position: relative;
@@ -88,6 +88,7 @@
             }
 
             &:hover {
+                z-index: 10;
                 .pinInfo {
                     
                     display: block;
@@ -493,6 +494,7 @@
 
                     .replyPost {
                         margin-bottom: 30px;
+                        position: relative;
 
                         .replyAvatar {
                             width: 45px;
@@ -529,7 +531,12 @@
                         i {
                             padding-right: 10px;
                         }
-
+                        .replyDate {
+                            position: absolute;
+                            right: 10px;
+                            top: 0;
+                            text-align: right;
+                        }
                     }
 
                 }

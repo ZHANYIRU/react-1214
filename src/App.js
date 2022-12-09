@@ -18,11 +18,10 @@ import Rental_detail from './pages/rental/Rental_detail'
 import AI from './pages/rental/AI'
 import Store from './pages/rental/Store'
 import Commnent from './pages/rental/components/Commnent'
-
+import SunClouds from './components/sunCloud'
 import Cart from './pages/Cart/Cart'
 import Order from './pages/Order/Order'
 import Confirm from './pages/Cart/child-pages/Confirm'
-import TestProducts from './pages/Cart/TestProducts/TestProducts'
 import Member from './pages/member/Member'
 import Login from './pages/member/Login'
 import Join from './pages/member/Join'
@@ -37,12 +36,14 @@ import SocialWall from './pages/member/SocialWall'
 import RoomFilterPage from './pages/room/RoomFilterPage'
 import RoomDetailPage from './pages/room/RoomDetailPage'
 import Leaderboard from './pages/home/leaderboard'
+import ResetPass from './pages/member/ResetPass'
 
 function App() {
   return (
     <BrowserRouter>
       <MemberContextProvider>
         <ProCartContextProvider>
+          <SunClouds />
           <Navbar />
           <ScrollToTop />
           <Routes>
@@ -60,7 +61,6 @@ function App() {
               <Route path="/room/:room_sid" element={<RoomDetailPage />} />
               <Route path="/rental" element={<Rental />} />
               <Route path="/rental/:sid" element={<Rental_detail />} />
-              <Route path="/test" element={<TestProducts />} />
               <Route path="/AI" element={<AI />} />
               <Route path="/store" element={<Store />} />
               <Route path="/commnent" element={<Commnent />} />
@@ -83,6 +83,7 @@ function App() {
               </Route>
               <Route path="/login" element={<Login />} />
               <Route path="/join" element={<Join />} />
+              <Route path="/resetPass" element={<ResetPass />} />
             </Route>
           </Routes>
           <Footer />

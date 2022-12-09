@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 // import ScrollTest from './components/scroll_test'
 import { Link, useNavigate } from 'react-router-dom'
-
+import Bear from './components/bear'
 import Slider from './components/slider'
 import ProductFilter from './components/product_filter'
 import { useMediaQuery } from 'react-responsive'
@@ -140,6 +140,7 @@ function Product() {
   return (
     <>
       <ToTop />
+      <Bear/>
       <div className={styled.container}>
         <div className={styled.empty}></div>
         {/* Slider */}

@@ -1,0 +1,240 @@
+@import '../global.scss';
+//熊掌1
+.palmprint{
+    position: fixed;
+    top: 450px;
+    left: 50px;
+    transform: rotate(30deg);
+    background: #000;
+	width: 40px;
+	height: 50px;
+	border-radius: 60% / 60%;
+    animation: palm 1s ;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+
+.palmprint li{
+    position: absolute;
+    background: #000;
+    width: 10px;
+    height: 18px;
+    border-radius: 50% / 50%;
+}
+.palmprint li:nth-child(1){
+    top: -5px;
+    left: -8px;
+}
+.palmprint li:nth-child(2){
+    top: -15px;
+    left: 5px;
+}
+.palmprint li:nth-child(3){
+    top: -17px;
+    left: 18px;
+}
+.palmprint li:nth-child(4){
+    top: -14px;
+    left: 30px;
+}
+.palmprint li:nth-child(5){
+    top: -3px;
+    left: 40px;
+}
+
+
+//熊掌2
+.palmprint2{
+    position: fixed;
+    top: 350px;
+    left: 200px;
+    transform: rotate(30deg);
+    background: #000;
+	width: 40px;
+	height: 50px;
+	border-radius: 60% / 60%;
+    animation: palm 1s ;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+.palmprint2 li{
+    position: absolute;
+    background: #000;
+    width: 10px;
+    height: 18px;
+    border-radius: 50% / 50%;
+    
+}
+.palmprint2 li:nth-child(1){
+    top: -5px;
+    left: -8px;
+}
+.palmprint2 li:nth-child(2){
+    top: -15px;
+    left: 5px;
+}
+.palmprint2 li:nth-child(3){
+    top: -17px;
+    left: 18px;
+}
+.palmprint2 li:nth-child(4){
+    top: -14px;
+    left: 30px;
+}
+.palmprint2 li:nth-child(5){
+    top: -3px;
+    left: 40px;
+}
+//熊掌3
+.palmprint3{
+    position: fixed;
+    top: 450px;
+    right: 350px;
+    transform: rotate(30deg);
+    background: #000;
+	width: 40px;
+	height: 50px;
+	border-radius: 60% / 60%;
+    animation: palm 1s ;
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+.palmprint3 li{
+    position: absolute;
+    background: #000;
+    width: 10px;
+    height: 18px;
+    border-radius: 50% / 50%;
+    
+}
+.palmprint3 li:nth-child(1){
+    top: -5px;
+    left: -8px;
+}
+.palmprint3 li:nth-child(2){
+    top: -15px;
+    left: 5px;
+}
+.palmprint3 li:nth-child(3){
+    top: -17px;
+    left: 18px;
+}
+.palmprint3 li:nth-child(4){
+    top: -14px;
+    left: 30px;
+}
+.palmprint3 li:nth-child(5){
+    top: -3px;
+    left: 40px;
+}
+//熊掌4
+.palmprint4{
+    position: fixed;
+    top: 350px;
+    right: 250px;
+    transform: rotate(30deg);
+    background: #000;
+	width: 40px;
+	height: 50px;
+	border-radius: 60% / 60%;
+    animation: palm 1s ;
+    animation-delay: 4s;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+.palmprint4 li{
+    position: absolute;
+    background: #000;
+    width: 10px;
+    height: 18px;
+    border-radius: 50% / 50%;
+    
+}
+.palmprint4 li:nth-child(1){
+    top: -5px;
+    left: -8px;
+}
+.palmprint4 li:nth-child(2){
+    top: -15px;
+    left: 5px;
+}
+.palmprint4 li:nth-child(3){
+    top: -17px;
+    left: 18px;
+}
+.palmprint4 li:nth-child(4){
+    top: -14px;
+    left: 30px;
+}
+.palmprint4 li:nth-child(5){
+    top: -3px;
+    left: 40px;
+}
+
+
+@keyframes palm {
+    0%{
+        opacity: 0;
+
+    }
+    50%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
+.bear{
+    top: 200px;
+    right: -250px;
+    // background-image: url(../../../public/img/blackbear-3.png);
+    position: fixed;
+    transform: rotate(-40deg);
+    // transform: translateX(-300px);
+    height: 350px;
+    animation: bear 1.5s linear;
+    animation-delay: 5s;
+    animation-fill-mode: forwards;
+    transition: .5s;
+    img{
+        height: 100%;
+    }
+}
+
+
+@keyframes bear {
+    0%{
+        // right: -250px;
+    }
+    100%{
+        right: -110px;
+        // transform: translateX(300px);
+        transform: rotate(-40deg);
+    }
+}
+
+
+
+@media screen and ((max-width:837px)) {
+    .bear{
+        top: 200px;
+        right: -250px;
+        // background-image: url(../../../public/img/blackbear-3.png);
+        position: fixed;
+        transform: rotate(-40deg);
+        // transform: translateX(-300px);
+        height: 180px;
+        animation: bear 1.5s linear;
+        animation-delay: 5s;
+        animation-fill-mode: forwards;
+        transition: .5s;
+        img{
+            height: 100%;
+        }
+    }
+
+
+    
+}

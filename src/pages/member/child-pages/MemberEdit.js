@@ -9,6 +9,7 @@ import { useRef } from 'react'
 import MemberContext from '../../../contexts/MemberContext'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import log from 'eslint-plugin-react/lib/util/log'
 
 //TODO 測試註冊資料格式驗證BUG (date)
 
@@ -33,11 +34,11 @@ export default function MemberEdit() {
 
   const updateForm = useRef(null)
 
+  // console.log('傳入member edit的生日為: '+ data.birthday)
+
   useEffect(() => {
-    let dateBirth = data.birthday
-      ? dayjs(data.birthday).format('YYYY-MM-DD')
-      : ''
-    console.log('生日為' + dateBirth)
+    let dateBirth = data.birthday ? data.birthday : ''
+    // console.log('生日為' + data.birthday)
     setMyBirth(dateBirth)
   }, [data])
 
@@ -110,7 +111,7 @@ export default function MemberEdit() {
       })
     }
 
-    console.log(result.data)
+    // console.log(result.data)
   }
 
   function showPreview(e) {

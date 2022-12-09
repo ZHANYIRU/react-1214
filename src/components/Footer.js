@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom'
 import { useMediaQuery } from 'react-responsive'
 function Footer(props) {
   const { pathname } = useLocation()
-  const mob = useMediaQuery({ query: '(max-width:390px)' })
+  const mob = useMediaQuery({ query: '(max-width:992px)' })
   //電腦樣式
   const webSize = (
     <footer>

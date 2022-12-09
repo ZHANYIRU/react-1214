@@ -1,0 +1,346 @@
+@import 'global.scss';
+
+    .bgc{
+        width: 100%;
+        height: 100vh;
+        background-image: linear-gradient(to right,rgb(93,147,123) );
+        background: #81a98d;
+        position: fixed;
+        top: 0;
+        transition: 2s;
+        z-index: 999;
+    .wrap{
+        width: 121px;
+        height: 262px;
+        position: relative;
+        .box{
+            position:absolute;
+            top: 500px;
+            left: 800px;
+            width: 100%;
+            height: 100%;
+            background-image: url(../../public/img/tozan_trekking_man.png);
+            background-size: 70%;
+            background-repeat: no-repeat;
+            animation: go 1s linear;
+            animation-fill-mode: forwards;
+        }
+        // @for $i from 1 through 4 {
+        //     .box#{$i}{
+        //         // opacity: 0;
+        //         position:absolute;
+        //         top: 500px;
+        //         left: calc(780px + ($i*35px));
+        //         width: 100%;
+        //         height: 100%;
+        //         background-image: url(../../public/img/tozan_trekking_man.png);
+        //         // animation: walk 1s steps(6) infinite;
+        //         animation:  0.25 linear calc(($i - 0.25))    afterimage;
+        //         // animation-delay:   ;
+        //         animation-fill-mode: forwards;
+        //     }
+        // }
+             .box1{
+                opacity: 0;
+                position:absolute;
+                top: 500px;
+                left: 835px;
+                width: 100%;
+                height: 100%;
+                background-size: 70%;
+                background-repeat: no-repeat;
+                background-image: url(../../public/img/tozan_trekking_man.png);
+                // animation: walk 1s steps(6) infinite;
+                animation: afterimage 0.25s  linear;
+                animation-delay: 0s;
+                animation-fill-mode: forwards;
+            }
+             .box2{
+                opacity: 0;
+                position:absolute;
+                top: 500px;
+                left: 870px;
+                width: 100%;
+                height: 100%;
+                background-size: 70%;
+                background-repeat: no-repeat;
+                background-image: url(../../public/img/tozan_trekking_man.png);
+                // animation: walk 1s steps(6) infinite;
+                animation: afterimage 0.25s  linear;
+                animation-delay: 0.2s;
+                animation-fill-mode: forwards;
+            }
+             .box3{
+                opacity: 0;
+                position:absolute;
+                top: 500px;
+                left: 905px;
+                width: 100%;
+                height: 100%;
+                background-size: 70%;
+                background-repeat: no-repeat;
+                background-image: url(../../public/img/tozan_trekking_man.png);
+                // animation: walk 1s steps(6) infinite;
+                animation: afterimage 0.25s  linear;
+                animation-delay: 0.4s;
+                animation-fill-mode: forwards;
+            }
+             .box4{
+                opacity: 0;
+                position:absolute;
+                top: 500px;
+                left: 940px;
+                width: 100%;
+                height: 100%;
+                background-size: 70%;
+                background-repeat: no-repeat;
+                background-image: url(../../public/img/tozan_trekking_man.png);
+                // animation: walk 1s steps(6) infinite;
+                animation: afterimage 0.25s  linear;
+                animation-delay: 0.6s;
+                animation-fill-mode: forwards;
+            }
+             .box5{
+                opacity: 0;
+                position:absolute;
+                top: 500px;
+                left: 975px;
+                width: 100%;
+                height: 100%;
+                background-size: 70%;
+                background-repeat: no-repeat;
+                background-image: url(../../public/img/tozan_trekking_man.png);
+                // animation: walk 1s steps(6) infinite;
+                animation: afterimage 0.25s  linear;
+                animation-delay: 0.8s;
+                animation-fill-mode: forwards;
+            }
+             .box6{
+                opacity: 0;
+                position:absolute;
+                top: 500px;
+                left: 1010px;
+                width: 100%;
+                height: 100%;
+                background-size: 70%;
+                background-repeat: no-repeat;
+                background-image: url(../../public/img/tozan_trekking_man.png);
+                // animation: walk 1s steps(6) infinite;
+                animation: afterimage 0.25s  linear;
+                animation-delay: 0.8s;
+                animation-fill-mode: forwards;
+            }
+             .box7{
+                opacity: 0;
+                position:absolute;
+                top: 500px;
+                left: 1035px;
+                width: 100%;
+                height: 100%;
+                background-size: 70%;
+                background-repeat: no-repeat;
+                background-image: url(../../public/img/tozan_trekking_man.png);
+                // animation: walk 1s steps(6) infinite;
+                animation: afterimage 0.25s  linear;
+                animation-delay: 0.8s;
+                animation-fill-mode: forwards;
+            }
+    }
+ 
+    @keyframes afterimage {
+        0%{
+            opacity: 0;
+        }
+        100%{
+            opacity: 0.3;
+        }
+    }
+    @keyframes go {
+        0%{
+            left: 800px;
+        }
+        100%{
+            left: 1070px;
+        }
+    }
+    .center{
+        position: absolute;    
+        top: 35%;
+        left: 50%;
+        transform: 50%;
+        transform:translate(-50%,-50%);
+    }
+    .cloud{
+        position: relative;
+        width: 250px;
+        height: 90px;
+        border-radius :50px; ;
+        background-color: #fff;
+        animation: move 8s linear infinite;
+    }
+    .cloud::before{
+        content: '';
+        position: absolute;
+        top: -50px;
+        left: 50px;
+        background: #fff;
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+    }
+    .cloud::after{
+        content: '';
+        position: absolute;
+        top: -65px;
+        left: 90px;
+        background: #fff;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+    }
+    
+    .sun{
+        top: -80px;
+        left: 60px;
+        position:absolute;
+        margin: 0;
+        padding: 0;
+        width: 80px;
+        height: 80px;
+        background: #ffe208;
+        border-radius: 50%;
+        box-shadow:0 0 15px rgba(255,255,8) ;
+        z-index: -1;
+        animation: animate 20s linear infinite;
+    }
+
+    .sun li{
+        list-style: none;
+        position: absolute;
+        top: 50%;    
+        left:50%;
+        transform: translate(-50%,-50%);
+        width: 120px;
+        height: 3px;
+        background: #ffe208;
+        box-shadow:0 0 15px rgba(255,255,8,.1) ;
+        z-index: -30;
+}
+    .sun li:nth-child(1){
+        transform: translate(-50%,-50%) rotate(0deg);
+    }
+    .sun li:nth-child(2){
+        transform: translate(-50%,-50%) rotate(90deg);
+    }
+    .sun li:nth-child(3){
+        transform: translate(-50%,-50%) rotate(45deg);
+    }
+    .sun li:nth-child(4){
+        transform: translate(-50%,-50%) rotate(-45deg);
+    }
+    .sun li:nth-child(5){
+        transform: translate(-50%,-50%) rotate(22.5deg);
+    }
+    .sun li:nth-child(6){
+        transform: translate(-50%,-50%) rotate(-22.5deg);
+    }
+    .sun li:nth-child(7){
+        transform: translate(-50%,-50%) rotate(67.5deg);
+    }
+    .sun li:nth-child(8){
+        transform: translate(-50%,-50%) rotate(-67.5deg);
+    }
+}
+.loader{
+    position: absolute;
+    top: 150px;
+    left: 80px;
+}
+.loader span{
+    font-size: 5rem;
+    color:#fff;
+    display:inline-block;
+    animation: textanimate 1s linear ;
+    animation-fill-mode: forwards;
+    font-family: 'Kdam Thmor Pro', sans-serif;
+    // font-family: 'Rampart One', cursive;
+}
+.loader span:nth-child(1){
+    animation-delay: 0s;
+}
+.loader span:nth-child(2){
+    animation-delay: 0.3s;
+}
+.loader span:nth-child(3){
+    animation-delay: .6s;
+}
+
+
+
+@keyframes walk {
+    from{
+        background-position:0;
+    }
+    to{
+        background-position:1248px;
+    }
+}
+
+@keyframes wrapTrasn {
+    0%{
+       left: 300px;
+    }
+    100%{
+        left: 700px;
+    }
+}
+
+
+
+    @keyframes textanimate {
+        0%{
+            transform: translateY(-150%);
+        }
+        30%{
+            
+            transform: translateY(-100%);
+        }
+        66%{
+            transform: translateY(-50%);
+        }
+        100%{
+            transform: translateY(0%);
+        }
+    }
+
+    @keyframes animate{
+        0%{
+            transform: rotate(0deg);
+        }
+        50%{
+            transform: rotate(180deg);
+        }
+        100%{
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes move {
+        0%{
+            transform: translate(0);
+        }
+        50%{
+            transform: translate(60px);
+        }
+        100%{
+            transform: translate(0px);
+        }
+    }
+    @keyframes fade {
+        0%{
+            width: 100%;
+        }
+        100%{
+            width: 0%;
+        }
+    }
