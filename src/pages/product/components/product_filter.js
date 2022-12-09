@@ -517,27 +517,27 @@ export default function ProductFilter({
             }
           })}
         </select>
-        <div className={styled.genderRadio}>
-          {genderOptions.map((v, i) => {
-            return (
-              <div key={i} className={styled.genderBox}>
-                <input
-                  type="radio"
-                  id={v}
-                  checked={genders === v}
-                  value={v}
-                  name="gender"
-                  onChange={(e) => {
-                    setGenders(e.target.value)
-                  }}
-                ></input>
-                <label htmlFor={v}> {v}</label>
-              </div>
-            )
-          })}
-        </div>
         {nav !== 'accessories' && (
           <>
+            <div className={styled.genderRadio}>
+              {genderOptions.map((v, i) => {
+                return (
+                  <div key={i} className={styled.genderBox}>
+                    <input
+                      type="radio"
+                      id={v}
+                      checked={genders === v}
+                      name="gender"
+                      value={v}
+                      onChange={(e) => {
+                        setGenders(e.target.value)
+                      }}
+                    ></input>
+                    <label htmlFor={v}> {v}</label>
+                  </div>
+                )
+              })}
+            </div>
             <h2> 防水等級</h2>
             <div className={styled.checkBoxWrap}>
               {wProofOptions.map((v, i) => {
