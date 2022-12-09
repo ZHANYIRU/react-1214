@@ -28,18 +28,16 @@ function ListLeft({ setFilter }) {
       <div className={style.list}>
         {title.map((v, i) => {
           return (
-            <>
-              <Link
-                className={style.leftLink}
-                to={`/camp/filter`}
-                key={i}
-                onClick={() => {
-                  setFilterCon(v.camptype_sid)
-                }}
-              >
-                {v.campaign_type_name}
-              </Link>
-            </>
+            <Link
+              className={style.leftLink}
+              to={`/camp/filter`}
+              key={i}
+              onClick={() => {
+                setFilterCon(v.camptype_sid)
+              }}
+            >
+              {v.campaign_type_name}
+            </Link>
           )
         })}
       </div>
