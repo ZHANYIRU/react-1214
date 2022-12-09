@@ -6,9 +6,8 @@ import { Link } from 'react-router-dom'
 function RentalCard({ data }) {
   // console.log(data)
   return (
-    <Link to={`/rental/${data.sid}`}>
-      {/* 外層 */}
       <div className={rentalcss.rentalProduct}>
+        <Link to={`/rental/${data.sid}`}>
         <div className={rentalcss.cardBody}>
           <div className={rentalcss.imageContainer}>
             <img
@@ -26,17 +25,11 @@ function RentalCard({ data }) {
             <p>
               品牌：<span>{data.rental_brand}</span>
             </p>
-            {/* <div className={rentalcss.star}>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-              <i className="fa-solid fa-star"></i>
-            </div> */}
           </div>
         </div>
+        </Link>
       </div>
-    </Link>
+    
   )
 }
 
