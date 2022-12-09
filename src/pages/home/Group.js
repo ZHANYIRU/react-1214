@@ -120,12 +120,12 @@ function Group({ oneday }) {
           </div> */}
           <div className={style.two}>
             <p>已報名</p>
-            <span>23</span>
+            <span>{oneday.totalPeople}</span>
             <p>人</p>
           </div>
           <div className={style.three}>
             <p>剩餘</p>
-            <span>07</span>
+            <span>{oneday.qty - oneday.totalPeople}</span>
             <p>人</p>
           </div>
         </div>

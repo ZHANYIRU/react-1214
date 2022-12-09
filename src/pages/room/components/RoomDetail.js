@@ -5,7 +5,7 @@ import RoomSelectBar from './RoomSelectBar'
 import { useState } from 'react'
 import SeeEvaluation from '../../../components/SeeEvaluation'
 
-function RoomDetail({ detail, el }) {
+function RoomDetail({ detail, detailComment, el }) {
   function avatarLevel(height = 0) {
     if (height > 10000) {
       return style.gold
@@ -125,7 +125,7 @@ function RoomDetail({ detail, el }) {
                 <span>
                   <i className="fa-solid fa-map-location-dot"></i>
                 </span>
-                <span>{detail.name}</span>
+                <span>{detail.location_name}</span>
               </div>
               <div className={style.mountain}>
                 <span>
@@ -292,13 +292,16 @@ function RoomDetail({ detail, el }) {
               <div className={style.commenAll}>
                 {/* 印一次 */}
 
-                {!detail.avatar ||
+                {/* {!detail.avatar ||
                   (detail.avatar &&
                     detail.total_height &&
                     detail.nickname &&
                     detail.message &&
                     detail.star &&
-                    detail.created_at && (
+                    detail.created_at && ( */}
+                {detailComment.length !== 0 &&
+                  detailComment.map((v, i) => {
+                    return (
                       <>
                         <div
                           className={style.commentWrap}
@@ -310,12 +313,12 @@ function RoomDetail({ detail, el }) {
                           <div className={style.member}>
                             <div
                               className={`${style.memberImg} ${avatarLevel(
-                                detail.total_height
+                                v.total_height
                               )}`}
                             >
-                              {detail.avatar ? (
+                              {v.avatar ? (
                                 <img
-                                  src={`http://localhost:3001/uploads/avatar_${detail.avatar}`}
+                                  src={`http://localhost:3001/uploads/avatar_${v.avatar}`}
                                   alt="avatar"
                                 ></img>
                               ) : (
@@ -325,96 +328,27 @@ function RoomDetail({ detail, el }) {
                                 />
                               )}
                             </div>
-                            <span>{detail.nickname}</span>
+                            <span>{v.nickname}</span>
                           </div>
                           <div className={style.commentText}>
-                            <p>{detail.message}</p>
+                            <p>{v.message}</p>
                           </div>
                           <div className={style.star}>
-                            {starCount(Math.round(detail.star))}
+                            {starCount(Math.round(v.star))}
                           </div>
                           <div className={style.date}>
                             <span style={{ marginRight: '100px' }}>
-                              {detail.created_at.split('T', 10)[0]}
+                              {v.created_at.split('T', 10)[0]}
                             </span>
                             <span>閱讀更多</span>
                           </div>
                         </div>
                       </>
-                    ))}
+                    )
+                  })}
+
+                {/* ))} */}
               </div>
-              {/* 印一次 */}
-              {/* <div
-                className={style.commentWrap}
-                onClick={(el) => {
-                  console.log(el.target.value)
-                  SeeEvaluation()
-                }}
-              >
-                <div className={style.member}>
-                  <div
-                    className={`${style.memberImg} ${avatarLevel(
-                      detail.total_height
-                    )}`}
-                  >
-                    {detail.avatar ? (
-                      <img
-                        src={`http://localhost:3001/uploads/avatar_${detail.avatar}`}
-                        alt="avatar"
-                      ></img>
-                    ) : (
-                      <img src="/img/default_avatar.png" alt="avatar" />
-                    )}
-                  </div>
-                  <span>{detail.nickname}</span>
-                </div>
-                <div className={style.commentText}>
-                  <p>{detail.message}</p>
-                </div>
-                <div className={style.star}>
-                  {starCount(Math.round(detail.star))}
-                </div>
-                <div className={style.date}>
-                  <span style={{ marginRight: '100px' }}>2022-12-01</span>
-                  <span>閱讀更多</span>
-                </div>
-              </div> */}
-              {/* 印一次 */}
-              {/* <div
-                className={style.commentWrap}
-                onClick={(el) => {
-                  console.log(el.target.value)
-                  SeeEvaluation()
-                }}
-              >
-                <div className={style.member}>
-                  <div
-                    className={`${style.memberImg} ${avatarLevel(
-                      detail.total_height
-                    )}`}
-                  >
-                    {detail.avatar ? (
-                      <img
-                        src={`http://localhost:3001/uploads/avatar_${detail.avatar}`}
-                        alt="avatar"
-                      ></img>
-                    ) : (
-                      <img src="/img/default_avatar.png" alt="avatar" />
-                    )}
-                  </div>
-                  <span>{detail.nickname}</span>
-                </div>
-                <div className={style.commentText}>
-                  <p>{detail.message}</p>
-                </div>
-                <div className={style.star}>
-                  {starCount(Math.round(detail.star))}
-                </div>
-                <div className={style.date}>
-                  <span style={{ marginRight: '100px' }}>2022-12-01</span>
-                  <span>閱讀更多</span>
-                </div>
-              </div> */}
             </>
           )}
         </div>

@@ -137,7 +137,7 @@ function RoomSelectBar({ detail }) {
               checkIn,
               checkOut,
               night,
-              detail.name,
+              detail.location_name,
               detail.mountain_name + ' ' + detail.height + 'm',
               detail.room_price,
               qty,
