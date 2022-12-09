@@ -434,13 +434,13 @@ export default function ModalView({
                                     <div>
                                       <h4>{el.nickname}</h4>
                                       <pre>
-                                        <Link
+                                        {/* <Link
                                           to={`/profile?id=${v.member_sid}`}
                                         >
                                           <span style={{ color: '#E50' }}>
                                             @{v.nickname}
                                           </span>
-                                        </Link>{' '}
+                                        </Link>{' '} */}
                                         {el.context}
                                       </pre>
                                       <p className={styled.replyDate}>
