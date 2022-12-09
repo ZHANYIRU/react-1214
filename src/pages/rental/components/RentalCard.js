@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import rentalcss from '../../../styles/rental-scss/rental.module.scss'
 import { Link } from 'react-router-dom'
+import ProCartContext from '../../../contexts/ProCartContext'
 // import Rental_detail from '../Rental_detail'
 
 function RentalCard({ data }) {
   // console.log(data)
+
+  const { moneyFormat } = useContext(ProCartContext)
   return (
-      <div className={rentalcss.rentalProduct}>
-        <Link to={`/rental/${data.sid}`}>
+    <div className={rentalcss.rentalProduct}>
+      <Link to={`/rental/${data.sid}`}>
         <div className={rentalcss.cardBody}>
           <div className={rentalcss.imageContainer}>
             <img
@@ -20,16 +23,15 @@ function RentalCard({ data }) {
           </div>
           <div className={rentalcss.price}>
             <p>
-              金額：<span>{data.rental_price}</span>
+              金額：<span>{moneyFormat(data.rental_price)}</span>
             </p>
             <p>
               品牌：<span>{data.rental_brand}</span>
             </p>
           </div>
         </div>
-        </Link>
-      </div>
-    
+      </Link>
+    </div>
   )
 }
 

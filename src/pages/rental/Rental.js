@@ -71,7 +71,7 @@ function Rental(props) {
             <p
               style={
                 conditions.category === '' && conditions.search == ''
-                  ? { color: 'red' }
+                  ? { transform: 'scale(1.4)', color: '#e60' }
                   : {}
               }
               onClick={() =>
@@ -91,7 +91,14 @@ function Rental(props) {
               全部商品
             </p>
             <p
-              style={conditions.category === '帳篷' ? { color: 'red' } : {}}
+              style={
+                conditions.category === '帳篷'
+                  ? {
+                      transform: 'scale(1.4)',
+                      color: '#e60',
+                    }
+                  : {}
+              }
               onClick={() =>
                 setConditions({
                   ...conditions,
@@ -109,7 +116,11 @@ function Rental(props) {
               露營帳篷
             </p>
             <p
-              style={conditions.category === '露營椅' ? { color: 'red' } : {}}
+              style={
+                conditions.category === '露營椅'
+                  ? { transform: 'scale(1.4)', color: '#e60' }
+                  : {}
+              }
               onClick={() =>
                 setConditions({ ...conditions, category: '露營椅', page: 1 })
               }
@@ -130,7 +141,7 @@ function Rental(props) {
             <p>一共{count}筆數</p>
             <p
               style={
-                conditions.order_by === 'time_DESC' ? { color: 'red' } : {}
+                conditions.order_by === 'time_DESC' ? { color: '#e60' } : {}
               }
               onClick={() =>
                 setConditions({ ...conditions, order_by: 'time_DESC', page: 1 })
@@ -141,7 +152,7 @@ function Rental(props) {
             {/* <p>最熱銷</p> */}
             <p
               style={
-                conditions.order_by === 'price_DESC' ? { color: 'red' } : {}
+                conditions.order_by === 'price_DESC' ? { color: '#e60' } : {}
               }
               onClick={() =>
                 setConditions({
@@ -155,7 +166,7 @@ function Rental(props) {
             </p>
             <p
               style={
-                conditions.order_by === 'price_ASC' ? { color: 'red' } : {}
+                conditions.order_by === 'price_ASC' ? { color: '#e60' } : {}
               }
               onClick={() =>
                 setConditions({ ...conditions, order_by: 'price_ASC', page: 1 })
