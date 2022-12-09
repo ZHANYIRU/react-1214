@@ -7,12 +7,14 @@ import { useParams, Link } from 'react-router-dom'
 function RoomDetailPage() {
   const { room_sid } = useParams()
   const [detail, setDetail] = useState([])
+  const [detailComment, setDetailComment] = useState([])
   async function getData() {
     const response = await axios.get(
       `http://localhost:3001/room/getRoomDetail/${room_sid}`
     )
     // console.log(response.data.rows[0])
     setDetail(response.data.rows[0])
+    setDetailComment(response.data.rowsForComment)
   }
 
   useEffect(() => {
@@ -29,7 +31,7 @@ function RoomDetailPage() {
 
           <span>房型介紹</span>
         </div>
-        <RoomDetail detail={detail} />
+        <RoomDetail detail={detail} detailComment={detailComment} />
       </div>
     </>
   )

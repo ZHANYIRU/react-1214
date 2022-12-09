@@ -1,7 +1,37 @@
 import style from '../../styles/home-scss/post.module.scss'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import ModalView from '../member/components/ModalView'
+import MemberContext from '../../contexts/MemberContext'
+import { useState, useEffect, useContext } from 'react'
+import axios from 'axios'
 
 function Post({ postData }) {
+  const { data, auth } = useContext(MemberContext)
+
+  const [isView, setIsView] = useState(false)
+  const [tabFollow, setTabFollow] = useState(false)
+  const [socialList, setSocialList] = useState([])
+  const [currentPost, setCurrentPost] = useState(0)
+
+  const navigate = useNavigate()
+
+  async function getSocialList() {
+    let fidQuery = ''
+    if (data.member_sid && tabFollow) {
+      fidQuery = `?fid=${data.member_sid}`
+    }
+
+    const rows = await axios.get(
+      `http://localhost:3001/member/social/api${fidQuery}`
+    )
+
+    setSocialList(rows.data)
+    // console.log('social wall data length:' + rows.data.length)
+  }
+
+  useEffect(() => {
+    getSocialList()
+  }, [tabFollow])
   function avatarLevel(height = 0) {
     if (height > 10000) {
       return style.gold
@@ -18,7 +48,12 @@ function Post({ postData }) {
       <div className={style.wrap}>
         {postData.map((v, i) => {
           return (
-            <div className={style.cardWrap}>
+            <div
+              className={style.cardWrap}
+              onClick={() => {
+                setIsView(true)
+              }}
+            >
               <div className={style.black}></div>
               <div className={style.imgWrap}>
                 <img
@@ -54,7 +89,7 @@ function Post({ postData }) {
                       alt=""
                     />
                   </div>
-                  <span>{v.name}</span>
+                  <span>{v.nickname}</span>
                 </div>
                 <div className={style.postDate}>
                   {v.created_at.split('T', 10)[0]}
@@ -67,6 +102,16 @@ function Post({ postData }) {
       <Link to="/social">
         <div className={style.more}>查看更多山友分享</div>
       </Link>
+      {isView && (
+        <ModalView
+          setIsView={setIsView}
+          showData={socialList[currentPost]}
+          setCurrentPost={setCurrentPost}
+          currentPost={currentPost}
+          listLength={socialList.length}
+          getPostList={getSocialList}
+        />
+      )}
     </>
   )
 }

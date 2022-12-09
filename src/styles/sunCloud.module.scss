@@ -4,7 +4,7 @@
         width: 100%;
         height: 100vh;
         background-image: linear-gradient(to right,rgb(93,147,123) );
-        background: linear-gradient(#52b6e1,#69d6e9,#69d6e9, #46b280,#42b57f);
+        background: #81a98d;
         position: fixed;
         top: 0;
         transition: 2s;
@@ -15,12 +15,13 @@
         position: relative;
         .box{
             position:absolute;
-            top: 650px;
-            left: 780px;
+            top: 500px;
+            left: 800px;
             width: 100%;
             height: 100%;
             background-image: url(../../public/img/tozan_trekking_man.png);
-            // animation: walk 1s steps(6) infinite;
+            background-size: 70%;
+            background-repeat: no-repeat;
             animation: go 1s linear;
             animation-fill-mode: forwards;
         }
@@ -28,7 +29,7 @@
         //     .box#{$i}{
         //         // opacity: 0;
         //         position:absolute;
-        //         top: 650px;
+        //         top: 500px;
         //         left: calc(780px + ($i*35px));
         //         width: 100%;
         //         height: 100%;
@@ -42,10 +43,12 @@
              .box1{
                 opacity: 0;
                 position:absolute;
-                top: 650px;
-                left: 780px;
+                top: 500px;
+                left: 835px;
                 width: 100%;
                 height: 100%;
+                background-size: 70%;
+                background-repeat: no-repeat;
                 background-image: url(../../public/img/tozan_trekking_man.png);
                 // animation: walk 1s steps(6) infinite;
                 animation: afterimage 0.25s  linear;
@@ -55,10 +58,12 @@
              .box2{
                 opacity: 0;
                 position:absolute;
-                top: 650px;
-                left: 815px;
+                top: 500px;
+                left: 870px;
                 width: 100%;
                 height: 100%;
+                background-size: 70%;
+                background-repeat: no-repeat;
                 background-image: url(../../public/img/tozan_trekking_man.png);
                 // animation: walk 1s steps(6) infinite;
                 animation: afterimage 0.25s  linear;
@@ -68,10 +73,12 @@
              .box3{
                 opacity: 0;
                 position:absolute;
-                top: 650px;
-                left: 850px;
+                top: 500px;
+                left: 905px;
                 width: 100%;
                 height: 100%;
+                background-size: 70%;
+                background-repeat: no-repeat;
                 background-image: url(../../public/img/tozan_trekking_man.png);
                 // animation: walk 1s steps(6) infinite;
                 animation: afterimage 0.25s  linear;
@@ -81,10 +88,12 @@
              .box4{
                 opacity: 0;
                 position:absolute;
-                top: 650px;
-                left: 885px;
+                top: 500px;
+                left: 940px;
                 width: 100%;
                 height: 100%;
+                background-size: 70%;
+                background-repeat: no-repeat;
                 background-image: url(../../public/img/tozan_trekking_man.png);
                 // animation: walk 1s steps(6) infinite;
                 animation: afterimage 0.25s  linear;
@@ -94,10 +103,42 @@
              .box5{
                 opacity: 0;
                 position:absolute;
-                top: 650px;
-                left: 920px;
+                top: 500px;
+                left: 975px;
                 width: 100%;
                 height: 100%;
+                background-size: 70%;
+                background-repeat: no-repeat;
+                background-image: url(../../public/img/tozan_trekking_man.png);
+                // animation: walk 1s steps(6) infinite;
+                animation: afterimage 0.25s  linear;
+                animation-delay: 0.8s;
+                animation-fill-mode: forwards;
+            }
+             .box6{
+                opacity: 0;
+                position:absolute;
+                top: 500px;
+                left: 1010px;
+                width: 100%;
+                height: 100%;
+                background-size: 70%;
+                background-repeat: no-repeat;
+                background-image: url(../../public/img/tozan_trekking_man.png);
+                // animation: walk 1s steps(6) infinite;
+                animation: afterimage 0.25s  linear;
+                animation-delay: 0.8s;
+                animation-fill-mode: forwards;
+            }
+             .box7{
+                opacity: 0;
+                position:absolute;
+                top: 500px;
+                left: 1035px;
+                width: 100%;
+                height: 100%;
+                background-size: 70%;
+                background-repeat: no-repeat;
                 background-image: url(../../public/img/tozan_trekking_man.png);
                 // animation: walk 1s steps(6) infinite;
                 animation: afterimage 0.25s  linear;
@@ -111,15 +152,15 @@
             opacity: 0;
         }
         100%{
-            opacity: 0.9;
+            opacity: 0.3;
         }
     }
     @keyframes go {
         0%{
-            left: 780px;
+            left: 800px;
         }
         100%{
-            left: 1000px;
+            left: 1070px;
         }
     }
     .center{
@@ -131,8 +172,8 @@
     }
     .cloud{
         position: relative;
-        width: 300px;
-        height: 100px;
+        width: 250px;
+        height: 90px;
         border-radius :50px; ;
         background-color: #fff;
         animation: move 8s linear infinite;
@@ -143,29 +184,29 @@
         top: -50px;
         left: 50px;
         background: #fff;
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
         border-radius: 50%;
     }
     .cloud::after{
         content: '';
         position: absolute;
-        top: -75px;
+        top: -65px;
         left: 90px;
         background: #fff;
-        width: 150px;
-        height: 150px;
+        width: 120px;
+        height: 120px;
         border-radius: 50%;
     }
     
     .sun{
-        top: -100px;
-        left: 50px;
+        top: -80px;
+        left: 60px;
         position:absolute;
         margin: 0;
         padding: 0;
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
         background: #ffe208;
         border-radius: 50%;
         box-shadow:0 0 15px rgba(255,255,8) ;
@@ -179,7 +220,7 @@
         top: 50%;    
         left:50%;
         transform: translate(-50%,-50%);
-        width: 140px;
+        width: 120px;
         height: 3px;
         background: #ffe208;
         box-shadow:0 0 15px rgba(255,255,8,.1) ;

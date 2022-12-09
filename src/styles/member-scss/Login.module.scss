@@ -57,6 +57,7 @@
             border: none;
             outline: none;
             transition: 0.2s;
+            padding-left: 4px;
 
             &:focus {
                 outline: 2px solid #ccc;
@@ -66,6 +67,13 @@
             position: absolute;
             right: 10px;
 
+        }
+
+        .errMsg {
+            position: absolute;
+            top: 36px;
+            left: 35%;
+            color: red;
         }
     }
 

@@ -100,6 +100,7 @@ function CampSlider() {
                     <div className={style.dayonepic}>
                       <img
                         src={`http://localhost:3001/n7/campmain/${v.mainImage}`}
+                        alt=""
                       />
                     </div>
                     <div className={style.dayoneright}>
@@ -123,14 +124,15 @@ function CampSlider() {
                           <p>{v.brife_describe}</p>
                         </div>
 
-                        <button
+                        
+                      </div>
+                      <button
                           onClick={() => {
                             navigate(`/camp/${v.c_sid}`)
                           }}
                         >
                           我要報名
                         </button>
-                      </div>
                     </div>
                   </div>
 

@@ -1,8 +1,15 @@
-.CarouselHome{
-    button{
-        border:none
-    }
-    div{
-        
-    }
+.CarouselGroup{
+    display: flex;
+   .groupbutton{
+    // width: 75px;
+    // height: 75px;
+    padding: 170px 10px;
+
+    i{
+        cursor: pointer;
+        font-size: 3rem;
+       }
+   }
+   
+    
 }

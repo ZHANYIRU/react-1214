@@ -34,8 +34,11 @@
 }
 
 .location{
+    display: flex;
     color:green;
     font-size: larger;
+    p{color:black;}
+    margin: 10px 0;
 }
 
 .switch{
@@ -105,7 +108,7 @@
     display: flex;
     // justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+    margin: 20px 0;
     p{
         font-size: 1.2rem;
         font-weight: 700;
@@ -138,7 +141,7 @@
     margin-top: 20px;
     width: 100%;
     display: flex;
-    justify-content:space-around;
+    justify-content:space-between;
 }
 .mainImage{
     width: 70%;
@@ -169,3 +172,34 @@
             }
 }
 
+.stitle{
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.price{
+    margin: 15px 0;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+ 
+
+.infos{
+    margin: 20px 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    .select{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        input{
+            margin-top: 10px;
+            border-radius: 5px;
+            padding: 8px 15px;
+            font-weight: 700;
+            background-color: rgba(255, 255, 255, 0.822);
+           }
+    }
+}

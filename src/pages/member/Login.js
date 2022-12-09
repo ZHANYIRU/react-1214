@@ -27,7 +27,7 @@ function Login(props) {
       'http://localhost:3001/member/login/api',
       formData
     )
-    console.log(result.data)
+    // console.log(result.data)
     // setData({...data, member_sid: result.data.member_sid})
 
     if (result.data.success) {
@@ -48,6 +48,41 @@ function Login(props) {
         confirmButtonColor: '#216326',
       })
     }
+  }
+
+  const forgotPass = async function () {
+    const formData = new FormData(loginForm.current)
+
+    if (!formData.get('email')) {
+      return Swal.fire({
+        icon: 'error',
+        title: '請輸入電子信箱',
+        confirmButtonColor: '#216326',
+      })
+    }
+
+    const result = await axios.post(
+      'http://localhost:3001/member/forgotPass/api',
+      formData
+    )
+
+    if (result) {
+      if (result.data.message === '密碼重置信已寄出') {
+        return Swal.fire({
+          icon: 'success',
+          title: result.data.message,
+          confirmButtonColor: '#216326',
+        })
+      }
+      return Swal.fire({
+        icon: 'error',
+        title: result.data.message,
+        confirmButtonColor: '#216326',
+      })
+    }
+
+    // alert(result.data)
+    // alert(formData.get('email'))
   }
 
   return (
@@ -97,6 +132,14 @@ function Login(props) {
                   }}
                 >
                   註冊新會員
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                    forgotPass()
+                  }}
+                >
+                  忘記密碼
                 </button>
               </div>
             </form>

@@ -41,7 +41,7 @@ export default function Following() {
         },
       }
     )
-    console.log(result.data)
+    // console.log(result.data)
     if (result.data.success) {
       // alert('取消關注成功')
       getFollowingInfo()
@@ -83,7 +83,7 @@ export default function Following() {
       }
     )
 
-    console.log(result.data.success)
+    // console.log(result.data.success)
     if (result.data.success) {
       // alert('關注成功')
       getFollowingInfo()

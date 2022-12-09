@@ -214,3 +214,27 @@
         transform: rotate(-40deg);
     }
 }
+
+
+
+@media screen and ((max-width:837px)) {
+    .bear{
+        top: 200px;
+        right: -250px;
+        // background-image: url(../../../public/img/blackbear-3.png);
+        position: fixed;
+        transform: rotate(-40deg);
+        // transform: translateX(-300px);
+        height: 180px;
+        animation: bear 1.5s linear;
+        animation-delay: 5s;
+        animation-fill-mode: forwards;
+        transition: .5s;
+        img{
+            height: 100%;
+        }
+    }
+
+
+    
+}

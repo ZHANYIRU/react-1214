@@ -23,7 +23,7 @@ export function avatarLevel(height = 0) {
 
 export function modalAvatarLevel(height = 0) {
   if (height > 10000){
-    return styled.gold
+    return styles.gold
   }
   if (height > 3000) {
     return styles.silver
