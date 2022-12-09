@@ -37,7 +37,7 @@ export default function ProfileInfo() {
       `http://localhost:3001/member/post/api?mid=${mid}`
     )
 
-    console.log(rows.data)
+    // console.log(rows.data)
     setPostList(rows.data)
   }
 

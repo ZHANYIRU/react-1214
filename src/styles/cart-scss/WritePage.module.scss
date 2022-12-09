@@ -12,6 +12,19 @@
     padding: 10px 20px;
   }
 }
+.goBuy{
+  width: 45%;
+  display: flex;
+  justify-content: flex-end;
+  margin: 30px auto;
+  button {
+    border: none;
+    background-color: $darkGreen;
+    color: $yellow;
+    border-radius: 5px;
+    padding: 10px 20px;
+  }
+}
 .camera {
   width: 50%;
   margin: 0 auto;

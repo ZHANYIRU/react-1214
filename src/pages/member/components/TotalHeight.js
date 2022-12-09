@@ -12,7 +12,7 @@ const Trekker = styled.img`
 `
 
 function climbAnimation(distance) {
-  console.log('距離為:' + distance)
+  // console.log('距離為:' + distance)
   let myDistance = distance
   if (myDistance > 10000) {
     myDistance = 10000
