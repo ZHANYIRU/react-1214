@@ -52,6 +52,7 @@
 .commonBox{
     padding: 15px 30px;
     width: 32%;
+    height: 220px;
     border: 1px solid #ccc;
     display: flex;
     flex-direction: column;
@@ -62,8 +63,15 @@
         align-items: center;
         margin-bottom: 10px;
         .memberName{
-            font-size: 1.5rem;
             margin-left: 20px;
+            p:nth-child(1){
+                font-size: 1.45rem;
+                margin-bottom: 5px;
+            }
+            p:nth-child(2){
+                font-size: 1rem;
+            }
+            
         }
     
         .commonTitle_img_border{
@@ -106,7 +114,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
         display: -webkit-box;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
     }
     .howStar{
@@ -170,8 +178,14 @@
             align-items: center;
             margin-bottom: 10px;
             .memberName{
-                font-size: 1.5rem;
                 margin-left: 20px;
+                p:nth-child(1){
+                    font-size: 1.3rem;
+                }
+                p:nth-child(1){
+                    font-size: 1rem;
+                }
+                
             }
         
             .commonTitle_img_border{

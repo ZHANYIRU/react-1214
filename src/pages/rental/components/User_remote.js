@@ -10,7 +10,14 @@ const User_remote = ({ text }) => {
         </div>
         <div className={styled.name}>智能客服</div>
       </div>
-      <div className={styled.txt}>{text}</div>
+      <div className={styled.txt}>
+        {text}
+        {text === '正在查詢中....' && (
+          <div className="spinner-border text-primary" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
