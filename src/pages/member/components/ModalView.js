@@ -466,44 +466,10 @@ export default function ModalView({
                                         {el.nickname}
                                       </h4>
                                       <pre>
-                                        <span
-                                          style={{ color: '#E50' }}
-                                          onClick={(e) => {
-                                            if (!isReplying) {
-                                              replyToReply(
-                                                el.context
-                                                  .split('@')[1]
-                                                  .split(':')[0],
-                                                v.sid
-                                              )
-                                              setIsReplying(true)
-                                              setTarget(e.target)
-                                            }
-                                            if (
-                                              isReplying &&
-                                              target === e.target
-                                            ) {
-                                              setReplyPlaceholder(
-                                                initPlaceholder
-                                              )
-                                              setIsReplying(false)
-                                            }
-                                            if (
-                                              isReplying &&
-                                              target !== e.target
-                                            ) {
-                                              replyToReply(
-                                                el.context
-                                                  .split('@')[1]
-                                                  .split(':')[0],
-                                                v.sid
-                                              )
-
-                                              setTarget(e.target)
-                                            }
-                                          }}
-                                        >
-                                          {el.context.split(':')[0]}
+                                        <span style={{ color: '#E50' }}>
+                                          {el.context.indexOf('@') !== -1
+                                            ? el.context.split(' ')[0]
+                                            : el.context}
                                         </span>
                                         <span>{el.context.split(':')[1]}</span>
                                       </pre>
@@ -563,6 +529,13 @@ export default function ModalView({
                     value={replyTxt}
                     onChange={(e) => {
                       setReplyTxt(e.target.value)
+                    }}
+                    onKeyDown={(e) => {
+                      console.log(e.key)
+                      if (e.key === 'Backspace' && replyTxt === '') {
+                        setReplyPlaceholder(initPlaceholder)
+                        setReplyPostId(0)
+                      }
                     }}
                     name="context"
                   />
