@@ -30,6 +30,7 @@ export default function ModalView({
   const [liked, setLiked] = useState(false)
   const [liking, setLiking] = useState(false)
   const [replies, setReplies] = useState([])
+  const [replyTxt, setReplyTxt] = useState('')
 
   const replyForm = useRef(null)
 
@@ -37,7 +38,7 @@ export default function ModalView({
     const rows = await axios.get(
       `http://localhost:3001/member/modal/api?mid=${showData.member_sid}`
     )
-    console.log(rows.data)
+    // console.log(rows.data)
     setUser(rows.data[0])
   }
 
@@ -47,7 +48,7 @@ export default function ModalView({
     const rows = await axios.get(
       `http://localhost:3001/member/like/api?mid=${mid}&pid=${showData.post_sid}`
     )
-    console.log(rows.data[0])
+    // console.log(rows.data[0])
     if (rows.data[0]) {
       setLiked(true)
     } else {
@@ -75,7 +76,7 @@ export default function ModalView({
     getPostList()
     setLiked(true)
 
-    console.log(result.data)
+    // console.log(result.data)
   }
 
   async function removeLike() {
@@ -94,7 +95,7 @@ export default function ModalView({
         },
       }
     )
-    console.log(result.data)
+    // console.log(result.data)
     getPostList()
     setLiked(false)
   }
@@ -103,7 +104,7 @@ export default function ModalView({
     const token = localStorage.getItem('token') || ''
 
     const formData = new FormData(replyForm.current)
-    
+
     // console.log('是否有留言內容: ' + !!formData.get('context').trim());
 
     if (!token) {
@@ -131,9 +132,10 @@ export default function ModalView({
       // alert('成功回覆')
       getReply()
       getPostList()
+      setReplyTxt('')
     }
 
-    console.log(result.data)
+    // console.log(result.data)
   }
 
   async function getReply() {
@@ -142,7 +144,42 @@ export default function ModalView({
     )
 
     setReplies(rows.data)
-    console.log(rows.data)
+    // console.log(rows.data)
+  }
+
+  async function deleteReply(mid, sid, pid) {
+    const token = localStorage.getItem('token') || ''
+
+    if (!token) {
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
+    }
+
+    const result = await axios.delete(
+      `http://localhost:3001/member/reply/api?sid=${sid}&pid=${pid}`,
+      {
+        headers: {
+          Authorization: token ? `Bearer ${token}` : '',
+        },
+      }
+    )
+
+    if (result.data.success) {
+      // alert('成功回覆')
+      getReply()
+      getPostList()
+      setReplyTxt('')
+      // alert(
+      //   `刪除成功: 要刪除的回覆sid為${sid}, 發表者mid為${mid}, 回覆的貼文pid為${pid}`
+      // )
+    }
+
+    if (!result || !result.data || !result.data.success) {
+      return Swal.fire({
+        icon: 'error',
+        title: '刪除留言失敗',
+        confirmButtonColor: '#216326',
+      })
+    }
   }
 
   // function avatarLevel(height = 0) {
@@ -285,6 +322,18 @@ export default function ModalView({
                         <div>
                           <h4>{v.nickname}</h4>
                           <TextareaAutosize readOnly value={v.context} />
+                          <p className={styled.replyDate}>
+                            {dayjs(v.datetime).format('YYYY-MM-DD')}
+                            <br></br>
+                            <span
+                              style={{ color: '#E00' }}
+                              onClick={() => {
+                                deleteReply(v.member_sid, v.sid, v.post_sid)
+                              }}
+                            >
+                              {v.member_sid === data.member_sid ? '刪除' : ''}
+                            </span>
+                          </p>
                         </div>
                         {/* <i className="fa-regular fa-heart"></i> */}
                       </div>
@@ -312,6 +361,10 @@ export default function ModalView({
                     maxRows="1"
                     maxLength="120"
                     placeholder="留言...(30字以內)"
+                    value={replyTxt}
+                    onChange={(e) => {
+                      setReplyTxt(e.target.value)
+                    }}
                     name="context"
                   />
                 </span>

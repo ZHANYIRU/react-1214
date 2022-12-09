@@ -71,16 +71,26 @@ const Rental_detail = () => {
   }
 
   const [like, setLike] = useState({})
+
+  const [comment, setComment] = useState('')
   const like_url = `http://localhost:3001/rental/getLike`
   async function get_Like() {
     const response = await axios.get(like_url)
     console.log(response.data.rows)
     setLike(response.data.rows)
   }
+
+  const comment_url = `http://localhost:3001/rental/comment?sid=${sid}`
+  async function get_Comment() {
+    const response = await axios.get(comment_url)
+    console.log(response.data.rows)
+    setComment(response.data.rows)
+  }
   useEffect(() => {
     get_rental_detail()
     get_store()
     get_Like()
+    get_Comment()
   }, [sid])
 
   return (

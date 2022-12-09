@@ -36,6 +36,9 @@ const Store = () => {
           <div className={styled.left}>
             {zoneChoice === '北區' && (
               <div
+                onMouseOver={() => {
+                  setshowStore(store[0])
+                }}
                 className={`${styled.redball}`}
                 style={{ top: '70px', left: '330px' }}
               >
@@ -44,6 +47,9 @@ const Store = () => {
             )}
             {zoneChoice === '北區' && (
               <div
+                onMouseOver={() => {
+                  setshowStore(store[1])
+                }}
                 className={`${styled.redball}`}
                 style={{ top: '73px', left: '290px' }}
               >
@@ -139,7 +145,6 @@ const Store = () => {
             </div>
             <div className={`${styled.flex} ${styled.thirddiv}`}>
               <pre>{showStore.store_introduction}</pre>
-              
             </div>
           </div>
         </div>

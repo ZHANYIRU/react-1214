@@ -43,7 +43,7 @@ export default function Followers() {
         },
       }
     )
-    console.log(result.data)
+    // console.log(result.data)
     if (result.data.success) {
       // alert('取消關注成功')
       getMyFollow()
@@ -87,7 +87,7 @@ export default function Followers() {
       }
     )
 
-    console.log(result.data.success)
+    // console.log(result.data.success)
     if (result.data.success) {
       // alert('關注成功')
       getMyFollow()

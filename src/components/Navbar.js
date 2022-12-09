@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom'
 function Navbar() {
   const navigate = useNavigate()
   //定義Navbar 手機板
-  const mobile = useMediaQuery({ query: '(max-width:800px)' })
+  const mobile = useMediaQuery({ query: '(max-width:837px)' })
   const { cartItem } = useContext(ProCartContext)
 
   const { data, auth, setAuth, resetData } = useContext(MemberContext)
@@ -36,7 +36,7 @@ function Navbar() {
     if (loginBoxMob.top === '-50px') {
       setLoginBoxMob({
         ...loginBoxMob,
-        top: '40px',
+        top: '64px',
         zIndex: '1',
         visibility: 'visible',
         opacity: 1,
