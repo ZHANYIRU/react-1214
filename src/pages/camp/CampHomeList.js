@@ -67,13 +67,16 @@ function CampHomeList(sliderdata) {
                         return (
                           <>
                             <div
+                              key={i}
                               className={style.listcard}
                               onClick={() => {
                                 navigate(`/camp/${v2.c_sid}`)
                               }}
                             >
                               <div>
-                                <img src={`http://localhost:3001/n7/campmain/${v2.mainImage}`}
+                                <img
+                                  src={`http://localhost:3001/n7/campmain/${v2.mainImage}`}
+                                  alt=""
                                 />
                               </div>
                               <div className={style.listcardtext}>
@@ -89,7 +92,7 @@ function CampHomeList(sliderdata) {
                       }
                     })}
                 </div>
-                <div className={style.listpage}></div>
+                
               </>
             )
           })}
