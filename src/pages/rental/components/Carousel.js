@@ -1,6 +1,7 @@
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import styled from '../../../styles/rental-scss/carousel.module.scss'
+import { Link } from 'react-router-dom'
 
 import React from 'react'
 import Slider from 'react-slick'
@@ -18,8 +19,11 @@ export default function Carousel() {
   return (
     <Slider {...settings} className={styled.carouselBox}>
       <div className={styled.carouselWrap}>
-        <img src="a帳篷_工作區域 1.png" alt="" />
+        <Link to={`/rental/101`}>
+          <img src="a帳篷_工作區域 1.png" alt="" />
+        </Link>
       </div>
+
       <div className={styled.carouselWrap}>
         <img src="/b睡袋_工作區域 1.png" alt="" />
       </div>
