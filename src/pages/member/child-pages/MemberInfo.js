@@ -41,7 +41,7 @@ export default function MemberInfo() {
       `http://localhost:3001/member/post/api?mid=${data.member_sid}`
     )
 
-    console.log(rows.data)
+    // console.log(rows.data)
     setPostList(rows.data)
   }
 
@@ -87,7 +87,7 @@ export default function MemberInfo() {
         },
       }
     )
-    console.log(result.data)
+    // console.log(result.data)
     Swal.fire({
       title: result.data.success ? '新增成功' : '新增失敗',
       confirmButtonColor: '#216326',
@@ -113,7 +113,7 @@ export default function MemberInfo() {
         },
       }
     )
-    console.log(result.data)
+    // console.log(result.data)
     Swal.fire({
       title: result.data.success ? '修改成功' : '修改失敗',
       confirmButtonColor: '#216326',
@@ -140,7 +140,7 @@ export default function MemberInfo() {
       }
     )
 
-    console.log(result.data)
+    // console.log(result.data)
     Swal.fire({
       title: result.data.success ? '刪除成功' : '刪除失敗',
       confirmButtonColor: '#216326',

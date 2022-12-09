@@ -71,7 +71,7 @@ export default function MemberPass() {
       })
     }
 
-    console.log(result.data)
+    // console.log(result.data)
   }
 
   return (

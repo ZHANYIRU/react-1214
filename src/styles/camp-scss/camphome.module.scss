@@ -3,6 +3,7 @@
 .title{
     text-align: center;
     font-size: 40px;
+    margin-bottom: 30px;
     padding: 100px 0 70px 0;
     a{
         color: rgb(45, 39, 39);
@@ -10,40 +11,48 @@
 }
 
 .dayonepic{
-    width: 40%;
+    width: 50%;
     img{
         width: 100%;
         object-fit: cover;
     }
 }
 
-.sliderdots{
-    margin: 80px 0;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
+// .sliderdots{
+//     margin: 80px 0;
+//     width: 100%;
+//     display: flex;
+//     justify-content: center;
+// }
 
-.sliderdot{
-    border-radius: 5px;
-    display: inline-block;
-    background-color: black;
-    width: 90px;
-    height: 10px;
-    margin-left: 13px;
-}
+// .sliderdot{
+//     border-radius: 5px;
+//     display: inline-block;
+//     background-color: black;
+//     width: 90px;
+//     height: 10px;
+//     margin-left: 13px;
+// }
 
-.sliderdot:hover{
-    background-color: white;
-}
+// .sliderdot:hover{
+//     background-color: white;
+// }
 
 .slider{
     margin: auto;
-    height: 400px;
+    height: 520px;
     width: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
+    button{
+        width: 125px;
+        height: 60px;
+        border-radius: 10px;
+        align-self:flex-end;
+        padding: 10px 20px;
+        margin-top: 5px;
+    }
 }
 
 .dayoneright{
@@ -56,19 +65,10 @@
 }
 
 .context{
-    margin:0 30px 0 60px;
-    width: 70%;
-    height: 100%;
+    margin:0 10px 0 60px;
+    width: 100%;
     display: flex;
-    justify-content: center;
-
-    button{
-        width: 125px;
-        height: 60px;
-        border-radius: 10px;
-        align-self:flex-end;
-        padding: 10px 20px;
-    }
+    justify-content: center;    
 }
 
 .text{
@@ -136,7 +136,7 @@
 .listbox{
     border-radius: 20px;
     background-color: #fff;
-    margin-top: 25px;
+    margin: 60px 0 120px 0;
     width: 1330px;
     height: 400px;
     display: flex;
@@ -155,7 +155,7 @@
     }
 }
 .listcardtext{
-    width: 90%;
+    width: 100%;
     height: 160px;
     font-size: 20px;
     display: flex;
@@ -163,12 +163,9 @@
     justify-content: space-between;
     align-items: flex-start;
     padding: 10px;
+
+    p{
+        text-align: left;
+    }
 }
 
-.listpage{
-    margin-top: 15px;
-    width: 30%;
-    min-width: 300px;
-    height: 20px;
-    background-color: rgb(77, 19, 19);
-}

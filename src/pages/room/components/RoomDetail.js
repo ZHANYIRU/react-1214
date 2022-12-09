@@ -3,14 +3,30 @@ import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import RoomSelectBar from './RoomSelectBar'
 import { useState } from 'react'
+import SeeEvaluation from '../../../components/SeeEvaluation'
 
-function RoomDetail({ detail }) {
-  //切換評論 or 房型介紹
+function RoomDetail({ detail, el }) {
+  function avatarLevel(height = 0) {
+    if (height > 10000) {
+      return style.gold
+    }
+    if (height > 3000) {
+      return style.silver
+    }
+    return style.bronze
+  }
+  // const [roomData, setRoomData]=useState([])
+
+  // const roomData = detailNoComment.length === 0 ? detail : detailNoComment
+  // 切換評論 or 房型介紹
+  // console.log('roomData', detail)
+  // console.log('detailNoComment', detailNoComment)
+
   const [showIntro, setShowIntro] = useState(true)
 
   const imgs = detail.room_imgs
   const roomService = detail.room_service_sid
-  console.log('imgs', roomService)
+  // console.log('imgs', roomService)
 
   const [service, setService] = useState([
     '淋浴',
@@ -264,10 +280,146 @@ function RoomDetail({ detail }) {
               </div>
             </>
           ) : (
-            <div>hello</div>
+            //評論頁切換
+            <>
+              <div className={style.stars}>
+                {starCount(Math.round(detail.Average))}
+
+                <span className={style.commentQTY}>
+                  ({detail.commentQty > 0 ? detail.commentQty : '目前沒有評論'})
+                </span>
+              </div>
+              <div className={style.commenAll}>
+                {/* 印一次 */}
+
+                {!detail.avatar ||
+                  (detail.avatar &&
+                    detail.total_height &&
+                    detail.nickname &&
+                    detail.message &&
+                    detail.star &&
+                    detail.created_at && (
+                      <>
+                        <div
+                          className={style.commentWrap}
+                          onClick={(el) => {
+                            console.log(el.target.value)
+                            SeeEvaluation()
+                          }}
+                        >
+                          <div className={style.member}>
+                            <div
+                              className={`${style.memberImg} ${avatarLevel(
+                                detail.total_height
+                              )}`}
+                            >
+                              {detail.avatar ? (
+                                <img
+                                  src={`http://localhost:3001/uploads/avatar_${detail.avatar}`}
+                                  alt="avatar"
+                                ></img>
+                              ) : (
+                                <img
+                                  src="/img/default_avatar.png"
+                                  alt="avatar"
+                                />
+                              )}
+                            </div>
+                            <span>{detail.nickname}</span>
+                          </div>
+                          <div className={style.commentText}>
+                            <p>{detail.message}</p>
+                          </div>
+                          <div className={style.star}>
+                            {starCount(Math.round(detail.star))}
+                          </div>
+                          <div className={style.date}>
+                            <span style={{ marginRight: '100px' }}>
+                              {detail.created_at.split('T', 10)[0]}
+                            </span>
+                            <span>閱讀更多</span>
+                          </div>
+                        </div>
+                      </>
+                    ))}
+              </div>
+              {/* 印一次 */}
+              {/* <div
+                className={style.commentWrap}
+                onClick={(el) => {
+                  console.log(el.target.value)
+                  SeeEvaluation()
+                }}
+              >
+                <div className={style.member}>
+                  <div
+                    className={`${style.memberImg} ${avatarLevel(
+                      detail.total_height
+                    )}`}
+                  >
+                    {detail.avatar ? (
+                      <img
+                        src={`http://localhost:3001/uploads/avatar_${detail.avatar}`}
+                        alt="avatar"
+                      ></img>
+                    ) : (
+                      <img src="/img/default_avatar.png" alt="avatar" />
+                    )}
+                  </div>
+                  <span>{detail.nickname}</span>
+                </div>
+                <div className={style.commentText}>
+                  <p>{detail.message}</p>
+                </div>
+                <div className={style.star}>
+                  {starCount(Math.round(detail.star))}
+                </div>
+                <div className={style.date}>
+                  <span style={{ marginRight: '100px' }}>2022-12-01</span>
+                  <span>閱讀更多</span>
+                </div>
+              </div> */}
+              {/* 印一次 */}
+              {/* <div
+                className={style.commentWrap}
+                onClick={(el) => {
+                  console.log(el.target.value)
+                  SeeEvaluation()
+                }}
+              >
+                <div className={style.member}>
+                  <div
+                    className={`${style.memberImg} ${avatarLevel(
+                      detail.total_height
+                    )}`}
+                  >
+                    {detail.avatar ? (
+                      <img
+                        src={`http://localhost:3001/uploads/avatar_${detail.avatar}`}
+                        alt="avatar"
+                      ></img>
+                    ) : (
+                      <img src="/img/default_avatar.png" alt="avatar" />
+                    )}
+                  </div>
+                  <span>{detail.nickname}</span>
+                </div>
+                <div className={style.commentText}>
+                  <p>{detail.message}</p>
+                </div>
+                <div className={style.star}>
+                  {starCount(Math.round(detail.star))}
+                </div>
+                <div className={style.date}>
+                  <span style={{ marginRight: '100px' }}>2022-12-01</span>
+                  <span>閱讀更多</span>
+                </div>
+              </div> */}
+            </>
           )}
         </div>
       </div>
+
       <RoomSelectBar detail={detail} />
     </>
   )

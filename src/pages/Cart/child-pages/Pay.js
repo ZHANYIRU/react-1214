@@ -32,11 +32,12 @@ function Pay({
     focused: '',
     formData: null,
   })
-  const { number, name, expiry, cvc, issuer, focused, formData } = card
+  const { number, name, expiry, cvc, issuer, focused } = card
   const handleInputChange = (e) => {
     setCard({ ...card, [e.target.name]: e.target.value })
   }
   const handleInputFocus = (e) => {
+    e.preventDefault()
     setCard({ ...card, focused: e.target.name })
   }
   const { data } = useContext(MemberContext)
@@ -45,6 +46,7 @@ function Pay({
   //用來開啟新視窗
   const newLinePay = useRef(null)
   const [paid, setPaid] = useState(false)
+  const [cardAni, setCardAni] = useState(false)
   //優惠卷的金額
   let coupon = 0
   if (useCoupon === 'Hiking837') {
@@ -85,19 +87,58 @@ function Pay({
       user: writeUser,
     },
   }
+  const cardPay = async (e) => {
+    e.preventDefault()
+    setCardAni(true)
+    let cardOrder = testOrder.totalOrder
+    cardOrder.orderId = new Date().getTime()
+    const { data } = await axios.post(
+      'http://localhost:3001/order/cardPay',
+      cardOrder
+    )
+    if (data.affectedRows) {
+      setForOk({
+        orderN: cardOrder.orderId,
+        family: familySelect,
+        pay: paySelect,
+        orderDay: dayjs(cardOrder.orderId).format('YYYY-MM-DD'),
+        totalPrice: cartPrice - coupon,
+      })
+      setTimeout(() => {
+        setCardAni(false)
+        setStep(step + 1)
+      }, 1500)
+    }
+  }
   useEffect(() => {
     subscribe('paid', () => setPaid(true))
     if (paid) {
       setTimeout(() => {
         setStep(step + 1)
-      }, 1200)
+      }, 3200)
     }
     return () => {
       unsubscribe('paid')
     }
   }, [paid])
+  //進這元件的時候，滾動到視窗最上面
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'instant',
+    })
+  }, [])
   return (
     <>
+      {cardAni && (
+        <div className={styled.payAnimation}>
+          <p>付款中，請稍後</p>
+          <div className="spinner-border text-light" role="status">
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
       <div className={styled.choose}>
         <button
           onClick={() => {
@@ -134,7 +175,6 @@ function Pay({
                   handleInputFocus(e)
                 }}
               />
-              <small>E.g.: 49..., 51..., 36..., 37...</small>
             </div>
             <div className="form-group">
               <input
@@ -192,7 +232,27 @@ function Pay({
             </div>
             <input type="hidden" name="issuer" value={issuer} />
             <div className="form-actions" style={{ marginTop: '20px' }}>
-              <button className="btn btn-primary btn-block">PAY</button>
+              <button
+                className={styled.btn}
+                onClick={(e) => {
+                  cardPay(e)
+                }}
+              >
+                付款
+              </button>
+              <button
+                className={styled.btn2}
+                onClick={(e) => {
+                  e.preventDefault()
+                  setCard({
+                    number: '4963547812985476',
+                    name: 'ZHANYIRU',
+                    expiry: '27/12',
+                  })
+                }}
+              >
+                付款
+              </button>
             </div>
           </form>
         </div>

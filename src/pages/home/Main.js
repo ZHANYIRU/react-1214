@@ -1,6 +1,7 @@
 import styled from '../../styles/home-scss/Main.module.scss'
 import { useRef, useEffect, useState } from 'react'
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax'
+import { Link } from 'react-router-dom'
 import Leaderboard from './leaderboard'
 import Weather from './Weather'
 import Bird from './Bird.js'
@@ -79,19 +80,20 @@ function Main({ setFtr }) {
   return (
     <>
       <div className={styled.main} ref={mainHeight}>
-        {rotateCube ? <Weather /> : ''}
-        <div className={styled.section1}>
-          {rotateCube ? (
-            <Bird
-              show={show}
-              setShow={setShow}
-              couponData={couponData}
-              setCouponData={setCouponData}
-            />
-          ) : (
-            ''
-          )}
-          <ParallaxProvider speed={-10}>
+        <ParallaxProvider speed={-10}>
+          {rotateCube ? <Weather /> : ''}
+          <div className={styled.section1}>
+            {rotateCube ? (
+              <Bird
+                show={show}
+                setShow={setShow}
+                couponData={couponData}
+                setCouponData={setCouponData}
+              />
+            ) : (
+              ''
+            )}
+
             <div
               className={styled.visible}
               style={{ visibility: rotateCube && !show ? 'visible' : 'hidden' }}
@@ -124,37 +126,39 @@ function Main({ setFtr }) {
             <Parallax translateX={[-50, 120]}>
               <img src="/img/cloud1.png" alt="" />
             </Parallax>
-          </ParallaxProvider>
-        </div>
-        <div className={styled.section2}>
-          <div className={styled.pic}>
-            <img
-              src="https://shoplineimg.com/5e8ca63265b7fe000a2e1c3f/6357c60978d1861b85d5aa3e/800x.webp?source_format=jpg"
-              alt=""
-            />
           </div>
-          <div className={styled.text}>
-            寧可做過了回味
-            <br />
-            也不要錯過了後悔 <br />
-            就算是初次進入戶外的世界，
-            <br />
-            也不用擔心不知道要從哪裡開始準備！ <br />
-            台灣837 推薦限定熱門行程
-            <br />
-            讓新手也能輕鬆擁有安全的登山、野營初體驗！
-            <button className={styled.click}>全台店點</button>
+          <div className={styled.section2}>
+            <div className={styled.pic}>
+              <img
+                src="https://shoplineimg.com/5e8ca63265b7fe000a2e1c3f/6357c60978d1861b85d5aa3e/800x.webp?source_format=jpg"
+                alt=""
+              />
+            </div>
+            <div className={styled.text}>
+              寧可做過了回味
+              <br />
+              也不要錯過了後悔 <br />
+              就算是初次進入戶外的世界，
+              <br />
+              也不用擔心不知道要從哪裡開始準備！ <br />
+              台灣837 推薦限定熱門行程
+              <br />
+              讓新手也能輕鬆擁有安全的登山、野營初體驗！
+              <Link to="/store">
+                <button className={styled.click}>全台店點</button>
+              </Link>
+            </div>
           </div>
-        </div>
-        <div className={styled.section3}>
-          <Group oneday={oneday} />
-        </div>
-        <div className={styled.section4}>
-          <Leaderboard />
-        </div>
-        <div className={styled.section5}>
-          <Post postData={postData} />
-        </div>
+          <div className={styled.section3}>
+            <Group oneday={oneday} />
+          </div>
+          <div className={styled.section4}>
+            <Leaderboard />
+          </div>
+          <div className={styled.section5}>
+            <Post postData={postData} />
+          </div>
+        </ParallaxProvider>
       </div>
     </>
   )
