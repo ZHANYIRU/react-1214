@@ -399,7 +399,8 @@ export default function ModalView({
                                   >
                                     <span
                                       style={{
-                                        transform: 'scale(-1) rotate(-90deg) translateY(-20%) translateX(15%)',
+                                        transform:
+                                          'scale(-1) rotate(-90deg) translateY(-20%) translateX(15%)',
                                       }}
                                     >
                                       <i className="fa-solid fa-arrow-turn-up"></i>
@@ -433,7 +434,14 @@ export default function ModalView({
                                     <div>
                                       <h4>{el.nickname}</h4>
                                       <pre>
-                                        <span style={{color: '#E50'}}>@{v.nickname}</span> {el.context}
+                                        <Link
+                                          to={`/profile?id=${v.member_sid}`}
+                                        >
+                                          <span style={{ color: '#E50' }}>
+                                            @{v.nickname}
+                                          </span>
+                                        </Link>{' '}
+                                        {el.context}
                                       </pre>
                                       <p className={styled.replyDate}>
                                         {dayjs(el.datetime).format(
@@ -514,6 +522,8 @@ export default function ModalView({
               if (currentPost > 0) {
                 setLiking(false)
                 setCurrentPost(currentPost - 1)
+                setReplyPostId(null)
+                setReplyPlaceholder(initPlaceholder)
               }
             }}
           >
@@ -530,6 +540,8 @@ export default function ModalView({
               if (currentPost < listLength - 1) {
                 setLiking(false)
                 setCurrentPost(currentPost + 1)
+                setReplyPostId(null)
+                setReplyPlaceholder(initPlaceholder)
               }
               // if(currentPost === listLength -1) {
               //   setCurrentPost(0)
