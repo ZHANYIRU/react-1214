@@ -40,7 +40,7 @@ function CampProduct() {
   //活動介紹區塊
   const intro = campSid.map((v, i) => {
     return (
-      <div id="introduction">
+      <div id="introduction" key={i}>
         <h4>活動介紹</h4>
         <p>{v.brife_describe}</p>
 
@@ -101,24 +101,27 @@ function CampProduct() {
             campSid.map((v, i) => {
               if (i < 1) {
                 return (
-                  <>
-                    {console.log(v)}
-                    <div className={style.card}>
-                      <div className={style.cardtop}>
-                        <h2>{v.camp_name}</h2>
+                  <div className={style.card} key={i}>
+                    <div className={style.cardtop}>
+                      <h2>{v.camp_name}</h2>
+                      <div className={style.infos}>
                         <div>
                           <div className={style.location}>
                             <span>
                               <i className="fa-solid fa-map-location-dot"></i>
                             </span>
-                            <span>{v.name}</span>
+                            <p>{v.name}</p>
                           </div>
-                          <div className={style.mountain}>
+                          <div className={style.location}>
                             <span>
                               <i className="fa-solid fa-mountain"></i>
                             </span>
-                            <span>{v.mountain_name}</span>
+                            <p>{v.mountain_name}</p>
                           </div>
+                          <div className={style.price}>金額：${v.price}/人</div>
+                          <div className={style.price}>評價：stars</div>
+                        </div>
+                        <div className={style.select}>
                           <label className={style.stitle}>請選擇報名日期</label>
                           <input
                             type="date"
@@ -130,11 +133,8 @@ function CampProduct() {
                               setChooseDate(myDate)
                             }}
                           />
-                          {console.log(chooseDate)}
-                          <div className={style.price}>金額：{v.price}</div>
-                          <div className={style.price}>評價：stars</div>
                           <div className={style.howNum}>
-                            <p>商品數量</p>
+                            <p>商品數量：</p>
                             <div className={style.numBox}>
                               <div className={style.numBox1}>
                                 <i
@@ -185,94 +185,97 @@ function CampProduct() {
                             加入購物車
                           </button>
                         </div>
-                        <div className={style.imgarea}>
-                          <div className={style.mainImage}>
-                            <img
-                              ref={picRef}
-                              src={`http://localhost:3001/n7/campmain/${v.mainImage}`}
-                              alt=""
-                            />
-                          </div>
-                          <div className={style.detailsimgs}>
-                            <img
-                              onClick={() => {
-                                picRef.current.setAttribute(
-                                  'src',
-                                  `http://localhost:3001/n7/campmain/${v.mainImage}`
-                                )
-                              }}
-                              src={`http://localhost:3001/n7/campmain/${v.mainImage}`}
-                              alt=""
-                            />
-                            <img
-                              onClick={() => {
-                                picRef.current.setAttribute(
-                                  'src',
-                                  `http://localhost:3001/n7/${v.detailImages[0]}`
-                                )
-                              }}
-                              src={`http://localhost:3001/n7/${v.detailImages[0]}`}
-                              alt=""
-                            />
-                            <img
-                              onClick={() => {
-                                picRef.current.setAttribute(
-                                  'src',
-                                  `http://localhost:3001/n7/${v.detailImages[1]}`
-                                )
-                              }}
-                              src={`http://localhost:3001/n7/${v.detailImages[1]}`}
-                              alt=""
-                            />
-                            <img
-                              onClick={() => {
-                                picRef.current.setAttribute(
-                                  'src',
-                                  `http://localhost:3001/n7/${v.detailImages[2]}`
-                                )
-                              }}
-                              src={`http://localhost:3001/n7/${v.detailImages[2]}`}
-                              alt=""
-                            />
-                          </div>
+
+                        {console.log(chooseDate)}
+                      </div>
+                      <div className={style.imgarea}>
+                        <div className={style.mainImage}>
+                          <img
+                            ref={picRef}
+                            src={`http://localhost:3001/n7/campmain/${v.mainImage}`}
+                            alt=""
+                          />
+                        </div>
+                        <div className={style.detailsimgs}>
+                          <img
+                            onClick={() => {
+                              picRef.current.setAttribute(
+                                'src',
+                                `http://localhost:3001/n7/campmain/${v.mainImage}`
+                              )
+                            }}
+                            src={`http://localhost:3001/n7/campmain/${v.mainImage}`}
+                            alt=""
+                          />
+                          <img
+                            onClick={() => {
+                              picRef.current.setAttribute(
+                                'src',
+                                `http://localhost:3001/n7/${v.detailImages[0]}`
+                              )
+                            }}
+                            src={`http://localhost:3001/n7/${v.detailImages[0]}`}
+                            alt=""
+                          />
+                          <img
+                            onClick={() => {
+                              picRef.current.setAttribute(
+                                'src',
+                                `http://localhost:3001/n7/${v.detailImages[1]}`
+                              )
+                            }}
+                            src={`http://localhost:3001/n7/${v.detailImages[1]}`}
+                            alt=""
+                          />
+                          <img
+                            onClick={() => {
+                              picRef.current.setAttribute(
+                                'src',
+                                `http://localhost:3001/n7/${v.detailImages[2]}`
+                              )
+                            }}
+                            src={`http://localhost:3001/n7/${v.detailImages[2]}`}
+                            alt=""
+                          />
                         </div>
                       </div>
-                      <div className={style.switch}>
-                        <div
-                          className={
-                            introCom
-                              ? `${style.productIntro} ${style.underLine}`
-                              : `${style.productIntro}`
+                    </div>
+                    <div className={style.switch}>
+                      <div
+                        className={
+                          introCom
+                            ? `${style.productIntro} ${style.underLine}`
+                            : `${style.productIntro}`
+                        }
+                        onClick={(e) => {
+                          if (!introCom) {
+                            changeBtn()
+                          } else {
+                            return
                           }
-                          onClick={(e) => {
-                            if (!introCom) {
-                              changeBtn()
-                            } else {
-                              return
-                            }
-                          }}
-                        >
-                          介紹
-                        </div>
-                        <div
-                          className={
-                            !introCom
-                              ? `${style.productIntro} ${style.underLine}`
-                              : `${style.productIntro}`
-                          }
-                          onClick={() => {
-                            if (introCom) {
-                              changeBtn()
-                            } else {
-                              return
-                            }
-                          }}
-                        >
-                          評論(12)
-                        </div>
+                        }}
+                      >
+                        介紹
                       </div>
-                      <div className={style.cardcontext}>
-                        {/* <div id="introduction">
+                      <div
+                        className={
+                          !introCom
+                            ? `${style.productIntro} ${style.underLine}`
+                            : `${style.productIntro}`
+                        }
+                        onClick={() => {
+                          if (introCom) {
+                            changeBtn()
+                          } else {
+                            return
+                          }
+                        }}
+                      >
+                        評論(12)
+                      </div>
+                    </div>
+                    <div className={style.cardcontext}>
+                      {/* <div id="introduction">
                           <h4>活動介紹</h4>
                           <p>{v.brife_describe}</p>
 
@@ -302,10 +305,9 @@ function CampProduct() {
                           <h4>評論數量</h4>
                           <h5>【報名前請務必詳閱 條款及細則 ＆ 裝備說明】 </h5>
                         </div> */}
-                        {introCom ? intro : com}
-                      </div>
+                      {introCom ? intro : com}
                     </div>
-                  </>
+                  </div>
                 )
               }
             })}
