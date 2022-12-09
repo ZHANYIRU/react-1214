@@ -72,30 +72,18 @@ export default function ProductPage() {
   //加入購物車方法
   const addCartFunction = (v) => {
     Swal.fire({
-      title: '將此商品加入購物車?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: '確定!',
-      cancelButtonText: '取消',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          icon: 'success',
-          title: '已加入!',
-          showCancelButton: false,
-        })
-        addProCart(
-          product_sid,
-          v.product_name,
-          size2,
-          Number(v.product_price),
-          num,
-          v.product_img
-        )
-      }
+      icon: 'success',
+      title: '已加入!',
+      showCancelButton: false,
     })
+    addProCart(
+      product_sid,
+      v.product_name,
+      size2,
+      Number(v.product_price),
+      num,
+      v.product_img
+    )
   }
 
   //隨機產生3筆資料
