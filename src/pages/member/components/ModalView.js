@@ -73,9 +73,10 @@ export default function ModalView({
         },
       }
     )
+
     getPostList()
     setLiked(true)
-    setLiking(false)
+    
 
     // console.log(result.data)
   }
@@ -389,6 +390,7 @@ export default function ModalView({
             className={`${styled.goTo} ${styled.prev}`}
             onClick={() => {
               if (currentPost > 0) {
+                setLiking(false)
                 setCurrentPost(currentPost - 1)
               }
             }}
@@ -404,6 +406,7 @@ export default function ModalView({
             className={`${styled.goTo} ${styled.next}`}
             onClick={() => {
               if (currentPost < listLength - 1) {
+                setLiking(false)
                 setCurrentPost(currentPost + 1)
               }
               // if(currentPost === listLength -1) {
