@@ -21,7 +21,8 @@ export default function ModalView({
 
   const { data } = useContext(MemberContext)
 
-  const initPlaceholder = '留言...(30字以內)'
+  // const initPlaceholder = '留言...(30字以內)'
+  const initPlaceholder = ''
 
   const [user, setUser] = useState({
     member_sid: 0,
@@ -33,7 +34,7 @@ export default function ModalView({
   const [liking, setLiking] = useState(false)
   const [replies, setReplies] = useState([])
   const [replyTxt, setReplyTxt] = useState('')
-  const [replyPlaceholder, setReplyPlaceholder] = useState(initPlaceholder)
+  const [replyPlaceholder, setReplyPlaceholder] = useState('')
   const [replyPostId, setReplyPostId] = useState(0)
   const [isReplying, setIsReplying] = useState(false)
   const [target, setTarget] = useState(null)
@@ -125,6 +126,8 @@ export default function ModalView({
       })
     }
 
+    formData.set('context', `${replyPlaceholder}${formData.get('context')}`)
+
     formData.append('sid', replyPostId)
 
     const result = await axios.post(
@@ -200,7 +203,7 @@ export default function ModalView({
   }
 
   async function replyToReply(nickname, rid) {
-    setReplyPlaceholder(`@${nickname}: ` + initPlaceholder)
+    setReplyPlaceholder(`@${nickname}: `)
     setReplyPostId(rid)
   }
 
@@ -348,25 +351,30 @@ export default function ModalView({
                             </div>
 
                             <div>
-                              <h4>{v.nickname}</h4>
-                              <TextareaAutosize
-                                readOnly
-                                value={v.context}
-                                style={{ color: 'black' }}
+                              <h4
                                 onClick={(e) => {
                                   if (!isReplying) {
                                     setIsReplying(true)
                                     replyToReply(v.nickname, v.sid)
-                                    e.target.style.color = '#E50'
                                     setTarget(e.target)
                                   }
-                                  if (isReplying) {
+                                  if (isReplying && target === e.target) {
                                     setReplyPlaceholder(initPlaceholder)
                                     setReplyPostId(0)
                                     setIsReplying(false)
-                                    target.style.color = '#000'
+                                  }
+                                  if (isReplying && target !== e.target) {
+                                    replyToReply(v.nickname, v.sid)
+                                    setTarget(e.target)
                                   }
                                 }}
+                              >
+                                {v.nickname}
+                              </h4>
+                              <TextareaAutosize
+                                readOnly
+                                value={v.context}
+                                style={{ color: 'black' }}
                               />
                               <p className={styled.replyDate}>
                                 {dayjs(v.datetime).format('YYYY-MM-DD')}
@@ -432,16 +440,72 @@ export default function ModalView({
                                     </div>
 
                                     <div>
-                                      <h4>{el.nickname}</h4>
+                                      <h4
+                                        onClick={(e) => {
+                                          if (!isReplying) {
+                                            setIsReplying(true)
+                                            replyToReply(el.nickname, v.sid)
+                                            setTarget(e.target)
+                                          }
+                                          if (
+                                            isReplying &&
+                                            target === e.target
+                                          ) {
+                                            setReplyPlaceholder(initPlaceholder)
+                                            setIsReplying(false)
+                                          }
+                                          if (
+                                            isReplying &&
+                                            target !== e.target
+                                          ) {
+                                            replyToReply(el.nickname, v.sid)
+                                            setTarget(e.target)
+                                          }
+                                        }}
+                                      >
+                                        {el.nickname}
+                                      </h4>
                                       <pre>
-                                        {/* <Link
-                                          to={`/profile?id=${v.member_sid}`}
+                                        <span
+                                          style={{ color: '#E50' }}
+                                          onClick={(e) => {
+                                            if (!isReplying) {
+                                              replyToReply(
+                                                el.context
+                                                  .split('@')[1]
+                                                  .split(':')[0],
+                                                v.sid
+                                              )
+                                              setIsReplying(true)
+                                              setTarget(e.target)
+                                            }
+                                            if (
+                                              isReplying &&
+                                              target === e.target
+                                            ) {
+                                              setReplyPlaceholder(
+                                                initPlaceholder
+                                              )
+                                              setIsReplying(false)
+                                            }
+                                            if (
+                                              isReplying &&
+                                              target !== e.target
+                                            ) {
+                                              replyToReply(
+                                                el.context
+                                                  .split('@')[1]
+                                                  .split(':')[0],
+                                                v.sid
+                                              )
+
+                                              setTarget(e.target)
+                                            }
+                                          }}
                                         >
-                                          <span style={{ color: '#E50' }}>
-                                            @{v.nickname}
-                                          </span>
-                                        </Link>{' '} */}
-                                        {el.context}
+                                          {el.context.split(':')[0]}
+                                        </span>
+                                        <span>{el.context.split(':')[1]}</span>
                                       </pre>
                                       <p className={styled.replyDate}>
                                         {dayjs(el.datetime).format(
@@ -492,11 +556,10 @@ export default function ModalView({
                   name="post_sid"
                 />
                 <span>
-                  <TextareaAutosize
+                  <input
                     className={styled.replyInput}
-                    maxRows="1"
                     maxLength="30"
-                    placeholder={replyPlaceholder}
+                    placeholder={`${replyPlaceholder} 留言...(30字以內)`}
                     value={replyTxt}
                     onChange={(e) => {
                       setReplyTxt(e.target.value)
@@ -522,7 +585,7 @@ export default function ModalView({
               if (currentPost > 0) {
                 setLiking(false)
                 setCurrentPost(currentPost - 1)
-                setReplyPostId(null)
+                setReplyPostId(0)
                 setReplyPlaceholder(initPlaceholder)
               }
             }}
@@ -540,7 +603,7 @@ export default function ModalView({
               if (currentPost < listLength - 1) {
                 setLiking(false)
                 setCurrentPost(currentPost + 1)
-                setReplyPostId(null)
+                setReplyPostId(0)
                 setReplyPlaceholder(initPlaceholder)
               }
               // if(currentPost === listLength -1) {
