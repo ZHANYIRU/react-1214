@@ -66,9 +66,23 @@ function Rental(props) {
         <div className={rentalcss.orderShow}>
           <div className={rentalcss.category}>
             <p
-              style={conditions.category === '' ? { color: 'red' } : {}}
+              style={
+                conditions.category === '' && conditions.search == ''
+                  ? { color: 'red' }
+                  : {}
+              }
               onClick={() =>
-                setConditions({ ...conditions, category: '', page: 1 })
+                setConditions({
+                  ...conditions,
+                  category: '',
+                  search: '',
+                  low_price: undefined,
+                  high_price: undefined,
+                  page: 1,
+                  order_by: '',
+                  brand: [],
+                  label: [],
+                })
               }
             >
               全部商品
@@ -129,7 +143,7 @@ function Rental(props) {
               onClick={() =>
                 setConditions({
                   ...conditions,
-                  order_by: 'price_DESC',
+                  order_by: 'price_DㄑESC',
                   page: 1,
                 })
               }
@@ -152,7 +166,7 @@ function Rental(props) {
               conditions={conditions}
               setConditions={setConditions}
             />
-            {conditions.search ? (
+            {conditions.search || conditions.category === '' ? (
               ''
             ) : (
               <i

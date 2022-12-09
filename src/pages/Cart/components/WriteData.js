@@ -149,7 +149,21 @@ function WriteData({
           </div>
           <div className={styled.receiveInput}>
             <div>
-              <label htmlFor="">姓名</label>
+              <label
+                htmlFor=""
+                onClick={() =>
+                  setWriteUser({
+                    ...writeUser,
+                    name: '詹姆士',
+                    mobile: '0987164777',
+                    address: '台北市大安區復興南路一段',
+                    email: 'buy1214@gmail.com',
+                    text: '我要爬山！！',
+                  })
+                }
+              >
+                姓名
+              </label>
               <input
                 value={writeUser.name}
                 type="text"
