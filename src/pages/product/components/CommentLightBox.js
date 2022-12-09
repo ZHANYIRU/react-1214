@@ -55,7 +55,7 @@ export default function CommentLightBox({
                 )}
               </div>
             </div>
-            <div className={styled.Name}>{commentFetch[whichCom].name}</div>
+            <div className={styled.Name}>{commentFetch[whichCom].nickname}</div>
           </div>
           <div className={styled.howStar}>
             {[...Array(5)].map((star, index) => {
