@@ -18,6 +18,16 @@ export default function ProductComment({
     }
     return styled.bronze
   }
+
+  function titleLevel(height = 0) {
+    if (height > 10000) {
+      return '金級玩家'
+    }
+    if (height > 3000) {
+      return '銀級玩家'
+    }
+    return '銅級玩家'
+  }
   return (
     <div className={styled.comWrap}>
       <div className={styled.starBox}>
@@ -71,7 +81,10 @@ export default function ProductComment({
                   </div>
                 </div>
 
-                <div className={styled.memberName}>{v.nickname}</div>
+                <div className={styled.memberName}>
+                  <p>{v.nickname}</p>
+                  <p>{titleLevel(v.total_height)}</p>
+                </div>
               </div>
               <div className={styled.commonText}>{v.message}</div>
               <div className={styled.howStar}>
