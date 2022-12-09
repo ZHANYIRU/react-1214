@@ -18,7 +18,7 @@ import Rental_detail from './pages/rental/Rental_detail'
 import AI from './pages/rental/AI'
 import Store from './pages/rental/Store'
 import Commnent from './pages/rental/components/Commnent'
-
+import SunClouds from './components/sunCloud'
 import Cart from './pages/Cart/Cart'
 import Order from './pages/Order/Order'
 import Confirm from './pages/Cart/child-pages/Confirm'
@@ -43,6 +43,7 @@ function App() {
     <BrowserRouter>
       <MemberContextProvider>
         <ProCartContextProvider>
+          <SunClouds />
           <Navbar />
           <ScrollToTop />
           <Routes>
