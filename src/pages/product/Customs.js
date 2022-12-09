@@ -121,23 +121,11 @@ export default function Customs(props) {
   //加入購物車方法
   const addCartFunction = () => {
     Swal.fire({
-      title: '將此商品加入購物車?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: '確定!',
-      cancelButtonText: '取消',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        Swal.fire({
-          icon: 'success',
-          title: '已加入!',
-          showCancelButton: false,
-        })
-        savePic()
-      }
+      icon: 'success',
+      title: '已加入!',
+      showCancelButton: false,
     })
+    savePic()
   }
 
   const uploadPhoto = (e) => {
