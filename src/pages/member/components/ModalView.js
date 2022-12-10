@@ -148,7 +148,7 @@ export default function ModalView({
       setReplyPlaceholder(initPlaceholder)
       setReplyPostId(0)
       setIsReplying(false)
-      target.style.color = '#000'
+      // target.style.color = '#000'
     }
 
     // console.log(result.data)
@@ -546,7 +546,7 @@ export default function ModalView({
                       setReplyTxt(e.target.value)
                     }}
                     onKeyDown={(e) => {
-                      console.log(e.key)
+                      // console.log(e.key)
                       if (e.key === 'Backspace' && replyTxt === '') {
                         setReplyPlaceholder(initPlaceholder)
                         setReplyPostId(0)
