@@ -8,6 +8,7 @@ const Trekker = styled.img`
   animation: ${(props) =>
       props.distance > 0 ? climbAnimation(props.distance) : climbAnimation(0)}
     ${(props) => props.distance / 2000}s linear forwards;
+  animation-delay: 1.2s;
   ${'' /* animation-iteration-count: infinite; */}
 `
 
@@ -21,10 +22,11 @@ function climbAnimation(distance) {
   let j = 15
   let k = 0
   let l = 5
-  if (distance < 5000) {
+
+  if (distance < 7500) {
     l = 10
   }
-  if (distance < 2500) {
+  if (distance < 4000) {
     l = 20
   }
 
@@ -33,7 +35,7 @@ function climbAnimation(distance) {
   }
 
   for (let i = 0; i <= 100; i = i + l) {
-    if (k % 2 === 0) {
+    if (k % 2 === 0 && k > 1) {
       str += `${i}% {
                   transform: translate(${
                     (k * 12 * myDistance * l) / 5 / 10000
