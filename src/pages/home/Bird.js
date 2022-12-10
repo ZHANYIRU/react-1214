@@ -1,6 +1,7 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import style from '../../styles/home-scss/bird.module.scss'
 import Swal from 'sweetalert2'
+import CarouselBird from './CarouselBird'
 
 function Bird({ show, setShow, couponData }) {
   //複製折扣碼 取得value
@@ -9,12 +10,12 @@ function Bird({ show, setShow, couponData }) {
   //問題集
   const [question, setQuestion] = useState([
     {
-      Q: '登山時的正確穿衣方法？',
+      Q: '１・登山時的正確穿衣方法？',
       Ans: ['駱駝式穿法', '洋蔥式穿法', '輕薄排汗最佳'],
       correct: '洋蔥式穿法',
     },
     {
-      Q: '如果迷路不小心在山中迷路該怎麼辦？',
+      Q: '２・如果迷路不小心在山中迷路該怎麼辦？',
       Ans: [
         '延著剛剛走過的路，原路走回去就好！',
         '原地待援，不要模糊的印象繼續走下去',
@@ -23,7 +24,7 @@ function Bird({ show, setShow, couponData }) {
       correct: '原地待援，不要模糊的印象繼續走下去',
     },
     {
-      Q: '陡峭的下坡地形要怎麼過？',
+      Q: '３・陡峭的下坡地形要怎麼過？',
       Ans: ['面向坡面', '背對坡面', '緩慢滑行'],
       correct: '面向坡面',
     },
@@ -42,12 +43,34 @@ function Bird({ show, setShow, couponData }) {
   //切換下一題 ＆ 送出 按鈕
   const [btnSwitch, setBtnSwitch] = useState(false)
 
+  //顯示小知識page
+  const [display, setDisply] = useState(false)
+
   //切換折扣碼頁面
   const [couponPage, setCouponPage] = useState(false)
 
   const [checkSwitch, setCheckSwitch] = useState(true)
 
   const coupon_id = Math.floor(Math.random() * 3)
+
+  //一鍵複製
+  const copyToClipboard = async (str) => {
+    // 写入粘贴板
+    await navigator.clipboard.writeText(str)
+
+    // 读取粘贴板
+    await navigator.clipboard.readText()
+  }
+  //顯示複製成功訊息
+  const [copyOk, setCopyOk] = useState(false)
+  const [copyOff, setCopyOff] = useState(false)
+  // const clickCopy = () => {
+  //   setCopyOk(true)
+  //   // setTimeout(setCopyOk(false), 3000)
+  // }
+  // const clickCopyOff = () => {
+  //   setTimeout(setCopyOk(false), 3000)
+  // }
 
   return (
     <>
@@ -73,20 +96,24 @@ function Bird({ show, setShow, couponData }) {
                 setNum(0)
                 setBtnSwitch(false)
                 setCouponPage(false)
+                setDisply(false)
               }}
             ></i>
           </div>
           {!couponPage ? (
             <div className={style.cardWrap}>
+              <div
+                className={style.sun}
+                onClick={() => {
+                  setDisply(true)
+                }}
+              ></div>
               <div className={style.cardContent}>
-                <div className={style.title}>
-                  <span>{num + 1}</span>
-                </div>
                 {question.map((v, i) => {
                   if (num === i) {
                     return (
                       <>
-                        <div className={style.options}>
+                        <div className={style.options} key={i}>
                           <p>{v.Q}</p>
                           <label>
                             <input
@@ -134,18 +161,47 @@ function Bird({ show, setShow, couponData }) {
                 })}
 
                 <div className={style.buttons}>
-                  <button
+                  <i
+                    class="fa-solid fa-chevron-left"
                     onClick={() => {
                       if (num > 0 && num < question.length) {
                         setNum(num - 1)
                         setBtnSwitch(false)
+                        setDisply(false)
                       }
                     }}
                     style={{ visibility: num !== 0 ? 'visible' : 'hidden' }}
-                  >
-                    上一題
-                  </button>
-                  <button
+                  ></i>
+                  <i
+                    class="fa-solid fa-chevron-right"
+                    onClick={() => {
+                      setDisply(false)
+
+                      setCheckSwitch(false)
+                      const CorrectAns = question[num].correct
+                      const AnsValid = userAnswer[num].Ans
+                      if (CorrectAns !== AnsValid) {
+                        Swal.fire({
+                          icon: 'error',
+                          title: '答案錯誤',
+                          confirmButtonText: '再試一次',
+                        })
+                      } else if (num < question.length - 1) {
+                        setNum(num + 1)
+                        if (num === 1) {
+                          console.log('btn', num)
+                          setBtnSwitch(true)
+                        }
+                      }
+                      //執行送出表單 給折扣碼
+                      if (num === 2) {
+                        console.log('折扣碼', num)
+                        setCouponPage(true)
+                      }
+                    }}
+                  ></i>
+
+                  {/* <button
                     onClick={() => {
                       setCheckSwitch(false)
                       const CorrectAns = question[num].correct
@@ -171,7 +227,7 @@ function Bird({ show, setShow, couponData }) {
                     }}
                   >
                     {!btnSwitch ? '下一題' : '送出'}
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
@@ -237,13 +293,22 @@ function Bird({ show, setShow, couponData }) {
                         onClick={() => {
                           const val = couponCode.current.textContent
                           console.log('copy', val)
-                          window.getSelection().selectAllChildren(val)
-                          document.execCommand('Copy')
-                          alert('已複製好，可貼粘。')
+                          // setCopyOk(true)
+                          copyToClipboard(val)
                         }}
                       >
                         複製
                       </button>
+                      {copyOk ? (
+                        <div
+                          className={style.copied}
+                          style={{ display: copyOff ? 'block' : 'none' }}
+                        >
+                          複製成功
+                        </div>
+                      ) : (
+                        <div className={style.copied}>消失</div>
+                      )}
                     </div>
                   </div>
                   <div className={style.detail}>
@@ -254,7 +319,7 @@ function Bird({ show, setShow, couponData }) {
                       有效期限：{couponData[coupon_id].coupon_validation}
                     </span>
                   </div>
-                  <button
+                  {/* <button
                     className={style.close}
                     onClick={() => {
                       setNum(0)
@@ -264,12 +329,21 @@ function Bird({ show, setShow, couponData }) {
                     }}
                   >
                     關閉
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </div>
           )}
         </div>
+        {display ? (
+          <div className={style.tipWrap}>
+            <div className={style.imgsWrap}>
+              <CarouselBird setDisply={setDisply} />
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
     </>
   )

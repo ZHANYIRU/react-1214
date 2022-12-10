@@ -1,0 +1,30 @@
+.CarouselGroup{
+    padding-top: 10px;
+    display: flex;
+    .groupbutton{
+        padding: 20px 10px;
+    
+        i{
+            cursor: pointer;
+            font-size: 3rem;
+           }
+       }
+       
+    .item{
+        height: 600px;
+    }
+    .TipXmark{
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top:5px;
+        right:-10px;
+        cursor: pointer;
+        i{
+            color:black;
+            font-size: 2rem;
+        }
+    }
+   
+    
+}

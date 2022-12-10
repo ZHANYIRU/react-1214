@@ -31,7 +31,7 @@ function Room({ data, setData }) {
   const [ftrRoom, setFtrRoom] = useState(false)
   const roomHeight = useRef()
   const scroll = () => {
-    const windowH = window.innerHeight - 200
+    const windowH = window.innerHeight - 250
     const roomH = roomHeight.current.clientHeight
     const windowScrollY = window.scrollY
     if (windowScrollY + windowH * 0.8 > roomH) {

@@ -3,9 +3,12 @@ import { Carousel } from 'react-responsive-carousel'
 import 'react-responsive-carousel/lib/styles/carousel.min.css' // requires a loader
 import RoomSelectBar from './RoomSelectBar'
 import { useState } from 'react'
-import SeeEvaluation from '../../../components/SeeEvaluation'
+import { useNavigate } from 'react-router-dom'
+import RoomLightBox from '../components/RoomLightBox'
 
 function RoomDetail({ detail, detailComment, el }) {
+  const navigate = useNavigate()
+
   function avatarLevel(height = 0) {
     if (height > 10000) {
       return style.gold
@@ -105,6 +108,11 @@ function RoomDetail({ detail, detailComment, el }) {
       )
     }
   }
+
+  //哪一筆評論的Index
+  const [whichCom, setWhichCom] = useState(0)
+  //燈箱切換
+  const [comLightBox, setComLightBox] = useState(false)
   return (
     <>
       <div className={style.cardWrap}>
@@ -303,18 +311,19 @@ function RoomDetail({ detail, detailComment, el }) {
                   detailComment.map((v, i) => {
                     return (
                       <>
-                        <div
-                          className={style.commentWrap}
-                          onClick={(el) => {
-                            console.log(el.target.value)
-                            SeeEvaluation()
-                          }}
-                        >
+                        <div className={style.commentWrap}>
                           <div className={style.member}>
                             <div
                               className={`${style.memberImg} ${avatarLevel(
                                 v.total_height
                               )}`}
+                              onClick={() => {
+                                navigate(
+                                  v.member_sid
+                                    ? `/member`
+                                    : `/profile?id=${v.member_sid}`
+                                )
+                              }}
                             >
                               {v.avatar ? (
                                 <img
@@ -340,16 +349,28 @@ function RoomDetail({ detail, detailComment, el }) {
                             <span style={{ marginRight: '100px' }}>
                               {v.created_at.split('T', 10)[0]}
                             </span>
-                            <span>閱讀更多</span>
+                            <span
+                              onClick={() => {
+                                setWhichCom(i)
+                                setComLightBox(true)
+                              }}
+                            >
+                              閱讀更多
+                            </span>
                           </div>
                         </div>
                       </>
                     )
                   })}
-
-                {/* ))} */}
               </div>
             </>
+          )}
+          {comLightBox && (
+            <RoomLightBox
+              setComLightBox={setComLightBox}
+              whichCom={whichCom}
+              detailComment={detailComment}
+            />
           )}
         </div>
       </div>

@@ -82,7 +82,12 @@ function CampHomeList(sliderdata) {
                               <div className={style.listcardtext}>
                                 <p>{v2.camp_name}</p>
                                 <p>金額：{v2.price}</p>
-                                <div> 評價：stars</div>
+                                <div> 評價：
+                                <span className="star">&#9733;</span>
+                                <span className="star">&#9733;</span>
+                                <span className="star">&#9733;</span>
+                                <span className="star">&#9733;</span>
+                                </div>
                               </div>
                             </div>
                           </>
