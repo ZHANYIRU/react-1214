@@ -293,7 +293,7 @@ function CampProduct() {
                             }}
                           />
                           <div className={style.howNum}>
-                            <p>商品數量：</p>
+                            <p>報名人數：</p>
                             <div className={style.numBox}>
                               <div className={style.numBox1}>
                                 <i

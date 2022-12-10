@@ -1,3 +1,5 @@
+@import '../global.scss';
+
 .filter{
     width: 100%;
     display: flex;
@@ -70,9 +72,12 @@ margin: 20px;
         margin: 10px 0;
     }
     button{
-        background-color: yellow;
+        background-color:$yellow;
         align-self:flex-end;
         border-radius: 6px;
         padding: 7px;
+    }
+    span{
+        color: $yellow;
     }
 }
