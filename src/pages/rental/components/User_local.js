@@ -10,7 +10,14 @@ const User_local = ({ text }) => {
       <div className={styled.avatar}>
         <div className={styled.pic}>
           {/* "Sally.jpeg" */}
-          <img src={data.avatar || 'Sally.jpeg'} alt="" />
+          <img
+            src={
+              data.avatar
+                ? `http://localhost:3001/uploads/${data.avatar}`
+                : 'Sally.jpeg'
+            }
+            alt=""
+          />
         </div>
         <div className={styled.name}>{data.nickname || '訪客'}</div>
       </div>
