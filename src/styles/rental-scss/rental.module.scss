@@ -5,7 +5,7 @@
 }
 .container{
     margin:0px auto;
-    width:80%;
+    width:70%;
 
 
     // 種類商品條 可能會棄案
@@ -106,13 +106,11 @@
         // justify-content:;
  
         justify-content:flex-start;
-        a{
-            width: 25%;
-        }
+        
         .rentalProduct{
             // border:1px solid black;
-            // width: 25%;
-            padding:15px 35px;
+            width: 20%;
+            padding:15px 15px;
             // width:295px;
             color:black;
             overflow:hidden;
@@ -123,7 +121,7 @@
                 border-radius:10px;
                 box-shadow: 3px 3px 3px #ccc;
                 padding:5px 20px;
-                border:1px solid black;
+                // border:1px solid black;
                 overflow: hidden;
                 // justify-content: center;
         
@@ -203,7 +201,7 @@
         height:100%;
         display:flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: space-between;
         // border:1px solid black;
        
     .kind{
