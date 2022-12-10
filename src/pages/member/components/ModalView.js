@@ -562,13 +562,11 @@ export default function ModalView({
                 setReplyPlaceholder(initPlaceholder)
               }
             }}
+            style={
+              currentPost === 0 ? { display: 'none' } : { display: 'flex' }
+            }
           >
-            <i
-              className="fa-solid fa-chevron-left"
-              style={
-                currentPost === 0 ? { display: 'none' } : { display: 'block' }
-              }
-            ></i>
+            <i className="fa-solid fa-chevron-left"></i>
           </div>
           <div
             className={`${styled.goTo} ${styled.next}`}
@@ -583,15 +581,13 @@ export default function ModalView({
               //   setCurrentPost(0)
               // }
             }}
+            style={
+              currentPost === listLength - 1
+                ? { display: 'none' }
+                : { display: 'flex' }
+            }
           >
-            <i
-              className="fa-solid fa-chevron-right"
-              style={
-                currentPost === listLength - 1
-                  ? { display: 'none' }
-                  : { display: 'block' }
-              }
-            ></i>
+            <i className="fa-solid fa-chevron-right"></i>
           </div>
         </div>
       </div>

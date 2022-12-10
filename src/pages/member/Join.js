@@ -20,7 +20,7 @@ export default function Join(props) {
 
   useEffect(() => {
     if (auth) {
-      navigate('/')
+      navigate('/member')
     }
   }, [auth])
 
