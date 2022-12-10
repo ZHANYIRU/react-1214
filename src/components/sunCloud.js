@@ -3,6 +3,7 @@ import styled from '../styles/sunCloud.module.scss'
 import { useLocation } from 'react-router-dom'
 export default function SunCloud() {
   const { pathname } = useLocation()
+  const location = useLocation()
   const [showAnimate, setShowAnimate] = useState(false)
 
   const animation = (
@@ -38,16 +39,18 @@ export default function SunCloud() {
       </div>
     </div>
   )
-
+    console.log(location);
   const display = showAnimate ? animation : ''
 
   useEffect(() => {
+    
     if (
       pathname === '/product' ||
       pathname === '/room' ||
       pathname === '/rental' ||
       pathname === '/camp' ||
-      pathname === '/member'
+      pathname === '/member' ||
+      pathname === `/profile`
     ) {
       document.body.style.overflow = 'hidden'
       setShowAnimate(!showAnimate)
