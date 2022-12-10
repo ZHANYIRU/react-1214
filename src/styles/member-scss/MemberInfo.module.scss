@@ -260,7 +260,7 @@
         position: relative;
         // border-radius: 5px;
         overflow: hidden;
-        transition: 0.2s;
+        transition: 0.1s;
 
         img {
             width: 100%;
@@ -278,7 +278,7 @@
             position: absolute;
             background-color: rgba(0, 0, 0, 0.5);
             opacity: 0;
-            transition: 0.3s;
+            transition: 0.2s;
             display: flex;
             flex-direction: column;
             justify-content: center;

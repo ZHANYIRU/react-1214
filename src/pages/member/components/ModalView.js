@@ -410,6 +410,21 @@ export default function ModalView({
                                         transform:
                                           'scale(-1) rotate(-90deg) translateY(-20%) translateX(15%)',
                                       }}
+                                      onClick={(e) => {
+                                        if (!isReplying) {
+                                          setIsReplying(true)
+                                          replyToReply(el.nickname, v.sid)
+                                          setTarget(e.target)
+                                        }
+                                        if (isReplying && target === e.target) {
+                                          setReplyPlaceholder(initPlaceholder)
+                                          setIsReplying(false)
+                                        }
+                                        if (isReplying && target !== e.target) {
+                                          replyToReply(el.nickname, v.sid)
+                                          setTarget(e.target)
+                                        }
+                                      }}
                                     >
                                       <i className="fa-solid fa-arrow-turn-up"></i>
                                     </span>
