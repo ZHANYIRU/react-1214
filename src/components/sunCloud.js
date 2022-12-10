@@ -39,18 +39,18 @@ export default function SunCloud() {
       </div>
     </div>
   )
-    console.log(location);
+  console.log(location)
   const display = showAnimate ? animation : ''
 
   useEffect(() => {
-    
     if (
       pathname === '/product' ||
       pathname === '/room' ||
       pathname === '/rental' ||
       pathname === '/camp' ||
       pathname === '/member' ||
-      pathname === `/profile`
+      pathname === '/profile' ||
+      pathname === '/product/custom'
     ) {
       document.body.style.overflow = 'hidden'
       setShowAnimate(!showAnimate)
