@@ -23,7 +23,7 @@ function OrderTime({ open, momOrder }) {
   useEffect(() => {
     test()
   }, [rows])
-
+  console.log(total)
   return (
     <>
       <div>
@@ -42,9 +42,8 @@ function OrderTime({ open, momOrder }) {
                     height:
                       open.includes(el.order_sid) &&
                       (50 + total[i] * 200 > 534.5
-                        ? // ? `${534.5}px`
-                          `${540.5}px`
-                        : `${50 + 26 + total[i] * 200}px`),
+                        ? `${525.5}px`
+                        : `${60 + total[i] * 200}px`),
                   }}
                 />
               </div>
