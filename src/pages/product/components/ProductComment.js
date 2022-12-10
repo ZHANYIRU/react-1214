@@ -50,7 +50,9 @@ export default function ProductComment({
             )
           })}
         </p>
-        <p>{avgStar} &nbsp; 顆星</p>
+        <p>
+          {avgStar} &nbsp; {avgStar ? '顆星' : '目前尚未有評價'}
+        </p>
       </div>
       <div className={styled.commonArea}>
         {commentFetch.map((v, i) => {

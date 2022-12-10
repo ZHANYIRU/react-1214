@@ -21,6 +21,9 @@ export default function ModalView({
 
   const { data } = useContext(MemberContext)
 
+  // const initPlaceholder = '留言...(30字以內)'
+  const initPlaceholder = ''
+
   const [user, setUser] = useState({
     member_sid: 0,
     avatar: '',
@@ -31,6 +34,10 @@ export default function ModalView({
   const [liking, setLiking] = useState(false)
   const [replies, setReplies] = useState([])
   const [replyTxt, setReplyTxt] = useState('')
+  const [replyPlaceholder, setReplyPlaceholder] = useState('')
+  const [replyPostId, setReplyPostId] = useState(0)
+  const [isReplying, setIsReplying] = useState(false)
+  const [target, setTarget] = useState(null)
 
   const replyForm = useRef(null)
 
@@ -73,6 +80,7 @@ export default function ModalView({
         },
       }
     )
+
     getPostList()
     setLiked(true)
 
@@ -118,6 +126,10 @@ export default function ModalView({
       })
     }
 
+    formData.set('context', `${replyPlaceholder}${formData.get('context')}`)
+
+    formData.append('sid', replyPostId)
+
     const result = await axios.post(
       'http://localhost:3001/member/reply/api',
       formData,
@@ -133,6 +145,10 @@ export default function ModalView({
       getReply()
       getPostList()
       setReplyTxt('')
+      setReplyPlaceholder(initPlaceholder)
+      setReplyPostId(0)
+      setIsReplying(false)
+      target.style.color = '#000'
     }
 
     // console.log(result.data)
@@ -149,6 +165,10 @@ export default function ModalView({
 
   async function deleteReply(mid, sid, pid) {
     const token = localStorage.getItem('token') || ''
+
+    // return alert(
+    //   `要刪除的回覆sid為${sid}, 發表者mid為${mid}, 回覆的貼文pid為${pid}`
+    // )
 
     if (!token) {
       return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
@@ -182,6 +202,11 @@ export default function ModalView({
     }
   }
 
+  async function replyToReply(nickname, rid) {
+    setReplyPlaceholder(`@${nickname}: `)
+    setReplyPostId(rid)
+  }
+
   // function avatarLevel(height = 0) {
   //   if (height > 3000) {
   //     return styled.silver
@@ -203,6 +228,8 @@ export default function ModalView({
         onClick={() => {
           setIsView(false)
           setCurrentPost(0)
+          setReplyPostId(null)
+          setReplyPlaceholder(initPlaceholder)
           // setLocationList(0)
         }}
       >
@@ -292,52 +319,191 @@ export default function ModalView({
               <div className={styled.reply}>
                 {replies.map((v, i) => {
                   return (
-                    <div key={i} className={styled.replyPost}>
-                      <div className={`${styled.contentFlex} ${styled.left}`}>
-                        <div
-                          className={`${styled.replyAvatar} ${modalAvatarLevel(
-                            v.total_height
-                          )}`}
-                          onClick={() => {
-                            setIsView(false)
-                            setCurrentPost(0)
-                            navigate(
-                              `${v.member_sid}` === `${data.member_sid}`
-                                ? `/member`
-                                : `/profile?id=${v.member_sid}`
-                            )
-                          }}
-                        >
-                          <img
-                            src={
-                              v.avatar
-                                ? `http://localhost:3001/uploads/avatar_${v.avatar}`
-                                : '/img/default_avatar.png'
-                            }
-                            alt="postImg"
-                            loading="lazy"
-                          ></img>
-                        </div>
-
-                        <div>
-                          <h4>{v.nickname}</h4>
-                          <TextareaAutosize readOnly value={v.context} />
-                          <p className={styled.replyDate}>
-                            {dayjs(v.datetime).format('YYYY-MM-DD')}
-                            <br></br>
-                            <span
-                              style={{ color: '#E00' }}
+                    !v.parent_sid && (
+                      <div key={`${v.sid}`} style={{ paddingBottom: '10px' }}>
+                        <div className={styled.replyPost}>
+                          <div
+                            className={`${styled.contentFlex} ${styled.left}`}
+                          >
+                            <div
+                              className={`${
+                                styled.replyAvatar
+                              } ${modalAvatarLevel(v.total_height)}`}
                               onClick={() => {
-                                deleteReply(v.member_sid, v.sid, v.post_sid)
+                                setIsView(false)
+                                setCurrentPost(0)
+                                navigate(
+                                  `${v.member_sid}` === `${data.member_sid}`
+                                    ? `/member`
+                                    : `/profile?id=${v.member_sid}`
+                                )
                               }}
                             >
-                              {v.member_sid === data.member_sid ? '刪除' : ''}
-                            </span>
-                          </p>
+                              <img
+                                src={
+                                  v.avatar
+                                    ? `http://localhost:3001/uploads/avatar_${v.avatar}`
+                                    : '/img/default_avatar.png'
+                                }
+                                alt="postImg"
+                                loading="lazy"
+                              ></img>
+                            </div>
+
+                            <div>
+                              <h4
+                                onClick={(e) => {
+                                  if (!isReplying) {
+                                    setIsReplying(true)
+                                    replyToReply(v.nickname, v.sid)
+                                    setTarget(e.target)
+                                  }
+                                  if (isReplying && target === e.target) {
+                                    setReplyPlaceholder(initPlaceholder)
+                                    setReplyPostId(0)
+                                    setIsReplying(false)
+                                  }
+                                  if (isReplying && target !== e.target) {
+                                    replyToReply(v.nickname, v.sid)
+                                    setTarget(e.target)
+                                  }
+                                }}
+                              >
+                                {v.nickname}
+                              </h4>
+                              <TextareaAutosize
+                                readOnly
+                                value={v.context}
+                                style={{ color: 'black' }}
+                              />
+                              <p className={styled.replyDate}>
+                                {dayjs(v.datetime).format('YYYY-MM-DD')}
+                                <br></br>
+                                <span
+                                  style={{ color: '#E00' }}
+                                  onClick={(e) => {
+                                    deleteReply(v.member_sid, v.sid, v.post_sid)
+                                  }}
+                                >
+                                  {v.member_sid === data.member_sid
+                                    ? '刪除'
+                                    : ''}
+                                </span>
+                              </p>
+                            </div>
+                            {/* <i className="fa-regular fa-heart"></i> */}
+                          </div>
                         </div>
-                        {/* <i className="fa-regular fa-heart"></i> */}
+                        {replies.map((el, index) => {
+                          if (`${el.parent_sid}` === `${v.sid}`) {
+                            return (
+                              <div key={`${el.sid}`}>
+                                <div
+                                  className={styled.replyPost}
+                                  style={{ marginLeft: '14px' }}
+                                >
+                                  <div
+                                    className={`${styled.contentFlex} ${styled.left}`}
+                                  >
+                                    <span
+                                      style={{
+                                        transform:
+                                          'scale(-1) rotate(-90deg) translateY(-20%) translateX(15%)',
+                                      }}
+                                    >
+                                      <i className="fa-solid fa-arrow-turn-up"></i>
+                                    </span>
+                                    <div
+                                      className={`${
+                                        styled.replyAvatar
+                                      } ${modalAvatarLevel(el.total_height)}`}
+                                      onClick={() => {
+                                        setIsView(false)
+                                        setCurrentPost(0)
+                                        navigate(
+                                          `${el.member_sid}` ===
+                                            `${data.member_sid}`
+                                            ? `/member`
+                                            : `/profile?id=${el.member_sid}`
+                                        )
+                                      }}
+                                    >
+                                      <img
+                                        src={
+                                          el.avatar
+                                            ? `http://localhost:3001/uploads/avatar_${el.avatar}`
+                                            : '/img/default_avatar.png'
+                                        }
+                                        alt="postImg"
+                                        loading="lazy"
+                                      ></img>
+                                    </div>
+
+                                    <div>
+                                      <h4
+                                        onClick={(e) => {
+                                          if (!isReplying) {
+                                            setIsReplying(true)
+                                            replyToReply(el.nickname, v.sid)
+                                            setTarget(e.target)
+                                          }
+                                          if (
+                                            isReplying &&
+                                            target === e.target
+                                          ) {
+                                            setReplyPlaceholder(initPlaceholder)
+                                            setIsReplying(false)
+                                          }
+                                          if (
+                                            isReplying &&
+                                            target !== e.target
+                                          ) {
+                                            replyToReply(el.nickname, v.sid)
+                                            setTarget(e.target)
+                                          }
+                                        }}
+                                      >
+                                        {el.nickname}
+                                      </h4>
+                                      <pre>
+                                        <span style={{ color: '#E50' }}>
+                                          {el.context.indexOf('@') !== -1
+                                            ? el.context.split(' ')[0]
+                                            : el.context}
+                                        </span>
+                                        <span>{el.context.split(':')[1]}</span>
+                                      </pre>
+                                      <p className={styled.replyDate}>
+                                        {dayjs(el.datetime).format(
+                                          'YYYY-MM-DD'
+                                        )}
+                                        <br></br>
+                                        <span
+                                          style={{ color: '#E00' }}
+                                          onClick={(e) => {
+                                            deleteReply(
+                                              el.member_sid,
+                                              el.sid,
+                                              el.post_sid
+                                            )
+                                          }}
+                                        >
+                                          {el.member_sid === data.member_sid
+                                            ? '刪除'
+                                            : ''}
+                                        </span>
+                                      </p>
+                                    </div>
+                                    {/* <i className="fa-regular fa-heart"></i> */}
+                                  </div>
+                                </div>
+                              </div>
+                            )
+                          }
+                          return null
+                        })}
                       </div>
-                    </div>
+                    )
                   )
                 })}
               </div>
@@ -356,14 +522,20 @@ export default function ModalView({
                   name="post_sid"
                 />
                 <span>
-                  <TextareaAutosize
+                  <input
                     className={styled.replyInput}
-                    maxRows="1"
-                    maxLength="120"
-                    placeholder="留言...(30字以內)"
+                    maxLength="30"
+                    placeholder={`${replyPlaceholder} 留言...(30字以內)`}
                     value={replyTxt}
                     onChange={(e) => {
                       setReplyTxt(e.target.value)
+                    }}
+                    onKeyDown={(e) => {
+                      console.log(e.key)
+                      if (e.key === 'Backspace' && replyTxt === '') {
+                        setReplyPlaceholder(initPlaceholder)
+                        setReplyPostId(0)
+                      }
                     }}
                     name="context"
                   />
@@ -384,7 +556,10 @@ export default function ModalView({
             className={`${styled.goTo} ${styled.prev}`}
             onClick={() => {
               if (currentPost > 0) {
+                setLiking(false)
                 setCurrentPost(currentPost - 1)
+                setReplyPostId(0)
+                setReplyPlaceholder(initPlaceholder)
               }
             }}
           >
@@ -399,7 +574,10 @@ export default function ModalView({
             className={`${styled.goTo} ${styled.next}`}
             onClick={() => {
               if (currentPost < listLength - 1) {
+                setLiking(false)
                 setCurrentPost(currentPost + 1)
+                setReplyPostId(0)
+                setReplyPlaceholder(initPlaceholder)
               }
               // if(currentPost === listLength -1) {
               //   setCurrentPost(0)
