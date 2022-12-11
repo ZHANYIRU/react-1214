@@ -42,9 +42,10 @@ export default function ModalView({
   const [replyPlaceholder, setReplyPlaceholder] = useState('')
   const [replyPostId, setReplyPostId] = useState(0)
   const [isReplying, setIsReplying] = useState(false)
+  const [isDel, setIsDel] = useState(false)
   const [target, setTarget] = useState(null)
   const [targetRid, setTargetRid] = useState(null)
-  const [isDel, setIsDel] = useState(false)
+  const [addingReply, setAddingReply] = useState(false)
 
   const replyForm = useRef(null)
 
@@ -155,6 +156,7 @@ export default function ModalView({
       setReplyPlaceholder(initPlaceholder)
       setReplyPostId(0)
       setIsReplying(false)
+      setAddingReply(true)
       // target.style.color = '#000'
     }
 
@@ -225,6 +227,8 @@ export default function ModalView({
     getInfo()
     getLike()
     getReply()
+    setReplyTxt('')
+    setReplyPlaceholder(initPlaceholder)
   }, [currentPost])
 
   useEffect(() => {
@@ -235,19 +239,27 @@ export default function ModalView({
   }, [isView])
 
   useEffect(() => {
-    console.log(targetRid)
-    if (targetRid && !isDel) {
-      replyRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
-      setTargetRid(null)
-    } else if (!isDel) {
-      bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+    if (!isDel) {
+      if (addingReply === true) {
+        if (targetRid) {
+          replyRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+          setTargetRid(null)
+          setAddingReply(false)
+        } else if (!targetRid) {
+          bottomRef.current?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          })
+          setAddingReply(false)
+        }
+      } else if (addingReply === false) {
+        topRef.current?.scrollIntoView()
+      }
     }
-    setIsDel(false)
-  }, [showData])
-
-  useEffect(() => {
-    topRef.current?.scrollIntoView()
-  }, [currentPost])
+    if (isDel) {
+      setIsDel(false)
+    }
+  }, [replies])
 
   return (
     <>
@@ -391,6 +403,7 @@ export default function ModalView({
                                     replyToReply(v.nickname, v.sid)
                                     setTarget(e.target)
                                     setTargetRid(e.target.dataset.rid)
+                                    console.log(e.target.dataset.rid)
                                   }
                                   if (isReplying && target === e.target) {
                                     setReplyPlaceholder(initPlaceholder)
@@ -402,6 +415,7 @@ export default function ModalView({
                                     replyToReply(v.nickname, v.sid)
                                     setTarget(e.target)
                                     setTargetRid(e.target.dataset.rid)
+                                    console.log(e.target.dataset.rid)
                                   }
                                 }}
                               >
@@ -454,6 +468,7 @@ export default function ModalView({
                                           replyToReply(el.nickname, v.sid)
                                           setTarget(e.target)
                                           setTargetRid(e.target.dataset.rid)
+                                          console.log(e.target.dataset.rid)
                                         }
                                         if (isReplying && target === e.target) {
                                           setReplyPlaceholder(initPlaceholder)
@@ -463,6 +478,7 @@ export default function ModalView({
                                           replyToReply(el.nickname, v.sid)
                                           setTarget(e.target)
                                           setTargetRid(e.target.dataset.rid)
+                                          console.log(e.target.dataset.rid)
                                         }
                                       }}
                                     >
@@ -503,6 +519,7 @@ export default function ModalView({
                                             replyToReply(el.nickname, v.sid)
                                             setTarget(e.target)
                                             setTargetRid(e.target.dataset.rid)
+                                            console.log(e.target.dataset.rid)
                                           }
                                           if (
                                             isReplying &&
@@ -518,6 +535,7 @@ export default function ModalView({
                                             replyToReply(el.nickname, v.sid)
                                             setTarget(e.target)
                                             setTargetRid(e.target.dataset.rid)
+                                            console.log(e.target.dataset.rid)
                                           }
                                         }}
                                       >
@@ -562,13 +580,13 @@ export default function ModalView({
                           }
                         })}
                         {`${v.sid}` === `${targetRid}` && (
-                          <div ref={replyRef}>**********</div>
+                          <div ref={replyRef}> </div>
                         )}
                       </div>
                     )
                   )
                 })}
-                <div ref={bottomRef}></div>
+                <div ref={bottomRef}> </div>
               </div>
             </div>
             <hr />
