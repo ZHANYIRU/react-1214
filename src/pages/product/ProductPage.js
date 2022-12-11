@@ -630,7 +630,7 @@ export default function ProductPage() {
                 }
               }}
             >
-              商品評論
+              商品評論({commentFetch.length})
             </div>
           </div>
           {introCom ? (
