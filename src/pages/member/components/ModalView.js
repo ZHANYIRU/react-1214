@@ -399,23 +399,26 @@ export default function ModalView({
                                 data-rid={v.sid}
                                 onClick={(e) => {
                                   if (!isReplying) {
+                                    setReplyTxt('')
                                     setIsReplying(true)
                                     replyToReply(v.nickname, v.sid)
                                     setTarget(e.target)
                                     setTargetRid(e.target.dataset.rid)
-                                    console.log(e.target.dataset.rid)
+                                    // console.log(e.target.dataset.rid)
                                   }
                                   if (isReplying && target === e.target) {
                                     setReplyPlaceholder(initPlaceholder)
                                     setReplyPostId(0)
                                     setIsReplying(false)
                                     setTargetRid(null)
+                                    setReplyTxt('')
                                   }
                                   if (isReplying && target !== e.target) {
+                                    setReplyTxt('')
                                     replyToReply(v.nickname, v.sid)
                                     setTarget(e.target)
                                     setTargetRid(e.target.dataset.rid)
-                                    console.log(e.target.dataset.rid)
+                                    // console.log(e.target.dataset.rid)
                                   }
                                 }}
                               >
@@ -465,20 +468,25 @@ export default function ModalView({
                                       onClick={(e) => {
                                         if (!isReplying) {
                                           setIsReplying(true)
+                                          setReplyTxt('')
                                           replyToReply(el.nickname, v.sid)
                                           setTarget(e.target)
                                           setTargetRid(e.target.dataset.rid)
-                                          console.log(e.target.dataset.rid)
+                                          // console.log(e.target.dataset.rid)
                                         }
                                         if (isReplying && target === e.target) {
                                           setReplyPlaceholder(initPlaceholder)
+                                          setReplyPostId(0)
                                           setIsReplying(false)
+                                          setTargetRid(null)
+                                          setReplyTxt('')
                                         }
                                         if (isReplying && target !== e.target) {
+                                          setReplyTxt('')
                                           replyToReply(el.nickname, v.sid)
                                           setTarget(e.target)
                                           setTargetRid(e.target.dataset.rid)
-                                          console.log(e.target.dataset.rid)
+                                          // console.log(e.target.dataset.rid)
                                         }
                                       }}
                                     >
@@ -515,27 +523,32 @@ export default function ModalView({
                                         data-rid={v.sid}
                                         onClick={(e) => {
                                           if (!isReplying) {
+                                            setReplyTxt('')
                                             setIsReplying(true)
                                             replyToReply(el.nickname, v.sid)
                                             setTarget(e.target)
                                             setTargetRid(e.target.dataset.rid)
-                                            console.log(e.target.dataset.rid)
+                                            // console.log(e.target.dataset.rid)
                                           }
                                           if (
                                             isReplying &&
                                             target === e.target
                                           ) {
                                             setReplyPlaceholder(initPlaceholder)
+                                            setReplyPostId(0)
                                             setIsReplying(false)
+                                            setTargetRid(null)
+                                            setReplyTxt('')
                                           }
                                           if (
                                             isReplying &&
                                             target !== e.target
                                           ) {
+                                            setReplyTxt('')
                                             replyToReply(el.nickname, v.sid)
                                             setTarget(e.target)
                                             setTargetRid(e.target.dataset.rid)
-                                            console.log(e.target.dataset.rid)
+                                            // console.log(e.target.dataset.rid)
                                           }
                                         }}
                                       >
@@ -617,6 +630,7 @@ export default function ModalView({
                         setReplyPlaceholder(initPlaceholder)
                         setReplyPostId(0)
                         setIsReplying(false)
+                        setTargetRid(null)
                       }
                     }}
                     name="context"
