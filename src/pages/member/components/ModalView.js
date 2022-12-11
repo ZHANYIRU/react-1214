@@ -24,6 +24,8 @@ export default function ModalView({
   // const initPlaceholder = '留言...(30字以內)'
   const initPlaceholder = ''
 
+  const bottomRef = useRef(null)
+
   const [user, setUser] = useState({
     member_sid: 0,
     avatar: '',
@@ -219,6 +221,16 @@ export default function ModalView({
     getLike()
     getReply()
   }, [currentPost])
+
+  useEffect(() => {
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth' })
+      setTarget(null)
+    } else {
+      //  scroll to bottom every time messages change
+      bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [showData])
 
   return (
     <>
@@ -521,6 +533,7 @@ export default function ModalView({
                     )
                   )
                 })}
+                <div ref={bottomRef}></div>
               </div>
             </div>
             <hr />
