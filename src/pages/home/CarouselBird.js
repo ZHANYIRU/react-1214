@@ -6,20 +6,20 @@ const CarouselHome = ({ setDisply }) => {
   let reactSwipeEl
 
   const imageStyles = {
-    margin: '25px auto',
+    margin: '15px 30px 15px 0px',
     width: '100%',
     // height: '100%',
   }
   const imageStyle = {
     display: 'block',
-    margin: '10px 120px',
+    margin: '5px 135px',
     width: '70%',
     // height: '100%',
   }
   return (
     <>
-      <div className="CarouselGroup">
-        <div className="TipXmark">
+      <div className="CarouselGroupBird">
+        <div className="TipXmarkBird">
           <i
             className="fa-solid fa-xmark"
             onClick={() => {
@@ -27,29 +27,29 @@ const CarouselHome = ({ setDisply }) => {
             }}
           ></i>
         </div>
-        <div className="groupbutton" onClick={() => reactSwipeEl.prev()}>
+        <div className="groupbuttonBird" onClick={() => reactSwipeEl.prev()}>
           <i className="fa-solid fa-angle-left"></i>
         </div>
         <ReactSwipe
           className="carousel"
-          swipeOptions={{ continuous: false }}
+          swipeOptions={{ continuous: true }}
           ref={(el) => (reactSwipeEl = el)}
         >
           <div className="item">
             <img style={imageStyles} alt="" src={`/img/tips/tip1.JPG`} />
           </div>
           <div className="item">
-            <img style={imageStyle} alt="" src={`/img/tips/tip2.JPG`} />
+            <img style={imageStyle} alt="" src={`/img/tips/tip3.JPG`} />
           </div>
           <div className="item">
-            <img style={imageStyle} alt="" src={`/img/tips/tip3.JPG`} />
+            <img style={imageStyle} alt="" src={`/img/tips/tip2.JPG`} />
           </div>
 
           <div className="item">
             <img style={imageStyle} alt="" src={`/img/tips/tip4.JPG`} />
           </div>
         </ReactSwipe>
-        <div className="groupbutton" onClick={() => reactSwipeEl.next()}>
+        <div className="groupbuttonBird" onClick={() => reactSwipeEl.next()}>
           <i className="fa-solid fa-angle-right"></i>
         </div>
       </div>
