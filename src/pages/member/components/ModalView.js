@@ -27,6 +27,7 @@ export default function ModalView({
 
   const bottomRef = useRef(null)
   const topRef = useRef(null)
+  const replyRef = useRef(null)
 
   const [user, setUser] = useState({
     member_sid: 0,
@@ -544,7 +545,7 @@ export default function ModalView({
                               </div>
                             )
                           }
-                          return null
+                          {/* return <div>---</div> */}
                         })}
                       </div>
                     )
