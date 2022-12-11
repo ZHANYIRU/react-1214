@@ -6,6 +6,7 @@ import ModalView from '../components/ModalView'
 import ThumbnailView from '../components/ThumbnailView'
 import TotalHeight from '../components/TotalHeight'
 import PostMap from '../components/PostMap'
+import LeafletMap from '../components/LeafletMap'
 import axios from 'axios'
 import MemberContext from '../../../contexts/MemberContext'
 import { useContext } from 'react'
@@ -31,6 +32,7 @@ export default function ProfileInfo() {
   const [postList, setPostList] = useState([])
   const [currentPost, setCurrentPost] = useState(0)
   const [uniqueLocations, setUniqueLocations] = useState([])
+  const [showOverview, setShowOverview] = useState(true)
 
   async function getPostList() {
     const rows = await axios.get(
@@ -72,19 +74,41 @@ export default function ProfileInfo() {
       <div className={styled.row}>
         <div className={styled.col}>
           <div className={`${styled.card} ${styled.infoCard}`}>
-            <h3>分享地圖</h3>
+            <div className={styled.postTitle}>
+              <h3>分享地圖</h3>
+              <button
+                onClick={() => {
+                  setShowOverview(!showOverview)
+                }}
+              >
+                <span>地圖切換</span>
+                <i className="fa-solid fa-map-location-dot"></i>
+              </button>
+            </div>
             <div className={styled.divider}></div>
-            <div className={styled.overview}>
-              <h4 className={styled.heightTag}>
-                累積海拔: {info.total_height}公尺
-              </h4>
-              <PostMap postList={postList} getPostList={getPostList} />
-              <TotalHeight
+            {showOverview ? (
+              <div className={styled.overview}>
+                <h4 className={styled.heightTag}>
+                  累積海拔: {info.total_height}公尺
+                </h4>
+                <PostMap postList={postList} getPostList={getPostList} />
+                <TotalHeight
+                  totalHeight={
+                    info && info.total_height
+                      ? { height: info.total_height }
+                      : 0
+                  }
+                />
+              </div>
+            ) : (
+              <LeafletMap
+                postList={postList}
+                getPostList={getPostList}
                 totalHeight={
                   info && info.total_height ? { height: info.total_height } : 0
                 }
               />
-            </div>
+            )}
           </div>
         </div>
       </div>
@@ -127,6 +151,7 @@ export default function ProfileInfo() {
       </div>
       {isView && (
         <ModalView
+          isView={isView}
           setIsView={setIsView}
           showData={postList[currentPost]}
           setCurrentPost={setCurrentPost}

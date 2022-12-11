@@ -115,6 +115,7 @@ export default function SocialWall() {
       </div>
       {isView && (
         <ModalView
+          isView={isView}
           setIsView={setIsView}
           showData={socialList[currentPost]}
           setCurrentPost={setCurrentPost}

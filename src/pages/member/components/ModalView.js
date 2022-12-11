@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { modalAvatarLevel } from '../components/Avatar'
 
 export default function ModalView({
+  isView,
   getPostList,
   setIsView,
   showData,
@@ -24,6 +25,10 @@ export default function ModalView({
   // const initPlaceholder = '留言...(30字以內)'
   const initPlaceholder = ''
 
+  const bottomRef = useRef(null)
+  const topRef = useRef(null)
+  const replyRef = useRef(null)
+
   const [user, setUser] = useState({
     member_sid: 0,
     avatar: '',
@@ -38,6 +43,7 @@ export default function ModalView({
   const [replyPostId, setReplyPostId] = useState(0)
   const [isReplying, setIsReplying] = useState(false)
   const [target, setTarget] = useState(null)
+  const [isDel, setIsDel] = useState(false)
 
   const replyForm = useRef(null)
 
@@ -148,7 +154,7 @@ export default function ModalView({
       setReplyPlaceholder(initPlaceholder)
       setReplyPostId(0)
       setIsReplying(false)
-      target.style.color = '#000'
+      // target.style.color = '#000'
     }
 
     // console.log(result.data)
@@ -220,12 +226,33 @@ export default function ModalView({
     getReply()
   }, [currentPost])
 
+  useEffect(() => {
+    if (isView === true) {
+      document.body.style.overflow = 'hidden'
+    }
+  }, [isView])
+
+  useEffect(() => {
+    if (target && !isDel) {
+      target.scrollIntoView({ behavior: 'smooth' })
+      setTarget(null)
+    } else if (!isDel) {
+      bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }
+    setIsDel(false)
+  }, [showData])
+
+  useEffect(() => {
+    topRef.current?.scrollIntoView()
+  }, [currentPost])
+
   return (
     <>
       <div
         className={styled.modalBg}
         // z-index over nav bar?
         onClick={() => {
+          document.body.style.overflow = 'visible'
           setIsView(false)
           setCurrentPost(0)
           setReplyPostId(null)
@@ -317,6 +344,7 @@ export default function ModalView({
               </div>
               <hr />
               <div className={styled.reply}>
+                <div ref={topRef}></div>
                 {replies.map((v, i) => {
                   return (
                     !v.parent_sid && (
@@ -383,6 +411,7 @@ export default function ModalView({
                                   style={{ color: '#E00' }}
                                   onClick={(e) => {
                                     deleteReply(v.member_sid, v.sid, v.post_sid)
+                                    setIsDel(true)
                                   }}
                                 >
                                   {v.member_sid === data.member_sid
@@ -409,6 +438,21 @@ export default function ModalView({
                                       style={{
                                         transform:
                                           'scale(-1) rotate(-90deg) translateY(-20%) translateX(15%)',
+                                      }}
+                                      onClick={(e) => {
+                                        if (!isReplying) {
+                                          setIsReplying(true)
+                                          replyToReply(el.nickname, v.sid)
+                                          setTarget(e.target)
+                                        }
+                                        if (isReplying && target === e.target) {
+                                          setReplyPlaceholder(initPlaceholder)
+                                          setIsReplying(false)
+                                        }
+                                        if (isReplying && target !== e.target) {
+                                          replyToReply(el.nickname, v.sid)
+                                          setTarget(e.target)
+                                        }
                                       }}
                                     >
                                       <i className="fa-solid fa-arrow-turn-up"></i>
@@ -481,6 +525,7 @@ export default function ModalView({
                                         <span
                                           style={{ color: '#E00' }}
                                           onClick={(e) => {
+                                            setTarget(e.target)
                                             deleteReply(
                                               el.member_sid,
                                               el.sid,
@@ -500,12 +545,13 @@ export default function ModalView({
                               </div>
                             )
                           }
-                          return null
+                          {/* return <div>---</div> */}
                         })}
                       </div>
                     )
                   )
                 })}
+                <div ref={bottomRef}></div>
               </div>
             </div>
             <hr />
@@ -531,7 +577,7 @@ export default function ModalView({
                       setReplyTxt(e.target.value)
                     }}
                     onKeyDown={(e) => {
-                      console.log(e.key)
+                      // console.log(e.key)
                       if (e.key === 'Backspace' && replyTxt === '') {
                         setReplyPlaceholder(initPlaceholder)
                         setReplyPostId(0)
@@ -560,15 +606,14 @@ export default function ModalView({
                 setCurrentPost(currentPost - 1)
                 setReplyPostId(0)
                 setReplyPlaceholder(initPlaceholder)
+                topRef.current?.scrollIntoView()
               }
             }}
+            style={
+              currentPost === 0 ? { display: 'none' } : { display: 'flex' }
+            }
           >
-            <i
-              className="fa-solid fa-chevron-left"
-              style={
-                currentPost === 0 ? { display: 'none' } : { display: 'block' }
-              }
-            ></i>
+            <i className="fa-solid fa-chevron-left"></i>
           </div>
           <div
             className={`${styled.goTo} ${styled.next}`}
@@ -578,20 +623,19 @@ export default function ModalView({
                 setCurrentPost(currentPost + 1)
                 setReplyPostId(0)
                 setReplyPlaceholder(initPlaceholder)
+                topRef.current?.scrollIntoView()
               }
               // if(currentPost === listLength -1) {
               //   setCurrentPost(0)
               // }
             }}
+            style={
+              currentPost === listLength - 1
+                ? { display: 'none' }
+                : { display: 'flex' }
+            }
           >
-            <i
-              className="fa-solid fa-chevron-right"
-              style={
-                currentPost === listLength - 1
-                  ? { display: 'none' }
-                  : { display: 'block' }
-              }
-            ></i>
+            <i className="fa-solid fa-chevron-right"></i>
           </div>
         </div>
       </div>

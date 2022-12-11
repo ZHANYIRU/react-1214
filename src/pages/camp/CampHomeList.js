@@ -47,10 +47,9 @@ function CampHomeList(sliderdata) {
           })
           .map((v, i) => {
             return (
-              <>
+              <div key={i}>
                 <Link
                   to={`/camp/filter`}
-                  key={i}
                   onClick={() => {
                     setFilterCon(v.camptype_sid)
                   }}
@@ -65,40 +64,39 @@ function CampHomeList(sliderdata) {
                     .map((v2, i2) => {
                       if (i2 < 4) {
                         return (
-                          <>
-                            <div
-                              key={i}
-                              className={style.listcard}
-                              onClick={() => {
-                                navigate(`/camp/${v2.c_sid}`)
-                              }}
-                            >
+                          <div
+                            key={i2}
+                            className={style.listcard}
+                            onClick={() => {
+                              navigate(`/camp/${v2.c_sid}`)
+                            }}
+                          >
+                            <div>
+                              <img
+                                src={`http://localhost:3001/n7/campmain/${v2.mainImage}`}
+                                alt=""
+                              />
+                            </div>
+                            <div className={style.listcardtext}>
+                              <p>{v2.camp_name}</p>
+                              <p>金額：{v2.price}</p>
                               <div>
-                                <img
-                                  src={`http://localhost:3001/n7/campmain/${v2.mainImage}`}
-                                  alt=""
-                                />
-                              </div>
-                              <div className={style.listcardtext}>
-                                <p>{v2.camp_name}</p>
-                                <p>金額：{v2.price}</p>
-                                <div> 評價：
+                                {' '}
+                                評價：
                                 <span className="star">&#9733;</span>
                                 <span className="star">&#9733;</span>
                                 <span className="star">&#9733;</span>
                                 <span className="star">&#9733;</span>
-                                </div>
                               </div>
                             </div>
-                          </>
+                          </div>
                         )
                       } else {
                         return
                       }
                     })}
                 </div>
-                
-              </>
+              </div>
             )
           })}
       </h2>
