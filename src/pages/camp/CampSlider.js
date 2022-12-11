@@ -3,6 +3,7 @@ import style from '../../styles/camp-scss/camphome.module.scss'
 import { useNavigate } from 'react-router-dom'
 import Slider from 'react-slick'
 import axios from 'axios'
+import log from 'eslint-plugin-react/lib/util/log'
 
 function CampSlider() {
   let all = 'all'
@@ -10,6 +11,8 @@ function CampSlider() {
   const [campData, setCampData] = useState([{}])
 
   const navigate = useNavigate()
+
+  const [people, setPeople] = useState([])
 
   const fetchAll = async (url) => {
     try {
@@ -19,6 +22,24 @@ function CampSlider() {
     } catch (e) {
       console.log(e.message)
     }
+  }
+
+  const howPeople = (v) => {
+    let pNum
+    people.map((v2, i2) => {
+      if (v.c_sid === v2.campaign_sid) {
+        console.log(v2.pnum)
+        return (pNum = v2.pnum)
+      }
+    })
+    return pNum ? pNum : 0
+  }
+
+  const howPresent = (pNum, v) => {
+    let present = Math.floor((pNum / v.qty) * 100)
+    return (
+      <div className={style.barshort} style={{ width: `${present}%` }}></div>
+    )
   }
 
   //輪播
@@ -65,6 +86,19 @@ function CampSlider() {
     return b
   }
 
+  // console.log(people[0])
+  //取得報名人數資訊
+  const sumpeople = async () => {
+    const response = await axios.get(`http://localhost:3001/camp/joinnum`)
+    const r = response.data
+
+    setPeople(r)
+  }
+
+  useEffect(() => {
+    sumpeople()
+  }, [])
+
   // useEffect 處理 timer
   useEffect(() => {
     let id = setInterval(() => {
@@ -105,11 +139,18 @@ function CampSlider() {
                     </div>
                     <div className={style.dayoneright}>
                       <div className={style.bar}>
-                        <div className={style.barlong}>
+                        {/* <div className={style.barlong}>
                           <div className={style.barshort}></div>
+                        </div> */}
+                        <div className={style.barlong}>
+                          {howPresent(howPeople(v), v)}
                         </div>
                         <div className={style.limit}>
-                          <p>報名人數限制：{v.qty}人 , 已報名：39人</p>
+                          <p>
+                            報名人數限制：{v.qty}人 , 已報名：
+                            {howPeople(v)}人
+                          </p>
+
                           <p>
                             截止報名：{v.camp_joinenddate}, 報名倒數：距離還有
                             {timeLeft[i].days}天{timeLeft[i].hours}時
@@ -123,16 +164,14 @@ function CampSlider() {
                           <h4>活動日期：{v.camp_startdate} </h4>
                           <p>{v.brife_describe}</p>
                         </div>
-
-                        
                       </div>
                       <button
-                          onClick={() => {
-                            navigate(`/camp/${v.c_sid}`)
-                          }}
-                        >
-                          我要報名
-                        </button>
+                        onClick={() => {
+                          navigate(`/camp/${v.c_sid}`)
+                        }}
+                      >
+                        我要報名
+                      </button>
                     </div>
                   </div>
 
