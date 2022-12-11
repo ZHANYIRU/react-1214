@@ -113,7 +113,7 @@
 }
 
 .barshort{
-    width: 50%;
+    width: 90%;
     height: 100%;
     background-color: rgb(255, 242, 0);
     border-radius:  15px ;
@@ -166,6 +166,9 @@
 
     p{
         text-align: left;
+    }
+    span{
+        color: $yellow;
     }
 }
 

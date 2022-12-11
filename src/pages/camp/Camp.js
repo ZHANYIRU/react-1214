@@ -1,4 +1,3 @@
-import stylePropObject from 'eslint-plugin-react/lib/rules/style-prop-object'
 import { useContext, useEffect, useState } from 'react'
 import ProCartContext from '../../contexts/ProCartContext'
 import { Link } from 'react-router-dom'

@@ -1,0 +1,112 @@
+@import '../global.scss';
+
+*{
+    line-height: 1.2rem;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+.on {
+    color: $yellow;
+  }
+  .off {
+    color: #ccc;
+  }
+
+.comLightBox{
+    background-color: rgba(7, 2, 2, 0.507);
+    width: 100%;
+    height: 100vh;
+    // height: calc(100vh - 60px);
+    left:0;
+    top: 0px;
+    position: fixed;
+    z-index: 80;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.comView{
+    min-width: 536px;
+    // margin: 0 auto;
+    width: 40%;
+    // height: 350px;
+    background-color: #fff;
+    display: flex;
+    border-radius: 10px;
+
+    .leftArea{
+        width: 40%;
+        padding: 20px 0px 40px 40px;
+        .picAndNameWrap{
+            width: 200px;
+            display: flex;
+            align-items: center;
+            height: 110px;
+            cursor: pointer;
+            .ggWrap{
+                margin-right: 30px;
+            }
+            .imgBorder{
+                    margin-right: 0px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 70px;
+                    height: 70px;
+                    border-radius: 50%;
+                    // background: linear-gradient(#3401f0, #6b41e7,#9b06e6);
+                   
+                .imgWrap{
+                    width: 60px;
+                    height: 60px;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    img{
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+            .gold {
+                background-image: conic-gradient(from 180deg at 50% 50%, #fffcf4 0deg, #ffbf00 69.37deg, #ffa600 163.12deg, #ab8100 275.62deg, #ffffff 360deg);
+            }
+            
+            .silver {
+                background-image: conic-gradient(from 180deg at 50% 50%, #F7F7F7 0deg, #A09F9E 69.37deg, #9A9998 163.12deg, #4b4946 275.62deg, #F7F7F7 360deg);
+            }
+            
+            .bronze {
+                background-image: conic-gradient(from 180deg at 50% 50%, #fff1c7 0deg, #b37e4a 69.37deg, #c27f3b 163.12deg, #98600c 275.62deg, #fff1c7 360deg);
+            }
+            .Name{
+                p:nth-child(1){
+                    font-size: 1.2rem;
+                }
+                p:nth-child(2){
+                    font-size: 1rem;
+                }
+                
+            }
+        }
+        .howStar{
+            display: flex;
+            p{
+                font-size: 1.5rem;
+            }
+        }
+    }
+    .rightArea{
+        width: 60%;
+        padding: 20px 40px 40px 40px;
+        .comDate{
+            display: flex;
+            align-items: center;
+            height: 80px;
+        }
+        .comText{
+            line-height: 2rem;
+            font-size: 1.2rem;
+        }
+    }
+}
+

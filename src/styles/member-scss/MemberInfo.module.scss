@@ -493,7 +493,7 @@
                     height: 190px;
 
                     .replyPost {
-                        margin-bottom: 30px;
+                        margin-bottom: 16px;
                         position: relative;
 
                         .replyAvatar {
@@ -503,7 +503,7 @@
                             // background-image: linear-gradient(0deg,#ddd, #444);
                             overflow: hidden;
                             margin-right: 12px;
-                            margin-left: 12px;
+                            margin-left: 8px;
                             cursor: pointer;
 
                             img {
@@ -519,13 +519,21 @@
                         h4 {
                             font-size: 14px;
                             font-weight: 700;
+                            cursor: pointer;
                         }
 
                         textarea {
-                            width: 276px;
+                            width: 240px;
                             font-size: 14px;
                             border-bottom: none;
                             margin-right: auto;
+                            padding-left: 0;
+                            
+                        }
+
+                        pre {
+                            font-family: 'Noto Sans TC', sans-serif;
+                            font-size: 14px;
                         }
 
                         i {
