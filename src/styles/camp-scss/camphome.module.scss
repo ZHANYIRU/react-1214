@@ -55,6 +55,25 @@
     }
 }
 
+.disable{
+    filter:grayscale(95%);
+    position: relative;
+    &::before{
+        content: '已報名截止';
+        font-size: 40px;
+        text-align: center;
+        line-height: 100px;
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 100px;
+        background-color: red;
+        color: #fff;
+        // transform: rotate(45deg);
+        
+    }
+}
+
 .dayoneright{
     width: 50%;
     height: 100%;
@@ -123,7 +142,12 @@
 .limit{
     display: flex;
     flex-direction: column;
-    align-items: left;     
+    align-items: left;    
+    button{
+        width: 10px;
+        height: 5px;
+        border: transparent;
+    }
 }
 
 .list{
