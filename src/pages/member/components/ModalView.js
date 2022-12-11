@@ -43,6 +43,7 @@ export default function ModalView({
   const [replyPostId, setReplyPostId] = useState(0)
   const [isReplying, setIsReplying] = useState(false)
   const [target, setTarget] = useState(null)
+  const [targetRid, setTargetRid] = useState(null)
   const [isDel, setIsDel] = useState(false)
 
   const replyForm = useRef(null)
@@ -229,13 +230,15 @@ export default function ModalView({
   useEffect(() => {
     if (isView === true) {
       document.body.style.overflow = 'hidden'
+      document.body.style.paddingRight = '10px'
     }
   }, [isView])
 
   useEffect(() => {
-    if (target && !isDel) {
-      target.scrollIntoView({ behavior: 'smooth' })
-      setTarget(null)
+    console.log(targetRid)
+    if (targetRid && !isDel) {
+      replyRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+      setTargetRid(null)
     } else if (!isDel) {
       bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
     }
@@ -253,6 +256,7 @@ export default function ModalView({
         // z-index over nav bar?
         onClick={() => {
           document.body.style.overflow = 'visible'
+          document.body.style.paddingRight = '0'
           setIsView(false)
           setCurrentPost(0)
           setReplyPostId(null)
@@ -380,20 +384,24 @@ export default function ModalView({
 
                             <div>
                               <h4
+                                data-rid={v.sid}
                                 onClick={(e) => {
                                   if (!isReplying) {
                                     setIsReplying(true)
                                     replyToReply(v.nickname, v.sid)
                                     setTarget(e.target)
+                                    setTargetRid(e.target.dataset.rid)
                                   }
                                   if (isReplying && target === e.target) {
                                     setReplyPlaceholder(initPlaceholder)
                                     setReplyPostId(0)
                                     setIsReplying(false)
+                                    setTargetRid(null)
                                   }
                                   if (isReplying && target !== e.target) {
                                     replyToReply(v.nickname, v.sid)
                                     setTarget(e.target)
+                                    setTargetRid(e.target.dataset.rid)
                                   }
                                 }}
                               >
@@ -435,6 +443,7 @@ export default function ModalView({
                                     className={`${styled.contentFlex} ${styled.left}`}
                                   >
                                     <span
+                                      data-rid={v.sid}
                                       style={{
                                         transform:
                                           'scale(-1) rotate(-90deg) translateY(-20%) translateX(15%)',
@@ -444,6 +453,7 @@ export default function ModalView({
                                           setIsReplying(true)
                                           replyToReply(el.nickname, v.sid)
                                           setTarget(e.target)
+                                          setTargetRid(e.target.dataset.rid)
                                         }
                                         if (isReplying && target === e.target) {
                                           setReplyPlaceholder(initPlaceholder)
@@ -452,6 +462,7 @@ export default function ModalView({
                                         if (isReplying && target !== e.target) {
                                           replyToReply(el.nickname, v.sid)
                                           setTarget(e.target)
+                                          setTargetRid(e.target.dataset.rid)
                                         }
                                       }}
                                     >
@@ -485,11 +496,13 @@ export default function ModalView({
 
                                     <div>
                                       <h4
+                                        data-rid={v.sid}
                                         onClick={(e) => {
                                           if (!isReplying) {
                                             setIsReplying(true)
                                             replyToReply(el.nickname, v.sid)
                                             setTarget(e.target)
+                                            setTargetRid(e.target.dataset.rid)
                                           }
                                           if (
                                             isReplying &&
@@ -504,6 +517,7 @@ export default function ModalView({
                                           ) {
                                             replyToReply(el.nickname, v.sid)
                                             setTarget(e.target)
+                                            setTargetRid(e.target.dataset.rid)
                                           }
                                         }}
                                       >
@@ -531,6 +545,7 @@ export default function ModalView({
                                               el.sid,
                                               el.post_sid
                                             )
+                                            setIsDel(true)
                                           }}
                                         >
                                           {el.member_sid === data.member_sid
@@ -545,8 +560,10 @@ export default function ModalView({
                               </div>
                             )
                           }
-                          {/* return <div>---</div> */}
                         })}
+                        {`${v.sid}` === `${targetRid}` && (
+                          <div ref={replyRef}>**********</div>
+                        )}
                       </div>
                     )
                   )
@@ -581,6 +598,7 @@ export default function ModalView({
                       if (e.key === 'Backspace' && replyTxt === '') {
                         setReplyPlaceholder(initPlaceholder)
                         setReplyPostId(0)
+                        setIsReplying(false)
                       }
                     }}
                     name="context"
