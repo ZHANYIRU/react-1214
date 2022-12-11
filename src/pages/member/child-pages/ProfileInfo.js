@@ -151,6 +151,7 @@ export default function ProfileInfo() {
       </div>
       {isView && (
         <ModalView
+          isView={isView}
           setIsView={setIsView}
           showData={postList[currentPost]}
           setCurrentPost={setCurrentPost}

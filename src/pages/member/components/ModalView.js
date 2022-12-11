@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { modalAvatarLevel } from '../components/Avatar'
 
 export default function ModalView({
+  isView,
   getPostList,
   setIsView,
   showData,
@@ -25,6 +26,7 @@ export default function ModalView({
   const initPlaceholder = ''
 
   const bottomRef = useRef(null)
+  const topRef = useRef(null)
 
   const [user, setUser] = useState({
     member_sid: 0,
@@ -150,6 +152,13 @@ export default function ModalView({
       setReplyPlaceholder(initPlaceholder)
       setReplyPostId(0)
       setIsReplying(false)
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth' })
+        setTarget(null)
+      } else {
+        //  scroll to bottom every time messages change
+        bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+      }
       // target.style.color = '#000'
     }
 
@@ -223,14 +232,10 @@ export default function ModalView({
   }, [currentPost])
 
   useEffect(() => {
-    if (target) {
-      target.scrollIntoView({ behavior: 'smooth' })
-      setTarget(null)
-    } else {
-      //  scroll to bottom every time messages change
-      bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-    }
-  }, [showData])
+    if (isView === true) {
+      document.body.style.overflow = 'hidden'
+    } 
+  }, [isView])
 
   return (
     <>
@@ -238,6 +243,7 @@ export default function ModalView({
         className={styled.modalBg}
         // z-index over nav bar?
         onClick={() => {
+          document.body.style.overflow = 'visible'
           setIsView(false)
           setCurrentPost(0)
           setReplyPostId(null)
@@ -329,6 +335,7 @@ export default function ModalView({
               </div>
               <hr />
               <div className={styled.reply}>
+                <div ref={topRef}></div>
                 {replies.map((v, i) => {
                   return (
                     !v.parent_sid && (
@@ -588,6 +595,7 @@ export default function ModalView({
                 setCurrentPost(currentPost - 1)
                 setReplyPostId(0)
                 setReplyPlaceholder(initPlaceholder)
+                topRef.current?.scrollIntoView()
               }
             }}
             style={
@@ -604,6 +612,7 @@ export default function ModalView({
                 setCurrentPost(currentPost + 1)
                 setReplyPostId(0)
                 setReplyPlaceholder(initPlaceholder)
+                topRef.current?.scrollIntoView()
               }
               // if(currentPost === listLength -1) {
               //   setCurrentPost(0)

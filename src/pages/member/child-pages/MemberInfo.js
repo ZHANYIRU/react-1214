@@ -184,6 +184,7 @@ export default function MemberInfo() {
     setUniqueLocations([...new Set(postList.map((item) => item.mountain_sid))])
   }, [postList])
 
+
   //show preview
   function showPreview(e) {
     if (e.target.files.length > 0) {
@@ -503,6 +504,7 @@ export default function MemberInfo() {
       )}
       {isView && (
         <ModalView
+          isView={isView}
           setIsView={setIsView}
           showData={postList[currentPost]}
           setCurrentPost={setCurrentPost}

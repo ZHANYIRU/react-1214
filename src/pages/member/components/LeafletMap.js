@@ -140,6 +140,7 @@ export default function LeafletMap({ postList, getPostList, totalHeight }) {
       </MapContainer>
       {isView && (
         <ModalView
+          isView={isView}
           setIsView={setIsView}
           showData={locationList[currentPost]}
           setCurrentPost={setCurrentPost}
