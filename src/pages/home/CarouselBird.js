@@ -6,13 +6,13 @@ const CarouselHome = ({ setDisply }) => {
   let reactSwipeEl
 
   const imageStyles = {
-    margin: '30px 30px 15px 30px',
+    margin: '15px 30px 15px 0px',
     width: '100%',
     // height: '100%',
   }
   const imageStyle = {
     display: 'block',
-    margin: '20px 160px',
+    margin: '5px 135px',
     width: '70%',
     // height: '100%',
   }
@@ -32,17 +32,17 @@ const CarouselHome = ({ setDisply }) => {
         </div>
         <ReactSwipe
           className="carousel"
-          swipeOptions={{ continuous: false }}
+          swipeOptions={{ continuous: true }}
           ref={(el) => (reactSwipeEl = el)}
         >
           <div className="item">
             <img style={imageStyles} alt="" src={`/img/tips/tip1.JPG`} />
           </div>
           <div className="item">
-            <img style={imageStyle} alt="" src={`/img/tips/tip2.JPG`} />
+            <img style={imageStyle} alt="" src={`/img/tips/tip3.JPG`} />
           </div>
           <div className="item">
-            <img style={imageStyle} alt="" src={`/img/tips/tip3.JPG`} />
+            <img style={imageStyle} alt="" src={`/img/tips/tip2.JPG`} />
           </div>
 
           <div className="item">

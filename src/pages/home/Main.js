@@ -1,6 +1,6 @@
 import styled from '../../styles/home-scss/Main.module.scss'
 import { useRef, useEffect, useState } from 'react'
-import { Parallax, ParallaxProvider } from 'react-scroll-parallax'
+// import { Parallax, ParallaxProvider } from 'react-scroll-parallax'
 import { Link } from 'react-router-dom'
 import Leaderboard from './leaderboard'
 import Weather from './Weather'

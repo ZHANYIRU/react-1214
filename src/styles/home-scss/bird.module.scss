@@ -225,8 +225,8 @@
     }
 }
 .tipWrap{
-    position: absolute;
-    top:120px;
+    position: fixed;
+    top: 120px;
     left:500px;
     border-radius: 10px;
     // padding-top: 300px;
@@ -235,7 +235,7 @@
     height: 620px;
     background-color: #fff;
     margin:0 auto;
-    z-index: 100;
+    z-index: 110;
     .imgsWrap{
         width: 100%;
 
