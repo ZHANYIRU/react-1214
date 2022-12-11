@@ -6,7 +6,7 @@ import SeeEvaluation from '../../../components/SeeEvaluation'
 import Swal from 'sweetalert2'
 import dayjs from 'dayjs'
 import axios from 'axios'
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 function OrderNum({ momOrder, open, setOpen, change, setChange }) {
   const { stars, setStar, lookLightBox, setLookLightBox } =
     useContext(ProCartContext)
@@ -144,7 +144,6 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
     })
   }
   const photo = (el) => {
-    console.log(el)
     let img
     if (el.product_img) {
       img = `${MY_HOST}/imgs/zx/${el.product_img}`
@@ -163,6 +162,16 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
     }
     return img
   }
+  useEffect(() => {
+    if (lightOpen === true) {
+      document.body.style.overflow = 'hidden'
+    }
+  }, [lightOpen])
+  useEffect(() => {
+    if (lookLightBox === true) {
+      document.body.style.overflow = 'hidden'
+    }
+  }, [lookLightBox])
   return (
     <>
       {/* 給評價 */}
@@ -172,6 +181,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
             <div
               className={styled.lightBgc}
               onClick={(e) => {
+                document.body.style.overflow = 'visible'
                 setStar(1)
                 setLightOpen(!lightOpen)
               }}
@@ -287,7 +297,6 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                       )}
                     {proRows &&
                       proRows.map((el2, i2) => {
-                        console.log(el2)
                         return el.order_num === el2.order_num ? (
                           <div
                             className={styled.proContent}
@@ -319,6 +328,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                             {el2.star ? (
                               <button
                                 onClick={() => {
+                                  document.body.style.overflow = 'visible'
                                   getEva(el2.order_sid, 0, 0, 0)
                                 }}
                               >
@@ -327,6 +337,7 @@ function OrderNum({ momOrder, open, setOpen, change, setChange }) {
                             ) : (
                               <button
                                 onClick={() => {
+                                  document.body.style.overflow = 'visible'
                                   setWriteEve('')
                                   const writeStars = [el2]
                                   setEvaluation(writeStars)
