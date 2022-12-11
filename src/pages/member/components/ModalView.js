@@ -42,6 +42,7 @@ export default function ModalView({
   const [replyPostId, setReplyPostId] = useState(0)
   const [isReplying, setIsReplying] = useState(false)
   const [target, setTarget] = useState(null)
+  const [isDel, setIsDel] = useState(false)
 
   const replyForm = useRef(null)
 
@@ -152,13 +153,6 @@ export default function ModalView({
       setReplyPlaceholder(initPlaceholder)
       setReplyPostId(0)
       setIsReplying(false)
-      if (target) {
-        target.scrollIntoView({ behavior: 'smooth' })
-        setTarget(null)
-      } else {
-        //  scroll to bottom every time messages change
-        bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
-      }
       // target.style.color = '#000'
     }
 
@@ -234,8 +228,22 @@ export default function ModalView({
   useEffect(() => {
     if (isView === true) {
       document.body.style.overflow = 'hidden'
-    } 
+    }
   }, [isView])
+
+  useEffect(() => {
+    if (target && !isDel) {
+      target.scrollIntoView({ behavior: 'smooth' })
+      setTarget(null)
+    } else if (!isDel) {
+      bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }
+    setIsDel(false)
+  }, [showData])
+
+  useEffect(() => {
+    topRef.current?.scrollIntoView()
+  }, [currentPost])
 
   return (
     <>
@@ -402,6 +410,7 @@ export default function ModalView({
                                   style={{ color: '#E00' }}
                                   onClick={(e) => {
                                     deleteReply(v.member_sid, v.sid, v.post_sid)
+                                    setIsDel(true)
                                   }}
                                 >
                                   {v.member_sid === data.member_sid
@@ -515,6 +524,7 @@ export default function ModalView({
                                         <span
                                           style={{ color: '#E00' }}
                                           onClick={(e) => {
+                                            setTarget(e.target)
                                             deleteReply(
                                               el.member_sid,
                                               el.sid,
