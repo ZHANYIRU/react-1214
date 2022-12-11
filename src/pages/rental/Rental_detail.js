@@ -7,9 +7,13 @@ import dayjs from 'dayjs'
 import ProCartContext from '../../contexts/ProCartContext'
 import RentalLikeCard from './components/RentalLikeCard'
 import { Link } from 'react-router-dom'
+import ProductComment from '../product/components/ProductComment'
+import MemberContext from '../../contexts/MemberContext'
+import CommentLightBox from '../product/components/CommentLightBox'
 
 const Rental_detail = () => {
   const { addRenCart } = useContext(ProCartContext)
+  const memberData = useContext(MemberContext)
   //設定金額
   const { moneyFormat } = useContext(ProCartContext)
   const picRef = useRef()
@@ -19,7 +23,7 @@ const Rental_detail = () => {
   const [checkPic, setCheckPic] = useState(0)
   //裝商品資料
   const [Detail, setDetail] = useState()
-  console.log(Detail)
+  // console.log(Detail)
   //介紹或評論狀態
   const [productIntroduce, setProductIntroduce] = useState(true)
 
@@ -53,8 +57,6 @@ const Rental_detail = () => {
   //跨店運費狀態 要送去給購物車 ！！！！！！！！！！！！！！！！！！！！！！！
   const [deliveryFee, setDeliveryFee] = useState(0)
 
-  //評論資料
-  // const [commnentData, setDommnentData] = useState([])
   //下面是利用useEffect去要資料
   const rental_url = `http://localhost:3001/rental/getDetailData/${sid}`
   //要商品資料
@@ -74,7 +76,12 @@ const Rental_detail = () => {
 
   const [like, setLike] = useState({})
 
+  // 評論資料
   const [comment, setComment] = useState('')
+  const [avgStar, setAvgStar] = useState(0)
+  const [whichCom, setWhichCom] = useState(0)
+  const [comLightBox, setComLightBox] = useState(false)
+
   const like_url = `http://localhost:3001/rental/getLike`
   async function get_Like() {
     const response = await axios.get(like_url)
@@ -85,9 +92,12 @@ const Rental_detail = () => {
   const comment_url = `http://localhost:3001/rental/comment?sid=${sid}`
   async function get_Comment() {
     const response = await axios.get(comment_url)
-    console.log(response.data.rows)
+    // console.log(response.data.rows)
+    const r2 = response.data.rows2[0].avgStar
     setComment(response.data.rows)
+    setAvgStar(r2)
   }
+
   useEffect(() => {
     get_rental_detail()
     get_store()
@@ -97,6 +107,13 @@ const Rental_detail = () => {
 
   return (
     <>
+      {comLightBox && (
+        <CommentLightBox
+          commentFetch={comment}
+          whichCom={whichCom}
+          setComLightBox={setComLightBox}
+        />
+      )}
       {Detail && (
         <>
           <div className={styled.empty}></div>
@@ -119,11 +136,10 @@ const Rental_detail = () => {
                           <div
                             key={i}
                             style={{
-                              border: `${
-                                checkPic === i
-                                  ? '2px solid rgb(255,255,255)'
+                              border: `${checkPic === i
+                                  ? '2px solid #ccc'
                                   : 'none'
-                              }`,
+                                }`,
                             }}
                           >
                             <img
@@ -179,7 +195,7 @@ const Rental_detail = () => {
                           (Detail.rental_price *
                             number *
                             (Date.parse(day.backDay) - changeDay)) /
-                            86400000
+                          86400000
                         )
                       }}
                     />
@@ -203,7 +219,7 @@ const Rental_detail = () => {
                           (Detail.rental_price *
                             number *
                             (changeDay - Date.parse(day.borrowDay))) /
-                            86400000
+                          86400000
                         )
                       }}
                     />
@@ -225,7 +241,7 @@ const Rental_detail = () => {
                         setCartStore(new_store)
                         setDeliveryFee(
                           60 *
-                            Math.abs(cartStore.back_fee_level - store_value[1])
+                          Math.abs(cartStore.back_fee_level - store_value[1])
                         )
                       }}
                     >
@@ -256,7 +272,7 @@ const Rental_detail = () => {
                         setCartStore(new_store)
                         setDeliveryFee(
                           60 *
-                            Math.abs(cartStore.borow_fee_level - store_value[1])
+                          Math.abs(cartStore.borow_fee_level - store_value[1])
                         )
                       }}
                     >
@@ -292,7 +308,7 @@ const Rental_detail = () => {
                             NewNumber *
                             (Date.parse(day.backDay) -
                               Date.parse(day.borrowDay))) /
-                            86400000
+                          86400000
                         )
                       }}
                     >
@@ -308,7 +324,7 @@ const Rental_detail = () => {
                             NewNumber *
                             (Date.parse(day.backDay) -
                               Date.parse(day.borrowDay))) /
-                            86400000
+                          86400000
                         )
                       }}
                     >
@@ -328,7 +344,7 @@ const Rental_detail = () => {
                       day.backDay,
                       //總共天數
                       (Date.parse(day.backDay) - Date.parse(day.borrowDay)) /
-                        86400000,
+                      86400000,
                       cartStore.borrowStore,
                       cartStore.backStore,
                       deliveryFee,
@@ -373,32 +389,43 @@ const Rental_detail = () => {
               </div>
             )}
 
-            {!productIntroduce && (
-              <div className={styled.sectionCommnent}>
-                <div className={styled.star}>
-                  <i className="fa-solid fa-star"></i>
-                  <i className="fa-solid fa-star"></i>
-                  <i className="fa-solid fa-star"></i>
-                  <i className="fa-solid fa-star"></i>
-                  <i className="fa-solid fa-star"></i>
-                </div>
-                <div className={styled.commnentCardBox}>
-                  {testData.map((v, i) => {
-                    return <Commnent key={i} />
-                  })}
+            {
+              !productIntroduce && (
+                <ProductComment
+                  avgStar={avgStar}
+                  commentFetch={comment}
+                  memberData={memberData}
+                  setWhichCom={setWhichCom}
+                  setComLightBox={setComLightBox}
+                />
+              )
+              // <div className={styled.sectionCommnent}>
+              //   <div className={styled.star}>
+              //     <i className="fa-solid fa-star"></i>
+              //     <i className="fa-solid fa-star"></i>
+              //     <i className="fa-solid fa-star"></i>
+              //     <i className="fa-solid fa-star"></i>
+              //     <i className="fa-solid fa-star"></i>
+              //   </div>
+              //   <div className={styled.commnentCardBox}>
+              //     {testData.map((v, i) => {
+              //       return <Commnent key={i} />
+              //     })}
+              //   </div>
+              // </div>
+            }
+
+            {productIntroduce && (
+              <div className={styled.section4}>
+                <h3>猜你喜歡</h3>
+                <div className={styled.cardbox}>
+                  {like.length > 0 &&
+                    like.map((e, i) => {
+                      return <RentalLikeCard data={e} key={i} />
+                    })}
                 </div>
               </div>
             )}
-
-            <div className={styled.section4}>
-              <h3>猜你喜歡</h3>
-              <div className={styled.cardbox}>
-                {like.length > 0 &&
-                  like.map((e, i) => {
-                    return <RentalLikeCard data={e} key={i} />
-                  })}
-              </div>
-            </div>
           </div>
         </>
       )}
