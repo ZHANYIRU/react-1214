@@ -110,7 +110,7 @@ function RoomDetail({ detail, detailComment, el }) {
     }
   }
 
-  const starsAve = detail.Average? detail.Average: 0
+  const starsAve = detail.Average ? detail.Average : 0
   //哪一筆評論的Index
   const [whichCom, setWhichCom] = useState(0)
   //燈箱切換
@@ -322,8 +322,8 @@ function RoomDetail({ detail, detailComment, el }) {
                               onClick={() => {
                                 navigate(
                                   v.member_sid
-                                    ? `/member`
-                                    : `/profile?id=${v.member_sid}`
+                                    ? `/profile?id=${v.member_sid}`
+                                    : `/member`
                                 )
                               }}
                             >
@@ -349,7 +349,7 @@ function RoomDetail({ detail, detailComment, el }) {
                           </div>
                           <div className={style.date}>
                             <span style={{ marginRight: '100px' }}>
-                              {v.created_at.split('T', 10)[0]}
+                              {v.created_time.split('T', 10)[0]}
                             </span>
                             <span
                               onClick={() => {

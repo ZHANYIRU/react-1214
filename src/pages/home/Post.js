@@ -110,6 +110,7 @@ function Post({ postData }) {
       </Link>
       {isView && (
         <ModalView
+          isView={isView}
           setIsView={setIsView}
           showData={socialList[currentPost]}
           setCurrentPost={setCurrentPost}

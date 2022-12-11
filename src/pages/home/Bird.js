@@ -61,16 +61,6 @@ function Bird({ show, setShow, couponData }) {
     // 讀取複製的內容
     await navigator.clipboard.readText()
   }
-  //顯示複製成功訊息
-  // const [copyOk, setCopyOk] = useState(false)
-  // const [copyOff, setCopyOff] = useState(false)
-  // const clickCopy = () => {
-  //   setCopyOk(true)
-  //   // setTimeout(setCopyOk(false), 3000)
-  // }
-  // const clickCopyOff = () => {
-  //   setTimeout(setCopyOk(false), 3000)
-  // }
 
   return (
     <>
@@ -188,12 +178,12 @@ function Bird({ show, setShow, couponData }) {
                       } else if (num < question.length - 1) {
                         setNum(num + 1)
                         if (num === 1) {
-                          console.log('btn', num)
+                          // console.log('btn', num)
                           setBtnSwitch(true)
                         }
                       }
                       //執行送出表單 給折扣碼
-                      if (num === 2) {
+                      if (num === 2 && CorrectAns === AnsValid) {
                         console.log('折扣碼', num)
                         setCouponPage(true)
                       }
