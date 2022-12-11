@@ -137,6 +137,11 @@
     max-height: 300vh;
   }
 }
+@media screen and (max-width: 837px){
+  .empty1 {
+    height: 130px;
+  }
+}
 @media screen and (max-width: 576px) {
   .cardWrap {
     .cartTitle {
