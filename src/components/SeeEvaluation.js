@@ -39,6 +39,7 @@ function SeeEvaluation({ el }) {
     <div
       className={styled.lightBgc}
       onClick={(e) => {
+        document.body.style.overflow = 'visible'
         setStar(1)
         setLookLightBox(!lookLightBox)
       }}

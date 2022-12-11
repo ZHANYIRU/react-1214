@@ -5,6 +5,7 @@ import RoomSelectBar from './RoomSelectBar'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import RoomLightBox from '../components/RoomLightBox'
+import '../../../styles/room-scss/roomSlider.scss'
 
 function RoomDetail({ detail, detailComment, el }) {
   const navigate = useNavigate()
@@ -109,6 +110,7 @@ function RoomDetail({ detail, detailComment, el }) {
     }
   }
 
+  const starsAve = detail.Average ? detail.Average : 0
   //哪一筆評論的Index
   const [whichCom, setWhichCom] = useState(0)
   //燈箱切換
@@ -120,7 +122,7 @@ function RoomDetail({ detail, detailComment, el }) {
           <div className={style.title}>
             <div className={style.roomName}>{detail.room_name}</div>
             <div className={style.star}>
-              {starCount(Math.round(detail.Average))}
+              {starCount(Math.round(starsAve))}
 
               <span className={style.commentQTY}>
                 ({detail.commentQty > 0 ? detail.commentQty : 0})
@@ -320,8 +322,8 @@ function RoomDetail({ detail, detailComment, el }) {
                               onClick={() => {
                                 navigate(
                                   v.member_sid
-                                    ? `/member`
-                                    : `/profile?id=${v.member_sid}`
+                                    ? `/profile?id=${v.member_sid}`
+                                    : `/member`
                                 )
                               }}
                             >
@@ -347,7 +349,7 @@ function RoomDetail({ detail, detailComment, el }) {
                           </div>
                           <div className={style.date}>
                             <span style={{ marginRight: '100px' }}>
-                              {v.created_at.split('T', 10)[0]}
+                              {v.created_time.split('T', 10)[0]}
                             </span>
                             <span
                               onClick={() => {

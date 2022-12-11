@@ -2,7 +2,7 @@
     width: 100px;
     height: 100px;
     position: fixed;
-    bottom: 180px;
+    bottom: 165px;
     right:10px;
     z-index:100;
     .fake{
@@ -30,7 +30,7 @@
         }
     }
    
-    img{
+    .fake img{
         cursor: pointer;
         width: 100%;
         &:hover{

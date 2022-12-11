@@ -32,7 +32,7 @@ export default function Leaderboard() {
   const getUsersBySearchWord = async (searchKeyword) => {
     try {
       if (switchBtn) {
-        console.log('hi')
+        // console.log('hi')
         const response = await axios.get(
           'http://localhost:3001/product/borad/api3?search=' + searchKeyword
         )

@@ -33,19 +33,17 @@ function Camp() {
             return v.campaign_type_name !== '一日單攻報名行程'
           })
           .map((v, i) => {
-            if (i <1)
+            if (i < 1)
               return (
-                <>
-                  <Link
-                    to={`/camp/filter`}
-                    key={i}
-                    onClick={() => {
-                      setFilterCon(4)
-                    }}
-                  >
-                    一日單攻報名行程
-                  </Link>
-                </>
+                <Link
+                  to={`/camp/filter`}
+                  key={i}
+                  onClick={() => {
+                    setFilterCon(4)
+                  }}
+                >
+                  一日單攻報名行程
+                </Link>
               )
           })}
       </h2>

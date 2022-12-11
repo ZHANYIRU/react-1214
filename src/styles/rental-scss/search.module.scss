@@ -10,14 +10,18 @@
     // margin-top:20px;
     // border:1px solid black;
 
-    input{
-        width:200px;
-    }
+    
     input,
     button {
         font-size: 1rem;
         padding: 0.25rem;
-        border: 3px solid rgb(43, 0, 43)
+        // border: 3px solid rgb(43, 0, 43)
+        border: none;
+        border-radius:0 10px 10px 0;
+    }
+    input{
+        width:200px;
+        border-radius:10px 0 0 10px;
     }
 
     button {

@@ -38,11 +38,12 @@ const Store = () => {
               <div
                 onMouseOver={() => {
                   setshowStore(store[0])
+                  console.log(store)
                 }}
                 className={`${styled.redball}`}
-                style={{ top: '70px', left: '330px' }}
+                style={{ top: '55px', left: '370px' }}
               >
-                大安
+                <i className="fa-solid fa-location-dot"></i>
               </div>
             )}
             {zoneChoice === '北區' && (
@@ -51,33 +52,33 @@ const Store = () => {
                   setshowStore(store[1])
                 }}
                 className={`${styled.redball}`}
-                style={{ top: '73px', left: '290px' }}
+                style={{ top: '65px', left: '330px' }}
               >
-                八德
+                <i className="fa-solid fa-location-dot"></i>
               </div>
             )}
             {zoneChoice === '中區' && (
               <div
                 className={`${styled.redball}`}
-                style={{ top: '150px', left: '240px' }}
+                style={{ top: '170px', left: '250px' }}
               >
-                臺中
+                <i className="fa-solid fa-location-dot"></i>
               </div>
             )}
             {zoneChoice === '南區' && (
               <div
                 className={`${styled.redball}`}
-                style={{ top: '370px', left: '200px' }}
+                style={{ top: '370px', left: '240px' }}
               >
-                高雄
+                <i className="fa-solid fa-location-dot"></i>
               </div>
             )}
             {zoneChoice === '東區' && (
               <div
                 className={`${styled.redball}`}
-                style={{ top: '200px', left: '330px' }}
+                style={{ top: '200px', left: '370px' }}
               >
-                花蓮
+                <i className="fa-solid fa-location-dot"></i>
               </div>
             )}
           </div>
@@ -99,7 +100,11 @@ const Store = () => {
                   style={{ margin: '0 20px 0 0' }}
                 >
                   {zone.map((e, i) => {
-                    return <option value={e}>{e}</option>
+                    return (
+                      <option value={e} key={i}>
+                        {e}
+                      </option>
+                    )
                   })}
                 </select>
 

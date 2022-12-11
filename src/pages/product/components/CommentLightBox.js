@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled from '../../../styles/product-scss/CommentLightBox.module.scss'
 import dayjs from 'dayjs'
 import { useNavigate } from 'react-router-dom'
@@ -29,11 +29,18 @@ export default function CommentLightBox({
     }
     return '銅級玩家'
   }
+
+  useEffect(() => {
+    if (setComLightBox) {
+      document.body.style.overflow = 'hidden'
+    }
+  }, [setComLightBox])
   return (
     <div
       className={styled.comLightBox}
       onClick={() => {
         setComLightBox(false)
+        document.body.style.overflow = 'visible'
       }}
     >
       <div className={styled.comView} onClick={(e) => e.stopPropagation()}>

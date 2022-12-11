@@ -16,6 +16,7 @@ import Room from './pages/room/Room'
 import Rental from './pages/rental/Rental'
 import Rental_detail from './pages/rental/Rental_detail'
 import AI from './pages/rental/AI'
+import Socket from './pages/rental/Socket'
 import Store from './pages/rental/Store'
 import Commnent from './pages/rental/components/Commnent'
 import SunClouds from './components/sunCloud'
@@ -37,6 +38,8 @@ import RoomFilterPage from './pages/room/RoomFilterPage'
 import RoomDetailPage from './pages/room/RoomDetailPage'
 import Leaderboard from './pages/home/leaderboard'
 import ResetPass from './pages/member/ResetPass'
+
+
 
 function App() {
   return (
@@ -61,7 +64,11 @@ function App() {
               <Route path="/room/:room_sid" element={<RoomDetailPage />} />
               <Route path="/rental" element={<Rental />} />
               <Route path="/rental/:sid" element={<Rental_detail />} />
+              {/* 這兩隻都是測試 */}
               <Route path="/AI" element={<AI />} />
+              <Route path="/Socket" element={<Socket />} />
+              {/* <Route path="/Socket" element={<Socket socket={socket} />} /> */}
+              {/* 上面兩隻都是測試  */}
               <Route path="/store" element={<Store />} />
               <Route path="/commnent" element={<Commnent />} />
               <Route path="/cart" element={<Cart />} />

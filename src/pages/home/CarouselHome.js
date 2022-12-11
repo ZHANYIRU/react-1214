@@ -19,31 +19,9 @@ const CarouselHome = ({ oneday }) => {
           </div>
           <ReactSwipe
             className="carousel"
-            swipeOptions={{ continuous: false }}
+            swipeOptions={{ continuous: true }}
             ref={(el) => (reactSwipeEl = el)}
           >
-            <div className="item">
-              <img
-                style={imageStyles}
-                alt=""
-                src={`http://localhost:3001/room_img/HeHuan.jpg`}
-              />
-            </div>
-            <div className="item">
-              <img
-                style={imageStyles}
-                alt=""
-                src={`http://localhost:3001/room_img/HeHuan2.jpg`}
-              />
-            </div>
-            <div className="item">
-              <img
-                style={imageStyles}
-                alt=""
-                src={`http://localhost:3001/room_img/MaWu.jpg`}
-              />
-            </div>
-
             <div className="item">
               <img
                 style={imageStyles}
