@@ -89,8 +89,9 @@
 
             &:hover {
                 z-index: 10;
+
                 .pinInfo {
-                    
+
                     display: block;
                 }
 
@@ -160,6 +161,50 @@
     }
 }
 
+.leafletMap {
+    padding-top: 24px;
+    width: 100%;
+    aspect-ratio: 1/0.658;
+    // background-color: pink;
+    display: flex;
+    justify-content: space-between;
+    .sidePan {
+        width: 23%;
+        height: 100%;
+        // background-color: #ccc;
+        text-align: center;
+        overflow: auto;
+        .showTotal {
+            text-align: left;
+            font-size: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+            margin-bottom: 16px;
+        }
+
+        .item {
+            text-align: left;
+            margin-bottom: 20px;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            h4{
+                font-size: 18px;
+            }
+        }
+    }
+    .mapBox {
+        width: 72%;
+        // background-color: lightblue;
+        .map{
+            width: 400px;
+            height: 400px;
+        }
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+}
+
 .postTitle {
     display: flex;
     justify-content: space-between;
@@ -215,6 +260,7 @@
         position: relative;
         // border-radius: 5px;
         overflow: hidden;
+        transition: 0.1s;
 
         img {
             width: 100%;
@@ -232,7 +278,7 @@
             position: absolute;
             background-color: rgba(0, 0, 0, 0.5);
             opacity: 0;
-            transition: 0.3s;
+            transition: 0.2s;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -268,10 +314,11 @@
             }
         }
 
-
-
-        &:hover .postInfo {
+        &:hover {
+        transform: scale(1.02);
+        .postInfo {
             opacity: 1;
+        }
         }
 
     }
@@ -286,7 +333,7 @@
     width: 100%;
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 100;
+    z-index: 1020;
 
     .modal {
         position: absolute;
@@ -300,6 +347,16 @@
         display: flex;
         box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.25);
         z-index: 105;
+        animation: bouncing 0.25s;
+
+        @keyframes bouncing {
+            0% {
+                transform: translate(-50%, -50%) scale(0.9);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
 
         .editImg {
             width: 50%;
@@ -382,7 +439,7 @@
             .contentTop {
 
                 .gold {
-                    background-image: conic-gradient(from 180deg at 50% 50%, #fffcf4 0deg, #ffbf00 69.37deg, #ffa600 163.12deg, #ab8100 275.62deg, #ffffff 360deg);
+                    background-image: conic-gradient(from 180deg at 50% 50%, #fffff5 0deg, #eea41b 69.37deg, #ffd321 163.12deg, #f0a820 275.62deg, #ffffc5 360deg);
                 }
 
                 .silver {
@@ -528,10 +585,11 @@
                             border-bottom: none;
                             margin-right: auto;
                             padding-left: 0;
-                            
                         }
 
                         pre {
+                            width: 200px;
+                            white-space: pre-wrap;
                             font-family: 'Noto Sans TC', sans-serif;
                             font-size: 14px;
                         }
@@ -539,6 +597,7 @@
                         i {
                             padding-right: 10px;
                         }
+
                         .replyDate {
                             position: absolute;
                             right: 10px;

@@ -90,6 +90,7 @@
     
     @media screen and (max-width: 576px) {
       .title{
+        padding-top: 120px;
         font-size: 1.4rem;
         line-height: 2.5rem;
 
@@ -98,7 +99,7 @@
     
     @media screen and (max-width: 450px) {
       .title{
-        padding-top: 115px;
+        padding-top: 120px;
         font-size: 1.2rem;
         line-height: 2rem;
         margin-bottom: 35px;

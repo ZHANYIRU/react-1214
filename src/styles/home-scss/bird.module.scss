@@ -81,7 +81,7 @@
     height: 100vh;
     background-color: rgba(1, 1, 1, 0.677);
     padding-top: 150px;
-    z-index: 10;
+    z-index: 110;
     .close{
         width: 50px;
         height: 50px;
@@ -100,81 +100,160 @@
         margin: 0 auto;
         width: 900px;
         height: 540px;
-        background-color: rgb(200, 189, 115);
+        background: url('../../../public/img/couponbgc.png') no-repeat;
+        background-size: 110%;
+        background-position-y: 101%;
+        background-position-x: 25%;
+        background-color: #f8edc0;
+        
     }
+    .sun{
+        cursor: pointer;
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: url('../../../public/img/SUN.png') no-repeat;
+        background-size: 90%;
+        top:500px;
+        right: 730px;
+        animation: sun linear 1s alternate infinite;
+
+        &:before{
+            content: '登山Tips';
+            position: absolute;
+            width: 120px;
+            height: 50px;
+            // background-color: rgba(255, 255, 255);
+            top:-20px;
+            left:100px;
+            transition: .5s;
+            display: none;
+            padding: 12px 10px;
+            text-align: center;
+            border: 3px dashed green;
+            border-radius: 10px;
+        }
+        &:hover:before{
+            display: block;
+        }
+        &:hover{
+            background-size: 100%;
+            transition: .5s;
+        }
+    }
+    @keyframes sun {
+        from{
+            transform: translateY(-20px);
+        }
+        to{
+            transform: translateY(10px);
+        }
+    }
+    
+    
     .cardContent{
         font-size: 1.2rem;
-        margin:0 auto;
-        padding-top: 50px;
         width: 800px;
         height: 440px;
-        background-color: white;
+        margin: 0 auto;
+
         border-radius: 10px;
-        .title{
-            overflow: hidden;
-            position: absolute;
-            top:250px;
-            left:510px;
-            width: 220px;
-            height: 350px;
-            span{
-                color: rgb(211, 193, 104);
-                position: absolute;
-                top:120px;
-                left:-12px;
-                font-size: 22rem;
-                font-weight: 900;
-                text-shadow: 5px 5px 5px rgba(108, 108, 108, 0.686)
+        
+        // .title{
+        //     overflow: hidden;
+        //     position: absolute;
+        //     top:250px;
+        //     left:510px;
+        //     width: 220px;
+        //     height: 350px;
+        //     span{
+        //         color: rgb(211, 193, 104);
+        //         position: absolute;
+        //         top:120px;
+        //         left:-12px;
+        //         font-size: 22rem;
+        //         font-weight: 900;
+        //         text-shadow: 5px 5px 5px rgba(108, 108, 108, 0.686)
                 
-            }
-        }
-        p{
-            padding-left: 25px;
-            width: 500px;
-            margin: 45px auto;
-            line-height: 1.5rem;
-            font-size: 1.5rem;
-            font-weight: 500;
-        }
+        //     }
+        // }
+      
         .options{
-            padding-left: 50px;
+            position: absolute;
+            left: 650px;
+            padding-left: 30px;
             width: 420px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
+            z-index: 100;
             input{
                 font-size: 1.3rem;
+                margin-top:10px;
                 margin-bottom:25px;
                 margin-right: 10px;
             }
+            p{
+                width: 700px;
+                margin: 45px auto;
+                line-height: 3rem;
+                font-size: 2rem;
+                font-weight: 500;
+            }
         }
         .buttons{
-            margin-top: 50px ;
+            position: absolute;
+            // width: 800px;
+           bottom: 500px ;
+        //left: 130px;
             // width: 550px;
             display: flex;
-            justify-content: center;
-            z-index: 100;
-        button{
+            justify-content: space-between;
+            z-index: 0;
+        i{ 
+            display: inline-block;
+            width: 50px;
+            cursor: pointer;
             border-radius: 5px;
-            background-color: $yellow;
             font-weight: 700;
-            border:none;
-            padding: 10px 50px;
-            margin-left: 100px;
+            padding: 10px 0px;
+
+            margin-right: 730px;
+            font-size: 3rem;
         }
     }
     }
 }
+.tipWrap{
+    position: fixed;
+    top: 120px;
+    left:500px;
+    border-radius: 10px;
+    // padding-top: 300px;
+    margin: 300px auto;
+    width: 960px;
+    height: 620px;
+    background-color: #fff;
+    margin:0 auto;
+    z-index: 110;
+    .imgsWrap{
+        width: 100%;
+
+    }
+
+}
+
+
 
 //coupon
 .container {
     margin:0 auto;
     width: 800px;
     height: 440px;
-    background-color: white;
+    // background-color: white;
     border-radius: 10px;
 	overflow: hidden;
-	padding: 60px;
+	// padding: 60px;
 	position: relative;
     .couponCard{
         height: 440px;
@@ -189,11 +268,15 @@
             line-height: 4rem;
      
          }
+         span{
+            font-size: 1.3rem;
+            line-height: 2rem;
+         }
          .coupon{
             width: 250px;
             height: 150px;
             border-radius: 10px;
-            border: 15px solid pink;
+            border: 10px solid rgb(210, 163, 75);
             text-align: center;
             position: relative;
             margin-top:25px;
@@ -211,6 +294,7 @@
 
             p{
                 font-size: 2rem;   
+                margin-bottom: 10px;
             }
          
          }
@@ -224,7 +308,7 @@
          .copy{
             span{
                 font-weight: 700;
-                font-size: 1.2rem;
+                font-size: 1.4rem;
             }
             .copyBtn{width: 25%;
                 padding: 5px 10px;
@@ -242,12 +326,21 @@
             background-color: $yellow;
          }
          .close{
-            margin-top:235px;
+            margin-top:150px;
             top:123px;
-            left:324px
+            left:600px
+         }
+         .copied{
+            position: absolute;
+            width: 100px;
+            height: 50px;
+            border: 1px solid red;
          }
         
     }
+
+
+    
     
     
     .confetti {

@@ -75,6 +75,7 @@ export default function PostMap({ postList, getPostList }) {
       </div>
       {isView && (
         <ModalView
+          isView={isView}
           setIsView={setIsView}
           showData={locationList[currentPost]}
           setCurrentPost={setCurrentPost}

@@ -50,8 +50,10 @@ function Post({ postData }) {
           return (
             <div
               className={style.cardWrap}
+              key={v.post_sid}
               onClick={() => {
                 setIsView(true)
+                setCurrentPost(i)
               }}
             >
               <div className={style.black}></div>
@@ -84,10 +86,14 @@ function Post({ postData }) {
                       v.total_height
                     )}`}
                   >
-                    <img
-                      src={`http://localhost:3001/uploads/${v.avatar}`}
-                      alt=""
-                    />
+                    {v.avatar ? (
+                      <img
+                        src={`http://localhost:3001/uploads/avatar_${v.avatar}`}
+                        alt="avatar"
+                      ></img>
+                    ) : (
+                      <img src="/img/default_avatar.png" alt="avatar" />
+                    )}
                   </div>
                   <span>{v.nickname}</span>
                 </div>
@@ -104,6 +110,7 @@ function Post({ postData }) {
       </Link>
       {isView && (
         <ModalView
+          isView={isView}
           setIsView={setIsView}
           showData={socialList[currentPost]}
           setCurrentPost={setCurrentPost}

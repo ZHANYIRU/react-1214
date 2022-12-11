@@ -1,12 +1,12 @@
-import React, { useContext, useEffect } from 'react'
-import styled from '../../../styles/product-scss/CommentLightBox.module.scss'
+import React, { useContext } from 'react'
+import styled from '../../../styles/room-scss/RoomCommentLightBox.module.scss'
 import dayjs from 'dayjs'
 import { useNavigate } from 'react-router-dom'
 import MemberContext from '../../../contexts/MemberContext'
-export default function CommentLightBox({
+export default function RoomLightBox({
   setComLightBox,
   whichCom,
-  commentFetch,
+  detailComment,
 }) {
   const memberData = useContext(MemberContext)
   const navigate = useNavigate()
@@ -29,18 +29,11 @@ export default function CommentLightBox({
     }
     return '銅級玩家'
   }
-
-  useEffect(() => {
-    if (setComLightBox) {
-      document.body.style.overflow = 'hidden'
-    }
-  }, [setComLightBox])
   return (
     <div
       className={styled.comLightBox}
       onClick={() => {
         setComLightBox(false)
-        document.body.style.overflow = 'visible'
       }}
     >
       <div className={styled.comView} onClick={(e) => e.stopPropagation()}>
@@ -49,21 +42,21 @@ export default function CommentLightBox({
             <div className={styled.ggWrap}>
               <div
                 className={`${styled.imgBorder} ${avatarLevel(
-                  commentFetch[whichCom].total_height
+                  detailComment[whichCom].total_height
                 )}`}
                 onClick={() => {
                   navigate(
                     `${memberData.data.member_sid}` ===
-                      `${commentFetch[whichCom].member_sid}`
+                      `${detailComment[whichCom].member_sid}`
                       ? `/member`
-                      : `/profile?id=${commentFetch[whichCom].member_sid}`
+                      : `/profile?id=${detailComment[whichCom].member_sid}`
                   )
                 }}
               >
                 <div className={styled.imgWrap}>
-                  {commentFetch[whichCom] && commentFetch[whichCom].avatar ? (
+                  {detailComment[whichCom] && detailComment[whichCom].avatar ? (
                     <img
-                      src={`http://localhost:3001/uploads/avatar_${commentFetch[whichCom].avatar}`}
+                      src={`http://localhost:3001/uploads/avatar_${detailComment[whichCom].avatar}`}
                       alt="avatar"
                     ></img>
                   ) : (
@@ -73,13 +66,13 @@ export default function CommentLightBox({
               </div>
             </div>
             <div className={styled.Name}>
-              <p>{commentFetch[whichCom].nickname}</p>
-              <p>{titleLevel(commentFetch[whichCom].total_height)}</p>
+              <p>{detailComment[whichCom].nickname}</p>
+              <p>{titleLevel(detailComment[whichCom].total_height)}</p>
             </div>
           </div>
           <div className={styled.howStar}>
             {[...Array(5)].map((star, index) => {
-              const totalStars = commentFetch[whichCom].star
+              const totalStars = detailComment[whichCom].star
               index += 1
               return (
                 <p
@@ -97,9 +90,11 @@ export default function CommentLightBox({
         <div className={styled.rightArea}>
           <div className={styled.comDate}>
             評語日期：
-            {dayjs(commentFetch[whichCom].messageTime).format('YYYY/MM/DD')}
+            {dayjs(detailComment[whichCom].messageTime).format('YYYY/MM/DD')}
           </div>
-          <div className={styled.comText}>{commentFetch[whichCom].message}</div>
+          <div className={styled.comText}>
+            {detailComment[whichCom].message}
+          </div>
         </div>
       </div>
     </div>

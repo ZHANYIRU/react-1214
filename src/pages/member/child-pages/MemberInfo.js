@@ -5,11 +5,11 @@ import ModalView from '../components/ModalView'
 import Thumbnail from '../components/Thumbnail'
 import TotalHeight from '../components/TotalHeight'
 import PostMap from '../components/PostMap'
+import LeafletMap from '../components/LeafletMap'
 import MemberContext from '../../../contexts/MemberContext'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import Swal from 'sweetalert2'
-
 
 export default function MemberInfo() {
   const [isNew, setIsNew] = useState(false)
@@ -31,6 +31,7 @@ export default function MemberInfo() {
   const [postList, setPostList] = useState([])
   const [currentPost, setCurrentPost] = useState(0)
   const [uniqueLocations, setUniqueLocations] = useState([])
+  const [showOverview, setShowOverview] = useState(true)
 
   const newForm = useRef(null)
   const editForm = useRef(null)
@@ -183,6 +184,7 @@ export default function MemberInfo() {
     setUniqueLocations([...new Set(postList.map((item) => item.mountain_sid))])
   }, [postList])
 
+
   //show preview
   function showPreview(e) {
     if (e.target.files.length > 0) {
@@ -197,16 +199,33 @@ export default function MemberInfo() {
       <div className={styled.row}>
         <div className={styled.col}>
           <div className={`${styled.card} ${styled.infoCard}`}>
-            <h3>分享地圖</h3>
-            <h4>{data.totalHeight}</h4>
-            <div className={styled.divider}></div>
-            <div className={styled.overview}>
-              <h4 className={styled.heightTag}>
-                累積海拔: {data.total_height}公尺
-              </h4>
-              <PostMap postList={postList} getPostList={getPostList} />
-              <TotalHeight totalHeight={{ height: data.total_height }} />
+            <div className={styled.postTitle}>
+              <h3>分享地圖</h3>
+              <button
+                onClick={() => {
+                  setShowOverview(!showOverview)
+                }}
+              >
+                <span>地圖切換</span>
+                <i className="fa-solid fa-map-location-dot"></i>
+              </button>
             </div>
+            <div className={styled.divider}></div>
+            {showOverview ? (
+              <div className={styled.overview}>
+                <h4 className={styled.heightTag}>
+                  累積海拔: {data.total_height}公尺
+                </h4>
+                <PostMap postList={postList} getPostList={getPostList} />
+                <TotalHeight totalHeight={{ height: data.total_height }} />
+              </div>
+            ) : (
+              <LeafletMap
+                postList={postList}
+                getPostList={getPostList}
+                totalHeight={{ height: data.total_height }}
+              />
+            )}
           </div>
         </div>
       </div>
@@ -485,6 +504,7 @@ export default function MemberInfo() {
       )}
       {isView && (
         <ModalView
+          isView={isView}
           setIsView={setIsView}
           showData={postList[currentPost]}
           setCurrentPost={setCurrentPost}

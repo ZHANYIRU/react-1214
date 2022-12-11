@@ -16,7 +16,7 @@ function Login(props) {
 
   useEffect(() => {
     if (auth) {
-      navigate('/')
+      navigate('/member')
     }
   }, [auth])
 

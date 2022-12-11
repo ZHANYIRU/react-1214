@@ -1,0 +1,31 @@
+.CarouselGroupBird{
+    padding-top: 10px;
+    display: flex;
+    .groupbuttonBird{
+        padding: 250px 10px;
+    
+        i{
+            cursor: pointer;
+            font-size: 3rem;
+           }
+       }
+       
+    .item{
+        height: 600px;
+        overflow: hidden;
+    }
+    .TipXmarkBird{
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        top:5px;
+        right:-10px;
+        cursor: pointer;
+        i{
+            color:black;
+            font-size: 2rem;
+        }
+    }
+   
+    
+}

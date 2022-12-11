@@ -32,10 +32,12 @@
 
     .redball{
         position:absolute;
-        width:15px;
-        height:15px;
+        width:25px;
+        height:25px;
         border-radius: 50%;
-        background-color: red;
+        // background-color: red;
+        color:red;
+        font-size:30px;
     }
     
    
@@ -73,6 +75,7 @@
 
 .storetitle{
     font-size:25px;
+    
 }
 
 
@@ -82,6 +85,15 @@
 
     div{
         margin-top:auto;
+        h2{
+            line-height: 2rem;
+            font-weight:600;
+        }
+        p{
+            line-height: 2rem;
+            font-weight:600;
+        }
+       
     }
 }
 
@@ -94,6 +106,8 @@
         
         // font-weight:400;
         // height:250px;
+        line-height: 2rem;
+        font-weight:600;
         word-wrap:break-word;
         white-space: pre-wrap;
         // word-wrap: break-word;

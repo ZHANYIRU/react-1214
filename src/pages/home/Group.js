@@ -136,7 +136,7 @@ function Group({ oneday }) {
             <h3>報名截止日期：{oneday.camp_joinenddate}</h3>
           </div>
           <div className={style.price}>費用：${oneday.price} 元 / 人</div>
-          <Link to={`/camp/${oneday.sid}`}>
+          <Link to={`/camp/${oneday.c_sid}`}>
             <div className={style.click}>查看詳情</div>
           </Link>
         </div>

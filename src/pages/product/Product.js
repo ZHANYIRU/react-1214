@@ -140,7 +140,7 @@ function Product() {
   return (
     <>
       <ToTop />
-      <Bear/>
+      <Bear />
       <div className={styled.container}>
         <div className={styled.empty}></div>
         {/* Slider */}
@@ -292,7 +292,7 @@ function Product() {
 
                     return (
                       <>
-                        <div className={styled.cardWrap} key={v.product_sid}>
+                        <div className={styled.cardWrap} key={v2.product_sid}>
                           <div
                             className={styled.card}
                             onClick={() => {

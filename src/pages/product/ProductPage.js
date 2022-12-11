@@ -251,7 +251,7 @@ export default function ProductPage() {
   // 商品介紹 or 商品評論
   const intro = datas.map((v, i) => {
     return (
-      <div className={styled.introWrap}>
+      <div className={styled.introWrap} key={i}>
         <div className={styled.introTitle}>產品規格</div>
         <p className={styled.intro}>{v.product_spec}</p>
         <div className={styled.introTitle}>特色說明</div>
@@ -313,7 +313,7 @@ export default function ProductPage() {
       <div className={styled.commonArea}>
         {commentFetch.map((v, i) => {
           return (
-            <div className={styled.commonBox}>
+            <div className={styled.commonBox} key={i}>
               <div className={styled.commonTitle}>
                 <div
                   className={`${styled.commonTitle_img_border} ${avatarLevel(
@@ -413,6 +413,7 @@ export default function ProductPage() {
               onClick={() => {
                 setSize2(v)
               }}
+              key={i}
             >
               {v}
             </div>
@@ -472,6 +473,7 @@ export default function ProductPage() {
                           onMouseLeave={() => {
                             msLeave(v)
                           }}
+                          key={i}
                         />
                       )
                     })}
@@ -628,7 +630,7 @@ export default function ProductPage() {
                 }
               }}
             >
-              商品評論
+              商品評論({commentFetch.length})
             </div>
           </div>
           {introCom ? (
