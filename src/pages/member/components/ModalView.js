@@ -79,6 +79,18 @@ export default function ModalView({
       return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
     }
 
+    const mid = data.member_sid || ''
+
+    const rows = await axios.get(
+      `http://localhost:3001/member/like/api?mid=${mid}&pid=${showData.post_sid}`
+    )
+
+    if (rows.data[0]) {
+      setLiked(true)
+      getPostList()
+      return null
+    }
+
     const result = await axios.post(
       `http://localhost:3001/member/like/api`,
       { mid: data.member_sid, pid: showData.post_sid },
@@ -101,6 +113,18 @@ export default function ModalView({
 
     if (!token) {
       return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
+    }
+
+    const mid = data.member_sid || ''
+
+    const rows = await axios.get(
+      `http://localhost:3001/member/like/api?mid=${mid}&pid=${showData.post_sid}`
+    )
+
+    if (!rows.data[0]) {
+      setLiked(false)
+      getPostList()
+      return null
     }
 
     const result = await axios.delete(
