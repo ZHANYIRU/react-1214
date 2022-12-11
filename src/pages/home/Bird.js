@@ -55,15 +55,15 @@ function Bird({ show, setShow, couponData }) {
 
   //一鍵複製
   const copyToClipboard = async (str) => {
-    // 写入粘贴板
+    // 複製到剪貼簿
     await navigator.clipboard.writeText(str)
 
-    // 读取粘贴板
+    // 讀取複製的內容
     await navigator.clipboard.readText()
   }
   //顯示複製成功訊息
-  const [copyOk, setCopyOk] = useState(false)
-  const [copyOff, setCopyOff] = useState(false)
+  // const [copyOk, setCopyOk] = useState(false)
+  // const [copyOff, setCopyOff] = useState(false)
   // const clickCopy = () => {
   //   setCopyOk(true)
   //   // setTimeout(setCopyOk(false), 3000)
@@ -97,6 +97,7 @@ function Bird({ show, setShow, couponData }) {
                 setBtnSwitch(false)
                 setCouponPage(false)
                 setDisply(false)
+                setUserAnswer([{ Ans: '' }, { Ans: '' }, { Ans: '' }])
               }}
             ></i>
           </div>
@@ -112,57 +113,55 @@ function Bird({ show, setShow, couponData }) {
                 {question.map((v, i) => {
                   if (num === i) {
                     return (
-                      <>
-                        <div className={style.options} key={i}>
-                          <p>{v.Q}</p>
-                          <label>
-                            <input
-                              type="radio"
-                              name={v.Q}
-                              value={v.Ans[0]}
-                              onChange={(e) => {
-                                const newAns = { ...userAnswer }
-                                newAns[i].Ans = e.target.value
-                                setUserAnswer(newAns)
-                              }}
-                            />
-                            {v.Ans[0]}
-                          </label>
-                          <label>
-                            <input
-                              type="radio"
-                              name={v.Q}
-                              value={v.Ans[1]}
-                              onChange={(e) => {
-                                const newAns = { ...userAnswer }
-                                newAns[i].Ans = e.target.value
-                                setUserAnswer(newAns)
-                              }}
-                            />
-                            {v.Ans[1]}
-                          </label>
-                          <label>
-                            <input
-                              type="radio"
-                              name={v.Q}
-                              value={v.Ans[2]}
-                              onChange={(e) => {
-                                const newAns = { ...userAnswer }
-                                newAns[i].Ans = e.target.value
-                                setUserAnswer(newAns)
-                              }}
-                            />
-                            {v.Ans[2]}
-                          </label>
-                        </div>
-                      </>
+                      <div className={style.options} key={i}>
+                        <p>{v.Q}</p>
+                        <label>
+                          <input
+                            type="radio"
+                            name={v.Q}
+                            value={v.Ans[0]}
+                            onChange={(e) => {
+                              const newAns = { ...userAnswer }
+                              newAns[i].Ans = e.target.value
+                              setUserAnswer(newAns)
+                            }}
+                          />
+                          {v.Ans[0]}
+                        </label>
+                        <label>
+                          <input
+                            type="radio"
+                            name={v.Q}
+                            value={v.Ans[1]}
+                            onChange={(e) => {
+                              const newAns = { ...userAnswer }
+                              newAns[i].Ans = e.target.value
+                              setUserAnswer(newAns)
+                            }}
+                          />
+                          {v.Ans[1]}
+                        </label>
+                        <label>
+                          <input
+                            type="radio"
+                            name={v.Q}
+                            value={v.Ans[2]}
+                            onChange={(e) => {
+                              const newAns = { ...userAnswer }
+                              newAns[i].Ans = e.target.value
+                              setUserAnswer(newAns)
+                            }}
+                          />
+                          {v.Ans[2]}
+                        </label>
+                      </div>
                     )
                   }
                 })}
 
                 <div className={style.buttons}>
                   <i
-                    class="fa-solid fa-chevron-left"
+                    className="fa-solid fa-chevron-left"
                     onClick={() => {
                       if (num > 0 && num < question.length) {
                         setNum(num - 1)
@@ -173,7 +172,7 @@ function Bird({ show, setShow, couponData }) {
                     style={{ visibility: num !== 0 ? 'visible' : 'hidden' }}
                   ></i>
                   <i
-                    class="fa-solid fa-chevron-right"
+                    className="fa-solid fa-chevron-right"
                     onClick={() => {
                       setDisply(false)
 
@@ -292,23 +291,17 @@ function Bird({ show, setShow, couponData }) {
                         className={style.copyBtn}
                         onClick={() => {
                           const val = couponCode.current.textContent
-                          console.log('copy', val)
-                          // setCopyOk(true)
                           copyToClipboard(val)
+                          Swal.fire({
+                            icon: 'success',
+                            title: '已成功複製',
+                            showConfirmButton: false,
+                            timer: 1000,
+                          })
                         }}
                       >
                         複製
                       </button>
-                      {copyOk ? (
-                        <div
-                          className={style.copied}
-                          style={{ display: copyOff ? 'block' : 'none' }}
-                        >
-                          複製成功
-                        </div>
-                      ) : (
-                        <div className={style.copied}>消失</div>
-                      )}
                     </div>
                   </div>
                   <div className={style.detail}>

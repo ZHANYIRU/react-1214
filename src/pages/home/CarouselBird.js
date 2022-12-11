@@ -6,20 +6,20 @@ const CarouselHome = ({ setDisply }) => {
   let reactSwipeEl
 
   const imageStyles = {
-    margin: '25px auto',
+    margin: '30px 30px 15px 30px',
     width: '100%',
     // height: '100%',
   }
   const imageStyle = {
     display: 'block',
-    margin: '10px 120px',
+    margin: '20px 160px',
     width: '70%',
     // height: '100%',
   }
   return (
     <>
-      <div className="CarouselGroup">
-        <div className="TipXmark">
+      <div className="CarouselGroupBird">
+        <div className="TipXmarkBird">
           <i
             className="fa-solid fa-xmark"
             onClick={() => {
@@ -27,7 +27,7 @@ const CarouselHome = ({ setDisply }) => {
             }}
           ></i>
         </div>
-        <div className="groupbutton" onClick={() => reactSwipeEl.prev()}>
+        <div className="groupbuttonBird" onClick={() => reactSwipeEl.prev()}>
           <i className="fa-solid fa-angle-left"></i>
         </div>
         <ReactSwipe
@@ -49,7 +49,7 @@ const CarouselHome = ({ setDisply }) => {
             <img style={imageStyle} alt="" src={`/img/tips/tip4.JPG`} />
           </div>
         </ReactSwipe>
-        <div className="groupbutton" onClick={() => reactSwipeEl.next()}>
+        <div className="groupbuttonBird" onClick={() => reactSwipeEl.next()}>
           <i className="fa-solid fa-angle-right"></i>
         </div>
       </div>
