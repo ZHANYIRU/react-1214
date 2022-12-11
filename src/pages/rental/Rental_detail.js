@@ -136,11 +136,10 @@ const Rental_detail = () => {
                           <div
                             key={i}
                             style={{
-                              border: `${
-                                checkPic === i
+                              border: `${checkPic === i
                                   ? '2px solid #ccc'
                                   : 'none'
-                              }`,
+                                }`,
                             }}
                           >
                             <img
@@ -196,7 +195,7 @@ const Rental_detail = () => {
                           (Detail.rental_price *
                             number *
                             (Date.parse(day.backDay) - changeDay)) /
-                            86400000
+                          86400000
                         )
                       }}
                     />
@@ -220,7 +219,7 @@ const Rental_detail = () => {
                           (Detail.rental_price *
                             number *
                             (changeDay - Date.parse(day.borrowDay))) /
-                            86400000
+                          86400000
                         )
                       }}
                     />
@@ -242,7 +241,7 @@ const Rental_detail = () => {
                         setCartStore(new_store)
                         setDeliveryFee(
                           60 *
-                            Math.abs(cartStore.back_fee_level - store_value[1])
+                          Math.abs(cartStore.back_fee_level - store_value[1])
                         )
                       }}
                     >
@@ -273,7 +272,7 @@ const Rental_detail = () => {
                         setCartStore(new_store)
                         setDeliveryFee(
                           60 *
-                            Math.abs(cartStore.borow_fee_level - store_value[1])
+                          Math.abs(cartStore.borow_fee_level - store_value[1])
                         )
                       }}
                     >
@@ -309,7 +308,7 @@ const Rental_detail = () => {
                             NewNumber *
                             (Date.parse(day.backDay) -
                               Date.parse(day.borrowDay))) /
-                            86400000
+                          86400000
                         )
                       }}
                     >
@@ -325,7 +324,7 @@ const Rental_detail = () => {
                             NewNumber *
                             (Date.parse(day.backDay) -
                               Date.parse(day.borrowDay))) /
-                            86400000
+                          86400000
                         )
                       }}
                     >
@@ -345,7 +344,7 @@ const Rental_detail = () => {
                       day.backDay,
                       //總共天數
                       (Date.parse(day.backDay) - Date.parse(day.borrowDay)) /
-                        86400000,
+                      86400000,
                       cartStore.borrowStore,
                       cartStore.backStore,
                       deliveryFee,
