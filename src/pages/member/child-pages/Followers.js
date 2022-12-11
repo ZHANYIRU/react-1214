@@ -57,6 +57,9 @@ export default function Followers() {
         title: '取消關注失敗',
         confirmButtonColor: '#216326',
       })
+      getMyFollow()
+      getFollow()
+      getFollowing()
     }
   }
 
@@ -100,6 +103,9 @@ export default function Followers() {
         title: '關注失敗',
         confirmButtonColor: '#216326',
       })
+      getMyFollow()
+      getFollow()
+      getFollowing()
     }
   }
 
