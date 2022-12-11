@@ -46,6 +46,7 @@ export default function ModalView({
   const [target, setTarget] = useState(null)
   const [targetRid, setTargetRid] = useState(null)
   const [addingReply, setAddingReply] = useState(false)
+  const [replyTo, setReplyTo] = useState('')
 
   const replyForm = useRef(null)
 
@@ -134,7 +135,12 @@ export default function ModalView({
       })
     }
 
-    formData.set('context', `${replyPlaceholder}${formData.get('context')}`)
+    formData.set(
+      'context',
+      `${replyTo ? replyTo + '#' : ''}${replyPlaceholder}${formData.get(
+        'context'
+      )}`
+    )
 
     formData.append('sid', replyPostId)
 
@@ -152,6 +158,7 @@ export default function ModalView({
       // alert('成功回覆')
       getReply()
       getPostList()
+      setReplyTo('')
       setReplyTxt('')
       setReplyPlaceholder(initPlaceholder)
       setReplyPostId(0)
@@ -402,18 +409,21 @@ export default function ModalView({
                                     setReplyTxt('')
                                     setIsReplying(true)
                                     replyToReply(v.nickname, v.sid)
+                                    setReplyTo(v.member_sid)
                                     setTarget(e.target)
                                     setTargetRid(e.target.dataset.rid)
                                     // console.log(e.target.dataset.rid)
                                   }
                                   if (isReplying && target === e.target) {
                                     setReplyPlaceholder(initPlaceholder)
+                                    setReplyTo('')
                                     setReplyPostId(0)
                                     setIsReplying(false)
                                     setTargetRid(null)
                                     setReplyTxt('')
                                   }
                                   if (isReplying && target !== e.target) {
+                                    setReplyTo(v.member_sid)
                                     setReplyTxt('')
                                     replyToReply(v.nickname, v.sid)
                                     setTarget(e.target)
@@ -467,6 +477,7 @@ export default function ModalView({
                                       }}
                                       onClick={(e) => {
                                         if (!isReplying) {
+                                          setReplyTo(el.member_sid)
                                           setIsReplying(true)
                                           setReplyTxt('')
                                           replyToReply(el.nickname, v.sid)
@@ -475,6 +486,7 @@ export default function ModalView({
                                           // console.log(e.target.dataset.rid)
                                         }
                                         if (isReplying && target === e.target) {
+                                          setReplyTo('')
                                           setReplyPlaceholder(initPlaceholder)
                                           setReplyPostId(0)
                                           setIsReplying(false)
@@ -482,6 +494,7 @@ export default function ModalView({
                                           setReplyTxt('')
                                         }
                                         if (isReplying && target !== e.target) {
+                                          setReplyTo(el.member_sid)
                                           setReplyTxt('')
                                           replyToReply(el.nickname, v.sid)
                                           setTarget(e.target)
@@ -523,6 +536,7 @@ export default function ModalView({
                                         data-rid={v.sid}
                                         onClick={(e) => {
                                           if (!isReplying) {
+                                            setReplyTo(el.member_sid)
                                             setReplyTxt('')
                                             setIsReplying(true)
                                             replyToReply(el.nickname, v.sid)
@@ -534,6 +548,7 @@ export default function ModalView({
                                             isReplying &&
                                             target === e.target
                                           ) {
+                                            setReplyTo('')
                                             setReplyPlaceholder(initPlaceholder)
                                             setReplyPostId(0)
                                             setIsReplying(false)
@@ -544,6 +559,7 @@ export default function ModalView({
                                             isReplying &&
                                             target !== e.target
                                           ) {
+                                            setReplyTo(el.member_sid)
                                             setReplyTxt('')
                                             replyToReply(el.nickname, v.sid)
                                             setTarget(e.target)
@@ -555,12 +571,46 @@ export default function ModalView({
                                         {el.nickname}
                                       </h4>
                                       <pre>
-                                        <span style={{ color: '#E50' }}>
+                                        <span
+                                          style={{ color: '#E50' }}
+                                          onClick={() => {
+                                            const linkToId =
+                                              el.context.split('#')[0]
+                                            // console.log(
+                                            //   '會員ID為' +
+                                            //     data.member_sid +
+                                            //     '|連結ID為:' +
+                                            //     linkToId
+                                            // )
+                                            if (!linkToId) {
+                                              return Swal.fire({
+                                                title: '查無此會員',
+                                                confirmButtonColor: '#216326',
+                                              })
+                                            }
+                                            if (
+                                              `${data.member_sid}` !==
+                                              `${linkToId}`
+                                            ) {
+                                              setIsView(false)
+                                              navigate(
+                                                `/profile?id=${linkToId}`
+                                              )
+                                            } else {
+                                              setIsView(false)
+                                              navigate('/member')
+                                            }
+                                          }}
+                                        >
+                                          @
                                           {el.context.indexOf('@') !== -1
-                                            ? el.context.split(' ')[0]
+                                            ? el.context
+                                                .split('@')
+                                                .pop()
+                                                .split(':')[0]
                                             : el.context}
                                         </span>
-                                        <span>{el.context.split(':')[1]}</span>
+                                        <span>:{el.context.split(':')[1]}</span>
                                       </pre>
                                       <p className={styled.replyDate}>
                                         {dayjs(el.datetime).format(
