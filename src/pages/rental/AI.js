@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import styled from '../../styles/rental-scss/AI.module.scss'
 import axios from 'axios'
 import User_local from './components/User_local'
@@ -24,6 +24,12 @@ const AI = ({ setCs }) => {
     ])
   }
 
+  const bottomRef = useRef(null)
+  const buttonRef = useRef(null)
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: 'smooth' }, [talk])
+  })
   return (
     <>
       <div className={styled.empty}></div>
@@ -45,6 +51,7 @@ const AI = ({ setCs }) => {
               <User_local text={e.talk} key={i} />
             )
           })}
+          <div ref={bottomRef}></div>
         </div>
         <div className={styled.userInput}>
           <input
@@ -53,11 +60,20 @@ const AI = ({ setCs }) => {
             placeholder="請輸入您的問題"
             value={words}
             onChange={(e) => {
+              console.log(e)
               setWords(e.target.value)
               setQuestion(e.target.value)
             }}
+            onKeyDown={(e) => {
+              if (e.keyCode === 13) {
+                buttonRef.current.click()
+                console.log(e.keyCode)
+              }
+              
+            }}
           />
           <button
+            ref={buttonRef}
             onClick={() => {
               setTalk([
                 ...talk,

@@ -46,12 +46,16 @@
         }
         .addcart{
             align-self:center;
-            background-color:#E91010;
+            background-color:black;
             color:white;
             border:none;
             border-radius:5px;
             padding:10px 20px;
             margin-left:40px;
+        }
+        .addcart:hover{
+            background-color:rgb(255, 174, 0);
+            color:black;
         }
         
     }
@@ -138,6 +142,8 @@
     pre{
         
         // overflow: auto;
+        line-height:2rem;
+        font-weight:600;
         white-space: pre-wrap;
     }
     // p{

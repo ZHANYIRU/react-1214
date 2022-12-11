@@ -15,7 +15,27 @@
         width:100%;
         height:160px;
         overflow:hidden;
-        object-fit: cover;
+        object-fit: contain;
     }
     img{width:100%;}
+
+    .rental_product_name{
+        margin-top:10px;
+        height:70px;
+        // p{
+        //     width:200px;
+        //     text-overflow:ellipsis;
+        //     white-space:nowrap;
+        //     overflow:hidden;
+        //     -webkit-line-clamp: 2;
+        //     display: -webkit-box;
+        //     -webkit-box-orient: vertical;
+        // }
+        p{
+            overflow:hidden;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+             -webkit-line-clamp: 2;}
+        
+    }
 }
