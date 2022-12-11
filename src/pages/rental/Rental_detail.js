@@ -10,6 +10,8 @@ import { Link } from 'react-router-dom'
 
 const Rental_detail = () => {
   const { addRenCart } = useContext(ProCartContext)
+  //設定金額
+  const { moneyFormat } = useContext(ProCartContext)
   const picRef = useRef()
   const testData = [0, 1, 2, 3, 4, 5]
   const { sid } = useParams()
@@ -149,7 +151,7 @@ const Rental_detail = () => {
                 <div className={styled.flex}>
                   <div>
                     <span className={styled.rental_price}>
-                      每日租金：{Detail.rental_price}
+                      每日租金：{moneyFormat(Detail.rental_price)}
                     </span>
                   </div>
                   <div>
@@ -273,8 +275,8 @@ const Rental_detail = () => {
                   </div>
                 </div>
                 <div className={styled.flex}>
-                  <div>租借費用:＄{borrowMoney}</div>{' '}
-                  <div>跨店費用:＄{deliveryFee}</div>
+                  <div>租借費用：{moneyFormat(borrowMoney)}</div>
+                  <div>跨店費用：{moneyFormat(deliveryFee)}</div>
                 </div>
                 {/* 商品數量跟金額 設定 */}
                 <div className={styled.flex}>
@@ -314,7 +316,7 @@ const Rental_detail = () => {
                     </button>
                   </div>
 
-                  <span>總金額：{borrowMoney + deliveryFee}</span>
+                  <span>總金額：{moneyFormat(borrowMoney + deliveryFee)}</span>
                 </div>
                 <button
                   className={styled.addcart}

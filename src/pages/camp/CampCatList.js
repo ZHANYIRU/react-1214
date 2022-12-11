@@ -123,13 +123,18 @@ function CampCatList({ filter }) {
                 <div className={style.listcardbig} key={v.c_sid}>
                   <div className={style.listcardimg}>
                     <img
-                      src={`http://localhost:3001/n7/campmain/${v.mainImage}`}
+                      src={`http://localhost:3001/n7/campmain/${v.mainImage}`} alt=""
                     />
                   </div>
                   <div className={style.listcardbigtext}>
                     <p>{v.camp_name}</p>
                     <p>金額：${v.price}</p>
-                    <div> 評價：stars</div>
+                    <div>
+                      評價：<span className="star">&#9733;</span>
+                      <span className="star">&#9733;</span>
+                      <span className="star">&#9733;</span>
+                      <span className="star">&#9733;</span>
+                    </div>
                     <button
                       onClick={() => {
                         navigate(`/camp/${v.c_sid}`)

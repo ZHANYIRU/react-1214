@@ -5,6 +5,7 @@ import MemberContext from '../../contexts/MemberContext'
 import { useState, useEffect, useContext } from 'react'
 import axios from 'axios'
 
+
 function Post({ postData }) {
   const { data, auth } = useContext(MemberContext)
 
@@ -50,8 +51,10 @@ function Post({ postData }) {
           return (
             <div
               className={style.cardWrap}
+              key={v.post_sid}
               onClick={() => {
                 setIsView(true)
+                setCurrentPost(i)
               }}
             >
               <div className={style.black}></div>
