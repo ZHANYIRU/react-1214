@@ -152,7 +152,7 @@ function CampSlider() {
   // }, [timeLeft])
 
   return (
-    <>
+    <div style={{ width: '98%' }}>
       <Slider
         dots={true}
         infinite={true}
@@ -242,7 +242,7 @@ function CampSlider() {
               // }
             })}
       </Slider>
-    </>
+    </div>
   )
 }
 
