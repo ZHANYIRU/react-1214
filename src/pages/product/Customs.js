@@ -194,7 +194,7 @@ export default function Customs(props) {
       .replace('image/png', 'image/octet-stream')
     const a = document.createElement('a')
     a.href = image
-    a.download = `newyear2020.jpeg`
+    a.download = `newCustom.jpeg`
     document.body.appendChild(a)
     a.click()
     document.body.removeChild(a)

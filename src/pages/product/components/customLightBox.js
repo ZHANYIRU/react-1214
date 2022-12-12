@@ -35,7 +35,12 @@ export default function CustomLightBox({
           document.body.style.overflow = 'visible'
         }}
       >
-        <div className={styled.customLightBoxBg}>
+        <div
+          className={styled.customLightBoxBg}
+          onClick={(e) => {
+            e.stopPropagation()
+          }}
+        >
           <div className={styled.topArea}>
             <div className={styled.title}>新增照片</div>
             <div className={styled.escape}>
