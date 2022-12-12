@@ -168,14 +168,13 @@ export default function Leaderboard() {
             </div>
             <ul
               className={display.length > 4 ? `${styled.flexUl}` : ''}
-              // style={
-              //   display.length > 5 ? { overflowY: 'scroll'} : ''
-              // }
+            // style={
+            //   display.length > 5 ? { overflowY: 'scroll'} : ''
+            // }
             >
               {display.map((v, i) => {
                 const rank = i + 1
                 return (
-<<<<<<< HEAD
                   <div key={v.member_sid}>
                     <li>
                       <div className={styled.ranking}>
@@ -188,47 +187,6 @@ export default function Leaderboard() {
                           rank
                         )}
                         {rank !== 1 && rank !== 2 && rank !== 3 ? rank : ''}
-=======
-                  <li key={v.member_sid}>
-                    <div className={styled.ranking}>
-                      {rank === 1 || rank === 2 || rank === 3 ? (
-                        <img
-                          src={`http://localhost:3001/imgs/zx/borad_${rank}.png`}
-                          alt=""
-                        />
-                      ) : (
-                        rank
-                      )}
-                      {rank !== 1 && rank !== 2 && rank !== 3 ? rank : ''}
-                    </div>
-                    <div className={styled.nameWrap}>
-                      <div className={styled.empty}>
-                        <div
-                          className={`${styled.imgBorder} ${avatarLevel(
-                            v.total_height
-                          )}`}
-                          onClick={() => {
-                            navigate(
-                              `${memberData.data.member_sid}` ===
-                                `${v.member_sid}`
-                                ? `/member`
-                                : `/profile?id=${v.member_sid}`
-                            )
-                          }}
-                        >
-                          <div className={styled.imgWrap}>
-                            {v && v.avatar ? (
-                              <img
-                                src={`http://localhost:3001/uploads/avatar_${v.avatar}`}
-                                alt="avatar"
-                              ></img>
-                            ) : (
-                              <img src="/img/default_avatar.png" alt="avatar" />
-                            )}
-                          </div>
-                        </div>
-                        <p>{v.nickname}</p>
->>>>>>> 21265c2ba16915e072b126841ca8c2ad9736a9ac
                       </div>
                       <div className={styled.nameWrap}>
                         <div className={styled.empty}>
@@ -282,9 +240,9 @@ export default function Leaderboard() {
                 style={
                   switchBtn
                     ? {
-                        backgroundColor: 'rgba(230, 189, 67, 0.701)',
-                        color: '#000',
-                      }
+                      backgroundColor: 'rgba(230, 189, 67, 0.701)',
+                      color: '#000',
+                    }
                     : {}
                 }
               >
@@ -300,9 +258,9 @@ export default function Leaderboard() {
                   switchBtn
                     ? {}
                     : {
-                        backgroundColor: 'rgba(230, 189, 67, 0.701)',
-                        color: '#000',
-                      }
+                      backgroundColor: 'rgba(230, 189, 67, 0.701)',
+                      color: '#000',
+                    }
                 }
               >
                 好友排名
