@@ -52,7 +52,7 @@ const Store = () => {
                   setshowStore(store[1])
                 }}
                 className={`${styled.redball}`}
-                style={{ top: '65px', left: '330px' }}
+                style={{ top: '65px', left: '350px' }}
               >
                 <i className="fa-solid fa-location-dot"></i>
               </div>
