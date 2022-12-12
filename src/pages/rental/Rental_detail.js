@@ -52,7 +52,7 @@ const Rental_detail = () => {
   const [cartStore, setCartStore] = useState({
     borrowStore: '大安店',
     backStore: '大安店',
-    borow_fee_level: 0,
+    borow_fee_level: 1,
     back_fee_level: 0,
   })
 
@@ -138,8 +138,9 @@ const Rental_detail = () => {
                           <div
                             key={i}
                             style={{
-                              border: `${checkPic === i ? '2px solid #ccc' : 'none'
-                                }`,
+                              border: `${
+                                checkPic === i ? '2px solid #ccc' : 'none'
+                              }`,
                             }}
                           >
                             <img
@@ -195,7 +196,7 @@ const Rental_detail = () => {
                           (Detail.rental_price *
                             number *
                             (Date.parse(day.backDay) - changeDay)) /
-                          86400000
+                            86400000
                         )
                       }}
                     />
@@ -219,7 +220,7 @@ const Rental_detail = () => {
                           (Detail.rental_price *
                             number *
                             (changeDay - Date.parse(day.borrowDay))) /
-                          86400000
+                            86400000
                         )
                       }}
                     />
@@ -237,6 +238,7 @@ const Rental_detail = () => {
                     <select
                       onChange={(e) => {
                         const store_value = e.target.value.split(',')
+                        console.log(store_value)
                         const new_store = {
                           ...cartStore,
                           borrowStore: store_value[0],
@@ -246,7 +248,7 @@ const Rental_detail = () => {
                         setCartStore(new_store)
                         setDeliveryFee(
                           60 *
-                          Math.abs(cartStore.back_fee_level - store_value[1])
+                            Math.abs(cartStore.back_fee_level - store_value[1])
                         )
                       }}
                     >
@@ -273,6 +275,7 @@ const Rental_detail = () => {
                     <select
                       onChange={(e) => {
                         const store_value = e.target.value.split(',')
+                        console.log(store_value)
                         const new_store = {
                           ...cartStore,
                           backStore: store_value[0],
@@ -282,7 +285,7 @@ const Rental_detail = () => {
                         setCartStore(new_store)
                         setDeliveryFee(
                           60 *
-                          Math.abs(cartStore.borow_fee_level - store_value[1])
+                            Math.abs(cartStore.borow_fee_level - store_value[1])
                         )
                       }}
                     >
@@ -318,10 +321,12 @@ const Rental_detail = () => {
                             NewNumber *
                             (Date.parse(day.backDay) -
                               Date.parse(day.borrowDay))) /
-                          86400000
+                            86400000
                         )
                       }}
-                    >－</button>
+                    >
+                      －
+                    </button>
                     <button className={styled.middlebutton}>{number}</button>
                     <button
                       onClick={() => {
@@ -332,7 +337,7 @@ const Rental_detail = () => {
                             NewNumber *
                             (Date.parse(day.backDay) -
                               Date.parse(day.borrowDay))) /
-                          86400000
+                            86400000
                         )
                       }}
                     >
@@ -358,7 +363,7 @@ const Rental_detail = () => {
                       day.backDay,
                       //總共天數
                       (Date.parse(day.backDay) - Date.parse(day.borrowDay)) /
-                      86400000,
+                        86400000,
                       cartStore.borrowStore,
                       cartStore.backStore,
                       deliveryFee,
