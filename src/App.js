@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ProCartContextProvider } from './contexts/ProCartContext'
 import { MemberContextProvider } from './contexts/MemberContext'
+import Tappay from './pages/Cart/child-pages/Tappay'
 import ScrollToTop from './components/ScrollToTop'
 import Layout from './Outlet/outlet'
 import Navbar from './components/Navbar'
@@ -39,8 +40,6 @@ import RoomDetailPage from './pages/room/RoomDetailPage'
 import Leaderboard from './pages/home/leaderboard'
 import ResetPass from './pages/member/ResetPass'
 
-
-
 function App() {
   return (
     <BrowserRouter>
@@ -72,6 +71,7 @@ function App() {
               <Route path="/store" element={<Store />} />
               <Route path="/commnent" element={<Commnent />} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/testpay" element={<Tappay />} />
               <Route path="/pay/confirm" element={<Confirm />} />
               <Route path="/social" element={<SocialWall />} />
               <Route path="/leaderboard" element={<Leaderboard />} />
