@@ -76,6 +76,7 @@ export default function Followers() {
         icon: 'error',
         title: '無法將自己加入關注',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
 

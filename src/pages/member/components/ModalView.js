@@ -7,6 +7,7 @@ import { useContext, useEffect, useState, useRef } from 'react'
 import MemberContext from '../../../contexts/MemberContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { modalAvatarLevel } from '../components/Avatar'
+import { logDOM } from '@testing-library/react'
 
 export default function ModalView({
   isView,
@@ -45,6 +46,7 @@ export default function ModalView({
   const [isDel, setIsDel] = useState(false)
   const [target, setTarget] = useState(null)
   const [targetRid, setTargetRid] = useState(null)
+  const [targetId, setTargetId] = useState(null)
   const [addingReply, setAddingReply] = useState(false)
   const [replyTo, setReplyTo] = useState('')
 
@@ -244,7 +246,7 @@ export default function ModalView({
       // alert('成功回覆')
       getReply()
       getPostList()
-      setReplyTxt('')
+      // setReplyTxt('')
       // alert(
       //   `刪除成功: 要刪除的回覆sid為${sid}, 發表者mid為${mid}, 回覆的貼文pid為${pid}`
       // )
@@ -260,9 +262,21 @@ export default function ModalView({
     }
   }
 
-  async function replyToReply(nickname, rid) {
+  function replyToReply(nickname, rid, mid) {
     setReplyPlaceholder(`@${nickname}: `)
     setReplyPostId(rid)
+    setReplyTo(mid)
+  }
+
+  function resetReply() {
+    setReplyPlaceholder(initPlaceholder)
+    setReplyTo('')
+    setReplyPostId(0)
+    setIsReplying(false)
+    setTargetRid(null)
+    setTarget(null)
+    setTargetId(null)
+    setReplyTxt('')
   }
 
   // function avatarLevel(height = 0) {
@@ -293,12 +307,16 @@ export default function ModalView({
         if (targetRid) {
           replyRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
           setTargetRid(null)
+          setTarget(null)
+          setTargetId(null)
           setAddingReply(false)
         } else if (!targetRid) {
           bottomRef.current?.scrollIntoView({
             behavior: 'smooth',
             block: 'start',
           })
+          setTarget(null)
+          setTargetId(null)
           setAddingReply(false)
         }
       } else if (addingReply === false) {
@@ -450,25 +468,28 @@ export default function ModalView({
                                   if (!isReplying) {
                                     setReplyTxt('')
                                     setIsReplying(true)
-                                    replyToReply(v.nickname, v.sid)
-                                    setReplyTo(v.member_sid)
+                                    replyToReply(
+                                      v.nickname,
+                                      v.sid,
+                                      v.member_sid
+                                    )
                                     setTarget(e.target)
+                                    setTargetId(v.sid)
                                     setTargetRid(e.target.dataset.rid)
                                     // console.log(e.target.dataset.rid)
                                   }
                                   if (isReplying && target === e.target) {
-                                    setReplyPlaceholder(initPlaceholder)
-                                    setReplyTo('')
-                                    setReplyPostId(0)
-                                    setIsReplying(false)
-                                    setTargetRid(null)
-                                    setReplyTxt('')
+                                    resetReply()
                                   }
                                   if (isReplying && target !== e.target) {
-                                    setReplyTo(v.member_sid)
                                     setReplyTxt('')
-                                    replyToReply(v.nickname, v.sid)
+                                    replyToReply(
+                                      v.nickname,
+                                      v.sid,
+                                      v.member_sid
+                                    )
                                     setTarget(e.target)
+                                    setTargetId(v.sid)
                                     setTargetRid(e.target.dataset.rid)
                                     // console.log(e.target.dataset.rid)
                                   }
@@ -485,8 +506,13 @@ export default function ModalView({
                                 {dayjs(v.datetime).format('YYYY-MM-DD')}
                                 <br></br>
                                 <span
+                                  data-rid={v.sid}
                                   style={{ color: '#E00' }}
                                   onClick={(e) => {
+                                    // return console.log(v.sid === targetId)
+                                    if (targetId === v.sid) {
+                                      resetReply()
+                                    }
                                     deleteReply(v.member_sid, v.sid, v.post_sid)
                                     setIsDel(true)
                                   }}
@@ -519,27 +545,30 @@ export default function ModalView({
                                       }}
                                       onClick={(e) => {
                                         if (!isReplying) {
-                                          setReplyTo(el.member_sid)
                                           setIsReplying(true)
                                           setReplyTxt('')
-                                          replyToReply(el.nickname, v.sid)
+                                          replyToReply(
+                                            el.nickname,
+                                            v.sid,
+                                            el.member_sid
+                                          )
                                           setTarget(e.target)
+                                          setTargetId(el.sid)
                                           setTargetRid(e.target.dataset.rid)
                                           // console.log(e.target.dataset.rid)
                                         }
                                         if (isReplying && target === e.target) {
-                                          setReplyTo('')
-                                          setReplyPlaceholder(initPlaceholder)
-                                          setReplyPostId(0)
-                                          setIsReplying(false)
-                                          setTargetRid(null)
-                                          setReplyTxt('')
+                                          resetReply()
                                         }
                                         if (isReplying && target !== e.target) {
-                                          setReplyTo(el.member_sid)
                                           setReplyTxt('')
-                                          replyToReply(el.nickname, v.sid)
+                                          replyToReply(
+                                            el.nickname,
+                                            v.sid,
+                                            el.member_sid
+                                          )
                                           setTarget(e.target)
+                                          setTarget(el.sid)
                                           setTargetRid(e.target.dataset.rid)
                                           // console.log(e.target.dataset.rid)
                                         }
@@ -578,11 +607,15 @@ export default function ModalView({
                                         data-rid={v.sid}
                                         onClick={(e) => {
                                           if (!isReplying) {
-                                            setReplyTo(el.member_sid)
                                             setReplyTxt('')
                                             setIsReplying(true)
-                                            replyToReply(el.nickname, v.sid)
+                                            replyToReply(
+                                              el.nickname,
+                                              v.sid,
+                                              el.member_sid
+                                            )
                                             setTarget(e.target)
+                                            setTargetId(el.sid)
                                             setTargetRid(e.target.dataset.rid)
                                             // console.log(e.target.dataset.rid)
                                           }
@@ -590,21 +623,20 @@ export default function ModalView({
                                             isReplying &&
                                             target === e.target
                                           ) {
-                                            setReplyTo('')
-                                            setReplyPlaceholder(initPlaceholder)
-                                            setReplyPostId(0)
-                                            setIsReplying(false)
-                                            setTargetRid(null)
-                                            setReplyTxt('')
+                                            resetReply()
                                           }
                                           if (
                                             isReplying &&
                                             target !== e.target
                                           ) {
-                                            setReplyTo(el.member_sid)
                                             setReplyTxt('')
-                                            replyToReply(el.nickname, v.sid)
+                                            replyToReply(
+                                              el.nickname,
+                                              v.sid,
+                                              el.member_sid
+                                            )
                                             setTarget(e.target)
+                                            setTargetId(el.sid)
                                             setTargetRid(e.target.dataset.rid)
                                             // console.log(e.target.dataset.rid)
                                           }
@@ -661,9 +693,15 @@ export default function ModalView({
                                         )}
                                         <br></br>
                                         <span
+                                          data-rid={v.sid}
                                           style={{ color: '#E00' }}
                                           onClick={(e) => {
-                                            setTarget(e.target)
+                                            // return console.log(el.sid ===  targetId)
+                                            if (
+                                              targetId === el.sid
+                                            ) {
+                                              resetReply()
+                                            }
                                             deleteReply(
                                               el.member_sid,
                                               el.sid,
@@ -719,12 +757,8 @@ export default function ModalView({
                     }}
                     onKeyDown={(e) => {
                       // console.log(e.key)
-                      if (e.key === 'Backspace' && replyTxt === '') {
-                        setReplyPlaceholder(initPlaceholder)
-                        setReplyPostId(0)
-                        setIsReplying(false)
-                        setTargetRid(null)
-                        setReplyTo('')
+                      if (e.key === 'Backspace' && replyTxt.trim() === '') {
+                        resetReply()
                       }
                     }}
                     name="context"
@@ -748,8 +782,7 @@ export default function ModalView({
               if (currentPost > 0) {
                 setLiking(false)
                 setCurrentPost(currentPost - 1)
-                setReplyPostId(0)
-                setReplyPlaceholder(initPlaceholder)
+                resetReply()
                 topRef.current?.scrollIntoView()
               }
             }}
@@ -765,8 +798,7 @@ export default function ModalView({
               if (currentPost < listLength - 1) {
                 setLiking(false)
                 setCurrentPost(currentPost + 1)
-                setReplyPostId(0)
-                setReplyPlaceholder(initPlaceholder)
+                resetReply()
                 topRef.current?.scrollIntoView()
               }
               // if(currentPost === listLength -1) {
