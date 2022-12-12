@@ -724,6 +724,7 @@ export default function ModalView({
                         setReplyPostId(0)
                         setIsReplying(false)
                         setTargetRid(null)
+                        setReplyTo('')
                       }
                     }}
                     name="context"
