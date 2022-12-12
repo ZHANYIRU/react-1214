@@ -164,7 +164,7 @@ export default function ModalView({
       })
     }
 
-    if (!formData.get('context').trim()) {
+    if (!formData.get('context').trim() || formData.get('context') === '') {
       return Swal.fire({
         title: '請輸入留言內容',
         confirmButtonColor: '#216326',
