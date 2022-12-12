@@ -168,9 +168,9 @@ export default function Leaderboard() {
             </div>
             <ul
               className={display.length > 4 ? `${styled.flexUl}` : ''}
-            // style={
-            //   display.length > 5 ? { overflowY: 'scroll'} : ''
-            // }
+              // style={
+              //   display.length > 5 ? { overflowY: 'scroll'} : ''
+              // }
             >
               {display.map((v, i) => {
                 const rank = i + 1
@@ -178,7 +178,7 @@ export default function Leaderboard() {
                   <div key={v.member_sid}>
                     <li>
                       <div className={styled.ranking}>
-                        {rank === 1 || 2 || 3 ? (
+                        {rank === 1 || rank === 2 || rank === 3 ? (
                           <img
                             src={`http://localhost:3001/imgs/zx/borad_${rank}.png`}
                             alt=""
@@ -240,9 +240,9 @@ export default function Leaderboard() {
                 style={
                   switchBtn
                     ? {
-                      backgroundColor: 'rgba(230, 189, 67, 0.701)',
-                      color: '#000',
-                    }
+                        backgroundColor: 'rgba(230, 189, 67, 0.701)',
+                        color: '#000',
+                      }
                     : {}
                 }
               >
@@ -258,9 +258,9 @@ export default function Leaderboard() {
                   switchBtn
                     ? {}
                     : {
-                      backgroundColor: 'rgba(230, 189, 67, 0.701)',
-                      color: '#000',
-                    }
+                        backgroundColor: 'rgba(230, 189, 67, 0.701)',
+                        color: '#000',
+                      }
                 }
               >
                 好友排名
