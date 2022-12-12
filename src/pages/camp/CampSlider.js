@@ -215,7 +215,7 @@ function CampSlider() {
                       <div className={style.context}>
                         <div className={style.text}>
                           <h3>{v.camp_name}</h3>
-                          <h4>最後一次活動日期：{v.camp_startdate} </h4>
+                          <h4>活動日期：{v.camp_startdate} </h4>
                           <p>{v.brife_describe}</p>
                         </div>
                       </div>
