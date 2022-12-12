@@ -211,6 +211,7 @@ function CampSlider() {
                         </div>
                       </div>
                       <button
+                      className={style.join}
                         onClick={() => {
                           navigate(`/camp/${v.c_sid}`)
                         }}
