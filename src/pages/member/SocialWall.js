@@ -62,6 +62,7 @@ export default function SocialWall() {
                     return Swal.fire({
                       title: '請先登入會員',
                       confirmButtonColor: '#216326',
+                      scrollbarPadding: false,
                     })
                   }
                   setTabFollow(true)
@@ -93,6 +94,7 @@ export default function SocialWall() {
                     return Swal.fire({
                       title: '請先登入會員',
                       confirmButtonColor: '#216326',
+                      scrollbarPadding: false,
                     })
                   }
                   navigate('/member')

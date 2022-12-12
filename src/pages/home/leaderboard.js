@@ -177,7 +177,7 @@ export default function Leaderboard() {
                 return (
                   <li key={v.member_sid}>
                     <div className={styled.ranking}>
-                      {rank === 1 || 2 || 3 ? (
+                      {rank === 1 || rank === 2 || rank === 3 ? (
                         <img
                           src={`http://localhost:3001/imgs/zx/borad_${rank}.png`}
                           alt=""

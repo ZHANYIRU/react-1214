@@ -11,6 +11,7 @@ import ProductComment from '../product/components/ProductComment'
 import pstyled from '../../styles/product-scss/ProductComment.module.scss'
 import CommentLightBox from '../product/components/CommentLightBox'
 import lbstyled from '../../styles/product-scss/CommentLightBox.module.scss'
+import Swal from 'sweetalert2'
 
 function CampProduct() {
   const navigate = useNavigate()
@@ -47,6 +48,28 @@ function CampProduct() {
   const changeBtn = (e) => {
     setintroCom(!introCom)
   }
+
+  //sweetAlert2
+  const sweetAlert = (text) => {
+    Swal.fire({
+      title: `${text}`,
+      icon: 'info',
+      scrollbarPadding: true,
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown',
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp',
+      },
+    })
+  }
+//加入購物車方法
+const addCartFunction = (v) => {
+  Swal.fire({
+    icon: 'success',
+    title: '已加入!',
+    showCancelButton: false,
+  })}
 
   //會員頭像邊框
   function avatarLevel(height = 0) {
@@ -339,6 +362,7 @@ function CampProduct() {
                                 num,
                                 v.mainImage
                               )
+                              addCartFunction(v)
                             }}
                           >
                             加入購物車

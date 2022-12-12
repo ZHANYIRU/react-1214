@@ -78,7 +78,7 @@ function Profile(props) {
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326',scrollbarPadding: false, })
     }
     const result = await axios.post(
       `http://localhost:3001/member/follow/api?mid=${mid}`,
@@ -106,6 +106,7 @@ function Profile(props) {
         logo: 'error',
         title: '關注失敗',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
   }
@@ -114,7 +115,7 @@ function Profile(props) {
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326',scrollbarPadding: false, })
     }
 
     const result = await axios.delete(
@@ -137,6 +138,7 @@ function Profile(props) {
         logo: 'error',
         title: '取消關注失敗',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
   }
@@ -230,6 +232,7 @@ function Profile(props) {
                     Swal.fire({
                       title: '請先登入會員',
                       confirmButtonColor: '#216326',
+                      scrollbarPadding: false,
                     })
                   } else {
                     unfollow()
@@ -246,6 +249,7 @@ function Profile(props) {
                     Swal.fire({
                       title: '請先登入會員',
                       confirmButtonColor: '#216326',
+                      scrollbarPadding: false,
                     })
                   } else {
                     addFollow()
