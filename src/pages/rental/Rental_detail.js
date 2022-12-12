@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import styled from '../../styles/rental-scss/rentalDetail.module.scss'
 import Commnent from './components/Commnent'
@@ -13,6 +13,7 @@ import CommentLightBox from '../product/components/CommentLightBox'
 import Swal from 'sweetalert2'
 
 const Rental_detail = () => {
+  const navigate = useNavigate()
   const { addRenCart } = useContext(ProCartContext)
   const memberData = useContext(MemberContext)
   //設定金額
@@ -137,10 +138,9 @@ const Rental_detail = () => {
                           <div
                             key={i}
                             style={{
-                              border: `${checkPic === i
-                                ? '2px solid #ccc'
-                                : 'none'
-                                }`,
+                              border: `${
+                                checkPic === i ? '2px solid #ccc' : 'none'
+                              }`,
                             }}
                           >
                             <img
@@ -196,7 +196,7 @@ const Rental_detail = () => {
                           (Detail.rental_price *
                             number *
                             (Date.parse(day.backDay) - changeDay)) /
-                          86400000
+                            86400000
                         )
                       }}
                     />
@@ -220,7 +220,7 @@ const Rental_detail = () => {
                           (Detail.rental_price *
                             number *
                             (changeDay - Date.parse(day.borrowDay))) /
-                          86400000
+                            86400000
                         )
                       }}
                     />
@@ -229,7 +229,12 @@ const Rental_detail = () => {
                 {/* 取件跟歸還店點設定 */}
                 <div className={styled.flex}>
                   <div>
-                    <span>取件店點：</span>
+                    <span
+                      className={styled.toStore}
+                      onClick={() => navigate('/Store')}
+                    >
+                      取件店點：
+                    </span>
                     <select
                       onChange={(e) => {
                         const store_value = e.target.value.split(',')
@@ -242,7 +247,7 @@ const Rental_detail = () => {
                         setCartStore(new_store)
                         setDeliveryFee(
                           60 *
-                          Math.abs(cartStore.back_fee_level - store_value[1])
+                            Math.abs(cartStore.back_fee_level - store_value[1])
                         )
                       }}
                     >
@@ -260,7 +265,12 @@ const Rental_detail = () => {
                     </select>
                   </div>
                   <div>
-                    <span>歸還店點：</span>
+                    <span
+                      className={styled.toStore}
+                      onClick={() => navigate('/Store')}
+                    >
+                      歸還店點：
+                    </span>
                     <select
                       onChange={(e) => {
                         const store_value = e.target.value.split(',')
@@ -273,7 +283,7 @@ const Rental_detail = () => {
                         setCartStore(new_store)
                         setDeliveryFee(
                           60 *
-                          Math.abs(cartStore.borow_fee_level - store_value[1])
+                            Math.abs(cartStore.borow_fee_level - store_value[1])
                         )
                       }}
                     >
@@ -309,12 +319,10 @@ const Rental_detail = () => {
                             NewNumber *
                             (Date.parse(day.backDay) -
                               Date.parse(day.borrowDay))) /
-                          86400000
+                            86400000
                         )
                       }}
-                    >
-                      -
-                    </button>
+                    ></button>
                     <button className={styled.middlebutton}>{number}</button>
                     <button
                       onClick={() => {
@@ -325,7 +333,7 @@ const Rental_detail = () => {
                             NewNumber *
                             (Date.parse(day.backDay) -
                               Date.parse(day.borrowDay))) /
-                          86400000
+                            86400000
                         )
                       }}
                     >
@@ -342,7 +350,7 @@ const Rental_detail = () => {
                       icon: 'success',
                       title: '已加入!',
                       timer: 1200,
-                      showConfirmButton: false
+                      showConfirmButton: false,
                     })
                     const test = [
                       Detail.sid,
@@ -351,7 +359,7 @@ const Rental_detail = () => {
                       day.backDay,
                       //總共天數
                       (Date.parse(day.backDay) - Date.parse(day.borrowDay)) /
-                      86400000,
+                        86400000,
                       cartStore.borrowStore,
                       cartStore.backStore,
                       deliveryFee,
