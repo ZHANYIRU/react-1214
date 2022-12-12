@@ -32,7 +32,7 @@ export default function Followers() {
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326', scrollbarPadding: false, })
     }
 
     const result = await axios.delete(
@@ -56,7 +56,11 @@ export default function Followers() {
         icon: 'error',
         title: '取消關注失敗',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
+      getMyFollow()
+      getFollow()
+      getFollowing()
     }
   }
 
@@ -64,7 +68,7 @@ export default function Followers() {
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326',scrollbarPadding: false, })
     }
 
     if (member_sid === data.member_sid) {
@@ -99,7 +103,11 @@ export default function Followers() {
         icon: 'error',
         title: '關注失敗',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
+      getMyFollow()
+      getFollow()
+      getFollowing()
     }
   }
 
@@ -159,6 +167,7 @@ export default function Followers() {
                             return Swal.fire({
                               title: '請先登入會員',
                               confirmButtonColor: '#216326',
+                              scrollbarPadding: false,
                             })
                           }
                           addFollow(v.member_sid)

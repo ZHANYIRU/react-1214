@@ -15,8 +15,14 @@ function CampSlider() {
 
   const [people, setPeople] = useState([])
 
+  let deadLineArray = []
+
+  for (let i = 0; i <= 4; i++) {
+    deadLineArray.push(false)
+  }
+
   // 隱藏時間開關
-  const [timeBtn, setTimeBtn] = useState(false)
+  const [timeBtn, setTimeBtn] = useState(deadLineArray)
   //隱藏的設定時間
   const [upTime, setUpTime] = useState(0)
 
@@ -79,14 +85,14 @@ function CampSlider() {
     const b = a.map((v1, i) => {
       let different
       let changeT
-      if (!timeBtn) {
+      if (timeBtn[i] === false) {
         changeT = v1.camp_joinenddate
-      } else {
+      } else if (timeBtn[i]) {
         changeT = upTime + 5000
       }
-      if (!timeBtn) {
+      if (timeBtn[i] === false) {
         different = new Date(changeT) - new Date().getTime()
-      } else {
+      } else if (timeBtn[i]) {
         different = changeT - new Date().getTime()
       }
 
@@ -98,7 +104,7 @@ function CampSlider() {
           minutes: Math.floor((different / (1000 * 60)) % 60),
           seconds: Math.floor((different / 1000) % 60),
         }
-      } else if (different <= 0) {
+      } else if (different <= 0 && timeBtn[i]) {
         timeLeft = {
           days: 0,
           hours: 0,
@@ -166,7 +172,7 @@ function CampSlider() {
               // if (i <= 5) {
               return (
                 <div key={i}>
-                  <div className={slider}>
+                  <div className={timeBtn[i] ? `${slider}` : `${style.slider}`}>
                     <div className={style.dayonepic}>
                       <img
                         src={`http://localhost:3001/n7/campmain/${v.mainImage}`}
@@ -189,7 +195,7 @@ function CampSlider() {
 
                           <p>
                             截止報名：
-                            {timeBtn ? '2022-12-14' : v.camp_joinenddate},
+                            {timeBtn[i] ? '2022-12-14' : v.camp_joinenddate},
                             報名倒數：距離還有
                             {timeLeft[i].days}天{timeLeft[i].hours}時
                             {timeLeft[i].minutes}分 {timeLeft[i].seconds}秒
@@ -197,7 +203,10 @@ function CampSlider() {
                           <button
                             type="button"
                             onClick={() => {
-                              setTimeBtn(!timeBtn)
+                              const newArray = [...timeBtn]
+                              newArray.splice(i, 1)
+                              newArray.splice(i, 0, true)
+                              setTimeBtn(newArray)
                               setUpTime(new Date().getTime())
                             }}
                           ></button>
@@ -206,11 +215,12 @@ function CampSlider() {
                       <div className={style.context}>
                         <div className={style.text}>
                           <h3>{v.camp_name}</h3>
-                          <h4>活動日期：{v.camp_startdate} </h4>
+                          <h4>最後一次活動日期：{v.camp_startdate} </h4>
                           <p>{v.brife_describe}</p>
                         </div>
                       </div>
                       <button
+                        className={style.join}
                         onClick={() => {
                           navigate(`/camp/${v.c_sid}`)
                         }}

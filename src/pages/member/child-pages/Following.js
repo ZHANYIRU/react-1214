@@ -30,7 +30,7 @@ export default function Following() {
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326',scrollbarPadding: false, })
     }
 
     const result = await axios.delete(
@@ -52,6 +52,7 @@ export default function Following() {
         icon: 'error',
         title: '取消關注失敗',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
   }
@@ -60,7 +61,7 @@ export default function Following() {
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
+      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326',scrollbarPadding: false, })
     }
 
     if (member_sid === data.member_sid) {
@@ -68,6 +69,7 @@ export default function Following() {
         icon: 'error',
         title: '無法將自己加入關注',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
 
@@ -94,6 +96,7 @@ export default function Following() {
         icon: 'error',
         title: '關注失敗',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
   }
@@ -154,6 +157,7 @@ export default function Following() {
                             return Swal.fire({
                               title: '請先登入會員',
                               confirmButtonColor: '#216326',
+                              scrollbarPadding: false,
                             })
                           }
                           addFollow(v.member_sid)

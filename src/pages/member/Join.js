@@ -50,7 +50,7 @@ export default function Join(props) {
 
     if (result.data.success) {
       localStorage.setItem('token', `${result.data.token}`)
-      Swal.fire({ title: '註冊成功', confirmButtonColor: '#216326' }).then(
+      Swal.fire({ title: '註冊成功', confirmButtonColor: '#216326', scrollbarPadding: false, }).then(
         function (isComfirm) {
           if (isComfirm) {
             getInfo()
@@ -65,6 +65,7 @@ export default function Join(props) {
         icon: 'error',
         title: `註冊失敗${result.data.error}`,
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
 
