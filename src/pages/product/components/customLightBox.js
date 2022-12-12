@@ -77,6 +77,7 @@ export default function CustomLightBox({
               onClick={() => {
                 addPhoto()
                 setShow(false)
+                document.body.style.overflow = 'visible'
               }}
             >
               確定
