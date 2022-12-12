@@ -147,7 +147,7 @@ export default function LeafletMap({ postList, getPostList, totalHeight }) {
           currentPost={currentPost}
           listLength={locationList.length}
           getPostList={getPostList}
-          //   setLocationList={setLocationList}
+          setLocationList={setLocationList}
         />
       )}
     </div>

@@ -100,6 +100,7 @@ export default function MemberEdit() {
         icon: 'success',
         title: '更新資料成功',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
       getInfo()
     }
@@ -108,6 +109,7 @@ export default function MemberEdit() {
         icon: 'error',
         title: `更新資料失敗${result.data.error}`,
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
 

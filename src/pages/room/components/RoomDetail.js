@@ -352,6 +352,7 @@ function RoomDetail({ detail, detailComment, el }) {
                               {v.created_time.split('T', 10)[0]}
                             </span>
                             <span
+                              className={style.more}
                               onClick={() => {
                                 setWhichCom(i)
                                 setComLightBox(true)

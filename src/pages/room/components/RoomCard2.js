@@ -78,8 +78,8 @@ function RoomCard({ roomlist }) {
         {M2rows &&
           M2rows.map((v, i) => {
             return (
-              <Link to={`/room/${v.room_sid}`}>
-                <div className={style.roomCard} key={v.room_sid}>
+              <Link to={`/room/${v.room_sid}`} key={v.room_sid}>
+                <div className={style.roomCard} >
                   <div className={style.cardImg}>
                     <img
                       src={`http://localhost:3001/room_img/${v.room_img}`}

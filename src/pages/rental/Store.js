@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import styled from '../../styles/rental-scss/store.module.scss'
 import axios from 'axios'
+import { setOptions } from 'leaflet'
 
 const Store = () => {
   const [zone, setZone] = useState(['北區', '中區', '南區', '東區'])
   const [zoneChoice, setZoneChoice] = useState('北區')
   const [store, setStore] = useState([])
   const [showStore, setshowStore] = useState({})
+  const [optionShow, setOptionShow] = useState('')
 
   const store_url = `http://localhost:3001/rental/getStore`
 
@@ -38,7 +40,8 @@ const Store = () => {
               <div
                 onMouseOver={() => {
                   setshowStore(store[0])
-                  console.log(store)
+                  setOptionShow(store[0].store_name)
+                  console.log(store[0].store_name)
                 }}
                 className={`${styled.redball}`}
                 style={{ top: '55px', left: '370px' }}
@@ -50,9 +53,11 @@ const Store = () => {
               <div
                 onMouseOver={() => {
                   setshowStore(store[1])
+                  setOptionShow(store[1].store_name)
+                  console.log(store[1].store_name)
                 }}
                 className={`${styled.redball}`}
-                style={{ top: '65px', left: '330px' }}
+                style={{ top: '65px', left: '350px' }}
               >
                 <i className="fa-solid fa-location-dot"></i>
               </div>
@@ -111,8 +116,10 @@ const Store = () => {
                 <select
                   onChange={(e) => {
                     const value = e.target.value
+                    setOptionShow(e.target.value)
                     showStoreFilter(value)
                   }}
+                  value={optionShow}
                 >
                   {store
                     .filter((e, i) => {

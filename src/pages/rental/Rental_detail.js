@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom'
 import ProductComment from '../product/components/ProductComment'
 import MemberContext from '../../contexts/MemberContext'
 import CommentLightBox from '../product/components/CommentLightBox'
+import Swal from 'sweetalert2'
 
 const Rental_detail = () => {
   const { addRenCart } = useContext(ProCartContext)
@@ -137,8 +138,8 @@ const Rental_detail = () => {
                             key={i}
                             style={{
                               border: `${checkPic === i
-                                  ? '2px solid #ccc'
-                                  : 'none'
+                                ? '2px solid #ccc'
+                                : 'none'
                                 }`,
                             }}
                           >
@@ -337,6 +338,12 @@ const Rental_detail = () => {
                 <button
                   className={styled.addcart}
                   onClick={() => {
+                    Swal.fire({
+                      icon: 'success',
+                      title: '已加入!',
+                      timer: 1200,
+                      showConfirmButton: false
+                    })
                     const test = [
                       Detail.sid,
                       Detail.rental_name,
