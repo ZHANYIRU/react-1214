@@ -291,63 +291,59 @@ function Product() {
                     const v = datas[i]
 
                     return (
-                      <>
-                        <div className={styled.cardWrap} key={v2.product_sid}>
-                          <div
-                            className={styled.card}
-                            onClick={() => {
-                              if (
-                                v.product_sid === 719 ||
-                                v.product_sid === 720 ||
-                                v.product_sid === 721 ||
-                                v.product_sid === 722
-                              ) {
-                                linkToDetail(`/product/custom`)
-                              } else {
-                                linkToDetail(`/product/${v.product_sid}`)
+                      <div className={styled.cardWrap} key={v2.product_sid}>
+                        <div
+                          className={styled.card}
+                          onClick={() => {
+                            if (
+                              v.product_sid === 719 ||
+                              v.product_sid === 720 ||
+                              v.product_sid === 721 ||
+                              v.product_sid === 722
+                            ) {
+                              linkToDetail(`/product/custom`)
+                            } else {
+                              linkToDetail(`/product/${v.product_sid}`)
+                            }
+                          }}
+                        >
+                          {/* 右上角布條 抗水 防潑水 */}
+                          {v.proof === '抗水' || '防潑水' ? (
+                            <div
+                              className={v.proof !== '0' ? styled.banner : ''}
+                              style={
+                                v.proof === '防潑水'
+                                  ? { backgroundColor: 'rgb(0, 190, 164)' }
+                                  : {}
                               }
-                            }}
-                          >
-                            {/* 右上角布條 抗水 防潑水 */}
-                            {v.proof === '抗水' || '防潑水' ? (
-                              <div
-                                className={v.proof !== '0' ? styled.banner : ''}
-                                style={
-                                  v.proof === '防潑水'
-                                    ? { backgroundColor: 'rgb(0, 190, 164)' }
-                                    : {}
-                                }
-                              >
-                                {v.proof !== '0' ? v.proof : ''}
-                              </div>
-                            ) : (
-                              ''
-                            )}
-                            {/* 右上角布條  防水 */}
-                            {v.proof === '防水' ? (
-                              <div
-                                className={
-                                  v.proof !== '0' ? styled.banner2 : ''
-                                }
-                              >
-                                {v.proof !== '0' ? v.proof : ''}
-                              </div>
-                            ) : (
-                              ''
-                            )}
-                            <div className={styled.imgWrap}>
-                              <img
-                                src={`http://localhost:3001/imgs/zx/${v.product_img}`}
-                                alt=""
-                              />
+                            >
+                              {v.proof !== '0' ? v.proof : ''}
                             </div>
-                            <p className={styled.p}>{v.product_name}</p>
-                            <h2>
-                              金額：<span>{moneyFormat(v.product_price)}</span>
-                            </h2>
+                          ) : (
+                            ''
+                          )}
+                          {/* 右上角布條  防水 */}
+                          {v.proof === '防水' ? (
+                            <div
+                              className={v.proof !== '0' ? styled.banner2 : ''}
+                            >
+                              {v.proof !== '0' ? v.proof : ''}
+                            </div>
+                          ) : (
+                            ''
+                          )}
+                          <div className={styled.imgWrap}>
+                            <img
+                              src={`http://localhost:3001/imgs/zx/${v.product_img}`}
+                              alt=""
+                            />
                           </div>
+                          <p className={styled.p}>{v.product_name}</p>
+                          <h2>
+                            金額：<span>{moneyFormat(v.product_price)}</span>
+                          </h2>
                         </div>
-                      </>
+                      </div>
                     )
                   })}
 

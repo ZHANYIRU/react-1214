@@ -79,8 +79,8 @@ function RoomCard({ roomlist }) {
         {M3rows &&
           M3rows.map((v, i) => {
             return (
-              <Link to={`/room/${v.room_sid}`}>
-                <div className={style.roomCard} key={v.room_sid}>
+              <Link to={`/room/${v.room_sid}`} key={v.room_sid}>
+                <div className={style.roomCard}>
                   <div className={style.cardImg}>
                     <img
                       src={`http://localhost:3001/room_img/${v.room_img}`}
@@ -104,9 +104,9 @@ function RoomCard({ roomlist }) {
                   </div>
                   <h4 className={style.roomName}>{v.room_name}</h4>
                   <div className={style.star}>
-                  {starCount(Math.round(v.Average))}
+                    {starCount(Math.round(v.Average))}
                     <span className={style.commentQTY}>
-                    ({v.commentQty > 0 ? v.commentQty : 0})
+                      ({v.commentQty > 0 ? v.commentQty : 0})
                     </span>
                   </div>
                   <div className={style.price}>

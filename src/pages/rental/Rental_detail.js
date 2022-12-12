@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef, useContext } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import styled from '../../styles/rental-scss/rentalDetail.module.scss'
 import Commnent from './components/Commnent'
@@ -10,8 +10,10 @@ import { Link } from 'react-router-dom'
 import ProductComment from '../product/components/ProductComment'
 import MemberContext from '../../contexts/MemberContext'
 import CommentLightBox from '../product/components/CommentLightBox'
+import Swal from 'sweetalert2'
 
 const Rental_detail = () => {
+  const navigate = useNavigate()
   const { addRenCart } = useContext(ProCartContext)
   const memberData = useContext(MemberContext)
   //設定金額
@@ -136,9 +138,7 @@ const Rental_detail = () => {
                           <div
                             key={i}
                             style={{
-                              border: `${checkPic === i
-                                  ? '2px solid #ccc'
-                                  : 'none'
+                              border: `${checkPic === i ? '2px solid #ccc' : 'none'
                                 }`,
                             }}
                           >
@@ -228,7 +228,12 @@ const Rental_detail = () => {
                 {/* 取件跟歸還店點設定 */}
                 <div className={styled.flex}>
                   <div>
-                    <span>取件店點：</span>
+                    <span
+                      className={styled.toStore}
+                      onClick={() => navigate('/Store')}
+                    >
+                      取件店點：
+                    </span>
                     <select
                       onChange={(e) => {
                         const store_value = e.target.value.split(',')
@@ -259,7 +264,12 @@ const Rental_detail = () => {
                     </select>
                   </div>
                   <div>
-                    <span>歸還店點：</span>
+                    <span
+                      className={styled.toStore}
+                      onClick={() => navigate('/Store')}
+                    >
+                      歸還店點：
+                    </span>
                     <select
                       onChange={(e) => {
                         const store_value = e.target.value.split(',')
@@ -311,9 +321,7 @@ const Rental_detail = () => {
                           86400000
                         )
                       }}
-                    >
-                      -
-                    </button>
+                    >－</button>
                     <button className={styled.middlebutton}>{number}</button>
                     <button
                       onClick={() => {
@@ -337,6 +345,12 @@ const Rental_detail = () => {
                 <button
                   className={styled.addcart}
                   onClick={() => {
+                    Swal.fire({
+                      icon: 'success',
+                      title: '已加入!',
+                      timer: 1200,
+                      showConfirmButton: false,
+                    })
                     const test = [
                       Detail.sid,
                       Detail.rental_name,
