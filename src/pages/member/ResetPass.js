@@ -49,12 +49,14 @@ export default function ResetPass() {
         icon: 'success',
         title: result.data.message,
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     } else {
       Swal.fire({
         icon: 'error',
         title: result.data.message,
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
   }

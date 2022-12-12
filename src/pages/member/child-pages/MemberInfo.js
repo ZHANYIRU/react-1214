@@ -73,6 +73,7 @@ export default function MemberInfo() {
         icon: 'error',
         title: '請先上傳圖片',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
 
@@ -92,6 +93,7 @@ export default function MemberInfo() {
     Swal.fire({
       title: result.data.success ? '新增成功' : '新增失敗',
       confirmButtonColor: '#216326',
+      scrollbarPadding: false,
     })
     setIsNew(false)
     getInfo()
@@ -118,6 +120,7 @@ export default function MemberInfo() {
     Swal.fire({
       title: result.data.success ? '修改成功' : '修改失敗',
       confirmButtonColor: '#216326',
+      scrollbarPadding: false,
     })
     setIsEdit(false)
     setIsDel(false)
@@ -145,6 +148,7 @@ export default function MemberInfo() {
     Swal.fire({
       title: result.data.success ? '刪除成功' : '刪除失敗',
       confirmButtonColor: '#216326',
+      scrollbarPadding: false,
     })
     if (result.data.success) {
       setIsEdit(false)

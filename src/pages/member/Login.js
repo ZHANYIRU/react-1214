@@ -46,6 +46,7 @@ function Login(props) {
         icon: 'error',
         title: '登入失敗, 信箱或密碼錯誤',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
   }
@@ -58,6 +59,7 @@ function Login(props) {
         icon: 'error',
         title: '請輸入電子信箱',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
 
@@ -72,12 +74,14 @@ function Login(props) {
           icon: 'success',
           title: result.data.message,
           confirmButtonColor: '#216326',
+          scrollbarPadding: false,
         })
       }
       return Swal.fire({
         icon: 'error',
         title: result.data.message,
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
 

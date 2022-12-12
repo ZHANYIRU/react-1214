@@ -58,6 +58,7 @@ export default function MemberPass() {
         icon: 'success',
         title: '密碼更新成功',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       }).then((result) => {
         navigate('/member')
       })
@@ -68,6 +69,7 @@ export default function MemberPass() {
         icon: 'error',
         title: '密碼更新失敗',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
 
