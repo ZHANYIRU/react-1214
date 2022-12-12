@@ -76,7 +76,11 @@ export default function ModalView({
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
+      return Swal.fire({
+        title: '請先登入會員',
+        confirmButtonColor: '#216326',
+        scrollbarPadding: false,
+      })
     }
 
     const mid = data.member_sid || ''
@@ -112,7 +116,11 @@ export default function ModalView({
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
+      return Swal.fire({
+        title: '請先登入會員',
+        confirmButtonColor: '#216326',
+        scrollbarPadding: false,
+      })
     }
 
     const mid = data.member_sid || ''
@@ -149,13 +157,18 @@ export default function ModalView({
     // console.log('是否有留言內容: ' + !!formData.get('context').trim());
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
+      return Swal.fire({
+        title: '請先登入會員',
+        confirmButtonColor: '#216326',
+        scrollbarPadding: false,
+      })
     }
 
     if (!formData.get('context').trim()) {
       return Swal.fire({
         title: '請輸入留言內容',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
 
@@ -211,7 +224,11 @@ export default function ModalView({
     // )
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
+      return Swal.fire({
+        title: '請先登入會員',
+        confirmButtonColor: '#216326',
+        scrollbarPadding: false,
+      })
     }
 
     const result = await axios.delete(
@@ -238,6 +255,7 @@ export default function ModalView({
         icon: 'error',
         title: '刪除留言失敗',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
   }
@@ -264,8 +282,8 @@ export default function ModalView({
 
   useEffect(() => {
     if (isView === true) {
-      document.body.style.overflow = 'hidden'
-      document.body.style.paddingRight = '10px'
+      // document.body.style.overflow = 'hidden'
+      // document.body.style.paddingRight = '10px'
     }
   }, [isView])
 
@@ -298,8 +316,8 @@ export default function ModalView({
         className={styled.modalBg}
         // z-index over nav bar?
         onClick={() => {
-          document.body.style.overflow = 'visible'
-          document.body.style.paddingRight = '0'
+          // document.body.style.overflow = 'visible'
+          // document.body.style.paddingRight = '0'
           setIsView(false)
           setCurrentPost(0)
           setReplyPostId(null)
@@ -610,6 +628,7 @@ export default function ModalView({
                                               return Swal.fire({
                                                 title: '查無此會員',
                                                 confirmButtonColor: '#216326',
+                                                scrollbarPadding: false,
                                               })
                                             }
                                             if (
