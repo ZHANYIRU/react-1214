@@ -276,3 +276,20 @@
 
 
 }
+
+.toStore{
+    position:relative;
+    &:after{
+        content:'查詢店點';
+        position:absolute;
+        width:80px;
+        background-color:rgba(238, 244, 128, 0.779);
+        display:none;
+        cursor: pointer;
+    }
+    &:hover:after{
+        // transform:translateY(15px);
+        // left:15px;
+        display:block
+    }
+}
