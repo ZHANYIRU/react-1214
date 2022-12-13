@@ -27,7 +27,7 @@ function Confirm() {
   }, [])
   return (
     <>
-      <div style={{ width: '100%', height: '100px' }}></div>
+      <div style={{ width: '100%', height: '150px' }}></div>
       <div>已完成付款</div>
     </>
   )

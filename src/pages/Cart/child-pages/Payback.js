@@ -6,33 +6,12 @@ import Card from 'react-credit-cards'
 import 'react-credit-cards/es/styles-compiled.css'
 import axios from 'axios'
 import dayjs from 'dayjs'
-import './TapPay.scss'
 function subscribe(eventName, listener) {
   document.addEventListener(eventName, listener)
 }
 
 function unsubscribe(eventName, listener) {
   document.removeEventListener(eventName, listener)
-}
-function getTPDirect() {
-  return new Promise((resolve, reject) => {
-    if (typeof window.TPDirect !== 'undefined') {
-      return resolve(window.TPDirect)
-    } else {
-      const script = window.document.createElement('script')
-      script.src = 'https://js.tappaysdk.com/sdk/tpdirect/v5.14.0'
-      script.async = true
-      script.onload = () => {
-        if (typeof window.TPDirect !== 'undefined') {
-          resolve(window.TPDirect)
-        } else {
-          reject(new Error('failed to load TapPay sdk'))
-        }
-      }
-      script.onerror = reject
-      window.document.body.appendChild(script)
-    }
-  })
 }
 function Pay({
   paySelect,
@@ -43,59 +22,6 @@ function Pay({
   useCoupon,
   writeUser,
 }) {
-  const num = useRef(null)
-  const exp = useRef(null)
-  const ccv = useRef(null)
-  const paymentSetUp = () => {
-    getTPDirect().then((TPDirect) => {
-      console.log(TPDirect)
-      TPDirect.setupSDK(
-        11327,
-        'app_whdEWBH8e8Lzy4N6BysVRRMILYORF6UxXbiOFsICkz0J9j1C0JUlCHv1tVJC',
-        'sandbox'
-      )
-      TPDirect.card.setup({
-        // Display ccv field
-        fields: {
-          number: {
-            // element: '.form-control.card-number',
-            element: num.current,
-            placeholder: '4434 5678 1234 5678',
-          },
-          expirationDate: {
-            // element: document.getElementById('tappay-expiration-date'),
-            element: exp.current,
-            placeholder: '12 / 22',
-          },
-          ccv: {
-            // element: '.form-control.ccv',
-            element: ccv.current,
-            placeholder: 'ccv',
-          },
-        },
-        styles: {
-          input: {
-            color: 'gray',
-          },
-          ':focus': {
-            color: 'black',
-          },
-          '.valid': {
-            color: 'black',
-          },
-        },
-        // 此設定會顯示卡號輸入正確後，會顯示前六後四碼信用卡卡號
-        isMaskCreditCardNumber: true,
-        maskCreditCardNumberRange: {
-          beginIndex: 6,
-          endIndex: 11,
-        },
-      })
-      TPDirect.card.onUpdate((update) => {
-        console.log(update)
-      })
-    })
-  }
   //信用卡套件
   const [card, setCard] = useState({
     number: '',
@@ -106,7 +32,14 @@ function Pay({
     focused: '',
     formData: null,
   })
-  const { issuer, focused } = card
+  const { number, name, expiry, cvc, issuer, focused } = card
+  const handleInputChange = (e) => {
+    setCard({ ...card, [e.target.name]: e.target.value })
+  }
+  const handleInputFocus = (e) => {
+    e.preventDefault()
+    setCard({ ...card, focused: e.target.name })
+  }
   const { data } = useContext(MemberContext)
   const { pro, ren, room, camp, cartPrice, moneyFormat } =
     useContext(ProCartContext)
@@ -157,43 +90,32 @@ function Pay({
   const cardPay = async (e) => {
     e.preventDefault()
     setCardAni(true)
-    getTPDirect().then((TPDirect) => {
-      TPDirect.card.getPrime(async (result) => {
-        console.log(result)
-        const res = await axios.post(
-          'http://localhost:3001/order/TapPay',
-          result.card
-        )
-        if (res.data.status === 0) {
-          let cardOrder = testOrder.totalOrder
-          cardOrder.orderId = new Date().getTime()
-          const { data } = await axios.post(
-            'http://localhost:3001/order/cardPay',
-            cardOrder
-          )
-          if (data.affectedRows) {
-            setForOk({
-              orderN: cardOrder.orderId,
-              family: familySelect,
-              pay: paySelect,
-              orderDay: dayjs(cardOrder.orderId).format('YYYY-MM-DD'),
-              totalPrice: cartPrice - coupon,
-            })
-            setTimeout(() => {
-              setCardAni(false)
-              setStep(step + 1)
-            }, 1500)
-          }
-        }
+    let cardOrder = testOrder.totalOrder
+    cardOrder.orderId = new Date().getTime()
+    const { data } = await axios.post(
+      'http://localhost:3001/order/cardPay',
+      cardOrder
+    )
+    if (data.affectedRows) {
+      setForOk({
+        orderN: cardOrder.orderId,
+        family: familySelect,
+        pay: paySelect,
+        orderDay: dayjs(cardOrder.orderId).format('YYYY-MM-DD'),
+        totalPrice: cartPrice - coupon,
       })
-    })
+      setTimeout(() => {
+        setCardAni(false)
+        setStep(step + 1)
+      }, 1500)
+    }
   }
   useEffect(() => {
     subscribe('paid', () => setPaid(true))
     if (paid) {
       setTimeout(() => {
         setStep(step + 1)
-      }, 2500)
+      }, 3200)
     }
     return () => {
       unsubscribe('paid')
@@ -206,9 +128,6 @@ function Pay({
       left: 0,
       behavior: 'instant',
     })
-  }, [])
-  useEffect(() => {
-    paymentSetUp()
   }, [])
   return (
     <>
@@ -232,34 +151,83 @@ function Pay({
       {paySelect === '信用卡' && (
         <div className={styled.payCard}>
           <Card
-            number={4434567812345678}
-            name={'範例信用卡'}
-            expiry={'12/22'}
-            cvc={123}
+            number={number}
+            name={name}
+            expiry={expiry}
+            cvc={cvc}
             focused={focused}
           />
           <form className={styled.form}>
             <div className="form-group" style={{ marginBottom: '20px' }}>
-              <div className="cardWrap">
-                <label htmlFor="">信用卡卡號(支援的卡別)：</label>
-                <div className="cardImgWrap">
-                  <img src="../../img/visa.png" alt="" />
-                  <img src="../../img/amex.png" alt="" />
-                  <img src="../../img/mastercard.png" alt="" />
-                  <img src="../../img/jcb.png" alt="" />
-                  <img src="../../img/card4.png" alt="" />
-                </div>
-              </div>
-              <div className="TapNum" ref={num}></div>
+              <input
+                type="tel"
+                name="number"
+                className="form-control"
+                placeholder="Card Number"
+                pattern="[\d| ]{16,22}"
+                required
+                maxLength={16}
+                value={card.number}
+                onChange={(e) => {
+                  handleInputChange(e)
+                }}
+                onFocus={(e) => {
+                  handleInputFocus(e)
+                }}
+              />
+            </div>
+            <div className="form-group">
+              <input
+                type="text"
+                name="name"
+                value={card.name}
+                className="form-control"
+                placeholder="Name"
+                required
+                onChange={(e) => {
+                  handleInputChange(e)
+                }}
+                onFocus={(e) => {
+                  handleInputFocus(e)
+                }}
+                style={{ marginBottom: '20px' }}
+              />
             </div>
             <div className="row">
               <div className="col-6">
-                <label htmlFor="">到期日</label>
-                <div className="TapExp" ref={exp}></div>
+                <input
+                  type="tel"
+                  name="expiry"
+                  value={card.expiry}
+                  className="form-control"
+                  placeholder="Valid Thru"
+                  pattern="\d\d/\d\d"
+                  required
+                  onChange={(e) => {
+                    handleInputChange(e)
+                  }}
+                  onFocus={(e) => {
+                    handleInputFocus(e)
+                  }}
+                />
               </div>
               <div className="col-6">
-                <label htmlFor="">安全碼</label>
-                <div className="TapCcv" ref={ccv}></div>
+                <input
+                  type="tel"
+                  name="cvc"
+                  value={card.cvc}
+                  className="form-control"
+                  placeholder="CVC"
+                  pattern="\d{3,4}"
+                  required
+                  maxLength={3}
+                  onChange={(e) => {
+                    handleInputChange(e)
+                  }}
+                  onFocus={(e) => {
+                    handleInputFocus(e)
+                  }}
+                />
               </div>
             </div>
             <input type="hidden" name="issuer" value={issuer} />
@@ -268,6 +236,19 @@ function Pay({
                 className={styled.btn}
                 onClick={(e) => {
                   cardPay(e)
+                }}
+              >
+                付款
+              </button>
+              <button
+                className={styled.btn2}
+                onClick={(e) => {
+                  e.preventDefault()
+                  setCard({
+                    number: '4963547812985476',
+                    name: 'ZHANYIRU',
+                    expiry: '27/12',
+                  })
                 }}
               >
                 付款

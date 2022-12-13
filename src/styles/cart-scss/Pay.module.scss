@@ -46,22 +46,21 @@
   border-radius: 10px;
   padding-top: 20px;
 }
-.btn{
+.btn {
   border: none;
-    background-color: $darkGreen;
-    color: $yellow;
-    border-radius: 5px;
-    padding: 10px 20px;
-}
-.btn2{
-  margin-left: 20px;
-  opacity: 0;
+  background-color: $darkGreen;
+  color: $yellow;
+  border-radius: 5px;
+  padding: 10px 20px;
 }
 .form {
   width: 50%;
   margin: 30px auto;
+  label {
+    margin-bottom: 10px;
+  }
 }
-.payAnimation{
+.payAnimation {
   width: 100%;
   height: 100vh;
   background-color: rgba(113, 113, 113, 0.713);
@@ -74,7 +73,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  p{
+  p {
     font-size: 30px;
     margin-bottom: 20px;
   }
