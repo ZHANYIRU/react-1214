@@ -43,7 +43,7 @@ function OrderTime({ open, momOrder }) {
                       open.includes(el.order_sid) &&
                       (50 + total[i] * 200 > 534.5
                         ? // ? `${534.5}px`
-                          `${545.5}px`
+                        `${530.5}px`
                         : `${50 + 26 + total[i] * 200}px`),
                   }}
                 />
