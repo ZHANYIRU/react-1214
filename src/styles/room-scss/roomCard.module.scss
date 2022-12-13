@@ -1,26 +1,30 @@
 @import '../global.scss';
-.titleWrap{
+
+.titleWrap {
     margin: 20px auto 25px 300px;
     width: 75%;
 }
-.roomMainTitle{
+
+.roomMainTitle {
     padding: 10px 0px;
     font-size: 1.4rem;
 }
-.roomCardGroup{
-    width:1400px;
+
+.roomCardGroup {
+    width: 1400px;
     margin: 0 auto;
     display: flex;
     justify-content: center;
- 
-    a{
+
+    a {
         color: black;
         width: 275px;
         display: block;
         margin-right: 75px;
     }
 }
-.roomCard{
+
+.roomCard {
     flex-shrink: 0;
     margin: 0px 35px 50px 35px;
     padding: 18px;
@@ -28,136 +32,157 @@
     background-color: white;
     border-radius: 10px;
     box-sizing: content-box;
-    &:hover{
+
+    &:hover {
         transform: scale(1.02);
-        transition:0.5s;
-        }
+        transition: 0.5s;
+    }
 }
-.cardImg{
+
+.cardImg {
     width: 100%;
     height: 200px;
     border-radius: 10px;
     overflow: hidden;
-    img{
+
+    img {
         width: 100%;
         height: 100%;
-        object-fit:cover;
+        object-fit: cover;
     }
 }
-.icon{
+
+.icon {
     display: flex;
     justify-content: space-between;
-    span{
+
+    span {
         display: inline-block;
         margin-top: 10px;
         padding-right: 10px;
         font-weight: 700;
+
         i {
-            color:#48742C;
+            color: #48742C;
         }
     }
-    }
-.roomName{
+}
+
+.roomName {
     margin-top: 10px;
     font-size: 1.2rem;
     font-weight: 700;
 }
-.star{
+
+.star {
     margin-top: 8px;
+
     i {
         color: #ffda16;
         font-size: 0.8rem;
         margin-right: 4px;
     }
 }
-.commentQTY{
+
+.commentQTY {
     font-size: 0.9rem;
 
 }
-.price{
-font-weight: 700;
-text-align: end;
-font-size: 1.2rem;
+
+.price {
+    font-weight: 700;
+    text-align: end;
+    font-size: 1.2rem;
 }
-.price span{
-font-size: 1rem;
+
+.price span {
+    font-size: 1rem;
 }
 
 @media screen and (max-width: 1400px) {
-    .titleWrap{
+    .titleWrap {
         margin: 20px 0px 25px 150px;
         width: 75%;
     }
-    .roomMainTitle{
+
+    .roomMainTitle {
         padding: 10px 0px;
         font-size: 1.4rem;
     }
-    .roomCardGroup{
-        width:95%;
-        flex-wrap:  wrap;
+
+    .roomCardGroup {
+        width: 95%;
+        flex-wrap: wrap;
         justify-content: flex-start;
-        a{
-            width:260px;
+
+        a {
+            width: 260px;
             margin-right: 50px;
         }
-   
+
     }
 
 }
 
 @media screen and (max-width: 992px) {
-    .titleWrap{
+    .titleWrap {
         margin: 20px 0px 25px 200px;
     }
-    .roomMainTitle{
+
+    .roomMainTitle {
         padding: 10px 0px;
         font-size: 1.4rem;
     }
 
-    .roomCardGroup{
-        width:95%;
-        a{
+    .roomCardGroup {
+        width: 95%;
+
+        a {
             width: 250px;
             margin-right: 50px;
         }
 
-        .roomCard{
+        .roomCard {
             padding: 13px;
             margin: 0 20px 10px 20px;
 
-            .cardImg{
+            .cardImg {
                 width: 100%;
                 height: 150px;
                 border-radius: 5px;
                 overflow: hidden;
-                img{
+
+                img {
                     width: 100%;
                     height: 100%;
-                    object-fit:cover;
+                    object-fit: cover;
                 }
             }
         }
     }
 }
 
-@media screen and (max-width: 768px) {  
-    .titleWrap{
+@media screen and (max-width: 768px) {
+    .titleWrap {
         margin: 20px 0px 25px 175px;
     }
-    .roomMainTitle{
+
+    .roomMainTitle {
         padding: 10px 0px;
         font-size: 1.4rem;
     }
-    .roomCardGroup{
-        width:95%;
+
+    .roomCardGroup {
+        width: 95%;
         flex-wrap: wrap;
-        a{
+
+        a {
             width: 225px;
-            margin-right:40px;
-        } 
+            margin-right: 40px;
+        }
     }
-  
-    .roomName{
+
+    .roomName {
         margin-top: 10px;
         font-size: 1.1rem;
         font-weight: 700;
@@ -165,49 +190,58 @@ font-size: 1rem;
 }
 
 @media screen and (max-width: 576px) {
-    .titleWrap{
+    .titleWrap {
         margin: 20px 0px 25px 50px;
     }
-    .roomCardGroup{
-      width:100%;
+
+    .roomCardGroup {
+        width: 100%;
 
         flex-wrap: wrap;
-        a{
+
+        a {
             width: 200px;
             height: 355px;
         }
-        .icon{
-            span{
+
+        .icon {
+            span {
                 font-size: 0.9rem;
                 margin-top: 10px;
                 padding-right: 10px;
                 font-weight: 700;
             }
-            }
+        }
     }
 
-    .roomName{
+    .roomName {
         font-size: 1rem;
     }
-    .price{
+
+    .price {
         font-size: 1.1rem;
-        }
-        .price span{
+    }
+
+    .price span {
         font-size: 0.9rem;
-        }
+    }
 }
 
 @media screen and (max-width: 450px) {
-    
-    .roomCardGroup{
-        width:95%;
+
+    .roomCardGroup {
+        width: 95%;
         flex-wrap: wrap;
-        a{
-            width: 175px;
-            margin-right: 10px;
+
+        a {
+            width: 270px;
+            height: 300px;
+            margin-right: 40px;
+            margin-left: 15px;
+
 
         }
-       
+
     }
-   
+
 }
