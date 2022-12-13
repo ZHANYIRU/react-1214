@@ -87,10 +87,16 @@
 }
 }
 .content{
+    width: 100%;
     height: 55px;
     padding: 20px 10px;
     line-height: 1.5rem;
     font-size: 0.9rem;
+    word-break:break-all;
+    text-overflow: ellipsis;
+    overflow:hidden;
+
+
 }
 .bottom{
     display: flex;

@@ -1,0 +1,35 @@
+.TapNum {
+  width: 450px;
+  height: 35px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  padding-left: 8px;
+}
+.TapExp,
+.TapCcv {
+  width: 200px;
+  height: 35px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  padding-left: 8px;
+}
+.TapName {
+  border: none;
+  outline: none;
+  width: 450px;
+  height: 35px;
+  background-color: rgb(255, 255, 255);
+  border-radius: 5px;
+  padding-left: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.cardWrap {
+  display: flex;
+}
+.cardImgWrap {
+  img {
+    width: 35px;
+    height: 20px;
+  }
+}

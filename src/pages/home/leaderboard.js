@@ -175,53 +175,57 @@ export default function Leaderboard() {
               {display.map((v, i) => {
                 const rank = i + 1
                 return (
-                  <li key={v.member_sid}>
-                    <div className={styled.ranking}>
-                      {rank === 1 || 2 || 3 ? (
-                        <img
-                          src={`http://localhost:3001/imgs/zx/borad_${rank}.png`}
-                          alt=""
-                        />
-                      ) : (
-                        rank
-                      )}
-                      {rank !== 1 && rank !== 2 && rank !== 3 ? rank : ''}
-                    </div>
-                    <div className={styled.nameWrap}>
-                      <div className={styled.empty}>
-                        <div
-                          className={`${styled.imgBorder} ${avatarLevel(
-                            v.total_height
-                          )}`}
-                          onClick={() => {
-                            navigate(
-                              `${memberData.data.member_sid}` ===
-                                `${v.member_sid}`
-                                ? `/member`
-                                : `/profile?id=${v.member_sid}`
-                            )
-                          }}
-                        >
-                          <div className={styled.imgWrap}>
-                            {v && v.avatar ? (
-                              <img
-                                src={`http://localhost:3001/uploads/avatar_${v.avatar}`}
-                                alt="avatar"
-                              ></img>
-                            ) : (
-                              <img src="/img/default_avatar.png" alt="avatar" />
-                            )}
-                          </div>
-                        </div>
-                        <p>{v.nickname}</p>
+                  <div key={v.member_sid}>
+                    <li>
+                      <div className={styled.ranking}>
+                        {rank === 1 || rank === 2 || rank === 3 ? (
+                          <img
+                            src={`http://localhost:3001/imgs/zx/borad_${rank}.png`}
+                            alt=""
+                          />
+                        ) : (
+                          rank
+                        )}
                       </div>
-                    </div>
-                    <div className={`${styled.height} `}>
-                      {!memberData.auth && !switchBtn
-                        ? '你尚未登入'
-                        : howHeight(v.total_height)}
-                    </div>
-                  </li>
+                      <div className={styled.nameWrap}>
+                        <div className={styled.empty}>
+                          <div
+                            className={`${styled.imgBorder} ${avatarLevel(
+                              v.total_height
+                            )}`}
+                            onClick={() => {
+                              navigate(
+                                `${memberData.data.member_sid}` ===
+                                  `${v.member_sid}`
+                                  ? `/member`
+                                  : `/profile?id=${v.member_sid}`
+                              )
+                            }}
+                          >
+                            <div className={styled.imgWrap}>
+                              {v && v.avatar ? (
+                                <img
+                                  src={`http://localhost:3001/uploads/avatar_${v.avatar}`}
+                                  alt="avatar"
+                                ></img>
+                              ) : (
+                                <img
+                                  src="/img/default_avatar.png"
+                                  alt="avatar"
+                                />
+                              )}
+                            </div>
+                          </div>
+                          <p>{v.nickname}</p>
+                        </div>
+                      </div>
+                      <div className={`${styled.height} `}>
+                        {!memberData.auth && !switchBtn
+                          ? '你尚未登入'
+                          : howHeight(v.total_height)}
+                      </div>
+                    </li>
+                  </div>
                 )
               })}
             </ul>

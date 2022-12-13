@@ -7,6 +7,7 @@ import { useContext, useEffect, useState, useRef } from 'react'
 import MemberContext from '../../../contexts/MemberContext'
 import { Link, useNavigate } from 'react-router-dom'
 import { modalAvatarLevel } from '../components/Avatar'
+import { logDOM } from '@testing-library/react'
 
 export default function ModalView({
   isView,
@@ -42,9 +43,12 @@ export default function ModalView({
   const [replyPlaceholder, setReplyPlaceholder] = useState('')
   const [replyPostId, setReplyPostId] = useState(0)
   const [isReplying, setIsReplying] = useState(false)
+  const [isDel, setIsDel] = useState(false)
   const [target, setTarget] = useState(null)
   const [targetRid, setTargetRid] = useState(null)
-  const [isDel, setIsDel] = useState(false)
+  const [targetId, setTargetId] = useState(null)
+  const [addingReply, setAddingReply] = useState(false)
+  const [replyTo, setReplyTo] = useState('')
 
   const replyForm = useRef(null)
 
@@ -74,7 +78,23 @@ export default function ModalView({
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
+      return Swal.fire({
+        title: '請先登入會員',
+        confirmButtonColor: '#216326',
+        scrollbarPadding: false,
+      })
+    }
+
+    const mid = data.member_sid || ''
+
+    const rows = await axios.get(
+      `http://localhost:3001/member/like/api?mid=${mid}&pid=${showData.post_sid}`
+    )
+
+    if (rows.data[0]) {
+      setLiked(true)
+      getPostList()
+      return null
     }
 
     const result = await axios.post(
@@ -98,7 +118,23 @@ export default function ModalView({
     const token = localStorage.getItem('token') || ''
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
+      return Swal.fire({
+        title: '請先登入會員',
+        confirmButtonColor: '#216326',
+        scrollbarPadding: false,
+      })
+    }
+
+    const mid = data.member_sid || ''
+
+    const rows = await axios.get(
+      `http://localhost:3001/member/like/api?mid=${mid}&pid=${showData.post_sid}`
+    )
+
+    if (!rows.data[0]) {
+      setLiked(false)
+      getPostList()
+      return null
     }
 
     const result = await axios.delete(
@@ -123,17 +159,27 @@ export default function ModalView({
     // console.log('是否有留言內容: ' + !!formData.get('context').trim());
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
-    }
-
-    if (!formData.get('context').trim()) {
       return Swal.fire({
-        title: '請輸入留言內容',
+        title: '請先登入會員',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
 
-    formData.set('context', `${replyPlaceholder}${formData.get('context')}`)
+    if (!formData.get('context').trim() || formData.get('context') === '') {
+      return Swal.fire({
+        title: '請輸入留言內容',
+        confirmButtonColor: '#216326',
+        scrollbarPadding: false,
+      })
+    }
+
+    formData.set(
+      'context',
+      `${replyTo ? replyTo + '#' : ''}${replyPlaceholder}${formData.get(
+        'context'
+      )}`
+    )
 
     formData.append('sid', replyPostId)
 
@@ -151,10 +197,12 @@ export default function ModalView({
       // alert('成功回覆')
       getReply()
       getPostList()
+      setReplyTo('')
       setReplyTxt('')
       setReplyPlaceholder(initPlaceholder)
       setReplyPostId(0)
       setIsReplying(false)
+      setAddingReply(true)
       // target.style.color = '#000'
     }
 
@@ -178,7 +226,11 @@ export default function ModalView({
     // )
 
     if (!token) {
-      return Swal.fire({ title: '請先登入會員', confirmButtonColor: '#216326' })
+      return Swal.fire({
+        title: '請先登入會員',
+        confirmButtonColor: '#216326',
+        scrollbarPadding: false,
+      })
     }
 
     const result = await axios.delete(
@@ -194,7 +246,7 @@ export default function ModalView({
       // alert('成功回覆')
       getReply()
       getPostList()
-      setReplyTxt('')
+      // setReplyTxt('')
       // alert(
       //   `刪除成功: 要刪除的回覆sid為${sid}, 發表者mid為${mid}, 回覆的貼文pid為${pid}`
       // )
@@ -205,13 +257,26 @@ export default function ModalView({
         icon: 'error',
         title: '刪除留言失敗',
         confirmButtonColor: '#216326',
+        scrollbarPadding: false,
       })
     }
   }
 
-  async function replyToReply(nickname, rid) {
+  function replyToReply(nickname, rid, mid) {
     setReplyPlaceholder(`@${nickname}: `)
     setReplyPostId(rid)
+    setReplyTo(mid)
+  }
+
+  function resetReply() {
+    setReplyPlaceholder(initPlaceholder)
+    setReplyTo('')
+    setReplyPostId(0)
+    setIsReplying(false)
+    setTargetRid(null)
+    setTarget(null)
+    setTargetId(null)
+    setReplyTxt('')
   }
 
   // function avatarLevel(height = 0) {
@@ -225,29 +290,43 @@ export default function ModalView({
     getInfo()
     getLike()
     getReply()
+    setReplyTxt('')
+    setReplyPlaceholder(initPlaceholder)
   }, [currentPost])
 
   useEffect(() => {
     if (isView === true) {
-      document.body.style.overflow = 'hidden'
-      document.body.style.paddingRight = '10px'
+      // document.body.style.overflow = 'hidden'
+      // document.body.style.paddingRight = '10px'
     }
   }, [isView])
 
   useEffect(() => {
-    console.log(targetRid)
-    if (targetRid && !isDel) {
-      replyRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
-      setTargetRid(null)
-    } else if (!isDel) {
-      bottomRef.current?.scrollIntoView({ behavior: 'smooth' })
+    if (!isDel) {
+      if (addingReply === true) {
+        if (targetRid) {
+          replyRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+          setTargetRid(null)
+          setTarget(null)
+          setTargetId(null)
+          setAddingReply(false)
+        } else if (!targetRid) {
+          bottomRef.current?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          })
+          setTarget(null)
+          setTargetId(null)
+          setAddingReply(false)
+        }
+      } else if (addingReply === false) {
+        topRef.current?.scrollIntoView()
+      }
     }
-    setIsDel(false)
-  }, [showData])
-
-  useEffect(() => {
-    topRef.current?.scrollIntoView()
-  }, [currentPost])
+    if (isDel) {
+      setIsDel(false)
+    }
+  }, [replies])
 
   return (
     <>
@@ -255,8 +334,8 @@ export default function ModalView({
         className={styled.modalBg}
         // z-index over nav bar?
         onClick={() => {
-          document.body.style.overflow = 'visible'
-          document.body.style.paddingRight = '0'
+          // document.body.style.overflow = 'visible'
+          // document.body.style.paddingRight = '0'
           setIsView(false)
           setCurrentPost(0)
           setReplyPostId(null)
@@ -387,21 +466,32 @@ export default function ModalView({
                                 data-rid={v.sid}
                                 onClick={(e) => {
                                   if (!isReplying) {
+                                    setReplyTxt('')
                                     setIsReplying(true)
-                                    replyToReply(v.nickname, v.sid)
+                                    replyToReply(
+                                      v.nickname,
+                                      v.sid,
+                                      v.member_sid
+                                    )
                                     setTarget(e.target)
+                                    setTargetId(v.sid)
                                     setTargetRid(e.target.dataset.rid)
+                                    // console.log(e.target.dataset.rid)
                                   }
                                   if (isReplying && target === e.target) {
-                                    setReplyPlaceholder(initPlaceholder)
-                                    setReplyPostId(0)
-                                    setIsReplying(false)
-                                    setTargetRid(null)
+                                    resetReply()
                                   }
                                   if (isReplying && target !== e.target) {
-                                    replyToReply(v.nickname, v.sid)
+                                    setReplyTxt('')
+                                    replyToReply(
+                                      v.nickname,
+                                      v.sid,
+                                      v.member_sid
+                                    )
                                     setTarget(e.target)
+                                    setTargetId(v.sid)
                                     setTargetRid(e.target.dataset.rid)
+                                    // console.log(e.target.dataset.rid)
                                   }
                                 }}
                               >
@@ -416,8 +506,13 @@ export default function ModalView({
                                 {dayjs(v.datetime).format('YYYY-MM-DD')}
                                 <br></br>
                                 <span
+                                  data-rid={v.sid}
                                   style={{ color: '#E00' }}
                                   onClick={(e) => {
+                                    // return console.log(v.sid === targetId)
+                                    if (targetId === v.sid) {
+                                      resetReply()
+                                    }
                                     deleteReply(v.member_sid, v.sid, v.post_sid)
                                     setIsDel(true)
                                   }}
@@ -451,18 +546,31 @@ export default function ModalView({
                                       onClick={(e) => {
                                         if (!isReplying) {
                                           setIsReplying(true)
-                                          replyToReply(el.nickname, v.sid)
+                                          setReplyTxt('')
+                                          replyToReply(
+                                            el.nickname,
+                                            v.sid,
+                                            el.member_sid
+                                          )
                                           setTarget(e.target)
+                                          setTargetId(el.sid)
                                           setTargetRid(e.target.dataset.rid)
+                                          // console.log(e.target.dataset.rid)
                                         }
                                         if (isReplying && target === e.target) {
-                                          setReplyPlaceholder(initPlaceholder)
-                                          setIsReplying(false)
+                                          resetReply()
                                         }
                                         if (isReplying && target !== e.target) {
-                                          replyToReply(el.nickname, v.sid)
+                                          setReplyTxt('')
+                                          replyToReply(
+                                            el.nickname,
+                                            v.sid,
+                                            el.member_sid
+                                          )
                                           setTarget(e.target)
+                                          setTarget(el.sid)
                                           setTargetRid(e.target.dataset.rid)
+                                          // console.log(e.target.dataset.rid)
                                         }
                                       }}
                                     >
@@ -499,37 +607,85 @@ export default function ModalView({
                                         data-rid={v.sid}
                                         onClick={(e) => {
                                           if (!isReplying) {
+                                            setReplyTxt('')
                                             setIsReplying(true)
-                                            replyToReply(el.nickname, v.sid)
+                                            replyToReply(
+                                              el.nickname,
+                                              v.sid,
+                                              el.member_sid
+                                            )
                                             setTarget(e.target)
+                                            setTargetId(el.sid)
                                             setTargetRid(e.target.dataset.rid)
+                                            // console.log(e.target.dataset.rid)
                                           }
                                           if (
                                             isReplying &&
                                             target === e.target
                                           ) {
-                                            setReplyPlaceholder(initPlaceholder)
-                                            setIsReplying(false)
+                                            resetReply()
                                           }
                                           if (
                                             isReplying &&
                                             target !== e.target
                                           ) {
-                                            replyToReply(el.nickname, v.sid)
+                                            setReplyTxt('')
+                                            replyToReply(
+                                              el.nickname,
+                                              v.sid,
+                                              el.member_sid
+                                            )
                                             setTarget(e.target)
+                                            setTargetId(el.sid)
                                             setTargetRid(e.target.dataset.rid)
+                                            // console.log(e.target.dataset.rid)
                                           }
                                         }}
                                       >
                                         {el.nickname}
                                       </h4>
                                       <pre>
-                                        <span style={{ color: '#E50' }}>
+                                        <span
+                                          style={{ color: '#E50' }}
+                                          onClick={() => {
+                                            const linkToId =
+                                              el.context.split('#')[0]
+                                            // console.log(
+                                            //   '會員ID為' +
+                                            //     data.member_sid +
+                                            //     '|連結ID為:' +
+                                            //     linkToId
+                                            // )
+                                            if (!linkToId) {
+                                              return Swal.fire({
+                                                title: '查無此會員',
+                                                confirmButtonColor: '#216326',
+                                                scrollbarPadding: false,
+                                              })
+                                            }
+                                            if (
+                                              `${data.member_sid}` !==
+                                              `${linkToId}`
+                                            ) {
+                                              setIsView(false)
+                                              navigate(
+                                                `/profile?id=${linkToId}`
+                                              )
+                                            } else {
+                                              setIsView(false)
+                                              navigate('/member')
+                                            }
+                                          }}
+                                        >
+                                          @
                                           {el.context.indexOf('@') !== -1
-                                            ? el.context.split(' ')[0]
+                                            ? el.context
+                                                .split('@')
+                                                .pop()
+                                                .split(':')[0]
                                             : el.context}
                                         </span>
-                                        <span>{el.context.split(':')[1]}</span>
+                                        <span>:{el.context.split(':')[1]}</span>
                                       </pre>
                                       <p className={styled.replyDate}>
                                         {dayjs(el.datetime).format(
@@ -537,9 +693,15 @@ export default function ModalView({
                                         )}
                                         <br></br>
                                         <span
+                                          data-rid={v.sid}
                                           style={{ color: '#E00' }}
                                           onClick={(e) => {
-                                            setTarget(e.target)
+                                            // return console.log(el.sid ===  targetId)
+                                            if (
+                                              targetId === el.sid
+                                            ) {
+                                              resetReply()
+                                            }
                                             deleteReply(
                                               el.member_sid,
                                               el.sid,
@@ -562,13 +724,13 @@ export default function ModalView({
                           }
                         })}
                         {`${v.sid}` === `${targetRid}` && (
-                          <div ref={replyRef}>**********</div>
+                          <div ref={replyRef}> </div>
                         )}
                       </div>
                     )
                   )
                 })}
-                <div ref={bottomRef}></div>
+                <div ref={bottomRef}> </div>
               </div>
             </div>
             <hr />
@@ -595,10 +757,8 @@ export default function ModalView({
                     }}
                     onKeyDown={(e) => {
                       // console.log(e.key)
-                      if (e.key === 'Backspace' && replyTxt === '') {
-                        setReplyPlaceholder(initPlaceholder)
-                        setReplyPostId(0)
-                        setIsReplying(false)
+                      if (e.key === 'Backspace' && replyTxt.trim() === '') {
+                        resetReply()
                       }
                     }}
                     name="context"
@@ -622,8 +782,7 @@ export default function ModalView({
               if (currentPost > 0) {
                 setLiking(false)
                 setCurrentPost(currentPost - 1)
-                setReplyPostId(0)
-                setReplyPlaceholder(initPlaceholder)
+                resetReply()
                 topRef.current?.scrollIntoView()
               }
             }}
@@ -639,8 +798,7 @@ export default function ModalView({
               if (currentPost < listLength - 1) {
                 setLiking(false)
                 setCurrentPost(currentPost + 1)
-                setReplyPostId(0)
-                setReplyPlaceholder(initPlaceholder)
+                resetReply()
                 topRef.current?.scrollIntoView()
               }
               // if(currentPost === listLength -1) {

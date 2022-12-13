@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+// import React, { useEffect, useState } from 'react'
 import style from '../../styles/home-scss/Group.module.scss'
 import dayjs from 'dayjs'
 import FlipClock from 'x-react-flipclock'
@@ -7,50 +7,50 @@ import CarouselHome from './CarouselHome'
 import { Link } from 'react-router-dom'
 
 function Group({ oneday }) {
-  const calulateTimeLeft = () => {
-    const dateFormat = 'YYYY-MM-DD HH:mm:ss'
-    const now = dayjs(new Date()).format(dateFormat)
-    const deadline = dayjs('2022-12-31 23:59:59').format(dateFormat)
+  // const calulateTimeLeft = () => {
+  //   const dateFormat = 'YYYY-MM-DD HH:mm:ss'
+  //   const now = dayjs(new Date()).format(dateFormat)
+  //   const deadline = dayjs('2022-12-31 23:59:59').format(dateFormat)
 
-    let different = null
-    let timeLeft = {}
+  //   let different
+  //   let timeLeft
 
-    different = new Date(deadline).getTime() - new Date(now).getTime()
+  //   different = new Date(deadline).getTime() - new Date(now).getTime()
 
-    if (different > 0) {
-      timeLeft = {
-        days:
-          Math.floor(different / (1000 * 60 * 60 * 24)) < 10
-            ? '0' + Math.floor(different / (1000 * 60 * 60 * 24))
-            : Math.floor(different / (1000 * 60 * 60 * 24)),
-        hours:
-          Math.floor((different / (1000 * 60 * 60)) % 24) < 24
-            ? '0' + Math.floor((different / (1000 * 60 * 60)) % 24)
-            : Math.floor((different / (1000 * 60 * 60)) % 24),
-        minutes:
-          Math.floor((different / (1000 * 60)) % 60) < 10
-            ? '0' + Math.floor((different / (1000 * 60)) % 60)
-            : Math.floor((different / (1000 * 60)) % 60),
-        seconds:
-          Math.floor((different / 1000) % 60) < 10
-            ? '0' + Math.floor((different / 1000) % 60)
-            : Math.floor((different / 1000) % 60),
-      }
-    }
-    return timeLeft
-  }
+  //   if (different > 0) {
+  //     timeLeft = {
+  //       days:
+  //         Math.floor(different / (1000 * 60 * 60 * 24)) < 10
+  //           ? '0' + Math.floor(different / (1000 * 60 * 60 * 24))
+  //           : Math.floor(different / (1000 * 60 * 60 * 24)),
+  //       hours:
+  //         Math.floor((different / (1000 * 60 * 60)) % 24) < 24
+  //           ? '0' + Math.floor((different / (1000 * 60 * 60)) % 24)
+  //           : Math.floor((different / (1000 * 60 * 60)) % 24),
+  //       minutes:
+  //         Math.floor((different / (1000 * 60)) % 60) < 10
+  //           ? '0' + Math.floor((different / (1000 * 60)) % 60)
+  //           : Math.floor((different / (1000 * 60)) % 60),
+  //       seconds:
+  //         Math.floor((different / 1000) % 60) < 10
+  //           ? '0' + Math.floor((different / 1000) % 60)
+  //           : Math.floor((different / 1000) % 60),
+  //     }
+  //   }
+  //   return timeLeft
+  // }
 
   //  以 calulateTimeLeft 回傳值
-  const [timeLeft, setTimeLeft] = useState(calulateTimeLeft())
+  // const [timeLeft, setTimeLeft] = useState(calulateTimeLeft())
 
-  useEffect(() => {
-    let id = setInterval(() => {
-      setTimeLeft(calulateTimeLeft())
-    }, 1000)
-    return function () {
-      clearInterval(id)
-    }
-  }, [timeLeft])
+  // useEffect(() => {
+  //   let id = setInterval(() => {
+  //     setTimeLeft(calulateTimeLeft())
+  //   }, 1000)
+  //   return function () {
+  //     clearInterval(id)
+  //   }
+  // }, [timeLeft])
   return (
     <>
       <div className={style.left}>

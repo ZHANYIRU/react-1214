@@ -59,7 +59,7 @@ export default function ProductPage() {
     Swal.fire({
       title: `${text}`,
       icon: 'info',
-      scrollbarPadding: true,
+      showCancelButton: false,
       showClass: {
         popup: 'animate__animated animate__fadeInDown',
       },

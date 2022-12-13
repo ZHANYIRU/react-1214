@@ -87,6 +87,7 @@ export default function ProductFilter({
     Swal.fire({
       title: `${text}`,
       icon: 'info',
+      showCancelButton: false,
       showClass: {
         popup: 'animate__animated animate__fadeInDown',
       },

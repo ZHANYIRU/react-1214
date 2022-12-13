@@ -63,6 +63,7 @@ function RoomSelectBar({ detail }) {
   }
   useEffect(() => {
     window.addEventListener('scroll', show)
+
     return () => {
       window.removeEventListener('scroll', show)
     }
@@ -83,6 +84,23 @@ function RoomSelectBar({ detail }) {
               const selDate = e.target.value
               setCheckIn(selDate)
               stayNightsI(e)
+
+              if (Date.parse(selDate) > Date.parse(checkOut)) {
+                Swal.fire({
+                  icon: 'error',
+                  title: '請重新選擇日期',
+                  showConfirmButton: false,
+                  timer: 1500,
+                })
+                setCheckIn(today)
+                setCheckOut(tomorrow)
+                setNight(1)
+              } else {
+                console.log('有進來嗎')
+                setCheckIn(selDate)
+                setCheckOut(checkOut)
+                stayNightsI(e)
+              }
             }}
           />
           <label>退房日期</label>
@@ -101,7 +119,7 @@ function RoomSelectBar({ detail }) {
           <select
             onChange={(e) => {
               const selectQty = +e.target.value
-              console.log(typeof selectQty)
+              // console.log(typeof selectQty)
               setQty(selectQty)
             }}
           >
@@ -117,7 +135,7 @@ function RoomSelectBar({ detail }) {
           </select>
         </div>
         <div className={style.price}>
-          共計{night && `${night}晚`}
+          {night >= 1 ? `共計${night && `${night}晚`}` : '1晚'}
           {qty && `${qty}床位`}：
           {qty && qty > 0 ? `${qty * roomPrice * night}` : 0}元
         </div>

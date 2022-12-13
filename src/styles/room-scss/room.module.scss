@@ -1,109 +1,140 @@
 @import '../global.scss';
 
-.title{
-    position: relative;
-    padding-top: 100px;
-    text-align: center;
-    font-size: 2rem;
-    line-height: 3rem;
-    font-weight: 700;
-    letter-spacing:5px;
-    margin-bottom: 50px;
+.title {
+  position: relative;
+  padding-top: 100px;
+  text-align: center;
+  font-size: 2rem;
+  line-height: 3rem;
+  font-weight: 700;
+  letter-spacing: 5px;
+  margin-bottom: 50px;
 }
+
 .box {
-    width: 100%;
-    height: 100vh;
-    // height: 330px;
-  }
+  width: 100%;
+  height: 100vh;
+  // height: 330px;
+}
+
 .box2 {
-    width: 100%;
-    // height: 100vh;
-    height: 330px;
-  }
+  width: 100%;
+  // height: 100vh;
+  height: 330px;
+}
+
 .bgc {
-    width: 100%;
-    height:100vh;
-    // background: url(../../../public/img/bgc.png) no-repeat;
-    background-size: 100% 100%;
-    position: fixed;
-    z-index: -99;
+  width: 100%;
+  height: 100vh;
+  // background: url(../../../public/img/bgc.png) no-repeat;
+  background-size: 100% 100%;
+  position: fixed;
+  z-index: -99;
+}
+
+.divWrap {
+  width: 100%;
+  height: 30vh;
+  position: fixed;
+  bottom: 0;
+  // background: url(../../../public/img/5.png) no-repeat,url(../../../public/img/4.png) no-repeat;
+  // background-position: center bottom -80px;
+  // visibility: hidden;
+}
+
+.div1 {
+  background: url(../../../public/img/1.png) no-repeat;
+  background-position: bottom;
+  position: absolute;
+}
+
+.div2 {
+  background: url(../../../public/img/2.png) no-repeat;
+  background-position: bottom;
+  position: absolute;
+}
+
+.div3 {
+  background: url(../../../public/img/3.png) no-repeat;
+  background-position: bottom;
+  position: absolute;
+}
+
+.div4 {
+  position: absolute;
+  bottom: 0;
+
+  img {
+    width: 1920px;
+    height: 100%
+  }
+}
+
+.div5 {
+  position: absolute;
+  bottom: -50px;
+
+  img {
+    width: 1920px;
+    height: 100%
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .title {
+    font-size: 1.8rem;
+  }
+}
+
+@media screen and (max-width: 992px) {}
+
+@media screen and (max-width: 768px) {
+  .title {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .title {
+    padding-top: 120px;
+    font-size: 1.4rem;
+    line-height: 2.5rem;
+
   }
 
-    .divWrap {
-        width: 100%;
-        height: 30vh;
-        position: fixed;
-        bottom: 0;
-        // background: url(../../../public/img/5.png) no-repeat,url(../../../public/img/4.png) no-repeat;
-        // background-position: center bottom -80px;
-        // visibility: hidden;
-      }
-    .div1 {
-        background: url(../../../public/img/1.png) no-repeat;
-        background-position: bottom;
-        position: absolute;
-      }
-      
-      .div2 {
-        background: url(../../../public/img/2.png) no-repeat;
-        background-position: bottom;
-        position: absolute;
-      }
-      
-      .div3 {
-        background: url(../../../public/img/3.png) no-repeat;
-        background-position: bottom;
-        position: absolute;
-      }
-      .div4{
-        position: absolute;
-        bottom: 0;
-        img{
-          width:1920px;
-          height: 100%
-        }
-      }
-      .div5 {
-        position: absolute;
-        bottom: -50px;
-        img{
-          width:1920px;
-          height: 100%
-        }
-      }
+  .divWrap {
+    .div4 {
+      bottom: -150px;
+      left: -300px
+    }
 
-    @media screen and (max-width: 1400px) {
-      .title{
-        font-size: 1.8rem;
-      }
+    .div5 {
+      bottom: -150px;
+      left: -400px
     }
-    
-    @media screen and (max-width: 992px) {
-      
-    }
-    
-    @media screen and (max-width: 768px) {  
-      .title{
-        font-size: 1.5rem;
-      }
-    }
-    
-    @media screen and (max-width: 576px) {
-      .title{
-        padding-top: 120px;
-        font-size: 1.4rem;
-        line-height: 2.5rem;
+  }
 
-      }
-    }
-    
-    @media screen and (max-width: 450px) {
-      .title{
-        padding-top: 120px;
-        font-size: 1.2rem;
-        line-height: 2rem;
-        margin-bottom: 35px;
+}
+
+@media screen and (max-width: 450px) {
+  .title {
+    padding-top: 120px;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    margin-bottom: 35px;
 
 
-      }
+  }
+
+  .divWrap {
+    .div4 {
+      bottom: -150px;
+      left: -500px
     }
+
+    .div5 {
+      bottom: -150px;
+      left: -500px
+    }
+  }
+}
