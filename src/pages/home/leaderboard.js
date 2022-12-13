@@ -186,7 +186,6 @@ export default function Leaderboard() {
                         ) : (
                           rank
                         )}
-                        {rank !== 1 && rank !== 2 && rank !== 3 ? rank : ''}
                       </div>
                       <div className={styled.nameWrap}>
                         <div className={styled.empty}>
