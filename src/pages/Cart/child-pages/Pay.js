@@ -60,12 +60,12 @@ function Pay({
           number: {
             // element: '.form-control.card-number',
             element: num.current,
-            placeholder: 'Card Number',
+            placeholder: '4434 5678 1234 5678',
           },
           expirationDate: {
             // element: document.getElementById('tappay-expiration-date'),
             element: exp.current,
-            placeholder: 'MM / YY',
+            placeholder: '12 / 22',
           },
           ccv: {
             // element: '.form-control.ccv',
@@ -240,16 +240,25 @@ function Pay({
           />
           <form className={styled.form}>
             <div className="form-group" style={{ marginBottom: '20px' }}>
+              <div className="cardWrap">
+                <label htmlFor="">信用卡卡號(支援的卡別)：</label>
+                <div className="cardImgWrap">
+                  <img src="../../img/visa.png" alt="" />
+                  <img src="../../img/amex.png" alt="" />
+                  <img src="../../img/mastercard.png" alt="" />
+                  <img src="../../img/jcb.png" alt="" />
+                  <img src="../../img/card4.png" alt="" />
+                </div>
+              </div>
               <div className="TapNum" ref={num}></div>
-            </div>
-            <div className="form-group">
-              <input className="TapName" placeholder="Name" />
             </div>
             <div className="row">
               <div className="col-6">
+                <label htmlFor="">到期日</label>
                 <div className="TapExp" ref={exp}></div>
               </div>
               <div className="col-6">
+                <label htmlFor="">安全碼</label>
                 <div className="TapCcv" ref={ccv}></div>
               </div>
             </div>
