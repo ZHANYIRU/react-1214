@@ -34,6 +34,14 @@ function climbAnimation(distance) {
     l = 25
   }
 
+  if (distance < 1000) {
+    l = 50
+  }
+
+  if (distance === 0) {
+    l = 100
+  }
+
   for (let i = 0; i <= 100; i = i + l) {
     if (k % 2 === 0 && k > 1) {
       str += `${i}% {

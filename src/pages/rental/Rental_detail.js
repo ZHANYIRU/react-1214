@@ -187,18 +187,54 @@ const Rental_detail = () => {
                       value={day.borrowDay}
                       onChange={(e) => {
                         const changeDay = Date.parse(e.currentTarget.value)
-                        setDay({
-                          ...day,
-                          borrowDay: dayjs(changeDay).format(dateFormat),
-                        })
+                        const changeDayTomorrow = changeDay + 86400000
+                        if (
+                          changeDay > Date.parse(day.backDay) ||
+                          changeDay === Date.parse(day.backDay)
+                        ) {
+                          console.log('changeDay!!!!', changeDay)
+                          console.log('backDay!!!!', Date.parse(day.backDay))
+                          setDay({
+                            ...day,
+                            borrowDay: dayjs(changeDay).format(dateFormat),
+                            backDay:
+                              dayjs(changeDayTomorrow).format(dateFormat),
+                          })
+                          setBorrowMoney(
+                            (Detail.rental_price *
+                              number *
+                              (changeDayTomorrow - changeDay)) /
+                              86400000
+                          )
+                        } else {
+                          setDay({
+                            ...day,
+                            borrowDay: dayjs(changeDay).format(dateFormat),
+                          })
 
-                        setBorrowMoney(
-                          (Detail.rental_price *
-                            number *
-                            (Date.parse(day.backDay) - changeDay)) /
-                            86400000
-                        )
+                          setBorrowMoney(
+                            (Detail.rental_price *
+                              number *
+                              (Date.parse(day.backDay) - changeDay)) /
+                              86400000
+                          )
+                        }
                       }}
+
+                      // onChange={(e) => {
+                      //   const changeDay = Date.parse(e.currentTarget.value)
+                      //   setDay({
+                      //     ...day,
+                      //     borrowDay: dayjs(changeDay).format(dateFormat),
+                      //   })
+
+                      //   setBorrowMoney(
+                      //     (Detail.rental_price *
+                      //       number *
+                      //       (Date.parse(day.backDay) - changeDay)) /
+                      //       86400000
+                      //   )
+                      // }}
                     />
                   </div>
                   {/* 歸還日設定 */}
@@ -211,18 +247,41 @@ const Rental_detail = () => {
                       value={day.backDay}
                       onChange={(e) => {
                         const changeDay = Date.parse(e.currentTarget.value)
-                        setDay({
-                          ...day,
-                          backDay: dayjs(changeDay).format(dateFormat),
-                        })
+                        const changeDayYesterDay = changeDay - 86400000
+                        if (
+                          changeDay < Date.parse(day.borrowDay) ||
+                          changeDay === Date.parse(day.borrowDay)
+                        ) {
+                          return
+                        } else {
+                          setDay({
+                            ...day,
+                            backDay: dayjs(changeDay).format(dateFormat),
+                          })
 
-                        setBorrowMoney(
-                          (Detail.rental_price *
-                            number *
-                            (changeDay - Date.parse(day.borrowDay))) /
-                            86400000
-                        )
+                          setBorrowMoney(
+                            (Detail.rental_price *
+                              number *
+                              (changeDay - Date.parse(day.borrowDay))) /
+                              86400000
+                          )
+                        }
                       }}
+
+                      // onChange={(e) => {
+                      //   const changeDay = Date.parse(e.currentTarget.value)
+                      //   setDay({
+                      //     ...day,
+                      //     backDay: dayjs(changeDay).format(dateFormat),
+                      //   })
+
+                      //   setBorrowMoney(
+                      //     (Detail.rental_price *
+                      //       number *
+                      //       (changeDay - Date.parse(day.borrowDay))) /
+                      //       86400000
+                      //   )
+                      // }}
                     />
                   </div>
                 </div>
@@ -305,7 +364,7 @@ const Rental_detail = () => {
                 </div>
                 <div className={styled.flex}>
                   <div>租借費用：{moneyFormat(borrowMoney)}</div>
-                  <div>跨店費用：{moneyFormat(deliveryFee)}</div>
+                  <div>跨區費用：{moneyFormat(deliveryFee)}</div>
                 </div>
                 {/* 商品數量跟金額 設定 */}
                 <div className={styled.flex}>

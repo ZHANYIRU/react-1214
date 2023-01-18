@@ -72,12 +72,33 @@ export default function Join(props) {
     // console.log(result.data)
   }
 
+  function autofill() {
+    // console.log('autofill')
+
+    reset({
+      name: '小墨',
+      nickname: 'MOMO',
+      password: 'Hiking1214',
+      verPass: 'Hiking1214',
+      email: 'momo@hiking.com',
+    })
+
+    joinForm.current.intro.value =
+      '熱愛大自然, 喜歡登山, 希望在這邊認識更多的同好\n\nGo Hiking!!'
+  }
+
   return (
     <>
       <div className={styled.row}>
         <div className={styled.col}>
           <div className={styled.card}>
-            <h3>會員註冊</h3>
+            <h3
+              onClick={() => {
+                autofill()
+              }}
+            >
+              會員註冊
+            </h3>
             <div className={styled.divider}></div>
             <form
               ref={joinForm}
@@ -215,10 +236,10 @@ export default function Join(props) {
                 <label htmlFor="birthday">生日</label>
                 <input
                   type="date"
-                    {...register('birthday', {
-                      valueAsDate: true,
-                      max: Date.now(),
-                    })}
+                  {...register('birthday', {
+                    valueAsDate: true,
+                    max: Date.now(),
+                  })}
                 ></input>
                 {errors.birthday && (
                   <p className={styled.errMsg}>錯誤的生日日期</p>
